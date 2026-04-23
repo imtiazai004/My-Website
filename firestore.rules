@@ -1,0 +1,94 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Phase 3: Primitives
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isEmailVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isAdmin() {
+      return isEmailVerified() && (
+        request.auth.token.email == 'imtiazai004@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+    
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Phase 4: Match Blocks
+
+    // Projects
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(projectId) && isValidProject(incoming());
+      allow update: if isAdmin() && isValidProject(incoming());
+      allow delete: if isAdmin();
+    }
+
+    function isValidProject(data) {
+      return data.keys().hasAll(['title', 'description', 'category', 'imageUrl', 'createdAt'])
+        && data.title is string && data.title.size() <= 100
+        && data.description is string && data.description.size() <= 1000
+        && data.category in ['SaaS', 'Web App', 'Website', 'Tool']
+        && data.imageUrl is string && data.imageUrl.size() <= 1000
+        && data.createdAt is timestamp;
+    }
+
+    // Testimonials
+    match /testimonials/{testimonialId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(testimonialId) && isValidTestimonial(incoming());
+      allow update: if isAdmin() && isValidTestimonial(incoming());
+      allow delete: if isAdmin();
+    }
+
+    function isValidTestimonial(data) {
+      return data.keys().hasAll(['name', 'role', 'company', 'content', 'avatarUrl', 'createdAt'])
+        && data.name is string && data.name.size() <= 100
+        && data.role is string && data.role.size() <= 100
+        && data.company is string && data.company.size() <= 100
+        && data.content is string && data.content.size() <= 1000
+        && data.avatarUrl is string && data.avatarUrl.size() <= 1000;
+    }
+
+    // Skills
+    match /skills/{skillId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(skillId) && isValidSkill(incoming());
+      allow update: if isAdmin() && isValidSkill(incoming());
+      allow delete: if isAdmin();
+    }
+
+    function isValidSkill(data) {
+      return data.keys().hasAll(['name', 'level', 'iconName'])
+        && data.name is string && data.name.size() <= 50
+        && data.level is int && data.level >= 0 && data.level <= 100
+        && data.iconName is string;
+    }
+
+    // Admins metadata (self-lookup for dynamic admins)
+    match /admins/{adminId} {
+      allow read: if isSignedIn() && request.auth.uid == adminId;
+      allow write: if false; // Only manageable via console or higher-level backend
+    }
+  }
+}
