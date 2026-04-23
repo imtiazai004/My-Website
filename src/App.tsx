@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { trackActivity } from './services/dataService';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -12,6 +13,10 @@ import { AnimatePresence } from 'motion/react';
 export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
 
+  useEffect(() => {
+    trackActivity('PAGE_VIEW');
+  }, []);
+
   return (
     <AuthProvider>
       <div className="min-h-screen selection:bg-brand-accent selection:text-white scroll-smooth relative">
@@ -22,7 +27,7 @@ export default function App() {
           <Skills />
           <Testimonials />
         </main>
-        <Footer />
+        <Footer onAction={() => setIsAdminOpen(true)} />
         
         <AnimatePresence>
           {isAdminOpen && (

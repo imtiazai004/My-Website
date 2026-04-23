@@ -1,6 +1,11 @@
 import { Terminal, Github, Twitter, Linkedin, Heart } from 'lucide-react';
+import { trackActivity } from '../services/dataService';
 
-export default function Footer() {
+interface FooterProps {
+  onAction?: () => void;
+}
+
+export default function Footer({ onAction }: FooterProps) {
   return (
     <footer className="bg-brand-bg pt-32 pb-12 px-6 border-t border-brand-border">
       <div className="max-w-7xl mx-auto space-y-24">
@@ -33,6 +38,7 @@ export default function Footer() {
                 <label className="text-[10px] font-bold text-brand-text-dim uppercase tracking-[0.2em]">Email Address</label>
                 <input 
                   type="email" 
+                  onFocus={() => trackActivity('FORM_FOCUS', { field: 'email' })}
                   placeholder="hello@vibe.code"
                   className="w-full bg-brand-bg border border-brand-border rounded-xl px-4 py-4 text-sm focus:outline-none focus:border-brand-accent transition-colors"
                 />
@@ -40,6 +46,7 @@ export default function Footer() {
               <div className="space-y-3">
                 <label className="text-[10px] font-bold text-brand-text-dim uppercase tracking-[0.2em]">Project Vision</label>
                 <textarea 
+                  onFocus={() => trackActivity('FORM_FOCUS', { field: 'vision' })}
                   placeholder="What are we building?"
                   rows={4}
                   className="w-full bg-brand-bg border border-brand-border rounded-xl px-4 py-4 text-sm focus:outline-none focus:border-brand-accent transition-colors resize-none"
@@ -77,7 +84,9 @@ export default function Footer() {
               <a href="#" className="hover:text-white transition-colors">Terms</a>
               <a href="#" className="hover:text-white transition-colors">GitHub</a>
             </div>
-            <span>&copy; {new Date().getFullYear()} VIBE.CODE ARC-01</span>
+            <button onClick={onAction} className="hover:text-white transition-colors text-left uppercase">
+               &copy; {new Date().getFullYear()} VIBE.CODE ARC-01
+            </button>
           </div>
         </div>
       </div>

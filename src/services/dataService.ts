@@ -1,4 +1,4 @@
-import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, Timestamp, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, Timestamp, addDoc, serverTimestamp, limit } from 'firebase/firestore';
 import { db, handleFirestoreError } from '../lib/firebase';
 import { Project, Testimonial, Skill } from '../types';
 
@@ -103,4 +103,33 @@ export const deleteTestimonial = async (id: string) => {
   } catch (error) {
     handleFirestoreError(error, 'delete', `testimonials/${id}`);
   }
+};
+
+export const trackActivity = async (type: string, metadata: any = {}) => {
+  try {
+    await addDoc(collection(db, 'activity'), {
+      type,
+      path: window.location.pathname,
+      timestamp: serverTimestamp(),
+      metadata: {
+        ...metadata,
+        userAgent: navigator.userAgent,
+        screen: `${window.innerWidth}x${window.innerHeight}`
+      }
+    });
+  } catch (error) {
+    // Fail silently for tracker to avoid UX impact
+    console.error('Tracking failed', error);
+  }
+};
+
+export const subscribeToActivity = (callback: (logs: any[]) => void) => {
+  const q = query(collection(db, 'activity'), orderBy('timestamp', 'desc'), limit(100));
+  return onSnapshot(q, (snapshot) => {
+    const logs = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    callback(logs);
+  });
 };

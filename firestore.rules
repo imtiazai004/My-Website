@@ -90,5 +90,12 @@ service cloud.firestore {
       allow read: if isSignedIn() && request.auth.uid == adminId;
       allow write: if false; // Only manageable via console or higher-level backend
     }
+
+    // Activity Tracking
+    match /activity/{activityId} {
+      allow read: if isAdmin();
+      allow create: if true; // Public can create logs
+      allow update, delete: if false;
+    }
   }
 }

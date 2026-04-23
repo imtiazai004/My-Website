@@ -33,18 +33,12 @@ export default function Navbar({ onAction }: NavbarProps) {
         </div>
         
         <div className="flex items-center gap-4">
-          {!user ? (
-            <button 
-              onClick={onAction}
-              className="text-[10px] font-bold text-brand-text-dim hover:text-white transition-colors uppercase tracking-widest border border-brand-border px-4 py-2 rounded-lg"
-            >
-              Login
-            </button>
-          ) : !isAdmin ? (
-            <div className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest px-4 py-2">
-              Guest
+          {isAdmin && (
+            <div className="flex items-center gap-2 text-[10px] text-green-500 font-mono animate-pulse mr-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+              LIVE_SYNC
             </div>
-          ) : null}
+          )}
           
           <motion.button 
             whileHover={{ scale: 1.02 }}

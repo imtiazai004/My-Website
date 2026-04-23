@@ -78,6 +78,21 @@
         "required": ["email"]
       },
       "description": "Authorized admin users"
+    },
+    "/activity/{activityId}": {
+      "schema": {
+        "title": "Activity",
+        "description": "User activity log",
+        "type": "object",
+        "properties": {
+          "type": { "type": "string" },
+          "path": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "metadata": { "type": "object" }
+        },
+        "required": ["type", "timestamp"]
+      },
+      "description": "Tracking user traffic and clicks"
     }
   }
 }

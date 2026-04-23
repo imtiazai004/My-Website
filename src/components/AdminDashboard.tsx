@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Plus, Trash2, Edit2, LogIn, LogOut, Save, UploadCloud, Briefcase, BrainCircuit, MessageSquareQuote } from 'lucide-react';
+import { X, Plus, Trash2, Edit2, LogIn, LogOut, Save, UploadCloud, Briefcase, BrainCircuit, MessageSquareQuote, Activity as ActivityIcon, Eye, MousePointer2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { auth, signInWithPopup, googleProvider } from '../lib/firebase';
-import { subscribeToProjects, saveProject, deleteProject, subscribeToSkills, saveSkill, deleteSkill, subscribeToTestimonials, saveTestimonial, deleteTestimonial } from '../services/dataService';
+import { subscribeToProjects, saveProject, deleteProject, subscribeToSkills, saveSkill, deleteSkill, subscribeToTestimonials, saveTestimonial, deleteTestimonial, subscribeToActivity } from '../services/dataService';
 import { Project, Skill, Testimonial } from '../types';
 import { PROJECTS as INITIAL_PROJECTS, SKILLS as INITIAL_SKILLS, TESTIMONIALS as INITIAL_TESTIMONIALS } from '../constants';
 
-type Tab = 'projects' | 'skills' | 'testimonials';
+type Tab = 'projects' | 'skills' | 'testimonials' | 'activity';
 
 export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
   const { user, isAdmin } = useAuth();
@@ -16,6 +16,7 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
   const [projects, setProjects] = useState<Project[]>([]);
   const [skills, setSkills] = useState<Skill[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [activityLogs, setActivityLogs] = useState<any[]>([]);
   
   const [editingItem, setEditingItem] = useState<any | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,7 +26,8 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
       const unsubProjects = subscribeToProjects(setProjects);
       const unsubSkills = subscribeToSkills(setSkills);
       const unsubTestimonials = subscribeToTestimonials(setTestimonials);
-      return () => { unsubProjects(); unsubSkills(); unsubTestimonials(); };
+      const unsubActivity = subscribeToActivity(setActivityLogs);
+      return () => { unsubProjects(); unsubSkills(); unsubTestimonials(); unsubActivity(); };
     }
   }, [isAdmin]);
 
@@ -96,7 +98,7 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
           <div className="flex items-center gap-4">
             <h2 className="text-2xl font-bold tracking-tight">ARC-01 Console</h2>
             <div className="flex bg-brand-bg p-1 rounded-lg border border-brand-border">
-              {(['projects', 'skills', 'testimonials'] as Tab[]).map(t => (
+              {(['projects', 'skills', 'testimonials', 'activity'] as Tab[]).map(t => (
                 <button
                   key={t}
                   onClick={() => { setActiveTab(t); setEditingItem(null); }}
@@ -145,18 +147,21 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
                     {activeTab === 'projects' && <Briefcase className="w-5 h-5 text-brand-accent" />}
                     {activeTab === 'skills' && <BrainCircuit className="w-5 h-5 text-brand-accent" />}
                     {activeTab === 'testimonials' && <MessageSquareQuote className="w-5 h-5 text-brand-accent" />}
+                    {activeTab === 'activity' && <ActivityIcon className="w-5 h-5 text-brand-accent" />}
                     {activeTab}_Archive
                   </h3>
                   <p className="text-xs text-brand-text-dim font-mono">Status: Secure Layer 1 Active</p>
                 </div>
-                <div className="flex gap-4">
-                  <button onClick={seedData} className="px-4 py-2 border border-brand-border rounded-lg text-[10px] font-bold uppercase tracking-widest hover:border-brand-accent transition-colors flex items-center gap-2 bg-brand-surface-muted">
-                    <UploadCloud className="w-4 h-4" /> Sync_Defaults
-                  </button>
-                  <button onClick={() => setEditingItem({})} className="bg-brand-accent text-white px-6 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-brand-accent-hover transition-colors flex items-center gap-2">
-                    <Plus className="w-4 h-4" /> New_Record
-                  </button>
-                </div>
+                {activeTab !== 'activity' && (
+                  <div className="flex gap-4">
+                    <button onClick={seedData} className="px-4 py-2 border border-brand-border rounded-lg text-[10px] font-bold uppercase tracking-widest hover:border-brand-accent transition-colors flex items-center gap-2 bg-brand-surface-muted">
+                      <UploadCloud className="w-4 h-4" /> Sync_Defaults
+                    </button>
+                    <button onClick={() => setEditingItem({})} className="bg-brand-accent text-white px-6 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-brand-accent-hover transition-colors flex items-center gap-2">
+                      <Plus className="w-4 h-4" /> New_Record
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Form Render */}
@@ -249,22 +254,43 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
 
               {/* Data List Component */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {(activeTab === 'projects' ? (projects || []) : activeTab === 'skills' ? (skills || []) : (testimonials || [])).map((item: any) => (
-                  <div key={item.id} className="p-5 bg-brand-surface-muted border border-brand-border rounded-xl group hover:border-brand-accent transition-all flex items-center justify-between">
-                    <div>
-                      <h4 className="font-bold text-sm text-white">{item.title || item.name}</h4>
-                      <p className="text-[10px] font-mono text-brand-text-dim uppercase tracking-wider">{item.category || `${item.level}%` || item.company}</p>
+                {activeTab === 'activity' ? (
+                  (activityLogs || []).map((log: any) => (
+                    <div key={log.id} className="p-4 bg-brand-surface-muted border border-brand-border rounded-xl flex items-start gap-4">
+                      {log.type === 'PAGE_VIEW' ? <Eye className="w-5 h-5 text-blue-400" /> : <MousePointer2 className="w-5 h-5 text-brand-accent" />}
+                      <div className="flex-1 overflow-hidden">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-[10px] font-bold text-white tracking-widest">{log.type}</span>
+                          <span className="text-[8px] text-brand-text-dim font-mono">{log.timestamp ? new Date(log.timestamp.toDate()).toLocaleString() : 'Recent'}</span>
+                        </div>
+                        <p className="text-[10px] text-brand-text-dim truncate">{log.path}</p>
+                        {log.metadata?.projectTitle && (
+                          <p className="text-[9px] text-brand-accent mt-1">Target: {log.metadata.projectTitle}</p>
+                        )}
+                        <div className="mt-2 text-[8px] text-brand-text-dim/50 font-mono truncate">
+                           {log.metadata?.userAgent}
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex gap-2">
-                      <button onClick={() => setEditingItem(item)} className="p-2 hover:bg-white/5 rounded-lg border border-brand-border text-brand-text-dim hover:text-white transition-colors">
-                        <Edit2 className="w-4 h-4" />
-                      </button>
-                      <button onClick={() => handleDelete(item.id)} className="p-2 hover:bg-red-500/10 rounded-lg border border-brand-border text-brand-text-dim hover:text-red-500 transition-colors">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                  ))
+                ) : (
+                  (activeTab === 'projects' ? (projects || []) : activeTab === 'skills' ? (skills || []) : (testimonials || [])).map((item: any) => (
+                    <div key={item.id} className="p-5 bg-brand-surface-muted border border-brand-border rounded-xl group hover:border-brand-accent transition-all flex items-center justify-between">
+                      <div>
+                        <h4 className="font-bold text-sm text-white">{item.title || item.name}</h4>
+                        <p className="text-[10px] font-mono text-brand-text-dim uppercase tracking-wider">{item.category || `${item.level}%` || item.company}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <button onClick={() => setEditingItem(item)} className="p-2 hover:bg-white/5 rounded-lg border border-brand-border text-brand-text-dim hover:text-white transition-colors">
+                          <Edit2 className="w-4 h-4" />
+                        </button>
+                        <button onClick={() => handleDelete(item.id)} className="p-2 hover:bg-red-500/10 rounded-lg border border-brand-border text-brand-text-dim hover:text-red-500 transition-colors">
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
           )}

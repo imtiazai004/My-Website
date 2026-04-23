@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { ExternalLink, Download, ArrowUpRight } from 'lucide-react';
 import { Project } from '../types';
+import { trackActivity } from '../services/dataService';
 
 interface ProjectCardProps {
   project: Project;
@@ -8,6 +9,10 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
+  const trackInteraction = (type: string) => {
+    trackActivity(type, { projectId: project.id, projectTitle: project.title });
+  };
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -15,6 +20,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       className="bg-brand-surface border border-brand-border rounded-2xl group overflow-hidden"
+      onViewportEnter={() => trackInteraction('PROJECT_VIEW')}
     >
       <div className="relative aspect-video overflow-hidden bg-brand-surface-muted">
         <img 
@@ -26,6 +32,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         <div className="absolute inset-0 bg-brand-bg/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
           <a 
             href={project.demoUrl} 
+            onClick={() => trackInteraction('DEMO_CLICK')}
             className="p-3 bg-brand-surface text-white border border-brand-border rounded-xl hover:bg-brand-accent hover:border-brand-accent transition-all"
             title="Live Demo"
           >
@@ -34,6 +41,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           {project.downloadUrl && (
             <a 
               href={project.downloadUrl} 
+              onClick={() => trackInteraction('DOWNLOAD_CLICK')}
               className="p-3 bg-brand-surface text-white border border-brand-border rounded-xl hover:bg-brand-accent hover:border-brand-accent transition-all"
               title="Download Assets"
               download
