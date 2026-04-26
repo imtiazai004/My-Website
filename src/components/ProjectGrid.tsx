@@ -29,7 +29,7 @@ export default function ProjectGrid() {
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Production Case Studies</h2>
           </div>
           <p className="max-w-md text-brand-text-muted font-light leading-relaxed">
-            A selection of high-performance applications and tools that define the vibe-coding philosophy: speed, precision, and architectural elegance.
+            A selection of high-performance applications and tools that define the Soft Tech philosophy: speed, precision, and architectural elegance.
           </p>
         </div>
         

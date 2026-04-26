@@ -3,8 +3,8 @@ import { Project, Testimonial, Skill } from './types';
 export const PROJECTS: Project[] = [
   {
     id: '1',
-    title: 'VibeFlow SaaS',
-    description: 'A comprehensive project management tool designed for creative teams to sync their workflow with their vibe. Featuring real-time collaboration and AI-powered task prioritization.',
+    title: 'SoftFlow SaaS',
+    description: 'A comprehensive project management tool designed for teams to sync their workflow with high-performance architecture. Featuring real-time collaboration and AI-powered task prioritization.',
     category: 'SaaS',
     tags: ['React', 'Node.js', 'PostgreSQL', 'AI'],
     imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop',
@@ -49,7 +49,7 @@ export const TESTIMONIALS: Testimonial[] = [
     id: '2',
     name: 'Marcus Thorne',
     role: 'Founder',
-    company: 'VibeLabs',
+    company: 'SoftFlow Systems',
     content: "Working with Soft Tech Solution is a different experience. They don't just build features; they create experiences that resonate with users.",
     avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop'
   }

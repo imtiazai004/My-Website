@@ -84,6 +84,22 @@ service cloud.firestore {
         && data.level is int && data.level >= 0 && data.level <= 100
         && data.iconName is string;
     }
+    
+    // Contacts
+    match /contacts/{contactId} {
+      allow read: if isAdmin();
+      allow create: if isValidId(contactId) && isValidContact(incoming());
+      allow update: if isAdmin() && isValidContact(incoming());
+      allow delete: if isAdmin();
+    }
+    
+    function isValidContact(data) {
+      return data.keys().hasAll(['email', 'message', 'status', 'createdAt'])
+        && data.email is string && data.email.size() <= 200
+        && data.message is string && data.message.size() <= 2000
+        && data.status in ['new', 'read', 'resolved']
+        && data.createdAt is timestamp;
+    }
 
     // Admins metadata (self-lookup for dynamic admins)
     match /admins/{adminId} {

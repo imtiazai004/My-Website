@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Plus, Trash2, Edit2, LogIn, LogOut, Save, UploadCloud, Briefcase, BrainCircuit, MessageSquareQuote, Activity as ActivityIcon, Eye, MousePointer2 } from 'lucide-react';
+import { X, Plus, Trash2, Edit2, LogIn, LogOut, Save, UploadCloud, Briefcase, BrainCircuit, MessageSquareQuote, Activity as ActivityIcon, Eye, MousePointer2, Send } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { auth, signInWithPopup, googleProvider } from '../lib/firebase';
-import { subscribeToProjects, saveProject, deleteProject, subscribeToSkills, saveSkill, deleteSkill, subscribeToTestimonials, saveTestimonial, deleteTestimonial, subscribeToActivity } from '../services/dataService';
+import { subscribeToProjects, saveProject, deleteProject, subscribeToSkills, saveSkill, deleteSkill, subscribeToTestimonials, saveTestimonial, deleteTestimonial, subscribeToActivity, subscribeToContacts } from '../services/dataService';
 import { Project, Skill, Testimonial } from '../types';
 import { PROJECTS as INITIAL_PROJECTS, SKILLS as INITIAL_SKILLS, TESTIMONIALS as INITIAL_TESTIMONIALS } from '../constants';
 
-type Tab = 'projects' | 'skills' | 'testimonials' | 'activity';
+type Tab = 'projects' | 'skills' | 'testimonials' | 'activity' | 'contacts';
 
 export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
   const { user, isAdmin } = useAuth();
@@ -17,6 +17,7 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
   const [skills, setSkills] = useState<Skill[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [activityLogs, setActivityLogs] = useState<any[]>([]);
+  const [contacts, setContacts] = useState<any[]>([]);
   
   const [editingItem, setEditingItem] = useState<any | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,7 +28,14 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
       const unsubSkills = subscribeToSkills(setSkills);
       const unsubTestimonials = subscribeToTestimonials(setTestimonials);
       const unsubActivity = subscribeToActivity(setActivityLogs);
-      return () => { unsubProjects(); unsubSkills(); unsubTestimonials(); unsubActivity(); };
+      const unsubContacts = subscribeToContacts(setContacts);
+      return () => { 
+        unsubProjects(); 
+        unsubSkills(); 
+        unsubTestimonials(); 
+        unsubActivity(); 
+        unsubContacts(); 
+      };
     }
   }, [isAdmin]);
 
@@ -98,7 +106,7 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
           <div className="flex items-center gap-4">
             <h2 className="text-2xl font-bold tracking-tight">Soft Tech Console</h2>
             <div className="flex bg-brand-bg p-1 rounded-lg border border-brand-border">
-              {(['projects', 'skills', 'testimonials', 'activity'] as Tab[]).map(t => (
+              {(['projects', 'skills', 'testimonials', 'activity', 'contacts'] as Tab[]).map(t => (
                 <button
                   key={t}
                   onClick={() => { setActiveTab(t); setEditingItem(null); }}
@@ -148,11 +156,12 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
                     {activeTab === 'skills' && <BrainCircuit className="w-5 h-5 text-brand-accent" />}
                     {activeTab === 'testimonials' && <MessageSquareQuote className="w-5 h-5 text-brand-accent" />}
                     {activeTab === 'activity' && <ActivityIcon className="w-5 h-5 text-brand-accent" />}
+                    {activeTab === 'contacts' && <Send className="w-5 h-5 text-brand-accent" />}
                     {activeTab}_Archive
                   </h3>
                   <p className="text-xs text-brand-text-dim font-mono">Status: Secure Layer 1 Active</p>
                 </div>
-                {activeTab !== 'activity' && (
+                {activeTab !== 'activity' && activeTab !== 'contacts' && (
                   <div className="flex gap-4">
                     <button onClick={seedData} className="px-4 py-2 border border-brand-border rounded-lg text-[10px] font-bold uppercase tracking-widest hover:border-brand-accent transition-colors flex items-center gap-2 bg-brand-surface-muted">
                       <UploadCloud className="w-4 h-4" /> Sync_Defaults
@@ -261,7 +270,11 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
                       <div className="flex-1 overflow-hidden">
                         <div className="flex justify-between items-center mb-1">
                           <span className="text-[10px] font-bold text-white tracking-widest">{log.type}</span>
-                          <span className="text-[8px] text-brand-text-dim font-mono">{log.timestamp ? new Date(log.timestamp.toDate()).toLocaleString() : 'Recent'}</span>
+                          <span className="text-[8px] text-brand-text-dim font-mono">
+                            {log.timestamp && typeof log.timestamp.toDate === 'function' 
+                              ? new Date(log.timestamp.toDate()).toLocaleString() 
+                              : 'Syncing...'}
+                          </span>
                         </div>
                         <p className="text-[10px] text-brand-text-dim truncate">{log.path}</p>
                         {log.metadata?.projectTitle && (
@@ -271,6 +284,27 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
                            {log.metadata?.userAgent}
                         </div>
                       </div>
+                    </div>
+                  ))
+                ) : activeTab === 'contacts' ? (
+                  (contacts || []).map((contact: any) => (
+                    <div key={contact.id} className="p-5 bg-brand-surface-muted border border-brand-border rounded-xl flex flex-col gap-4">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <p className="text-xs font-bold text-brand-accent">{contact.email}</p>
+                          <p className="text-[8px] text-brand-text-dim font-mono uppercase mt-1">
+                            {contact.createdAt && typeof contact.createdAt.toDate === 'function' 
+                              ? new Date(contact.createdAt.toDate()).toLocaleString() 
+                              : 'Recent'}
+                          </p>
+                        </div>
+                        <span className="px-2 py-0.5 bg-green-500/10 text-green-500 rounded text-[8px] font-bold uppercase tracking-widest border border-green-500/20">
+                          {contact.status || 'NEW'}
+                        </span>
+                      </div>
+                      <p className="text-xs text-brand-text uppercase leading-relaxed font-medium">
+                        {contact.message}
+                      </p>
                     </div>
                   ))
                 ) : (

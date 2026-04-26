@@ -52,6 +52,18 @@
         "order": { "type": "number" }
       },
       "required": ["name", "level", "iconName"]
+    },
+    "Contact": {
+      "title": "Contact",
+      "description": "Contact form submission",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["new", "read", "resolved"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "message", "status", "createdAt"]
     }
   },
   "firestore": {
@@ -66,6 +78,10 @@
     "/skills/{skillId}": {
       "schema": "Skill",
       "description": "Collection of technical skills"
+    },
+    "/contacts/{contactId}": {
+      "schema": "Contact",
+      "description": "Collection of contact form messages"
     },
     "/admins/{adminId}": {
       "schema": {

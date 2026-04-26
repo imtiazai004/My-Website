@@ -43,6 +43,10 @@ export default function Navbar({ onAction }: NavbarProps) {
           <motion.button 
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
+            onClick={() => {
+              const el = document.getElementById('contact');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
             className="btn-primary flex items-center gap-2 text-sm"
           >
             START A PROJECT

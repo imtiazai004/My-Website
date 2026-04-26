@@ -133,3 +133,27 @@ export const subscribeToActivity = (callback: (logs: any[]) => void) => {
     callback(logs);
   });
 };
+
+export const sendContactMessage = async (email: string, message: string) => {
+  try {
+    await addDoc(collection(db, 'contacts'), {
+      email,
+      message,
+      status: 'new',
+      createdAt: serverTimestamp(),
+    });
+  } catch (error) {
+    handleFirestoreError(error, 'create', 'contacts');
+  }
+};
+
+export const subscribeToContacts = (callback: (contacts: any[]) => void) => {
+  const q = query(collection(db, 'contacts'), orderBy('createdAt', 'desc'));
+  return onSnapshot(q, (snapshot) => {
+    const contacts = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    callback(contacts);
+  }, (error) => handleFirestoreError(error, 'list', 'contacts'));
+};

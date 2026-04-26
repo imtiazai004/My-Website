@@ -3,7 +3,7 @@ import { ArrowRight, Sparkles, Code2, Globe, Github } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative pt-40 pb-24 px-6 overflow-hidden min-h-screen flex items-center">
+    <section className="relative pt-40 pb-24 px-6 overflow-hidden min-h-screen flex items-center bg-brand-bg">
       {/* Background decoration */}
       <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[120px]" />
       
@@ -20,12 +20,12 @@ export default function Hero() {
           </div>
           
           <h1 className="text-6xl md:text-8xl font-bold font-sans tracking-tight leading-[0.9] text-white">
-            Turning your vibes <br />
+            Turning your ideas <br />
             <span className="text-brand-accent">into the tools that solve.</span>
           </h1>
           
           <p className="text-brand-text-muted text-xl max-w-xl leading-relaxed font-normal">
-            Turning complex vibes into production-ready software using cutting-edge AI orchestration. Fast, SEO-optimized, and built to solve your toughest problems.
+            Turning complex requirements into production-ready software using cutting-edge AI orchestration. Fast, SEO-optimized, and built to solve your toughest problems.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-6">
