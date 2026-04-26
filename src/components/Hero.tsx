@@ -61,7 +61,7 @@ export default function Hero() {
           
           <div className="p-6 bg-gradient-to-br from-brand-accent/10 to-transparent border border-brand-accent/20 rounded-2xl">
             <p className="italic text-brand-text-muted mb-4 font-light">
-              "Vibe.code transformed our legacy workflow into a modern AI power-house in weeks."
+              "Soft Tech Solution transformed our legacy workflow into a modern AI power-house in weeks."
             </p>
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-brand-surface-muted border border-brand-border" />

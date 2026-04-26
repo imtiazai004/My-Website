@@ -13,7 +13,7 @@ export default function Footer({ onAction }: FooterProps) {
           <div className="space-y-8">
             <h2 className="text-5xl md:text-7xl font-bold tracking-tight leading-[0.9] text-white">
               Elevate your <br />
-              <span className="text-brand-accent">Digital Vibe.</span>
+              <span className="text-brand-accent">Soft Tech Solution.</span>
             </h2>
             <p className="text-brand-text-muted text-xl leading-relaxed font-light max-w-md">
               Let's collaborate on building high-performance applications that stand out in the modern web.
@@ -39,7 +39,7 @@ export default function Footer({ onAction }: FooterProps) {
                 <input 
                   type="email" 
                   onFocus={() => trackActivity('FORM_FOCUS', { field: 'email' })}
-                  placeholder="hello@vibe.code"
+                  placeholder="hello@softtech.solutions"
                   className="w-full bg-brand-bg border border-brand-border rounded-xl px-4 py-4 text-sm focus:outline-none focus:border-brand-accent transition-colors"
                 />
               </div>
@@ -85,7 +85,7 @@ export default function Footer({ onAction }: FooterProps) {
               <a href="#" className="hover:text-white transition-colors">GitHub</a>
             </div>
             <button onClick={onAction} className="hover:text-white transition-colors text-left uppercase">
-               &copy; {new Date().getFullYear()} VIBE.CODE ARC-01
+               &copy; {new Date().getFullYear()} Soft Tech Solution
             </button>
           </div>
         </div>

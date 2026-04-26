@@ -50,7 +50,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Marcus Thorne',
     role: 'Founder',
     company: 'VibeLabs',
-    content: "Working with a Vibe Coder is a different experience. They don't just build features; they create experiences that resonate with users.",
+    content: "Working with Soft Tech Solution is a different experience. They don't just build features; they create experiences that resonate with users.",
     avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop'
   }
 ];

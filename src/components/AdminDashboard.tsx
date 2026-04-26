@@ -96,7 +96,7 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
       >
         <div className="p-6 border-b border-brand-border flex items-center justify-between bg-brand-surface">
           <div className="flex items-center gap-4">
-            <h2 className="text-2xl font-bold tracking-tight">ARC-01 Console</h2>
+            <h2 className="text-2xl font-bold tracking-tight">Soft Tech Console</h2>
             <div className="flex bg-brand-bg p-1 rounded-lg border border-brand-border">
               {(['projects', 'skills', 'testimonials', 'activity'] as Tab[]).map(t => (
                 <button
