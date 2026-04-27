@@ -308,8 +308,8 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
                     </div>
                   ))
                 ) : (
-                  (activeTab === 'projects' ? (projects || []) : activeTab === 'skills' ? (skills || []) : (testimonials || [])).map((item: any) => (
-                    <div key={item.id} className="p-5 bg-brand-surface-muted border border-brand-border rounded-xl group hover:border-brand-accent transition-all flex items-center justify-between">
+                  (activeTab === 'projects' ? (projects || []) : activeTab === 'skills' ? (skills || []) : (testimonials || [])).map((item: any, index: number) => (
+                    <div key={item.id || `admin-${activeTab}-${index}`} className="p-5 bg-brand-surface-muted border border-brand-border rounded-xl group hover:border-brand-accent transition-all flex items-center justify-between">
                       <div>
                         <h4 className="font-bold text-sm text-white">{item.title || item.name}</h4>
                         <p className="text-[10px] font-mono text-brand-text-dim uppercase tracking-wider">{item.category || `${item.level}%` || item.company}</p>

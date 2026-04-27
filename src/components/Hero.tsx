@@ -1,79 +1,112 @@
 import { motion } from 'motion/react';
-import { ArrowRight, Sparkles, Code2, Globe, Github } from 'lucide-react';
+import { ArrowRight, Sparkles, MoveRight } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative pt-40 pb-24 px-6 overflow-hidden min-h-screen flex items-center bg-brand-bg">
-      {/* Background decoration */}
-      <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[120px]" />
-      
-      <div className="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="lg:col-span-8 flex flex-col justify-center space-y-8"
-        >
-          <div className="pill-badge w-fit">
-            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-            AVAILABLE FOR HIRE Q4 2026
-          </div>
-          
-          <h1 className="text-6xl md:text-8xl font-bold font-sans tracking-tight leading-[0.9] text-white">
-            Turning your ideas <br />
-            <span className="text-brand-accent">into the tools that solve.</span>
-          </h1>
-          
-          <p className="text-brand-text-muted text-xl max-w-xl leading-relaxed font-normal">
-            Turning complex requirements into production-ready software using cutting-edge AI orchestration. Fast, SEO-optimized, and built to solve your toughest problems.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center gap-4 pt-6">
-            <motion.button 
-              whileHover={{ scale: 1.02 }}
-              className="px-10 py-5 bg-white text-black font-bold rounded-xl flex items-center gap-3 text-lg"
-            >
-              VIEW WORK 
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
-            <button className="px-10 py-5 bg-transparent border border-gray-700 text-white font-bold rounded-xl hover:bg-gray-900 transition-colors text-lg">
-              BOOK A DISCOVERY
-            </button>
-          </div>
-        </motion.div>
+    <section className="relative min-h-[110vh] flex items-center justify-center pt-24 px-6 overflow-hidden">
+      {/* Hero-Specific Spotlight System */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Core Central Spotlight */}
+        <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-accent/20 rounded-full blur-[140px] opacity-40 animate-pulse-glow" style={{ animationDuration: '10s' }} />
         
-        <div className="lg:col-span-4 hidden lg:flex flex-col justify-center gap-6">
-          <div className="bg-brand-surface border border-brand-border rounded-2xl p-6 relative overflow-hidden group">
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <h3 className="font-bold text-lg">Nebula Analytics</h3>
-                <p className="text-[10px] text-brand-text-dim font-bold uppercase tracking-widest">AI-DRIVEN SAAS PLATFORM</p>
-              </div>
+        {/* Deep Depth Lights */}
+        <div className="absolute -top-[10%] -left-[10%] w-[800px] h-[800px] bg-brand-accent/10 rounded-full blur-[160px] animate-float opacity-30" />
+        <div className="absolute bottom-0 right-[5%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px] animate-float opacity-20" style={{ animationDelay: '-4s' }} />
+        
+        {/* Heading Backlight */}
+        <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[600px] bg-white/[0.03] rounded-full blur-[160px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto w-full relative z-10">
+        <div className="flex flex-col items-center text-center space-y-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="pill-badge group cursor-default bg-neutral-100 text-neutral-900 border-neutral-200">
+              <Sparkles className="w-3.5 h-3.5 fill-neutral-900 animate-pulse group-hover:scale-125 transition-transform" />
+              <span>THE NEW STANDARD IN DIGITAL ENGINEERING</span>
             </div>
-            <div className="h-32 bg-brand-surface-muted rounded-xl border border-dashed border-gray-700 flex items-center justify-center">
-              <div className="flex gap-2 items-end h-16">
-                <div className="w-3 h-8 bg-brand-accent/40 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                <div className="w-3 h-12 bg-brand-accent rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                <div className="w-3 h-6 bg-brand-accent/20 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }}></div>
-              </div>
-            </div>
+          </motion.div>
+
+          <div className="space-y-10 relative">
+            {/* The "Spotlight" Flare behind text */}
+            <div className="absolute inset-0 bg-brand-accent/5 blur-3xl rounded-full scale-150 pointer-events-none" />
+            
+            <motion.h1 
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="heading-xl relative"
+            >
+              <span className="block bg-clip-text text-transparent bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-500 pb-4">
+                Redefining the <br />
+              </span>
+              <span className="block text-neutral-950">Digital Frontier.</span>
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+              className="max-w-3xl mx-auto text-brand-text-muted text-xl md:text-2xl font-light leading-relaxed tracking-tight"
+            >
+              We craft high-performance software systems where cinematic aesthetics 
+              meet uncompromising technical precision. <span className="text-neutral-950 font-medium">Engineered for impact.</span>
+            </motion.p>
           </div>
-          
-          <div className="p-6 bg-gradient-to-br from-brand-accent/10 to-transparent border border-brand-accent/20 rounded-2xl">
-            <p className="italic text-brand-text-muted mb-4 font-light">
-              "Soft Tech Solution transformed our legacy workflow into a modern AI power-house in weeks."
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-brand-surface-muted border border-brand-border" />
-              <div>
-                <p className="text-xs font-bold uppercase tracking-widest">Marcus Chen</p>
-                <p className="text-[10px] text-brand-text-dim font-mono">CTO, LUMINA TECH</p>
-              </div>
-            </div>
-          </div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+            className="flex flex-col sm:flex-row items-center gap-8"
+          >
+            <motion.button 
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => {
+                const el = document.getElementById('work');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="btn-primary group !px-12"
+            >
+              EXPLORE WORK
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-500" />
+            </motion.button>
+            <motion.button 
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => {
+                const el = document.getElementById('contact');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="btn-secondary group flex items-center gap-4"
+            >
+              OUR PROCESS
+              <MoveRight className="w-4 h-4 opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+            </motion.button>
+          </motion.div>
         </div>
       </div>
+
+      {/* Hero Interactive Scroll Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+      >
+        <span className="text-[10px] font-black tracking-[0.4em] text-neutral-950/20 uppercase">SCROLL_SYSTEM</span>
+        <div className="w-px h-16 bg-gradient-to-b from-brand-accent to-transparent relative overflow-hidden">
+          <motion.div 
+            animate={{ y: ['-100%', '100%'] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            className="absolute top-0 left-0 w-full h-1/2 bg-neutral-950"
+          />
+        </div>
+      </motion.div>
     </section>
   );
 }
-

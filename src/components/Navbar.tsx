@@ -10,36 +10,37 @@ export default function Navbar({ onAction }: NavbarProps) {
   const { user, isAdmin } = useAuth();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-brand-border bg-brand-bg/80 backdrop-blur-xl">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-brand-accent rounded-lg flex items-center justify-center font-bold text-xl text-white">S</div>
-          <span className="font-sans font-black tracking-tighter text-2xl uppercase">Soft Tech Solution</span>
+    <nav className="fixed top-0 left-0 right-0 z-[100] transition-all duration-700 border-b border-white/5 backdrop-blur-sm">
+      <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+        <div className="flex items-center gap-5 group cursor-pointer">
+          <div className="w-11 h-11 bg-white text-black rounded-none flex items-center justify-center font-display font-black text-2xl transition-all duration-700 group-hover:bg-brand-accent group-hover:text-white group-hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]">
+            S
+          </div>
+          <div className="flex flex-col">
+            <span className="font-display font-medium tracking-tighter text-2xl uppercase leading-none text-white">Soft Tech</span>
+            <span className="text-[9px] font-mono text-white/40 font-bold tracking-[0.5em] uppercase mt-1">PROTOCOL_ACTIVE</span>
+          </div>
         </div>
         
-        <div className="hidden md:flex items-center gap-8 font-sans text-sm font-medium text-brand-text-muted">
-          <a href="#work" className="hover:text-white transition-colors uppercase tracking-widest text-[10px] font-bold">Portfolio</a>
-          <a href="#skills" className="hover:text-white transition-colors uppercase tracking-widest text-[10px] font-bold">Stack</a>
-          <a href="#testimonials" className="hover:text-white transition-colors uppercase tracking-widest text-[10px] font-bold">Process</a>
-          {isAdmin && (
-            <button 
-              onClick={onAction}
-              className="flex items-center gap-2 text-brand-accent hover:text-white transition-colors uppercase tracking-widest text-[10px] font-bold"
+        <div className="hidden lg:flex items-center gap-14">
+          {[
+            { label: 'Work', href: '#work' },
+            { label: 'Stack', href: '#skills' },
+            { label: 'Process', href: '#testimonials' }
+          ].map((link) => (
+            <motion.a 
+              key={link.label}
+              href={link.href}
+              whileHover={{ y: -1 }}
+              className="relative text-[10px] font-bold uppercase tracking-[0.3em] text-white/50 hover:text-white transition-all duration-500 group"
             >
-              <Settings className="w-3 h-3" />
-              Admin Console
-            </button>
-          )}
+              {link.label}
+              <span className="absolute -bottom-2 left-0 w-0 h-px bg-white transition-all duration-500 group-hover:w-full opacity-0 group-hover:opacity-100" />
+            </motion.a>
+          ))}
         </div>
         
-        <div className="flex items-center gap-4">
-          {isAdmin && (
-            <div className="flex items-center gap-2 text-[10px] text-green-500 font-mono animate-pulse mr-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-              LIVE_SYNC
-            </div>
-          )}
-          
+        <div className="flex items-center gap-6">
           <motion.button 
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -47,9 +48,9 @@ export default function Navbar({ onAction }: NavbarProps) {
               const el = document.getElementById('contact');
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="btn-primary flex items-center gap-2 text-sm"
+            className="px-8 py-3 bg-white text-black text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-brand-accent hover:text-white transition-all duration-500"
           >
-            START A PROJECT
+            START_MISSION
           </motion.button>
         </div>
       </div>

@@ -27,15 +27,18 @@ export const subscribeToTestimonials = (callback: (testimonials: Testimonial[]) 
 export const subscribeToSkills = (callback: (skills: Skill[]) => void) => {
   const q = query(collection(db, 'skills'), orderBy('order', 'asc'));
   return onSnapshot(q, (snapshot) => {
-    const skills = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    } as Skill));
+    const skills = snapshot.docs.map(doc => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        ...data
+      } as any as Skill;
+    });
     callback(skills);
   }, (error) => handleFirestoreError(error, 'list', 'skills'));
 };
 
-export const saveProject = async (project: Partial<Project>) => {
+export const saveProject = async (project: any) => {
   try {
     const data = {
       ...project,
@@ -81,7 +84,7 @@ export const deleteSkill = async (id: string) => {
   }
 };
 
-export const saveTestimonial = async (testimonial: Partial<Testimonial> & { id?: string }) => {
+export const saveTestimonial = async (testimonial: any) => {
   try {
     const data = {
       ...testimonial,
