@@ -264,8 +264,8 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
               {/* Data List Component */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {activeTab === 'activity' ? (
-                  (activityLogs || []).map((log: any) => (
-                    <div key={log.id} className="p-4 bg-brand-surface-muted border border-brand-border rounded-xl flex items-start gap-4">
+                  (activityLogs || []).map((log: any, index: number) => (
+                    <div key={log.id || `log-${index}`} className="p-4 bg-brand-surface-muted border border-brand-border rounded-xl flex items-start gap-4">
                       {log.type === 'PAGE_VIEW' ? <Eye className="w-5 h-5 text-blue-400" /> : <MousePointer2 className="w-5 h-5 text-brand-accent" />}
                       <div className="flex-1 overflow-hidden">
                         <div className="flex justify-between items-center mb-1">
@@ -287,8 +287,8 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
                     </div>
                   ))
                 ) : activeTab === 'contacts' ? (
-                  (contacts || []).map((contact: any) => (
-                    <div key={contact.id} className="p-5 bg-brand-surface-muted border border-brand-border rounded-xl flex flex-col gap-4">
+                  (contacts || []).map((contact: any, index: number) => (
+                    <div key={contact.id || `contact-${index}`} className="p-5 bg-brand-surface-muted border border-brand-border rounded-xl flex flex-col gap-4">
                       <div className="flex justify-between items-start">
                         <div>
                           <p className="text-xs font-bold text-brand-accent">{contact.email}</p>

@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 
 function FloatingPaths({ position }: { position: number }) {
     const paths = Array.from({ length: 36 }, (_, i) => ({
-        id: i,
+        id: `${position}-${i}`,
+        index: i,
         d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
             380 - i * 5 * position
         } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
@@ -31,7 +32,7 @@ function FloatingPaths({ position }: { position: number }) {
                         d={path.d}
                         stroke="currentColor"
                         strokeWidth={path.width}
-                        strokeOpacity={0.1 + path.id * 0.03}
+                        strokeOpacity={0.1 + (path.index / 36) * 0.3}
                         initial={{ pathLength: 0.3, opacity: 0.6 }}
                         animate={{
                             pathLength: 1,

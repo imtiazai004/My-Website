@@ -4,7 +4,9 @@ import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import { SplineSceneBasic } from './components/SplineSceneBasic';
 import ProjectGrid from './components/ProjectGrid';
+import Services from './components/Services';
 import Skills from './components/Skills';
+import WhyChooseUs from './components/WhyChooseUs';
 import { EtheralShadow } from './components/ui/etheral-shadow';
 import ShaderBackground from './components/ui/shader-background';
 import Testimonials from './components/Testimonials';
@@ -35,6 +37,8 @@ export default function App() {
         <main className="relative z-20">
           <SplineSceneBasic />
           <ProjectGrid />
+          <Services />
+          <WhyChooseUs />
           <Skills />
           <Testimonials />
         </main>

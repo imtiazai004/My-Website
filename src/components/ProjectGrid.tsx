@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import ProjectCard from './ProjectCard';
-import { Laptop, Cpu, Bot, Code, Zap, Globe, Shield } from 'lucide-react';
+import { Laptop, Cpu, Bot, Code, Zap, Globe, Shield, X, ExternalLink, Github, Layers, Target, LineChart } from 'lucide-react';
 import { PROJECTS as INITIAL_PROJECTS } from '../constants';
 import { subscribeToProjects } from '../services/dataService';
 import { Project } from '../types';
 
 export default function ProjectGrid() {
   const [projects, setProjects] = useState<Project[]>(INITIAL_PROJECTS);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selectedProject = projects.find(p => p.id === selectedId);
 
   useEffect(() => {
     const unsubscribe = subscribeToProjects((data) => {
@@ -27,6 +29,7 @@ export default function ProjectGrid() {
       <div className="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-brand-accent/5 rounded-full blur-[200px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto mb-32 px-6">
+        {/* ... existing header content ... */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-black/5 text-[10px] font-bold tracking-[0.2em] text-black/60 mb-10">
           <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
           CORE_PHILOSOPHY & CAPABILITIES
@@ -48,13 +51,10 @@ export default function ProjectGrid() {
             
             <div className="space-y-8 text-black/80 text-xl font-light leading-relaxed">
               <p>
-                Soft Tech empowers businesses with intelligent, high-performance digital solutions designed to solve complex operational challenges and accelerate growth. Our passionate team of developers, designers, and AI specialists focuses on building tailored software systems that combine cutting-edge technology with seamless user experiences and modern cinematic design aesthetics.
+                Soft Tech empowers businesses with intelligent, high-performance digital solutions designed to solve complex operational challenges and accelerate growth.
               </p>
               <p>
-                Leveraging expertise in AI development, intelligent automation, cloud infrastructure, scalable web platforms, and custom software engineering, we create solutions that help businesses streamline operations, enhance decision-making, improve efficiency, and unlock new growth opportunities.
-              </p>
-              <p>
-                From AI-powered workflows and smart automation systems to responsive digital platforms and scalable architectures, every solution is engineered for performance, reliability, and long-term impact. At Soft Tech, we believe technology should not only function flawlessly but also deliver a refined and future-ready experience.
+                Leveraging expertise in AI development, intelligent automation, and cloud infrastructure, we create solutions that help businesses streamline operations and unlock new growth opportunities.
               </p>
             </div>
 
@@ -83,75 +83,22 @@ export default function ProjectGrid() {
               transition={{ duration: 1 }}
               className="relative z-10"
             >
-              {/* Laptop Base - Dark contrast on white background */}
+              {/* Laptop Base */}
               <div className="relative bg-black rounded-xl p-2 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] border border-black/20 w-80 h-52 md:w-96 md:h-64">
                 <div className="absolute inset-x-0 bottom-0 h-2 bg-neutral-900 rounded-b-xl border-t border-white/5" />
                 <div className="w-full h-full bg-neutral-950 rounded-lg relative overflow-hidden flex items-center justify-center">
-                  <div className="absolute inset-0 opacity-20 pointer-events-none" 
-                       style={{ backgroundImage: 'radial-gradient(circle, #6366f1 1px, transparent 1px)', backgroundSize: '10px 10px' }} />
                   <Code className="w-16 h-16 text-brand-accent animate-pulse" />
                 </div>
 
-                {/* Floating Elements rising from the screen */}
                 <AnimatePresence>
-                  {/* AI Bot */}
                   <motion.div
-                    animate={{ y: [0, -40, 0], x: [0, 10, 0] }}
+                    animate={{ y: [0, -40, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                     className="absolute -top-10 left-1/4 bg-brand-accent/20 backdrop-blur-md p-3 rounded-full border border-brand-accent/30"
                   >
                     <Bot className="w-6 h-6 text-brand-accent" />
                   </motion.div>
-
-                  {/* CPU/Brain */}
-                  <motion.div
-                    animate={{ y: [0, -60, 0], x: [0, -10, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                    className="absolute -top-20 right-1/4 bg-white/5 backdrop-blur-md p-4 rounded-2xl border border-white/10"
-                  >
-                    <Cpu className="w-8 h-8 text-white" />
-                  </motion.div>
-
-                  {/* Security/Shield */}
-                  <motion.div
-                    animate={{ y: [0, -30, 0], rotate: [0, 10, 0] }}
-                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className="absolute top-10 -right-5 bg-white/5 backdrop-blur-md p-2 rounded-lg border border-white/10"
-                  >
-                    <Shield className="w-5 h-5 text-emerald-500" />
-                  </motion.div>
-
-                  {/* Global/Globe */}
-                  <motion.div
-                    animate={{ y: [0, -50, 0], scale: [1, 1.1, 1] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                    className="absolute top-20 -left-10 bg-white/5 backdrop-blur-md p-3 rounded-full border border-white/10 shadow-[0_0_20px_rgba(99,102,241,0.2)]"
-                  >
-                    <Globe className="w-6 h-6 text-blue-400" />
-                  </motion.div>
-
-                  {/* Zap/Performance */}
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute bottom-10 -right-10 bg-amber-500/20 backdrop-blur-md p-2 rounded-full border border-amber-500/30"
-                  >
-                    <Zap className="w-4 h-4 text-amber-500" />
-                  </motion.div>
                 </AnimatePresence>
-
-                {/* Vertical Data Streams */}
-                <div className="absolute -top-32 left-1/2 -translate-x-1/2 flex gap-8 pointer-events-none opacity-20">
-                  <div className="w-px h-32 bg-gradient-to-t from-brand-accent to-transparent relative overflow-hidden">
-                    <motion.div animate={{ y: ['-100%', '100%'] }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }} className="w-full h-1/2 bg-white" />
-                  </div>
-                  <div className="w-px h-40 bg-gradient-to-t from-brand-accent to-transparent relative overflow-hidden">
-                    <motion.div animate={{ y: ['-100%', '100%'] }} transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: 0.5 }} className="w-full h-1/2 bg-white" />
-                  </div>
-                  <div className="w-px h-24 bg-gradient-to-t from-brand-accent to-transparent relative overflow-hidden">
-                    <motion.div animate={{ y: ['-100%', '100%'] }} transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 1 }} className="w-full h-1/2 bg-white" />
-                  </div>
-                </div>
               </div>
             </motion.div>
           </div>
@@ -163,7 +110,7 @@ export default function ProjectGrid() {
           <div className="space-y-6">
              <h3 className="text-black font-bold tracking-widest text-xs uppercase opacity-40">PROTOCOL_ACTIVE</h3>
              <p className="text-black/60 text-lg font-light leading-relaxed max-w-xl">
-                The following matrix contains our most critical production deployments. 
+                Matrix contains our most critical production deployments. 
                 Each node represents a distinct architecture optimized for specific operational vectors.
              </p>
           </div>
@@ -175,33 +122,110 @@ export default function ProjectGrid() {
                 Infinite scalability from day zero. We bridge backends and cinematic frontends.
               </p>
             </div>
-            <div className="space-y-4">
-              <h4 className="text-black font-bold tracking-widest text-[10px] uppercase">Cloud Intelligence</h4>
-              <p className="text-black/40 text-sm font-light leading-relaxed">
-                Bespoke enterprise solutions with real-time data orchestration and AI.
-              </p>
-            </div>
           </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {(projects || []).map((project, index) => (
-            <ProjectCard key={project.id || index} project={project} index={index} />
+            <div key={project.id || `project-${index}`} onClick={() => setSelectedId(project.id)}>
+              <ProjectCard project={project} index={index} />
+            </div>
           ))}
         </div>
-        
-        <div className="flex justify-center pt-12">
-          <motion.button 
-            whileHover={{ scale: 1.05 }}
-            className="px-12 py-4 border border-white/20 text-white text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all group"
-          >
-            LOAD ARCHIVE
-            <span className="ml-3 font-mono text-[8px] text-brand-accent opacity-60 group-hover:opacity-100 transition-opacity">v.2.4</span>
-          </motion.button>
-        </div>
       </div>
+
+      <AnimatePresence>
+        {selectedId && selectedProject && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-12">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedId(null)}
+              className="absolute inset-0 bg-white/70 backdrop-blur-2xl"
+            />
+            
+            <motion.div
+              layoutId={selectedId}
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 50, scale: 0.95 }}
+              className="w-full max-w-5xl bg-white border border-black/10 rounded-[2.5rem] shadow-2xl overflow-hidden relative z-10 flex flex-col lg:flex-row max-h-[90vh]"
+            >
+              <div className="lg:w-1/2 relative bg-neutral-100 overflow-hidden">
+                <img 
+                  src={selectedProject.imageUrl} 
+                  alt={selectedProject.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-10 left-10 text-white">
+                  <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase opacity-70 mb-2 block">PROJECT_ID: {selectedProject.id}</span>
+                  <h3 className="text-4xl font-display font-medium">{selectedProject.title}</h3>
+                </div>
+              </div>
+
+              <div className="lg:w-1/2 p-12 overflow-y-auto custom-scrollbar bg-white">
+                <button 
+                  onClick={() => setSelectedId(null)}
+                  className="absolute top-8 right-8 p-3 rounded-full hover:bg-neutral-100 transition-colors z-20"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+
+                <div className="space-y-12">
+                  <div className="space-y-4">
+                    <h4 className="text-xs font-mono font-bold text-brand-accent uppercase tracking-widest flex items-center gap-2">
+                      <Target className="w-4 h-4" /> OBJECTIVE & BRIEF
+                    </h4>
+                    <p className="text-black/60 text-lg font-light leading-relaxed">
+                      {selectedProject.description}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <h4 className="text-xs font-mono font-bold text-black/40 uppercase tracking-widest flex items-center gap-2">
+                        <Layers className="w-4 h-4" /> TECH_STACK
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedProject.tags?.map((tag, i) => (
+                          <span key={i} className="px-3 py-1 bg-neutral-50 border border-black/5 rounded-full text-[10px] font-bold text-black/60 uppercase">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <h4 className="text-xs font-mono font-bold text-black/40 uppercase tracking-widest flex items-center gap-2">
+                        <LineChart className="w-4 h-4" /> IMPACT_METRIC
+                      </h4>
+                      <div className="p-4 bg-brand-accent/5 rounded-2xl border border-brand-accent/10">
+                        <p className="text-2xl font-display font-bold text-brand-accent tracking-tighter">99.9%</p>
+                        <p className="text-[9px] font-mono text-black/40 font-bold uppercase tracking-widest">Uptime Architecture</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-10 border-t border-black/5 flex flex-col md:flex-row gap-4 items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <a href={selectedProject.demoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full text-xs font-bold hover:bg-brand-accent hover:text-black transition-all">
+                        Launch Deployment <ExternalLink className="w-3 h-3" />
+                      </a>
+                      <button className="flex items-center gap-2 px-6 py-3 bg-neutral-100 text-black/60 rounded-full text-xs font-bold hover:bg-neutral-200 transition-all">
+                        Review Source <Github className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
+
 
 
