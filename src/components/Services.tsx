@@ -1,18 +1,8 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Code2, 
-  Smartphone, 
-  BrainCircuit, 
-  Cloud, 
-  Layers, 
-  Cpu, 
-  Globe, 
-  ShieldCheck,
-  Terminal,
-  X,
-  ArrowRight,
-  CheckCircle2
+import {
+  Code2, Smartphone, BrainCircuit, Cloud, Layers, Cpu,
+  Globe, ShieldCheck, Terminal, X, ArrowRight, CheckCircle2
 } from 'lucide-react';
 
 const SERVICES = [
@@ -37,7 +27,7 @@ const SERVICES = [
     description: 'Transforming businesses with intelligent automation. We specialize in integrating Gemini, OpenAI, and custom ML models.',
     icon: BrainCircuit,
     tags: ['Gemini AI', 'OpenAI', 'Automation', 'NLP'],
-    details: 'We bridge the gap between static applications and intelligent systems. From RAG (Retrieval-Augmented Generation) pipelines to custom vision models, we help you leverage your data strategically.',
+    details: 'We bridge the gap between static applications and intelligent systems. From RAG pipelines to custom vision models, we help you leverage your data strategically.',
     features: ['Custom Chatbot Orchestration', 'Automated Content Generation', 'Predictive Analytics', 'Semantic Search Systems']
   },
   {
@@ -61,7 +51,7 @@ const SERVICES = [
     description: 'Engineering tailored internal tools, ERP systems, and dashboards designed to handle complex business logic.',
     icon: Terminal,
     tags: ['Dashboard', 'ERP', 'Internal Tools', 'SQL'],
-    details: 'Modernizing legacy systems and building bespoke mission-critical software. We understand enterprise complexity and build tools that simplify operations rather than adding to it.',
+    details: 'Modernizing legacy systems and building bespoke mission-critical software. We understand enterprise complexity and build tools that simplify operations.',
     features: ['Legacy Data Migration', 'Complex Workflow Automation', 'SaaS Multi-tenancy', 'Role-Based Access Control (RBAC)']
   },
   {
@@ -90,109 +80,155 @@ const SERVICES = [
   }
 ];
 
+function ServiceCard({ service, index, onClick }: { service: typeof SERVICES[0]; index: number; onClick: () => void }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
+  const [glowPos, setGlowPos] = useState({ x: 50, y: 50 });
+
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    const x = (e.clientX - left) / width;
+    const y = (e.clientY - top) / height;
+    setTiltStyle({
+      transform: `perspective(900px) rotateX(${(y - 0.5) * -12}deg) rotateY(${(x - 0.5) * 12}deg) scale3d(1.02,1.02,1.02)`,
+      transition: 'transform 0.1s ease-out',
+    });
+    setGlowPos({ x: x * 100, y: y * 100 });
+  };
+
+  const onLeave = () => {
+    setTiltStyle({
+      transform: 'perspective(900px) rotateX(0) rotateY(0) scale3d(1,1,1)',
+      transition: 'transform 0.5s ease-out',
+    });
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.07 }}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      onClick={onClick}
+      style={tiltStyle}
+      className="relative group flex flex-col bg-white/[0.03] border border-white/[0.08] rounded-2xl p-8 cursor-pointer"
+    >
+      {/* Mouse-follow glow */}
+      <div
+        className="absolute inset-0 pointer-events-none rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, rgba(99,102,241,0.12) 0%, transparent 60%)` }}
+      />
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+      <div className="mb-8 relative z-10">
+        <div className="w-14 h-14 rounded-2xl bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-xl">
+          <service.icon className="w-7 h-7 group-hover:text-white transition-colors" />
+        </div>
+        <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-[10px] font-mono font-bold text-white/20">
+          {index + 1}
+        </div>
+      </div>
+
+      <div className="space-y-4 flex-grow relative z-10">
+        <h3 className="text-2xl font-display font-medium text-white group-hover:text-brand-accent transition-colors">
+          {service.title}
+        </h3>
+        <p className="text-white/50 text-base font-light leading-relaxed">
+          {service.description}
+        </p>
+      </div>
+
+      <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between relative z-10">
+        <div className="flex flex-wrap gap-2">
+          {service.tags.slice(0, 2).map((tag, tagIdx) => (
+            <span key={`${tag}-${tagIdx}`} className="text-[9px] font-mono font-bold text-white/30 uppercase tracking-widest px-2 py-1 bg-white/5 rounded border border-white/10">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <motion.div
+          className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/20 group-hover:text-brand-accent group-hover:border-brand-accent/30 transition-colors"
+          whileHover={{ scale: 1.1 }}
+        >
+          <ArrowRight className="w-4 h-4" />
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Services() {
   const [selectedService, setSelectedService] = useState<typeof SERVICES[0] | null>(null);
 
   return (
-    <section id="services" className="py-32 px-6 relative bg-neutral-50 overflow-hidden">
-      {/* Background patterns */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: 'radial-gradient(circle, black 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-      
+    <section id="services" className="py-32 px-6 relative bg-[#030712] overflow-hidden">
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+      />
+      <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[150px] pointer-events-none" />
+
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-20">
           <div className="space-y-6 max-w-2xl">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-black/5 text-[10px] font-bold tracking-[0.2em] text-black/60"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-[0.2em] text-white/40"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
               OUR_SPECIALIZED_VECTORS
             </motion.div>
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-6xl font-display font-medium text-black tracking-tight leading-tight"
+              className="text-5xl md:text-6xl font-display font-medium text-white tracking-tight leading-tight"
             >
               Services We <span className="text-brand-accent italic">Offer</span>
             </motion.h2>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-black/60 text-xl font-light leading-relaxed"
+              className="text-white/50 text-xl font-light leading-relaxed"
             >
-              Comprehensive programming and software engineering solutions tailored for the modern digital era. We build systems that perform as elegantly as they look.
+              Comprehensive programming and software engineering solutions tailored for the modern digital era.
             </motion.p>
           </div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="flex flex-wrap gap-4"
           >
-            <div className="glass-card-light !p-4 flex items-center gap-3">
+            <div className="glass-card !p-4 flex items-center gap-3">
               <ShieldCheck className="w-5 h-5 text-brand-accent" />
-              <span className="text-xs font-mono font-bold text-black/60">SECURE_PROTOCOL_V4</span>
+              <span className="text-xs font-mono font-bold text-white/40">SECURE_PROTOCOL_V4</span>
             </div>
-            <div className="glass-card-light !p-4 flex items-center gap-3">
+            <div className="glass-card !p-4 flex items-center gap-3">
               <Layers className="w-5 h-5 text-brand-accent" />
-              <span className="text-xs font-mono font-bold text-black/60">SCALABLE_ARCHITECTURE</span>
+              <span className="text-xs font-mono font-bold text-white/40">SCALABLE_ARCHITECTURE</span>
             </div>
           </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((service, index) => (
-            <motion.div
+            <ServiceCard
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              service={service}
+              index={index}
               onClick={() => setSelectedService(service)}
-              className="glass-card-light group flex flex-col hover:border-brand-accent/30 transition-all duration-500 cursor-pointer"
-            >
-              <div className="mb-8 relative">
-                <div className="w-14 h-14 rounded-2xl bg-black flex items-center justify-center text-brand-accent group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 shadow-xl">
-                  <service.icon className="w-7 h-7" />
-                </div>
-                <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full border border-black/5 bg-white flex items-center justify-center text-[10px] font-mono font-bold text-black/20">
-                  {index + 1}
-                </div>
-              </div>
-
-              <div className="space-y-4 flex-grow">
-                <h3 className="text-2xl font-display font-medium text-black group-hover:text-brand-accent transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-black/60 text-base font-light leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-black/5 flex items-center justify-between">
-                <div className="flex flex-wrap gap-2">
-                  {service.tags.slice(0, 2).map((tag, tagIdx) => (
-                    <span key={`${tag}-${tagIdx}`} className="text-[9px] font-mono font-bold text-black/40 uppercase tracking-widest px-2 py-1 bg-black/5 rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <motion.div 
-                  className="w-8 h-8 rounded-full border border-black/5 flex items-center justify-center text-black/20 group-hover:text-brand-accent group-hover:border-brand-accent/20 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <ArrowRight className="w-4 h-4" />
-                </motion.div>
-              </div>
-            </motion.div>
+            />
           ))}
         </div>
 
@@ -200,83 +236,81 @@ export default function Services() {
         <AnimatePresence>
           {selectedService && (
             <>
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSelectedService(null)}
-                className="fixed inset-0 bg-white/80 backdrop-blur-md z-[100] cursor-pointer"
+                className="fixed inset-0 bg-[#020617]/90 backdrop-blur-md z-[100] cursor-pointer"
               />
-              <motion.div 
-                layoutId={`service-${selectedService.title}`}
+              <motion.div
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-white border border-black/5 rounded-3xl shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] z-[101] overflow-hidden"
+                className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-[#0f172a] border border-white/10 rounded-3xl shadow-2xl z-[101] overflow-hidden"
               >
-                <button 
+                <button
                   onClick={() => setSelectedService(null)}
-                  className="absolute top-6 right-6 p-2 rounded-full hover:bg-neutral-100 transition-colors z-20 text-black/40 hover:text-black"
+                  className="absolute top-6 right-6 p-2 rounded-full hover:bg-white/10 transition-colors z-20 text-white/40 hover:text-white"
                 >
                   <X className="w-6 h-6" />
                 </button>
 
                 <div className="p-8 md:p-12">
                   <div className="flex items-start gap-6 mb-10">
-                    <div className="w-20 h-20 rounded-2xl bg-black flex items-center justify-center text-brand-accent shadow-2xl shrink-0">
+                    <div className="w-20 h-20 rounded-2xl bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent shadow-2xl shrink-0">
                       <selectedService.icon className="w-10 h-10" />
                     </div>
                     <div className="space-y-2">
-                       <div className="inline-block px-3 py-1 rounded-full border border-brand-accent/20 bg-brand-accent/5 text-[10px] font-bold tracking-widest text-brand-accent uppercase">
-                          SERVICE_VECTOR_DETAILED
-                       </div>
-                       <h3 className="text-3xl md:text-4xl font-display font-medium text-black">
-                          {selectedService.title}
-                       </h3>
+                      <div className="inline-block px-3 py-1 rounded-full border border-brand-accent/20 bg-brand-accent/5 text-[10px] font-bold tracking-widest text-brand-accent uppercase">
+                        SERVICE_VECTOR_DETAILED
+                      </div>
+                      <h3 className="text-3xl md:text-4xl font-display font-medium text-white">
+                        {selectedService.title}
+                      </h3>
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-5 gap-12">
                     <div className="md:col-span-3 space-y-8">
-                       <div className="space-y-4">
-                          <h4 className="text-xs font-mono font-bold text-black/40 uppercase tracking-widest">Engineering_Philosophy</h4>
-                          <p className="text-black/70 text-lg font-light leading-relaxed">
-                            {selectedService.details}
-                          </p>
-                       </div>
-
-                       <div className="space-y-4">
-                          <h4 className="text-xs font-mono font-bold text-black/40 uppercase tracking-widest">Core_Deliverables</h4>
-                          <div className="grid grid-cols-1 gap-3">
-                            {selectedService.features.map((feature, fIdx) => (
-                              <div key={`${feature}-${fIdx}`} className="flex items-center gap-3 text-sm text-black/60 font-medium">
-                                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                                {feature}
-                              </div>
-                            ))}
-                          </div>
-                       </div>
+                      <div className="space-y-4">
+                        <h4 className="text-xs font-mono font-bold text-white/30 uppercase tracking-widest">Engineering_Philosophy</h4>
+                        <p className="text-white/60 text-lg font-light leading-relaxed">{selectedService.details}</p>
+                      </div>
+                      <div className="space-y-4">
+                        <h4 className="text-xs font-mono font-bold text-white/30 uppercase tracking-widest">Core_Deliverables</h4>
+                        <div className="grid grid-cols-1 gap-3">
+                          {selectedService.features.map((feature, fIdx) => (
+                            <div key={`${feature}-${fIdx}`} className="flex items-center gap-3 text-sm text-white/50 font-medium">
+                              <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                              {feature}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
 
                     <div className="md:col-span-2 space-y-8">
-                       <div className="space-y-4">
-                          <h4 className="text-xs font-mono font-bold text-black/40 uppercase tracking-widest">Tech_Stack</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {selectedService.tags.map((tag, tIdx) => (
-                              <span key={`${tag}-${tIdx}`} className="px-3 py-2 bg-neutral-100 rounded-xl text-[11px] font-bold text-black/60 border border-black/5">
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                       </div>
-
-                       <div className="p-6 bg-brand-accent rounded-2xl text-white space-y-4">
-                          <p className="text-xs font-bold uppercase tracking-widest opacity-80">Ready to deploy?</p>
-                          <h5 className="text-xl font-display font-medium">Request Quote</h5>
-                          <button className="w-full py-3 bg-white text-brand-accent rounded-xl font-bold flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform">
-                            Start Project <ArrowRight className="w-4 h-4" />
-                          </button>
-                       </div>
+                      <div className="space-y-4">
+                        <h4 className="text-xs font-mono font-bold text-white/30 uppercase tracking-widest">Tech_Stack</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedService.tags.map((tag, tIdx) => (
+                            <span key={`${tag}-${tIdx}`} className="px-3 py-2 bg-white/5 rounded-xl text-[11px] font-bold text-white/50 border border-white/10">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="p-6 bg-brand-accent rounded-2xl text-white space-y-4">
+                        <p className="text-xs font-bold uppercase tracking-widest opacity-80">Ready to deploy?</p>
+                        <h5 className="text-xl font-display font-medium">Request Quote</h5>
+                        <button
+                          className="w-full py-3 bg-white text-brand-accent rounded-xl font-bold flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform"
+                          onClick={() => { setSelectedService(null); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+                        >
+                          Start Project <ArrowRight className="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -285,31 +319,30 @@ export default function Services() {
           )}
         </AnimatePresence>
 
-        {/* Global Stats Footer */}
-        <div className="mt-20 pt-10 border-t border-black/10 flex flex-col md:flex-row items-center justify-between gap-8 opacity-40">
+        {/* Footer Stats */}
+        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 opacity-40">
           <div className="flex items-center gap-8">
             <div className="space-y-1">
-              <p className="text-3xl font-display font-bold text-black tracking-tighter">99.9%</p>
-              <p className="text-[10px] font-mono font-bold tracking-widest uppercase">Uptime_Guarantee</p>
+              <p className="text-3xl font-display font-bold text-white tracking-tighter">99.9%</p>
+              <p className="text-[10px] font-mono font-bold tracking-widest uppercase text-white/50">Uptime_Guarantee</p>
             </div>
-            <div className="w-px h-10 bg-black/10" />
+            <div className="w-px h-10 bg-white/10" />
             <div className="space-y-1">
-              <p className="text-3xl font-display font-bold text-black tracking-tighter">150ms</p>
-              <p className="text-[10px] font-mono font-bold tracking-widest uppercase">Median_Latency</p>
+              <p className="text-3xl font-display font-bold text-white tracking-tighter">150ms</p>
+              <p className="text-[10px] font-mono font-bold tracking-widest uppercase text-white/50">Median_Latency</p>
             </div>
           </div>
-          
           <div className="flex items-center gap-4">
-             <div className="flex flex-col items-end gap-1">
-               <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase">Deployment_Status</span>
-               <span className="text-[9px] font-mono font-medium text-emerald-500 flex items-center gap-2">
-                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                 ALL_SYSTEMS_OPERATIONAL
-               </span>
-             </div>
-             <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center">
-               <Cpu className="w-5 h-5" />
-             </div>
+            <div className="flex flex-col items-end gap-1">
+              <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/50">Deployment_Status</span>
+              <span className="text-[9px] font-mono font-medium text-emerald-500 flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                ALL_SYSTEMS_OPERATIONAL
+              </span>
+            </div>
+            <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40">
+              <Cpu className="w-5 h-5" />
+            </div>
           </div>
         </div>
       </div>

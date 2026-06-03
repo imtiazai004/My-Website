@@ -67,9 +67,13 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
 
   const handleDelete = async (id: string) => {
     if (window.confirm(`Delete this ${activeTab.slice(0, -1)}?`)) {
-      if (activeTab === 'projects') await deleteProject(id);
-      if (activeTab === 'skills') await deleteSkill(id);
-      if (activeTab === 'testimonials') await deleteTestimonial(id);
+      try {
+        if (activeTab === 'projects') await deleteProject(id);
+        if (activeTab === 'skills') await deleteSkill(id);
+        if (activeTab === 'testimonials') await deleteTestimonial(id);
+      } catch (error) {
+        console.error('Delete failed', error);
+      }
     }
   };
 
@@ -193,7 +197,7 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
                           <div className="space-y-2">
                             <label className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest">Category</label>
                             <select value={editingItem.category || 'SaaS'} onChange={e => setEditingItem({...editingItem, category: e.target.value})} className="admin-input" required>
-                              <option>SaaS</option><option>Web App</option><option>Website</option><option>Tool</option>
+                              <option>SaaS</option><option>Web App</option><option>Website</option><option>Tool</option><option>Desktop App</option>
                             </select>
                           </div>
                           <div className="md:col-span-2 space-y-2">

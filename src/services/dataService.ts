@@ -1,6 +1,7 @@
 import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, Timestamp, addDoc, serverTimestamp, limit } from 'firebase/firestore';
 import { db, handleFirestoreError } from '../lib/firebase';
-import { Project, Testimonial, Skill } from '../types';
+import { Project, Testimonial, Skill, FAQ, SectionSettings } from '../types';
+import { DEFAULT_SECTION_SETTINGS } from '../constants';
 
 export const subscribeToProjects = (callback: (projects: Project[]) => void) => {
   const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'));
@@ -40,13 +41,14 @@ export const subscribeToSkills = (callback: (skills: Skill[]) => void) => {
 
 export const saveProject = async (project: any) => {
   try {
+    const { id, ...fields } = project;
     const data = {
-      ...project,
+      ...fields,
       updatedAt: serverTimestamp(),
-      createdAt: project.id ? (project.createdAt || serverTimestamp()) : serverTimestamp(),
+      createdAt: id ? (fields.createdAt || serverTimestamp()) : serverTimestamp(),
     };
-    if (project.id) {
-      await setDoc(doc(db, 'projects', project.id), data);
+    if (id) {
+      await setDoc(doc(db, 'projects', id), data);
     } else {
       await addDoc(collection(db, 'projects'), data);
     }
@@ -65,11 +67,11 @@ export const deleteProject = async (id: string) => {
 
 export const saveSkill = async (skill: Partial<Skill> & { id?: string }) => {
   try {
-    const data = { ...skill };
-    if (skill.id) {
-      await setDoc(doc(db, 'skills', skill.id), data);
+    const { id, ...fields } = skill;
+    if (id) {
+      await setDoc(doc(db, 'skills', id), fields);
     } else {
-      await addDoc(collection(db, 'skills'), data);
+      await addDoc(collection(db, 'skills'), fields);
     }
   } catch (error) {
     handleFirestoreError(error, skill.id ? 'update' : 'create', `skills/${skill.id || 'new'}`);
@@ -86,12 +88,13 @@ export const deleteSkill = async (id: string) => {
 
 export const saveTestimonial = async (testimonial: any) => {
   try {
+    const { id, ...fields } = testimonial;
     const data = {
-      ...testimonial,
-      createdAt: testimonial.id ? (testimonial.createdAt || serverTimestamp()) : serverTimestamp(),
+      ...fields,
+      createdAt: id ? (fields.createdAt || serverTimestamp()) : serverTimestamp(),
     };
-    if (testimonial.id) {
-      await setDoc(doc(db, 'testimonials', testimonial.id), data);
+    if (id) {
+      await setDoc(doc(db, 'testimonials', id), data);
     } else {
       await addDoc(collection(db, 'testimonials'), data);
     }
@@ -147,6 +150,49 @@ export const sendContactMessage = async (email: string, message: string) => {
     });
   } catch (error) {
     handleFirestoreError(error, 'create', 'contacts');
+  }
+};
+
+export const subscribeToFAQs = (callback: (faqs: FAQ[]) => void) => {
+  const q = query(collection(db, 'faqs'), orderBy('order', 'asc'));
+  return onSnapshot(q, (snapshot) => {
+    const faqs = snapshot.docs.map(d => ({ id: d.id, ...d.data() } as FAQ));
+    callback(faqs);
+  }, (error) => handleFirestoreError(error, 'list', 'faqs'));
+};
+
+export const saveFAQ = async (faq: Partial<FAQ> & { id?: string }) => {
+  try {
+    const { id, ...fields } = faq;
+    if (id) {
+      await setDoc(doc(db, 'faqs', id), fields);
+    } else {
+      await addDoc(collection(db, 'faqs'), fields);
+    }
+  } catch (error) {
+    handleFirestoreError(error, faq.id ? 'update' : 'create', `faqs/${faq.id || 'new'}`);
+  }
+};
+
+export const deleteFAQ = async (id: string) => {
+  try {
+    await deleteDoc(doc(db, 'faqs', id));
+  } catch (error) {
+    handleFirestoreError(error, 'delete', `faqs/${id}`);
+  }
+};
+
+export const subscribeToSectionSettings = (callback: (settings: SectionSettings) => void) => {
+  return onSnapshot(doc(db, 'settings', 'sections'), (snap) => {
+    callback(snap.exists() ? (snap.data() as SectionSettings) : DEFAULT_SECTION_SETTINGS);
+  });
+};
+
+export const saveSectionSettings = async (settings: SectionSettings) => {
+  try {
+    await setDoc(doc(db, 'settings', 'sections'), settings);
+  } catch (error) {
+    handleFirestoreError(error, 'update', 'settings/sections');
   }
 };
 

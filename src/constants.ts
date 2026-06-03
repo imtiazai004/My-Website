@@ -1,4 +1,11 @@
-import { Project, Testimonial, Skill } from './types';                                                                                                                                                                                     
+import { Project, Testimonial, Skill, FAQ, SectionSettings } from './types';
+
+/** Maps Firestore project titles → bundled SVG illustration paths.
+ *  Used by ProjectCard when imageUrl is blank, a placeholder, or missing. */
+export const PROJECT_LOGO_MAP: Record<string, string> = {
+  'Amazon Product Hunting': '/projects/amazon-hunt.svg',
+  'Nursing App': '/projects/nursing-app.svg',
+};                                                                                                                                                                                     
   export const PROJECTS: Project[] = [
     {
       id: '1',
@@ -34,10 +41,31 @@ import { Project, Testimonial, Skill } from './types';
       stats: [{ label: 'Latency', value: '<50ms' }, { label: 'Data Points', value: '1M/day' }]
     },
     {
+      id: '5',
+      title: 'Amazon Product Hunting',
+      description: 'A powerful desktop tool for Amazon FBA sellers to discover high-demand, low-competition products. Features real-time BSR tracking, competitor analysis, profit calculators, and keyword research — all in one streamlined dashboard.',
+      category: 'Tool',
+      tags: ['Python', 'Tkinter', 'Amazon API', 'Data Analytics'],
+      imageUrl: '/projects/amazon-hunt.svg',
+      demoUrl: '#',
+      downloadUrl: '#',
+      stats: [{ label: 'Products Scanned', value: '1M+' }, { label: 'Avg ROI', value: '3.2×' }]
+    },
+    {
+      id: '6',
+      title: 'Nursing App',
+      description: 'A comprehensive mobile-first platform for nursing professionals. Manage patient care schedules, medication reminders, shift logs, and clinical notes with an intuitive interface built for high-pressure healthcare environments.',
+      category: 'Web App',
+      tags: ['React Native', 'Firebase', 'Healthcare', 'HIPAA'],
+      imageUrl: '/projects/nursing-app.svg',
+      demoUrl: '#',
+      downloadUrl: '#',
+      stats: [{ label: 'Patients Tracked', value: '500+' }, { label: 'Shift Accuracy', value: '99.8%' }]
+    },
+    {
       id: '4',
       title: 'School Finance System',
-      description: 'A complete offline fee management system for Windows schools. Manage student records, collect fees, generate receipts, and track payments. Staff can access it from any PC on the school\'s network — no internet
-  needed.',
+      description: 'A complete offline fee management system for Windows schools. Manage student records, collect fees, generate receipts, and track payments. Staff can access it from any PC on the school\'s network — no internet needed.',
       category: 'Desktop App',
       tags: ['Python', 'Flask', 'SQLite', 'Windows', 'Offline'],
       imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2011&auto=format&fit=crop',
@@ -73,3 +101,25 @@ import { Project, Testimonial, Skill } from './types';
     { name: 'UI/UX & Motion', level: 92, iconName: 'Layers' },
     { name: 'Performance Optimization', level: 88, iconName: 'Zap' }
   ];
+
+export const FAQS: FAQ[] = [
+  { id: '1', question: 'How long does a typical project take?', answer: 'Project timelines vary by scope. A landing page takes 1–2 weeks, a full web app 4–8 weeks, and enterprise systems 3–6 months. We provide a detailed timeline estimate during the free consultation before any work begins.', order: 1 },
+  { id: '2', question: 'What technologies do you specialize in?', answer: 'Our core stack is React/Next.js, TypeScript, Node.js, and Firebase/PostgreSQL for web. We also work with React Native for mobile, Python for AI/ML integrations, and AWS/GCP for cloud infrastructure.', order: 2 },
+  { id: '3', question: 'Do you offer ongoing support after launch?', answer: 'Yes. We offer flexible support plans: Basic (bug fixes only), Standard (monthly updates + monitoring), and Premium (dedicated developer on-call). All projects come with 30 days of free post-launch support.', order: 3 },
+  { id: '4', question: 'How does your pricing work?', answer: 'We price per project, not per hour. After your free discovery call, we send a fixed-price proposal scoped to your requirements. No surprise invoices. For ongoing work, we offer monthly retainer arrangements.', order: 4 },
+  { id: '5', question: 'Can you work with an existing codebase?', answer: 'Absolutely. We regularly audit, refactor, and extend existing systems. We start every legacy project with a technical audit to identify risks and opportunities before writing a single line of new code.', order: 5 },
+  { id: '6', question: 'Do you sign NDAs and IP agreements?', answer: 'Yes. We sign NDAs before any confidential discussion and full IP assignment agreements are included in every project contract. You own 100% of the code, designs, and assets we produce for you.', order: 6 },
+  { id: '7', question: 'Can you integrate AI into my existing product?', answer: 'Yes — this is one of our strongest capabilities. We integrate OpenAI, Gemini, and custom models via RAG pipelines, fine-tuning, or API orchestration depending on your needs and data sensitivity.', order: 7 },
+  { id: '8', question: 'How do we get started?', answer: 'Click "Get Free Consultation" anywhere on the site, fill in a brief project description, and we will schedule a 30-minute discovery call within 24 hours. No commitment required at that stage.', order: 8 },
+];
+
+export const DEFAULT_SECTION_SETTINGS: SectionSettings = {
+  clientLogos: true,
+  about: true,
+  services: true,
+  projects: true,
+  whyChooseUs: true,
+  skills: true,
+  testimonials: true,
+  faq: true,
+};

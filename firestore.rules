@@ -48,7 +48,7 @@ service cloud.firestore {
       return data.keys().hasAll(['title', 'description', 'category', 'imageUrl', 'createdAt'])
         && data.title is string && data.title.size() <= 100
         && data.description is string && data.description.size() <= 1000
-        && data.category in ['SaaS', 'Web App', 'Website', 'Tool']
+        && data.category in ['SaaS', 'Web App', 'Website', 'Tool', 'Desktop App']
         && data.imageUrl is string && data.imageUrl.size() <= 1000
         && data.createdAt is timestamp;
     }
@@ -105,6 +105,27 @@ service cloud.firestore {
     match /admins/{adminId} {
       allow read: if isSignedIn() && request.auth.uid == adminId;
       allow write: if false; // Only manageable via console or higher-level backend
+    }
+
+    // FAQs
+    match /faqs/{faqId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidFAQ(incoming());
+      allow update: if isAdmin() && isValidFAQ(incoming());
+      allow delete: if isAdmin();
+    }
+
+    function isValidFAQ(data) {
+      return data.keys().hasAll(['question', 'answer', 'order'])
+        && data.question is string && data.question.size() <= 300
+        && data.answer is string && data.answer.size() <= 2000
+        && data.order is int;
+    }
+
+    // Section visibility settings
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
     }
 
     // Activity Tracking

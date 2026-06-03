@@ -1,0 +1,71 @@
+# Soft Tech Solution
+
+> AI & Web Development Agency — we build high-performance web applications, SaaS platforms, and custom digital tools that combine cinematic design with uncompromising engineering precision.
+
+## About
+
+Soft Tech Solution is a digital engineering agency. We specialize in full-stack web development, AI/LLM integration, mobile apps, cloud infrastructure, and custom enterprise software. Every product we ship is engineered for performance and designed for impact.
+
+- Website: https://aisofttechsolution.com
+- Email: info@aisofttechsolution.com
+- Phone: +44 7462 086661
+- Twitter/X: https://x.com/imtiazahmadPTI
+- LinkedIn: https://www.linkedin.com/in/imtiazahmad004
+- GitHub: https://github.com/imtiazai004
+
+## Services
+
+- **Full-Stack Web Development** — React, Next.js, Node.js, TypeScript. SSR, PWAs, WCAG compliance, sub-500ms global load times.
+- **Mobile App Engineering** — React Native and Flutter for iOS and Android. Native performance, offline-first, biometric auth.
+- **AI & LLM Integration** — OpenAI, Gemini, custom ML models. RAG pipelines, fine-tuning, semantic search, chatbot orchestration.
+- **Cloud Infrastructure & DevOps** — AWS, GCP, Azure. Kubernetes, Docker, zero-downtime CI/CD, 99.99% uptime SLAs.
+- **Custom API Development** — REST and GraphQL APIs. OAuth, rate limiting, WebSocket real-time feeds.
+- **Enterprise Software Solutions** — ERP systems, internal dashboards, legacy migration, RBAC, SaaS multi-tenancy.
+- **Embedded Systems & IoT** — C/C++, Rust, firmware, RTOS, edge AI, MQTT/CoAP protocols.
+- **Blockchain & Web3 Engineering** — Solidity, smart contract audits, DeFi, NFT ecosystems on Ethereum and Solana.
+- **Data Engineering & Analytics** — Python, Spark, Kafka, BigQuery. ETL pipelines, real-time streaming, data lakehouse architecture.
+
+## Portfolio
+
+- **SoftFlow SaaS** — Project management platform with real-time collaboration and AI-powered task prioritization. Stack: React, Node.js, PostgreSQL.
+- **ZenEngine Web App** — Focus and meditation app with generative soundscapes. Stack: Next.js, WebAudio API, Framer Motion.
+- **Pulse Analytics Tool** — Privacy-first real-time analytics dashboard. Stack: TypeScript, D3.js, Redis. <50ms latency.
+- **Amazon Product Hunting** — Desktop tool for Amazon FBA sellers: BSR tracking, competitor analysis, profit calculators, keyword research. Stack: Python, Tkinter, Amazon API.
+- **Nursing App** — HIPAA-compliant mobile platform for nursing professionals: patient care, medication reminders, shift logs. Stack: React Native, Firebase.
+- **School Finance System** — Offline-first Windows fee management system for schools: student records, receipts, network access, no internet required. Stack: Python, Flask, SQLite.
+
+## Pricing & Process
+
+- Fixed-price proposals (not hourly billing)
+- Free 30-minute discovery call before any commitment
+- 30 days free post-launch support on all projects
+- Flexible ongoing support plans: Basic, Standard, Premium
+- NDA signed before any confidential discussion
+- Full IP assignment — clients own 100% of all code, designs, and assets
+
+## Tech Stack
+
+Frontend: React, Next.js, TypeScript, Tailwind CSS, Framer Motion
+Backend: Node.js, Python, Flask, GraphQL, REST
+Mobile: React Native, Flutter
+Database: PostgreSQL, Firebase Firestore, SQLite, Redis
+Cloud: AWS, GCP, Azure, Docker, Kubernetes
+AI/ML: OpenAI, Gemini, custom models, RAG pipelines
+Blockchain: Solidity, Web3.js, Ethereum, Solana
+
+## FAQs
+
+**How long does a typical project take?**
+A landing page: 1–2 weeks. A full web app: 4–8 weeks. Enterprise systems: 3–6 months.
+
+**Do you offer ongoing support after launch?**
+Yes. Basic (bug fixes), Standard (monthly updates + monitoring), Premium (dedicated developer on-call). All projects include 30 days of free post-launch support.
+
+**Can you integrate AI into my existing product?**
+Yes. We integrate OpenAI, Gemini, and custom models via RAG pipelines, fine-tuning, or API orchestration depending on your needs and data sensitivity.
+
+**How does pricing work?**
+Per-project fixed pricing. Free discovery call first, then a scoped proposal with no surprise invoices.
+
+**Do you sign NDAs?**
+Yes. NDAs before any confidential discussion; full IP assignment in every contract.

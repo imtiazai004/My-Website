@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -104,6 +105,42 @@
 
 .animate-pulse-glow {
   animation: pulse-glow 15s ease-in-out infinite;
+}
+
+/* 3D Cube Logo */
+@keyframes sts-cube-rotate {
+  0%   { transform: rotateX(-20deg) rotateY(0deg); }
+  100% { transform: rotateX(-20deg) rotateY(360deg); }
+}
+
+.sts-cube-spin {
+  animation: sts-cube-rotate 12s linear infinite;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+@keyframes sts-solution-scan {
+  0%   { background-position: -250% center; }
+  55%  { background-position: 250% center; }
+  100% { background-position: 250% center; }
+}
+
+.sts-solution-animate {
+  background: linear-gradient(
+    90deg,
+    #6D28D9 0%,
+    #8B5CF6 30%,
+    #ddd6fe 47%,
+    #ffffff 50%,
+    #ddd6fe 53%,
+    #8B5CF6 70%,
+    #A78BFA 100%
+  );
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: sts-solution-scan 3.5s ease-in-out infinite;
 }
 
 /* Custom Scrollbar */

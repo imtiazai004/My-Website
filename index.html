@@ -3,11 +3,231 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <title>Soft Tech Solution – AI & Web Development Agency</title>
+    <meta name="description" content="Soft Tech Solution builds high-performance AI-powered web applications, SaaS platforms, and digital experiences. Cinematic design meets uncompromising engineering." />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aisofttechsolution.com/" />
+    <meta property="og:site_name" content="Soft Tech Solution" />
+    <meta property="og:title" content="Soft Tech Solution – AI & Web Development Agency" />
+    <meta property="og:description" content="We build high-performance AI-powered web apps, SaaS platforms, and custom digital tools. Check out our Amazon Product Hunting tool and more in our portfolio." />
+    <meta property="og:image" content="https://aisofttechsolution.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Soft Tech Solution – Portfolio Preview" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Soft Tech Solution – AI & Web Development Agency" />
+    <meta name="twitter:description" content="We build high-performance AI-powered web apps, SaaS platforms, and custom digital tools." />
+    <meta name="twitter:image" content="https://aisofttechsolution.com/og-image.jpg" />
+
+    <!-- Preconnect to speed up Firebase and analytics -->
+    <link rel="preconnect" href="https://firestore.googleapis.com" />
+    <link rel="preconnect" href="https://www.googleapis.com" />
+    <link rel="preconnect" href="https://identitytoolkit.googleapis.com" />
+    <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
+
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Soft Tech Solution",
+      "url": "https://aisofttechsolution.com",
+      "logo": "https://aisofttechsolution.com/og-image.jpg",
+      "description": "Soft Tech Solution builds high-performance AI-powered web applications, SaaS platforms, and digital experiences. Cinematic design meets uncompromising engineering.",
+      "email": "info@aisofttechsolution.com",
+      "telephone": "+44-7462-086661",
+      "sameAs": [
+        "https://x.com/imtiazahmadPTI",
+        "https://www.linkedin.com/in/imtiazahmad004",
+        "https://github.com/imtiazai004"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+44-7462-086661",
+        "contactType": "sales",
+        "email": "info@aisofttechsolution.com",
+        "availableLanguage": "English"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Soft Tech Solution",
+      "url": "https://aisofttechsolution.com",
+      "description": "AI & Web Development Agency — high-performance web apps, SaaS platforms, and custom digital tools.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://aisofttechsolution.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: ProfessionalService with offer catalog -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Soft Tech Solution",
+      "url": "https://aisofttechsolution.com",
+      "description": "Digital engineering agency specializing in AI integration, full-stack web development, mobile apps, cloud infrastructure, and custom software solutions.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Software Development Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Full-Stack Web Development",
+              "description": "High-performance, responsive web applications using React, Next.js, and Node.js with SSR and edge-computing solutions."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Mobile App Engineering",
+              "description": "Native-quality mobile experiences for iOS and Android using React Native and Flutter."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI & LLM Integration",
+              "description": "Intelligent automation integrating Gemini, OpenAI, and custom ML models via RAG pipelines, fine-tuning, and API orchestration."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cloud Infrastructure & DevOps",
+              "description": "Resilient, auto-scaling architectures on AWS, GCP, and Azure with zero-downtime CI/CD pipelines."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom API Development",
+              "description": "Secure, high-throughput REST and GraphQL APIs for complex digital ecosystems."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Enterprise Software Solutions",
+              "description": "Tailored internal tools, ERP systems, and dashboards for complex business logic."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Data Engineering & Analytics",
+              "description": "Robust data pipelines and processing frameworks transforming raw data into actionable insights."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Blockchain & Web3 Engineering",
+              "description": "Decentralized applications and smart contracts for Ethereum and Solana with security-first development."
+            }
+          }
+        ]
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does a typical project take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Project timelines vary by scope. A landing page takes 1–2 weeks, a full web app 4–8 weeks, and enterprise systems 3–6 months. We provide a detailed timeline estimate during the free consultation before any work begins."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What technologies do you specialize in?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our core stack is React/Next.js, TypeScript, Node.js, and Firebase/PostgreSQL for web. We also work with React Native for mobile, Python for AI/ML integrations, and AWS/GCP for cloud infrastructure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer ongoing support after launch?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We offer flexible support plans: Basic (bug fixes only), Standard (monthly updates + monitoring), and Premium (dedicated developer on-call). All projects come with 30 days of free post-launch support."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does your pricing work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We price per project, not per hour. After your free discovery call, we send a fixed-price proposal scoped to your requirements. No surprise invoices. For ongoing work, we offer monthly retainer arrangements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you work with an existing codebase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. We regularly audit, refactor, and extend existing systems. We start every legacy project with a technical audit to identify risks and opportunities before writing a single line of new code."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you sign NDAs and IP agreements?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We sign NDAs before any confidential discussion and full IP assignment agreements are included in every project contract. You own 100% of the code, designs, and assets we produce for you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you integrate AI into my existing product?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — this is one of our strongest capabilities. We integrate OpenAI, Gemini, and custom models via RAG pipelines, fine-tuning, or API orchestration depending on your needs and data sensitivity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do we get started?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Click 'Get Free Consultation' anywhere on the site, fill in a brief project description, and we will schedule a 30-minute discovery call within 24 hours. No commitment required at that stage."
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

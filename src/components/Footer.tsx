@@ -1,13 +1,10 @@
-import { Terminal, Github, Twitter, Linkedin, Heart, Send, CheckCircle2, Mail, MessageCircle } from 'lucide-react';
+import { Twitter, Linkedin, Send, CheckCircle2, Mail, MessageCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 import { trackActivity, sendContactMessage } from '../services/dataService';
+import { Logo, TAGLINE } from './Logo';
 import React, { useState } from 'react';
 
-interface FooterProps {
-  onAction?: () => void;
-}
-
-export default function Footer({ onAction }: FooterProps) {
+export default function Footer() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
@@ -85,13 +82,15 @@ export default function Footer({ onAction }: FooterProps) {
 
             <div className="flex items-center gap-6 pt-4">
               {[
-                { icon: Github, label: 'GitHub' },
-                { icon: Twitter, label: 'Twitter' },
-                { icon: Linkedin, label: 'LinkedIn' }
+                { icon: Twitter, label: 'Twitter', href: 'https://x.com/imtiazahmadPTI' },
+                { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/imtiazahmad004' }
               ].map((social, i) => (
-                <motion.a 
+                <motion.a
                   key={i}
-                  href="#"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
                   whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.05)' }}
                   className="w-14 h-14 rounded-2xl border border-white/5 flex items-center justify-center text-brand-text-dim hover:text-white transition-all"
                 >
@@ -177,9 +176,16 @@ export default function Footer({ onAction }: FooterProps) {
         </div>
         
         <div className="pt-24 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
-          <div className="flex flex-col gap-4">
-            <span className="text-[11px] text-brand-accent font-black uppercase tracking-[0.3em]">Operational Metrics</span>
-            <div className="flex gap-16 font-display">
+          {/* Logo + tagline signature */}
+          <div className="flex flex-col gap-5">
+            <Logo variant="full" size={40} />
+            <span className="text-[10px] text-white/20 uppercase tracking-[0.4em] font-mono">
+              &copy; {new Date().getFullYear()} Soft Tech Solution — All rights reserved.
+            </span>
+          </div>
+
+          <div className="flex flex-col md:items-end gap-4">
+            <div className="flex gap-16 font-display mb-4">
               <div className="flex flex-col">
                 <span className="text-4xl font-bold tracking-tighter">12</span>
                 <span className="text-[10px] text-brand-text-dim uppercase font-black tracking-widest">SHIPPED</span>
@@ -193,17 +199,11 @@ export default function Footer({ onAction }: FooterProps) {
                 <span className="text-[10px] text-brand-text-dim uppercase font-black tracking-widest">LATENCY</span>
               </div>
             </div>
-          </div>
-          
-          <div className="flex flex-col md:items-end gap-4">
             <div className="flex gap-8 text-[11px] text-brand-text-dim font-black uppercase tracking-[0.3em]">
-              <a href="#" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
-              <a href="#" className="hover:text-white transition-colors">GitHub</a>
+              <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors">Privacy</button>
+              <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors">Terms</button>
+              <a href="https://github.com/imtiazai004" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
             </div>
-            <button onClick={onAction} className="text-[10px] text-white/20 hover:text-white/40 transition-colors text-left uppercase tracking-[0.4em] font-mono">
-               &copy; {new Date().getFullYear()} SOFT_TECH_SOLUTION // SYSTEM_ROOT
-            </button>
           </div>
         </div>
       </div>
