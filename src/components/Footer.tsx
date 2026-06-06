@@ -63,10 +63,10 @@ export default function Footer() {
                 </div>
               </motion.a>
 
-              <motion.a 
+              <motion.a
                 whileHover={{ y: -5 }}
-                href="https://wa.me/447462086661" 
-                target="_blank" 
+                href="https://wa.me/447462086661"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-5 p-6 glass-card !p-6 hover:bg-green-500/10 transition-all group"
               >
@@ -74,8 +74,23 @@ export default function Footer() {
                   <MessageCircle className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest">Secure Comms</p>
+                  <p className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest">WhatsApp (UK)</p>
                   <p className="text-sm font-medium tracking-tight">+44 7462 086661</p>
+                </div>
+              </motion.a>
+              <motion.a
+                whileHover={{ y: -5 }}
+                href="https://wa.me/923005863032"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-5 p-6 glass-card !p-6 hover:bg-green-500/10 transition-all group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 group-hover:bg-green-500 group-hover:text-white transition-all">
+                  <MessageCircle className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest">WhatsApp (PK)</p>
+                  <p className="text-sm font-medium tracking-tight">+92 300 5863032</p>
                 </div>
               </motion.a>
             </div>

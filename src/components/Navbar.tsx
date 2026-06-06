@@ -44,8 +44,9 @@ const COMPANY_ITEMS = [
 ];
 
 const CONTACT_ITEMS = [
-  { icon: Mail,        label: 'Email Us',      desc: 'info@aisofttechsolution.com', href: 'mailto:info@aisofttechsolution.com' },
-  { icon: MessageCircle,label:'WhatsApp',      desc: '+44 7462 086661',             href: 'https://wa.me/447462086661' },
+  { icon: Mail,          label: 'Email Us',       desc: 'info@aisofttechsolution.com', href: 'mailto:info@aisofttechsolution.com' },
+  { icon: MessageCircle, label: 'WhatsApp (UK)',  desc: '+44 7462 086661',             href: 'https://wa.me/447462086661' },
+  { icon: MessageCircle, label: 'WhatsApp (PK)',  desc: '+92 300 5863032',             href: 'https://wa.me/923005863032' },
 ];
 
 type DropdownKey = 'services' | 'work' | 'company' | 'contact' | null;
@@ -398,8 +399,15 @@ export default function Navbar() {
               <a href="https://wa.me/447462086661" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/20 hover:bg-green-500/15 transition-all group">
                 <MessageCircle className="w-5 h-5 text-green-400" />
                 <div>
-                  <p className="text-[12px] font-bold text-white/80 group-hover:text-white">WhatsApp</p>
+                  <p className="text-[12px] font-bold text-white/80 group-hover:text-white">WhatsApp (UK)</p>
                   <p className="text-[10px] text-white/40">+44 7462 086661</p>
+                </div>
+              </a>
+              <a href="https://wa.me/923005863032" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/20 hover:bg-green-500/15 transition-all group">
+                <MessageCircle className="w-5 h-5 text-green-400" />
+                <div>
+                  <p className="text-[12px] font-bold text-white/80 group-hover:text-white">WhatsApp (PK)</p>
+                  <p className="text-[10px] text-white/40">+92 300 5863032</p>
                 </div>
               </a>
               <button onClick={() => scrollTo('#contact')} className="w-full py-3.5 bg-brand-accent text-white text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-indigo-400 transition-colors">
