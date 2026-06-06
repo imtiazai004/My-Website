@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://imtiazahmad004-composer-ai-scanner.hf.space/$1",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "composer.aisofttechsolution.com"
+        }
+      ]
+    }
+  ]
+}
