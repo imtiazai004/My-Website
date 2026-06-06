@@ -63,6 +63,17 @@ export const PROJECT_LOGO_MAP: Record<string, string> = {
       stats: [{ label: 'Patients Tracked', value: '500+' }, { label: 'Shift Accuracy', value: '99.8%' }]
     },
     {
+      id: '7',
+      title: 'Composer — AI OCR Scanner',
+      description: 'An AI-powered document scanner that extracts text from any image instantly. Supports multi-page scanning, 10+ languages, Gemini AI engine with EasyOCR fallback, and installs as a PWA on mobile and desktop.',
+      category: 'AI Tool',
+      tags: ['Python', 'Gemini AI', 'OCR', 'Streamlit', 'PWA'],
+      imageUrl: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2070&auto=format&fit=crop',
+      demoUrl: 'https://composer.aisofttechsolution.com',
+      downloadUrl: '#',
+      stats: [{ label: 'AI Engine', value: 'Gemini' }, { label: 'Languages', value: '10+' }]
+    },
+    {
       id: '4',
       title: 'School Finance System',
       description: 'A complete offline fee management system for Windows schools. Manage student records, collect fees, generate receipts, and track payments. Staff can access it from any PC on the school\'s network — no internet needed.',
