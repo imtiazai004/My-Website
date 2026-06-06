@@ -202,7 +202,6 @@ export default function Footer() {
             <div className="flex gap-8 text-[11px] text-brand-text-dim font-black uppercase tracking-[0.3em]">
               <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors">Privacy</button>
               <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors">Terms</button>
-              <a href="https://github.com/imtiazai004" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
             </div>
           </div>
         </div>
