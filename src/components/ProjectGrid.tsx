@@ -13,7 +13,11 @@ export default function ProjectGrid() {
 
   useEffect(() => {
     const unsubscribe = subscribeToProjects((data) => {
-      if (data.length > 0) setProjects(data);
+      if (data.length > 0) {
+        const firestoreIds = new Set(data.map(p => p.id));
+        const localOnly = INITIAL_PROJECTS.filter(p => !firestoreIds.has(p.id));
+        setProjects([...data, ...localOnly]);
+      }
     });
     return unsubscribe;
   }, []);
