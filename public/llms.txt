@@ -8,10 +8,10 @@ Soft Tech Solution is a digital engineering agency. We specialize in full-stack 
 
 - Website: https://aisofttechsolution.com
 - Email: info@aisofttechsolution.com
-- Phone: +44 7462 086661
+- WhatsApp (UK): +44 7462 086661
+- WhatsApp (PK): +92 300 5863032
 - Twitter/X: https://x.com/imtiazahmadPTI
 - LinkedIn: https://www.linkedin.com/in/imtiazahmad004
-- GitHub: https://github.com/imtiazai004
 
 ## Services
 
@@ -33,6 +33,7 @@ Soft Tech Solution is a digital engineering agency. We specialize in full-stack 
 - **Amazon Product Hunting** — Desktop tool for Amazon FBA sellers: BSR tracking, competitor analysis, profit calculators, keyword research. Stack: Python, Tkinter, Amazon API.
 - **Nursing App** — HIPAA-compliant mobile platform for nursing professionals: patient care, medication reminders, shift logs. Stack: React Native, Firebase.
 - **School Finance System** — Offline-first Windows fee management system for schools: student records, receipts, network access, no internet required. Stack: Python, Flask, SQLite.
+- **Composer — AI OCR Scanner** — AI-powered document scanner that extracts text from any image. Supports multi-page scanning, 10+ languages, Gemini AI engine with EasyOCR fallback. Available as a PWA. Live at: https://composer.aisofttechsolution.com. Stack: Python, Streamlit, Gemini AI.
 
 ## Pricing & Process
 
