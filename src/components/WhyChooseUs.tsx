@@ -139,7 +139,7 @@ function ReasonCard({ reason, index, onClick }: { reason: typeof REASONS[0]; ind
       onMouseLeave={onLeave}
       onClick={onClick}
       style={tiltStyle}
-      className="relative group p-8 border border-white/[0.08] bg-white/[0.03] rounded-3xl cursor-pointer overflow-hidden"
+      className="relative group p-8 border border-slate-900/10 bg-slate-900/[0.03] rounded-3xl cursor-pointer overflow-hidden"
     >
       {/* Mouse-follow glow */}
       <div
@@ -154,20 +154,20 @@ function ReasonCard({ reason, index, onClick }: { reason: typeof REASONS[0]; ind
 
       <div className="space-y-4 relative z-10">
         <div className="flex items-center justify-between">
-          <h4 className="text-xl font-display font-medium text-white group-hover:text-brand-accent transition-colors">
+          <h4 className="text-xl font-display font-medium text-slate-900 group-hover:text-brand-accent transition-colors">
             {reason.title}
           </h4>
-          <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-brand-accent group-hover:translate-x-1 transition-all shrink-0" />
+          <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-brand-accent group-hover:translate-x-1 transition-all shrink-0" />
         </div>
-        <p className="text-sm text-white/40 leading-relaxed font-light">{reason.description}</p>
+        <p className="text-sm text-slate-500 leading-relaxed font-light">{reason.description}</p>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-white/5 flex items-end justify-between relative z-10">
+      <div className="mt-8 pt-6 border-t border-slate-900/[0.07] flex items-end justify-between relative z-10">
         <div className="space-y-1">
-          <p className="text-2xl font-display font-bold text-white tracking-tighter">{reason.stat}</p>
-          <p className="text-[9px] font-mono font-bold uppercase tracking-widest text-white/30">{reason.statLabel}</p>
+          <p className="text-2xl font-display font-bold text-slate-900 tracking-tighter">{reason.stat}</p>
+          <p className="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-400">{reason.statLabel}</p>
         </div>
-        <div className="text-[10px] font-mono font-bold text-white/10">S_VAL_{index + 1}</div>
+        <div className="text-[10px] font-mono font-bold text-slate-900/10">S_VAL_{index + 1}</div>
       </div>
     </motion.div>
   );
@@ -178,9 +178,9 @@ export default function WhyChooseUs() {
   const selectedReason = REASONS.find(r => r.id === selectedId);
 
   return (
-    <section id="why-choose-us" className="py-32 px-6 relative bg-[#0d1117] overflow-hidden">
+    <section id="why-choose-us" className="py-32 px-6 relative bg-[#f8fafc] overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.015] pointer-events-none select-none overflow-hidden">
-        <div className="text-[20rem] font-black font-mono leading-none rotate-90 translate-x-1/2 text-white">
+        <div className="text-[20rem] font-black font-mono leading-none rotate-90 translate-x-1/2 text-slate-900/[0.04]">
           WHY_US
         </div>
       </div>
@@ -195,7 +195,7 @@ export default function WhyChooseUs() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-[0.2em] text-white/40"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.04] text-[10px] font-bold tracking-[0.2em] text-slate-500"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
               THE_SOFT_TECH_ADVANTAGE
@@ -207,7 +207,7 @@ export default function WhyChooseUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-5xl md:text-6xl font-display font-medium text-white leading-tight tracking-tight"
+                className="text-5xl md:text-6xl font-display font-medium text-slate-900 leading-tight tracking-tight"
               >
                 Why Leaders <span className="text-brand-accent italic">Trust</span> Us
               </motion.h2>
@@ -216,7 +216,7 @@ export default function WhyChooseUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="text-white/50 text-xl font-light leading-relaxed max-w-md"
+                className="text-slate-500 text-xl font-light leading-relaxed max-w-md"
               >
                 We don't just build websites; we engineer digital competitive advantages. Combining mathematical precision with artistic UI execution.
               </motion.p>
@@ -227,11 +227,11 @@ export default function WhyChooseUs() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="p-8 bg-brand-accent/10 border border-brand-accent/20 rounded-[2rem] text-white space-y-6 relative overflow-hidden group"
+              className="p-8 bg-brand-accent/10 border border-brand-accent/20 rounded-[2rem] text-slate-800 space-y-6 relative overflow-hidden group"
             >
               <div className="relative z-10 space-y-4">
                 <h3 className="text-2xl font-display font-medium">Ready for the Next Level?</h3>
-                <p className="text-white/50 text-sm leading-relaxed">
+                <p className="text-slate-500 text-sm leading-relaxed">
                   Join 50+ hyper-growth startups and enterprises that have scaled their vision with our specialized engineering.
                 </p>
                 <button
@@ -268,17 +268,17 @@ export default function WhyChooseUs() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedId(null)}
-              className="absolute inset-0 bg-[#0d1117]/90 backdrop-blur-2xl"
+              className="absolute inset-0 bg-slate-900/40 backdrop-blur-2xl"
             />
             <motion.div
               layoutId={selectedId}
               initial={{ opacity: 0, y: 100, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 100, scale: 0.9 }}
-              className="w-full max-w-4xl bg-[#0f172a] border border-white/10 rounded-[3rem] shadow-2xl overflow-hidden relative z-10 flex flex-col md:flex-row"
+              className="w-full max-w-4xl bg-white border border-slate-900/10 rounded-[3rem] shadow-2xl overflow-hidden relative z-10 flex flex-col md:flex-row"
             >
               {/* Sidebar */}
-              <div className="md:w-1/3 bg-[#0d1117] p-12 text-white flex flex-col justify-between relative overflow-hidden border-r border-white/5">
+              <div className="md:w-1/3 bg-slate-50 p-12 text-slate-900 flex flex-col justify-between relative overflow-hidden border-r border-slate-900/[0.07]">
                 <div className="relative z-10">
                   <selectedReason.icon className="w-12 h-12 text-brand-accent mb-8" />
                   <h3 className="text-3xl font-display font-medium leading-tight">{selectedReason.title}</h3>
@@ -287,7 +287,7 @@ export default function WhyChooseUs() {
                   {selectedReason.details.metrics.map((m, i) => (
                     <div key={i} className="space-y-1">
                       <p className="text-brand-accent text-3xl font-display font-bold tracking-tighter">{m.value}</p>
-                      <p className="text-[10px] font-mono font-bold text-white/30 uppercase tracking-widest">{m.label}</p>
+                      <p className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">{m.label}</p>
                     </div>
                   ))}
                 </div>
@@ -297,44 +297,44 @@ export default function WhyChooseUs() {
               </div>
 
               {/* Content */}
-              <div className="flex-1 p-12 space-y-10 relative bg-[#0f172a]">
+              <div className="flex-1 p-12 space-y-10 relative bg-white">
                 <button
                   onClick={() => setSelectedId(null)}
-                  className="absolute top-8 right-8 p-2 rounded-full hover:bg-white/10 transition-colors text-white/40 hover:text-white"
+                  className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-900/[0.06] transition-colors text-slate-500 hover:text-slate-900"
                 >
                   <X className="w-6 h-6" />
                 </button>
 
                 <div className="space-y-4">
                   <h4 className="text-xs font-mono font-bold text-brand-accent uppercase tracking-[0.2em]">Engineering_Brief</h4>
-                  <p className="text-xl text-white/60 font-light leading-relaxed italic">
+                  <p className="text-xl text-slate-600 font-light leading-relaxed italic">
                     "{selectedReason.description}"
                   </p>
                 </div>
 
                 <div className="space-y-6">
-                  <h4 className="text-xs font-mono font-bold text-white/30 uppercase tracking-widest">Protocol_Framework</h4>
+                  <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Protocol_Framework</h4>
                   <div className="space-y-4">
                     {selectedReason.details.points.map((point, i) => (
                       <div key={i} className="flex items-start gap-4">
                         <div className="mt-1 w-5 h-5 rounded-md bg-brand-accent/10 text-brand-accent border border-brand-accent/20 flex items-center justify-center shrink-0">
                           <ArrowRight className="w-3 h-3" />
                         </div>
-                        <p className="text-white/50 font-medium leading-normal">{point}</p>
+                        <p className="text-slate-500 font-medium leading-normal">{point}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-10 border-t border-white/5 flex items-center justify-between">
+                <div className="pt-10 border-t border-slate-900/[0.07] flex items-center justify-between">
                   <div className="flex items-center gap-8">
                     <div className="flex items-center gap-2">
                       <Activity className="w-4 h-4 text-brand-accent" />
-                      <span className="text-[10px] font-mono text-white/30 font-bold">STATUS: STABLE</span>
+                      <span className="text-[10px] font-mono text-slate-400 font-bold">STATUS: STABLE</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Lock className="w-4 h-4 text-brand-accent" />
-                      <span className="text-[10px] font-mono text-white/30 font-bold">ENCRYPTION: ACTIVE</span>
+                      <span className="text-[10px] font-mono text-slate-400 font-bold">ENCRYPTION: ACTIVE</span>
                     </div>
                   </div>
                   <button

@@ -73,7 +73,7 @@ function ServiceCard({ item, index, onClick }: { item: typeof SERVICES[0]; index
       initial="hidden"
       animate="visible"
       onClick={onClick}
-      className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/[0.05] transition-all duration-200 group text-left w-full"
+      className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-900/[0.04] transition-all duration-200 group text-left w-full"
     >
       <div
         className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-200 group-hover:scale-110"
@@ -82,8 +82,8 @@ function ServiceCard({ item, index, onClick }: { item: typeof SERVICES[0]; index
         <Icon className="w-4 h-4" />
       </div>
       <div>
-        <p className="text-[12px] font-semibold text-white/90 group-hover:text-white leading-tight">{item.label}</p>
-        <p className="text-[11px] text-white/40 group-hover:text-white/60 leading-tight mt-0.5">{item.desc}</p>
+        <p className="text-[12px] font-semibold text-slate-700 group-hover:text-slate-900 leading-tight">{item.label}</p>
+        <p className="text-[11px] text-slate-500 group-hover:text-slate-600 leading-tight mt-0.5">{item.desc}</p>
       </div>
     </motion.button>
   );
@@ -123,8 +123,8 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
           scrolled
-            ? 'border-b border-white/8 bg-[#0d1117]/90 backdrop-blur-xl shadow-[0_1px_40px_rgba(0,0,0,0.5)]'
-            : 'border-b border-white/5 backdrop-blur-sm'
+            ? 'border-b border-slate-900/10 bg-slate-900/40 backdrop-blur-xl shadow-[0_1px_40px_rgba(15,23,42,0.08)]'
+            : 'border-b border-slate-900/[0.07] backdrop-blur-sm'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-8">
@@ -153,7 +153,7 @@ export default function Navbar() {
             {/* Direct links */}
             <button
               onClick={() => scrollTo('#contact')}
-              className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50 hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5"
+              className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-slate-900/[0.04]"
             >
               Contact
             </button>
@@ -167,17 +167,17 @@ export default function Navbar() {
                   initial="hidden" animate="visible" exit="exit"
                   onMouseEnter={() => { if (closeTimer.current) clearTimeout(closeTimer.current); }}
                   onMouseLeave={handleMouseLeave}
-                  className="absolute top-[76px] left-1/2 -translate-x-1/2 w-[780px] bg-[#0a0f1e]/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_24px_80px_rgba(0,0,0,0.6)] overflow-hidden"
+                  className="absolute top-[76px] left-1/2 -translate-x-1/2 w-[780px] bg-white/95 backdrop-blur-2xl border border-slate-900/10 rounded-2xl shadow-[0_24px_80px_rgba(15,23,42,0.15)] overflow-hidden"
                 >
                   {/* Header */}
-                  <div className="px-6 pt-5 pb-4 border-b border-white/5 flex items-center justify-between">
+                  <div className="px-6 pt-5 pb-4 border-b border-slate-900/[0.07] flex items-center justify-between">
                     <div>
-                      <p className="text-white font-bold tracking-tight text-sm">Our Services</p>
-                      <p className="text-white/40 text-[11px] mt-0.5">Everything you need to build, launch, and scale</p>
+                      <p className="text-slate-900 font-bold tracking-tight text-sm">Our Services</p>
+                      <p className="text-slate-500 text-[11px] mt-0.5">Everything you need to build, launch, and scale</p>
                     </div>
                     <button
                       onClick={() => scrollTo('#services')}
-                      className="flex items-center gap-1.5 text-[11px] font-bold text-brand-accent hover:text-white transition-colors uppercase tracking-widest group"
+                      className="flex items-center gap-1.5 text-[11px] font-bold text-brand-accent hover:text-slate-900 transition-colors uppercase tracking-widest group"
                     >
                       View all <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </button>
@@ -191,8 +191,8 @@ export default function Navbar() {
                   </div>
 
                   {/* Footer CTA */}
-                  <div className="px-6 py-4 border-t border-white/5 bg-brand-accent/5 flex items-center justify-between">
-                    <p className="text-[11px] text-white/40">Not sure which service fits? We'll guide you.</p>
+                  <div className="px-6 py-4 border-t border-slate-900/[0.07] bg-brand-accent/5 flex items-center justify-between">
+                    <p className="text-[11px] text-slate-500">Not sure which service fits? We'll guide you.</p>
                     <button
                       onClick={() => scrollTo('#contact')}
                       className="px-4 py-2 bg-brand-accent text-white text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-indigo-400 transition-colors"
@@ -210,11 +210,11 @@ export default function Navbar() {
                   initial="hidden" animate="visible" exit="exit"
                   onMouseEnter={() => { if (closeTimer.current) clearTimeout(closeTimer.current); }}
                   onMouseLeave={handleMouseLeave}
-                  className="absolute top-[76px] left-1/2 -translate-x-1/2 w-[440px] bg-[#0a0f1e]/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_24px_80px_rgba(0,0,0,0.6)] overflow-hidden"
+                  className="absolute top-[76px] left-1/2 -translate-x-1/2 w-[440px] bg-white/95 backdrop-blur-2xl border border-slate-900/10 rounded-2xl shadow-[0_24px_80px_rgba(15,23,42,0.15)] overflow-hidden"
                 >
-                  <div className="px-5 pt-4 pb-3 border-b border-white/5">
-                    <p className="text-white font-bold tracking-tight text-sm">Portfolio</p>
-                    <p className="text-white/40 text-[11px] mt-0.5">Real products. Real impact.</p>
+                  <div className="px-5 pt-4 pb-3 border-b border-slate-900/[0.07]">
+                    <p className="text-slate-900 font-bold tracking-tight text-sm">Portfolio</p>
+                    <p className="text-slate-500 text-[11px] mt-0.5">Real products. Real impact.</p>
                   </div>
                   <div className="p-3 grid grid-cols-2 gap-1">
                     {WORK_ITEMS.map((item, i) => {
@@ -227,21 +227,21 @@ export default function Navbar() {
                           initial="hidden"
                           animate="visible"
                           onClick={() => scrollTo(item.href)}
-                          className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/[0.05] transition-all duration-200 group text-left"
+                          className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-900/[0.04] transition-all duration-200 group text-left"
                         >
                           <div className="w-8 h-8 rounded-lg bg-brand-accent/10 flex items-center justify-center shrink-0 text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all">
                             <Icon className="w-4 h-4" />
                           </div>
                           <div>
-                            <p className="text-[12px] font-semibold text-white/90 group-hover:text-white leading-tight">{item.label}</p>
-                            <p className="text-[11px] text-white/40 group-hover:text-white/60 leading-tight mt-0.5">{item.desc}</p>
+                            <p className="text-[12px] font-semibold text-slate-700 group-hover:text-slate-900 leading-tight">{item.label}</p>
+                            <p className="text-[11px] text-slate-500 group-hover:text-slate-600 leading-tight mt-0.5">{item.desc}</p>
                           </div>
                         </motion.button>
                       );
                     })}
                   </div>
-                  <div className="px-5 py-3 border-t border-white/5 bg-white/[0.02]">
-                    <button onClick={() => scrollTo('#work')} className="w-full flex items-center justify-center gap-2 py-2 text-[11px] font-bold text-brand-accent hover:text-white transition-colors uppercase tracking-widest group">
+                  <div className="px-5 py-3 border-t border-slate-900/[0.07] bg-slate-900/[0.02]">
+                    <button onClick={() => scrollTo('#work')} className="w-full flex items-center justify-center gap-2 py-2 text-[11px] font-bold text-brand-accent hover:text-slate-900 transition-colors uppercase tracking-widest group">
                       See All Projects <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
@@ -255,11 +255,11 @@ export default function Navbar() {
                   initial="hidden" animate="visible" exit="exit"
                   onMouseEnter={() => { if (closeTimer.current) clearTimeout(closeTimer.current); }}
                   onMouseLeave={handleMouseLeave}
-                  className="absolute top-[76px] left-1/2 -translate-x-1/2 w-[360px] bg-[#0a0f1e]/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_24px_80px_rgba(0,0,0,0.6)] overflow-hidden"
+                  className="absolute top-[76px] left-1/2 -translate-x-1/2 w-[360px] bg-white/95 backdrop-blur-2xl border border-slate-900/10 rounded-2xl shadow-[0_24px_80px_rgba(15,23,42,0.15)] overflow-hidden"
                 >
-                  <div className="px-5 pt-4 pb-3 border-b border-white/5">
-                    <p className="text-white font-bold tracking-tight text-sm">Company</p>
-                    <p className="text-white/40 text-[11px] mt-0.5">Get to know Soft Tech Solution</p>
+                  <div className="px-5 pt-4 pb-3 border-b border-slate-900/[0.07]">
+                    <p className="text-slate-900 font-bold tracking-tight text-sm">Company</p>
+                    <p className="text-slate-500 text-[11px] mt-0.5">Get to know Soft Tech Solution</p>
                   </div>
                   <div className="p-3 flex flex-col gap-1">
                     {COMPANY_ITEMS.map((item, i) => {
@@ -272,22 +272,22 @@ export default function Navbar() {
                           initial="hidden"
                           animate="visible"
                           onClick={() => scrollTo(item.href)}
-                          className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/[0.05] transition-all duration-200 group text-left"
+                          className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-900/[0.04] transition-all duration-200 group text-left"
                         >
-                          <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0 text-white/40 group-hover:bg-brand-accent/20 group-hover:text-brand-accent transition-all">
+                          <div className="w-8 h-8 rounded-lg bg-slate-900/[0.04] flex items-center justify-center shrink-0 text-slate-500 group-hover:bg-brand-accent/20 group-hover:text-brand-accent transition-all">
                             <Icon className="w-4 h-4" />
                           </div>
                           <div>
-                            <p className="text-[12px] font-semibold text-white/90 group-hover:text-white leading-tight">{item.label}</p>
-                            <p className="text-[11px] text-white/40 group-hover:text-white/60 leading-tight">{item.desc}</p>
+                            <p className="text-[12px] font-semibold text-slate-700 group-hover:text-slate-900 leading-tight">{item.label}</p>
+                            <p className="text-[11px] text-slate-500 group-hover:text-slate-600 leading-tight">{item.desc}</p>
                           </div>
-                          <ArrowRight className="w-3.5 h-3.5 text-white/20 group-hover:text-brand-accent group-hover:translate-x-0.5 transition-all ml-auto shrink-0" />
+                          <ArrowRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-brand-accent group-hover:translate-x-0.5 transition-all ml-auto shrink-0" />
                         </motion.button>
                       );
                     })}
                   </div>
                   {/* Contact shortcuts */}
-                  <div className="px-5 py-4 border-t border-white/5 bg-white/[0.02] flex gap-3">
+                  <div className="px-5 py-4 border-t border-slate-900/[0.07] bg-slate-900/[0.02] flex gap-3">
                     {CONTACT_ITEMS.map(c => {
                       const Icon = c.icon;
                       return (
@@ -296,12 +296,12 @@ export default function Navbar() {
                           href={c.href}
                           target={c.href.startsWith('http') ? '_blank' : undefined}
                           rel="noopener noreferrer"
-                          className="flex-1 flex items-center gap-2 p-2.5 rounded-xl bg-white/5 hover:bg-brand-accent/10 hover:border-brand-accent/30 border border-white/5 transition-all group"
+                          className="flex-1 flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/[0.04] hover:bg-brand-accent/10 hover:border-brand-accent/30 border border-slate-900/[0.07] transition-all group"
                         >
-                          <Icon className="w-3.5 h-3.5 text-white/40 group-hover:text-brand-accent transition-colors shrink-0" />
+                          <Icon className="w-3.5 h-3.5 text-slate-500 group-hover:text-brand-accent transition-colors shrink-0" />
                           <div>
-                            <p className="text-[10px] font-bold text-white/60 group-hover:text-white leading-none">{c.label}</p>
-                            <p className="text-[9px] text-white/30 leading-none mt-0.5">{c.desc}</p>
+                            <p className="text-[10px] font-bold text-slate-600 group-hover:text-slate-900 leading-none">{c.label}</p>
+                            <p className="text-[9px] text-slate-400 leading-none mt-0.5">{c.desc}</p>
                           </div>
                         </a>
                       );
@@ -326,7 +326,7 @@ export default function Navbar() {
             {/* Mobile hamburger */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl border border-white/10 text-white/60 hover:text-white hover:bg-white/5 transition-all"
+              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl border border-slate-900/10 text-slate-600 hover:text-slate-900 hover:bg-slate-900/[0.04] transition-all"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -342,11 +342,11 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-y-0 right-0 w-80 z-[99] bg-[#080d1a]/98 backdrop-blur-2xl border-l border-white/10 flex flex-col overflow-y-auto"
+            className="fixed inset-y-0 right-0 w-80 z-[99] bg-white/98 backdrop-blur-2xl border-l border-slate-900/10 flex flex-col overflow-y-auto"
           >
-            <div className="px-6 h-20 flex items-center justify-between border-b border-white/5">
-              <span className="text-sm font-bold text-white/70 tracking-widest uppercase">Menu</span>
-              <button onClick={() => setMobileOpen(false)} className="w-9 h-9 flex items-center justify-center rounded-xl border border-white/10 text-white/60 hover:text-white">
+            <div className="px-6 h-20 flex items-center justify-between border-b border-slate-900/[0.07]">
+              <span className="text-sm font-bold text-slate-600 tracking-widest uppercase">Menu</span>
+              <button onClick={() => setMobileOpen(false)} className="w-9 h-9 flex items-center justify-center rounded-xl border border-slate-900/10 text-slate-600 hover:text-slate-900">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -356,11 +356,11 @@ export default function Navbar() {
                 {SERVICES.slice(0, 8).map(s => {
                   const Icon = s.icon;
                   return (
-                    <button key={s.label} onClick={() => scrollTo('#services')} className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition-all group text-left">
+                    <button key={s.label} onClick={() => scrollTo('#services')} className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-900/[0.04] transition-all group text-left">
                       <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `${s.color}18`, color: s.color }}>
                         <Icon className="w-4 h-4" />
                       </div>
-                      <span className="text-[13px] text-white/70 group-hover:text-white transition-colors">{s.label}</span>
+                      <span className="text-[13px] text-slate-600 group-hover:text-slate-900 transition-colors">{s.label}</span>
                     </button>
                   );
                 })}
@@ -370,11 +370,11 @@ export default function Navbar() {
                 {WORK_ITEMS.map(w => {
                   const Icon = w.icon;
                   return (
-                    <button key={w.label} onClick={() => scrollTo(w.href)} className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition-all group text-left">
+                    <button key={w.label} onClick={() => scrollTo(w.href)} className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-900/[0.04] transition-all group text-left">
                       <div className="w-8 h-8 rounded-lg bg-brand-accent/10 text-brand-accent flex items-center justify-center shrink-0">
                         <Icon className="w-4 h-4" />
                       </div>
-                      <span className="text-[13px] text-white/70 group-hover:text-white transition-colors">{w.label}</span>
+                      <span className="text-[13px] text-slate-600 group-hover:text-slate-900 transition-colors">{w.label}</span>
                     </button>
                   );
                 })}
@@ -384,30 +384,30 @@ export default function Navbar() {
                 {COMPANY_ITEMS.map(c => {
                   const Icon = c.icon;
                   return (
-                    <button key={c.label} onClick={() => scrollTo(c.href)} className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/5 transition-all group text-left">
-                      <div className="w-8 h-8 rounded-lg bg-white/5 text-white/40 group-hover:text-brand-accent flex items-center justify-center shrink-0">
+                    <button key={c.label} onClick={() => scrollTo(c.href)} className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-900/[0.04] transition-all group text-left">
+                      <div className="w-8 h-8 rounded-lg bg-slate-900/[0.04] text-slate-500 group-hover:text-brand-accent flex items-center justify-center shrink-0">
                         <Icon className="w-4 h-4" />
                       </div>
-                      <span className="text-[13px] text-white/70 group-hover:text-white transition-colors">{c.label}</span>
+                      <span className="text-[13px] text-slate-600 group-hover:text-slate-900 transition-colors">{c.label}</span>
                     </button>
                   );
                 })}
               </MobileSection>
             </div>
 
-            <div className="p-6 border-t border-white/5 space-y-3">
+            <div className="p-6 border-t border-slate-900/[0.07] space-y-3">
               <a href="https://wa.me/447462086661" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/20 hover:bg-green-500/15 transition-all group">
                 <MessageCircle className="w-5 h-5 text-green-400" />
                 <div>
-                  <p className="text-[12px] font-bold text-white/80 group-hover:text-white">WhatsApp (UK)</p>
-                  <p className="text-[10px] text-white/40">+44 7462 086661</p>
+                  <p className="text-[12px] font-bold text-slate-700 group-hover:text-slate-900">WhatsApp (UK)</p>
+                  <p className="text-[10px] text-slate-500">+44 7462 086661</p>
                 </div>
               </a>
               <a href="https://wa.me/923005863032" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 border border-green-500/20 hover:bg-green-500/15 transition-all group">
                 <MessageCircle className="w-5 h-5 text-green-400" />
                 <div>
-                  <p className="text-[12px] font-bold text-white/80 group-hover:text-white">WhatsApp (PK)</p>
-                  <p className="text-[10px] text-white/40">+92 300 5863032</p>
+                  <p className="text-[12px] font-bold text-slate-700 group-hover:text-slate-900">WhatsApp (PK)</p>
+                  <p className="text-[10px] text-slate-500">+92 300 5863032</p>
                 </div>
               </a>
               <button onClick={() => scrollTo('#contact')} className="w-full py-3.5 bg-brand-accent text-white text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-indigo-400 transition-colors">
@@ -424,7 +424,7 @@ export default function Navbar() {
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={() => setMobileOpen(false)}
-            className="fixed inset-0 z-[98] bg-black/60 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-[98] bg-slate-900/40 backdrop-blur-sm lg:hidden"
           />
         )}
       </AnimatePresence>
@@ -438,12 +438,12 @@ function NavItem({ label, icon, active, onEnter }: { label: string; icon: React.
     <button
       onMouseEnter={onEnter}
       className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-[11px] font-semibold uppercase tracking-[0.15em] transition-all duration-200 group ${
-        active ? 'bg-white/8 text-white' : 'text-white/50 hover:text-white hover:bg-white/5'
+        active ? 'bg-slate-900/[0.06] text-slate-900' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-900/[0.04]'
       }`}
     >
-      <span className={`transition-colors ${active ? 'text-brand-accent' : 'text-white/30 group-hover:text-brand-accent'}`}>{icon}</span>
+      <span className={`transition-colors ${active ? 'text-brand-accent' : 'text-slate-400 group-hover:text-brand-accent'}`}>{icon}</span>
       {label}
-      <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${active ? 'rotate-180 text-brand-accent' : 'text-white/30 group-hover:text-white/60'}`} />
+      <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${active ? 'rotate-180 text-brand-accent' : 'text-slate-400 group-hover:text-slate-600'}`} />
     </button>
   );
 }
@@ -451,19 +451,19 @@ function NavItem({ label, icon, active, onEnter }: { label: string; icon: React.
 function MobileSection({ title, children }: { title: string; children: React.ReactNode }) {
   const [expanded, setExpanded] = useState(false);
   return (
-    <div className="rounded-2xl border border-white/5 overflow-hidden">
+    <div className="rounded-2xl border border-slate-900/[0.07] overflow-hidden">
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between px-4 py-3.5 text-left hover:bg-white/5 transition-colors"
+        className="w-full flex items-center justify-between px-4 py-3.5 text-left hover:bg-slate-900/[0.04] transition-colors"
       >
-        <span className="text-[11px] font-bold text-white/40 uppercase tracking-[0.3em]">{title}</span>
-        <ChevronDown className={`w-4 h-4 text-white/30 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`} />
+        <span className="text-[11px] font-bold text-slate-500 uppercase tracking-[0.3em]">{title}</span>
+        <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`} />
       </button>
       <AnimatePresence>
         {expanded && (
           <motion.div
             initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }}
-            className="overflow-hidden border-t border-white/5"
+            className="overflow-hidden border-t border-slate-900/[0.07]"
           >
             <div className="p-2">{children}</div>
           </motion.div>

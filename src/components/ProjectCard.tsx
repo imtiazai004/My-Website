@@ -56,7 +56,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       style={tiltStyle}
-      className="relative group flex flex-col h-full overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] cursor-pointer"
+      className="relative group flex flex-col h-full overflow-hidden rounded-2xl border border-slate-900/10 bg-slate-900/[0.03] cursor-pointer"
     >
       {/* Mouse-follow ambient glow */}
       <div
@@ -68,14 +68,14 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
       {/* Image */}
       <div className="relative aspect-[16/10] overflow-hidden">
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0d1117]/90 via-[#0d1117]/20 to-transparent" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
         <img
           src={resolveImage(project)}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-700 ease-[0.16,1,0.3,1] group-hover:scale-110"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 backdrop-blur-sm bg-[#0d1117]/30 transition-all duration-500">
+        <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 backdrop-blur-sm bg-slate-900/30 transition-all duration-500">
           <motion.a
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -95,22 +95,22 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             <span className="text-[10px] font-bold text-brand-accent uppercase tracking-[0.3em]">{project.category}</span>
             <div className="flex items-center gap-1.5 opacity-40 group-hover:opacity-100 transition-opacity">
               <div className="w-1 h-1 rounded-full bg-brand-accent" />
-              <span className="font-mono text-[9px] text-white/60 tracking-widest leading-none">ST_0{index + 1}</span>
+              <span className="font-mono text-[9px] text-slate-600 tracking-widest leading-none">ST_0{index + 1}</span>
             </div>
           </div>
-          <h3 className="text-3xl font-display font-medium tracking-tight text-white transition-colors group-hover:text-brand-accent">
+          <h3 className="text-3xl font-display font-medium tracking-tight text-slate-900 transition-colors group-hover:text-brand-accent">
             {project.title}
           </h3>
-          <p className="text-white/50 text-base font-light leading-relaxed line-clamp-3">
+          <p className="text-slate-500 text-base font-light leading-relaxed line-clamp-3">
             {project.description}
           </p>
         </div>
 
-        <div className="mt-auto pt-8 flex flex-wrap gap-2 border-t border-white/5">
+        <div className="mt-auto pt-8 flex flex-wrap gap-2 border-t border-slate-900/[0.07]">
           {project.tags?.slice(0, 3).map((tag, tagIndex) => (
             <span
               key={`${tag}-${tagIndex}`}
-              className="px-3 py-1 bg-white/5 border border-white/10 text-[9px] font-bold text-white/40 uppercase tracking-widest group-hover:border-brand-accent/30 group-hover:text-brand-accent transition-colors"
+              className="px-3 py-1 bg-slate-900/[0.04] border border-slate-900/10 text-[9px] font-bold text-slate-500 uppercase tracking-widest group-hover:border-brand-accent/30 group-hover:text-brand-accent transition-colors"
             >
               {tag}
             </span>

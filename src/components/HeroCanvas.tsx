@@ -1,6 +1,6 @@
 import { useRef, useMemo, useEffect, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Stars, Float, MeshDistortMaterial } from '@react-three/drei'
+import { Float, MeshDistortMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 
 function CameraRig() {
@@ -161,13 +161,12 @@ export default function HeroCanvas() {
   return (
     <Canvas camera={{ position: [0, 0, 7], fov: 60 }} gl={{ antialias: true, alpha: false }} dpr={[1, 1.5]}>
       <Suspense fallback={null}>
-        <color attach="background" args={['#0d1117']} />
-        <fog attach="fog" args={['#0d1117', 12, 28]} />
-        <ambientLight intensity={0.3} />
+        <color attach="background" args={['#f8fafc']} />
+        <fog attach="fog" args={['#f8fafc', 12, 28]} />
+        <ambientLight intensity={0.8} />
         <pointLight position={[5, 5, 5]} color="#6366f1" intensity={4} />
         <pointLight position={[-5, -3, 3]} color="#4f46e5" intensity={2.5} />
         <pointLight position={[0, 0, 8]} color="#818cf8" intensity={1.5} />
-        <Stars radius={80} depth={50} count={4000} factor={3} fade speed={0.5} />
         <CameraRig />
         <HeroOrb />
         <Rings />

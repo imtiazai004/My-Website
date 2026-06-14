@@ -115,7 +115,7 @@ function ServiceCard({ service, index, onClick }: { service: typeof SERVICES[0];
       onMouseLeave={onLeave}
       onClick={onClick}
       style={tiltStyle}
-      className="relative group flex flex-col bg-white/[0.03] border border-white/[0.08] rounded-2xl p-8 cursor-pointer"
+      className="relative group flex flex-col bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-8 cursor-pointer"
     >
       {/* Mouse-follow glow */}
       <div
@@ -128,30 +128,30 @@ function ServiceCard({ service, index, onClick }: { service: typeof SERVICES[0];
         <div className="w-14 h-14 rounded-2xl bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-xl">
           <service.icon className="w-7 h-7 group-hover:text-white transition-colors" />
         </div>
-        <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-[10px] font-mono font-bold text-white/20">
+        <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full border border-slate-900/10 bg-slate-900/[0.04] flex items-center justify-center text-[10px] font-mono font-bold text-slate-300">
           {index + 1}
         </div>
       </div>
 
       <div className="space-y-4 flex-grow relative z-10">
-        <h3 className="text-2xl font-display font-medium text-white group-hover:text-brand-accent transition-colors">
+        <h3 className="text-2xl font-display font-medium text-slate-900 group-hover:text-brand-accent transition-colors">
           {service.title}
         </h3>
-        <p className="text-white/50 text-base font-light leading-relaxed">
+        <p className="text-slate-500 text-base font-light leading-relaxed">
           {service.description}
         </p>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between relative z-10">
+      <div className="mt-8 pt-6 border-t border-slate-900/[0.07] flex items-center justify-between relative z-10">
         <div className="flex flex-wrap gap-2">
           {service.tags.slice(0, 2).map((tag, tagIdx) => (
-            <span key={`${tag}-${tagIdx}`} className="text-[9px] font-mono font-bold text-white/30 uppercase tracking-widest px-2 py-1 bg-white/5 rounded border border-white/10">
+            <span key={`${tag}-${tagIdx}`} className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest px-2 py-1 bg-slate-900/[0.04] rounded border border-slate-900/10">
               {tag}
             </span>
           ))}
         </div>
         <motion.div
-          className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/20 group-hover:text-brand-accent group-hover:border-brand-accent/30 transition-colors"
+          className="w-8 h-8 rounded-full border border-slate-900/10 flex items-center justify-center text-slate-300 group-hover:text-brand-accent group-hover:border-brand-accent/30 transition-colors"
           whileHover={{ scale: 1.1 }}
         >
           <ArrowRight className="w-4 h-4" />
@@ -165,10 +165,10 @@ export default function Services() {
   const [selectedService, setSelectedService] = useState<typeof SERVICES[0] | null>(null);
 
   return (
-    <section id="services" className="py-32 px-6 relative bg-[#030712] overflow-hidden">
+    <section id="services" className="py-32 px-6 relative bg-[#f8fafc] overflow-hidden">
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+        style={{ backgroundImage: 'radial-gradient(circle, rgba(15,23,42,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
       />
       <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[150px] pointer-events-none" />
 
@@ -179,7 +179,7 @@ export default function Services() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-[0.2em] text-white/40"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.04] text-[10px] font-bold tracking-[0.2em] text-slate-500"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
               OUR_SPECIALIZED_VECTORS
@@ -189,7 +189,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-6xl font-display font-medium text-white tracking-tight leading-tight"
+              className="text-5xl md:text-6xl font-display font-medium text-slate-900 tracking-tight leading-tight"
             >
               Services We <span className="text-brand-accent italic">Offer</span>
             </motion.h2>
@@ -198,7 +198,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-white/50 text-xl font-light leading-relaxed"
+              className="text-slate-500 text-xl font-light leading-relaxed"
             >
               Comprehensive programming and software engineering solutions tailored for the modern digital era.
             </motion.p>
@@ -212,11 +212,11 @@ export default function Services() {
           >
             <div className="glass-card !p-4 flex items-center gap-3">
               <ShieldCheck className="w-5 h-5 text-brand-accent" />
-              <span className="text-xs font-mono font-bold text-white/40">SECURE_PROTOCOL_V4</span>
+              <span className="text-xs font-mono font-bold text-slate-500">SECURE_PROTOCOL_V4</span>
             </div>
             <div className="glass-card !p-4 flex items-center gap-3">
               <Layers className="w-5 h-5 text-brand-accent" />
-              <span className="text-xs font-mono font-bold text-white/40">SCALABLE_ARCHITECTURE</span>
+              <span className="text-xs font-mono font-bold text-slate-500">SCALABLE_ARCHITECTURE</span>
             </div>
           </motion.div>
         </div>
@@ -241,17 +241,17 @@ export default function Services() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSelectedService(null)}
-                className="fixed inset-0 bg-[#0d1117]/90 backdrop-blur-md z-[100] cursor-pointer"
+                className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[100] cursor-pointer"
               />
               <motion.div
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-[#0f172a] border border-white/10 rounded-3xl shadow-2xl z-[101] overflow-hidden"
+                className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-white border border-slate-900/10 rounded-3xl shadow-2xl z-[101] overflow-hidden"
               >
                 <button
                   onClick={() => setSelectedService(null)}
-                  className="absolute top-6 right-6 p-2 rounded-full hover:bg-white/10 transition-colors z-20 text-white/40 hover:text-white"
+                  className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-900/[0.06] transition-colors z-20 text-slate-500 hover:text-slate-900"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -265,7 +265,7 @@ export default function Services() {
                       <div className="inline-block px-3 py-1 rounded-full border border-brand-accent/20 bg-brand-accent/5 text-[10px] font-bold tracking-widest text-brand-accent uppercase">
                         SERVICE_VECTOR_DETAILED
                       </div>
-                      <h3 className="text-3xl md:text-4xl font-display font-medium text-white">
+                      <h3 className="text-3xl md:text-4xl font-display font-medium text-slate-900">
                         {selectedService.title}
                       </h3>
                     </div>
@@ -274,14 +274,14 @@ export default function Services() {
                   <div className="grid md:grid-cols-5 gap-12">
                     <div className="md:col-span-3 space-y-8">
                       <div className="space-y-4">
-                        <h4 className="text-xs font-mono font-bold text-white/30 uppercase tracking-widest">Engineering_Philosophy</h4>
-                        <p className="text-white/60 text-lg font-light leading-relaxed">{selectedService.details}</p>
+                        <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Engineering_Philosophy</h4>
+                        <p className="text-slate-600 text-lg font-light leading-relaxed">{selectedService.details}</p>
                       </div>
                       <div className="space-y-4">
-                        <h4 className="text-xs font-mono font-bold text-white/30 uppercase tracking-widest">Core_Deliverables</h4>
+                        <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Core_Deliverables</h4>
                         <div className="grid grid-cols-1 gap-3">
                           {selectedService.features.map((feature, fIdx) => (
-                            <div key={`${feature}-${fIdx}`} className="flex items-center gap-3 text-sm text-white/50 font-medium">
+                            <div key={`${feature}-${fIdx}`} className="flex items-center gap-3 text-sm text-slate-500 font-medium">
                               <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
                               {feature}
                             </div>
@@ -292,10 +292,10 @@ export default function Services() {
 
                     <div className="md:col-span-2 space-y-8">
                       <div className="space-y-4">
-                        <h4 className="text-xs font-mono font-bold text-white/30 uppercase tracking-widest">Tech_Stack</h4>
+                        <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Tech_Stack</h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedService.tags.map((tag, tIdx) => (
-                            <span key={`${tag}-${tIdx}`} className="px-3 py-2 bg-white/5 rounded-xl text-[11px] font-bold text-white/50 border border-white/10">
+                            <span key={`${tag}-${tIdx}`} className="px-3 py-2 bg-slate-900/[0.04] rounded-xl text-[11px] font-bold text-slate-500 border border-slate-900/10">
                               {tag}
                             </span>
                           ))}
@@ -320,27 +320,27 @@ export default function Services() {
         </AnimatePresence>
 
         {/* Footer Stats */}
-        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 opacity-40">
+        <div className="mt-20 pt-10 border-t border-slate-900/[0.07] flex flex-col md:flex-row items-center justify-between gap-8 opacity-40">
           <div className="flex items-center gap-8">
             <div className="space-y-1">
-              <p className="text-3xl font-display font-bold text-white tracking-tighter">99.9%</p>
-              <p className="text-[10px] font-mono font-bold tracking-widest uppercase text-white/50">Uptime_Guarantee</p>
+              <p className="text-3xl font-display font-bold text-slate-900 tracking-tighter">99.9%</p>
+              <p className="text-[10px] font-mono font-bold tracking-widest uppercase text-slate-500">Uptime_Guarantee</p>
             </div>
-            <div className="w-px h-10 bg-white/10" />
+            <div className="w-px h-10 bg-slate-900/[0.06]" />
             <div className="space-y-1">
-              <p className="text-3xl font-display font-bold text-white tracking-tighter">150ms</p>
-              <p className="text-[10px] font-mono font-bold tracking-widest uppercase text-white/50">Median_Latency</p>
+              <p className="text-3xl font-display font-bold text-slate-900 tracking-tighter">150ms</p>
+              <p className="text-[10px] font-mono font-bold tracking-widest uppercase text-slate-500">Median_Latency</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
             <div className="flex flex-col items-end gap-1">
-              <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-white/50">Deployment_Status</span>
+              <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-slate-500">Deployment_Status</span>
               <span className="text-[9px] font-mono font-medium text-emerald-500 flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 ALL_SYSTEMS_OPERATIONAL
               </span>
             </div>
-            <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40">
+            <div className="w-12 h-12 rounded-full border border-slate-900/10 flex items-center justify-center text-slate-500">
               <Cpu className="w-5 h-5" />
             </div>
           </div>
