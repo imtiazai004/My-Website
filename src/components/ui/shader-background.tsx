@@ -8,7 +8,7 @@ export default function ShaderBackground() {
           radial-gradient(ellipse 80% 60% at 20% -10%, rgba(99,102,241,0.12) 0%, transparent 60%),
           radial-gradient(ellipse 60% 50% at 80% 110%, rgba(79,70,229,0.10) 0%, transparent 60%),
           radial-gradient(ellipse 40% 40% at 50% 50%, rgba(99,102,241,0.04) 0%, transparent 70%),
-          #020617
+          #0d1117
         `,
       }}
     />

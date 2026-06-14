@@ -241,7 +241,7 @@ export default function Services() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSelectedService(null)}
-                className="fixed inset-0 bg-[#020617]/90 backdrop-blur-md z-[100] cursor-pointer"
+                className="fixed inset-0 bg-[#0d1117]/90 backdrop-blur-md z-[100] cursor-pointer"
               />
               <motion.div
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}

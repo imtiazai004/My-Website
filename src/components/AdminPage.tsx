@@ -234,10 +234,10 @@ export default function AdminPage() {
   const crudItems = activeTab === 'projects' ? projects : activeTab === 'skills' ? skills : activeTab === 'testimonials' ? testimonials : faqs;
 
   return (
-    <div className="min-h-screen bg-[#020617] text-white flex flex-col">
+    <div className="min-h-screen bg-[#0d1117] text-white flex flex-col">
 
       {/* Header */}
-      <header className="border-b border-white/5 bg-[#020617]/95 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-white/5 bg-[#0d1117]/95 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-screen-2xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link to="/" className="flex items-center gap-2 text-white/30 hover:text-white transition-colors text-[11px] font-mono font-bold uppercase tracking-widest">
@@ -305,7 +305,7 @@ export default function AdminPage() {
         <div className="flex-1 flex">
 
           {/* Sidebar */}
-          <aside className="w-52 border-r border-white/5 bg-[#020617] shrink-0 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
+          <aside className="w-52 border-r border-white/5 bg-[#0d1117] shrink-0 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
             <nav className="p-3 space-y-0.5">
               {TABS.map(tab => {
                 const Icon = tab.icon;

@@ -178,7 +178,7 @@ export default function WhyChooseUs() {
   const selectedReason = REASONS.find(r => r.id === selectedId);
 
   return (
-    <section id="why-choose-us" className="py-32 px-6 relative bg-[#020617] overflow-hidden">
+    <section id="why-choose-us" className="py-32 px-6 relative bg-[#0d1117] overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.015] pointer-events-none select-none overflow-hidden">
         <div className="text-[20rem] font-black font-mono leading-none rotate-90 translate-x-1/2 text-white">
           WHY_US
@@ -268,7 +268,7 @@ export default function WhyChooseUs() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedId(null)}
-              className="absolute inset-0 bg-[#020617]/90 backdrop-blur-2xl"
+              className="absolute inset-0 bg-[#0d1117]/90 backdrop-blur-2xl"
             />
             <motion.div
               layoutId={selectedId}
@@ -278,7 +278,7 @@ export default function WhyChooseUs() {
               className="w-full max-w-4xl bg-[#0f172a] border border-white/10 rounded-[3rem] shadow-2xl overflow-hidden relative z-10 flex flex-col md:flex-row"
             >
               {/* Sidebar */}
-              <div className="md:w-1/3 bg-[#020617] p-12 text-white flex flex-col justify-between relative overflow-hidden border-r border-white/5">
+              <div className="md:w-1/3 bg-[#0d1117] p-12 text-white flex flex-col justify-between relative overflow-hidden border-r border-white/5">
                 <div className="relative z-10">
                   <selectedReason.icon className="w-12 h-12 text-brand-accent mb-8" />
                   <h3 className="text-3xl font-display font-medium leading-tight">{selectedReason.title}</h3>

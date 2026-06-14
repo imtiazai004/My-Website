@@ -161,8 +161,8 @@ export default function HeroCanvas() {
   return (
     <Canvas camera={{ position: [0, 0, 7], fov: 60 }} gl={{ antialias: true, alpha: false }} dpr={[1, 1.5]}>
       <Suspense fallback={null}>
-        <color attach="background" args={['#020617']} />
-        <fog attach="fog" args={['#020617', 12, 28]} />
+        <color attach="background" args={['#0d1117']} />
+        <fog attach="fog" args={['#0d1117', 12, 28]} />
         <ambientLight intensity={0.3} />
         <pointLight position={[5, 5, 5]} color="#6366f1" intensity={4} />
         <pointLight position={[-5, -3, 3]} color="#4f46e5" intensity={2.5} />

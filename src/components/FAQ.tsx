@@ -17,7 +17,7 @@ export default function FAQ() {
   }, []);
 
   return (
-    <section id="faq" className="py-32 px-6 relative overflow-hidden bg-[#020617]">
+    <section id="faq" className="py-32 px-6 relative overflow-hidden bg-[#0d1117]">
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }}

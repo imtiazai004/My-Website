@@ -68,14 +68,14 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
       {/* Image */}
       <div className="relative aspect-[16/10] overflow-hidden">
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#020617]/90 via-[#020617]/20 to-transparent" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0d1117]/90 via-[#0d1117]/20 to-transparent" />
         <img
           src={resolveImage(project)}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-700 ease-[0.16,1,0.3,1] group-hover:scale-110"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 backdrop-blur-sm bg-[#020617]/30 transition-all duration-500">
+        <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 backdrop-blur-sm bg-[#0d1117]/30 transition-all duration-500">
           <motion.a
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}

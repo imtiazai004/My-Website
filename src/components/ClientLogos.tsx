@@ -51,8 +51,8 @@ function MarqueeRow({ items, reverse = false }: { items: typeof ROW1; reverse?: 
 
 export default function ClientLogos() {
   return (
-    <section className="py-16 relative overflow-hidden bg-[#020617] border-y border-white/5">
-      <div className="absolute inset-0 bg-gradient-to-r from-[#020617] via-transparent to-[#020617] z-10 pointer-events-none" />
+    <section className="py-16 relative overflow-hidden bg-[#0d1117] border-y border-white/5">
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0d1117] via-transparent to-[#0d1117] z-10 pointer-events-none" />
 
       <div className="mb-8 text-center">
         <span className="text-[10px] font-mono font-bold text-white/20 uppercase tracking-[0.5em]">TECHNOLOGIES WE MASTER</span>

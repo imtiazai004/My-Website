@@ -7,10 +7,10 @@ const HeroCanvas = lazy(() => import('./HeroCanvas'))
 
 export function SplineSceneBasic() {
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-[#020617]">
+    <section className="relative w-full h-screen overflow-hidden bg-[#0d1117]">
       {/* 3D Canvas — lazy loaded so text renders immediately */}
       <div className="absolute inset-0 z-10">
-        <Suspense fallback={<div className="w-full h-full bg-[#020617]" />}>
+        <Suspense fallback={<div className="w-full h-full bg-[#0d1117]" />}>
           <HeroCanvas />
         </Suspense>
       </div>

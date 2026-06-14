@@ -40,7 +40,7 @@ export default function ProjectGrid() {
   }, [selectedId]);
 
   return (
-    <section id="work" className="py-40 px-6 relative overflow-hidden bg-[#020617]">
+    <section id="work" className="py-40 px-6 relative overflow-hidden bg-[#0d1117]">
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
@@ -80,7 +80,7 @@ export default function ProjectGrid() {
             <div className="flex items-center gap-4 pt-6">
               <div className="flex -space-x-3">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-12 h-12 rounded-full border-2 border-[#020617] bg-white/10 flex items-center justify-center overflow-hidden shadow-sm">
+                  <div key={i} className="w-12 h-12 rounded-full border-2 border-[#0d1117] bg-white/10 flex items-center justify-center overflow-hidden shadow-sm">
                     <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="Expert" className="w-full h-full object-cover" />
                   </div>
                 ))}
@@ -158,7 +158,7 @@ export default function ProjectGrid() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedId(null)}
-              className="absolute inset-0 bg-[#020617]/90 backdrop-blur-2xl"
+              className="absolute inset-0 bg-[#0d1117]/90 backdrop-blur-2xl"
             />
             <motion.div
               layoutId={selectedId}
@@ -167,13 +167,13 @@ export default function ProjectGrid() {
               exit={{ opacity: 0, y: 50, scale: 0.95 }}
               className="w-full max-w-5xl bg-[#0f172a] border border-white/10 rounded-[2.5rem] shadow-2xl overflow-hidden relative z-10 flex flex-col lg:flex-row max-h-[90vh]"
             >
-              <div className="lg:w-1/2 relative bg-[#020617] overflow-hidden">
+              <div className="lg:w-1/2 relative bg-[#0d1117] overflow-hidden">
                 <img
                   src={(() => { const u = selectedProject.imageUrl?.trim(); return (u && u !== '#') ? u : (PROJECT_LOGO_MAP[selectedProject.title] ?? u); })()}
                   alt={selectedProject.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117]/80 to-transparent" />
                 <div className="absolute bottom-10 left-10 text-white">
                   <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase opacity-50 mb-2 block">
                     PROJECT_ID: {selectedProject.id}
