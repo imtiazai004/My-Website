@@ -14,6 +14,14 @@
   ],
   "rewrites": [
     {
+      "source": "/profitscout",
+      "destination": "/profitscout.html"
+    },
+    {
+      "source": "/profitscout-privacy",
+      "destination": "/profitscout-privacy.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
