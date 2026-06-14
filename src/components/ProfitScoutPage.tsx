@@ -226,6 +226,51 @@ export default function ProfitScoutPage() {
         </div>
       </section>
 
+      {/* ── Video Tutorial ── */}
+      <section className="relative z-20 py-24 px-6 border-t border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-accent/10 border border-brand-accent/20 rounded-full text-brand-accent text-[10px] font-bold uppercase tracking-widest mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+              Video Tutorial
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+              See it in action
+            </h2>
+            <p className="text-white/40 text-sm max-w-xl mx-auto">Watch how ProfitScout turns any product page into a complete research report — in under 60 seconds.</p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+            className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_60px_rgba(99,102,241,0.15)]"
+            style={{ aspectRatio: '16/9' }}
+          >
+            <iframe
+              src="https://www.youtube.com/embed/D6g1DsVMXFQ?rel=0&modestbranding=1"
+              title="ProfitScout v1 — Tutorial"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+          </motion.div>
+
+          <p className="text-center text-white/25 text-xs mt-5">
+            Prefer reading?{' '}
+            <a href="#features" className="text-brand-accent hover:text-indigo-300 transition-colors">
+              Scroll down to see all 44 features →
+            </a>
+          </p>
+        </div>
+      </section>
+
       {/* ── Feature Categories ── */}
       <div id="features">
         {FEATURE_CATEGORIES.map((category, catIdx) => (
