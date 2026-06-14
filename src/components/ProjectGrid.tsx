@@ -40,16 +40,16 @@ export default function ProjectGrid() {
   }, [selectedId]);
 
   return (
-    <section id="work" className="py-40 px-6 relative overflow-hidden bg-[#0d1117]">
+    <section id="work" className="py-40 px-6 relative overflow-hidden bg-[#f8fafc]">
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+        style={{ backgroundImage: 'radial-gradient(circle, rgba(15,23,42,0.4) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
       />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-900/10 to-transparent" />
       <div className="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-brand-accent/5 rounded-full blur-[200px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto mb-32 px-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-[0.2em] text-white/40 mb-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.04] text-[10px] font-bold tracking-[0.2em] text-slate-500 mb-10">
           <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
           CORE_PHILOSOPHY & CAPABILITIES
         </div>
@@ -63,12 +63,12 @@ export default function ProjectGrid() {
             transition={{ duration: 0.8 }}
             className="space-y-10"
           >
-            <h2 className="text-5xl md:text-6xl font-display font-medium text-white leading-tight tracking-tight">
+            <h2 className="text-5xl md:text-6xl font-display font-medium text-slate-900 leading-tight tracking-tight">
               Engineering <span className="text-brand-accent italic">Intelligent</span> <br />
               Digital Ecosystems
             </h2>
 
-            <div className="space-y-8 text-white/60 text-xl font-light leading-relaxed">
+            <div className="space-y-8 text-slate-600 text-xl font-light leading-relaxed">
               <p>
                 Soft Tech empowers businesses with intelligent, high-performance digital solutions designed to solve complex operational challenges and accelerate growth.
               </p>
@@ -80,12 +80,12 @@ export default function ProjectGrid() {
             <div className="flex items-center gap-4 pt-6">
               <div className="flex -space-x-3">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-12 h-12 rounded-full border-2 border-[#0d1117] bg-white/10 flex items-center justify-center overflow-hidden shadow-sm">
+                  <div key={i} className="w-12 h-12 rounded-full border-2 border-[#f8fafc] bg-slate-900/[0.06] flex items-center justify-center overflow-hidden shadow-sm">
                     <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="Expert" className="w-full h-full object-cover" />
                   </div>
                 ))}
               </div>
-              <p className="text-[12px] font-mono text-white/30 tracking-widest uppercase">
+              <p className="text-[12px] font-mono text-slate-400 tracking-widest uppercase">
                 <span className="text-brand-accent font-bold">24+</span> SENIOR_SYSTEM_ENGINEERS
               </p>
             </div>
@@ -101,9 +101,9 @@ export default function ProjectGrid() {
               transition={{ duration: 1 }}
               className="relative z-10"
             >
-              <div className="relative bg-[#0f172a] rounded-xl p-2 shadow-[0_50px_100px_-20px_rgba(99,102,241,0.3)] border border-white/10 w-80 h-52 md:w-96 md:h-64">
-                <div className="absolute inset-x-0 bottom-0 h-2 bg-[#0a0f1e] rounded-b-xl border-t border-white/5" />
-                <div className="w-full h-full bg-[#030712] rounded-lg relative overflow-hidden flex items-center justify-center">
+              <div className="relative bg-white rounded-xl p-2 shadow-[0_50px_100px_-20px_rgba(99,102,241,0.3)] border border-slate-900/10 w-80 h-52 md:w-96 md:h-64">
+                <div className="absolute inset-x-0 bottom-0 h-2 bg-slate-200 rounded-b-xl border-t border-slate-900/[0.07]" />
+                <div className="w-full h-full bg-[#f8fafc] rounded-lg relative overflow-hidden flex items-center justify-center">
                   <Code className="w-16 h-16 text-brand-accent animate-pulse" />
                 </div>
                 <AnimatePresence>
@@ -124,16 +124,16 @@ export default function ProjectGrid() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-20 mb-32 items-start opacity-60">
           <div className="space-y-6">
-            <h3 className="text-white/40 font-bold tracking-widest text-xs uppercase">PROTOCOL_ACTIVE</h3>
-            <p className="text-white/40 text-lg font-light leading-relaxed max-w-xl">
+            <h3 className="text-slate-500 font-bold tracking-widest text-xs uppercase">PROTOCOL_ACTIVE</h3>
+            <p className="text-slate-500 text-lg font-light leading-relaxed max-w-xl">
               Matrix contains our most critical production deployments.
               Each node represents a distinct architecture optimized for specific operational vectors.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-4 border-l border-white/10 pl-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-4 border-l border-slate-900/10 pl-12">
             <div className="space-y-4">
-              <h4 className="text-white/30 font-bold tracking-widest text-[10px] uppercase">Architecture-First</h4>
-              <p className="text-white/25 text-sm font-light leading-relaxed">
+              <h4 className="text-slate-400 font-bold tracking-widest text-[10px] uppercase">Architecture-First</h4>
+              <p className="text-slate-400 text-sm font-light leading-relaxed">
                 Infinite scalability from day zero. We bridge backends and cinematic frontends.
               </p>
             </div>
@@ -158,22 +158,22 @@ export default function ProjectGrid() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedId(null)}
-              className="absolute inset-0 bg-[#0d1117]/90 backdrop-blur-2xl"
+              className="absolute inset-0 bg-slate-900/40 backdrop-blur-2xl"
             />
             <motion.div
               layoutId={selectedId}
               initial={{ opacity: 0, y: 50, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 50, scale: 0.95 }}
-              className="w-full max-w-5xl bg-[#0f172a] border border-white/10 rounded-[2.5rem] shadow-2xl overflow-hidden relative z-10 flex flex-col lg:flex-row max-h-[90vh]"
+              className="w-full max-w-5xl bg-white border border-slate-900/10 rounded-[2.5rem] shadow-2xl overflow-hidden relative z-10 flex flex-col lg:flex-row max-h-[90vh]"
             >
-              <div className="lg:w-1/2 relative bg-[#0d1117] overflow-hidden">
+              <div className="lg:w-1/2 relative bg-[#f8fafc] overflow-hidden">
                 <img
                   src={(() => { const u = selectedProject.imageUrl?.trim(); return (u && u !== '#') ? u : (PROJECT_LOGO_MAP[selectedProject.title] ?? u); })()}
                   alt={selectedProject.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117]/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
                 <div className="absolute bottom-10 left-10 text-white">
                   <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase opacity-50 mb-2 block">
                     PROJECT_ID: {selectedProject.id}
@@ -182,12 +182,12 @@ export default function ProjectGrid() {
                 </div>
               </div>
 
-              <div className="lg:w-1/2 p-12 overflow-y-auto bg-[#0f172a]">
+              <div className="lg:w-1/2 p-12 overflow-y-auto bg-white">
                 <button
                   onClick={() => setSelectedId(null)}
-                  className="absolute top-8 right-8 p-3 rounded-full hover:bg-white/10 transition-colors z-20"
+                  className="absolute top-8 right-8 p-3 rounded-full hover:bg-slate-900/[0.06] transition-colors z-20"
                 >
-                  <X className="w-6 h-6 text-white" />
+                  <X className="w-6 h-6 text-slate-500" />
                 </button>
 
                 <div className="space-y-12">
@@ -195,26 +195,26 @@ export default function ProjectGrid() {
                     <h4 className="text-xs font-mono font-bold text-brand-accent uppercase tracking-widest flex items-center gap-2">
                       <Target className="w-4 h-4" /> OBJECTIVE & BRIEF
                     </h4>
-                    <p className="text-white/60 text-lg font-light leading-relaxed">
+                    <p className="text-slate-600 text-lg font-light leading-relaxed">
                       {selectedProject.description}
                     </p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-8">
                     <div className="space-y-4">
-                      <h4 className="text-xs font-mono font-bold text-white/30 uppercase tracking-widest flex items-center gap-2">
+                      <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
                         <Layers className="w-4 h-4" /> TECH_STACK
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {selectedProject.tags?.map((tag, i) => (
-                          <span key={i} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold text-white/50 uppercase">
+                          <span key={i} className="px-3 py-1 bg-slate-900/[0.04] border border-slate-900/10 rounded-full text-[10px] font-bold text-slate-500 uppercase">
                             {tag}
                           </span>
                         ))}
                       </div>
                     </div>
                     <div className="space-y-4">
-                      <h4 className="text-xs font-mono font-bold text-white/30 uppercase tracking-widest flex items-center gap-2">
+                      <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
                         <LineChart className="w-4 h-4" /> IMPACT_METRIC
                       </h4>
                       {selectedProject.stats && selectedProject.stats.length > 0 ? (
@@ -222,19 +222,19 @@ export default function ProjectGrid() {
                           {selectedProject.stats.map((stat, i) => (
                             <div key={i} className="p-4 bg-brand-accent/10 rounded-2xl border border-brand-accent/20">
                               <p className="text-2xl font-display font-bold text-brand-accent tracking-tighter">{stat.value}</p>
-                              <p className="text-[9px] font-mono text-white/40 font-bold uppercase tracking-widest">{stat.label}</p>
+                              <p className="text-[9px] font-mono text-slate-500 font-bold uppercase tracking-widest">{stat.label}</p>
                             </div>
                           ))}
                         </div>
                       ) : (
                         <div className="p-4 bg-brand-accent/10 rounded-2xl border border-brand-accent/20">
-                          <p className="text-[9px] font-mono text-white/40 font-bold uppercase tracking-widest">No metrics available</p>
+                          <p className="text-[9px] font-mono text-slate-500 font-bold uppercase tracking-widest">No metrics available</p>
                         </div>
                       )}
                     </div>
                   </div>
 
-                  <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row gap-4 items-center justify-between">
+                  <div className="pt-10 border-t border-slate-900/[0.07] flex flex-col md:flex-row gap-4 items-center justify-between">
                     <div className="flex items-center gap-4">
                       {selectedProject.demoUrl && selectedProject.demoUrl !== '#' ? (
                         <a
@@ -246,7 +246,7 @@ export default function ProjectGrid() {
                           Launch Deployment <ExternalLink className="w-3 h-3" />
                         </a>
                       ) : (
-                        <span className="flex items-center gap-2 px-6 py-3 bg-white/5 text-white/25 rounded-full text-xs font-bold cursor-not-allowed border border-white/10">
+                        <span className="flex items-center gap-2 px-6 py-3 bg-slate-900/[0.04] text-slate-400 rounded-full text-xs font-bold cursor-not-allowed border border-slate-900/10">
                           Launch Deployment <ExternalLink className="w-3 h-3" />
                         </span>
                       )}
@@ -255,12 +255,12 @@ export default function ProjectGrid() {
                           href={selectedProject.downloadUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-6 py-3 bg-white/10 text-white/60 rounded-full text-xs font-bold hover:bg-white/20 transition-all"
+                          className="flex items-center gap-2 px-6 py-3 bg-slate-900/[0.06] text-slate-600 rounded-full text-xs font-bold hover:bg-white/20 transition-all"
                         >
                           Review Source <Github className="w-3 h-3" />
                         </a>
                       ) : (
-                        <span className="flex items-center gap-2 px-6 py-3 bg-white/5 text-white/20 rounded-full text-xs font-bold cursor-not-allowed">
+                        <span className="flex items-center gap-2 px-6 py-3 bg-slate-900/[0.04] text-slate-300 rounded-full text-xs font-bold cursor-not-allowed">
                           Review Source <Github className="w-3 h-3" />
                         </span>
                       )}

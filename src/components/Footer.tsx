@@ -39,11 +39,11 @@ export default function Footer() {
                 <Send className="w-3 h-3" />
                 INITIATE PROTOCOL
               </div>
-              <h2 className="heading-lg text-white">
+              <h2 className="heading-lg text-slate-900">
                 Ready to Build the <br />
                 <span className="text-brand-accent italic font-light tracking-tighter">Global Future?</span>
               </h2>
-              <p className="text-neutral-400 text-xl leading-relaxed font-light max-w-lg">
+              <p className="text-slate-500 text-xl leading-relaxed font-light max-w-lg">
                 We combine high-performance engineering with cinematic design to build applications that don't just work—they inspire.
               </p>
             </div>
@@ -52,7 +52,7 @@ export default function Footer() {
               <motion.a 
                 whileHover={{ y: -5 }}
                 href="mailto:info@aisofttechsolution.com" 
-                className="flex items-center gap-5 p-6 glass-card !p-6 hover:bg-white/[0.05] transition-all group"
+                className="flex items-center gap-5 p-6 glass-card !p-6 hover:bg-slate-900/[0.04] transition-all group"
               >
                 <div className="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all">
                   <Mail className="w-6 h-6" />
@@ -107,7 +107,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={social.label}
                   whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.05)' }}
-                  className="w-14 h-14 rounded-2xl border border-white/5 flex items-center justify-center text-brand-text-dim hover:text-white transition-all"
+                  className="w-14 h-14 rounded-2xl border border-slate-900/[0.07] flex items-center justify-center text-brand-text-dim hover:text-slate-900 transition-all"
                 >
                   <social.icon className="w-6 h-6" />
                 </motion.a>
@@ -148,7 +148,7 @@ export default function Footer() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="commander@enterprise.com"
-                      className="w-full bg-white/[0.02] border border-white/10 rounded-2xl px-6 py-5 text-sm focus:outline-none focus:border-brand-accent focus:bg-white/[0.05] transition-all"
+                      className="w-full bg-slate-900/[0.02] border border-slate-900/10 rounded-2xl px-6 py-5 text-sm focus:outline-none focus:border-brand-accent focus:bg-slate-900/[0.04] transition-all"
                     />
                   </div>
                   <div className="space-y-4">
@@ -159,7 +159,7 @@ export default function Footer() {
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="What are we building today?"
                       rows={4}
-                      className="w-full bg-white/[0.02] border border-white/10 rounded-2xl px-6 py-5 text-sm focus:outline-none focus:border-brand-accent focus:bg-white/[0.05] transition-all resize-none"
+                      className="w-full bg-slate-900/[0.02] border border-slate-900/10 rounded-2xl px-6 py-5 text-sm focus:outline-none focus:border-brand-accent focus:bg-slate-900/[0.04] transition-all resize-none"
                     />
                   </div>
                   <motion.button 
@@ -190,11 +190,11 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="pt-24 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+        <div className="pt-24 border-t border-slate-900/[0.07] flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
           {/* Logo + tagline signature */}
           <div className="flex flex-col gap-5">
             <Logo variant="full" size={40} />
-            <span className="text-[10px] text-white/20 uppercase tracking-[0.4em] font-mono">
+            <span className="text-[10px] text-slate-300 uppercase tracking-[0.4em] font-mono">
               &copy; {new Date().getFullYear()} Soft Tech Solution — All rights reserved.
             </span>
           </div>
@@ -215,8 +215,8 @@ export default function Footer() {
               </div>
             </div>
             <div className="flex gap-8 text-[11px] text-brand-text-dim font-black uppercase tracking-[0.3em]">
-              <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors">Privacy</button>
-              <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors">Terms</button>
+              <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-slate-900 transition-colors">Privacy</button>
+              <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-slate-900 transition-colors">Terms</button>
             </div>
           </div>
         </div>

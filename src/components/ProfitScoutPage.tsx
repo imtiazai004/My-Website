@@ -139,20 +139,20 @@ export default function ProfitScoutPage() {
       <section className="relative z-20 pt-40 pb-28 px-6 text-center">
         <div className="max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <a href="/" className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-white/40 hover:text-brand-accent transition-colors mb-10">
+            <a href="/" className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-slate-500 hover:text-brand-accent transition-colors mb-10">
               ← Back to Home
             </a>
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-accent/10 border border-brand-accent/20 rounded-full text-brand-accent text-[10px] font-bold uppercase tracking-widest mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
               Chrome Extension · 100% Free
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+            <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
               Profit<span className="text-brand-accent">Scout</span> v1
             </h1>
-            <p className="text-xl text-white/60 mb-4 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xl text-slate-600 mb-4 leading-relaxed max-w-2xl mx-auto">
               The only product research extension you'll ever need. 44 features across 12 platforms — completely free, forever.
             </p>
-            <p className="text-sm text-white/35 mb-10">
+            <p className="text-sm text-slate-400 mb-10">
               Built by <a href="https://aisofttechsolution.com" className="text-brand-accent hover:text-indigo-300 transition-colors">Imtiaz Ahmad</a> · AI Soft Tech Solution
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -162,14 +162,14 @@ export default function ProfitScoutPage() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-accent text-white font-bold text-sm rounded-xl hover:bg-indigo-400 transition-all shadow-[0_0_30px_rgba(99,102,241,0.3)] hover:shadow-[0_0_40px_rgba(99,102,241,0.5)]"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-accent text-slate-900 font-bold text-sm rounded-xl hover:bg-indigo-400 transition-all shadow-[0_0_30px_rgba(99,102,241,0.3)] hover:shadow-[0_0_40px_rgba(99,102,241,0.5)]"
               >
                 <Download className="w-4 h-4" />
                 Add to Chrome — Free
               </motion.a>
               <a
                 href="#features"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 text-white/70 font-bold text-sm rounded-xl hover:bg-white/10 hover:text-white transition-all"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900/[0.04] border border-slate-900/10 text-slate-600 font-bold text-sm rounded-xl hover:bg-slate-900/[0.06] hover:text-slate-900 transition-all"
               >
                 See All 44 Features <ArrowRight className="w-4 h-4" />
               </a>
@@ -179,9 +179,9 @@ export default function ProfitScoutPage() {
       </section>
 
       {/* ── Platforms ── */}
-      <section className="relative z-20 py-16 px-6 border-y border-white/5">
+      <section className="relative z-20 py-16 px-6 border-y border-slate-900/[0.07]">
         <div className="max-w-5xl mx-auto">
-          <p className="text-center text-[10px] font-bold uppercase tracking-[0.3em] text-white/25 mb-8">Works on 12 platforms</p>
+          <p className="text-center text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-8">Works on 12 platforms</p>
           <div className="mb-4">
             <p className="text-center text-[10px] font-bold uppercase tracking-widest text-brand-accent/60 mb-4">Selling Platforms</p>
             <div className="flex flex-wrap justify-center gap-3">
@@ -191,10 +191,10 @@ export default function ProfitScoutPage() {
             </div>
           </div>
           <div className="mt-6">
-            <p className="text-center text-[10px] font-bold uppercase tracking-widest text-white/30 mb-4">Sourcing Platforms</p>
+            <p className="text-center text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Sourcing Platforms</p>
             <div className="flex flex-wrap justify-center gap-3">
               {SOURCING_PLATFORMS.map(p => (
-                <span key={p} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm font-semibold text-white/50">{p}</span>
+                <span key={p} className="px-4 py-2 bg-slate-900/[0.04] border border-slate-900/10 rounded-full text-sm font-semibold text-slate-500">{p}</span>
               ))}
             </div>
           </div>
@@ -219,7 +219,7 @@ export default function ProfitScoutPage() {
                 transition={{ delay: i * 0.1 }}
               >
                 <div className="text-4xl font-bold text-brand-accent mb-1" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{stat.value}</div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-white/35">{stat.label}</div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -227,7 +227,7 @@ export default function ProfitScoutPage() {
       </section>
 
       {/* ── Video Tutorial ── */}
-      <section className="relative z-20 py-24 px-6 border-t border-white/5">
+      <section className="relative z-20 py-24 px-6 border-t border-slate-900/[0.07]">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -239,10 +239,10 @@ export default function ProfitScoutPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
               Video Tutorial
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
               See it in action
             </h2>
-            <p className="text-white/40 text-sm max-w-xl mx-auto">Watch how ProfitScout turns any product page into a complete research report — in under 60 seconds.</p>
+            <p className="text-slate-500 text-sm max-w-xl mx-auto">Watch how ProfitScout turns any product page into a complete research report — in under 60 seconds.</p>
           </motion.div>
 
           <motion.div
@@ -250,7 +250,7 @@ export default function ProfitScoutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_60px_rgba(99,102,241,0.15)]"
+            className="relative rounded-2xl overflow-hidden border border-slate-900/10 shadow-[0_0_60px_rgba(99,102,241,0.15)]"
             style={{ aspectRatio: '16/9' }}
           >
             <iframe
@@ -262,7 +262,7 @@ export default function ProfitScoutPage() {
             />
           </motion.div>
 
-          <p className="text-center text-white/25 text-xs mt-5">
+          <p className="text-center text-slate-400 text-xs mt-5">
             Prefer reading?{' '}
             <a href="#features" className="text-brand-accent hover:text-indigo-300 transition-colors">
               Scroll down to see all 44 features →
@@ -276,7 +276,7 @@ export default function ProfitScoutPage() {
         {FEATURE_CATEGORIES.map((category, catIdx) => (
           <section
             key={category.label}
-            className={`relative z-20 py-24 px-6 border-t border-white/5 ${catIdx % 2 === 1 ? 'bg-white/[0.015]' : ''}`}
+            className={`relative z-20 py-24 px-6 border-t border-slate-900/[0.07] ${catIdx % 2 === 1 ? 'bg-white/[0.015]' : ''}`}
           >
             <div className="max-w-6xl mx-auto">
               <motion.div
@@ -285,13 +285,13 @@ export default function ProfitScoutPage() {
                 viewport={{ once: true }}
                 className="mb-12"
               >
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-white/40 mb-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900/[0.04] border border-slate-900/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4">
                   {category.badge} {category.label} · {category.features.length} Features
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
                   {category.title}
                 </h2>
-                <p className="text-white/40 text-sm max-w-2xl leading-relaxed">{category.subtitle}</p>
+                <p className="text-slate-500 text-sm max-w-2xl leading-relaxed">{category.subtitle}</p>
               </motion.div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -304,13 +304,13 @@ export default function ProfitScoutPage() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.05, duration: 0.4 }}
-                      className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-5 hover:border-brand-accent/30 hover:bg-brand-accent/[0.05] transition-all duration-300 group"
+                      className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-5 hover:border-brand-accent/30 hover:bg-brand-accent/[0.05] transition-all duration-300 group"
                     >
                       <div className="w-9 h-9 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-3 group-hover:bg-brand-accent/20 transition-colors shrink-0">
                         <Icon className="w-4 h-4 text-brand-accent" />
                       </div>
-                      <h3 className="text-white font-bold text-sm mb-1.5 leading-snug">{f.title}</h3>
-                      <p className="text-white/45 text-xs leading-relaxed">{f.desc}</p>
+                      <h3 className="text-slate-900 font-bold text-sm mb-1.5 leading-snug">{f.title}</h3>
+                      <p className="text-slate-500 text-xs leading-relaxed">{f.desc}</p>
                     </motion.div>
                   );
                 })}
@@ -321,13 +321,13 @@ export default function ProfitScoutPage() {
       </div>
 
       {/* ── Extra 4 Features ── */}
-      <section className="relative z-20 py-20 px-6 border-t border-white/5">
+      <section className="relative z-20 py-20 px-6 border-t border-slate-900/[0.07]">
         <div className="max-w-6xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-white/40 mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900/[0.04] border border-slate-900/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4">
               🔧 Even More · 4 Features
             </div>
-            <h2 className="text-3xl font-bold text-white" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+            <h2 className="text-3xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
               And there's more
             </h2>
           </motion.div>
@@ -341,13 +341,13 @@ export default function ProfitScoutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-5 hover:border-brand-accent/30 hover:bg-brand-accent/[0.05] transition-all duration-300 group"
+                  className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-5 hover:border-brand-accent/30 hover:bg-brand-accent/[0.05] transition-all duration-300 group"
                 >
                   <div className="w-9 h-9 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-3 group-hover:bg-brand-accent/20 transition-colors">
                     <Icon className="w-4 h-4 text-brand-accent" />
                   </div>
-                  <h3 className="text-white font-bold text-sm mb-1.5">{f.title}</h3>
-                  <p className="text-white/45 text-xs leading-relaxed">{f.desc}</p>
+                  <h3 className="text-slate-900 font-bold text-sm mb-1.5">{f.title}</h3>
+                  <p className="text-slate-500 text-xs leading-relaxed">{f.desc}</p>
                 </motion.div>
               );
             })}
@@ -356,12 +356,12 @@ export default function ProfitScoutPage() {
       </section>
 
       {/* ── How it works ── */}
-      <section className="relative z-20 py-24 px-6 border-t border-white/5">
+      <section className="relative z-20 py-24 px-6 border-t border-slate-900/[0.07]">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-white/40 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900/[0.04] border border-slate-900/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4">
             How It Works
           </div>
-          <h2 className="text-4xl font-bold text-white mb-16" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+          <h2 className="text-4xl font-bold text-slate-900 mb-16" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
             Three steps to your next winning product
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -378,9 +378,9 @@ export default function ProfitScoutPage() {
                 transition={{ delay: i * 0.15 }}
                 className="relative"
               >
-                <div className="text-6xl font-bold text-white/5 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{s.step}</div>
-                <h3 className="text-white font-bold text-base mb-2">{s.title}</h3>
-                <p className="text-white/45 text-sm leading-relaxed">{s.desc}</p>
+                <div className="text-6xl font-bold text-slate-900/5 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{s.step}</div>
+                <h3 className="text-slate-900 font-bold text-base mb-2">{s.title}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -388,13 +388,13 @@ export default function ProfitScoutPage() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="relative z-20 py-24 px-6 border-t border-white/5">
+      <section className="relative z-20 py-24 px-6 border-t border-slate-900/[0.07]">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-white/40 mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900/[0.04] border border-slate-900/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4">
               FAQ
             </div>
-            <h2 className="text-4xl font-bold text-white" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+            <h2 className="text-4xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
               Common questions
             </h2>
           </div>
@@ -406,13 +406,13 @@ export default function ProfitScoutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6"
+                className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-6"
               >
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-4 h-4 text-brand-accent shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-white font-semibold text-sm mb-2">{faq.q}</p>
-                    <p className="text-white/50 text-sm leading-relaxed">{faq.a}</p>
+                    <p className="text-slate-900 font-semibold text-sm mb-2">{faq.q}</p>
+                    <p className="text-slate-500 text-sm leading-relaxed">{faq.a}</p>
                   </div>
                 </div>
               </motion.div>
@@ -422,32 +422,32 @@ export default function ProfitScoutPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="relative z-20 py-24 px-6 border-t border-white/5">
+      <section className="relative z-20 py-24 px-6 border-t border-slate-900/[0.07]">
         <div className="max-w-2xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-accent/10 border border-brand-accent/20 rounded-full text-brand-accent text-[10px] font-bold uppercase tracking-widest mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
             44 Features · 12 Platforms · Free Forever
           </div>
-          <h2 className="text-4xl font-bold text-white mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+          <h2 className="text-4xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
             Start researching smarter today
           </h2>
-          <p className="text-white/40 mb-8 text-sm">Join sellers using ProfitScout to find winning products faster — completely free, no sign-up, no catch.</p>
+          <p className="text-slate-500 mb-8 text-sm">Join sellers using ProfitScout to find winning products faster — completely free, no sign-up, no catch.</p>
           <motion.a
             href="https://chromewebstore.google.com"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-10 py-4 bg-brand-accent text-white font-bold text-sm rounded-xl hover:bg-indigo-400 transition-all shadow-[0_0_40px_rgba(99,102,241,0.35)]"
+            className="inline-flex items-center gap-2 px-10 py-4 bg-brand-accent text-slate-900 font-bold text-sm rounded-xl hover:bg-indigo-400 transition-all shadow-[0_0_40px_rgba(99,102,241,0.35)]"
           >
             <Download className="w-4 h-4" />
             Add to Chrome — It's Free
           </motion.a>
-          <p className="mt-6 text-white/25 text-xs">
-            Questions? <a href="mailto:imtiazahmad@aisofttechsolution.com" className="text-brand-accent hover:text-indigo-300 transition-colors">imtiazahmad@aisofttechsolution.com</a> · <a href="https://wa.me/923005863032" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">WhatsApp</a>
+          <p className="mt-6 text-slate-400 text-xs">
+            Questions? <a href="mailto:imtiazahmad@aisofttechsolution.com" className="text-brand-accent hover:text-indigo-300 transition-colors">imtiazahmad@aisofttechsolution.com</a> · <a href="https://wa.me/923005863032" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-slate-900 transition-colors">WhatsApp</a>
           </p>
-          <p className="mt-3 text-white/20 text-xs">
-            <a href="/profitscout-privacy" className="hover:text-white/40 transition-colors">Privacy Policy</a>
+          <p className="mt-3 text-slate-300 text-xs">
+            <a href="/profitscout-privacy" className="hover:text-slate-500 transition-colors">Privacy Policy</a>
           </p>
         </div>
       </section>

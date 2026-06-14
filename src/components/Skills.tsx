@@ -27,13 +27,13 @@ export default function Skills() {
   }, []);
 
   return (
-    <section id="skills" className="py-32 px-6 relative overflow-hidden bg-[#0d1117]">
+    <section id="skills" className="py-32 px-6 relative overflow-hidden bg-[#f8fafc]">
       {/* Dot grid */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+        style={{ backgroundImage: 'radial-gradient(circle, rgba(15,23,42,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
       />
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-900/10 to-transparent" />
       {/* Ambient glows */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
@@ -46,7 +46,7 @@ export default function Skills() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold tracking-[0.2em] text-white/40"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.04] text-[10px] font-bold tracking-[0.2em] text-slate-500"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
               TECHNICAL_ARSENAL
@@ -56,7 +56,7 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-6xl font-display font-medium text-white tracking-tight leading-tight"
+              className="text-5xl md:text-6xl font-display font-medium text-slate-900 tracking-tight leading-tight"
             >
               Our Core <span className="text-brand-accent italic">Tech Stack</span>
             </motion.h2>
@@ -65,7 +65,7 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-white/50 text-xl font-light leading-relaxed"
+              className="text-slate-500 text-xl font-light leading-relaxed"
             >
               Our infrastructure is built on modern, future-proof technologies. Click any skill to explore the full stack.
             </motion.p>
@@ -77,9 +77,9 @@ export default function Skills() {
             viewport={{ once: true }}
             className="flex flex-wrap gap-4"
           >
-            <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-4 flex items-center gap-3">
+            <div className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-4 flex items-center gap-3">
               <Cpu className="w-5 h-5 text-brand-accent" />
-              <span className="text-xs font-mono font-bold text-white/40">STACK_V2025</span>
+              <span className="text-xs font-mono font-bold text-slate-500">STACK_V2025</span>
             </div>
           </motion.div>
         </div>
@@ -88,14 +88,14 @@ export default function Skills() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           {/* Left Column */}
           <div className="space-y-10">
-            <p className="text-white/50 text-xl leading-relaxed font-light max-w-xl">
+            <p className="text-slate-500 text-xl leading-relaxed font-light max-w-xl">
               We architect systems that don't just work — they excel. Every technology choice is deliberate, optimized for performance and longevity.
             </p>
 
             <div className="grid grid-cols-2 gap-x-12 gap-y-8 relative">
               <div className="space-y-4">
                 <span className="text-[10px] text-brand-accent font-bold tracking-[0.4em] uppercase">CORE_ENGINE</span>
-                <div className="flex flex-col gap-2 font-mono text-[10px] text-white/40">
+                <div className="flex flex-col gap-2 font-mono text-[10px] text-slate-500">
                   {['NEXT.JS 15 FRAMEWORK', 'TAILWIND 4 ENGINE', 'GEMINI AI ORCHESTRATION'].map((tech, i) => (
                     <div key={`${tech}-${i}`} className="flex items-center gap-2 group cursor-default">
                       <div className="w-1 h-1 bg-brand-accent group-hover:scale-150 transition-transform" />
@@ -106,7 +106,7 @@ export default function Skills() {
               </div>
               <div className="space-y-4">
                 <span className="text-[10px] text-brand-accent font-bold tracking-[0.4em] uppercase">DATA_LAYER</span>
-                <div className="flex flex-col gap-2 font-mono text-[10px] text-white/40">
+                <div className="flex flex-col gap-2 font-mono text-[10px] text-slate-500">
                   {['POSTGRESQL CLUSTER', 'REDIS CACHING', 'FIRESTORE REALTIME'].map((tech, i) => (
                     <div key={`${tech}-${i}`} className="flex items-center gap-2 group cursor-default">
                       <div className="w-1 h-1 bg-brand-accent group-hover:scale-150 transition-transform" />
@@ -118,15 +118,15 @@ export default function Skills() {
             </div>
 
             {/* Stats row */}
-            <div className="pt-8 border-t border-white/5 grid grid-cols-3 gap-6">
+            <div className="pt-8 border-t border-slate-900/[0.07] grid grid-cols-3 gap-6">
               {[
                 { value: '5+', label: 'Core Stacks' },
                 { value: '99%', label: 'Type Coverage' },
                 { value: '<50ms', label: 'API Latency' },
               ].map((stat, i) => (
                 <div key={i} className="space-y-1">
-                  <p className="text-2xl font-display font-bold text-white tracking-tighter">{stat.value}</p>
-                  <p className="text-[9px] font-mono font-bold uppercase tracking-widest text-white/30">{stat.label}</p>
+                  <p className="text-2xl font-display font-bold text-slate-900 tracking-tighter">{stat.value}</p>
+                  <p className="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-400">{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -149,24 +149,24 @@ export default function Skills() {
                   onClick={() => setSelectedSkill(isSelected ? null : skill.name)}
                   className={`p-6 rounded-2xl border transition-all cursor-pointer group ${
                     isSelected
-                      ? 'bg-white/10 border-brand-accent/40 shadow-2xl shadow-brand-accent/10'
-                      : 'bg-white/[0.02] border-white/5 hover:border-white/20'
+                      ? 'bg-slate-900/[0.06] border-brand-accent/40 shadow-2xl shadow-brand-accent/10'
+                      : 'bg-slate-900/[0.02] border-slate-900/[0.07] hover:border-slate-900/15'
                   }`}
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between font-bold text-[10px] uppercase tracking-widest">
                       <div className="flex items-center gap-4">
                         <div className={`p-2 rounded-lg border transition-colors ${
-                          isSelected ? 'bg-brand-accent text-black border-transparent' : 'bg-brand-accent/10 text-brand-accent border-brand-accent/20'
+                          isSelected ? 'bg-brand-accent text-white border-transparent' : 'bg-brand-accent/10 text-brand-accent border-brand-accent/20'
                         }`}>
                           <Icon className="w-4 h-4" />
                         </div>
-                        <span className="text-white tracking-[0.3em] font-display text-sm">{skill.name}</span>
+                        <span className="text-slate-900 tracking-[0.3em] font-display text-sm">{skill.name}</span>
                       </div>
                       <span className="font-mono text-brand-accent">{skill.level}%</span>
                     </div>
 
-                    <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-1 bg-slate-900/[0.04] rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
@@ -185,9 +185,9 @@ export default function Skills() {
                         >
                           <div className="pt-6 grid grid-cols-2 gap-3">
                             {details.map((tool, i) => (
-                              <div key={i} className="flex items-center gap-2 p-2 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 transition-colors">
+                              <div key={i} className="flex items-center gap-2 p-2 bg-slate-900/[0.04] rounded-lg border border-slate-900/[0.07] hover:bg-slate-900/[0.06] transition-colors">
                                 <ChevronRight className="w-3 h-3 text-brand-accent" />
-                                <span className="text-[10px] font-mono font-bold text-white/50">{tool}</span>
+                                <span className="text-[10px] font-mono font-bold text-slate-500">{tool}</span>
                               </div>
                             ))}
                           </div>

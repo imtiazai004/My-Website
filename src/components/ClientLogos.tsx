@@ -38,10 +38,10 @@ function MarqueeRow({ items, reverse = false }: { items: typeof ROW1; reverse?: 
         {doubled.map((tech, i) => (
           <div
             key={i}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/[0.06] bg-white/[0.03] whitespace-nowrap"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/[0.06] bg-slate-900/[0.03] whitespace-nowrap"
           >
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: tech.color, boxShadow: `0 0 6px ${tech.color}60` }} />
-            <span className="text-[11px] font-mono font-bold text-white/40 uppercase tracking-widest">{tech.name}</span>
+            <span className="text-[11px] font-mono font-bold text-slate-500 uppercase tracking-widest">{tech.name}</span>
           </div>
         ))}
       </motion.div>
@@ -51,11 +51,11 @@ function MarqueeRow({ items, reverse = false }: { items: typeof ROW1; reverse?: 
 
 export default function ClientLogos() {
   return (
-    <section className="py-16 relative overflow-hidden bg-[#0d1117] border-y border-white/5">
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0d1117] via-transparent to-[#0d1117] z-10 pointer-events-none" />
+    <section className="py-16 relative overflow-hidden bg-[#f8fafc] border-y border-slate-900/[0.07]">
+      <div className="absolute inset-0 bg-gradient-to-r from-[#f8fafc] via-transparent to-[#f8fafc] z-10 pointer-events-none" />
 
       <div className="mb-8 text-center">
-        <span className="text-[10px] font-mono font-bold text-white/20 uppercase tracking-[0.5em]">TECHNOLOGIES WE MASTER</span>
+        <span className="text-[10px] font-mono font-bold text-slate-300 uppercase tracking-[0.5em]">TECHNOLOGIES WE MASTER</span>
       </div>
 
       <div className="space-y-4">
