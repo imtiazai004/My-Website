@@ -74,6 +74,17 @@ export const PROJECT_LOGO_MAP: Record<string, string> = {
       stats: [{ label: 'AI Engine', value: 'Gemini' }, { label: 'Languages', value: '10+' }]
     },
     {
+      id: '8',
+      title: 'ProfitScout — Chrome Extension',
+      description: 'A 100% free Chrome extension for e-commerce product research. Analyze listings on Amazon, eBay, TikTok Shop, Walmart & Etsy with X-Ray niche scanning, ROI calculator, AI-powered insights via Gemini, lead manager, and price tracker — all in the browser, no sign-up needed.',
+      category: 'Chrome Extension',
+      tags: ['Chrome Extension', 'JavaScript', 'Gemini AI', 'Firebase', 'E-commerce'],
+      imageUrl: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop',
+      demoUrl: 'https://aisofttechsolution.com/profitscout',
+      downloadUrl: '#',
+      stats: [{ label: 'Platforms', value: '12' }, { label: 'Price', value: 'Free' }]
+    },
+    {
       id: '4',
       title: 'School Finance System',
       description: 'A complete offline fee management system for Windows schools. Manage student records, collect fees, generate receipts, and track payments. Staff can access it from any PC on the school\'s network — no internet needed.',
