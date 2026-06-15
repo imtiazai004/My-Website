@@ -146,7 +146,7 @@ export default function ProfitScoutPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
               Chrome Extension · 100% Free
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+            <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight" style={{ fontFamily: 'Clash Display, sans-serif' }}>
               Profit<span className="text-brand-accent">Scout</span> v1
             </h1>
             <p className="text-xl text-slate-600 mb-4 leading-relaxed max-w-2xl mx-auto">
@@ -218,7 +218,7 @@ export default function ProfitScoutPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="text-4xl font-bold text-brand-accent mb-1" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{stat.value}</div>
+                <div className="text-4xl font-bold text-brand-accent mb-1" style={{ fontFamily: 'Clash Display, sans-serif' }}>{stat.value}</div>
                 <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{stat.label}</div>
               </motion.div>
             ))}
@@ -239,7 +239,7 @@ export default function ProfitScoutPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
               Video Tutorial
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3" style={{ fontFamily: 'Clash Display, sans-serif' }}>
               See it in action
             </h2>
             <p className="text-slate-500 text-sm max-w-xl mx-auto">Watch how ProfitScout turns any product page into a complete research report — in under 60 seconds.</p>
@@ -288,7 +288,7 @@ export default function ProfitScoutPage() {
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900/[0.04] border border-slate-900/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4">
                   {category.badge} {category.label} · {category.features.length} Features
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3" style={{ fontFamily: 'Clash Display, sans-serif' }}>
                   {category.title}
                 </h2>
                 <p className="text-slate-500 text-sm max-w-2xl leading-relaxed">{category.subtitle}</p>
@@ -327,7 +327,7 @@ export default function ProfitScoutPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900/[0.04] border border-slate-900/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4">
               🔧 Even More · 4 Features
             </div>
-            <h2 className="text-3xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+            <h2 className="text-3xl font-bold text-slate-900" style={{ fontFamily: 'Clash Display, sans-serif' }}>
               And there's more
             </h2>
           </motion.div>
@@ -361,7 +361,7 @@ export default function ProfitScoutPage() {
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900/[0.04] border border-slate-900/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4">
             How It Works
           </div>
-          <h2 className="text-4xl font-bold text-slate-900 mb-16" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+          <h2 className="text-4xl font-bold text-slate-900 mb-16" style={{ fontFamily: 'Clash Display, sans-serif' }}>
             Three steps to your next winning product
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -378,7 +378,7 @@ export default function ProfitScoutPage() {
                 transition={{ delay: i * 0.15 }}
                 className="relative"
               >
-                <div className="text-6xl font-bold text-slate-900/5 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{s.step}</div>
+                <div className="text-6xl font-bold text-slate-900/5 mb-4" style={{ fontFamily: 'Clash Display, sans-serif' }}>{s.step}</div>
                 <h3 className="text-slate-900 font-bold text-base mb-2">{s.title}</h3>
                 <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
               </motion.div>
@@ -394,7 +394,7 @@ export default function ProfitScoutPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-900/[0.04] border border-slate-900/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4">
               FAQ
             </div>
-            <h2 className="text-4xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+            <h2 className="text-4xl font-bold text-slate-900" style={{ fontFamily: 'Clash Display, sans-serif' }}>
               Common questions
             </h2>
           </div>
@@ -428,7 +428,7 @@ export default function ProfitScoutPage() {
             <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
             44 Features · 12 Platforms · Free Forever
           </div>
-          <h2 className="text-4xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+          <h2 className="text-4xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'Clash Display, sans-serif' }}>
             Start researching smarter today
           </h2>
           <p className="text-slate-500 mb-8 text-sm">Join sellers using ProfitScout to find winning products faster — completely free, no sign-up, no catch.</p>
