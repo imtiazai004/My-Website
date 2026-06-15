@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Award, Clock, Users, Zap, CheckCircle2, Globe } from 'lucide-react';
 
@@ -7,6 +8,45 @@ const STATS = [
   { value: '100%', label: 'Client Satisfaction' },
   { value: '<24h', label: 'Response Time' },
 ];
+
+/* Counts up to the numeric part of a value when scrolled into view (IntersectionObserver). */
+function CountUp({ value, duration = 1600 }: { value: string; duration?: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
+  const match = value.match(/^(\D*)([\d.]+)(\D*)$/);
+  const prefix = match ? match[1] : '';
+  const target = match ? parseFloat(match[2]) : 0;
+  const suffix = match ? match[3] : value;
+  const decimals = match && match[2].includes('.') ? match[2].split('.')[1].length : 0;
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !started.current) {
+          started.current = true;
+          const start = performance.now();
+          const tick = (now: number) => {
+            const p = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+            setDisplay(target * eased);
+            if (p < 1) requestAnimationFrame(tick);
+            else setDisplay(target);
+          };
+          requestAnimationFrame(tick);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [target, duration]);
+
+  return <span ref={ref}>{prefix}{display.toFixed(decimals)}{suffix}</span>;
+}
 
 const HIGHLIGHTS = [
   'Full-stack web & mobile engineering',
@@ -89,20 +129,15 @@ export default function AboutSection() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="space-y-8"
           >
-            {/* Stats grid */}
-            <div className="grid grid-cols-2 gap-4">
+            {/* Stats — single horizontal bar, 4 columns with thin dividers + count-up */}
+            <div className="flex divide-x divide-slate-900/10">
               {STATS.map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="p-6 bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl group hover:border-brand-accent/30 hover:bg-slate-900/[0.04] transition-all"
-                >
-                  <p className="text-4xl font-display font-bold text-slate-900 tracking-tighter">{stat.value}</p>
+                <div key={i} className="flex-1 px-3 sm:px-5 text-center">
+                  <p className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-brand-accent tracking-tighter tabular-nums">
+                    <CountUp value={stat.value} />
+                  </p>
                   <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 mt-2">{stat.label}</p>
-                </motion.div>
+                </div>
               ))}
             </div>
 
