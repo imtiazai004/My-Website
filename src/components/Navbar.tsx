@@ -123,7 +123,7 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
           scrolled
-            ? 'border-b border-slate-900/10 bg-slate-900/40 backdrop-blur-xl shadow-[0_1px_40px_rgba(15,23,42,0.08)]'
+            ? 'border-b border-slate-900/10 bg-white/90 backdrop-blur-xl shadow-[0_1px_40px_rgba(15,23,42,0.08)]'
             : 'border-b border-slate-900/[0.07] backdrop-blur-sm'
         }`}
       >
