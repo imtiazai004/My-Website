@@ -1,347 +1,192 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  Code2, Smartphone, BrainCircuit, Cloud, Layers, Cpu,
-  Globe, ShieldCheck, Terminal, X, ArrowRight, CheckCircle2
+  Code2, Smartphone, BrainCircuit, Cloud, Globe, Terminal,
+  ArrowRight, Sparkles, FileText, Layers,
 } from 'lucide-react';
 
 const SERVICES = [
   {
-    title: 'Full-Stack Web Development',
-    description: 'Architecting high-performance, responsive web applications using modern frameworks like React, Next.js, and Node.js.',
+    name: 'Full-Stack',
+    label: 'Full-Stack Web Development',
     icon: Globe,
+    tagline: 'Pixel-perfect web apps that convert.',
+    description: 'High-performance, SEO-optimized applications with server-side rendering and edge computing for sub-500ms global load times.',
     tags: ['React', 'Next.js', 'Node.js', 'TypeScript'],
-    details: 'Our web engineering team builds pixel-perfect, SEO-optimized applications that convert. We specialize in Server-Side Rendering (SSR) and edge-computing solutions that ensure your application loads in under 500ms globally.',
-    features: ['Progressive Web Apps (PWA)', 'Real-time Data Sync', 'Accessibility (WCAG) Compliance', 'SEO & Performance Optimization']
   },
   {
-    title: 'Mobile App Engineering',
-    description: 'Developing native-quality mobile experiences for iOS and Android. From initial wireframing to App Store deployment.',
+    name: 'Mobile',
+    label: 'Mobile App Engineering',
     icon: Smartphone,
-    tags: ['React Native', 'Flutter', 'iOS/Android'],
-    details: 'Leveraging cross-platform technologies to deliver native performance with a single codebase. We focus on gesture-driven interfaces and offline-first capabilities for a seamless mobile experience.',
-    features: ['Native Performance', 'Push Notifications', 'Biometric Authentication', 'Offline Data Persistence']
+    tagline: 'Native-quality apps from a single codebase.',
+    description: 'Gesture-driven, offline-first iOS & Android experiences — from initial wireframe all the way to App Store deployment.',
+    tags: ['React Native', 'Flutter', 'iOS', 'Android'],
   },
   {
-    title: 'AI & LLM Integration',
-    description: 'Transforming businesses with intelligent automation. We specialize in integrating Gemini, OpenAI, and custom ML models.',
+    name: 'AI / LLM',
+    label: 'AI & LLM Integration',
     icon: BrainCircuit,
-    tags: ['Gemini AI', 'OpenAI', 'Automation', 'NLP'],
-    details: 'We bridge the gap between static applications and intelligent systems. From RAG pipelines to custom vision models, we help you leverage your data strategically.',
-    features: ['Custom Chatbot Orchestration', 'Automated Content Generation', 'Predictive Analytics', 'Semantic Search Systems']
+    tagline: 'Intelligent automation that actually works.',
+    description: 'Gemini & OpenAI integration via RAG pipelines, custom models, and semantic search that turns your data into leverage.',
+    tags: ['Gemini', 'OpenAI', 'RAG', 'NLP'],
   },
   {
-    title: 'Cloud Infrastructure & DevOps',
-    description: 'Building resilient, auto-scaling architectures on AWS, GCP, and Azure. We implement zero-downtime CI/CD pipelines.',
+    name: 'Cloud',
+    label: 'Cloud Infrastructure & DevOps',
     icon: Cloud,
+    tagline: 'Resilient, auto-scaling infrastructure.',
+    description: 'Cloud-native systems on AWS & GCP with zero-downtime CI/CD pipelines and 99.99% reliability, built as infrastructure-as-code.',
     tags: ['AWS', 'Docker', 'Kubernetes', 'CI/CD'],
-    details: 'Infrastructure as code is at our core. We design cloud-native systems that scale horizontally and vertically based on traffic demand, ensuring maximum cost-efficiency and 99.99% reliability.',
-    features: ['Kubernetes Orchestration', 'Auto-scaling Clusters', 'Disaster Recovery Planning', 'Security & Compliance Audits']
   },
   {
-    title: 'Custom API Development',
-    description: 'Designing secure, high-throughput REST and GraphQL APIs that serve as the backbone for complex digital ecosystems.',
+    name: 'API',
+    label: 'Custom API Development',
     icon: Code2,
+    tagline: 'The connective tissue of your stack.',
+    description: 'Secure, high-throughput REST & GraphQL APIs with robust versioning, rate limiting, and comprehensive documentation.',
     tags: ['GraphQL', 'REST', 'Microservices', 'OAuth'],
-    details: 'We build the connective tissue for modern enterprises. Our APIs are designed with developer experience in mind, featuring comprehensive documentation, robust versioning, and high security.',
-    features: ['Zero-Trust Security Layout', 'Rate Limiting & Throttling', 'Websocket Real-time Feeds', 'Comprehensive Documentation']
   },
   {
-    title: 'Enterprise Software Solutions',
-    description: 'Engineering tailored internal tools, ERP systems, and dashboards designed to handle complex business logic.',
+    name: 'Enterprise',
+    label: 'Enterprise Software',
     icon: Terminal,
-    tags: ['Dashboard', 'ERP', 'Internal Tools', 'SQL'],
-    details: 'Modernizing legacy systems and building bespoke mission-critical software. We understand enterprise complexity and build tools that simplify operations.',
-    features: ['Legacy Data Migration', 'Complex Workflow Automation', 'SaaS Multi-tenancy', 'Role-Based Access Control (RBAC)']
+    tagline: 'Bespoke tools that simplify operations.',
+    description: 'Tailored ERP systems, internal dashboards, and mission-critical software with multi-tenancy and role-based access control.',
+    tags: ['Dashboards', 'ERP', 'RBAC', 'SQL'],
   },
-  {
-    title: 'Embedded Systems & IoT',
-    description: 'Developing firmware and software for connected devices and edge computing. Bridging the gap between hardware and software.',
-    icon: Cpu,
-    tags: ['C/C++', 'Rust', 'Firmware', 'RTOS'],
-    details: 'Writing low-latency, resource-efficient code for hardware sensors and controllers. We handle the entire IoT stack from device firmware to cloud-based data ingestion.',
-    features: ['Firmware Development', 'Edge AI Implementation', 'MQTT & CoAP Protocols', 'Hardware-Software Integration']
-  },
-  {
-    title: 'Blockchain & Web3 Engineering',
-    description: 'Building decentralized applications and smart contracts with high security standards for Ethereum and Solana.',
-    icon: ShieldCheck,
-    tags: ['Solidity', 'Web3.js', 'Smart Contracts'],
-    details: 'Security-first development for decentralized protocols. We provide comprehensive smart contract audits and build decentralized frontends that users trust.',
-    features: ['Smart Contract Audits', 'DeFi Protocol Engineering', 'NFT Ecosystems', 'DAOs & Governance Layers']
-  },
-  {
-    title: 'Data Engineering & Analytics',
-    description: 'Designing robust data pipelines and processing frameworks. Transforming raw data into actionable insights.',
-    icon: Layers,
-    tags: ['Python', 'Spark', 'Kafka', 'BigQuery'],
-    details: 'Making sense of the data deluge. We build the pipelines that ingest, clean, and transform multi-terabyte datasets into dashboards that drive decision-making.',
-    features: ['ETL Pipeline Orchestration', 'Real-time Streaming Analytics', 'Data Lakehouse Architecture', 'Visualization Dashboards']
-  }
 ];
 
-function ServiceCard({ service, index, onClick }: { service: typeof SERVICES[0]; index: number; onClick: () => void }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [tiltStyle, setTiltStyle] = useState<React.CSSProperties>({});
-  const [glowPos, setGlowPos] = useState({ x: 50, y: 50 });
-
-  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const { left, top, width, height } = ref.current.getBoundingClientRect();
-    const x = (e.clientX - left) / width;
-    const y = (e.clientY - top) / height;
-    setTiltStyle({
-      transform: `perspective(900px) rotateX(${(y - 0.5) * -12}deg) rotateY(${(x - 0.5) * 12}deg) scale3d(1.02,1.02,1.02)`,
-      transition: 'transform 0.1s ease-out',
-    });
-    setGlowPos({ x: x * 100, y: y * 100 });
-  };
-
-  const onLeave = () => {
-    setTiltStyle({
-      transform: 'perspective(900px) rotateX(0) rotateY(0) scale3d(1,1,1)',
-      transition: 'transform 0.5s ease-out',
-    });
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.07 }}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      onClick={onClick}
-      style={tiltStyle}
-      className="relative group flex flex-col bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-8 cursor-pointer"
-    >
-      {/* Mouse-follow glow */}
-      <div
-        className="absolute inset-0 pointer-events-none rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, rgba(99,102,241,0.12) 0%, transparent 60%)` }}
-      />
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-      <div className="mb-8 relative z-10">
-        <div className="w-14 h-14 rounded-2xl bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-xl">
-          <service.icon className="w-7 h-7 group-hover:text-white transition-colors" />
-        </div>
-        <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full border border-slate-900/10 bg-slate-900/[0.04] flex items-center justify-center text-[10px] font-mono font-bold text-slate-300">
-          {index + 1}
-        </div>
-      </div>
-
-      <div className="space-y-4 flex-grow relative z-10">
-        <h3 className="text-2xl font-display font-medium text-slate-900 group-hover:text-brand-accent transition-colors">
-          {service.title}
-        </h3>
-        <p className="text-slate-500 text-base font-light leading-relaxed">
-          {service.description}
-        </p>
-      </div>
-
-      <div className="mt-8 pt-6 border-t border-slate-900/[0.07] flex items-center justify-between relative z-10">
-        <div className="flex flex-wrap gap-2">
-          {service.tags.slice(0, 2).map((tag, tagIdx) => (
-            <span key={`${tag}-${tagIdx}`} className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest px-2 py-1 bg-slate-900/[0.04] rounded border border-slate-900/10">
-              {tag}
-            </span>
-          ))}
-        </div>
-        <motion.div
-          className="w-8 h-8 rounded-full border border-slate-900/10 flex items-center justify-center text-slate-300 group-hover:text-brand-accent group-hover:border-brand-accent/30 transition-colors"
-          whileHover={{ scale: 1.1 }}
-        >
-          <ArrowRight className="w-4 h-4" />
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-}
-
 export default function Services() {
-  const [selectedService, setSelectedService] = useState<typeof SERVICES[0] | null>(null);
+  const [active, setActive] = useState(0);
+  const svc = SERVICES[active];
+  const Icon = svc.icon;
+  const progress = ((active + 1) / SERVICES.length) * 100;
 
   return (
     <section id="services" className="py-32 px-6 relative bg-[#f8fafc] overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{ backgroundImage: 'radial-gradient(circle, rgba(15,23,42,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
-      />
-      <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-20">
-          <div className="space-y-6 max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.04] text-[10px] font-bold tracking-[0.2em] text-slate-500"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
-              OUR_SPECIALIZED_VECTORS
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-5xl md:text-6xl font-display font-medium text-slate-900 tracking-tight leading-tight"
-            >
-              Services We <span className="text-brand-accent italic">Offer</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-slate-500 text-xl font-light leading-relaxed"
-            >
-              Comprehensive programming and software engineering solutions tailored for the modern digital era.
-            </motion.p>
+        {/* Header */}
+        <div className="max-w-2xl mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.03] text-[10px] font-bold tracking-[0.2em] text-slate-500 mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+            OUR_SPECIALIZED_VECTORS
+          </div>
+          <h2 className="text-5xl md:text-6xl font-display font-medium text-slate-900 tracking-tight leading-tight">
+            Services We <span className="text-brand-accent italic">Offer</span>
+          </h2>
+          <p className="text-slate-500 text-xl font-light leading-relaxed mt-5">
+            Comprehensive engineering solutions tailored for the modern digital era — pick a vector to explore.
+          </p>
+        </div>
+
+        {/* Two-column tabbed layout */}
+        <div className="grid lg:grid-cols-[300px_1fr] gap-8">
+
+          {/* Left — vertical tab list */}
+          <div className="flex flex-col gap-2">
+            {SERVICES.map((s, i) => {
+              const TabIcon = s.icon;
+              const isActive = i === active;
+              return (
+                <button
+                  key={s.name}
+                  onClick={() => setActive(i)}
+                  className={`group flex items-center gap-3 p-4 rounded-2xl text-left transition-all duration-300 border ${
+                    isActive
+                      ? 'bg-white border-slate-900/10 shadow-[0_10px_30px_-12px_rgba(15,23,42,0.15)]'
+                      : 'bg-transparent border-transparent hover:bg-white/60'
+                  }`}
+                >
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 ${
+                    isActive ? 'bg-brand-accent text-white' : 'bg-slate-900/[0.05] text-slate-500 group-hover:text-brand-accent'
+                  }`}>
+                    <TabIcon className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className={`font-semibold text-sm transition-colors ${isActive ? 'text-slate-900' : 'text-slate-500 group-hover:text-slate-900'}`}>
+                      {s.name}
+                    </p>
+                  </div>
+                  <ArrowRight className={`w-4 h-4 ml-auto shrink-0 transition-all ${isActive ? 'text-brand-accent translate-x-0 opacity-100' : 'text-slate-300 -translate-x-1 opacity-0 group-hover:opacity-100'}`} />
+                </button>
+              );
+            })}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-wrap gap-4"
-          >
-            <div className="glass-card !p-4 flex items-center gap-3">
-              <ShieldCheck className="w-5 h-5 text-brand-accent" />
-              <span className="text-xs font-mono font-bold text-slate-500">SECURE_PROTOCOL_V4</span>
-            </div>
-            <div className="glass-card !p-4 flex items-center gap-3">
-              <Layers className="w-5 h-5 text-brand-accent" />
-              <span className="text-xs font-mono font-bold text-slate-500">SCALABLE_ARCHITECTURE</span>
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SERVICES.map((service, index) => (
-            <ServiceCard
-              key={service.title}
-              service={service}
-              index={index}
-              onClick={() => setSelectedService(service)}
-            />
-          ))}
-        </div>
-
-        {/* Detail Overlay */}
-        <AnimatePresence>
-          {selectedService && (
-            <>
+          {/* Right — 2×2 bento grid */}
+          <div>
+            <AnimatePresence mode="wait">
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setSelectedService(null)}
-                className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[100] cursor-pointer"
-              />
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-white border border-slate-900/10 rounded-3xl shadow-2xl z-[101] overflow-hidden"
+                key={active}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4"
               >
-                <button
-                  onClick={() => setSelectedService(null)}
-                  className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-900/[0.06] transition-colors z-20 text-slate-500 hover:text-slate-900"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-
-                <div className="p-8 md:p-12">
-                  <div className="flex items-start gap-6 mb-10">
-                    <div className="w-20 h-20 rounded-2xl bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent shadow-2xl shrink-0">
-                      <selectedService.icon className="w-10 h-10" />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="inline-block px-3 py-1 rounded-full border border-brand-accent/20 bg-brand-accent/5 text-[10px] font-bold tracking-widest text-brand-accent uppercase">
-                        SERVICE_VECTOR_DETAILED
-                      </div>
-                      <h3 className="text-3xl md:text-4xl font-display font-medium text-slate-900">
-                        {selectedService.title}
-                      </h3>
-                    </div>
+                {/* Cell 1 — Icon + name (featured) */}
+                <div className="bg-gradient-to-br from-brand-accent to-indigo-500 rounded-2xl p-6 flex flex-col justify-between min-h-[180px] text-white">
+                  <div className="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center backdrop-blur-sm">
+                    <Icon className="w-7 h-7" />
                   </div>
+                  <h3 className="text-2xl font-display font-bold leading-tight mt-6">{svc.label}</h3>
+                </div>
 
-                  <div className="grid md:grid-cols-5 gap-12">
-                    <div className="md:col-span-3 space-y-8">
-                      <div className="space-y-4">
-                        <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Engineering_Philosophy</h4>
-                        <p className="text-slate-600 text-lg font-light leading-relaxed">{selectedService.details}</p>
-                      </div>
-                      <div className="space-y-4">
-                        <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Core_Deliverables</h4>
-                        <div className="grid grid-cols-1 gap-3">
-                          {selectedService.features.map((feature, fIdx) => (
-                            <div key={`${feature}-${fIdx}`} className="flex items-center gap-3 text-sm text-slate-500 font-medium">
-                              <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                              {feature}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+                {/* Cell 2 — Tagline */}
+                <div className="bg-white border border-slate-900/10 rounded-2xl p-6 flex flex-col min-h-[180px]">
+                  <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brand-accent mb-3">
+                    <Sparkles className="w-3.5 h-3.5" /> The Promise
+                  </div>
+                  <p className="text-xl md:text-2xl font-display font-medium text-slate-900 leading-snug">
+                    {svc.tagline}
+                  </p>
+                </div>
 
-                    <div className="md:col-span-2 space-y-8">
-                      <div className="space-y-4">
-                        <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Tech_Stack</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {selectedService.tags.map((tag, tIdx) => (
-                            <span key={`${tag}-${tIdx}`} className="px-3 py-2 bg-slate-900/[0.04] rounded-xl text-[11px] font-bold text-slate-500 border border-slate-900/10">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="p-6 bg-brand-accent rounded-2xl text-white space-y-4">
-                        <p className="text-xs font-bold uppercase tracking-widest opacity-80">Ready to deploy?</p>
-                        <h5 className="text-xl font-display font-medium">Request Quote</h5>
-                        <button
-                          className="w-full py-3 bg-white text-brand-accent rounded-xl font-bold flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform"
-                          onClick={() => { setSelectedService(null); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-                        >
-                          Start Project <ArrowRight className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
+                {/* Cell 3 — Short description */}
+                <div className="bg-white border border-slate-900/10 rounded-2xl p-6 flex flex-col min-h-[180px]">
+                  <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">
+                    <FileText className="w-3.5 h-3.5" /> What We Do
+                  </div>
+                  <p className="text-slate-600 text-base font-light leading-relaxed">
+                    {svc.description}
+                  </p>
+                </div>
+
+                {/* Cell 4 — Tech stack pills */}
+                <div className="bg-white border border-slate-900/10 rounded-2xl p-6 flex flex-col min-h-[180px]">
+                  <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">
+                    <Layers className="w-3.5 h-3.5" /> Tech Stack
+                  </div>
+                  <div className="flex flex-wrap gap-2 content-start">
+                    {svc.tags.map((tag) => (
+                      <span key={tag} className="px-3 py-1.5 rounded-full bg-slate-900/[0.04] border border-slate-900/10 text-xs font-semibold text-slate-700">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </motion.div>
-            </>
-          )}
-        </AnimatePresence>
+            </AnimatePresence>
 
-        {/* Footer Stats */}
-        <div className="mt-20 pt-10 border-t border-slate-900/[0.07] flex flex-col md:flex-row items-center justify-between gap-8 opacity-40">
-          <div className="flex items-center gap-8">
-            <div className="space-y-1">
-              <p className="text-3xl font-display font-bold text-slate-900 tracking-tighter">99.9%</p>
-              <p className="text-[10px] font-mono font-bold tracking-widest uppercase text-slate-500">Uptime_Guarantee</p>
-            </div>
-            <div className="w-px h-10 bg-slate-900/[0.06]" />
-            <div className="space-y-1">
-              <p className="text-3xl font-display font-bold text-slate-900 tracking-tighter">150ms</p>
-              <p className="text-[10px] font-mono font-bold tracking-widest uppercase text-slate-500">Median_Latency</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="flex flex-col items-end gap-1">
-              <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-slate-500">Deployment_Status</span>
-              <span className="text-[9px] font-mono font-medium text-emerald-500 flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                ALL_SYSTEMS_OPERATIONAL
-              </span>
-            </div>
-            <div className="w-12 h-12 rounded-full border border-slate-900/10 flex items-center justify-center text-slate-500">
-              <Cpu className="w-5 h-5" />
+            {/* Progress bar — fills as you switch tabs */}
+            <div className="mt-8">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400">
+                  Vector {String(active + 1).padStart(2, '0')} / {String(SERVICES.length).padStart(2, '0')}
+                </span>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-brand-accent">
+                  {svc.name}
+                </span>
+              </div>
+              <div className="h-1.5 w-full bg-slate-900/10 rounded-full overflow-hidden">
+                <motion.div
+                  animate={{ width: `${progress}%` }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  className="h-full bg-brand-accent rounded-full"
+                />
+              </div>
             </div>
           </div>
         </div>
