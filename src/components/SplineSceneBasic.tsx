@@ -48,7 +48,7 @@ export function SplineSceneBasic() {
             transition={{ duration: 0.9, delay: 0.1 }}
             className="text-6xl md:text-8xl font-display font-medium text-slate-900 leading-[0.85] tracking-tighter"
           >
-            Turning Your Vibes <br /> Into <span className="text-brand-accent font-bold">Soft Tech</span> That <br /> Solve Your <span className="text-brand-accent font-bold">Problems</span>
+            Turning Your Vibes Into <span className="text-brand-accent font-bold">Soft Tech</span> That Solve Your <span className="text-brand-accent font-bold">Problems</span>
           </motion.h1>
 
           <motion.p
