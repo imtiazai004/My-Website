@@ -42,7 +42,7 @@ function HeroOrb() {
   })
 
   return (
-    <group position={[1.8, 0, 0]}>
+    <group position={[0, 0, 0]}>
       <mesh ref={coreRef}>
         <icosahedronGeometry args={[1.6, 4]} />
         <MeshDistortMaterial
@@ -76,7 +76,7 @@ function Rings() {
   })
 
   return (
-    <group position={[1.8, 0, 0]}>
+    <group position={[0, 0, 0]}>
       <mesh ref={r1}>
         <torusGeometry args={[2.4, 0.012, 16, 120]} />
         <meshStandardMaterial color="#6366f1" emissive="#6366f1" emissiveIntensity={2} />

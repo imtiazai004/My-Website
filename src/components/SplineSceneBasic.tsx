@@ -15,22 +15,22 @@ export function SplineSceneBasic() {
         </Suspense>
       </div>
 
-      {/* Left gradient so text stays readable */}
+      {/* Soft centered halo so text stays readable over the 3D shape */}
       <div
         className="absolute inset-0 z-20 pointer-events-none"
-        style={{ background: 'linear-gradient(90deg, rgba(248,250,252,0.96) 0%, rgba(248,250,252,0.72) 50%, transparent 100%)' }}
+        style={{ background: 'radial-gradient(ellipse 60% 55% at 50% 50%, rgba(248,250,252,0.62) 0%, rgba(248,250,252,0.25) 45%, transparent 78%)' }}
       />
 
       {/* Text — renders immediately, no Three.js dependency */}
-      <div className="relative z-30 h-full w-full flex flex-col justify-center items-start px-8 md:px-24 pt-24 pointer-events-none">
-        <div className="max-w-2xl pointer-events-auto">
+      <div className="relative z-30 h-full w-full flex flex-col justify-center items-center text-center px-6 pt-24 pointer-events-none">
+        <div className="max-w-3xl mx-auto pointer-events-auto">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="mb-8"
           >
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 items-center">
               <div className="pill-badge bg-slate-900/[0.04] backdrop-blur-md text-slate-700 border-slate-900/15">
                 <Sparkles className="w-3.5 h-3.5 fill-slate-600" />
                 <span className="tracking-[0.4em]">SYSTEM_INITIALIZED</span>
@@ -55,7 +55,7 @@ export function SplineSceneBasic() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-8 text-slate-500 max-w-xl text-xl md:text-2xl font-light leading-relaxed"
+            className="mt-8 text-slate-500 max-w-xl mx-auto text-xl md:text-2xl font-light leading-relaxed"
           >
             We craft high-performance software systems where cinematic aesthetics meet uncompromising technical precision.{' '}
             <span className="text-slate-700 font-normal uppercase tracking-widest text-xs bg-slate-900/[0.06] px-3 py-1 rounded">
@@ -67,7 +67,7 @@ export function SplineSceneBasic() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-12 flex flex-wrap gap-6"
+            className="mt-12 flex flex-wrap gap-6 justify-center"
           >
             <motion.button
               whileHover={{ scale: 1.02, x: 10 }}
