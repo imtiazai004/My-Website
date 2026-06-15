@@ -1,94 +1,261 @@
-import { motion } from 'motion/react'
-import { ArrowRight, TrendingUp, Activity, Users, BarChart3 } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import { ArrowRight } from 'lucide-react'
 
-/* ── Floating dashboard-card mockup (replaces the 3D sphere) ── */
-function DashboardCard() {
-  const bars = [42, 68, 55, 80, 60, 92, 74]
+const solutions = [
+  {
+    name: 'Fixr AI',
+    label: 'Service Industry',
+    category: 'AI PLATFORM',
+    desc: 'Voice-powered AI agent booking home services in 3 languages via natural conversation.',
+    tags: ['GEMINI AI', 'PYTHON', 'VOICE API'],
+    gradient: 'from-violet-600 to-indigo-700',
+    icon: '🤖',
+    stat: '5-Agent',
+    statLabel: 'AI PIPELINE'
+  },
+  {
+    name: 'ProfitScout',
+    label: 'E-Commerce · Product Research',
+    category: 'CHROME EXTENSION',
+    desc: 'AI-powered product research across Amazon, eBay, TikTok Shop & Etsy with ROI calculator.',
+    tags: ['JAVASCRIPT', 'GEMINI AI', 'CHROME API'],
+    gradient: 'from-orange-500 to-rose-600',
+    icon: '🔍',
+    stat: '5 Markets',
+    statLabel: 'MULTI-PLATFORM'
+  },
+  {
+    name: 'MarketNexus',
+    label: 'E-Commerce · Marketplace Selling',
+    category: 'SELLER DASHBOARD',
+    desc: 'Multi-channel listing management for Amazon, eBay, TikTok & Etsy — inventory, pricing and orders unified.',
+    tags: ['REACT', 'NODE.JS', 'AMAZON API'],
+    gradient: 'from-orange-400 to-amber-600',
+    icon: '🏪',
+    stat: '5 Channels',
+    statLabel: 'UNIFIED SELLING'
+  },
+  {
+    name: 'DropFlow AI',
+    label: 'E-Commerce · Dropshipping',
+    category: 'AUTOMATION PLATFORM',
+    desc: 'AI-powered dropshipping automation — supplier discovery, dynamic pricing and fulfillment tracking.',
+    tags: ['NEXT.JS', 'PYTHON', 'GEMINI AI'],
+    gradient: 'from-rose-500 to-pink-700',
+    icon: '🚀',
+    stat: '3x Speed',
+    statLabel: 'FULFILLMENT'
+  },
+  {
+    name: 'ConvertIQ',
+    label: 'E-Commerce · Store Analytics',
+    category: 'CRO ANALYTICS',
+    desc: 'Real-time Shopify & WooCommerce analytics with AI CRO suggestions, heatmaps and A/B testing.',
+    tags: ['TYPESCRIPT', 'D3.JS', 'REDIS'],
+    gradient: 'from-violet-500 to-purple-700',
+    icon: '📊',
+    stat: '+34%',
+    statLabel: 'CONVERSION LIFT'
+  },
+  {
+    name: 'TradeStack',
+    label: 'E-Commerce · B2B Wholesale',
+    category: 'WHOLESALE PORTAL',
+    desc: 'Enterprise B2B portal with tiered pricing, bulk orders, net-30 payment terms and ERP integration.',
+    tags: ['NEXT.JS', 'POSTGRESQL', 'STRIPE'],
+    gradient: 'from-teal-500 to-cyan-700',
+    icon: '🤝',
+    stat: 'Net-30',
+    statLabel: 'PAYMENT ENGINE'
+  },
+  {
+    name: 'LedgerFlow',
+    label: 'FinTech & Banking',
+    category: 'ENTERPRISE SAAS',
+    desc: 'Real-time financial ledger with fraud detection, multi-currency support and full audit trails.',
+    tags: ['NEXT.JS', 'POSTGRESQL', 'STRIPE'],
+    gradient: 'from-emerald-500 to-teal-700',
+    icon: '🏦',
+    stat: '< 50ms',
+    statLabel: 'TXN LATENCY'
+  },
+  {
+    name: 'CareSync',
+    label: 'HealthTech & MedTech',
+    category: 'CLINICAL PLATFORM',
+    desc: 'HIPAA-compliant patient management with AI diagnostics assistance and medication tracking.',
+    tags: ['REACT NATIVE', 'FIREBASE', 'OPENAI'],
+    gradient: 'from-cyan-500 to-blue-600',
+    icon: '🏥',
+    stat: '99.9%',
+    statLabel: 'UPTIME SLA'
+  },
+  {
+    name: 'Scholr AI',
+    label: 'EdTech & E-Learning',
+    category: 'AI LEARNING PLATFORM',
+    desc: 'Adaptive LLM engine that personalizes curriculum, auto-generates quizzes and tracks mastery.',
+    tags: ['NEXT.JS', 'OPENAI', 'POSTGRESQL'],
+    gradient: 'from-yellow-500 to-orange-600',
+    icon: '🎓',
+    stat: '40%',
+    statLabel: 'FASTER LEARNING'
+  },
+  {
+    name: 'NovaDeploy',
+    label: 'Cloud & DevOps',
+    category: 'INFRASTRUCTURE TOOL',
+    desc: 'Zero-downtime CI/CD orchestration with auto-scaling across AWS, GCP and Azure.',
+    tags: ['DOCKER', 'KUBERNETES', 'AWS'],
+    gradient: 'from-slate-600 to-slate-800',
+    icon: '☁️',
+    stat: '< 2min',
+    statLabel: 'DEPLOY TIME'
+  },
+  {
+    name: 'EstateIQ',
+    label: 'PropTech & Real Estate',
+    category: 'AI SAAS PLATFORM',
+    desc: 'AI property valuation, tenant screening and lease lifecycle management for real estate firms.',
+    tags: ['REACT', 'PYTHON', 'GEMINI AI'],
+    gradient: 'from-lime-500 to-emerald-600',
+    icon: '🏘️',
+    stat: '30 sec',
+    statLabel: 'AI VALUATION'
+  },
+  {
+    name: 'EdgePulse',
+    label: 'IoT & Embedded Systems',
+    category: 'EDGE PLATFORM',
+    desc: 'Real-time IoT sensor network with edge computing and predictive maintenance alerts.',
+    tags: ['C/C++', 'RUST', 'MQTT'],
+    gradient: 'from-fuchsia-500 to-pink-700',
+    icon: '⚡',
+    stat: '10ms',
+    statLabel: 'EDGE LATENCY'
+  },
+  {
+    name: 'ChainForge',
+    label: 'Blockchain & Web3',
+    category: 'DECENTRALIZED PLATFORM',
+    desc: 'Audited smart contracts, multi-sig wallets and cross-chain bridge — Ethereum & Solana.',
+    tags: ['SOLIDITY', 'WEB3.JS', 'ETHEREUM'],
+    gradient: 'from-purple-600 to-violet-800',
+    icon: '⛓️',
+    stat: '100%',
+    statLabel: 'AUDIT READY'
+  },
+  {
+    name: 'OpsCore ERP',
+    label: 'Enterprise & Operations',
+    category: 'ENTERPRISE SOFTWARE',
+    desc: 'Modular ERP covering HR, inventory, procurement and finance — cloud or on-premise.',
+    tags: ['PYTHON', 'FLASK', 'POSTGRESQL'],
+    gradient: 'from-blue-600 to-indigo-800',
+    icon: '🏢',
+    stat: '24/7',
+    statLabel: 'ENTERPRISE SUPPORT'
+  }
+]
+
+const STRIPES = 'repeating-linear-gradient(90deg, transparent 11px, rgba(99,102,241,0.12) 11px, rgba(99,102,241,0.12) 12px)'
+
+/* ── NETSOL-style cycling visual showcase (right side of hero) ── */
+function SolutionShowcase() {
+  const [index, setIndex] = useState(0)
+  const item = solutions[index]
+
+  useEffect(() => {
+    const id = setInterval(() => setIndex((i) => (i + 1) % solutions.length), 3500)
+    return () => clearInterval(id)
+  }, [])
+
   return (
-    <div className="relative w-full max-w-md mx-auto">
-      {/* soft glow behind the card */}
-      <div className="absolute inset-0 -z-10 bg-brand-accent/20 blur-[90px] rounded-[3rem]" aria-hidden="true" />
+    <div className="relative w-full max-w-md mx-auto h-[520px]">
+      {/* Background striped card — bottom 75% */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-[75%] rounded-[24px]"
+        style={{ backgroundColor: '#e0e7ff', backgroundImage: STRIPES }}
+      />
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: [0, -14, 0] }}
-        transition={{
-          opacity: { duration: 0.8 },
-          y: { duration: 6, repeat: Infinity, ease: 'easeInOut' },
-        }}
-        /* -translate-y-8 makes the card overflow the top of its container */
-        className="relative -translate-y-8 rounded-3xl bg-[#0f172a] border border-white/10 shadow-[0_40px_90px_-25px_rgba(15,23,42,0.55)] p-6"
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <p className="text-white font-semibold text-sm">Revenue Analytics</p>
-            <p className="text-white/40 text-[11px] mt-0.5">Last 30 days</p>
-          </div>
-          <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-brand-accent/15 text-brand-accent text-[10px] font-bold uppercase tracking-wider">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
-            Live
-          </span>
-        </div>
-
-        {/* Hero metric */}
-        <div className="mb-6">
-          <div className="flex items-end gap-3">
-            <p className="text-4xl font-display font-bold text-white tracking-tight">$48.2K</p>
-            <span className="flex items-center gap-1 text-emerald-400 text-xs font-bold mb-1">
-              <TrendingUp className="w-3.5 h-3.5" /> +24.8%
-            </span>
-          </div>
-          <p className="text-white/40 text-[11px] mt-1">vs. previous period</p>
-        </div>
-
-        {/* Mini bar chart */}
-        <div className="bg-white/[0.04] border border-white/5 rounded-2xl p-4 mb-5">
-          <div className="flex items-end justify-between gap-2 h-24">
-            {bars.map((h, i) => (
-              <motion.div
-                key={i}
-                initial={{ height: 0 }}
-                animate={{ height: `${h}%` }}
-                transition={{ delay: 0.4 + i * 0.08, duration: 0.6, ease: 'easeOut' }}
-                className={`flex-1 rounded-md ${i === 5 ? 'bg-brand-accent' : 'bg-white/15'}`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Stat tiles */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-white/[0.04] border border-white/5 rounded-xl p-3">
-            <div className="flex items-center gap-1.5 text-white/40 text-[10px] font-semibold uppercase tracking-wider mb-1">
-              <Users className="w-3 h-3" /> Users
+      {/* Floating card — top 0, overflowing the bg card upward */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            className="bg-white rounded-[20px] p-6"
+            style={{ boxShadow: '0 25px 60px rgba(99,102,241,0.22)' }}
+          >
+            {/* Top banner */}
+            <div className={`relative h-[130px] rounded-[12px] overflow-hidden bg-gradient-to-br ${item.gradient}`}>
+              {/* category badge top-left */}
+              <span className="absolute top-3 left-3 bg-slate-900 text-white text-[9px] font-bold tracking-widest px-2 py-1 rounded-full">
+                {item.category}
+              </span>
+              {/* stat chip top-right */}
+              <div className="absolute top-3 right-3 bg-white rounded-full px-3 py-1.5 text-right leading-none">
+                <p className="text-slate-900 text-sm font-bold leading-none">{item.stat}</p>
+                <p className="text-slate-400 text-[8px] font-bold uppercase tracking-wide mt-0.5">{item.statLabel}</p>
+              </div>
+              {/* emoji centered */}
+              <div className="absolute inset-0 flex items-center justify-center" style={{ fontSize: '48px' }}>
+                {item.icon}
+              </div>
             </div>
-            <p className="text-white font-bold text-lg">12,480</p>
-          </div>
-          <div className="bg-white/[0.04] border border-white/5 rounded-xl p-3">
-            <div className="flex items-center gap-1.5 text-white/40 text-[10px] font-semibold uppercase tracking-wider mb-1">
-              <Activity className="w-3 h-3" /> Conversion
-            </div>
-            <p className="text-white font-bold text-lg">6.4%</p>
-          </div>
-        </div>
-      </motion.div>
 
-      {/* Small floating widget that overflows the top of the card */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.6, duration: 0.5 }}
-        className="absolute -top-2 right-4 flex items-center gap-2 bg-white rounded-2xl shadow-[0_20px_40px_-12px_rgba(15,23,42,0.3)] border border-slate-900/5 px-3.5 py-2.5"
-      >
-        <div className="w-8 h-8 rounded-xl bg-brand-accent/10 flex items-center justify-center">
-          <BarChart3 className="w-4 h-4 text-brand-accent" />
+            {/* App name */}
+            <h3 className="text-slate-900 font-bold mt-3.5" style={{ fontSize: '17px' }}>{item.name}</h3>
+
+            {/* Description */}
+            <p className="text-gray-500 mt-1.5 line-clamp-2" style={{ fontSize: '12.5px', lineHeight: 1.5 }}>
+              {item.desc}
+            </p>
+
+            {/* Tech tags */}
+            <div className="flex flex-row gap-1.5 mt-3 flex-wrap">
+              {item.tags.map((tag) => (
+                <span key={tag} className="border border-indigo-200 text-indigo-600 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Label + side lines + progress dots (over the lower striped area) */}
+      <div className="absolute bottom-7 left-0 right-0 flex flex-col items-center gap-4 px-4">
+        <div className="flex items-center justify-center gap-3 w-full">
+          <div className="w-16 h-px bg-indigo-300 shrink-0" />
+          <motion.span
+            key={index}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.35 }}
+            className="text-center font-extrabold leading-tight"
+            style={{ fontSize: '28px', color: '#6366f1' }}
+          >
+            {item.label}
+          </motion.span>
+          <div className="w-16 h-px bg-indigo-300 shrink-0" />
         </div>
-        <div>
-          <p className="text-slate-900 font-bold text-sm leading-none">+1.2K</p>
-          <p className="text-slate-400 text-[9px] font-medium mt-0.5">new this week</p>
+
+        <div className="flex items-center justify-center gap-1.5">
+          {solutions.map((_, i) => (
+            <div
+              key={i}
+              className={`rounded-full transition-all duration-300 ${
+                i === index ? 'w-5 h-2 bg-indigo-600' : 'w-2 h-2 bg-indigo-200'
+              }`}
+            />
+          ))}
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }
@@ -102,7 +269,7 @@ export function SplineSceneBasic() {
 
       <div className="relative z-30 max-w-7xl mx-auto w-full px-6 md:px-12 pt-28 pb-20 grid lg:grid-cols-2 gap-16 items-center">
 
-        {/* Left — text */}
+        {/* Left — text (UNCHANGED) */}
         <div className="max-w-2xl">
           {/* Accent label above the headline */}
           <motion.div
@@ -162,9 +329,9 @@ export function SplineSceneBasic() {
           </motion.div>
         </div>
 
-        {/* Right — floating dashboard card */}
+        {/* Right — cycling solution showcase */}
         <div className="hidden lg:flex items-center justify-center">
-          <DashboardCard />
+          <SolutionShowcase />
         </div>
       </div>
     </section>
