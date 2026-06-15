@@ -1,87 +1,110 @@
+import { lazy, Suspense } from 'react'
 import { motion } from 'motion/react'
 import { Sparkles, ArrowRight } from 'lucide-react'
 import { TAGLINE } from './Logo'
 
+const HeroCanvas = lazy(() => import('./HeroCanvas'))
+
 export function SplineSceneBasic() {
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-[#f8fafc] flex items-center justify-center">
-      {/* Subtle decorative background glows (clean, no 3D shape) */}
-      <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-brand-accent/10 rounded-full blur-[170px] pointer-events-none" aria-hidden="true" />
-      <div className="absolute bottom-[-15%] right-[10%] w-[620px] h-[620px] bg-indigo-400/10 rounded-full blur-[150px] pointer-events-none" aria-hidden="true" />
-      <div className="absolute top-[20%] left-[8%] w-[480px] h-[480px] bg-violet-400/8 rounded-full blur-[150px] pointer-events-none" aria-hidden="true" />
+    <section className="relative w-full h-screen overflow-hidden bg-[#f8fafc]">
+      {/* 3D Canvas — lazy loaded so text renders immediately */}
+      <div className="absolute inset-0 z-10">
+        <Suspense fallback={<div className="w-full h-full bg-[#f8fafc]" />}>
+          <HeroCanvas />
+        </Suspense>
+      </div>
 
-      {/* Centered hero content */}
-      <div className="relative z-30 w-full max-w-4xl mx-auto px-6 pt-28 pb-20 flex flex-col items-center text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center gap-4 mb-8"
-        >
-          <div className="pill-badge bg-slate-900/[0.04] backdrop-blur-md text-slate-700 border-slate-900/15">
-            <Sparkles className="w-3.5 h-3.5 fill-brand-accent text-brand-accent" />
-            <span className="tracking-[0.4em]">SYSTEM_INITIALIZED</span>
-          </div>
-          <p className="text-[11px] font-mono tracking-[0.35em] uppercase text-brand-accent/70">
-            {TAGLINE}
-          </p>
-        </motion.div>
+      {/* Left gradient so text stays readable */}
+      <div
+        className="absolute inset-0 z-20 pointer-events-none"
+        style={{ background: 'linear-gradient(90deg, rgba(248,250,252,0.96) 0%, rgba(248,250,252,0.72) 50%, transparent 100%)' }}
+      />
 
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-5xl md:text-7xl font-display font-bold text-slate-900 leading-[1.05] tracking-tight"
-        >
-          Turning Your Vibes Into <span className="text-brand-accent">Soft Tech</span><br />
-          That Solve Your <span className="text-brand-accent">Problems</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.25 }}
-          className="mt-7 text-slate-500 max-w-2xl text-lg md:text-xl font-light leading-relaxed"
-        >
-          High-performance software where cinematic design meets uncompromising engineering — built for impact.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="mt-12 flex flex-wrap gap-4 justify-center"
-        >
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-9 py-4 bg-slate-900 text-white font-bold uppercase tracking-widest text-[11px] rounded-xl hover:bg-brand-accent transition-all duration-300 flex items-center gap-3 group shadow-[0_10px_30px_rgba(15,23,42,0.12)]"
+      {/* Text — renders immediately, no Three.js dependency */}
+      <div className="relative z-30 h-full w-full flex flex-col justify-center items-start px-8 md:px-24 pt-24 pointer-events-none">
+        <div className="max-w-2xl pointer-events-auto">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mb-8"
           >
-            EXPLORE WORK
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-          </motion.button>
+            <div className="flex flex-col gap-3">
+              <div className="pill-badge bg-slate-900/[0.04] backdrop-blur-md text-slate-700 border-slate-900/15">
+                <Sparkles className="w-3.5 h-3.5 fill-slate-600" />
+                <span className="tracking-[0.4em]">SYSTEM_INITIALIZED</span>
+              </div>
+              {/* Company tagline signature */}
+              <p className="text-[11px] font-mono tracking-[0.35em] uppercase text-brand-accent/70">
+                {TAGLINE}
+              </p>
+            </div>
+          </motion.div>
 
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-9 py-4 bg-white border border-slate-900/15 text-slate-900 font-bold uppercase tracking-widest text-[11px] rounded-xl hover:border-brand-accent hover:text-brand-accent transition-all duration-300"
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.1 }}
+            className="text-6xl md:text-8xl font-display font-medium text-slate-900 leading-[0.85] tracking-tighter"
           >
-            START PROJECT
-          </motion.button>
-        </motion.div>
+            Turning Your Vibes <br /> Into <span className="text-brand-accent font-bold">Soft Tech</span> That <br /> Solve Your <span className="text-brand-accent font-bold">Problems</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mt-8 text-slate-500 max-w-xl text-xl md:text-2xl font-light leading-relaxed"
+          >
+            We craft high-performance software systems where cinematic aesthetics meet uncompromising technical precision.{' '}
+            <span className="text-slate-700 font-normal uppercase tracking-widest text-xs bg-slate-900/[0.06] px-3 py-1 rounded">
+              Engineered for impact
+            </span>
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mt-12 flex flex-wrap gap-6"
+          >
+            <motion.button
+              whileHover={{ scale: 1.02, x: 10 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-10 py-5 bg-slate-900 text-white font-bold uppercase tracking-widest text-[11px] hover:bg-brand-accent hover:text-white transition-all duration-500 flex items-center gap-3 group"
+            >
+              EXPLORE STACK
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-10 py-5 bg-transparent border border-slate-900/20 text-slate-900 font-bold uppercase tracking-widest text-[11px] hover:border-brand-accent hover:text-brand-accent transition-all duration-500"
+            >
+              START PROJECT
+            </motion.button>
+          </motion.div>
+        </div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3 z-30 pointer-events-none"
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-12 right-12 hidden md:flex flex-col items-center gap-4 z-40 pointer-events-none"
       >
-        <span className="text-[10px] font-mono font-bold tracking-[0.4em] text-slate-400 uppercase">SCROLL</span>
-        <div className="w-px h-14 bg-gradient-to-b from-slate-900/30 to-transparent relative overflow-hidden">
+        <span
+          className="text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase"
+          style={{ writingMode: 'vertical-rl' }}
+        >
+          SCROLL_SYSTEM
+        </span>
+        <div className="w-px h-16 bg-gradient-to-b from-slate-900/30 to-transparent relative overflow-hidden">
           <motion.div
             animate={{ y: ['-100%', '100%'] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
