@@ -32,7 +32,7 @@ export default function PrivacyPolicy() {
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-accent/10 border border-brand-accent/20 rounded-full text-brand-accent text-[10px] font-bold uppercase tracking-widest mb-4 ml-0 block w-fit">
               Legal
             </div>
-            <h1 className="text-4xl font-bold text-slate-900 mb-3" style={{ fontFamily: 'Clash Display, sans-serif' }}>
+            <h1 className="text-4xl font-bold text-slate-900 mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
               Privacy Policy
             </h1>
             <p className="text-slate-500 text-sm">ProfitScout Chrome Extension · Last updated: June 14, 2026</p>
@@ -51,7 +51,7 @@ export default function PrivacyPolicy() {
           <div className="space-y-4">
 
             <div className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-6">
-              <h2 className="text-slate-900 font-bold text-base mb-3" style={{ fontFamily: 'Clash Display, sans-serif' }}>
+              <h2 className="text-slate-900 font-bold text-base mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
                 1. Data We Collect
               </h2>
               <p className="text-slate-600 text-sm leading-relaxed">
@@ -62,7 +62,7 @@ export default function PrivacyPolicy() {
             </div>
 
             <div className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-6">
-              <h2 className="text-slate-900 font-bold text-base mb-3" style={{ fontFamily: 'Clash Display, sans-serif' }}>
+              <h2 className="text-slate-900 font-bold text-base mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
                 2. Data Storage
               </h2>
               <p className="text-slate-600 text-sm leading-relaxed mb-4">
@@ -84,7 +84,7 @@ export default function PrivacyPolicy() {
             </div>
 
             <div className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-6">
-              <h2 className="text-slate-900 font-bold text-base mb-3" style={{ fontFamily: 'Clash Display, sans-serif' }}>
+              <h2 className="text-slate-900 font-bold text-base mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
                 3. Gemini API Key
               </h2>
               <p className="text-slate-600 text-sm leading-relaxed">
@@ -96,7 +96,7 @@ export default function PrivacyPolicy() {
             </div>
 
             <div className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-6">
-              <h2 className="text-slate-900 font-bold text-base mb-3" style={{ fontFamily: 'Clash Display, sans-serif' }}>
+              <h2 className="text-slate-900 font-bold text-base mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
                 4. Firebase Sync
               </h2>
               <p className="text-slate-600 text-sm leading-relaxed">
@@ -108,7 +108,7 @@ export default function PrivacyPolicy() {
             </div>
 
             <div className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-6">
-              <h2 className="text-slate-900 font-bold text-base mb-3" style={{ fontFamily: 'Clash Display, sans-serif' }}>
+              <h2 className="text-slate-900 font-bold text-base mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
                 5. Third-Party Services
               </h2>
               <ul className="space-y-2">
@@ -126,7 +126,7 @@ export default function PrivacyPolicy() {
             </div>
 
             <div className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-6">
-              <h2 className="text-slate-900 font-bold text-base mb-3" style={{ fontFamily: 'Clash Display, sans-serif' }}>
+              <h2 className="text-slate-900 font-bold text-base mb-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
                 6. Data Sharing
               </h2>
               <p className="text-slate-600 text-sm leading-relaxed">
@@ -135,7 +135,7 @@ export default function PrivacyPolicy() {
             </div>
 
             <div className="bg-brand-accent/5 border border-brand-accent/20 rounded-2xl p-6">
-              <h2 className="text-slate-900 font-bold text-base mb-4" style={{ fontFamily: 'Clash Display, sans-serif' }}>
+              <h2 className="text-slate-900 font-bold text-base mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>
                 7. Contact
               </h2>
               <div className="space-y-2 text-sm">
