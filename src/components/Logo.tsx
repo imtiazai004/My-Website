@@ -1,5 +1,8 @@
 export const TAGLINE = 'Engineered to Perform. Designed to Inspire.';
 
+// Shifts the S image's azure blue toward the site's indigo (#6366f1) accent.
+const S_FILTER = 'hue-rotate(20deg) saturate(1.1)';
+
 interface LogoProps {
   variant?: 'full' | 'compact' | 'icon';
   size?: number;
@@ -17,7 +20,7 @@ export function Logo({ variant = 'compact', size = 40, className }: LogoProps) {
       <img
         src="/logo-s.png"
         alt="Soft Tech Solution"
-        style={{ height: size, width: 'auto' }}
+        style={{ height: size, width: 'auto', filter: S_FILTER }}
         className={`object-contain select-none ${className ?? ''}`}
         draggable={false}
       />
@@ -31,7 +34,7 @@ export function Logo({ variant = 'compact', size = 40, className }: LogoProps) {
   const wordColor = onDark ? '#ffffff' : '#0f172a';
 
   return (
-    <div className={`flex items-center select-none ${className ?? ''}`} style={{ gap: size * 0.12 }}>
+    <div className={`flex items-center select-none ${className ?? ''}`} style={{ gap: size * 0.03 }}>
       {/* AI prefix */}
       <span
         style={{
@@ -49,13 +52,13 @@ export function Logo({ variant = 'compact', size = 40, className }: LogoProps) {
       <img
         src="/logo-s.png"
         alt="Soft Tech Solution"
-        style={{ height: sHeight, width: 'auto' }}
+        style={{ height: sHeight, width: 'auto', filter: S_FILTER }}
         className="object-contain shrink-0"
         draggable={false}
       />
 
       {/* Words that start from the S */}
-      <div className="flex flex-col justify-center" style={{ lineHeight: 0.96, marginLeft: -(size * 0.08) }}>
+      <div className="flex flex-col justify-center" style={{ lineHeight: 0.96, marginLeft: -(size * 0.22) }}>
         <span style={{ fontSize: wordSize, fontWeight: 700, letterSpacing: '-0.02em', color: wordColor }}>
           oft <span style={{ color: '#6366f1' }}>Tech</span>
         </span>
@@ -72,7 +75,7 @@ export function LogoMark({ size = 44, className }: { size?: number; className?: 
     <img
       src="/logo-s.png"
       alt="Soft Tech Solution"
-      style={{ height: size, width: 'auto' }}
+      style={{ height: size, width: 'auto', filter: S_FILTER }}
       className={`object-contain select-none ${className ?? ''}`}
       draggable={false}
     />
