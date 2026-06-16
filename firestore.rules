@@ -122,6 +122,24 @@ service cloud.firestore {
         && data.order is int;
     }
 
+    // Blog posts
+    match /posts/{postId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(postId) && isValidPost(incoming());
+      allow update: if isAdmin() && isValidPost(incoming());
+      allow delete: if isAdmin();
+    }
+
+    function isValidPost(data) {
+      return data.keys().hasAll(['slug', 'title', 'excerpt', 'content', 'published', 'createdAt'])
+        && data.slug is string && data.slug.size() <= 200
+        && data.title is string && data.title.size() <= 200
+        && data.excerpt is string && data.excerpt.size() <= 500
+        && data.content is string && data.content.size() <= 100000
+        && data.published is bool
+        && data.createdAt is timestamp;
+    }
+
     // Section visibility settings
     match /settings/{settingId} {
       allow read: if true;
