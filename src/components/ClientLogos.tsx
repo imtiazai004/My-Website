@@ -51,7 +51,7 @@ function MarqueeRow({ items, reverse = false }: { items: typeof ROW1; reverse?: 
 
 export default function ClientLogos() {
   return (
-    <section className="py-16 px-6 relative bg-[#f8fafc]">
+    <section className="py-16 px-6 relative bg-[#f1f5f9]">
       <div className="max-w-6xl mx-auto">
         {/* White rounded card with subtle border */}
         <div className="rounded-3xl bg-white border border-slate-900/10 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.12)] py-10 px-6 overflow-hidden">

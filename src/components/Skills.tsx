@@ -27,7 +27,7 @@ export default function Skills() {
   }, []);
 
   return (
-    <section id="skills" className="py-32 px-6 relative overflow-hidden bg-[#f8fafc]">
+    <section id="skills" className="py-32 px-6 relative overflow-hidden bg-white">
       {/* Dot grid */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"

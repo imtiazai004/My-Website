@@ -178,7 +178,7 @@ export default function WhyChooseUs() {
   const selectedReason = REASONS.find(r => r.id === selectedId);
 
   return (
-    <section id="why-choose-us" className="py-32 px-6 relative bg-[#f8fafc] overflow-hidden">
+    <section id="why-choose-us" className="py-32 px-6 relative bg-[#f1f5f9] overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.015] pointer-events-none select-none overflow-hidden">
         <div className="text-[20rem] font-black font-mono leading-none rotate-90 translate-x-1/2 text-slate-900/[0.04]">
           WHY_US

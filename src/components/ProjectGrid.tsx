@@ -40,7 +40,7 @@ export default function ProjectGrid() {
   }, [selectedId]);
 
   return (
-    <section id="work" className="py-40 px-6 relative overflow-hidden bg-[#f8fafc]">
+    <section id="work" className="py-40 px-6 relative overflow-hidden bg-white">
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{ backgroundImage: 'radial-gradient(circle, rgba(15,23,42,0.4) 1px, transparent 1px)', backgroundSize: '40px 40px' }}

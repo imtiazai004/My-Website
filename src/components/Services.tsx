@@ -63,7 +63,7 @@ export default function Services() {
   const progress = ((active + 1) / SERVICES.length) * 100;
 
   return (
-    <section id="services" className="py-32 px-6 relative bg-[#f8fafc] overflow-hidden">
+    <section id="services" className="py-32 px-6 relative bg-[#f1f5f9] overflow-hidden">
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto">

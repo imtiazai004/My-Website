@@ -65,7 +65,7 @@ const thirdColumn = testimonials.slice(6, 9);
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-40 px-6 relative overflow-hidden bg-[#f8fafc]">
+    <section id="testimonials" className="py-40 px-6 relative overflow-hidden bg-[#f1f5f9]">
       {/* Dot grid */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
