@@ -57,10 +57,10 @@ export function Logo({ variant = 'compact', size = 40, className }: LogoProps) {
         draggable={false}
       />
 
-      {/* Words that start from the S */}
+      {/* Words from the S — "oft Tech" blue (theme), "olution" black/white */}
       <div className="flex flex-col justify-center" style={{ lineHeight: 0.96, marginLeft: -(size * 0.22) }}>
-        <span style={{ fontSize: wordSize, fontWeight: 700, letterSpacing: '-0.02em', color: wordColor }}>
-          oft <span style={{ color: '#6366f1' }}>Tech</span>
+        <span style={{ fontSize: wordSize, fontWeight: 700, letterSpacing: '-0.02em', color: '#6366f1' }}>
+          oft Tech
         </span>
         <span style={{ fontSize: wordSize, fontWeight: 700, letterSpacing: '-0.02em', color: wordColor }}>
           olution
