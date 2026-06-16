@@ -22,6 +22,8 @@ const Footer = lazy(() => import('./components/Footer'));
 const AdminPage = lazy(() => import('./components/AdminPage'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const ProfitScoutPage = lazy(() => import('./components/ProfitScoutPage'));
+const BlogPage = lazy(() => import('./components/BlogPage'));
+const BlogPostPage = lazy(() => import('./components/BlogPostPage'));
 
 const ADMIN_PATH = '/sts-x9k2m7p4-console';
 
@@ -103,6 +105,30 @@ export default function App() {
                 </div>
               }>
                 <PrivacyPolicy />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <Suspense fallback={
+                <div className="min-h-screen bg-brand-bg flex items-center justify-center">
+                  <div className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin" />
+                </div>
+              }>
+                <BlogPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/blog/:slug"
+            element={
+              <Suspense fallback={
+                <div className="min-h-screen bg-brand-bg flex items-center justify-center">
+                  <div className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin" />
+                </div>
+              }>
+                <BlogPostPage />
               </Suspense>
             }
           />

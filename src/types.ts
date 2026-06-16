@@ -32,6 +32,20 @@ export interface FAQ {
   order: number;
 }
 
+export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;        // markdown
+  coverImage: string;
+  author: string;
+  tags: string[];
+  published: boolean;
+  createdAt?: any;
+  updatedAt?: any;
+}
+
 export interface SectionSettings {
   clientLogos: boolean;
   about: boolean;

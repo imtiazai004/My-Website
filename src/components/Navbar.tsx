@@ -6,7 +6,7 @@ import {
   ShoppingCart, Server, Blocks, Code2, Briefcase,
   ChevronDown, ArrowRight, Mail, MessageCircle,
   Layers, Star, Cpu, Users, HelpCircle, X, Menu,
-  Zap, Shield, BarChart3, Bot,
+  Zap, Shield, BarChart3, Bot, PenLine,
 } from 'lucide-react';
 
 /* ─── Data ─────────────────────────────────────────────────── */
@@ -151,6 +151,12 @@ export default function Navbar() {
             <NavItem label="Company" icon={<Users className="w-3.5 h-3.5" />} active={open === 'company'} onEnter={() => handleMouseEnter('company')} />
 
             {/* Direct links */}
+            <a
+              href="/blog"
+              className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-slate-900/[0.04]"
+            >
+              Blog
+            </a>
             <button
               onClick={() => scrollTo('#contact')}
               className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-slate-900/[0.04]"
@@ -393,6 +399,13 @@ export default function Navbar() {
                   );
                 })}
               </MobileSection>
+
+              <a href="/blog" className="flex items-center gap-3 w-full p-3 mt-2 rounded-xl hover:bg-slate-900/[0.04] transition-all group text-left">
+                <div className="w-8 h-8 rounded-lg bg-brand-accent/10 text-brand-accent flex items-center justify-center shrink-0">
+                  <PenLine className="w-4 h-4" />
+                </div>
+                <span className="text-[13px] font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">Blog</span>
+              </a>
             </div>
 
             <div className="p-6 border-t border-slate-900/[0.07] space-y-3">

@@ -1,6 +1,6 @@
 import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, Timestamp, addDoc, serverTimestamp, limit } from 'firebase/firestore';
 import { db, handleFirestoreError } from '../lib/firebase';
-import { Project, Testimonial, Skill, FAQ, SectionSettings } from '../types';
+import { Project, Testimonial, Skill, FAQ, SectionSettings, BlogPost } from '../types';
 import { DEFAULT_SECTION_SETTINGS } from '../constants';
 
 export const subscribeToProjects = (callback: (projects: Project[]) => void) => {
@@ -193,6 +193,48 @@ export const saveSectionSettings = async (settings: SectionSettings) => {
     await setDoc(doc(db, 'settings', 'sections'), settings);
   } catch (error) {
     handleFirestoreError(error, 'update', 'settings/sections');
+  }
+};
+
+// ---------- Blog posts ----------
+
+// All posts (admin) — newest first.
+export const subscribeToPosts = (callback: (posts: BlogPost[]) => void) => {
+  const q = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
+  return onSnapshot(q, (snapshot) => {
+    const posts = snapshot.docs.map(d => ({ id: d.id, ...d.data() } as BlogPost));
+    callback(posts);
+  }, (error) => handleFirestoreError(error, 'list', 'posts'));
+};
+
+// Published posts only — filtered client-side to avoid a composite index.
+export const subscribeToPublishedPosts = (callback: (posts: BlogPost[]) => void) => {
+  return subscribeToPosts((posts) => callback(posts.filter(p => p.published)));
+};
+
+export const savePost = async (post: Partial<BlogPost> & { id?: string }) => {
+  try {
+    const { id, ...fields } = post;
+    const data = {
+      ...fields,
+      updatedAt: serverTimestamp(),
+      createdAt: id ? (fields.createdAt || serverTimestamp()) : serverTimestamp(),
+    };
+    if (id) {
+      await setDoc(doc(db, 'posts', id), data);
+    } else {
+      await addDoc(collection(db, 'posts'), data);
+    }
+  } catch (error) {
+    handleFirestoreError(error, post.id ? 'update' : 'create', `posts/${post.id || 'new'}`);
+  }
+};
+
+export const deletePost = async (id: string) => {
+  try {
+    await deleteDoc(doc(db, 'posts', id));
+  } catch (error) {
+    handleFirestoreError(error, 'delete', `posts/${id}`);
   }
 };
 

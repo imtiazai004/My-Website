@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Plus, Trash2, Edit2, LogIn, LogOut, Save, UploadCloud, Briefcase, BrainCircuit, MessageSquareQuote, Activity as ActivityIcon, Eye, MousePointer2, Send } from 'lucide-react';
+import { X, Plus, Trash2, Edit2, LogIn, LogOut, Save, UploadCloud, Briefcase, BrainCircuit, MessageSquareQuote, Activity as ActivityIcon, Eye, MousePointer2, Send, PenLine } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { auth, signInWithPopup, googleProvider } from '../lib/firebase';
-import { subscribeToProjects, saveProject, deleteProject, subscribeToSkills, saveSkill, deleteSkill, subscribeToTestimonials, saveTestimonial, deleteTestimonial, subscribeToActivity, subscribeToContacts } from '../services/dataService';
-import { Project, Skill, Testimonial } from '../types';
+import { subscribeToProjects, saveProject, deleteProject, subscribeToSkills, saveSkill, deleteSkill, subscribeToTestimonials, saveTestimonial, deleteTestimonial, subscribeToActivity, subscribeToContacts, subscribeToPosts, savePost, deletePost } from '../services/dataService';
+import { Project, Skill, Testimonial, BlogPost } from '../types';
 import { PROJECTS as INITIAL_PROJECTS, SKILLS as INITIAL_SKILLS, TESTIMONIALS as INITIAL_TESTIMONIALS } from '../constants';
+import { slugify } from '../lib/seo';
 
-type Tab = 'projects' | 'skills' | 'testimonials' | 'activity' | 'contacts';
+type Tab = 'projects' | 'posts' | 'skills' | 'testimonials' | 'activity' | 'contacts';
 
 export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
   const { user, isAdmin } = useAuth();
   const [activeTab, setActiveTab ] = useState<Tab>('projects');
   
   const [projects, setProjects] = useState<Project[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
   const [skills, setSkills] = useState<Skill[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [activityLogs, setActivityLogs] = useState<any[]>([]);
@@ -25,16 +27,18 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
   useEffect(() => {
     if (isAdmin) {
       const unsubProjects = subscribeToProjects(setProjects);
+      const unsubPosts = subscribeToPosts(setPosts);
       const unsubSkills = subscribeToSkills(setSkills);
       const unsubTestimonials = subscribeToTestimonials(setTestimonials);
       const unsubActivity = subscribeToActivity(setActivityLogs);
       const unsubContacts = subscribeToContacts(setContacts);
-      return () => { 
-        unsubProjects(); 
-        unsubSkills(); 
-        unsubTestimonials(); 
-        unsubActivity(); 
-        unsubContacts(); 
+      return () => {
+        unsubProjects();
+        unsubPosts();
+        unsubSkills();
+        unsubTestimonials();
+        unsubActivity();
+        unsubContacts();
       };
     }
   }, [isAdmin]);
@@ -55,6 +59,18 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
     setIsSubmitting(true);
     try {
       if (activeTab === 'projects') await saveProject(editingItem);
+      if (activeTab === 'posts') {
+        const tags = Array.isArray(editingItem.tags)
+          ? editingItem.tags
+          : String(editingItem.tags || '').split(',').map((t: string) => t.trim()).filter(Boolean);
+        await savePost({
+          ...editingItem,
+          slug: editingItem.slug || slugify(editingItem.title || ''),
+          author: editingItem.author || 'Imtiaz Ahmad',
+          published: editingItem.published ?? false,
+          tags,
+        });
+      }
       if (activeTab === 'skills') await saveSkill(editingItem);
       if (activeTab === 'testimonials') await saveTestimonial(editingItem);
       setEditingItem(null);
@@ -69,6 +85,7 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
     if (window.confirm(`Delete this ${activeTab.slice(0, -1)}?`)) {
       try {
         if (activeTab === 'projects') await deleteProject(id);
+        if (activeTab === 'posts') await deletePost(id);
         if (activeTab === 'skills') await deleteSkill(id);
         if (activeTab === 'testimonials') await deleteTestimonial(id);
       } catch (error) {
@@ -110,7 +127,7 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
           <div className="flex items-center gap-4">
             <h2 className="text-2xl font-bold tracking-tight">Soft Tech Console</h2>
             <div className="flex bg-brand-bg p-1 rounded-lg border border-brand-border">
-              {(['projects', 'skills', 'testimonials', 'activity', 'contacts'] as Tab[]).map(t => (
+              {(['projects', 'posts', 'skills', 'testimonials', 'activity', 'contacts'] as Tab[]).map(t => (
                 <button
                   key={t}
                   onClick={() => { setActiveTab(t); setEditingItem(null); }}
@@ -157,6 +174,7 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
                 <div>
                   <h3 className="text-xl font-bold uppercase tracking-tighter flex items-center gap-2">
                     {activeTab === 'projects' && <Briefcase className="w-5 h-5 text-brand-accent" />}
+                    {activeTab === 'posts' && <PenLine className="w-5 h-5 text-brand-accent" />}
                     {activeTab === 'skills' && <BrainCircuit className="w-5 h-5 text-brand-accent" />}
                     {activeTab === 'testimonials' && <MessageSquareQuote className="w-5 h-5 text-brand-accent" />}
                     {activeTab === 'activity' && <ActivityIcon className="w-5 h-5 text-brand-accent" />}
@@ -167,9 +185,11 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
                 </div>
                 {activeTab !== 'activity' && activeTab !== 'contacts' && (
                   <div className="flex gap-4">
-                    <button onClick={seedData} className="px-4 py-2 border border-brand-border rounded-lg text-[10px] font-bold uppercase tracking-widest hover:border-brand-accent transition-colors flex items-center gap-2 bg-brand-surface-muted">
-                      <UploadCloud className="w-4 h-4" /> Sync_Defaults
-                    </button>
+                    {activeTab !== 'posts' && (
+                      <button onClick={seedData} className="px-4 py-2 border border-brand-border rounded-lg text-[10px] font-bold uppercase tracking-widest hover:border-brand-accent transition-colors flex items-center gap-2 bg-brand-surface-muted">
+                        <UploadCloud className="w-4 h-4" /> Sync_Defaults
+                      </button>
+                    )}
                     <button onClick={() => setEditingItem({})} className="bg-brand-accent text-white px-6 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-brand-accent-hover transition-colors flex items-center gap-2">
                       <Plus className="w-4 h-4" /> New_Record
                     </button>
@@ -211,6 +231,44 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
                           <div className="space-y-2">
                             <label className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest">Download URL</label>
                             <input value={editingItem.downloadUrl || ''} onChange={e => setEditingItem({...editingItem, downloadUrl: e.target.value})} className="admin-input" />
+                          </div>
+                        </>
+                      )}
+                      {activeTab === 'posts' && (
+                        <>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest">Title</label>
+                            <input value={editingItem.title || ''} onChange={e => setEditingItem({...editingItem, title: e.target.value, slug: editingItem.slug || slugify(e.target.value)})} className="admin-input" required />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest">Slug (URL)</label>
+                            <input value={editingItem.slug || ''} onChange={e => setEditingItem({...editingItem, slug: slugify(e.target.value)})} className="admin-input" placeholder="my-post-title" required />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest">Author</label>
+                            <input value={editingItem.author || ''} onChange={e => setEditingItem({...editingItem, author: e.target.value})} className="admin-input" placeholder="Imtiaz Ahmad" />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest">Cover Image URL</label>
+                            <input value={editingItem.coverImage || ''} onChange={e => setEditingItem({...editingItem, coverImage: e.target.value})} className="admin-input" placeholder="https://..." />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest">Tags (comma-separated)</label>
+                            <input value={Array.isArray(editingItem.tags) ? editingItem.tags.join(', ') : (editingItem.tags || '')} onChange={e => setEditingItem({...editingItem, tags: e.target.value})} className="admin-input" placeholder="Product Research, AI, E-commerce" />
+                          </div>
+                          <div className="space-y-2 flex items-end">
+                            <label className="flex items-center gap-3 cursor-pointer select-none">
+                              <input type="checkbox" checked={!!editingItem.published} onChange={e => setEditingItem({...editingItem, published: e.target.checked})} className="w-4 h-4 accent-[#1a7fe6]" />
+                              <span className="text-[11px] font-bold text-brand-text-dim uppercase tracking-widest">Published {editingItem.published ? '(live)' : '(draft)'}</span>
+                            </label>
+                          </div>
+                          <div className="md:col-span-2 space-y-2">
+                            <label className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest">Excerpt (short summary for cards &amp; SEO)</label>
+                            <textarea value={editingItem.excerpt || ''} onChange={e => setEditingItem({...editingItem, excerpt: e.target.value})} className="admin-input" rows={2} required />
+                          </div>
+                          <div className="md:col-span-2 space-y-2">
+                            <label className="text-[10px] font-bold text-brand-text-dim uppercase tracking-widest">Content (Markdown — # heading, **bold**, - list, [text](url), ![alt](img))</label>
+                            <textarea value={editingItem.content || ''} onChange={e => setEditingItem({...editingItem, content: e.target.value})} className="admin-input font-mono" rows={14} required style={{ lineHeight: 1.6 }} />
                           </div>
                         </>
                       )}
@@ -312,11 +370,18 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
                     </div>
                   ))
                 ) : (
-                  (activeTab === 'projects' ? (projects || []) : activeTab === 'skills' ? (skills || []) : (testimonials || [])).map((item: any, index: number) => (
+                  (activeTab === 'projects' ? (projects || []) : activeTab === 'posts' ? (posts || []) : activeTab === 'skills' ? (skills || []) : (testimonials || [])).map((item: any, index: number) => (
                     <div key={item.id || `admin-${activeTab}-${index}`} className="p-5 bg-brand-surface-muted border border-brand-border rounded-xl group hover:border-brand-accent transition-all flex items-center justify-between">
-                      <div>
-                        <h4 className="font-bold text-sm text-white">{item.title || item.name}</h4>
-                        <p className="text-[10px] font-mono text-brand-text-dim uppercase tracking-wider">{item.category || `${item.level}%` || item.company}</p>
+                      <div className="flex items-center gap-3 min-w-0">
+                        {activeTab === 'posts' && (
+                          <span className={`px-2 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest border shrink-0 ${item.published ? 'bg-green-500/10 text-green-500 border-green-500/20' : 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20'}`}>
+                            {item.published ? 'LIVE' : 'DRAFT'}
+                          </span>
+                        )}
+                        <div className="min-w-0">
+                          <h4 className="font-bold text-sm text-white truncate">{item.title || item.name}</h4>
+                          <p className="text-[10px] font-mono text-brand-text-dim uppercase tracking-wider truncate">{activeTab === 'posts' ? `/blog/${item.slug}` : (item.category || `${item.level}%` || item.company)}</p>
+                        </div>
                       </div>
                       <div className="flex gap-2">
                         <button onClick={() => setEditingItem(item)} className="p-2 hover:bg-white/5 rounded-lg border border-brand-border text-brand-text-dim hover:text-white transition-colors">
