@@ -2,12 +2,17 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
 
-const apps = [
-  { name: 'Fixr AI', category: 'AI TOOL', desc: 'Voice-powered service booking platform', tags: ['GEMINI AI', 'PYTHON'], gradient: 'from-violet-500 to-indigo-600' },
-  { name: 'SoftFlow SaaS', category: 'SAAS', desc: 'AI-powered project management tool', tags: ['REACT', 'NODE.JS', 'POSTGRESQL'], gradient: 'from-blue-500 to-cyan-600' },
-  { name: 'ZenEngine', category: 'WEB APP', desc: 'Generative soundscape focus app', tags: ['NEXT.JS', 'WEBAUDIO API'], gradient: 'from-emerald-500 to-teal-600' },
-  { name: 'ProfitScout', category: 'EXTENSION', desc: 'AI product research for e-commerce', tags: ['JAVASCRIPT', 'GEMINI AI'], gradient: 'from-orange-500 to-rose-600' },
-  { name: 'Composer OCR', category: 'AI TOOL', desc: 'AI-powered document scanner & OCR', tags: ['PYTHON', 'GEMINI AI'], gradient: 'from-pink-500 to-purple-600' },
+const solutions = [
+  { name: 'Fixr AI', label: 'Service Industry', category: 'AI PLATFORM', desc: 'Voice-powered AI agent that books home services in 3 languages via natural conversation.', tags: ['GEMINI AI', 'PYTHON', 'VOICE API'], gradient: 'from-violet-600 to-indigo-700', icon: '🤖', stat: '5-Agent Pipeline', statLabel: 'AI ORCHESTRATION' },
+  { name: 'ProfitScout', label: 'E-Commerce & Retail', category: 'CHROME EXTENSION', desc: 'AI-powered product research across Amazon, eBay, TikTok Shop & Etsy with ROI calculator.', tags: ['JAVASCRIPT', 'GEMINI AI', 'CHROME API'], gradient: 'from-orange-500 to-rose-600', icon: '📦', stat: '5 Marketplaces', statLabel: 'MULTI-PLATFORM' },
+  { name: 'LedgerFlow', label: 'FinTech & Banking', category: 'ENTERPRISE SAAS', desc: 'Real-time financial ledger with fraud detection, multi-currency support and audit trails.', tags: ['NEXT.JS', 'POSTGRESQL', 'STRIPE'], gradient: 'from-emerald-500 to-teal-700', icon: '🏦', stat: '< 50ms', statLabel: 'TRANSACTION LATENCY' },
+  { name: 'CareSync', label: 'HealthTech & MedTech', category: 'CLINICAL PLATFORM', desc: 'HIPAA-compliant patient management with AI diagnostics and medication tracking.', tags: ['REACT NATIVE', 'FIREBASE', 'OPENAI'], gradient: 'from-cyan-500 to-blue-600', icon: '🏥', stat: '99.9%', statLabel: 'UPTIME SLA' },
+  { name: 'Scholr AI', label: 'EdTech & E-Learning', category: 'AI LEARNING PLATFORM', desc: 'Adaptive learning engine that personalizes curriculum and auto-generates quizzes using LLMs.', tags: ['NEXT.JS', 'OPENAI', 'POSTGRESQL'], gradient: 'from-yellow-500 to-orange-600', icon: '🎓', stat: '40%', statLabel: 'FASTER LEARNING' },
+  { name: 'NovaDeploy', label: 'Cloud & DevOps', category: 'INFRASTRUCTURE TOOL', desc: 'Zero-downtime CI/CD orchestration with auto-scaling on AWS, GCP and Azure.', tags: ['DOCKER', 'KUBERNETES', 'AWS'], gradient: 'from-slate-600 to-slate-800', icon: '☁️', stat: '< 2min', statLabel: 'DEPLOY TIME' },
+  { name: 'EstateIQ', label: 'PropTech & Real Estate', category: 'AI SAAS PLATFORM', desc: 'AI-driven property valuation, tenant screening and lease lifecycle management.', tags: ['REACT', 'PYTHON', 'GEMINI AI'], gradient: 'from-lime-500 to-emerald-600', icon: '🏘️', stat: '30 sec', statLabel: 'AI VALUATION' },
+  { name: 'EdgePulse', label: 'IoT & Embedded Systems', category: 'EDGE PLATFORM', desc: 'Real-time IoT sensor network with edge computing and predictive maintenance alerts.', tags: ['C/C++', 'RUST', 'MQTT'], gradient: 'from-fuchsia-500 to-pink-700', icon: '⚡', stat: '10ms', statLabel: 'EDGE LATENCY' },
+  { name: 'ChainForge', label: 'Blockchain & Web3', category: 'DECENTRALIZED PLATFORM', desc: 'Audited smart contract deployment with multi-sig wallets and cross-chain bridge support.', tags: ['SOLIDITY', 'WEB3.JS', 'ETHEREUM'], gradient: 'from-purple-600 to-violet-800', icon: '⛓️', stat: '100%', statLabel: 'AUDIT READY' },
+  { name: 'OpsCore ERP', label: 'Enterprise & Operations', category: 'ENTERPRISE SOFTWARE', desc: 'Modular ERP covering HR, inventory, procurement and finance — cloud or on-premise.', tags: ['PYTHON', 'FLASK', 'POSTGRESQL'], gradient: 'from-blue-600 to-indigo-800', icon: '🏢', stat: '24/7', statLabel: 'ENTERPRISE SUPPORT' },
 ]
 
 const STRIPES = 'repeating-linear-gradient(90deg, transparent 11px, rgba(99,102,241,0.12) 11px, rgba(99,102,241,0.12) 12px)'
@@ -15,60 +20,64 @@ const STRIPES = 'repeating-linear-gradient(90deg, transparent 11px, rgba(99,102,
 /* ── NETSOL-style cycling visual showcase (right side of hero) ── */
 function SolutionShowcase() {
   const [index, setIndex] = useState(0)
-  const item = apps[index]
+  const item = solutions[index]
 
   useEffect(() => {
-    const id = setInterval(() => setIndex((i) => (i + 1) % apps.length), 3000)
+    const id = setInterval(() => setIndex((i) => (i + 1) % solutions.length), 3500)
     return () => clearInterval(id)
   }, [])
 
   return (
-    <div className="relative w-full max-w-md mx-auto h-[520px]">
-      {/* Background striped card — bottom 75% */}
+    <div className="relative w-full max-w-md mx-auto h-[500px]">
+      {/* Background striped card — bottom 80% */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-[75%] rounded-[24px]"
+        className="absolute bottom-0 left-0 right-0 h-[80%] rounded-[24px]"
         style={{ backgroundColor: '#e0e7ff', backgroundImage: STRIPES }}
       />
 
-      {/* Floating product card — top 0, overflowing the bg card upward */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%]">
+      {/* Floating card — top, overflowing the bg card upward */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%]">
         <AnimatePresence mode="wait">
-          {/* Outer handles the slide-up-out / slide-in-from-below (framer transform) */}
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.35, ease: 'easeOut' }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
           >
-            {/* Inner handles the hover lift (CSS transform) */}
+            {/* Inner handles hover lift (CSS transform, separate from framer slide) */}
             <div
-              className="bg-white rounded-[20px] p-5 hover:-translate-y-2 transition-transform duration-300"
-              style={{ boxShadow: '0 25px 60px rgba(99,102,241,0.22)' }}
+              className="bg-white rounded-[20px] p-6 hover:-translate-y-2 transition-transform duration-300"
+              style={{ boxShadow: '0 25px 60px rgba(99,102,241,0.25)' }}
             >
-              {/* Preview image (gradient placeholder with app name centered) */}
-              <div className={`relative h-40 rounded-[14px] overflow-hidden bg-gradient-to-br ${item.gradient} flex items-center justify-center`}>
-                <span className="text-white font-bold text-2xl tracking-tight">{item.name}</span>
-              </div>
-
-              {/* Category badge (bordered pill) */}
-              <div className="flex items-center mt-4">
-                <span className="border border-indigo-200 text-indigo-600 text-[10px] font-bold tracking-widest px-2.5 py-1 rounded-full">
+              {/* Gradient banner */}
+              <div className={`relative h-[140px] rounded-[12px] overflow-hidden bg-gradient-to-br ${item.gradient}`}>
+                {/* category badge top-left */}
+                <span className="absolute top-3 left-3 bg-slate-900 text-white text-[9px] font-bold tracking-widest px-2 py-1 rounded-full">
                   {item.category}
                 </span>
+                {/* stat chip top-right */}
+                <div className="absolute top-3 right-3 bg-white rounded-lg px-3 py-1.5 text-right leading-none">
+                  <p className="text-slate-900 text-sm font-bold leading-none">{item.stat}</p>
+                  <p className="text-slate-400 text-[8px] font-bold uppercase tracking-wide mt-1">{item.statLabel}</p>
+                </div>
+                {/* emoji centered */}
+                <div className="absolute inset-0 flex items-center justify-center" style={{ fontSize: '52px' }}>
+                  {item.icon}
+                </div>
               </div>
 
               {/* App name */}
-              <h3 className="text-slate-900 font-bold mt-3" style={{ fontSize: '17px' }}>{item.name}</h3>
+              <h3 className="text-slate-900 font-bold mt-4" style={{ fontSize: '18px' }}>{item.name}</h3>
 
-              {/* One-line description */}
-              <p className="text-gray-500 mt-1.5 line-clamp-2" style={{ fontSize: '12.5px', lineHeight: 1.5 }}>
+              {/* Description */}
+              <p className="text-gray-500 mt-1.5 line-clamp-2" style={{ fontSize: '13px', lineHeight: 1.5 }}>
                 {item.desc}
               </p>
 
-              {/* Tech stack pills */}
+              {/* Tech tag pills */}
               <div className="flex flex-row gap-1.5 mt-3 flex-wrap">
-                {item.tags.slice(0, 3).map((tag) => (
+                {item.tags.map((tag) => (
                   <span key={tag} className="border border-indigo-200 text-indigo-600 text-[10px] font-bold px-2 py-0.5 rounded-full">
                     {tag}
                   </span>
@@ -79,25 +88,28 @@ function SolutionShowcase() {
         </AnimatePresence>
       </div>
 
-      {/* Label + side lines + progress dots (over the lower striped area) */}
-      <div className="absolute bottom-7 left-0 right-0 flex flex-col items-center gap-4 px-4">
-        <div className="flex items-center justify-center gap-3 w-full">
-          <div className="w-16 h-px bg-indigo-300 shrink-0" />
-          <motion.span
-            key={index}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.35 }}
-            className="text-center font-extrabold leading-tight"
-            style={{ fontSize: '28px', color: '#6366f1' }}
-          >
-            {item.category}
-          </motion.span>
-          <div className="w-16 h-px bg-indigo-300 shrink-0" />
+      {/* Label + decorator lines + progress dots (over the lower striped area) */}
+      <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center gap-3 px-4">
+        <motion.span
+          key={index}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="text-center font-extrabold leading-tight"
+          style={{ fontSize: '30px', color: '#6366f1' }}
+        >
+          {item.label}
+        </motion.span>
+
+        {/* Two thin horizontal decorator lines */}
+        <div className="flex flex-col items-center gap-1.5">
+          <div className="w-24 h-px bg-indigo-300" />
+          <div className="w-12 h-px bg-indigo-200" />
         </div>
 
-        <div className="flex items-center justify-center gap-1.5">
-          {apps.map((_, i) => (
+        {/* 10 progress dots */}
+        <div className="flex items-center justify-center gap-1.5 mt-1">
+          {solutions.map((_, i) => (
             <div
               key={i}
               className={`rounded-full transition-all duration-300 ${
