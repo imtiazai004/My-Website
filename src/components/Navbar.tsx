@@ -318,7 +318,7 @@ export default function Navbar() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => scrollTo('#contact')}
-              className="hidden sm:flex px-6 py-2.5 bg-brand-accent text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-lg hover:bg-blue-400 transition-all duration-300 shadow-[0_0_20px_rgba(26, 127, 230,0.3)] hover:shadow-[0_0_30px_rgba(26, 127, 230,0.5)]"
+              className="hidden sm:flex px-6 py-2.5 bg-brand-accent text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-lg hover:bg-blue-400 transition-all duration-300 shadow-[0_0_20px_rgba(26,127,230,0.3)] hover:shadow-[0_0_30px_rgba(26,127,230,0.5)]"
             >
               Get Started
             </motion.button>

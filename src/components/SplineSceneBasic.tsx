@@ -15,7 +15,7 @@ const solutions = [
   { name: 'OpsCore ERP', label: 'Enterprise & Operations', category: 'ENTERPRISE SOFTWARE', desc: 'Modular ERP covering HR, inventory, procurement and finance — cloud or on-premise.', tags: ['PYTHON', 'FLASK', 'POSTGRESQL'], gradient: 'from-blue-600 to-blue-800', icon: '🏢', stat: '24/7', statLabel: 'ENTERPRISE SUPPORT' },
 ]
 
-const STRIPES = 'repeating-linear-gradient(90deg, transparent 11px, rgba(26, 127, 230,0.12) 11px, rgba(26, 127, 230,0.12) 12px)'
+const STRIPES = 'repeating-linear-gradient(90deg, transparent 11px, rgba(26,127,230,0.12) 11px, rgba(26,127,230,0.12) 12px)'
 
 /* ── NETSOL-style cycling visual showcase (right side of hero) ── */
 function SolutionShowcase() {
@@ -48,7 +48,7 @@ function SolutionShowcase() {
             {/* Inner handles hover lift (CSS transform, separate from framer slide) */}
             <div
               className="bg-white rounded-[20px] p-6 hover:-translate-y-2 transition-transform duration-300"
-              style={{ boxShadow: '0 25px 60px rgba(26, 127, 230,0.25)' }}
+              style={{ boxShadow: '0 25px 60px rgba(26,127,230,0.25)' }}
             >
               {/* Gradient banner */}
               <div className={`relative h-[140px] rounded-[12px] overflow-hidden bg-gradient-to-br ${item.gradient}`}>

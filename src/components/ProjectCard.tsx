@@ -61,7 +61,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       {/* Mouse-follow ambient glow */}
       <div
         className="absolute inset-0 z-10 pointer-events-none rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, rgba(26, 127, 230,0.14) 0%, transparent 65%)` }}
+        style={{ background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, rgba(26,127,230,0.14) 0%, transparent 65%)` }}
       />
       {/* Top edge highlight */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-accent/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

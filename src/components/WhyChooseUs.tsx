@@ -144,7 +144,7 @@ function ReasonCard({ reason, index, onClick }: { reason: typeof REASONS[0]; ind
       {/* Mouse-follow glow */}
       <div
         className="absolute inset-0 pointer-events-none rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, rgba(26, 127, 230,0.13) 0%, transparent 60%)` }}
+        style={{ background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, rgba(26,127,230,0.13) 0%, transparent 60%)` }}
       />
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

@@ -162,7 +162,7 @@ export default function ProfitScoutPage() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-accent text-slate-900 font-bold text-sm rounded-xl hover:bg-blue-400 transition-all shadow-[0_0_30px_rgba(26, 127, 230,0.3)] hover:shadow-[0_0_40px_rgba(26, 127, 230,0.5)]"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-accent text-slate-900 font-bold text-sm rounded-xl hover:bg-blue-400 transition-all shadow-[0_0_30px_rgba(26,127,230,0.3)] hover:shadow-[0_0_40px_rgba(26,127,230,0.5)]"
               >
                 <Download className="w-4 h-4" />
                 Add to Chrome — Free
@@ -250,7 +250,7 @@ export default function ProfitScoutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="relative rounded-2xl overflow-hidden border border-slate-900/10 shadow-[0_0_60px_rgba(26, 127, 230,0.15)]"
+            className="relative rounded-2xl overflow-hidden border border-slate-900/10 shadow-[0_0_60px_rgba(26,127,230,0.15)]"
             style={{ aspectRatio: '16/9' }}
           >
             <iframe
@@ -438,7 +438,7 @@ export default function ProfitScoutPage() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-10 py-4 bg-brand-accent text-slate-900 font-bold text-sm rounded-xl hover:bg-blue-400 transition-all shadow-[0_0_40px_rgba(26, 127, 230,0.35)]"
+            className="inline-flex items-center gap-2 px-10 py-4 bg-brand-accent text-slate-900 font-bold text-sm rounded-xl hover:bg-blue-400 transition-all shadow-[0_0_40px_rgba(26,127,230,0.35)]"
           >
             <Download className="w-4 h-4" />
             Add to Chrome — It's Free
