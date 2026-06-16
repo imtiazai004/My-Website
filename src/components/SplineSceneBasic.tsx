@@ -179,50 +179,51 @@ function SolutionShowcase() {
         style={{ backgroundColor: '#e0e7ff', backgroundImage: STRIPES }}
       />
 
-      {/* Floating card — top 0, overflowing the bg card upward */}
+      {/* Floating product card — top 0, overflowing the bg card upward */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%]">
         <AnimatePresence mode="wait">
+          {/* Outer handles the slide-up-out / slide-in-from-below (framer transform) */}
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 26 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.35, ease: 'easeOut' }}
-            className="bg-white rounded-[20px] p-6"
-            style={{ boxShadow: '0 25px 60px rgba(99,102,241,0.22)' }}
+            exit={{ opacity: 0, y: -26 }}
+            transition={{ duration: 0.38, ease: 'easeOut' }}
           >
-            {/* Top banner */}
-            <div className={`relative h-[130px] rounded-[12px] overflow-hidden bg-gradient-to-br ${item.gradient}`}>
-              {/* category badge top-left */}
-              <span className="absolute top-3 left-3 bg-slate-900 text-white text-[9px] font-bold tracking-widest px-2 py-1 rounded-full">
-                {item.category}
-              </span>
-              {/* stat chip top-right */}
-              <div className="absolute top-3 right-3 bg-white rounded-full px-3 py-1.5 text-right leading-none">
-                <p className="text-slate-900 text-sm font-bold leading-none">{item.stat}</p>
-                <p className="text-slate-400 text-[8px] font-bold uppercase tracking-wide mt-0.5">{item.statLabel}</p>
+            {/* Inner handles the hover lift (CSS transform) */}
+            <div
+              className="bg-white rounded-[20px] p-5 hover:-translate-y-2 transition-transform duration-300"
+              style={{ boxShadow: '0 25px 60px rgba(99,102,241,0.22)' }}
+            >
+              {/* Preview image (gradient placeholder with app name centered) */}
+              <div className={`relative h-40 rounded-[14px] overflow-hidden bg-gradient-to-br ${item.gradient} flex flex-col items-center justify-center gap-1`}>
+                <span style={{ fontSize: '40px' }}>{item.icon}</span>
+                <span className="text-white font-bold text-xl tracking-tight">{item.name}</span>
               </div>
-              {/* emoji centered */}
-              <div className="absolute inset-0 flex items-center justify-center" style={{ fontSize: '48px' }}>
-                {item.icon}
-              </div>
-            </div>
 
-            {/* App name */}
-            <h3 className="text-slate-900 font-bold mt-3.5" style={{ fontSize: '17px' }}>{item.name}</h3>
-
-            {/* Description */}
-            <p className="text-gray-500 mt-1.5 line-clamp-2" style={{ fontSize: '12.5px', lineHeight: 1.5 }}>
-              {item.desc}
-            </p>
-
-            {/* Tech tags */}
-            <div className="flex flex-row gap-1.5 mt-3 flex-wrap">
-              {item.tags.map((tag) => (
-                <span key={tag} className="border border-indigo-200 text-indigo-600 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                  {tag}
+              {/* Category badge (bordered pill) */}
+              <div className="flex items-center mt-4">
+                <span className="border border-indigo-200 text-indigo-600 text-[10px] font-bold tracking-widest px-2.5 py-1 rounded-full">
+                  {item.category}
                 </span>
-              ))}
+              </div>
+
+              {/* App name */}
+              <h3 className="text-slate-900 font-bold mt-3" style={{ fontSize: '17px' }}>{item.name}</h3>
+
+              {/* One-line description */}
+              <p className="text-gray-500 mt-1.5 line-clamp-2" style={{ fontSize: '12.5px', lineHeight: 1.5 }}>
+                {item.desc}
+              </p>
+
+              {/* Tech stack pills */}
+              <div className="flex flex-row gap-1.5 mt-3 flex-wrap">
+                {item.tags.slice(0, 3).map((tag) => (
+                  <span key={tag} className="border border-indigo-200 text-indigo-600 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
