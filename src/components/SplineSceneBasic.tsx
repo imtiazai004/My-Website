@@ -2,161 +2,12 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
 
-const solutions = [
-  {
-    name: 'Fixr AI',
-    label: 'Service Industry',
-    category: 'AI PLATFORM',
-    desc: 'Voice-powered AI agent booking home services in 3 languages via natural conversation.',
-    tags: ['GEMINI AI', 'PYTHON', 'VOICE API'],
-    gradient: 'from-violet-600 to-indigo-700',
-    icon: '🤖',
-    stat: '5-Agent',
-    statLabel: 'AI PIPELINE'
-  },
-  {
-    name: 'ProfitScout',
-    label: 'E-Commerce · Product Research',
-    category: 'CHROME EXTENSION',
-    desc: 'AI-powered product research across Amazon, eBay, TikTok Shop & Etsy with ROI calculator.',
-    tags: ['JAVASCRIPT', 'GEMINI AI', 'CHROME API'],
-    gradient: 'from-orange-500 to-rose-600',
-    icon: '🔍',
-    stat: '5 Markets',
-    statLabel: 'MULTI-PLATFORM'
-  },
-  {
-    name: 'MarketNexus',
-    label: 'E-Commerce · Marketplace Selling',
-    category: 'SELLER DASHBOARD',
-    desc: 'Multi-channel listing management for Amazon, eBay, TikTok & Etsy — inventory, pricing and orders unified.',
-    tags: ['REACT', 'NODE.JS', 'AMAZON API'],
-    gradient: 'from-orange-400 to-amber-600',
-    icon: '🏪',
-    stat: '5 Channels',
-    statLabel: 'UNIFIED SELLING'
-  },
-  {
-    name: 'DropFlow AI',
-    label: 'E-Commerce · Dropshipping',
-    category: 'AUTOMATION PLATFORM',
-    desc: 'AI-powered dropshipping automation — supplier discovery, dynamic pricing and fulfillment tracking.',
-    tags: ['NEXT.JS', 'PYTHON', 'GEMINI AI'],
-    gradient: 'from-rose-500 to-pink-700',
-    icon: '🚀',
-    stat: '3x Speed',
-    statLabel: 'FULFILLMENT'
-  },
-  {
-    name: 'ConvertIQ',
-    label: 'E-Commerce · Store Analytics',
-    category: 'CRO ANALYTICS',
-    desc: 'Real-time Shopify & WooCommerce analytics with AI CRO suggestions, heatmaps and A/B testing.',
-    tags: ['TYPESCRIPT', 'D3.JS', 'REDIS'],
-    gradient: 'from-violet-500 to-purple-700',
-    icon: '📊',
-    stat: '+34%',
-    statLabel: 'CONVERSION LIFT'
-  },
-  {
-    name: 'TradeStack',
-    label: 'E-Commerce · B2B Wholesale',
-    category: 'WHOLESALE PORTAL',
-    desc: 'Enterprise B2B portal with tiered pricing, bulk orders, net-30 payment terms and ERP integration.',
-    tags: ['NEXT.JS', 'POSTGRESQL', 'STRIPE'],
-    gradient: 'from-teal-500 to-cyan-700',
-    icon: '🤝',
-    stat: 'Net-30',
-    statLabel: 'PAYMENT ENGINE'
-  },
-  {
-    name: 'LedgerFlow',
-    label: 'FinTech & Banking',
-    category: 'ENTERPRISE SAAS',
-    desc: 'Real-time financial ledger with fraud detection, multi-currency support and full audit trails.',
-    tags: ['NEXT.JS', 'POSTGRESQL', 'STRIPE'],
-    gradient: 'from-emerald-500 to-teal-700',
-    icon: '🏦',
-    stat: '< 50ms',
-    statLabel: 'TXN LATENCY'
-  },
-  {
-    name: 'CareSync',
-    label: 'HealthTech & MedTech',
-    category: 'CLINICAL PLATFORM',
-    desc: 'HIPAA-compliant patient management with AI diagnostics assistance and medication tracking.',
-    tags: ['REACT NATIVE', 'FIREBASE', 'OPENAI'],
-    gradient: 'from-cyan-500 to-blue-600',
-    icon: '🏥',
-    stat: '99.9%',
-    statLabel: 'UPTIME SLA'
-  },
-  {
-    name: 'Scholr AI',
-    label: 'EdTech & E-Learning',
-    category: 'AI LEARNING PLATFORM',
-    desc: 'Adaptive LLM engine that personalizes curriculum, auto-generates quizzes and tracks mastery.',
-    tags: ['NEXT.JS', 'OPENAI', 'POSTGRESQL'],
-    gradient: 'from-yellow-500 to-orange-600',
-    icon: '🎓',
-    stat: '40%',
-    statLabel: 'FASTER LEARNING'
-  },
-  {
-    name: 'NovaDeploy',
-    label: 'Cloud & DevOps',
-    category: 'INFRASTRUCTURE TOOL',
-    desc: 'Zero-downtime CI/CD orchestration with auto-scaling across AWS, GCP and Azure.',
-    tags: ['DOCKER', 'KUBERNETES', 'AWS'],
-    gradient: 'from-slate-600 to-slate-800',
-    icon: '☁️',
-    stat: '< 2min',
-    statLabel: 'DEPLOY TIME'
-  },
-  {
-    name: 'EstateIQ',
-    label: 'PropTech & Real Estate',
-    category: 'AI SAAS PLATFORM',
-    desc: 'AI property valuation, tenant screening and lease lifecycle management for real estate firms.',
-    tags: ['REACT', 'PYTHON', 'GEMINI AI'],
-    gradient: 'from-lime-500 to-emerald-600',
-    icon: '🏘️',
-    stat: '30 sec',
-    statLabel: 'AI VALUATION'
-  },
-  {
-    name: 'EdgePulse',
-    label: 'IoT & Embedded Systems',
-    category: 'EDGE PLATFORM',
-    desc: 'Real-time IoT sensor network with edge computing and predictive maintenance alerts.',
-    tags: ['C/C++', 'RUST', 'MQTT'],
-    gradient: 'from-fuchsia-500 to-pink-700',
-    icon: '⚡',
-    stat: '10ms',
-    statLabel: 'EDGE LATENCY'
-  },
-  {
-    name: 'ChainForge',
-    label: 'Blockchain & Web3',
-    category: 'DECENTRALIZED PLATFORM',
-    desc: 'Audited smart contracts, multi-sig wallets and cross-chain bridge — Ethereum & Solana.',
-    tags: ['SOLIDITY', 'WEB3.JS', 'ETHEREUM'],
-    gradient: 'from-purple-600 to-violet-800',
-    icon: '⛓️',
-    stat: '100%',
-    statLabel: 'AUDIT READY'
-  },
-  {
-    name: 'OpsCore ERP',
-    label: 'Enterprise & Operations',
-    category: 'ENTERPRISE SOFTWARE',
-    desc: 'Modular ERP covering HR, inventory, procurement and finance — cloud or on-premise.',
-    tags: ['PYTHON', 'FLASK', 'POSTGRESQL'],
-    gradient: 'from-blue-600 to-indigo-800',
-    icon: '🏢',
-    stat: '24/7',
-    statLabel: 'ENTERPRISE SUPPORT'
-  }
+const apps = [
+  { name: 'Fixr AI', category: 'AI TOOL', desc: 'Voice-powered service booking platform', tags: ['GEMINI AI', 'PYTHON'], gradient: 'from-violet-500 to-indigo-600' },
+  { name: 'SoftFlow SaaS', category: 'SAAS', desc: 'AI-powered project management tool', tags: ['REACT', 'NODE.JS', 'POSTGRESQL'], gradient: 'from-blue-500 to-cyan-600' },
+  { name: 'ZenEngine', category: 'WEB APP', desc: 'Generative soundscape focus app', tags: ['NEXT.JS', 'WEBAUDIO API'], gradient: 'from-emerald-500 to-teal-600' },
+  { name: 'ProfitScout', category: 'EXTENSION', desc: 'AI product research for e-commerce', tags: ['JAVASCRIPT', 'GEMINI AI'], gradient: 'from-orange-500 to-rose-600' },
+  { name: 'Composer OCR', category: 'AI TOOL', desc: 'AI-powered document scanner & OCR', tags: ['PYTHON', 'GEMINI AI'], gradient: 'from-pink-500 to-purple-600' },
 ]
 
 const STRIPES = 'repeating-linear-gradient(90deg, transparent 11px, rgba(99,102,241,0.12) 11px, rgba(99,102,241,0.12) 12px)'
@@ -164,10 +15,10 @@ const STRIPES = 'repeating-linear-gradient(90deg, transparent 11px, rgba(99,102,
 /* ── NETSOL-style cycling visual showcase (right side of hero) ── */
 function SolutionShowcase() {
   const [index, setIndex] = useState(0)
-  const item = solutions[index]
+  const item = apps[index]
 
   useEffect(() => {
-    const id = setInterval(() => setIndex((i) => (i + 1) % solutions.length), 3500)
+    const id = setInterval(() => setIndex((i) => (i + 1) % apps.length), 3000)
     return () => clearInterval(id)
   }, [])
 
@@ -185,10 +36,10 @@ function SolutionShowcase() {
           {/* Outer handles the slide-up-out / slide-in-from-below (framer transform) */}
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 26 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -26 }}
-            transition={{ duration: 0.38, ease: 'easeOut' }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
           >
             {/* Inner handles the hover lift (CSS transform) */}
             <div
@@ -196,9 +47,8 @@ function SolutionShowcase() {
               style={{ boxShadow: '0 25px 60px rgba(99,102,241,0.22)' }}
             >
               {/* Preview image (gradient placeholder with app name centered) */}
-              <div className={`relative h-40 rounded-[14px] overflow-hidden bg-gradient-to-br ${item.gradient} flex flex-col items-center justify-center gap-1`}>
-                <span style={{ fontSize: '40px' }}>{item.icon}</span>
-                <span className="text-white font-bold text-xl tracking-tight">{item.name}</span>
+              <div className={`relative h-40 rounded-[14px] overflow-hidden bg-gradient-to-br ${item.gradient} flex items-center justify-center`}>
+                <span className="text-white font-bold text-2xl tracking-tight">{item.name}</span>
               </div>
 
               {/* Category badge (bordered pill) */}
@@ -241,13 +91,13 @@ function SolutionShowcase() {
             className="text-center font-extrabold leading-tight"
             style={{ fontSize: '28px', color: '#6366f1' }}
           >
-            {item.label}
+            {item.category}
           </motion.span>
           <div className="w-16 h-px bg-indigo-300 shrink-0" />
         </div>
 
         <div className="flex items-center justify-center gap-1.5">
-          {solutions.map((_, i) => (
+          {apps.map((_, i) => (
             <div
               key={i}
               className={`rounded-full transition-all duration-300 ${
