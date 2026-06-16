@@ -277,7 +277,7 @@ export default function AdminPage() {
             <motion.button
               whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
               onClick={handleLogin}
-              className="w-full py-4 bg-brand-accent text-white font-bold uppercase tracking-widest text-[11px] rounded-2xl hover:bg-indigo-400 transition-all flex items-center justify-center gap-3"
+              className="w-full py-4 bg-brand-accent text-white font-bold uppercase tracking-widest text-[11px] rounded-2xl hover:bg-blue-400 transition-all flex items-center justify-center gap-3"
             >
               <LogIn className="w-4 h-4" /> Sign in with Google
             </motion.button>
@@ -397,7 +397,7 @@ export default function AdminPage() {
                       <button onClick={seedData} className="px-4 py-2 border border-white/10 rounded-xl text-[10px] font-bold uppercase tracking-widest text-white/40 hover:border-brand-accent hover:text-white transition-all flex items-center gap-2">
                         <UploadCloud className="w-4 h-4" /> Seed Defaults
                       </button>
-                      <button onClick={() => setEditingItem({})} className="px-4 py-2 bg-brand-accent text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-indigo-400 transition-all flex items-center gap-2">
+                      <button onClick={() => setEditingItem({})} className="px-4 py-2 bg-brand-accent text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-blue-400 transition-all flex items-center gap-2">
                         <Plus className="w-4 h-4" /> Add New
                       </button>
                     </div>
@@ -445,7 +445,7 @@ export default function AdminPage() {
                         </div>
                         <div className="flex justify-end gap-3 pt-2">
                           <button type="button" onClick={()=>setEditingItem(null)} className="text-xs font-bold text-white/30 hover:text-white uppercase tracking-widest transition-colors">Cancel</button>
-                          <button disabled={isSubmitting} className="px-6 py-2.5 bg-brand-accent text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-indigo-400 transition-all flex items-center gap-2 disabled:opacity-50">
+                          <button disabled={isSubmitting} className="px-6 py-2.5 bg-brand-accent text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-blue-400 transition-all flex items-center gap-2 disabled:opacity-50">
                             <Save className="w-3.5 h-3.5" /> {isSubmitting ? 'Saving…' : 'Save'}
                           </button>
                         </div>

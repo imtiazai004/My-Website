@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
 
 const solutions = [
-  { name: 'Fixr AI', label: 'Service Industry', category: 'AI PLATFORM', desc: 'Voice-powered AI agent that books home services in 3 languages via natural conversation.', tags: ['GEMINI AI', 'PYTHON', 'VOICE API'], gradient: 'from-violet-600 to-indigo-700', icon: '🤖', stat: '5-Agent Pipeline', statLabel: 'AI ORCHESTRATION' },
+  { name: 'Fixr AI', label: 'Service Industry', category: 'AI PLATFORM', desc: 'Voice-powered AI agent that books home services in 3 languages via natural conversation.', tags: ['GEMINI AI', 'PYTHON', 'VOICE API'], gradient: 'from-violet-600 to-blue-700', icon: '🤖', stat: '5-Agent Pipeline', statLabel: 'AI ORCHESTRATION' },
   { name: 'ProfitScout', label: 'E-Commerce & Retail', category: 'CHROME EXTENSION', desc: 'AI-powered product research across Amazon, eBay, TikTok Shop & Etsy with ROI calculator.', tags: ['JAVASCRIPT', 'GEMINI AI', 'CHROME API'], gradient: 'from-orange-500 to-rose-600', icon: '📦', stat: '5 Marketplaces', statLabel: 'MULTI-PLATFORM' },
   { name: 'LedgerFlow', label: 'FinTech & Banking', category: 'ENTERPRISE SAAS', desc: 'Real-time financial ledger with fraud detection, multi-currency support and audit trails.', tags: ['NEXT.JS', 'POSTGRESQL', 'STRIPE'], gradient: 'from-emerald-500 to-teal-700', icon: '🏦', stat: '< 50ms', statLabel: 'TRANSACTION LATENCY' },
   { name: 'CareSync', label: 'HealthTech & MedTech', category: 'CLINICAL PLATFORM', desc: 'HIPAA-compliant patient management with AI diagnostics and medication tracking.', tags: ['REACT NATIVE', 'FIREBASE', 'OPENAI'], gradient: 'from-cyan-500 to-blue-600', icon: '🏥', stat: '99.9%', statLabel: 'UPTIME SLA' },
@@ -12,10 +12,10 @@ const solutions = [
   { name: 'EstateIQ', label: 'PropTech & Real Estate', category: 'AI SAAS PLATFORM', desc: 'AI-driven property valuation, tenant screening and lease lifecycle management.', tags: ['REACT', 'PYTHON', 'GEMINI AI'], gradient: 'from-lime-500 to-emerald-600', icon: '🏘️', stat: '30 sec', statLabel: 'AI VALUATION' },
   { name: 'EdgePulse', label: 'IoT & Embedded Systems', category: 'EDGE PLATFORM', desc: 'Real-time IoT sensor network with edge computing and predictive maintenance alerts.', tags: ['C/C++', 'RUST', 'MQTT'], gradient: 'from-fuchsia-500 to-pink-700', icon: '⚡', stat: '10ms', statLabel: 'EDGE LATENCY' },
   { name: 'ChainForge', label: 'Blockchain & Web3', category: 'DECENTRALIZED PLATFORM', desc: 'Audited smart contract deployment with multi-sig wallets and cross-chain bridge support.', tags: ['SOLIDITY', 'WEB3.JS', 'ETHEREUM'], gradient: 'from-purple-600 to-violet-800', icon: '⛓️', stat: '100%', statLabel: 'AUDIT READY' },
-  { name: 'OpsCore ERP', label: 'Enterprise & Operations', category: 'ENTERPRISE SOFTWARE', desc: 'Modular ERP covering HR, inventory, procurement and finance — cloud or on-premise.', tags: ['PYTHON', 'FLASK', 'POSTGRESQL'], gradient: 'from-blue-600 to-indigo-800', icon: '🏢', stat: '24/7', statLabel: 'ENTERPRISE SUPPORT' },
+  { name: 'OpsCore ERP', label: 'Enterprise & Operations', category: 'ENTERPRISE SOFTWARE', desc: 'Modular ERP covering HR, inventory, procurement and finance — cloud or on-premise.', tags: ['PYTHON', 'FLASK', 'POSTGRESQL'], gradient: 'from-blue-600 to-blue-800', icon: '🏢', stat: '24/7', statLabel: 'ENTERPRISE SUPPORT' },
 ]
 
-const STRIPES = 'repeating-linear-gradient(90deg, transparent 11px, rgba(99,102,241,0.12) 11px, rgba(99,102,241,0.12) 12px)'
+const STRIPES = 'repeating-linear-gradient(90deg, transparent 11px, rgba(26, 127, 230,0.12) 11px, rgba(26, 127, 230,0.12) 12px)'
 
 /* ── NETSOL-style cycling visual showcase (right side of hero) ── */
 function SolutionShowcase() {
@@ -48,7 +48,7 @@ function SolutionShowcase() {
             {/* Inner handles hover lift (CSS transform, separate from framer slide) */}
             <div
               className="bg-white rounded-[20px] p-6 hover:-translate-y-2 transition-transform duration-300"
-              style={{ boxShadow: '0 25px 60px rgba(99,102,241,0.25)' }}
+              style={{ boxShadow: '0 25px 60px rgba(26, 127, 230,0.25)' }}
             >
               {/* Gradient banner */}
               <div className={`relative h-[140px] rounded-[12px] overflow-hidden bg-gradient-to-br ${item.gradient}`}>
@@ -78,7 +78,7 @@ function SolutionShowcase() {
               {/* Tech tag pills */}
               <div className="flex flex-row gap-1.5 mt-3 flex-wrap">
                 {item.tags.map((tag) => (
-                  <span key={tag} className="border border-indigo-200 text-indigo-600 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  <span key={tag} className="border border-blue-200 text-blue-600 text-[10px] font-bold px-2 py-0.5 rounded-full">
                     {tag}
                   </span>
                 ))}
@@ -96,15 +96,15 @@ function SolutionShowcase() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
           className="text-center font-extrabold leading-tight"
-          style={{ fontSize: '30px', color: '#6366f1' }}
+          style={{ fontSize: '30px', color: '#1a7fe6' }}
         >
           {item.label}
         </motion.span>
 
         {/* Two thin horizontal decorator lines */}
         <div className="flex flex-col items-center gap-1.5">
-          <div className="w-24 h-px bg-indigo-300" />
-          <div className="w-12 h-px bg-indigo-200" />
+          <div className="w-24 h-px bg-blue-300" />
+          <div className="w-12 h-px bg-blue-200" />
         </div>
 
         {/* 10 progress dots */}
@@ -113,7 +113,7 @@ function SolutionShowcase() {
             <div
               key={i}
               className={`rounded-full transition-all duration-300 ${
-                i === index ? 'w-5 h-2 bg-indigo-600' : 'w-2 h-2 bg-indigo-200'
+                i === index ? 'w-5 h-2 bg-blue-600' : 'w-2 h-2 bg-blue-200'
               }`}
             />
           ))}
@@ -128,7 +128,7 @@ export function SplineSceneBasic() {
     <section className="relative w-full min-h-screen overflow-hidden bg-[#f8fafc] flex items-center">
       {/* Decorative background glows */}
       <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] bg-brand-accent/10 rounded-full blur-[170px] pointer-events-none" aria-hidden="true" />
-      <div className="absolute bottom-[-15%] left-[-5%] w-[600px] h-[600px] bg-indigo-400/10 rounded-full blur-[150px] pointer-events-none" aria-hidden="true" />
+      <div className="absolute bottom-[-15%] left-[-5%] w-[600px] h-[600px] bg-blue-400/10 rounded-full blur-[150px] pointer-events-none" aria-hidden="true" />
 
       <div className="relative z-30 max-w-7xl mx-auto w-full px-6 md:px-12 pt-28 pb-20 grid lg:grid-cols-2 gap-16 items-center">
 
@@ -139,7 +139,7 @@ export function SplineSceneBasic() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center border-l-2 border-[#6366f1] pl-3 mb-7 text-[11px] md:text-xs font-semibold uppercase tracking-[0.2em] text-slate-600"
+            className="inline-flex items-center border-l-2 border-[#1a7fe6] pl-3 mb-7 text-[11px] md:text-xs font-semibold uppercase tracking-[0.2em] text-slate-600"
           >
             UK-Based • AI-First • Fast Delivery
           </motion.div>

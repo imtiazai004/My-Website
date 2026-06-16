@@ -101,7 +101,7 @@ export default function ProjectGrid() {
               transition={{ duration: 1 }}
               className="relative z-10"
             >
-              <div className="relative bg-white rounded-xl p-2 shadow-[0_50px_100px_-20px_rgba(99,102,241,0.3)] border border-slate-900/10 w-80 h-52 md:w-96 md:h-64">
+              <div className="relative bg-white rounded-xl p-2 shadow-[0_50px_100px_-20px_rgba(26, 127, 230,0.3)] border border-slate-900/10 w-80 h-52 md:w-96 md:h-64">
                 <div className="absolute inset-x-0 bottom-0 h-2 bg-slate-200 rounded-b-xl border-t border-slate-900/[0.07]" />
                 <div className="w-full h-full bg-[#f8fafc] rounded-lg relative overflow-hidden flex items-center justify-center">
                   <Code className="w-16 h-16 text-brand-accent animate-pulse" />
@@ -241,7 +241,7 @@ export default function ProjectGrid() {
                           href={selectedProject.demoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-6 py-3 bg-brand-accent text-white rounded-full text-xs font-bold hover:bg-indigo-400 transition-all"
+                          className="flex items-center gap-2 px-6 py-3 bg-brand-accent text-white rounded-full text-xs font-bold hover:bg-blue-400 transition-all"
                         >
                           Launch Deployment <ExternalLink className="w-3 h-3" />
                         </a>

@@ -131,7 +131,7 @@ export default function ProfitScoutPage() {
       <div className="grid-texture" />
       <div className="soft-vignette" />
       <div className="fixed top-0 left-1/4 w-[1200px] h-[1200px] bg-brand-accent/5 rounded-full blur-[180px] -translate-y-1/2 -translate-x-1/2 pointer-events-none" aria-hidden="true" />
-      <div className="fixed bottom-0 right-0 w-[900px] h-[900px] bg-indigo-500/4 rounded-full blur-[160px] translate-y-1/2 translate-x-1/2 pointer-events-none" aria-hidden="true" />
+      <div className="fixed bottom-0 right-0 w-[900px] h-[900px] bg-blue-500/4 rounded-full blur-[160px] translate-y-1/2 translate-x-1/2 pointer-events-none" aria-hidden="true" />
 
       <Navbar />
 
@@ -153,7 +153,7 @@ export default function ProfitScoutPage() {
               The only product research extension you'll ever need. 44 features across 12 platforms — completely free, forever.
             </p>
             <p className="text-sm text-slate-400 mb-10">
-              Built by <a href="https://aisofttechsolution.com" className="text-brand-accent hover:text-indigo-300 transition-colors">Imtiaz Ahmad</a> · AI Soft Tech Solution
+              Built by <a href="https://aisofttechsolution.com" className="text-brand-accent hover:text-blue-300 transition-colors">Imtiaz Ahmad</a> · AI Soft Tech Solution
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
@@ -162,7 +162,7 @@ export default function ProfitScoutPage() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-accent text-slate-900 font-bold text-sm rounded-xl hover:bg-indigo-400 transition-all shadow-[0_0_30px_rgba(99,102,241,0.3)] hover:shadow-[0_0_40px_rgba(99,102,241,0.5)]"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-brand-accent text-slate-900 font-bold text-sm rounded-xl hover:bg-blue-400 transition-all shadow-[0_0_30px_rgba(26, 127, 230,0.3)] hover:shadow-[0_0_40px_rgba(26, 127, 230,0.5)]"
               >
                 <Download className="w-4 h-4" />
                 Add to Chrome — Free
@@ -250,7 +250,7 @@ export default function ProfitScoutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="relative rounded-2xl overflow-hidden border border-slate-900/10 shadow-[0_0_60px_rgba(99,102,241,0.15)]"
+            className="relative rounded-2xl overflow-hidden border border-slate-900/10 shadow-[0_0_60px_rgba(26, 127, 230,0.15)]"
             style={{ aspectRatio: '16/9' }}
           >
             <iframe
@@ -264,7 +264,7 @@ export default function ProfitScoutPage() {
 
           <p className="text-center text-slate-400 text-xs mt-5">
             Prefer reading?{' '}
-            <a href="#features" className="text-brand-accent hover:text-indigo-300 transition-colors">
+            <a href="#features" className="text-brand-accent hover:text-blue-300 transition-colors">
               Scroll down to see all 44 features →
             </a>
           </p>
@@ -438,13 +438,13 @@ export default function ProfitScoutPage() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-10 py-4 bg-brand-accent text-slate-900 font-bold text-sm rounded-xl hover:bg-indigo-400 transition-all shadow-[0_0_40px_rgba(99,102,241,0.35)]"
+            className="inline-flex items-center gap-2 px-10 py-4 bg-brand-accent text-slate-900 font-bold text-sm rounded-xl hover:bg-blue-400 transition-all shadow-[0_0_40px_rgba(26, 127, 230,0.35)]"
           >
             <Download className="w-4 h-4" />
             Add to Chrome — It's Free
           </motion.a>
           <p className="mt-6 text-slate-400 text-xs">
-            Questions? <a href="mailto:imtiazahmad@aisofttechsolution.com" className="text-brand-accent hover:text-indigo-300 transition-colors">imtiazahmad@aisofttechsolution.com</a> · <a href="https://wa.me/923005863032" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-slate-900 transition-colors">WhatsApp</a>
+            Questions? <a href="mailto:imtiazahmad@aisofttechsolution.com" className="text-brand-accent hover:text-blue-300 transition-colors">imtiazahmad@aisofttechsolution.com</a> · <a href="https://wa.me/923005863032" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-slate-900 transition-colors">WhatsApp</a>
           </p>
           <p className="mt-3 text-slate-300 text-xs">
             <a href="/profitscout-privacy" className="hover:text-slate-500 transition-colors">Privacy Policy</a>

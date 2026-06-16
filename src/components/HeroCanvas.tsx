@@ -46,7 +46,7 @@ function HeroOrb() {
       <mesh ref={coreRef}>
         <icosahedronGeometry args={[1.6, 4]} />
         <MeshDistortMaterial
-          color="#6366f1"
+          color="#1a7fe6"
           distort={0.35}
           speed={2}
           roughness={0.05}
@@ -79,7 +79,7 @@ function Rings() {
     <group position={[1.8, 0, 0]}>
       <mesh ref={r1}>
         <torusGeometry args={[2.4, 0.012, 16, 120]} />
-        <meshStandardMaterial color="#6366f1" emissive="#6366f1" emissiveIntensity={2} />
+        <meshStandardMaterial color="#1a7fe6" emissive="#1a7fe6" emissiveIntensity={2} />
       </mesh>
       <mesh ref={r2}>
         <torusGeometry args={[3.1, 0.008, 16, 120]} />
@@ -114,8 +114,8 @@ function FloatingShapes() {
             {s.type === 1 && <tetrahedronGeometry args={[1]} />}
             {s.type === 2 && <dodecahedronGeometry args={[1]} />}
             <meshStandardMaterial
-              color={i % 2 === 0 ? '#6366f1' : '#818cf8'}
-              emissive={i % 2 === 0 ? '#4f46e5' : '#6366f1'}
+              color={i % 2 === 0 ? '#1a7fe6' : '#818cf8'}
+              emissive={i % 2 === 0 ? '#4f46e5' : '#1a7fe6'}
               emissiveIntensity={0.8}
               metalness={0.9}
               roughness={0.1}
@@ -152,7 +152,7 @@ function Particles() {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial size={0.025} color="#6366f1" transparent opacity={0.5} sizeAttenuation />
+      <pointsMaterial size={0.025} color="#1a7fe6" transparent opacity={0.5} sizeAttenuation />
     </points>
   )
 }
@@ -164,7 +164,7 @@ export default function HeroCanvas() {
         <color attach="background" args={['#f8fafc']} />
         <fog attach="fog" args={['#f8fafc', 12, 28]} />
         <ambientLight intensity={0.8} />
-        <pointLight position={[5, 5, 5]} color="#6366f1" intensity={4} />
+        <pointLight position={[5, 5, 5]} color="#1a7fe6" intensity={4} />
         <pointLight position={[-5, -3, 3]} color="#4f46e5" intensity={2.5} />
         <pointLight position={[0, 0, 8]} color="#818cf8" intensity={1.5} />
         <CameraRig />

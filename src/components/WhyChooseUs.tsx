@@ -144,7 +144,7 @@ function ReasonCard({ reason, index, onClick }: { reason: typeof REASONS[0]; ind
       {/* Mouse-follow glow */}
       <div
         className="absolute inset-0 pointer-events-none rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, rgba(99,102,241,0.13) 0%, transparent 60%)` }}
+        style={{ background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, rgba(26, 127, 230,0.13) 0%, transparent 60%)` }}
       />
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -338,7 +338,7 @@ export default function WhyChooseUs() {
                     </div>
                   </div>
                   <button
-                    className="px-6 py-3 bg-brand-accent text-white rounded-full text-xs font-bold hover:bg-indigo-400 transition-all flex items-center gap-2"
+                    className="px-6 py-3 bg-brand-accent text-white rounded-full text-xs font-bold hover:bg-blue-400 transition-all flex items-center gap-2"
                     onClick={() => { setSelectedId(null); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
                   >
                     Request Docs <Workflow className="w-3 h-3" />

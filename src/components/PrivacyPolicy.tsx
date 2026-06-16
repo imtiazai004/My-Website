@@ -143,7 +143,7 @@ export default function PrivacyPolicy() {
                 <p className="text-slate-500">AI Soft Tech Solution</p>
                 <a
                   href="mailto:imtiazahmad@aisofttechsolution.com"
-                  className="block text-brand-accent hover:text-indigo-300 transition-colors"
+                  className="block text-brand-accent hover:text-blue-300 transition-colors"
                 >
                   imtiazahmad@aisofttechsolution.com
                 </a>
@@ -151,7 +151,7 @@ export default function PrivacyPolicy() {
                   href="https://aisofttechsolution.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-brand-accent hover:text-indigo-300 transition-colors"
+                  className="block text-brand-accent hover:text-blue-300 transition-colors"
                 >
                   aisofttechsolution.com
                 </a>

@@ -108,7 +108,7 @@ export default function FAQ() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-10 py-4 bg-brand-accent text-slate-900 font-bold uppercase tracking-widest text-[11px] hover:bg-indigo-400 transition-all rounded-2xl"
+            className="px-10 py-4 bg-brand-accent text-slate-900 font-bold uppercase tracking-widest text-[11px] hover:bg-blue-400 transition-all rounded-2xl"
           >
             Get a Free Consultation
           </motion.button>

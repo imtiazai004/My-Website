@@ -11,7 +11,7 @@ export default function Hero() {
         
         {/* Deep Depth Lights */}
         <div className="absolute -top-[10%] -left-[10%] w-[800px] h-[800px] bg-brand-accent/10 rounded-full blur-[160px] animate-float opacity-30" />
-        <div className="absolute bottom-0 right-[5%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px] animate-float opacity-20" style={{ animationDelay: '-4s' }} />
+        <div className="absolute bottom-0 right-[5%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px] animate-float opacity-20" style={{ animationDelay: '-4s' }} />
         
         {/* Heading Backlight */}
         <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[600px] bg-white/[0.03] rounded-full blur-[160px]" />

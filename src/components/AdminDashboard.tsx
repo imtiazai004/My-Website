@@ -360,9 +360,9 @@ export default function AdminDashboard({ isOpen, onClose }: { isOpen: boolean, o
           transition: all 0.2s;
         }
         .admin-input:focus {
-          border-color: #6366F1;
+          border-color: #1a7fe6;
           outline: none;
-          box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+          box-shadow: 0 0 0 4px rgba(26, 127, 230, 0.1);
         }
       `}</style>
     </div>

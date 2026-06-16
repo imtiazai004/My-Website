@@ -5,9 +5,9 @@ export default function ShaderBackground() {
       className="fixed inset-0 -z-10 pointer-events-none"
       style={{
         background: `
-          radial-gradient(ellipse 80% 60% at 20% -10%, rgba(99,102,241,0.10) 0%, transparent 60%),
+          radial-gradient(ellipse 80% 60% at 20% -10%, rgba(26, 127, 230,0.10) 0%, transparent 60%),
           radial-gradient(ellipse 60% 50% at 80% 110%, rgba(79,70,229,0.08) 0%, transparent 60%),
-          radial-gradient(ellipse 40% 40% at 50% 50%, rgba(99,102,241,0.03) 0%, transparent 70%),
+          radial-gradient(ellipse 40% 40% at 50% 50%, rgba(26, 127, 230,0.03) 0%, transparent 70%),
           #f8fafc
         `,
       }}

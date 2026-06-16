@@ -12,7 +12,7 @@ import {
 /* ─── Data ─────────────────────────────────────────────────── */
 
 const SERVICES = [
-  { icon: Globe,            label: 'Website Development',   desc: 'Fast, responsive sites that convert',        color: '#6366f1' },
+  { icon: Globe,            label: 'Website Development',   desc: 'Fast, responsive sites that convert',        color: '#1a7fe6' },
   { icon: MonitorSmartphone,label: 'Web App Development',   desc: 'Powerful browser-based applications',        color: '#8b5cf6' },
   { icon: Smartphone,       label: 'Mobile App Development',desc: 'Native iOS & Android experiences',           color: '#06b6d4' },
   { icon: Code2,            label: 'App Development',       desc: 'Cross-platform apps built to scale',         color: '#10b981' },
@@ -20,7 +20,7 @@ const SERVICES = [
   { icon: Briefcase,        label: 'Firm & Agency Sites',   desc: 'Authority-driven sites for law & finance',   color: '#f43f5e' },
   { icon: Brain,            label: 'AI Automation',         desc: 'Intelligent workflows that save hours',       color: '#a855f7' },
   { icon: ShoppingCart,     label: 'E-commerce Solutions',  desc: 'Stores that sell while you sleep',           color: '#FF9900' },
-  { icon: Server,           label: 'SaaS Development',      desc: 'Scalable software-as-a-service platforms',   color: '#6366f1' },
+  { icon: Server,           label: 'SaaS Development',      desc: 'Scalable software-as-a-service platforms',   color: '#1a7fe6' },
   { icon: Blocks,           label: 'API & Integrations',    desc: 'Connect your systems seamlessly',            color: '#06b6d4' },
   { icon: Bot,              label: 'Chatbot & AI Agents',   desc: 'Deploy AI that handles queries 24/7',        color: '#a855f7' },
   { icon: Shield,           label: 'Security & Compliance', desc: 'Harden your stack against threats',         color: '#ef4444' },
@@ -195,7 +195,7 @@ export default function Navbar() {
                     <p className="text-[11px] text-slate-500">Not sure which service fits? We'll guide you.</p>
                     <button
                       onClick={() => scrollTo('#contact')}
-                      className="px-4 py-2 bg-brand-accent text-white text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-indigo-400 transition-colors"
+                      className="px-4 py-2 bg-brand-accent text-white text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-blue-400 transition-colors"
                     >
                       Free Consultation
                     </button>
@@ -318,7 +318,7 @@ export default function Navbar() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => scrollTo('#contact')}
-              className="hidden sm:flex px-6 py-2.5 bg-brand-accent text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-lg hover:bg-indigo-400 transition-all duration-300 shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)]"
+              className="hidden sm:flex px-6 py-2.5 bg-brand-accent text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-lg hover:bg-blue-400 transition-all duration-300 shadow-[0_0_20px_rgba(26, 127, 230,0.3)] hover:shadow-[0_0_30px_rgba(26, 127, 230,0.5)]"
             >
               Get Started
             </motion.button>
@@ -410,7 +410,7 @@ export default function Navbar() {
                   <p className="text-[10px] text-slate-500">+92 300 5863032</p>
                 </div>
               </a>
-              <button onClick={() => scrollTo('#contact')} className="w-full py-3.5 bg-brand-accent text-white text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-indigo-400 transition-colors">
+              <button onClick={() => scrollTo('#contact')} className="w-full py-3.5 bg-brand-accent text-white text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-blue-400 transition-colors">
                 Free Consultation
               </button>
             </div>

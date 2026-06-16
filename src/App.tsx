@@ -41,7 +41,7 @@ function MainSite() {
       <div className="grid-texture" />
       <div className="soft-vignette" />
       <div className="fixed top-0 left-1/4 w-[1200px] h-[1200px] bg-brand-accent/5 rounded-full blur-[180px] -translate-y-1/2 -translate-x-1/2 pointer-events-none animate-pulse-glow" aria-hidden="true" />
-      <div className="fixed bottom-0 right-0 w-[1000px] h-[1000px] bg-indigo-500/5 rounded-full blur-[160px] translate-y-1/2 translate-x-1/2 pointer-events-none animate-pulse-glow" style={{ animationDelay: '-5s' }} aria-hidden="true" />
+      <div className="fixed bottom-0 right-0 w-[1000px] h-[1000px] bg-blue-500/5 rounded-full blur-[160px] translate-y-1/2 translate-x-1/2 pointer-events-none animate-pulse-glow" style={{ animationDelay: '-5s' }} aria-hidden="true" />
       <Navbar />
       <main className="relative z-20">
         <SplineSceneBasic />

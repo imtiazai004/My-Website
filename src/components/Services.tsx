@@ -127,7 +127,7 @@ export default function Services() {
                 className="grid grid-cols-1 sm:grid-cols-2 gap-4"
               >
                 {/* Cell 1 — Icon + name (featured) */}
-                <div className="bg-gradient-to-br from-brand-accent to-indigo-500 rounded-2xl p-6 flex flex-col justify-between min-h-[180px] text-white">
+                <div className="bg-gradient-to-br from-brand-accent to-blue-500 rounded-2xl p-6 flex flex-col justify-between min-h-[180px] text-white">
                   <div className="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center backdrop-blur-sm">
                     <Icon className="w-7 h-7" />
                   </div>
