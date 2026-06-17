@@ -6,7 +6,7 @@ import {
   Briefcase, BrainCircuit, MessageSquareQuote,
   Send, LayoutDashboard, HelpCircle, Layers, Eye,
   ArrowLeft, Terminal, XCircle, ToggleLeft, ToggleRight,
-  TrendingUp, Users, MousePointer2, Mail, Globe, Monitor, Smartphone,
+  TrendingUp, Users, MousePointer2, Mail, Globe, Monitor, Smartphone, PenLine,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { auth, signInWithPopup, googleProvider } from '../lib/firebase';
@@ -17,19 +17,22 @@ import {
   subscribeToActivity, subscribeToContacts,
   subscribeToFAQs, saveFAQ, deleteFAQ,
   subscribeToSectionSettings, saveSectionSettings,
+  subscribeToPosts, savePost, deletePost,
 } from '../services/dataService';
-import { Project, Skill, Testimonial, FAQ, SectionSettings } from '../types';
+import { Project, Skill, Testimonial, FAQ, SectionSettings, BlogPost } from '../types';
+import { slugify } from '../lib/seo';
 import {
   PROJECTS as INITIAL_PROJECTS, SKILLS as INITIAL_SKILLS,
   TESTIMONIALS as INITIAL_TESTIMONIALS, FAQS as INITIAL_FAQS,
   DEFAULT_SECTION_SETTINGS,
 } from '../constants';
 
-type Tab = 'overview' | 'projects' | 'skills' | 'testimonials' | 'faqs' | 'sections' | 'messages' | 'activity';
+type Tab = 'overview' | 'projects' | 'posts' | 'skills' | 'testimonials' | 'faqs' | 'sections' | 'messages' | 'activity';
 
 const TABS: { id: Tab; label: string; icon: React.ElementType }[] = [
   { id: 'overview',      label: 'Overview',      icon: LayoutDashboard },
   { id: 'projects',      label: 'Projects',       icon: Briefcase },
+  { id: 'posts',         label: 'Blog Posts',     icon: PenLine },
   { id: 'testimonials',  label: 'Testimonials',   icon: MessageSquareQuote },
   { id: 'skills',        label: 'Skills',          icon: BrainCircuit },
   { id: 'faqs',          label: 'FAQs',            icon: HelpCircle },
@@ -162,6 +165,7 @@ export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<Tab>('overview');
 
   const [projects,        setProjects]        = useState<Project[]>([]);
+  const [posts,           setPosts]           = useState<BlogPost[]>([]);
   const [skills,          setSkills]          = useState<Skill[]>([]);
   const [testimonials,    setTestimonials]    = useState<Testimonial[]>([]);
   const [faqs,            setFaqs]            = useState<FAQ[]>([]);
@@ -177,6 +181,7 @@ export default function AdminPage() {
     if (!isAdmin) return;
     const unsubs = [
       subscribeToProjects(setProjects),
+      subscribeToPosts(setPosts),
       subscribeToSkills(setSkills),
       subscribeToTestimonials(setTestimonials),
       subscribeToFAQs(setFaqs),
@@ -197,6 +202,18 @@ export default function AdminPage() {
     setIsSubmitting(true);
     try {
       if (activeTab === 'projects')     await saveProject(editingItem);
+      if (activeTab === 'posts') {
+        const tags = Array.isArray(editingItem.tags)
+          ? editingItem.tags
+          : String(editingItem.tags || '').split(',').map((t: string) => t.trim()).filter(Boolean);
+        await savePost({
+          ...editingItem,
+          slug: editingItem.slug || slugify(editingItem.title || ''),
+          author: editingItem.author || 'Imtiaz Ahmad',
+          published: editingItem.published ?? false,
+          tags,
+        });
+      }
       if (activeTab === 'skills')       await saveSkill(editingItem);
       if (activeTab === 'testimonials') await saveTestimonial(editingItem);
       if (activeTab === 'faqs')         await saveFAQ(editingItem);
@@ -207,6 +224,7 @@ export default function AdminPage() {
   const handleDelete = async (id: string) => {
     if (!window.confirm('Delete this item?')) return;
     if (activeTab === 'projects')     await deleteProject(id);
+    if (activeTab === 'posts')        await deletePost(id);
     if (activeTab === 'skills')       await deleteSkill(id);
     if (activeTab === 'testimonials') await deleteTestimonial(id);
     if (activeTab === 'faqs')         await deleteFAQ(id);
@@ -230,8 +248,8 @@ export default function AdminPage() {
 
   const inp = "w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-accent transition-all";
 
-  const isCrudTab = ['projects', 'skills', 'testimonials', 'faqs'].includes(activeTab);
-  const crudItems = activeTab === 'projects' ? projects : activeTab === 'skills' ? skills : activeTab === 'testimonials' ? testimonials : faqs;
+  const isCrudTab = ['projects', 'posts', 'skills', 'testimonials', 'faqs'].includes(activeTab);
+  const crudItems = activeTab === 'projects' ? projects : activeTab === 'posts' ? posts : activeTab === 'skills' ? skills : activeTab === 'testimonials' ? testimonials : faqs;
 
   return (
     <div className="min-h-screen bg-[#0d1117] text-white flex flex-col">
@@ -394,9 +412,11 @@ export default function AdminPage() {
                       <p className="text-white/30 text-sm mt-1">{(crudItems as any[]).length} items</p>
                     </div>
                     <div className="flex gap-3">
-                      <button onClick={seedData} className="px-4 py-2 border border-white/10 rounded-xl text-[10px] font-bold uppercase tracking-widest text-white/40 hover:border-brand-accent hover:text-white transition-all flex items-center gap-2">
-                        <UploadCloud className="w-4 h-4" /> Seed Defaults
-                      </button>
+                      {activeTab !== 'posts' && (
+                        <button onClick={seedData} className="px-4 py-2 border border-white/10 rounded-xl text-[10px] font-bold uppercase tracking-widest text-white/40 hover:border-brand-accent hover:text-white transition-all flex items-center gap-2">
+                          <UploadCloud className="w-4 h-4" /> Seed Defaults
+                        </button>
+                      )}
                       <button onClick={() => setEditingItem({})} className="px-4 py-2 bg-brand-accent text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-blue-400 transition-all flex items-center gap-2">
                         <Plus className="w-4 h-4" /> Add New
                       </button>
@@ -424,6 +444,16 @@ export default function AdminPage() {
                             <div><label className="lbl">Tags (comma-separated)</label><input className={inp} value={Array.isArray(editingItem.tags)?editingItem.tags.join(', '):(editingItem.tags||'')} onChange={e=>setEditingItem({...editingItem,tags:e.target.value.split(',').map((t:string)=>t.trim())})} /></div>
                             <div><label className="lbl">Live Demo URL</label><input className={inp} value={editingItem.demoUrl||''} onChange={e=>setEditingItem({...editingItem,demoUrl:e.target.value})} /></div>
                             <div><label className="lbl">Source / Download URL</label><input className={inp} value={editingItem.downloadUrl||''} onChange={e=>setEditingItem({...editingItem,downloadUrl:e.target.value})} /></div>
+                          </>)}
+                          {activeTab === 'posts' && (<>
+                            <div><label className="lbl">Title</label><input className={inp} value={editingItem.title||''} onChange={e=>setEditingItem({...editingItem,title:e.target.value,slug:editingItem.slug||slugify(e.target.value)})} required /></div>
+                            <div><label className="lbl">Slug (URL)</label><input className={inp} value={editingItem.slug||''} onChange={e=>setEditingItem({...editingItem,slug:slugify(e.target.value)})} placeholder="my-post-title" required /></div>
+                            <div><label className="lbl">Author</label><input className={inp} value={editingItem.author||''} onChange={e=>setEditingItem({...editingItem,author:e.target.value})} placeholder="Imtiaz Ahmad" /></div>
+                            <div><label className="lbl">Cover Image URL</label><input className={inp} value={editingItem.coverImage||''} onChange={e=>setEditingItem({...editingItem,coverImage:e.target.value})} placeholder="https://..." /></div>
+                            <div><label className="lbl">Tags (comma-separated)</label><input className={inp} value={Array.isArray(editingItem.tags)?editingItem.tags.join(', '):(editingItem.tags||'')} onChange={e=>setEditingItem({...editingItem,tags:e.target.value})} placeholder="Product Research, AI" /></div>
+                            <div className="flex items-end"><label className="flex items-center gap-3 cursor-pointer select-none pb-2"><input type="checkbox" checked={!!editingItem.published} onChange={e=>setEditingItem({...editingItem,published:e.target.checked})} className="w-4 h-4 accent-[#1a7fe6]" /><span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{editingItem.published ? 'Published (live)' : 'Draft'}</span></label></div>
+                            <div className="md:col-span-2"><label className="lbl">Excerpt (short summary for cards & SEO)</label><textarea className={inp} rows={2} value={editingItem.excerpt||''} onChange={e=>setEditingItem({...editingItem,excerpt:e.target.value})} required /></div>
+                            <div className="md:col-span-2"><label className="lbl">Content — Markdown (# heading, **bold**, - list, [text](url), ![alt](img))</label><textarea className={`${inp} font-mono`} rows={14} value={editingItem.content||''} onChange={e=>setEditingItem({...editingItem,content:e.target.value})} required style={{lineHeight:1.6}} /></div>
                           </>)}
                           {activeTab === 'skills' && (<>
                             <div><label className="lbl">Skill Name</label><input className={inp} value={editingItem.name||''} onChange={e=>setEditingItem({...editingItem,name:e.target.value})} required /></div>
@@ -458,9 +488,14 @@ export default function AdminPage() {
                     {(crudItems as any[]).map((item, i) => (
                       <div key={item.id||i} className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/[0.05] rounded-xl hover:border-white/10 transition-all group">
                         <div className="min-w-0 flex-1">
-                          <p className="font-medium text-sm text-white truncate">{item.title || item.name || item.question}</p>
+                          <p className="font-medium text-sm text-white truncate flex items-center gap-2">
+                            {activeTab === 'posts' && (
+                              <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest border shrink-0 ${item.published ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'}`}>{item.published ? 'LIVE' : 'DRAFT'}</span>
+                            )}
+                            <span className="truncate">{item.title || item.name || item.question}</span>
+                          </p>
                           <p className="text-[10px] font-mono text-white/30 mt-0.5 uppercase tracking-widest">
-                            {item.category || (item.level !== undefined ? `${item.level}%` : '') || item.company || (item.order !== undefined ? `Order #${item.order}` : '')}
+                            {activeTab === 'posts' ? `/blog/${item.slug}` : (item.category || (item.level !== undefined ? `${item.level}%` : '') || item.company || (item.order !== undefined ? `Order #${item.order}` : ''))}
                           </p>
                         </div>
                         <div className="flex gap-2 ml-4 opacity-0 group-hover:opacity-100 transition-opacity">
