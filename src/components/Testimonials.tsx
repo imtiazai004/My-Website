@@ -1,8 +1,13 @@
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Quote } from "lucide-react";
 import { TestimonialsColumn } from "./ui/testimonials-columns-1";
+import { subscribeToTestimonials } from "../services/dataService";
+import { Testimonial } from "../types";
 
-const testimonials = [
+type ColumnItem = { text: string; image: string; name: string; role: string };
+
+const STATIC_TESTIMONIALS: ColumnItem[] = [
   {
     text: "This ERP revolutionized our operations, streamlining finance and inventory. The cloud-based platform keeps us productive, even remotely.",
     image: "https://randomuser.me/api/portraits/women/1.jpg",
@@ -59,11 +64,28 @@ const testimonials = [
   },
 ];
 
-const firstColumn = testimonials.slice(0, 3);
-const secondColumn = testimonials.slice(3, 6);
-const thirdColumn = testimonials.slice(6, 9);
-
 export default function Testimonials() {
+  const [items, setItems] = useState<ColumnItem[]>(STATIC_TESTIMONIALS);
+
+  useEffect(() => {
+    const unsub = subscribeToTestimonials((data: Testimonial[]) => {
+      if (data.length >= 3) {
+        setItems(data.map(t => ({
+          text: t.content,
+          image: t.avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=random&color=fff&size=128`,
+          name: t.name,
+          role: t.company ? `${t.role} · ${t.company}` : t.role,
+        })));
+      }
+    });
+    return unsub;
+  }, []);
+
+  const third = Math.ceil(items.length / 3);
+  const firstColumn = items.slice(0, third);
+  const secondColumn = items.slice(third, third * 2);
+  const thirdColumn = items.slice(third * 2);
+
   return (
     <section id="testimonials" className="py-40 px-6 relative overflow-hidden bg-[#f1f5f9]">
       {/* Dot grid */}

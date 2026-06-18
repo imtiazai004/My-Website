@@ -24,6 +24,7 @@ const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const ProfitScoutPage = lazy(() => import('./components/ProfitScoutPage'));
 const BlogPage = lazy(() => import('./components/BlogPage'));
 const BlogPostPage = lazy(() => import('./components/BlogPostPage'));
+const SubmitTestimonial = lazy(() => import('./components/SubmitTestimonial'));
 
 const ADMIN_PATH = '/sts-x9k2m7p4-console';
 
@@ -65,6 +66,12 @@ function MainSite() {
   );
 }
 
+const LoadingSpinner = (
+  <div className="min-h-screen bg-brand-bg flex items-center justify-center">
+    <div className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin" />
+  </div>
+);
+
 export default function App() {
   return (
     <AuthProvider>
@@ -74,63 +81,27 @@ export default function App() {
           <Route path="/" element={<MainSite />} />
           <Route
             path={ADMIN_PATH}
-            element={
-              <Suspense fallback={
-                <div className="min-h-screen bg-brand-bg flex items-center justify-center">
-                  <div className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin" />
-                </div>
-              }>
-                <AdminPage />
-              </Suspense>
-            }
+            element={<Suspense fallback={LoadingSpinner}><AdminPage /></Suspense>}
           />
           <Route
             path="/profitscout"
-            element={
-              <Suspense fallback={
-                <div className="min-h-screen bg-brand-bg flex items-center justify-center">
-                  <div className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin" />
-                </div>
-              }>
-                <ProfitScoutPage />
-              </Suspense>
-            }
+            element={<Suspense fallback={LoadingSpinner}><ProfitScoutPage /></Suspense>}
           />
           <Route
             path="/profitscout-privacy"
-            element={
-              <Suspense fallback={
-                <div className="min-h-screen bg-brand-bg flex items-center justify-center">
-                  <div className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin" />
-                </div>
-              }>
-                <PrivacyPolicy />
-              </Suspense>
-            }
+            element={<Suspense fallback={LoadingSpinner}><PrivacyPolicy /></Suspense>}
           />
           <Route
             path="/blog"
-            element={
-              <Suspense fallback={
-                <div className="min-h-screen bg-brand-bg flex items-center justify-center">
-                  <div className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin" />
-                </div>
-              }>
-                <BlogPage />
-              </Suspense>
-            }
+            element={<Suspense fallback={LoadingSpinner}><BlogPage /></Suspense>}
           />
           <Route
             path="/blog/:slug"
-            element={
-              <Suspense fallback={
-                <div className="min-h-screen bg-brand-bg flex items-center justify-center">
-                  <div className="w-6 h-6 border-2 border-brand-accent border-t-transparent rounded-full animate-spin" />
-                </div>
-              }>
-                <BlogPostPage />
-              </Suspense>
-            }
+            element={<Suspense fallback={LoadingSpinner}><BlogPostPage /></Suspense>}
+          />
+          <Route
+            path="/submit-testimonial"
+            element={<Suspense fallback={LoadingSpinner}><SubmitTestimonial /></Suspense>}
           />
           <Route path="*" element={<MainSite />} />
         </Routes>
