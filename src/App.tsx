@@ -25,6 +25,7 @@ const ProfitScoutPage = lazy(() => import('./components/ProfitScoutPage'));
 const BlogPage = lazy(() => import('./components/BlogPage'));
 const BlogPostPage = lazy(() => import('./components/BlogPostPage'));
 const SubmitTestimonial = lazy(() => import('./components/SubmitTestimonial'));
+const ChatWidget = lazy(() => import('./components/ChatWidget'));
 
 const ADMIN_PATH = '/sts-x9k2m7p4-console';
 
@@ -105,6 +106,9 @@ export default function App() {
           />
           <Route path="*" element={<MainSite />} />
         </Routes>
+        <Suspense fallback={null}>
+          <ChatWidget />
+        </Suspense>
       </BrowserRouter>
     </AuthProvider>
   );
