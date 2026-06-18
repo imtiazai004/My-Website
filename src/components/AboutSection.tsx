@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowRight, Award, Clock, Users, Zap, CheckCircle2, Globe } from 'lucide-react';
 
 const STATS = [
-  { value: '200+', label: 'Projects Shipped' },
+  { value: '100+', label: 'Projects Shipped' },
   { value: '3+', label: 'Years Experience' },
   { value: '100%', label: 'Client Satisfaction' },
   { value: '<24h', label: 'Response Time' },
