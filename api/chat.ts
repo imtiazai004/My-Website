@@ -111,7 +111,7 @@ export default async function handler(req: any, res: any) {
 
     // All keys exhausted
     console.error('All Gemini keys failed:', lastError);
-    return res.status(503).json({ error: 'Service temporarily unavailable. Please try again later.' });
+    return res.status(200).json({ message: `[DEBUG] Keys found: ${keys.length}, Last error: ${lastError}`, requestContact: false });
 
   } catch (err) {
     console.error('Chat handler error:', err);
