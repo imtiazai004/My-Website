@@ -22,7 +22,7 @@
       "destination": "/profitscout-privacy.html"
     },
     {
-      "source": "/((?!api/).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]

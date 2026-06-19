@@ -41,7 +41,20 @@ export default function ChatWidget() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: updated }),
       });
-      const data = await res.json();
+
+      let data: any = {};
+      try {
+        data = await res.json();
+      } catch {
+        setMessages(prev => [...prev, { role: 'assistant', content: 'Service is temporarily unavailable. Please try again in a moment.' }]);
+        return;
+      }
+
+      if (!res.ok || !data.message) {
+        setMessages(prev => [...prev, { role: 'assistant', content: 'I\'m having trouble responding right now. Please try again shortly.' }]);
+        return;
+      }
+
       setMessages(prev => [...prev, { role: 'assistant', content: data.message }]);
       if (data.requestContact && !leadCaptured && !showLeadForm) {
         setTimeout(() => setShowLeadForm(true), 400);
@@ -49,7 +62,7 @@ export default function ChatWidget() {
     } catch {
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'Something went wrong. Please try again or contact us directly through our website.',
+        content: 'Network error. Please check your connection and try again.',
       }]);
     } finally {
       setLoading(false);

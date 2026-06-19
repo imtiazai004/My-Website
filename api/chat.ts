@@ -90,11 +90,17 @@ export default async function handler(req: any, res: any) {
         continue;
       }
 
-      const data = await geminiRes.json();
-      const raw = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      let data: any;
+      try {
+        data = await geminiRes.json();
+      } catch {
+        lastError = 'json_parse_error';
+        continue;
+      }
 
+      const raw = data.candidates?.[0]?.content?.parts?.[0]?.text;
       if (!raw) {
-        lastError = 'empty_response';
+        lastError = `empty_response: ${JSON.stringify(data?.error || data?.promptFeedback || '')}`;
         continue;
       }
 
