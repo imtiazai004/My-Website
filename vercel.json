@@ -1,4 +1,6 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "functions": {
     "api/chat.ts": {
       "runtime": "nodejs18.x"
@@ -25,10 +27,6 @@
     {
       "source": "/profitscout-privacy",
       "destination": "/profitscout-privacy.html"
-    },
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
     },
     {
       "source": "/(.*)",
