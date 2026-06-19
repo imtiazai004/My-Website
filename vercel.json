@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/chat.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "redirects": [
     {
       "source": "/(.*)",
@@ -20,6 +25,10 @@
     {
       "source": "/profitscout-privacy",
       "destination": "/profitscout-privacy.html"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     },
     {
       "source": "/(.*)",
