@@ -5,8 +5,20 @@ import { Project, Testimonial, Skill, FAQ, SectionSettings } from './types';
 export const PROJECT_LOGO_MAP: Record<string, string> = {
   'Amazon Product Hunting': '/projects/amazon-hunt.svg',
   'Nursing App': '/projects/nursing-app.svg',
+  'Soft Clipper': '/projects/soft-clipper.svg',
 };                                                                                                                                                                                     
   export const PROJECTS: Project[] = [
+    {
+      id: '9',
+      title: 'Soft Clipper',
+      description: 'A free Windows app that turns long videos into viral vertical clips for TikTok, Instagram Reels and YouTube Shorts. AI finds the most viral-worthy moments with a virality score, reframes them to 9:16 while keeping the speaker in frame, burns in captions, and exports ready-to-post clips. Also builds teasers and highlight reels, with prompt-based search and per-clip AI editing.',
+      category: 'Desktop App',
+      tags: ['Python', 'React', 'FastAPI', 'Gemini AI', 'Windows'],
+      imageUrl: '/projects/soft-clipper.svg',
+      demoUrl: '#',
+      downloadUrl: 'https://github.com/imtiazai004/Soft-Clipper/releases/latest/download/Soft-Clipper.zip',
+      stats: [{ label: 'Platform', value: 'Windows' }, { label: 'Price', value: 'Free' }]
+    },
     {
       id: '1',
       title: 'SoftFlow SaaS',
