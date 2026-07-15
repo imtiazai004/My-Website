@@ -15,7 +15,7 @@ export const PROJECT_LOGO_MAP: Record<string, string> = {
       category: 'Desktop App',
       tags: ['Python', 'React', 'FastAPI', 'Gemini AI', 'Windows'],
       imageUrl: '/projects/soft-clipper.svg',
-      demoUrl: '#',
+      demoUrl: '/soft-clipper',
       downloadUrl: 'https://github.com/imtiazai004/Soft-Clipper/releases/latest/download/Soft-Clipper.zip',
       stats: [{ label: 'Platform', value: 'Windows' }, { label: 'Price', value: 'Free' }]
     },

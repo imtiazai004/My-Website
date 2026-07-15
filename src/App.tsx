@@ -22,6 +22,7 @@ const Footer = lazy(() => import('./components/Footer'));
 const AdminPage = lazy(() => import('./components/AdminPage'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const ProfitScoutPage = lazy(() => import('./components/ProfitScoutPage'));
+const SoftClipperPage = lazy(() => import('./components/SoftClipperPage'));
 const BlogPage = lazy(() => import('./components/BlogPage'));
 const BlogPostPage = lazy(() => import('./components/BlogPostPage'));
 const SubmitTestimonial = lazy(() => import('./components/SubmitTestimonial'));
@@ -87,6 +88,10 @@ export default function App() {
           <Route
             path="/profitscout"
             element={<Suspense fallback={LoadingSpinner}><ProfitScoutPage /></Suspense>}
+          />
+          <Route
+            path="/soft-clipper"
+            element={<Suspense fallback={LoadingSpinner}><SoftClipperPage /></Suspense>}
           />
           <Route
             path="/profitscout-privacy"
