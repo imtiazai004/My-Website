@@ -493,9 +493,9 @@ export default function AdminPage() {
                             <div><label className="lbl">Tags (comma-separated)</label><input className={inp} placeholder="e.g. amazon, saas, ai" value={Array.isArray(editingItem.tags)?editingItem.tags.join(', '):(editingItem.tags||'')} onChange={e=>setEditingItem({...editingItem,tags:e.target.value.split(',').map((t:string)=>t.trim()).filter(Boolean)})} /></div>
                             <div><label className="lbl">Download File Name</label><input className={inp} placeholder="blueprint-name.html" value={editingItem.fileName||''} onChange={e=>setEditingItem({...editingItem,fileName:e.target.value})} required /></div>
                             <div className="md:col-span-2">
-                              <label className="lbl">HTML Content — paste your full .html file here</label>
-                              <textarea className={inp} rows={14} style={{fontFamily:'monospace',fontSize:'12px'}} value={editingItem.content||''} onChange={e=>setEditingItem({...editingItem,content:e.target.value})} placeholder="<!doctype html>..." required />
-                              <p className="text-[10px] text-white/20 mt-1.5 font-mono">Open your .html file in Notepad → Select All → Copy → Paste here</p>
+                              <label className="lbl">Content — Markdown format</label>
+                              <textarea className={inp} rows={16} style={{fontFamily:'monospace',fontSize:'13px',lineHeight:1.6}} value={editingItem.content||''} onChange={e=>setEditingItem({...editingItem,content:e.target.value})} placeholder={`# Blueprint Title\n\n## Introduction\nWrite your guide here...\n\n## Step 1: Setup\n- First do this\n- Then do that\n\n## Step 2: Build\n**Bold text**, *italic*, \`code\`\n\n> Tip: Use blockquotes for important notes`} required />
+                              <p className="text-[10px] text-white/20 mt-1.5 font-mono"># H1 &nbsp;## H2 &nbsp;**bold** &nbsp;*italic* &nbsp;- list &nbsp;1. numbered &nbsp;`code` &nbsp;[link](url)</p>
                             </div>
                           </>)}
                         </div>
