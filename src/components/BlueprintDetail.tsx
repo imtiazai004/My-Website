@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 import { getBlueprint } from '../services/dataService';
 import { Blueprint } from '../types';
 
-const mdComponents: React.ComponentProps<typeof ReactMarkdown>['components'] = {
+const mdComponents = {
   h1: ({ children }) => <h1 className="text-3xl font-bold text-slate-900 mt-10 mb-4 leading-tight">{children}</h1>,
   h2: ({ children }) => <h2 className="text-2xl font-bold text-slate-800 mt-8 mb-3 pb-2 border-b border-slate-200">{children}</h2>,
   h3: ({ children }) => <h3 className="text-xl font-semibold text-slate-700 mt-6 mb-2">{children}</h3>,
@@ -106,7 +106,6 @@ function buildHtmlTemplate(blueprint: Blueprint, forPrint = false): string {
 
 function generateDownloadHtml(blueprint: Blueprint): string {
   return buildHtmlTemplate(blueprint, false);
-}
 }
 
 function DownloadMenu({ onHTML, onPDF, dark = false }: { onHTML: () => void; onPDF: () => void; dark?: boolean }) {
