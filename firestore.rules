@@ -56,7 +56,7 @@ service cloud.firestore {
     // Testimonials
     match /testimonials/{testimonialId} {
       allow read: if true;
-      allow create: if isAdmin() && isValidId(testimonialId) && isValidTestimonial(incoming());
+      allow create: if isValidId(testimonialId) && isValidTestimonial(incoming());
       allow update: if isAdmin() && isValidTestimonial(incoming());
       allow delete: if isAdmin();
     }
@@ -68,6 +68,23 @@ service cloud.firestore {
         && data.company is string && data.company.size() <= 100
         && data.content is string && data.content.size() <= 1000
         && data.avatarUrl is string && data.avatarUrl.size() <= 1000;
+    }
+
+    // Blueprints
+    match /blueprints/{blueprintId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidBlueprint(incoming());
+      allow update: if isAdmin() && isValidBlueprint(incoming());
+      allow delete: if isAdmin();
+    }
+
+    function isValidBlueprint(data) {
+      return data.keys().hasAll(['title', 'description', 'category', 'content', 'fileName', 'createdAt'])
+        && data.title is string && data.title.size() <= 200
+        && data.description is string && data.description.size() <= 2000
+        && data.category is string && data.category.size() <= 100
+        && data.content is string
+        && data.fileName is string && data.fileName.size() <= 500;
     }
 
     // Skills

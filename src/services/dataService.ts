@@ -1,6 +1,7 @@
-import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, Timestamp, addDoc, serverTimestamp, limit } from 'firebase/firestore';
-import { db, handleFirestoreError } from '../lib/firebase';
-import { Project, Testimonial, Skill, FAQ, SectionSettings, BlogPost } from '../types';
+import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, Timestamp, addDoc, serverTimestamp, limit, getDoc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { db, storage, handleFirestoreError } from '../lib/firebase';
+import { Project, Testimonial, Skill, FAQ, SectionSettings, BlogPost, Blueprint } from '../types';
 import { DEFAULT_SECTION_SETTINGS } from '../constants';
 
 export const subscribeToProjects = (callback: (projects: Project[]) => void) => {
@@ -84,6 +85,15 @@ export const deleteSkill = async (id: string) => {
   } catch (error) {
     handleFirestoreError(error, 'delete', `skills/${id}`);
   }
+};
+
+export const submitTestimonial = async (data: { name: string; role: string; company: string; content: string }) => {
+  const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&background=4F46E5&color=FFFFFF&size=128&bold=true`;
+  await addDoc(collection(db, 'testimonials'), {
+    ...data,
+    avatarUrl,
+    createdAt: serverTimestamp(),
+  });
 };
 
 export const saveTestimonial = async (testimonial: any) => {
@@ -198,7 +208,6 @@ export const saveSectionSettings = async (settings: SectionSettings) => {
 
 // ---------- Blog posts ----------
 
-// All posts (admin) — newest first.
 export const subscribeToPosts = (callback: (posts: BlogPost[]) => void) => {
   const q = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
   return onSnapshot(q, (snapshot) => {
@@ -207,7 +216,6 @@ export const subscribeToPosts = (callback: (posts: BlogPost[]) => void) => {
   }, (error) => handleFirestoreError(error, 'list', 'posts'));
 };
 
-// Published posts only — filtered client-side to avoid a composite index.
 export const subscribeToPublishedPosts = (callback: (posts: BlogPost[]) => void) => {
   return subscribeToPosts((posts) => callback(posts.filter(p => p.published)));
 };
@@ -235,6 +243,56 @@ export const deletePost = async (id: string) => {
     await deleteDoc(doc(db, 'posts', id));
   } catch (error) {
     handleFirestoreError(error, 'delete', `posts/${id}`);
+  }
+};
+
+// ---------- Blueprints ----------
+
+export const uploadBlueprintFile = async (file: File): Promise<{ fileUrl: string; fileName: string }> => {
+  const storageRef = ref(storage, `blueprints/${Date.now()}_${file.name}`);
+  await uploadBytes(storageRef, file, {
+    contentDisposition: `attachment; filename="${file.name}"`,
+  });
+  const fileUrl = await getDownloadURL(storageRef);
+  return { fileUrl, fileName: file.name };
+};
+
+export const getBlueprint = async (id: string): Promise<Blueprint | null> => {
+  const snap = await getDoc(doc(db, 'blueprints', id));
+  if (!snap.exists()) return null;
+  return { id: snap.id, ...snap.data() } as Blueprint;
+};
+
+export const subscribeToBlueprints = (callback: (blueprints: Blueprint[]) => void) => {
+  const q = query(collection(db, 'blueprints'), orderBy('createdAt', 'desc'));
+  return onSnapshot(q, (snapshot) => {
+    const blueprints = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Blueprint));
+    callback(blueprints);
+  }, (error) => handleFirestoreError(error, 'list', 'blueprints'));
+};
+
+export const saveBlueprint = async (blueprint: any) => {
+  try {
+    const { id, ...fields } = blueprint;
+    const data = {
+      ...fields,
+      createdAt: id ? (fields.createdAt || serverTimestamp()) : serverTimestamp(),
+    };
+    if (id) {
+      await setDoc(doc(db, 'blueprints', id), data);
+    } else {
+      await addDoc(collection(db, 'blueprints'), data);
+    }
+  } catch (error) {
+    handleFirestoreError(error, blueprint.id ? 'update' : 'create', `blueprints/${blueprint.id || 'new'}`);
+  }
+};
+
+export const deleteBlueprint = async (id: string) => {
+  try {
+    await deleteDoc(doc(db, 'blueprints', id));
+  } catch (error) {
+    handleFirestoreError(error, 'delete', `blueprints/${id}`);
   }
 };
 

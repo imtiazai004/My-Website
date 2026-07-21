@@ -27,6 +27,8 @@ const BlogPage = lazy(() => import('./components/BlogPage'));
 const BlogPostPage = lazy(() => import('./components/BlogPostPage'));
 const SubmitTestimonial = lazy(() => import('./components/SubmitTestimonial'));
 const ChatWidget = lazy(() => import('./components/ChatWidget'));
+const BlueprintLibrary = lazy(() => import('./components/BlueprintLibrary'));
+const BlueprintDetail = lazy(() => import('./components/BlueprintDetail'));
 
 const ADMIN_PATH = '/sts-x9k2m7p4-console';
 
@@ -109,6 +111,16 @@ export default function App() {
             path="/submit-testimonial"
             element={<Suspense fallback={LoadingSpinner}><SubmitTestimonial /></Suspense>}
           />
+          <Route path="/blueprint-library" element={
+            <Suspense fallback={<div className="min-h-screen bg-[#030712]" />}>
+              <BlueprintLibrary />
+            </Suspense>
+          } />
+          <Route path="/blueprint-library/:id" element={
+            <Suspense fallback={<div className="min-h-screen bg-[#030712]" />}>
+              <BlueprintDetail />
+            </Suspense>
+          } />
           <Route path="*" element={<MainSite />} />
         </Routes>
         <Suspense fallback={null}>

@@ -7,6 +7,7 @@ import {
   Send, LayoutDashboard, HelpCircle, Layers, Eye,
   ArrowLeft, Terminal, XCircle, ToggleLeft, ToggleRight,
   TrendingUp, Users, MousePointer2, Mail, Globe, Monitor, Smartphone, PenLine,
+  BookOpen,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { auth, signInWithPopup, googleProvider } from '../lib/firebase';
@@ -18,8 +19,9 @@ import {
   subscribeToFAQs, saveFAQ, deleteFAQ,
   subscribeToSectionSettings, saveSectionSettings,
   subscribeToPosts, savePost, deletePost,
+  subscribeToBlueprints, saveBlueprint, deleteBlueprint,
 } from '../services/dataService';
-import { Project, Skill, Testimonial, FAQ, SectionSettings, BlogPost } from '../types';
+import { Project, Skill, Testimonial, FAQ, SectionSettings, BlogPost, Blueprint } from '../types';
 import { slugify } from '../lib/seo';
 import {
   PROJECTS as INITIAL_PROJECTS, SKILLS as INITIAL_SKILLS,
@@ -27,7 +29,7 @@ import {
   DEFAULT_SECTION_SETTINGS,
 } from '../constants';
 
-type Tab = 'overview' | 'projects' | 'posts' | 'skills' | 'testimonials' | 'faqs' | 'sections' | 'messages' | 'activity';
+type Tab = 'overview' | 'projects' | 'posts' | 'skills' | 'testimonials' | 'faqs' | 'blueprints' | 'sections' | 'messages' | 'activity';
 
 const TABS: { id: Tab; label: string; icon: React.ElementType }[] = [
   { id: 'overview',      label: 'Overview',      icon: LayoutDashboard },
@@ -36,6 +38,7 @@ const TABS: { id: Tab; label: string; icon: React.ElementType }[] = [
   { id: 'testimonials',  label: 'Testimonials',   icon: MessageSquareQuote },
   { id: 'skills',        label: 'Skills',          icon: BrainCircuit },
   { id: 'faqs',          label: 'FAQs',            icon: HelpCircle },
+  { id: 'blueprints',    label: 'Blueprints',      icon: BookOpen },
   { id: 'sections',      label: 'Sections',        icon: Layers },
   { id: 'messages',      label: 'Messages',        icon: Send },
   { id: 'activity',      label: 'Activity',        icon: TrendingUp },
@@ -169,12 +172,15 @@ export default function AdminPage() {
   const [skills,          setSkills]          = useState<Skill[]>([]);
   const [testimonials,    setTestimonials]    = useState<Testimonial[]>([]);
   const [faqs,            setFaqs]            = useState<FAQ[]>([]);
+  const [blueprints,      setBlueprints]      = useState<Blueprint[]>([]);
   const [sectionSettings, setSectionSettings] = useState<SectionSettings>(DEFAULT_SECTION_SETTINGS);
   const [activityLogs,    setActivityLogs]    = useState<any[]>([]);
   const [contacts,        setContacts]        = useState<any[]>([]);
 
   const [editingItem,  setEditingItem]  = useState<any | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading,  setIsUploading]  = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [savingSection, setSavingSection] = useState(false);
 
   useEffect(() => {
@@ -185,6 +191,7 @@ export default function AdminPage() {
       subscribeToSkills(setSkills),
       subscribeToTestimonials(setTestimonials),
       subscribeToFAQs(setFaqs),
+      subscribeToBlueprints(setBlueprints),
       subscribeToSectionSettings(setSectionSettings),
       subscribeToActivity(setActivityLogs),
       subscribeToContacts(setContacts),
@@ -217,8 +224,9 @@ export default function AdminPage() {
       if (activeTab === 'skills')       await saveSkill(editingItem);
       if (activeTab === 'testimonials') await saveTestimonial(editingItem);
       if (activeTab === 'faqs')         await saveFAQ(editingItem);
+      if (activeTab === 'blueprints')   await saveBlueprint(editingItem);
       setEditingItem(null);
-    } finally { setIsSubmitting(false); }
+    } finally { setIsSubmitting(false); setIsUploading(false); }
   };
 
   const handleDelete = async (id: string) => {
@@ -228,6 +236,7 @@ export default function AdminPage() {
     if (activeTab === 'skills')       await deleteSkill(id);
     if (activeTab === 'testimonials') await deleteTestimonial(id);
     if (activeTab === 'faqs')         await deleteFAQ(id);
+    if (activeTab === 'blueprints')   await deleteBlueprint(id);
   };
 
   const handleToggleSection = async (key: keyof SectionSettings) => {
@@ -248,8 +257,13 @@ export default function AdminPage() {
 
   const inp = "w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-accent transition-all";
 
-  const isCrudTab = ['projects', 'posts', 'skills', 'testimonials', 'faqs'].includes(activeTab);
-  const crudItems = activeTab === 'projects' ? projects : activeTab === 'posts' ? posts : activeTab === 'skills' ? skills : activeTab === 'testimonials' ? testimonials : faqs;
+  const isCrudTab = ['projects', 'posts', 'skills', 'testimonials', 'faqs', 'blueprints'].includes(activeTab);
+  const crudItems = activeTab === 'projects' ? projects
+    : activeTab === 'posts' ? posts
+    : activeTab === 'skills' ? skills
+    : activeTab === 'testimonials' ? testimonials
+    : activeTab === 'blueprints' ? blueprints
+    : faqs;
 
   return (
     <div className="min-h-screen bg-[#0d1117] text-white flex flex-col">
@@ -412,7 +426,7 @@ export default function AdminPage() {
                       <p className="text-white/30 text-sm mt-1">{(crudItems as any[]).length} items</p>
                     </div>
                     <div className="flex gap-3">
-                      {activeTab !== 'posts' && (
+                      {activeTab !== 'posts' && activeTab !== 'blueprints' && (
                         <button onClick={seedData} className="px-4 py-2 border border-white/10 rounded-xl text-[10px] font-bold uppercase tracking-widest text-white/40 hover:border-brand-accent hover:text-white transition-all flex items-center gap-2">
                           <UploadCloud className="w-4 h-4" /> Seed Defaults
                         </button>
@@ -472,9 +486,21 @@ export default function AdminPage() {
                             <div className="md:col-span-2"><label className="lbl">Answer</label><textarea className={inp} rows={4} value={editingItem.answer||''} onChange={e=>setEditingItem({...editingItem,answer:e.target.value})} required /></div>
                             <div><label className="lbl">Display Order</label><input type="number" className={inp} value={editingItem.order||1} onChange={e=>setEditingItem({...editingItem,order:parseInt(e.target.value)})} /></div>
                           </>)}
+                          {activeTab === 'blueprints' && (<>
+                            <div><label className="lbl">Title</label><input className={inp} value={editingItem.title||''} onChange={e=>setEditingItem({...editingItem,title:e.target.value})} required /></div>
+                            <div><label className="lbl">Category</label><input className={inp} placeholder="e.g. Landing Page, SaaS, E-commerce" value={editingItem.category||''} onChange={e=>setEditingItem({...editingItem,category:e.target.value})} required /></div>
+                            <div className="md:col-span-2"><label className="lbl">Description</label><textarea className={inp} rows={2} value={editingItem.description||''} onChange={e=>setEditingItem({...editingItem,description:e.target.value})} required /></div>
+                            <div><label className="lbl">Tags (comma-separated)</label><input className={inp} placeholder="e.g. amazon, saas, ai" value={Array.isArray(editingItem.tags)?editingItem.tags.join(', '):(editingItem.tags||'')} onChange={e=>setEditingItem({...editingItem,tags:e.target.value.split(',').map((t:string)=>t.trim()).filter(Boolean)})} /></div>
+                            <div><label className="lbl">Download File Name</label><input className={inp} placeholder="blueprint-name.html" value={editingItem.fileName||''} onChange={e=>setEditingItem({...editingItem,fileName:e.target.value})} required /></div>
+                            <div className="md:col-span-2">
+                              <label className="lbl">HTML Content — paste your full .html file here</label>
+                              <textarea className={inp} rows={14} style={{fontFamily:'monospace',fontSize:'12px'}} value={editingItem.content||''} onChange={e=>setEditingItem({...editingItem,content:e.target.value})} placeholder="<!doctype html>..." required />
+                              <p className="text-[10px] text-white/20 mt-1.5 font-mono">Open your .html file in Notepad → Select All → Copy → Paste here</p>
+                            </div>
+                          </>)}
                         </div>
                         <div className="flex justify-end gap-3 pt-2">
-                          <button type="button" onClick={()=>setEditingItem(null)} className="text-xs font-bold text-white/30 hover:text-white uppercase tracking-widest transition-colors">Cancel</button>
+                          <button type="button" onClick={()=>{setEditingItem(null);setSelectedFile(null);}} className="text-xs font-bold text-white/30 hover:text-white uppercase tracking-widest transition-colors">Cancel</button>
                           <button disabled={isSubmitting} className="px-6 py-2.5 bg-brand-accent text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-blue-400 transition-all flex items-center gap-2 disabled:opacity-50">
                             <Save className="w-3.5 h-3.5" /> {isSubmitting ? 'Saving…' : 'Save'}
                           </button>
@@ -495,7 +521,9 @@ export default function AdminPage() {
                             <span className="truncate">{item.title || item.name || item.question}</span>
                           </p>
                           <p className="text-[10px] font-mono text-white/30 mt-0.5 uppercase tracking-widest">
-                            {activeTab === 'posts' ? `/blog/${item.slug}` : (item.category || (item.level !== undefined ? `${item.level}%` : '') || item.company || (item.order !== undefined ? `Order #${item.order}` : ''))}
+                            {activeTab === 'posts'
+                              ? `/blog/${item.slug}`
+                              : (item.category || (item.level !== undefined ? `${item.level}%` : '') || item.company || (item.order !== undefined ? `Order #${item.order}` : '') || '')}
                           </p>
                         </div>
                         <div className="flex gap-2 ml-4 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -509,7 +537,7 @@ export default function AdminPage() {
                       </div>
                     ))}
                     {(crudItems as any[]).length === 0 && (
-                      <div className="text-center py-12 text-white/20 text-sm">No items yet. Click "Add New" or "Seed Defaults".</div>
+                      <div className="text-center py-12 text-white/20 text-sm">No items yet. Click "Add New" to get started.</div>
                     )}
                   </div>
                 </div>

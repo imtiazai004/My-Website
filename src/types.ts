@@ -46,6 +46,17 @@ export interface BlogPost {
   updatedAt?: any;
 }
 
+export interface Blueprint {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  content: string;
+  fileName: string;
+  tags: string[];
+  createdAt: any;
+}
+
 export interface SectionSettings {
   clientLogos: boolean;
   about: boolean;

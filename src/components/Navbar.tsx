@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Logo } from './Logo';
 import {
@@ -7,7 +7,7 @@ import {
   ShoppingCart, Server, Blocks, Code2, Briefcase,
   ChevronDown, ArrowRight, Mail, MessageCircle,
   Layers, Star, Cpu, Users, HelpCircle, X, Menu,
-  Zap, Shield, BarChart3, Bot, PenLine,
+  Zap, Shield, BarChart3, Bot, PenLine, BookOpen,
 } from 'lucide-react';
 
 /* ─── Data ─────────────────────────────────────────────────── */
@@ -166,6 +166,13 @@ export default function Navbar() {
             >
               Blog
             </a>
+            <Link
+              to="/blueprint-library"
+              className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-slate-900/[0.04]"
+            >
+              Blueprints
+            </Link>
+
             <button
               onClick={() => scrollTo('#contact')}
               className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-slate-900/[0.04]"
@@ -415,6 +422,20 @@ export default function Navbar() {
                 </div>
                 <span className="text-[13px] font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">Blog</span>
               </a>
+
+              <Link
+                to="/blueprint-library"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-900/[0.04] transition-all group text-left"
+              >
+                <div className="w-8 h-8 rounded-lg bg-brand-accent/10 text-brand-accent flex items-center justify-center shrink-0">
+                  <BookOpen className="w-4 h-4" />
+                </div>
+                <div>
+                  <p className="text-[13px] font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">Blueprint Library</p>
+                  <p className="text-[10px] text-slate-400">Free daily building guides</p>
+                </div>
+              </Link>
             </div>
 
             <div className="p-6 border-t border-slate-900/[0.07] space-y-3">
