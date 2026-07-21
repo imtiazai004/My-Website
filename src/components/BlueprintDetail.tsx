@@ -130,7 +130,7 @@ export default function BlueprintDetail() {
                   onLoad={handleIframeLoad}
                   style={{ height: `${iframeHeight}px` }}
                   className="w-full bg-white"
-                  sandbox="allow-same-origin allow-popups"
+                  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
                 />
               </div>
 
