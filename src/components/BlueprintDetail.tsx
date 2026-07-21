@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowLeft, Download, BookOpen, Calendar, Tag, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Download, BookOpen, Calendar, Tag, ExternalLink, FileText } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Navbar from './Navbar';
@@ -63,7 +63,18 @@ const mdComponents: React.ComponentProps<typeof ReactMarkdown>['components'] = {
   ),
 };
 
-function generateDownloadHtml(blueprint: Blueprint): string {
+function buildHtmlTemplate(blueprint: Blueprint, forPrint = false): string {
+  const printScript = forPrint
+    ? `window.addEventListener('load', function() { setTimeout(function() { window.print(); }, 400); });`
+    : '';
+  const printCss = forPrint ? `
+    @media print {
+      .meta { display: none; }
+      pre, blockquote, table { page-break-inside: avoid; }
+      h2, h3, h4 { page-break-after: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+    @page { margin: 2cm 2.5cm; }` : '';
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,6 +87,7 @@ function generateDownloadHtml(blueprint: Blueprint): string {
     .markdown-body { box-sizing: border-box; max-width: 860px; margin: 0 auto; padding: 40px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
     .meta { font-size: 12px; color: #666; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #e5e7eb; }
     @media (max-width: 640px) { .markdown-body { padding: 20px 16px; } }
+    ${printCss}
   </style>
 </head>
 <body>
@@ -86,9 +98,15 @@ function generateDownloadHtml(blueprint: Blueprint): string {
   <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
   <script>
     document.getElementById('content').innerHTML = marked.parse(${JSON.stringify(blueprint.content)});
+    ${printScript}
   </script>
 </body>
 </html>`;
+}
+
+function generateDownloadHtml(blueprint: Blueprint): string {
+  return buildHtmlTemplate(blueprint, false);
+}
 }
 
 export default function BlueprintDetail() {
@@ -127,6 +145,15 @@ export default function BlueprintDetail() {
     const url = URL.createObjectURL(blob);
     window.open(url, '_blank');
     setTimeout(() => URL.revokeObjectURL(url), 10000);
+  };
+
+  const handleDownloadPDF = () => {
+    if (!blueprint) return;
+    const html = buildHtmlTemplate(blueprint, true);
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
   };
 
   return (
@@ -186,7 +213,7 @@ export default function BlueprintDetail() {
                       ))}
                     </div>
                   )}
-                  <div className="ml-auto flex items-center gap-2">
+                  <div className="ml-auto flex items-center gap-2 flex-wrap">
                     <button
                       onClick={handleOpenInTab}
                       className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 text-white/60 text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-white/10 hover:text-white transition-colors"
@@ -194,10 +221,16 @@ export default function BlueprintDetail() {
                       <ExternalLink className="w-3.5 h-3.5" /> Full Screen
                     </button>
                     <button
+                      onClick={handleDownloadPDF}
+                      className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 text-white/60 text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-white/10 hover:text-white transition-colors"
+                    >
+                      <FileText className="w-3.5 h-3.5" /> Download PDF
+                    </button>
+                    <button
                       onClick={handleDownload}
                       className="flex items-center gap-2 px-4 py-2 bg-brand-accent text-white text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-brand-accent/80 transition-colors"
                     >
-                      <Download className="w-3.5 h-3.5" /> Download
+                      <Download className="w-3.5 h-3.5" /> Download HTML
                     </button>
                   </div>
                 </div>
@@ -214,12 +247,18 @@ export default function BlueprintDetail() {
                 {/* Bottom CTA inside card */}
                 <div className="border-t border-slate-100 px-8 py-6 md:px-14 bg-slate-50 flex flex-wrap items-center justify-between gap-4">
                   <p className="text-[13px] text-slate-400">Blueprint Library — aisofttechsolution.com</p>
-                  <div className="flex gap-3">
+                  <div className="flex flex-wrap gap-2">
                     <button
                       onClick={handleOpenInTab}
                       className="flex items-center gap-2 px-4 py-2 border border-slate-200 text-slate-600 text-[11px] font-bold uppercase tracking-widest rounded-xl hover:border-slate-400 transition-colors"
                     >
                       <ExternalLink className="w-3.5 h-3.5" /> Full Screen
+                    </button>
+                    <button
+                      onClick={handleDownloadPDF}
+                      className="flex items-center gap-2 px-4 py-2 border border-slate-200 text-slate-600 text-[11px] font-bold uppercase tracking-widest rounded-xl hover:border-slate-400 transition-colors"
+                    >
+                      <FileText className="w-3.5 h-3.5" /> Download PDF
                     </button>
                     <button
                       onClick={handleDownload}
