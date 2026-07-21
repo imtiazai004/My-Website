@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowLeft, Download, BookOpen, Calendar, Tag } from 'lucide-react';
+import { ArrowLeft, Download, BookOpen, Calendar, Tag, ExternalLink } from 'lucide-react';
 import Navbar from './Navbar';
 import { getBlueprint } from '../services/dataService';
 import { Blueprint } from '../types';
@@ -10,7 +10,7 @@ export default function BlueprintDetail() {
   const { id } = useParams<{ id: string }>();
   const [blueprint, setBlueprint] = useState<Blueprint | null>(null);
   const [loading, setLoading] = useState(true);
-  const [iframeHeight, setIframeHeight] = useState(800);
+  const [iframeHeight, setIframeHeight] = useState(900);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
@@ -23,18 +23,10 @@ export default function BlueprintDetail() {
     return () => { document.title = 'Blueprint Library | Soft Tech Solution'; };
   }, [id]);
 
-  useEffect(() => {
-    if (!blueprint?.content || !iframeRef.current) return;
-    const blob = new Blob([blueprint.content], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    iframeRef.current.src = url;
-    return () => URL.revokeObjectURL(url);
-  }, [blueprint?.content]);
-
   const handleIframeLoad = () => {
     try {
       const h = iframeRef.current?.contentWindow?.document.documentElement.scrollHeight;
-      if (h && h > 400) setIframeHeight(h + 40);
+      if (h && h > 400) setIframeHeight(h + 60);
     } catch {}
   };
 
@@ -49,6 +41,14 @@ export default function BlueprintDetail() {
     a.click();
     document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  const handleOpenInTab = () => {
+    if (!blueprint?.content) return;
+    const blob = new Blob([blueprint.content], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
   };
 
   return (
@@ -94,7 +94,7 @@ export default function BlueprintDetail() {
                   {blueprint.description}
                 </p>
 
-                <div className="flex flex-wrap items-center gap-4 pt-2">
+                <div className="flex flex-wrap items-center gap-3 pt-2">
                   <span className="flex items-center gap-1.5 text-[11px] font-mono text-white/25">
                     <Calendar className="w-3.5 h-3.5" />
                     {blueprint.createdAt?.toDate
@@ -109,24 +109,36 @@ export default function BlueprintDetail() {
                       ))}
                     </div>
                   )}
-                  <button
-                    onClick={handleDownload}
-                    className="ml-auto flex items-center gap-2 px-5 py-2.5 bg-brand-accent text-white text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-indigo-400 transition-colors shadow-[0_0_16px_rgba(99,102,241,0.25)]"
-                  >
-                    <Download className="w-4 h-4" />
-                    Download HTML
-                  </button>
+
+                  {/* Action buttons */}
+                  <div className="ml-auto flex items-center gap-2 flex-wrap">
+                    <button
+                      onClick={handleOpenInTab}
+                      className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 text-white/70 text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-white/10 hover:text-white transition-colors"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      Full Screen
+                    </button>
+                    <button
+                      onClick={handleDownload}
+                      className="flex items-center gap-2 px-4 py-2.5 bg-brand-accent text-white text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-brand-accent/80 transition-colors shadow-[0_0_16px_rgba(26,127,230,0.25)]"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      Download HTML
+                    </button>
+                  </div>
                 </div>
               </div>
 
               {/* Divider */}
               <div className="w-full h-px bg-white/5 mb-8" />
 
-              {/* Iframe */}
+              {/* Iframe — srcdoc renders HTML directly, no blob URL timing issues */}
               <div className="rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_60px_rgba(0,0,0,0.5)]">
                 <iframe
                   ref={iframeRef}
                   title={blueprint.title}
+                  srcDoc={blueprint.content}
                   onLoad={handleIframeLoad}
                   style={{ height: `${iframeHeight}px` }}
                   className="w-full bg-white"
@@ -134,16 +146,24 @@ export default function BlueprintDetail() {
                 />
               </div>
 
-              {/* Bottom download */}
-              <div className="mt-8 text-center">
+              {/* Bottom actions */}
+              <div className="mt-8 flex items-center justify-center gap-3 flex-wrap">
+                <button
+                  onClick={handleOpenInTab}
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-white/5 border border-white/10 text-white/70 text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-white/10 hover:text-white transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Open in Full Screen
+                </button>
                 <button
                   onClick={handleDownload}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-brand-accent text-white text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-indigo-400 transition-colors"
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-brand-accent text-white text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-brand-accent/80 transition-colors"
                 >
                   <Download className="w-4 h-4" />
                   Download This Blueprint
                 </button>
               </div>
+
             </motion.div>
           )}
         </div>
