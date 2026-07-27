@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import { trackActivity, subscribeToSectionSettings } from './services/dataService';
 import { AuthProvider } from './context/AuthContext';
@@ -8,6 +8,7 @@ import { SectionSettings } from './types';
 import Navbar from './components/Navbar';
 import { SplineSceneBasic } from './components/SplineSceneBasic';
 import ShaderBackground from './components/ui/shader-background';
+import BusinessDisclosureFooter from './components/BusinessDisclosureFooter';
 
 // Below-fold sections: lazy-loaded so they don't block initial parse
 const ClientLogos = lazy(() => import('./components/ClientLogos'));
@@ -29,8 +30,15 @@ const SubmitTestimonial = lazy(() => import('./components/SubmitTestimonial'));
 const ChatWidget = lazy(() => import('./components/ChatWidget'));
 const BlueprintLibrary = lazy(() => import('./components/BlueprintLibrary'));
 const BlueprintDetail = lazy(() => import('./components/BlueprintDetail'));
+const TermsAndConditions = lazy(() => import('./components/TermsAndConditions'));
+const WebsitePrivacyPolicy = lazy(() => import('./components/WebsitePrivacyPolicy'));
 
 const ADMIN_PATH = '/sts-x9k2m7p4-console';
+
+function PublicBusinessDisclosure() {
+  const { pathname } = useLocation();
+  return pathname === ADMIN_PATH ? null : <BusinessDisclosureFooter />;
+}
 
 function MainSite() {
   const [sections, setSections] = useState<SectionSettings>(DEFAULT_SECTION_SETTINGS);
@@ -100,6 +108,14 @@ export default function App() {
             element={<Suspense fallback={LoadingSpinner}><PrivacyPolicy /></Suspense>}
           />
           <Route
+            path="/privacy"
+            element={<Suspense fallback={LoadingSpinner}><WebsitePrivacyPolicy /></Suspense>}
+          />
+          <Route
+            path="/terms"
+            element={<Suspense fallback={LoadingSpinner}><TermsAndConditions /></Suspense>}
+          />
+          <Route
             path="/blog"
             element={<Suspense fallback={LoadingSpinner}><BlogPage /></Suspense>}
           />
@@ -123,6 +139,7 @@ export default function App() {
           } />
           <Route path="*" element={<MainSite />} />
         </Routes>
+        <PublicBusinessDisclosure />
         <Suspense fallback={null}>
           <ChatWidget />
         </Suspense>

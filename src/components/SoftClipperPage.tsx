@@ -7,6 +7,7 @@ import {
   Download, Sparkles, Crop, Captions, Film, Wand2, Search, Gauge,
   Eye, Scissors, ArrowRight, CheckCircle, Monitor, Zap,
 } from 'lucide-react';
+import { BUSINESS } from '../config/business';
 
 const DOWNLOAD_URL = 'https://github.com/imtiazai004/Soft-Clipper/releases/latest/download/Soft-Clipper.zip';
 const PAGE_URL = 'https://aisofttechsolution.com/soft-clipper';
@@ -80,7 +81,12 @@ function useSoftClipperSEO() {
         url: PAGE_URL,
         downloadUrl: DOWNLOAD_URL,
         softwareVersion: '1.0.1',
-        author: { '@type': 'Organization', name: 'AI Soft Tech Solution', url: 'https://aisofttechsolution.com' },
+        author: {
+          '@type': 'Organization',
+          name: BUSINESS.brandName,
+          legalName: BUSINESS.legalCompanyName,
+          url: BUSINESS.websiteUrl,
+        },
       },
       {
         '@context': 'https://schema.org',

@@ -1,10 +1,10 @@
-# Soft Tech Solution
+# AI Soft Tech Solution
 
 > AI & Web Development Agency — we build high-performance web applications, SaaS platforms, and custom digital tools that combine cinematic design with uncompromising engineering precision.
 
 ## About
 
-Soft Tech Solution is a digital engineering agency. We specialize in full-stack web development, AI/LLM integration, mobile apps, cloud infrastructure, and custom enterprise software. Every product we ship is engineered for performance and designed for impact.
+AI Soft Tech Solution is a digital engineering agency and customer-facing brand operated by Atlantic LTD STORE LIMITED, a company registered in England and Wales. We specialize in full-stack web development, AI/LLM integration, mobile apps, cloud infrastructure, and custom enterprise software. Every product we ship is engineered for performance and designed for impact.
 
 - Website: https://aisofttechsolution.com
 - Email: info@aisofttechsolution.com
@@ -67,6 +67,9 @@ Yes. We integrate OpenAI, Gemini, and custom models via RAG pipelines, fine-tuni
 
 **How does pricing work?**
 Per-project fixed pricing. Free discovery call first, then a scoped proposal with no surprise invoices.
+
+**Why does AI Soft Tech Solution appear on my bank statement?**
+AI SOFT TECH SOLUTION is our payment statement descriptor. Payments for AI Soft Tech Solution are processed by Atlantic LTD STORE LIMITED. AI Soft Tech Solution is operated by Atlantic LTD STORE LIMITED.
 
 **Do you sign NDAs?**
 Yes. NDAs before any confidential discussion; full IP assignment in every contract.

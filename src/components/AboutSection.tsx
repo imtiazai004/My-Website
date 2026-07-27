@@ -89,7 +89,7 @@ export default function AboutSection() {
                 <span className="text-brand-accent italic">For Visionaries</span>
               </h2>
               <p className="text-slate-500 text-xl font-light leading-relaxed">
-                Soft Tech Solution was founded with one belief: great software should be both technically
+                AI Soft Tech Solution was founded with one belief: great software should be both technically
                 uncompromising and visually extraordinary. We bridge the gap between raw engineering
                 precision and cinematic digital experiences.
               </p>

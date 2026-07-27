@@ -166,7 +166,7 @@ export default function BlueprintDetail() {
       setLoading(false);
       if (bp) document.title = `${bp.title} | Blueprint Library`;
     });
-    return () => { document.title = 'Blueprint Library | Soft Tech Solution'; };
+    return () => { document.title = 'Blueprint Library | AI Soft Tech Solution'; };
   }, [id]);
 
   const handleDownload = () => {

@@ -13,8 +13,8 @@ export default function BlueprintLibrary() {
   const [activeCategory, setActiveCategory] = useState('All');
 
   useEffect(() => {
-    document.title = 'Blueprint Library | Soft Tech Solution';
-    return () => { document.title = 'Soft Tech Solution'; };
+    document.title = 'Blueprint Library | AI Soft Tech Solution';
+    return () => { document.title = 'AI Soft Tech Solution'; };
   }, []);
 
   useEffect(() => {

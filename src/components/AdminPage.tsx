@@ -31,7 +31,7 @@ import {
 
 type Tab = 'overview' | 'projects' | 'posts' | 'skills' | 'testimonials' | 'faqs' | 'blueprints' | 'sections' | 'messages' | 'activity';
 
-const TABS: { id: Tab; label: string; icon: React.ElementType }[] = [
+const TABS: { id: Tab; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
   { id: 'overview',      label: 'Overview',      icon: LayoutDashboard },
   { id: 'projects',      label: 'Projects',       icon: Briefcase },
   { id: 'posts',         label: 'Blog Posts',     icon: PenLine },

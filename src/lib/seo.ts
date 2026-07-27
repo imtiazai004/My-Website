@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { BUSINESS } from '../config/business';
 
 interface SeoOptions {
   title: string;
@@ -10,10 +11,9 @@ interface SeoOptions {
 }
 
 const DEFAULTS = {
-  title: 'Soft Tech Solution – AI & Web Development Agency',
-  description:
-    'Soft Tech Solution builds high-performance AI-powered web applications, SaaS platforms, and digital experiences.',
-  image: 'https://aisofttechsolution.com/og-image.jpg',
+  title: `${BUSINESS.brandName} – AI & Web Development Agency`,
+  description: `${BUSINESS.brandName} builds high-performance AI-powered web applications, SaaS platforms, and digital experiences.`,
+  image: `${BUSINESS.websiteUrl}/og-image.jpg`,
 };
 
 function setMeta(attr: 'name' | 'property', key: string, content: string) {

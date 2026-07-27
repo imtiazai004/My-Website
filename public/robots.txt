@@ -1,4 +1,4 @@
-# Soft Tech Solution — robots.txt
+# AI Soft Tech Solution — robots.txt
 
 # All crawlers: allow everything except the hidden admin panel
 User-agent: *

@@ -2,7 +2,7 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  category: 'SaaS' | 'Web App' | 'Website' | 'Tool' | 'Desktop App';
+  category: 'SaaS' | 'Web App' | 'Website' | 'Tool' | 'Desktop App' | 'AI Tool' | 'Chrome Extension';
   tags: string[];
   imageUrl: string;
   demoUrl: string;

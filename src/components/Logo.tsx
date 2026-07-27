@@ -7,7 +7,7 @@ interface LogoProps {
 }
 
 /**
- * Brand logo — single full-lockup image ("AiSoft Tech Olution").
+ * Brand logo — single full-lockup image.
  * `size` controls the rendered height in px; width scales automatically.
  */
 export function Logo({ variant = 'compact', size = 40, className }: LogoProps) {
@@ -18,7 +18,7 @@ export function Logo({ variant = 'compact', size = 40, className }: LogoProps) {
   return (
     <img
       src="/logo-full.png"
-      alt="AiSoft Tech Olution"
+      alt="AI Soft Tech Solution"
       style={{ height, width: 'auto' }}
       className={`object-contain select-none ${className ?? ''}`}
       draggable={false}
@@ -30,7 +30,7 @@ export function LogoMark({ size = 44, className }: { size?: number; className?: 
   return (
     <img
       src="/logo-full.png"
-      alt="AiSoft Tech Olution"
+      alt="AI Soft Tech Solution"
       style={{ height: size, width: 'auto' }}
       className={`object-contain select-none ${className ?? ''}`}
       draggable={false}

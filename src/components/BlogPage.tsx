@@ -9,6 +9,7 @@ import { subscribeToPublishedPosts, trackActivity } from '../services/dataServic
 import { BlogPost } from '../types';
 import { usePageSeo } from '../lib/seo';
 import { readingTime } from '../lib/markdown';
+import { BUSINESS } from '../config/business';
 
 function formatDate(ts: any): string {
   try {
@@ -23,15 +24,14 @@ export default function BlogPage() {
   const [loading, setLoading] = useState(true);
 
   usePageSeo({
-    title: 'Blog — Soft Tech Solution | Product Research, AI & Web Dev Insights',
-    description:
-      'Guides and insights on e-commerce product research, AI tools, and web development from the Soft Tech Solution team.',
-    canonical: 'https://aisofttechsolution.com/blog',
+    title: `Blog — ${BUSINESS.brandName} | Product Research, AI & Web Dev Insights`,
+    description: `Guides and insights on e-commerce product research, AI tools, and web development from the ${BUSINESS.brandName} team.`,
+    canonical: `${BUSINESS.websiteUrl}/blog`,
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Blog',
-      name: 'Soft Tech Solution Blog',
-      url: 'https://aisofttechsolution.com/blog',
+      name: `${BUSINESS.brandName} Blog`,
+      url: `${BUSINESS.websiteUrl}/blog`,
       description:
         'Guides and insights on e-commerce product research, AI tools, and web development.',
     },

@@ -3,6 +3,8 @@ import { motion } from 'motion/react';
 import { trackActivity, sendContactMessage } from '../services/dataService';
 import { Logo } from './Logo';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { BUSINESS } from '../config/business';
 
 const CARD = 'bg-white/[0.04] border border-white/10 backdrop-blur-xl rounded-2xl';
 
@@ -53,7 +55,7 @@ export default function Footer() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <motion.a
                 whileHover={{ y: -5 }}
-                href="mailto:info@aisofttechsolution.com"
+                href={`mailto:${BUSINESS.supportEmail}`}
                 className={`flex items-center gap-5 p-6 ${CARD} hover:bg-white/[0.08] transition-all group`}
               >
                 <div className="w-12 h-12 rounded-xl bg-brand-accent/15 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all">
@@ -61,7 +63,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Email Control</p>
-                  <p className="text-sm font-medium tracking-tight text-white">info@aisofttechsolution.com</p>
+                  <p className="text-sm font-medium tracking-tight text-white">{BUSINESS.supportEmail}</p>
                 </div>
               </motion.a>
 
@@ -96,6 +98,36 @@ export default function Footer() {
                 </div>
               </motion.a>
             </div>
+
+            <section className={`${CARD} p-6`} aria-labelledby="business-information-title">
+              <h3 id="business-information-title" className="mb-4 text-sm font-bold text-white">
+                Business information
+              </h3>
+              <dl className="grid gap-3 text-sm sm:grid-cols-[auto_1fr] sm:gap-x-6">
+                <dt className="font-semibold text-slate-400">Brand</dt>
+                <dd className="text-slate-200">{BUSINESS.brandName}</dd>
+                <dt className="font-semibold text-slate-400">Operated by</dt>
+                <dd className="text-slate-200">{BUSINESS.legalCompanyName}</dd>
+                {BUSINESS.companyNumber && (
+                  <>
+                    <dt className="font-semibold text-slate-400">Company registration number</dt>
+                    <dd className="text-slate-200">{BUSINESS.companyNumber}</dd>
+                  </>
+                )}
+                {BUSINESS.registeredOffice && (
+                  <>
+                    <dt className="font-semibold text-slate-400">Registered office</dt>
+                    <dd className="text-slate-200">{BUSINESS.registeredOffice}</dd>
+                  </>
+                )}
+                <dt className="font-semibold text-slate-400">Customer support email</dt>
+                <dd>
+                  <a className="text-brand-accent transition-colors hover:text-blue-300" href={`mailto:${BUSINESS.supportEmail}`}>
+                    {BUSINESS.supportEmail}
+                  </a>
+                </dd>
+              </dl>
+            </section>
 
             <div className="flex items-center gap-6 pt-4">
               {[
@@ -197,7 +229,7 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <Logo variant="full" size={40} />
             <span className="text-[10px] text-slate-500 uppercase tracking-[0.4em] font-mono">
-              &copy; {new Date().getFullYear()} Soft Tech Solution — All rights reserved.
+              &copy; {new Date().getFullYear()} {BUSINESS.brandName} — All rights reserved.
             </span>
           </div>
 
@@ -217,8 +249,8 @@ export default function Footer() {
               </div>
             </div>
             <div className="flex gap-8 text-[11px] text-slate-400 font-black uppercase tracking-[0.3em]">
-              <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors">Privacy</button>
-              <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-white transition-colors">Terms</button>
+              <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+              <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
             </div>
           </div>
         </div>

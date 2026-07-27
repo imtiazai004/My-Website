@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import ShaderBackground from './ui/shader-background';
 import Navbar from './Navbar';
+import { BUSINESS } from '../config/business';
 
 export default function PrivacyPolicy() {
   useEffect(() => {
@@ -41,9 +42,12 @@ export default function PrivacyPolicy() {
           {/* Intro */}
           <div className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-6 mb-6">
             <p className="text-slate-600 text-sm leading-relaxed">
-              ProfitScout is a free Chrome extension for e-commerce product research, built by{' '}
-              <span className="text-brand-accent font-semibold">Imtiaz Ahmad</span> at AI Soft Tech Solution.
-              This policy explains what data the extension handles and how it is used.
+              ProfitScout is a free Chrome extension for e-commerce product research offered under the{' '}
+              <span className="text-brand-accent font-semibold">{BUSINESS.brandName}</span> brand. For the
+              purposes of this Privacy Policy, {BUSINESS.brandName} is operated by {BUSINESS.legalCompanyName}.
+              {' '}{BUSINESS.legalCompanyName} is responsible for operating the {BUSINESS.brandName} platform
+              and handling personal information in accordance with this Privacy Policy. This policy explains
+              what data the extension handles and how it is used.
             </p>
           </div>
 
@@ -140,7 +144,8 @@ export default function PrivacyPolicy() {
               </h2>
               <div className="space-y-2 text-sm">
                 <p className="text-slate-700 font-semibold">Imtiaz Ahmad</p>
-                <p className="text-slate-500">AI Soft Tech Solution</p>
+                <p className="text-slate-500">{BUSINESS.brandName}</p>
+                <p className="text-slate-500">Operated by {BUSINESS.legalCompanyName}</p>
                 <a
                   href="mailto:imtiazahmad@aisofttechsolution.com"
                   className="block text-brand-accent hover:text-blue-300 transition-colors"

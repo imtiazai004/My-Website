@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Plus, Minus } from 'lucide-react';
-import { FAQS as DEFAULT_FAQS } from '../constants';
+import { BILLING_FAQ, FAQS as DEFAULT_FAQS } from '../constants';
 import { subscribeToFAQs } from '../services/dataService';
 import { FAQ as FAQType } from '../types';
 
@@ -11,7 +11,11 @@ export default function FAQ() {
 
   useEffect(() => {
     const unsub = subscribeToFAQs((data) => {
-      if (data.length > 0) setFaqs(data);
+      if (data.length > 0) {
+        const billingQuestion = BILLING_FAQ.question.trim().toLowerCase();
+        const otherFaqs = data.filter((faq) => faq.question.trim().toLowerCase() !== billingQuestion);
+        setFaqs([...otherFaqs, BILLING_FAQ].sort((a, b) => a.order - b.order));
+      }
     });
     return unsub;
   }, []);

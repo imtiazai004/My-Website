@@ -8,6 +8,7 @@ import { subscribeToPublishedPosts, trackActivity } from '../services/dataServic
 import { BlogPost } from '../types';
 import { usePageSeo } from '../lib/seo';
 import { renderMarkdown, readingTime } from '../lib/markdown';
+import { BUSINESS } from '../config/business';
 
 function formatDate(ts: any): string {
   try {
@@ -29,14 +30,14 @@ export default function BlogPostPage() {
 
   const post = useMemo(() => (posts ?? []).find(p => p.slug === slug) || null, [posts, slug]);
   const loading = posts === null;
-  const canonical = `https://aisofttechsolution.com/blog/${slug}`;
+  const canonical = `${BUSINESS.websiteUrl}/blog/${slug}`;
 
   useEffect(() => {
     if (post) trackActivity('PAGE_VIEW', { page: 'blog-post', slug: post.slug });
   }, [post]);
 
   usePageSeo({
-    title: post ? `${post.title} — Soft Tech Solution Blog` : 'Article — Soft Tech Solution Blog',
+    title: post ? `${post.title} — ${BUSINESS.brandName} Blog` : `Article — ${BUSINESS.brandName} Blog`,
     description: post?.excerpt,
     canonical,
     image: post?.coverImage || undefined,
@@ -46,12 +47,13 @@ export default function BlogPostPage() {
       '@type': 'BlogPosting',
       headline: post.title,
       description: post.excerpt,
-      image: post.coverImage || 'https://aisofttechsolution.com/og-image.jpg',
-      author: { '@type': 'Person', name: post.author || 'Soft Tech Solution' },
+      image: post.coverImage || `${BUSINESS.websiteUrl}/og-image.jpg`,
+      author: { '@type': 'Person', name: post.author || BUSINESS.brandName },
       publisher: {
         '@type': 'Organization',
-        name: 'Soft Tech Solution',
-        logo: { '@type': 'ImageObject', url: 'https://aisofttechsolution.com/og-image.jpg' },
+        name: BUSINESS.brandName,
+        legalName: BUSINESS.legalCompanyName,
+        logo: { '@type': 'ImageObject', url: `${BUSINESS.websiteUrl}/og-image.jpg` },
       },
       mainEntityOfPage: canonical,
     } : null,
@@ -100,7 +102,7 @@ export default function BlogPostPage() {
                   {post.title}
                 </h1>
                 <div className="flex items-center gap-3 text-sm text-slate-400">
-                  <span className="font-medium text-slate-600">{post.author || 'Soft Tech Solution'}</span>
+                  <span className="font-medium text-slate-600">{post.author || BUSINESS.brandName}</span>
                   <span>·</span>
                   <span>{formatDate(post.createdAt)}</span>
                   <span>·</span>

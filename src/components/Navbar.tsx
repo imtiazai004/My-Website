@@ -9,6 +9,7 @@ import {
   Layers, Star, Cpu, Users, HelpCircle, X, Menu,
   Zap, Shield, BarChart3, Bot, PenLine, BookOpen,
 } from 'lucide-react';
+import { BUSINESS } from '../config/business';
 
 /* ─── Data ─────────────────────────────────────────────────── */
 
@@ -45,7 +46,7 @@ const COMPANY_ITEMS = [
 ];
 
 const CONTACT_ITEMS = [
-  { icon: Mail,          label: 'Email Us',       desc: 'info@aisofttechsolution.com', href: 'mailto:info@aisofttechsolution.com' },
+  { icon: Mail,          label: 'Email Us',       desc: BUSINESS.supportEmail, href: `mailto:${BUSINESS.supportEmail}` },
   { icon: MessageCircle, label: 'WhatsApp (UK)',  desc: '+44 7462 086661',             href: 'https://wa.me/447462086661' },
   { icon: MessageCircle, label: 'WhatsApp (PK)',  desc: '+92 300 5863032',             href: 'https://wa.me/923005863032' },
 ];
@@ -55,13 +56,13 @@ type DropdownKey = 'services' | 'work' | 'company' | 'contact' | null;
 /* ─── Dropdown panel variants ────────────────────────────────── */
 const dropdownVariants = {
   hidden:  { opacity: 0, y: -8, scale: 0.97 },
-  visible: { opacity: 1, y: 0,  scale: 1,   transition: { duration: 0.18, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, y: 0,  scale: 1,   transition: { duration: 0.18, ease: [0.16, 1, 0.3, 1] as const } },
   exit:    { opacity: 0, y: -6, scale: 0.97, transition: { duration: 0.12 } },
 };
 
 const itemVariants = {
   hidden:  { opacity: 0, y: 6 },
-  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.04, duration: 0.2, ease: 'easeOut' } }),
+  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.04, duration: 0.2, ease: 'easeOut' as const } }),
 };
 
 /* ─── Reusable service card ──────────────────────────────────── */
@@ -281,7 +282,7 @@ export default function Navbar() {
                 >
                   <div className="px-5 pt-4 pb-3 border-b border-slate-900/[0.07]">
                     <p className="text-slate-900 font-bold tracking-tight text-sm">Company</p>
-                    <p className="text-slate-500 text-[11px] mt-0.5">Get to know Soft Tech Solution</p>
+                    <p className="text-slate-500 text-[11px] mt-0.5">Get to know AI Soft Tech Solution</p>
                   </div>
                   <div className="p-3 flex flex-col gap-1">
                     {COMPANY_ITEMS.map((item, i) => {

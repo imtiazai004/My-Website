@@ -1,4 +1,5 @@
 import { Project, Testimonial, Skill, FAQ, SectionSettings } from './types';
+import { BUSINESS, PAYMENT_DISCLOSURE } from './config/business';
 
 /** Maps Firestore project titles → bundled SVG illustration paths.
  *  Used by ProjectCard when imageUrl is blank, a placeholder, or missing. */
@@ -123,7 +124,7 @@ export const PROJECT_LOGO_MAP: Record<string, string> = {
       name: 'Marcus Thorne',
       role: 'Founder',
       company: 'SoftFlow Systems',
-      content: "Working with Soft Tech Solution is a different experience. They don't just build features; they create experiences that resonate with users.",
+      content: `Working with ${BUSINESS.brandName} is a different experience. They don't just build features; they create experiences that resonate with users.`,
       avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop'
     }
   ];
@@ -136,6 +137,13 @@ export const PROJECT_LOGO_MAP: Record<string, string> = {
     { name: 'Performance Optimization', level: 88, iconName: 'Zap' }
   ];
 
+export const BILLING_FAQ: FAQ = {
+  id: 'billing-statement-descriptor',
+  question: `Why does ${BUSINESS.brandName} appear on my bank statement?`,
+  answer: `${BUSINESS.statementDescriptor} is our payment statement descriptor. ${PAYMENT_DISCLOSURE} ${BUSINESS.brandName} is operated by ${BUSINESS.legalCompanyName}.`,
+  order: 9,
+};
+
 export const FAQS: FAQ[] = [
   { id: '1', question: 'How long does a typical project take?', answer: 'Project timelines vary by scope. A landing page takes 1–2 weeks, a full web app 4–8 weeks, and enterprise systems 3–6 months. We provide a detailed timeline estimate during the free consultation before any work begins.', order: 1 },
   { id: '2', question: 'What technologies do you specialize in?', answer: 'Our core stack is React/Next.js, TypeScript, Node.js, and Firebase/PostgreSQL for web. We also work with React Native for mobile, Python for AI/ML integrations, and AWS/GCP for cloud infrastructure.', order: 2 },
@@ -145,6 +153,7 @@ export const FAQS: FAQ[] = [
   { id: '6', question: 'Do you sign NDAs and IP agreements?', answer: 'Yes. We sign NDAs before any confidential discussion and full IP assignment agreements are included in every project contract. You own 100% of the code, designs, and assets we produce for you.', order: 6 },
   { id: '7', question: 'Can you integrate AI into my existing product?', answer: 'Yes — this is one of our strongest capabilities. We integrate OpenAI, Gemini, and custom models via RAG pipelines, fine-tuning, or API orchestration depending on your needs and data sensitivity.', order: 7 },
   { id: '8', question: 'How do we get started?', answer: 'Click "Get Free Consultation" anywhere on the site, fill in a brief project description, and we will schedule a 30-minute discovery call within 24 hours. No commitment required at that stage.', order: 8 },
+  BILLING_FAQ,
 ];
 
 export const DEFAULT_SECTION_SETTINGS: SectionSettings = {
