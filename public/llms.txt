@@ -2,6 +2,18 @@
 
 > AI & Web Development Agency — we build high-performance web applications, SaaS platforms, and custom digital tools that combine cinematic design with uncompromising engineering precision.
 
+## Facts
+
+- Company: AI Soft Tech Solution is a trading name of Atlantic LTD STORE LIMITED, registered in England and Wales.
+- Location: UK-registered company, team based in Islamabad, Pakistan.
+- Model: fixed-price project proposals, not hourly billing. Free 30-minute discovery call before any commitment.
+- Support: 30 days of free post-launch support included on every project; ongoing plans available (Basic, Standard, Premium).
+- IP: full intellectual property assignment — clients own 100% of code, designs, and assets delivered.
+- Contracts: an NDA is signed before any confidential discussion.
+- Free tools built by this team: ProfitScout (Chrome extension, product research for Amazon/eBay/TikTok Shop/Walmart/Etsy, 44 features, no account needed) and Soft Clipper (free Windows app that turns long videos into AI-edited vertical clips for TikTok/Reels/Shorts).
+- Payment statement descriptor: "AI SOFT TECH SOLUTION" — payments are processed by Atlantic LTD STORE LIMITED.
+- Contact: info@aisofttechsolution.com, WhatsApp +44 7462 086661 (UK) or +92 300 5863032 (Pakistan).
+
 ## About
 
 AI Soft Tech Solution is a digital engineering agency and customer-facing brand operated by Atlantic LTD STORE LIMITED, a company registered in England and Wales. We specialize in full-stack web development, AI/LLM integration, mobile apps, cloud infrastructure, and custom enterprise software. Every product we ship is engineered for performance and designed for impact.
@@ -53,6 +65,16 @@ Database: PostgreSQL, Firebase Firestore, SQLite, Redis
 Cloud: AWS, GCP, Azure, Docker, Kubernetes
 AI/ML: OpenAI, Gemini, custom models, RAG pipelines
 Blockchain: Solidity, Web3.js, Ethereum, Solana
+
+## Pages
+
+- [Home](https://aisofttechsolution.com/): what the agency does, services and portfolio overview
+- [ProfitScout](https://aisofttechsolution.com/profitscout): free Chrome extension for e-commerce product research (44 features)
+- [ProfitScout Privacy Policy](https://aisofttechsolution.com/profitscout-privacy): data handling for the ProfitScout extension
+- [Soft Clipper](https://aisofttechsolution.com/soft-clipper): free Windows app that turns long videos into AI-edited vertical clips
+- [Blog](https://aisofttechsolution.com/blog): product research, AI, and web development writing
+- [Website Privacy Policy](https://aisofttechsolution.com/privacy): how this website handles submitted and technical data
+- [Terms & Conditions](https://aisofttechsolution.com/terms): terms for using this website and purchasing services
 
 ## FAQs
 
