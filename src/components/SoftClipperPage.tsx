@@ -132,8 +132,14 @@ export default function SoftClipperPage() {
             <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight" style={{ fontFamily: 'Poppins, sans-serif' }}>
               Turn long videos into <span className="text-brand-accent italic">viral clips</span>
             </h1>
-            <p className="text-slate-600 text-lg md:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-slate-600 text-lg md:text-xl font-light max-w-2xl mx-auto mb-6 leading-relaxed">
               Soft Clipper finds the best moments in any long video with AI, reframes them to 9:16 while keeping the speaker in frame, burns in captions, and exports ready-to-post clips for TikTok, Reels and YouTube Shorts.
+            </p>
+            <p
+              data-answer-block="true"
+              className="text-slate-500 text-sm max-w-2xl mx-auto mb-10 leading-relaxed bg-slate-900/[0.05] border border-slate-900/10 rounded-xl px-5 py-4"
+            >
+              Soft Clipper is a free Windows app, built by AI Soft Tech Solution, that turns a single long video — a podcast, stream, or webinar — into multiple short vertical clips using AI to pick the highlights, reframe to 9:16 with speaker tracking, and burn in captions automatically. It bundles ffmpeg, needs no installation beyond unzipping, and its AI features run on your own free Google Gemini API key.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href={DOWNLOAD_URL} className="inline-flex items-center gap-2 px-8 py-4 bg-brand-accent text-white rounded-full text-sm font-bold hover:bg-blue-400 transition-all shadow-lg shadow-brand-accent/30">
