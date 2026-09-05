@@ -70,6 +70,12 @@ export default function BlogPage() {
             <p className="text-slate-500 text-xl font-light">
               Product research, AI tools, and web development — practical writing from the team behind ProfitScout.
             </p>
+            <p
+              data-answer-block="true"
+              className="mt-6 text-slate-600 text-sm leading-relaxed bg-slate-900/[0.04] border border-slate-900/10 rounded-xl px-5 py-4 text-left"
+            >
+              This is the blog of AI Soft Tech Solution, a UK-based AI-first software agency. Posts here cover e-commerce product research (Amazon, TikTok Shop, and cross-border sourcing), practical AI/LLM integration patterns, and web development — written by the team that builds ProfitScout and Soft Clipper.
+            </p>
           </div>
 
           {loading ? (
