@@ -39,15 +39,14 @@ export default function PrivacyPolicy() {
             <p className="text-slate-500 text-sm">ProfitScout Chrome Extension · Last updated: June 14, 2026</p>
           </div>
 
-          {/* Intro */}
-          <div className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-6 mb-6">
+          {/* Intro / answer block */}
+          <div data-answer-block="true" className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-6 mb-6">
             <p className="text-slate-600 text-sm leading-relaxed">
-              ProfitScout is a free Chrome extension for e-commerce product research offered under the{' '}
-              <span className="text-brand-accent font-semibold">{BUSINESS.brandName}</span> brand. For the
-              purposes of this Privacy Policy, {BUSINESS.brandName} is operated by {BUSINESS.legalCompanyName}.
-              {' '}{BUSINESS.legalCompanyName} is responsible for operating the {BUSINESS.brandName} platform
-              and handling personal information in accordance with this Privacy Policy. This policy explains
-              what data the extension handles and how it is used.
+              In short: ProfitScout collects no personal information. It's a free Chrome extension offered under
+              the <span className="text-brand-accent font-semibold">{BUSINESS.brandName}</span> brand (operated
+              by {BUSINESS.legalCompanyName}) that reads publicly visible product data on the page you're viewing
+              and analyzes it locally in your browser — your leads, settings, and tracking history stay in Chrome's
+              local storage, and only anonymous product metadata (price, BSR) syncs to power market intelligence.
             </p>
           </div>
 
