@@ -17,6 +17,7 @@ export default function TermsAndConditions() {
       title="Terms & Conditions"
       description={`These Terms explain who operates ${BUSINESS.brandName} and the basis on which we provide our website and services.`}
       lastUpdated="July 27, 2026"
+      answer={`${BUSINESS.brandName} is a trading name of ${BUSINESS.legalCompanyName} (England and Wales). Buying a service means agreeing to the scope, fees, and terms set out in your specific proposal or written agreement — these website Terms are the general baseline, and cover payment processing, IP ownership, and cancellation only where a project agreement doesn't already say otherwise.`}
     >
       <LegalSection title="1. Who we are" highlighted>
         <p>
