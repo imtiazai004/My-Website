@@ -27,4 +27,22 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
+# Answer and generative engines: explicitly welcomed by name for retrieval and
+# citation, not just via the catch-all above. If the catch-all ever tightens,
+# these should not quietly go with it — being cited by these is the point.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
 Sitemap: https://aisofttechsolution.com/sitemap.xml
