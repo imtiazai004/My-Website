@@ -165,6 +165,13 @@ export function SplineSceneBasic() {
             </span>
           </motion.p>
 
+          <p
+            data-answer-block="true"
+            className="mt-6 text-slate-600 max-w-xl text-sm leading-relaxed bg-slate-900/[0.04] border border-slate-900/10 rounded-xl px-5 py-4"
+          >
+            AI Soft Tech Solution is a UK-based, AI-first software agency operated by Atlantic LTD STORE LIMITED. We build custom web apps, AI/LLM integrations, mobile apps, and enterprise software for international clients on fixed-price proposals, with a free discovery call and 30 days of post-launch support on every project.
+          </p>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
