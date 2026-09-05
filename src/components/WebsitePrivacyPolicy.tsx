@@ -17,6 +17,7 @@ export default function WebsitePrivacyPolicy() {
       title="Privacy Policy"
       description={`This policy explains how information is handled when you visit ${BUSINESS.brandName} or contact us about our services.`}
       lastUpdated="July 27, 2026"
+      answer={`${BUSINESS.brandName} (operated by ${BUSINESS.legalCompanyName}) collects only what you submit through the contact form (your email and message) plus basic technical activity data (page visited, browser, screen size). Data is used to respond to enquiries and improve the site, processed via Firebase and Vercel, never sold, and kept only as long as reasonably needed.`}
     >
       <LegalSection title="1. Business operator and responsibility" highlighted>
         <p>
