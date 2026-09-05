@@ -7,10 +7,12 @@ interface LegalPageLayoutProps {
   title: string;
   description: string;
   lastUpdated: string;
+  /** Optional single-paragraph, directly-quotable answer shown right under the intro — for AI answer engines and snippet extraction. */
+  answer?: string;
   children: ReactNode;
 }
 
-export function LegalPageLayout({ title, description, lastUpdated, children }: LegalPageLayoutProps) {
+export function LegalPageLayout({ title, description, lastUpdated, answer, children }: LegalPageLayoutProps) {
   return (
     <div className="min-h-screen selection:bg-brand-accent selection:text-white scroll-smooth relative overflow-x-hidden">
       <ShaderBackground />
@@ -44,6 +46,14 @@ export function LegalPageLayout({ title, description, lastUpdated, children }: L
             <p className="mt-3 text-xs font-medium uppercase tracking-wider text-slate-400">
               Last updated: {lastUpdated}
             </p>
+            {answer && (
+              <p
+                data-answer-block="true"
+                className="mt-6 max-w-2xl rounded-xl border border-slate-900/10 bg-slate-900/[0.03] px-5 py-4 text-sm leading-relaxed text-slate-600"
+              >
+                {answer}
+              </p>
+            )}
           </header>
 
           <div className="space-y-4">{children}</div>
