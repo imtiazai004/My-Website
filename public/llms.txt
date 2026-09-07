@@ -2,6 +2,19 @@
 
 > AI & Web Development Agency — we build high-performance web applications, SaaS platforms, and custom digital tools that combine cinematic design with uncompromising engineering precision.
 
+## Facts
+
+- Company: AI Soft Tech Solution, a digital engineering agency and customer-facing brand operated by Atlantic LTD STORE LIMITED, a company registered in England and Wales.
+- Track record: 100+ projects shipped.
+- Services: full-stack web development, mobile app engineering, AI & LLM integration, cloud infrastructure & DevOps, custom API development, enterprise software, embedded systems & IoT, blockchain & Web3, data engineering & analytics.
+- Pricing model: fixed-price proposals, not hourly billing. No published catalogue price — every quote is scoped per project after a free discovery call.
+- Typical timelines: a landing page takes 1-2 weeks, a full web app 4-8 weeks, an enterprise system 3-6 months.
+- Discovery: a free 30-minute discovery call before any commitment.
+- Post-launch support: 30 days included free on every project; ongoing plans beyond that are Basic, Standard or Premium.
+- Contracts: an NDA is signed before any confidential discussion, and every contract assigns 100% IP ownership of code, designs and assets to the client.
+- Payment descriptor: charges appear on a bank statement as "AI SOFT TECH SOLUTION", processed by Atlantic LTD STORE LIMITED.
+- Contact: info@aisofttechsolution.com, WhatsApp UK +44 7462 086661, WhatsApp Pakistan +92 300 5863032.
+
 ## About
 
 AI Soft Tech Solution is a digital engineering agency and customer-facing brand operated by Atlantic LTD STORE LIMITED, a company registered in England and Wales. We specialize in full-stack web development, AI/LLM integration, mobile apps, cloud infrastructure, and custom enterprise software. Every product we ship is engineered for performance and designed for impact.
