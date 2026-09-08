@@ -33,10 +33,16 @@ function stripClientScripts(html) {
   // Analytics beacon, drop the React/Vite JS bundle <script type="module">
   // tags — bots reading this snapshot don't execute JS, so shipping the
   // bundle references here is dead weight, not a feature.
-  return html.replace(
+  html = html.replace(
     /<script\b(?![^>]*application\/ld\+json)(?![^>]*_vercel\/insights)[^>]*>[\s\S]*?<\/script>\s*/gi,
     ''
   );
+  // Same logic for the compiled CSS <link> and <link rel="modulepreload">
+  // hints: both reference content-hashed build asset filenames that change
+  // on every rebuild even when nothing a bot would read has changed, so
+  // they're pure diff noise here — strip them too.
+  html = html.replace(/<link\b[^>]*rel="(?:stylesheet|modulepreload)"[^>]*>\s*/gi, '');
+  return html;
 }
 
 for (const [route, filename] of Object.entries(routes)) {
