@@ -249,6 +249,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="flex gap-8 text-[11px] text-slate-400 font-black uppercase tracking-[0.3em]">
+              <Link to="/compare/agency-vs-freelancer" className="hover:text-white transition-colors">Vs Freelancer</Link>
               <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
               <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
             </div>
