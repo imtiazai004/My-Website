@@ -1,9 +1,13 @@
 # AI Soft Tech Solution — robots.txt
 
-# All crawlers: allow everything except the hidden admin panel
+# All crawlers: allow everything except the hidden admin panel and the raw
+# prerendered snapshots (served automatically at the real URLs to bot user
+# agents by middleware.ts — the /prerendered/ copies exist only for that
+# rewrite and would otherwise look like duplicate content if crawled directly)
 User-agent: *
 Allow: /
 Disallow: /sts-x9k2m7p4-console
+Disallow: /prerendered/
 
 # Explicitly welcome major AI crawlers (training / index crawls)
 User-agent: GPTBot
