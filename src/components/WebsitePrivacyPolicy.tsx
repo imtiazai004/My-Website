@@ -15,7 +15,7 @@ export default function WebsitePrivacyPolicy() {
   return (
     <LegalPageLayout
       title="Privacy Policy"
-      description={`This policy explains how information is handled when you visit ${BUSINESS.brandName} or contact us about our services.`}
+      description={`This policy explains how information is handled when you visit ${BUSINESS.brandName} or contact us about our services — including what we collect through the contact form, how Firebase and Vercel process it on our behalf, and who to contact with questions.`}
       lastUpdated="July 27, 2026"
     >
       <LegalSection title="1. Business operator and responsibility" highlighted>

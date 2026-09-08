@@ -15,7 +15,7 @@ export default function TermsAndConditions() {
   return (
     <LegalPageLayout
       title="Terms & Conditions"
-      description={`These Terms explain who operates ${BUSINESS.brandName} and the basis on which we provide our website and services.`}
+      description={`These Terms explain who operates ${BUSINESS.brandName} and the basis on which we provide our website and services, including cancellations, refunds, and how licence terms for project deliverables are set out in the relevant proposal.`}
       lastUpdated="July 27, 2026"
     >
       <LegalSection title="1. Who we are" highlighted>

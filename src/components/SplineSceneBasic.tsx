@@ -165,6 +165,18 @@ export function SplineSceneBasic() {
             </span>
           </motion.p>
 
+          {/* Screen-reader-only self-contained answer paragraph — same content an
+              assistant could quote whole, kept separate from the shorter visual
+              tagline above so the design doesn't have to carry the full sentence. */}
+          <p className="answer sr-only">
+            AI Soft Tech Solution is a UK-based software agency that builds
+            high-performance, AI-powered web applications and SaaS platforms for
+            startups, scale-ups, and enterprises. The team has shipped 100+
+            projects, responds within 24 hours, and combines full-stack
+            engineering with AI/LLM integration, cloud infrastructure, and
+            post-launch support.
+          </p>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

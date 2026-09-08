@@ -149,8 +149,8 @@ export default function ProfitScoutPage() {
             <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight" style={{ fontFamily: 'Poppins, sans-serif' }}>
               Profit<span className="text-brand-accent">Scout</span> v1
             </h1>
-            <p className="text-xl text-slate-600 mb-4 leading-relaxed max-w-2xl mx-auto">
-              The only product research extension you'll ever need. 44 features across 12 platforms — completely free, forever.
+            <p className="answer text-xl text-slate-600 mb-4 leading-relaxed max-w-2xl mx-auto">
+              The only product research extension you'll ever need — 44 features across 12 platforms, completely free, forever. Score any Amazon, eBay, TikTok Shop, Walmart or Etsy listing in one click, see competitor revenue, and track price history for a year, with no account or sign-up required.
             </p>
             <p className="text-sm text-slate-400 mb-10">
               Built by <a href="https://aisofttechsolution.com" className="text-brand-accent hover:text-blue-300 transition-colors">Imtiaz Ahmad</a> · AI Soft Tech Solution

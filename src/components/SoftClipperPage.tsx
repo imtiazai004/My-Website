@@ -132,7 +132,7 @@ export default function SoftClipperPage() {
             <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight" style={{ fontFamily: 'Poppins, sans-serif' }}>
               Turn long videos into <span className="text-brand-accent italic">viral clips</span>
             </h1>
-            <p className="text-slate-600 text-lg md:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="answer text-slate-600 text-lg md:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed">
               Soft Clipper finds the best moments in any long video with AI, reframes them to 9:16 while keeping the speaker in frame, burns in captions, and exports ready-to-post clips for TikTok, Reels and YouTube Shorts.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

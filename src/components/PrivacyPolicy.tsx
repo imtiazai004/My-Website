@@ -41,7 +41,7 @@ export default function PrivacyPolicy() {
 
           {/* Intro */}
           <div className="bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl p-6 mb-6">
-            <p className="text-slate-600 text-sm leading-relaxed">
+            <p className="answer text-slate-600 text-sm leading-relaxed">
               ProfitScout is a free Chrome extension for e-commerce product research offered under the{' '}
               <span className="text-brand-accent font-semibold">{BUSINESS.brandName}</span> brand. For the
               purposes of this Privacy Policy, {BUSINESS.brandName} is operated by {BUSINESS.legalCompanyName}.

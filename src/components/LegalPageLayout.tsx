@@ -40,7 +40,11 @@ export function LegalPageLayout({ title, description, lastUpdated, children }: L
             <h1 className="mb-3 text-4xl font-bold text-slate-900 md:text-5xl" style={{ fontFamily: 'Poppins, sans-serif' }}>
               {title}
             </h1>
-            <p className="max-w-2xl text-base leading-relaxed text-slate-600">{description}</p>
+            {/* "answer" is not a style hook — it's what the prerender script and any
+                assistant reading the page treats as the citable, self-contained lead.
+                Keep every `description` prop passed into this layout a 20-90 word
+                standalone answer for that to hold. */}
+            <p className="answer max-w-2xl text-base leading-relaxed text-slate-600">{description}</p>
             <p className="mt-3 text-xs font-medium uppercase tracking-wider text-slate-400">
               Last updated: {lastUpdated}
             </p>
