@@ -42,6 +42,7 @@ const STATIC_SNAPSHOTS: Record<string, string> = {
   '/privacy': '/prerendered/privacy.html',
   '/terms': '/prerendered/terms.html',
   '/profitscout-privacy': '/prerendered/profitscout-privacy.html',
+  '/compare/agency-vs-freelancer': '/prerendered/agency-vs-freelancer.html',
 };
 
 export const config = {
@@ -52,6 +53,7 @@ export const config = {
     '/privacy',
     '/terms',
     '/profitscout-privacy',
+    '/compare/agency-vs-freelancer',
   ],
 };
 

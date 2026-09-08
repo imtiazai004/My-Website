@@ -23,6 +23,7 @@ const routes = {
   '/privacy': 'privacy.html',
   '/terms': 'terms.html',
   '/profitscout-privacy': 'profitscout-privacy.html',
+  '/compare/agency-vs-freelancer': 'agency-vs-freelancer.html',
 };
 
 const browser = await chromium.launch();
