@@ -32,6 +32,7 @@ const BlueprintLibrary = lazy(() => import('./components/BlueprintLibrary'));
 const BlueprintDetail = lazy(() => import('./components/BlueprintDetail'));
 const TermsAndConditions = lazy(() => import('./components/TermsAndConditions'));
 const WebsitePrivacyPolicy = lazy(() => import('./components/WebsitePrivacyPolicy'));
+const AgencyVsFreelancer = lazy(() => import('./components/AgencyVsFreelancer'));
 
 const ADMIN_PATH = '/sts-x9k2m7p4-console';
 
@@ -114,6 +115,10 @@ export default function App() {
           <Route
             path="/terms"
             element={<Suspense fallback={LoadingSpinner}><TermsAndConditions /></Suspense>}
+          />
+          <Route
+            path="/compare/agency-vs-freelancer"
+            element={<Suspense fallback={LoadingSpinner}><AgencyVsFreelancer /></Suspense>}
           />
           <Route
             path="/blog"
