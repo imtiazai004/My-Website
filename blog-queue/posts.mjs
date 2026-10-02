@@ -1,14 +1,7 @@
 // Blog post queue for the daily auto-publisher (api/publish-post.ts).
 // One post is published per day, in array order. Doc ID = slug.
-export interface QueuedPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  tags: string[];
-  content: string;
-}
 
-export const POSTS: QueuedPost[] = [
+export const POSTS = [
   {
     slug: 'digital-khata-udhaar-notebook',
     title: "A Shopkeeper's Biggest Thief Is His Own Credit Notebook",

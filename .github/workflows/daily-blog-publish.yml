@@ -1,0 +1,27 @@
+name: Daily blog publish
+
+# Publishes one queued blog post per day at 10:00 PKT (05:00 UTC).
+# Posts live in blog-queue/posts.mjs; the script picks the first slug
+# not yet present in the Firestore `posts` collection.
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install firebase-admin (ephemeral, repo stays clean)
+        run: npm install --prefix /tmp/fbdeps firebase-admin@12 --no-audit --no-fund
+
+      - name: Publish next queued post
+        run: NODE_PATH=/tmp/fbdeps/node_modules node scripts/publish-next-post.mjs
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
