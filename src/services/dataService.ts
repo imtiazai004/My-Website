@@ -12,7 +12,7 @@ export const subscribeToProjects = (callback: (projects: Project[]) => void) => 
       ...doc.data()
     } as Project));
     callback(projects);
-  }, (error) => handleFirestoreError(error, 'list', 'projects'));
+  }, (error) => { handleFirestoreError(error, 'list', 'projects'); callback([]); });
 };
 
 export const subscribeToTestimonials = (callback: (testimonials: Testimonial[]) => void) => {
@@ -23,7 +23,7 @@ export const subscribeToTestimonials = (callback: (testimonials: Testimonial[]) 
       ...doc.data()
     } as Testimonial));
     callback(testimonials);
-  }, (error) => handleFirestoreError(error, 'list', 'testimonials'));
+  }, (error) => { handleFirestoreError(error, 'list', 'testimonials'); callback([]); });
 };
 
 export const subscribeToSkills = (callback: (skills: Skill[]) => void) => {
@@ -37,7 +37,7 @@ export const subscribeToSkills = (callback: (skills: Skill[]) => void) => {
       } as any as Skill;
     });
     callback(skills);
-  }, (error) => handleFirestoreError(error, 'list', 'skills'));
+  }, (error) => { handleFirestoreError(error, 'list', 'skills'); callback([]); });
 };
 
 export const saveProject = async (project: any) => {
@@ -168,7 +168,7 @@ export const subscribeToFAQs = (callback: (faqs: FAQ[]) => void) => {
   return onSnapshot(q, (snapshot) => {
     const faqs = snapshot.docs.map(d => ({ id: d.id, ...d.data() } as FAQ));
     callback(faqs);
-  }, (error) => handleFirestoreError(error, 'list', 'faqs'));
+  }, (error) => { handleFirestoreError(error, 'list', 'faqs'); callback([]); });
 };
 
 export const saveFAQ = async (faq: Partial<FAQ> & { id?: string }) => {
@@ -213,7 +213,7 @@ export const subscribeToPosts = (callback: (posts: BlogPost[]) => void) => {
   return onSnapshot(q, (snapshot) => {
     const posts = snapshot.docs.map(d => ({ id: d.id, ...d.data() } as BlogPost));
     callback(posts);
-  }, (error) => handleFirestoreError(error, 'list', 'posts'));
+  }, (error) => { handleFirestoreError(error, 'list', 'posts'); callback([]); });
 };
 
 export const subscribeToPublishedPosts = (callback: (posts: BlogPost[]) => void) => {
@@ -268,7 +268,7 @@ export const subscribeToBlueprints = (callback: (blueprints: Blueprint[]) => voi
   return onSnapshot(q, (snapshot) => {
     const blueprints = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Blueprint));
     callback(blueprints);
-  }, (error) => handleFirestoreError(error, 'list', 'blueprints'));
+  }, (error) => { handleFirestoreError(error, 'list', 'blueprints'); callback([]); });
 };
 
 export const saveBlueprint = async (blueprint: any) => {
@@ -304,5 +304,5 @@ export const subscribeToContacts = (callback: (contacts: any[]) => void) => {
       ...doc.data()
     }));
     callback(contacts);
-  }, (error) => handleFirestoreError(error, 'list', 'contacts'));
+  }, (error) => { handleFirestoreError(error, 'list', 'contacts'); callback([]); });
 };
