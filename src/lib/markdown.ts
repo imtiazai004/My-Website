@@ -110,7 +110,19 @@ export function renderMarkdown(md: string): string {
       !/^\s*[-*]\s+/.test(lines[i]) &&
       !/^\s*\d+\.\s+/.test(lines[i])
     ) { para.push(lines[i]); i++; }
-    out.push(`<p>${inline(para.join('<br />'))}</p>`);
+    const pHtml = `<p>${inline(para.join('<br />'))}</p>`;
+    // In-post CTA: a fully-italic paragraph containing "DM me" becomes a CTA
+    // card with a direct Contact Us link. Applies to published posts too,
+    // since rendering happens client-side from the stored markdown.
+    const cta = pHtml.match(/^<p><em>([\s\S]*DM me[\s\S]*)<\/em><\/p>$/);
+    if (cta) {
+      out.push(
+        `<div class="post-cta"><p class="post-cta-text">${cta[1]}</p>` +
+        `<a class="post-cta-btn" href="/#contact">Contact Us &rarr;</a></div>`
+      );
+    } else {
+      out.push(pHtml);
+    }
   }
 
   return out.join('\n');

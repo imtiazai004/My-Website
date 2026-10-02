@@ -175,3 +175,38 @@
   opacity: 0.55;
   margin-top: 0.6rem;
 }
+
+/* In-post CTA card: fully-italic "DM me" paragraph rendered with a direct Contact Us link */
+.blog-content .post-cta {
+  margin: 2.5rem 0 0;
+  padding: 1.75rem 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(26,127,230,0.09), rgba(79,70,229,0.06));
+  border: 1px solid rgba(26,127,230,0.28);
+  text-align: center;
+}
+.blog-content .post-cta-text {
+  font-style: italic;
+  color: #0f172a;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0 0 1.25rem;
+}
+.blog-content a.post-cta-btn {
+  display: inline-block;
+  padding: 0.8rem 2.25rem;
+  background: #1a7fe6;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  font-style: normal;
+  border-radius: 0.9rem;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(26,127,230,0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.blog-content a.post-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(26,127,230,0.45);
+  color: #fff;
+}
