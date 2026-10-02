@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SupportAI — AI Customer Support</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#eef0ff;min-height:100vh;padding:26px}
+.wrap{max-width:1180px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:18px}
+.top h1{font-size:24px;font-weight:800;color:#1e1b4b}.top h1 span{color:#4f46e5}
+.lang{margin-inline-start:auto;background:#fff;border:1px solid #c7d2fe;color:#4f46e5;font-size:12px;font-weight:700;padding:7px 14px;border-radius:20px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel{background:#fff;border-radius:20px;padding:20px;box-shadow:0 4px 18px rgba(79,70,229,.08)}
+.panel h3{font-size:16px;color:#1e1b4b;margin-bottom:12px}
+.chat{background:#f5f6ff;border-radius:14px;padding:14px;height:380px;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+.msg{max-width:85%;padding:9px 13px;border-radius:14px;font-size:13.5px;line-height:1.5;animation:pop .25s ease}
+@keyframes pop{from{transform:scale(.96);opacity:0}to{transform:none;opacity:1}}
+.msg.bot{background:#fff;color:#1e1b4b;align-self:flex-start;border:1px solid #e0e7ff;border-top-left-radius:4px}
+.msg.user{background:#4f46e5;color:#fff;align-self:flex-end;border-top-right-radius:4px}
+.typing{align-self:flex-start;background:#fff;border:1px solid #e0e7ff;padding:11px 15px;border-radius:14px;display:flex;gap:5px}
+.typing span{width:7px;height:7px;background:#a5b4fc;border-radius:50%;animation:bl 1s infinite}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+@keyframes bl{50%{opacity:.3}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{background:#eef0ff;border:1.5px solid #4f46e5;color:#4f46e5;font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:20px;cursor:pointer;transition:all .2s}
+.chip:active{background:#4f46e5;color:#fff}
+.chip.human{border-color:#f59e0b;color:#b45309}
+.tl{margin:8px 0;font-size:13px}
+.tl div{padding:5px 0;color:#1e1b4b}.tl .ok{color:#059669;font-weight:700}.tl .wait{color:#b45309;font-weight:700}
+.ticket{background:#fffbeb;border:1px solid #f59e0b;border-radius:12px;padding:12px;margin-top:8px;font-size:13px;color:#1e1b4b}
+.ticket b{color:#b45309}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:#f5f6ff;border-radius:14px;padding:14px;text-align:center}
+.kpi .v{font-size:24px;font-weight:800;color:#4f46e5}.kpi .l{font-size:11px;color:#6b7280;margin-top:2px}
+.tabs{display:flex;gap:8px;margin-bottom:10px}
+.tab{font-size:12px;font-weight:700;padding:7px 16px;border-radius:20px;border:1px solid #c7d2fe;background:#fff;color:#6b7280;cursor:pointer}
+.tab.on{background:#4f46e5;color:#fff;border-color:#4f46e5}
+.bars{display:flex;align-items:flex-end;gap:10px;height:150px;padding:10px 4px}
+.barw{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}
+.bar{width:100%;max-width:44px;background:linear-gradient(180deg,#818cf8,#4f46e5);border-radius:8px 8px 4px 4px;transition:height .6s ease;min-height:8px}
+.barw span{font-size:10px;color:#6b7280}
+.intents{margin-top:12px}
+.intent{display:flex;align-items:center;gap:10px;font-size:13px;padding:8px 0;border-bottom:1px solid #eef0ff}
+.intent:last-child{border:none}
+.ibar{flex:1;height:8px;background:#eef0ff;border-radius:6px;overflow:hidden}
+.ibar div{height:100%;background:linear-gradient(90deg,#818cf8,#a78bfa);border-radius:6px}
+.intent b{color:#1e1b4b;min-width:130px;font-weight:600}
+.intent span{color:#6b7280;font-size:12px;min-width:36px;text-align:end}
+.sms{background:#f5f6ff;border-radius:12px;padding:12px;margin-top:12px;font-size:13px}
+.sms .srow{display:flex;gap:8px;align-items:center;padding:6px 0;color:#1e1b4b}
+.sms .srow .sic{width:28px;height:28px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.sms .srow small{color:#6b7280;display:block;font-size:11px}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#4f46e5;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:all .3s;z-index:20;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><h1>🤖 Support<span>AI</span></h1><button class="lang" id="langToggle" onclick="setLang(LANG==='en'?'ur':'en')">اردو</button></div>
+  <div class="grid">
+    <div class="panel"><h3 data-i18n="chatT">💬 Live demo — KhaasStores</h3><div class="chat" id="chat"></div><div class="chips" id="chips"></div></div>
+    <div class="panel"><h3 data-i18n="anT">📊 Deflection analytics</h3>
+      <div class="kpis">
+        <div class="kpi"><div class="v">78%</div><div class="l" data-i18n="k1">tickets deflected</div></div>
+        <div class="kpi"><div class="v">4s</div><div class="l" data-i18n="k2">avg response</div></div>
+        <div class="kpi"><div class="v">24/7</div><div class="l" data-i18n="k3">coverage</div></div>
+      </div>
+      <div class="tabs"><button class="tab on" id="tabW" onclick="setTab('w')" data-i18n="week">This week</button><button class="tab" id="tabM" onclick="setTab('m')" data-i18n="month">This month</button></div>
+      <div class="bars" id="bars"></div>
+      <div class="intents" id="intents"></div>
+      <div class="sms"><b style="font-size:13px;color:#1e1b4b" data-i18n="smsT">📲 Proactive SMS — the question never arises</b>
+        <div class="srow"><div class="sic">📦</div><div><span data-i18n="sms1">Dispatched — your parcel left Lahore</span><small>10:42 AM</small></div></div>
+        <div class="srow"><div class="sic">🚚</div><div><span data-i18n="sms2">In transit — arriving in your city</span><small>Yesterday</small></div></div>
+        <div class="srow"><div class="sic">✅</div><div><span data-i18n="sms3">Delivered — enjoy! Rate us ⭐</span><small>2 days ago</small></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let LANG='en', tab='w';
+const T={
+chatT:{en:'💬 Live demo — KhaasStores',ur:'💬 لائیو ڈیمو — خاص اسٹورز'},anT:{en:'📊 Deflection analytics',ur:'📊 تجزیات'},
+k1:{en:'tickets deflected',ur:'ٹکٹ خود حل'},k2:{en:'avg response',ur:'اوسط جواب'},k3:{en:'coverage',ur:'کوریج'},
+week:{en:'This week',ur:'اس ہفتے'},month:{en:'This month',ur:'اس ماہ'},
+smsT:{en:'📲 Proactive SMS — the question never arises',ur:'📲 پیشگی ایس ایم ایس — سوال پیدا ہی نہ ہو'},
+sms1:{en:'Dispatched — your parcel left Lahore',ur:'بھیج دیا — پارسل لاہور سے روانہ'},sms2:{en:'In transit — arriving in your city',ur:'راستے میں — آپ کے شہر پہنچ رہا ہے'},
+sms3:{en:'Delivered — enjoy! Rate us ⭐',ur:'موصول — لطف اٹھائیں! ریٹنگ دیں ⭐'},
+chipOrder:{en:'Where is my order?',ur:'میرا آرڈر کہاں ہے؟'},chipReturn:{en:'Return policy?',ur:'واپسی کی پالیسی؟'},
+chipDamage:{en:'Damaged item received',ur:'خراب چیز موصول ہوئی'},chipRefund:{en:'Refund status?',ur:'رقم واپسی کی حالت؟'},
+chipHuman:{en:'🧑 Talk to human',ur:'🧑 انسان سے بات کریں'},
+aOrder:{en:'Your order <b>#KS-8814</b> is on its way! 🚚<div class="tl"><div class="ok">✓ Dispatched — left Lahore hub</div><div class="ok">✓ In transit — reached your city</div><div class="wait">… Arriving tomorrow before 6 PM</div></div>',ur:'آپ کا آرڈر <b>#KS-8814</b> راستے میں ہے! 🚚<div class="tl"><div class="ok">✓ بھیج دیا — لاہور سے روانہ</div><div class="ok">✓ راستے میں — آپ کے شہر پہنچ گیا</div><div class="wait">… کل شام 6 بجے سے پہلے پہنچے گا</div></div>'},
+aReturn:{en:'Easy! You have <b>7 days</b> for a full refund — item must be unused with tags. Want me to start a return for order #KS-8814?',ur:'آسان! مکمل واپسی کے لیے <b>7 دن</b> ہیں — چیز بغیر استعمال ٹیگ کے ساتھ ہو۔ کیا آرڈر #KS-8814 کی واپسی شروع کروں؟'},
+aDamage:{en:'I am sorry! 😟 Please share a photo of the damaged item here — I will approve a <b>replacement shipment today</b>, no need to return the broken one.',ur:'معذرت! 😟 خراب چیز کی تصویر یہیں بھیجیں — میں <b>آج ہی متبادل بھیجنے</b> کی منظوری دوں گا، ٹوٹی چیز واپس کی ضرورت نہیں۔'},
+aRefund:{en:'Your refund of <b>Rs 2,450</b> was processed yesterday — it reaches your JazzCash in <b>1–2 working days</b>. ✅',ur:'آپ کی <b>2450 روپے</b> کی واپسی کل ہو گئی — <b>1–2 کاروباری دن</b> میں جیز کیش میں آ جائے گی۔ ✅'},
+aHuman:{en:'Connecting you to a human agent… 🧑<div class="ticket"><b>Ticket #1042 created</b> · Priority: High<br>Agent Sara will reply within ~10 minutes. Your chat history is attached.</div>',ur:'آپ کو انسانی نمائندے سے جوڑ رہے ہیں… 🧑<div class="ticket"><b>ٹکٹ #1042 بن گیا</b> · ترجیح: زیادہ<br>نمائندہ سارہ ~10 منٹ میں جواب دیں گی۔ آپ کی گفتگو منسلک ہے۔</div>'},
+i1:{en:'Where is my order?',ur:'میرا آرڈر کہاں ہے؟'},i2:{en:'Return policy',ur:'واپسی کی پالیسی'},i3:{en:'Refund status',ur:'رقم واپسی'},i4:{en:'Damaged item',ur:'خراب چیز'}
+};
+const BARS={w:[42,58,50,72,64,88,78],m:[55,62,70,66,80,74,90]};
+function t(k){return T[k]?T[k][LANG]:k}
+function setLang(l){LANG=l;document.documentElement.lang=l;document.documentElement.dir=l==='ur'?'rtl':'ltr';
+document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(T[k])e.innerHTML=T[k][l]});
+document.getElementById('langToggle').textContent=l==='en'?'اردو':'EN';resetChat();renderBars();renderIntents()}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function addMsg(html,who){const d=document.createElement('div');d.className='msg '+who;d.innerHTML=html;const c=document.getElementById('chat');c.appendChild(d);c.scrollTop=1e6}
+function typing(cb){const d=document.createElement('div');d.className='typing';d.innerHTML='<span></span><span></span><span></span>';const c=document.getElementById('chat');c.appendChild(d);c.scrollTop=1e6;setTimeout(()=>{d.remove();cb()},900)}
+function ask(q,a){addMsg(q,'user');typing(()=>addMsg(a,'bot'))}
+function resetChat(){document.getElementById('chat').innerHTML='';
+document.getElementById('chips').innerHTML=[['chipOrder','aOrder'],['chipReturn','aReturn'],['chipDamage','aDamage'],['chipRefund','aRefund']].map(([c,a])=>`<button class="chip" onclick="ask(t('${c}'),t('${a}'))">${t(c)}</button>`).join('')+`<button class="chip human" onclick="ask(t('chipHuman'),t('aHuman'));setTimeout(()=>toast('${LANG==='en'?'Priority ticket #1042 assigned to Sara':'ترجیحی ٹکٹ #1042 سارہ کو سونپا گیا'}'),1400)">${t('chipHuman')}</button>`}
+function setTab(x){tab=x;document.getElementById('tabW').classList.toggle('on',x==='w');document.getElementById('tabM').classList.toggle('on',x==='m');renderBars()}
+function renderBars(){const d=BARS[tab],days=LANG==='en'?['M','T','W','T','F','S','S']:['پ','م','ب','ج','ہ','ہ','ا'];
+document.getElementById('bars').innerHTML=d.map((v,i)=>`<div class="barw"><div class="bar" style="height:${v}%"></div><span>${days[i]}</span></div>`).join('')}
+function renderIntents(){const rows=[['i1',64,'1,204'],['i2',38,'712'],['i3',27,'508'],['i4',19,'344']];
+document.getElementById('intents').innerHTML='<b style="font-size:13px;color:#1e1b4b">'+(LANG==='en'?'Top intents this week':'اس ہفتے کے اہم سوالات')+'</b>'+rows.map(([k,p,n])=>`<div class="intent"><b>${t(k)}</b><div class="ibar"><div style="width:${p}%"></div></div><span>${n}</span></div>`).join('')}
+resetChat();renderBars();renderIntents();
+</script>
+</body>
+</html>

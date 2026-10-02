@@ -3,6 +3,12 @@
 // images, blockquotes, unordered/ordered lists, horizontal rules, paragraphs.
 // Content is author-controlled (admin only); raw HTML is escaped first.
 
+// Whitelisted interactive demo embeds: :::demo <name>::: renders a same-origin iframe.
+const DEMO_NAMES = new Set([
+  'khatabook', 'foodbot', 'tikfulfill', 'supportai',
+  'salonbook', 'codconfirm', 'invoicechaser', 'leadcrm',
+]);
+
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, '&amp;')
@@ -40,6 +46,14 @@ export function renderMarkdown(md: string): string {
 
   while (i < lines.length) {
     const line = lines[i];
+
+    // interactive demo embed: :::demo <name>:::
+    const dm = line.match(/^:::\s*demo\s+([a-z0-9-]+)\s*:::\s*$/);
+    if (dm && DEMO_NAMES.has(dm[1])) {
+      const dn = dm[1];
+      out.push(`<div class="demo-embed"><iframe src="/demos/${dn}" title="${dn} interactive demo" loading="lazy"></iframe><p class="demo-embed-cap">Interactive demo — try it right here</p></div>`);
+      i++; continue;
+    }
 
     // fenced code block
     if (/^```/.test(line)) {

@@ -156,3 +156,22 @@
 ::-webkit-scrollbar-thumb {
   @apply bg-slate-900/15 rounded-full hover:bg-brand-accent/50 transition-all border-4 border-transparent;
 }
+
+/* Interactive prototype embeds (blog :::demo::: directive) */
+.demo-embed {
+  margin: 2.5rem 0;
+}
+.demo-embed iframe {
+  width: 100%;
+  height: min(80vh, 840px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 1rem;
+  background: #fff;
+  display: block;
+}
+.demo-embed-cap {
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.55;
+  margin-top: 0.6rem;
+}

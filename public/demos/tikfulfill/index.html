@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikFulfill — Auto-Fulfillment</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#0a0a0f;color:#e5e7eb;min-height:100vh;padding:26px}
+.wrap{max-width:1240px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px}
+.top h1{font-size:24px;font-weight:800}.top h1 span{color:#22d3ee}
+.live{margin-inline-start:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:#22d3ee;font-weight:600}
+.pulse{width:10px;height:10px;border-radius:50%;background:#22d3ee;animation:pl 1.4s infinite}
+@keyframes pl{50%{box-shadow:0 0 0 8px rgba(34,211,238,.12)}}
+.lang{background:#13131c;border:1px solid #2a2a38;color:#e5e7eb;font-size:12px;font-weight:700;padding:7px 14px;border-radius:20px;cursor:pointer}
+.banner{background:linear-gradient(90deg,rgba(244,114,182,.16),rgba(244,114,182,.04));border:1px solid #f472b6;border-radius:14px;padding:13px 18px;margin-bottom:18px;display:flex;align-items:center;gap:12px;font-size:14px}
+.banner b{color:#f472b6}
+.shoptabs{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.shop{padding:10px 20px;border-radius:12px;border:1px solid #2a2a38;background:#13131c;color:#9ca3af;font-weight:700;font-size:13px;cursor:pointer;transition:all .2s}
+.shop small{display:block;font-weight:400;font-size:11px;color:#6b7280}
+.shop.on{background:#13131c;border-color:#22d3ee;color:#22d3ee}
+.shop.on small{color:#22d3ee}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.stat{background:#13131c;border:1px solid #23232f;border-radius:16px;padding:16px;transition:transform .2s,border-color .2s}
+.stat:hover{transform:translateY(-3px);border-color:#22d3ee}
+.stat .l{font-size:12px;color:#9ca3af}.stat .v{font-size:28px;font-weight:800;margin-top:4px}
+.c1{color:#22d3ee}.c2{color:#34d399}.c3{color:#f472b6}.c4{color:#a78bfa}
+.filters{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.f{padding:8px 18px;border-radius:24px;border:1px solid #2a2a38;background:#13131c;color:#9ca3af;font-weight:600;font-size:13px;cursor:pointer;transition:all .2s}
+.f.on{background:#22d3ee;color:#062a33;border-color:#22d3ee}
+.rule{margin-inline-start:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:#9ca3af}
+.switch{width:44px;height:24px;background:#2a2a38;border-radius:20px;position:relative;cursor:pointer;transition:background .2s}
+.switch.on{background:#22d3ee}.switch::after{content:'';position:absolute;top:3px;inset-inline-start:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:all .2s}
+.switch.on::after{inset-inline-start:23px}
+table{width:100%;border-collapse:collapse;background:#13131c;border-radius:16px;overflow:hidden}
+th{text-align:start;padding:12px 14px;font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #23232f}
+td{padding:11px 14px;font-size:13px;border-bottom:1px solid #1c1c26}
+tr.risk td{background:rgba(244,114,182,.06)}
+tbody tr{transition:background .2s}tbody tr:hover{background:#181824}
+.pill{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+.pend{background:rgba(34,211,238,.15);color:#22d3ee}.rsk{background:rgba(244,114,182,.18);color:#f472b6}.ok{background:rgba(52,211,153,.15);color:#34d399}
+.cd{font-family:monospace;font-weight:700;color:#22d3ee;font-size:13px}
+tr.risk .cd{color:#f472b6}
+select.cour{background:#0a0a0f;border:1px solid #2a2a38;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:8px;cursor:pointer}
+.pickbtn{background:transparent;border:1px solid #a78bfa;color:#a78bfa;font-size:11px;font-weight:700;padding:6px 10px;border-radius:8px;cursor:pointer;white-space:nowrap}
+.bar{display:flex;justify-content:space-between;align-items:center;margin:16px 0 8px;flex-wrap:wrap;gap:10px}
+.print{background:linear-gradient(90deg,#22d3ee,#f472b6);border:none;color:#0a0a0f;font-weight:800;padding:11px 26px;border-radius:12px;font-size:14px;cursor:pointer;transition:transform .15s}
+.print:active{transform:scale(.95)}.print:disabled{opacity:.4;cursor:not-allowed}
+input[type=checkbox]{width:16px;height:16px;accent-color:#22d3ee;cursor:pointer}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:10}
+.modal.open{display:flex}
+.box{background:#13131c;border:1px solid #2a2a38;border-radius:20px;padding:32px;width:420px;text-align:center;animation:pop .3s}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:none;opacity:1}}
+.pbar{height:12px;background:#23232f;border-radius:8px;overflow:hidden;margin:18px 0}
+.pbar div{height:100%;width:0;background:linear-gradient(90deg,#22d3ee,#f472b6);transition:width .15s;border-radius:8px}
+.exc{margin-top:22px;background:#13131c;border:1px solid #f472b6;border-radius:16px;padding:16px}
+.exc h3{font-size:15px;color:#f472b6;margin-bottom:10px}
+.exrow{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #1c1c26;font-size:13px}
+.exrow:last-child{border:none}
+.exrow .ei{flex:1}.exrow .ei b{display:block}.exrow .ei span{color:#9ca3af;font-size:12px}
+.resolve{background:transparent;border:1px solid #34d399;color:#34d399;font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;cursor:pointer}
+.scale{color:#6b7280;font-size:12px}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#22d3ee;color:#062a33;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:all .3s;z-index:20;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><h1>⚡ Tik<span>Fulfill</span></h1><div class="live"><span class="pulse"></span><span data-i18n="live">Live</span></div><button class="lang" id="langToggle" onclick="setLang(LANG==='en'?'ur':'en')">اردو</button></div>
+  <div class="banner">⚠️ <span><b>38</b> <span data-i18n="banner">orders are near the <b>48-hour dispatch window</b>. TikTok penalizes late dispatch with suppressed payouts and FYP reach cuts.</span></span></div>
+  <div class="shoptabs" id="shoptabs"></div>
+  <div class="stats">
+    <div class="stat"><div class="l" data-i18n="sOrders">Orders today</div><div class="v c1" id="stOrders">1,284</div></div>
+    <div class="stat"><div class="l" data-i18n="sDisp">Dispatched</div><div class="v c2" id="stDisp">1,102</div></div>
+    <div class="stat"><div class="l"><span data-i18n="sRisk">At risk</span> ⚠️</div><div class="v c3" id="stRisk">38</div></div>
+    <div class="stat"><div class="l" data-i18n="sAvg">Avg dispatch</div><div class="v c4">6.2h</div></div>
+  </div>
+  <div class="filters">
+    <button class="f on" onclick="setF('all',this)" data-i18n="fAll">All</button>
+    <button class="f" onclick="setF('pend',this)" data-i18n="fPend">Pending</button>
+    <button class="f" onclick="setF('risk',this)" data-i18n="fRisk">At risk</button>
+    <span class="scale" id="scaleTxt"></span>
+    <span class="rule"><span data-i18n="autoRule">Auto-print when &lt; 4h left</span><span class="switch on" id="autoSw" onclick="this.classList.toggle('on')"></span></span>
+  </div>
+  <table><thead><tr><th></th><th data-i18n="cOrder">Order</th><th data-i18n="cCust">Customer</th><th data-i18n="cItems">Items</th><th data-i18n="cCourier">Courier</th><th data-i18n="cDispatch">Dispatch in</th><th data-i18n="cStatus">Status</th><th></th></tr></thead><tbody id="rows"></tbody></table>
+  <div class="bar"><span style="color:#9ca3af;font-size:13px" id="sel">0 selected</span><button class="print" id="pb" onclick="doPrint()" disabled>🖨️ Print 0 labels</button></div>
+  <div class="exc"><h3 data-i18n="excT">🚨 Exception queue — needs a human</h3><div id="excRows"></div></div>
+</div>
+<div class="modal" id="m"><div class="box"><h2>🖨️ <span data-i18n="printT">Printing labels</span></h2><p style="color:#9ca3af;font-size:13px;margin-top:6px" id="pt">…</p><div class="pbar"><div id="pf"></div></div><button class="print" onclick="closeM()" id="doneBtn" style="display:none">✓ <span data-i18n="done">Done</span></button></div></div>
+<div class="toast" id="toast"></div>
+<script>
+let LANG='en', f='all', shop='all'; const sel=new Set();
+const T={
+live:{en:'Live',ur:'لائیو'},sOrders:{en:'Orders today',ur:'آج کے آرڈر'},sDisp:{en:'Dispatched',ur:'بھیجے گئے'},
+sRisk:{en:'At risk',ur:'خطرے میں'},sAvg:{en:'Avg dispatch',ur:'اوسط ترسیل'},fAll:{en:'All',ur:'سب'},fPend:{en:'Pending',ur:'زیر التواء'},fRisk:{en:'At risk',ur:'خطرے میں'},
+autoRule:{en:'Auto-print when < 4h left',ur:'4 گھنٹے سے کم پر خود پرنٹ کریں'},cOrder:{en:'Order',ur:'آرڈر'},cCust:{en:'Customer',ur:'گاہک'},
+cItems:{en:'Items',ur:'آئٹمز'},cCourier:{en:'Courier',ur:'کوریئر'},cDispatch:{en:'Dispatch in',ur:'ترسیل میں'},cStatus:{en:'Status',ur:'حالت'},
+excT:{en:'🚨 Exception queue — needs a human',ur:'🚨 مسئلہ قطار — انسان کی ضرورت'},printT:{en:'Printing labels',ur:'لیبل پرنٹ ہو رہے ہیں'},
+done:{en:'Done',ur:'ہو گیا'},banner:{en:'orders are near the <b>48-hour dispatch window</b>. TikTok penalizes late dispatch with suppressed payouts and FYP reach cuts.',ur:'آرڈر <b>48 گھنٹے کی ترسیل</b> کے قریب ہیں۔ دیر پر ٹک ٹاک ادائیگی روکتا اور رسائی کم کرتا ہے۔'},
+stP:{en:'Pending',ur:'زیر التواء'},stR:{en:'At risk',ur:'خطرے میں'},stO:{en:'Dispatched',ur:'بھیجا گیا'},
+pickup:{en:'📅 Pickup',ur:'📅 پک اپ'},of:{en:'of',ur:'کا'},showing:{en:'showing',ur:'دکھائے جا رہے ہیں'},selected:{en:'selected',ur:'منتخب'},
+printL:{en:'labels',ur:'لیبل'},ex1t:{en:'Failed pickup — rider found shop closed',ur:'پک اپ ناکام — دکان بند ملی'},ex1d:{en:'TT-90098 · Leopards · retry pickup',ur:'TT-90098 · لیپرڈز · دوبارہ پک اپ'},
+ex2t:{en:'Address issue — incomplete house number',ur:'پتہ مسئلہ — نامکمل مکان نمبر'},ex2d:{en:'TT-90102 · TCS · confirm with customer',ur:'TT-90102 · ٹی سی ایس · گاہک سے تصدیق'},
+ex3t:{en:'COD amount mismatch on label',ur:'لیبل پر رقم کا فرق'},ex3d:{en:'TT-90111 · PostEx · reprint label',ur:'TT-90111 · پوسٹ ایکس · لیبل دوبارہ پرنٹ'},
+resolve:{en:'Resolve',ur:'حل کریں'}
+};
+const SHOPS=[{id:'all',n:{en:'All shops',ur:'تمام دکانیں'},o:'1,284'},{id:'s1',n:{en:'GlowKart',ur:'گلو کارٹ'},o:'612'},{id:'s2',n:{en:'DesiNest',ur:'دیسی نیسٹ'},o:'418'},{id:'s3',n:{en:'FitFuel',ur:'فٹ فیول'},o:'254'}];
+const NAMES=['Ayesha Khan','Bilal Ahmed','Fatima Raza','Usman Tariq','Sana Malik','Hamza Sheikh','Iqra Nawaz','Danish Ali','Mahnoor Asif','Ali Raza','Hira Shah','Kamran Yousaf','Sadia Noor','Fahad Khan','Areeba Tariq','Zain Malik','Nimra Ahmed','Saad Farooq','Laiba Khan','Umar Sheikh','Rabia Aslam','Talha Mehmood','Kiran Shah','Adnan Raza','Saba Iqbal'];
+let O=[];NAMES.forEach((n,i)=>{O.push({id:'TT-90'+(121+i),c:n,it:1+((i*7)%5),sec:600+((i*1373)%30000),st:i%9===8?'ok':'pend',shop:['s1','s2','s3'][i%3],cour:['TCS','Leopards','PostEx'][i%3]})});
+let EXC=[{t:'ex1t',d:'ex1d'},{t:'ex2t',d:'ex2d'},{t:'ex3t',d:'ex3d'}];
+function t(k){return T[k]?T[k][LANG]:k}
+function setLang(l){LANG=l;document.documentElement.lang=l;document.documentElement.dir=l==='ur'?'rtl':'ltr';
+document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(T[k])e.innerHTML=T[k][l]});
+document.getElementById('langToggle').textContent=l==='en'?'اردو':'EN';renderShops();render();}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function fmt(s){s=Math.max(0,s);return String(Math.floor(s/3600)).padStart(2,'0')+':'+String(Math.floor(s%3600/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function pill(s){return s==='risk'?'<span class="pill rsk">'+t('stR')+'</span>':s==='ok'?'<span class="pill ok">'+t('stO')+'</span>':'<span class="pill pend">'+t('stP')+'</span>'}
+function renderShops(){document.getElementById('shoptabs').innerHTML=SHOPS.map(s=>`<button class="shop ${shop===s.id?'on':''}" onclick="setShop('${s.id}')">${s.n[LANG]}<small>${s.o} ${t('sOrders').toLowerCase()}</small></button>`).join('')}
+function setShop(id){shop=id;renderShops();render()}
+function setF(x,el){f=x;document.querySelectorAll('.f').forEach(b=>b.classList.remove('on'));el.classList.add('on');render()}
+function visible(){return O.map((o,i)=>({o,i})).filter(({o})=>{if(shop!=='all'&&o.shop!==shop)return false;if(f==='pend'&&o.st!=='pend')return false;if(f==='risk'&&o.st!=='risk')return false;return true})}
+function render(){const v=visible();
+document.getElementById('rows').innerHTML=v.map(({o,i})=>`<tr class="${o.st==='risk'?'risk':''}"><td><input type="checkbox" ${sel.has(i)?'checked':''} onchange="tog(${i},this.checked)" ${o.st==='ok'?'disabled':''}></td><td><b>${o.id}</b></td><td>${o.c}</td><td>${o.it}</td><td><select class="cour" onchange="event.stopPropagation();O[${i}].cour=this.value;toast('${o.id} → '+this.value)">${['TCS','Leopards','PostEx'].map(c=>`<option ${o.cour===c?'selected':''}>${c}</option>`).join('')}</select></td><td class="cd" id="cd${i}">${o.st==='ok'?'—':fmt(o.sec)}</td><td>${pill(o.st)}</td><td>${o.st!=='ok'?`<button class="pickbtn" onclick="toast('${LANG==='en'?'Pickup scheduled':'پک اپ طے شدہ'}: ${o.id} · ${o.cour} · ${LANG==='en'?'tomorrow 10 AM':'کل صبح 10 بجے'}')">${t('pickup')}</button>`:''}</td></tr>`).join('');
+document.getElementById('scaleTxt').textContent=`${t('showing')} ${v.length} ${t('of')} 1,284`;
+document.getElementById('excRows').innerHTML=EXC.map((e,k)=>`<div class="exrow"><div class="ei"><b>${t(e.t)}</b><span>${t(e.d)}</span></div><button class="resolve" onclick="resolveEx(${k})">${t('resolve')}</button></div>`).join('')||'<div style="color:#34d399;font-size:13px">✓ '+(LANG==='en'?'All exceptions cleared.':'تمام مسائل حل۔')+'</div>';
+upd()}
+function resolveEx(k){EXC.splice(k,1);render();toast(LANG==='en'?'Exception resolved ✓':'مسئلہ حل ✓')}
+function tog(i,on){on?sel.add(i):sel.delete(i);upd()}
+function upd(){const n=sel.size;document.getElementById('sel').textContent=n+' '+t('selected');const b=document.getElementById('pb');b.innerHTML=`🖨️ Print ${n} ${t('printL')}`;b.disabled=!n}
+function doPrint(){const m=document.getElementById('m');m.classList.add('open');document.getElementById('doneBtn').style.display='none';let p=0;const n=sel.size;const iv=setInterval(()=>{p+=Math.random()*16+6;if(p>=100){p=100;clearInterval(iv);document.getElementById('pt').textContent=n+(LANG==='en'?' labels sent to printer ✓':' لیبل پرنٹر کو بھیجے گئے ✓');document.getElementById('doneBtn').style.display='inline-block';sel.forEach(i=>O[i].st='ok');sel.clear();render()}else document.getElementById('pt').textContent=(LANG==='en'?'Printing label ':'لیبل پرنٹ ہو رہا ہے ')+Math.ceil(p/100*n)+' / '+n;document.getElementById('pf').style.width=p+'%'},160)}
+function closeM(){document.getElementById('m').classList.remove('open');document.getElementById('pf').style.width='0'}
+setInterval(()=>{let changed=false;O.forEach((o,i)=>{if(o.sec>0&&o.st!=='ok'){o.sec--;const e=document.getElementById('cd'+i);if(e)e.textContent=fmt(o.sec);
+if(o.sec<3600&&o.st==='pend'){o.st='risk';changed=true}
+if(o.sec<4*3600&&o.sec>0&&o.st==='pend'&&document.getElementById('autoSw').classList.contains('on')&&o.sec%7===0){/* auto-print trigger zone */}
+if(o.sec===0&&o.st!=='ok'&&document.getElementById('autoSw').classList.contains('on')){o.st='ok';changed=true;toast('⚡ '+(LANG==='en'?'Auto-printed':'خودکار پرنٹ')+': '+o.id)}}});
+if(changed)render();
+const risk=O.filter(o=>o.st==='risk').length;document.getElementById('stRisk').textContent=risk;},1000);
+renderShops();render();
+</script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KhataBook — Digital Khata</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#e8e2cf;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.phone{width:390px;height:800px;background:#fdfbf4;border-radius:38px;overflow:hidden;position:relative;box-shadow:0 30px 70px rgba(6,95,70,.35);display:flex;flex-direction:column}
+.header{background:#065f46;color:#fff;padding:20px 18px 16px;position:relative}
+.header h1{font-size:21px;font-weight:800}
+.header h1 span{color:#f59e0b}
+.header p{font-size:12px;opacity:.85;margin-top:2px}
+.lang{position:absolute;top:16px;inset-inline-end:14px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px;cursor:pointer}
+.content{flex:1;overflow-y:auto;padding:14px 14px 92px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(6,95,70,.08)}
+.card h4{font-size:14px;margin-bottom:8px}
+.stat{background:linear-gradient(135deg,#065f46,#047857);color:#fff;border-radius:18px;padding:16px;margin-bottom:12px}
+.stat .lbl{font-size:12px;opacity:.85}
+.stat .val{font-size:28px;font-weight:800;margin:4px 0}
+.stat.amber{background:linear-gradient(135deg,#b45309,#f59e0b)}
+.stat.red{background:linear-gradient(135deg,#7f1d1d,#b91c1c)}
+.row{display:flex;gap:10px}.row .stat{flex:1}
+.buckets{display:flex;gap:8px;margin-bottom:12px}
+.bucket{flex:1;background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 2px 8px rgba(6,95,70,.08)}
+.bucket .b-lbl{font-size:10px;color:#888;font-weight:600}
+.bucket .b-val{font-size:16px;font-weight:800;color:#b45309}
+.cust{display:flex;align-items:center;padding:12px;cursor:pointer;transition:transform .15s}
+.cust:active{transform:scale(.98)}
+.avatar{width:42px;height:42px;border-radius:50%;background:#065f46;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;margin-inline-end:10px;flex-shrink:0}
+.cust .nm{font-weight:600;font-size:14px}
+.cust .ph{font-size:11px;color:#888}
+.bal{margin-inline-start:auto;text-align:end;font-weight:700;color:#b45309;font-size:15px}
+.badge{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:700;display:inline-block;margin-top:3px}
+.badge.od{background:#fee2e2;color:#b91c1c}
+.badge.risk{background:#fef3c7;color:#92400e}
+.tabs{position:absolute;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #eee;padding:8px 0 16px;z-index:5}
+.tab{flex:1;text-align:center;font-size:10px;color:#999;cursor:pointer;font-weight:600}
+.tab.active{color:#065f46}
+.tab .ic{font-size:19px;display:block;margin-bottom:2px}
+.entry{padding:10px 0;border-bottom:1px solid #f0ead9;font-size:13px}
+.entry .t{font-size:11px;color:#999}
+.entry .erow{display:flex;justify-content:space-between;align-items:center}
+.plus{color:#047857;font-weight:700}.minus{color:#b91c1c;font-weight:700}
+.paybtn{background:#065f46;color:#fff;border:none;font-size:11px;font-weight:700;padding:6px 12px;border-radius:8px;cursor:pointer;margin-top:6px}
+.back{color:#065f46;font-weight:600;font-size:14px;cursor:pointer;margin-bottom:8px;display:inline-block}
+.search{width:100%;padding:11px 14px;border:1px solid #e5dfcc;border-radius:12px;margin-bottom:10px;font-size:14px;outline:none;background:#fff}
+.search:focus{border-color:#065f46}
+.modal{position:absolute;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-end;z-index:10}
+.modal.open{display:flex}
+.sheet{background:#fdfbf4;width:100%;border-radius:24px 24px 0 0;padding:20px;animation:up .3s ease;max-height:85%;overflow-y:auto}
+@keyframes up{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
+.sheet h3{font-size:17px;margin-bottom:12px}
+.sheet label{font-size:12px;color:#666;font-weight:600;display:block;margin:10px 0 4px}
+.sheet select,.sheet input,.sheet textarea{width:100%;padding:11px;border:1px solid #e5dfcc;border-radius:12px;font-size:14px;outline:none;background:#fff;font-family:'Inter',sans-serif}
+.toggle{display:flex;background:#f0ead9;border-radius:12px;padding:4px;margin:6px 0 4px}
+.toggle div{flex:1;text-align:center;padding:9px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;color:#888;transition:all .2s}
+.toggle div.on{background:#065f46;color:#fff}
+.btn{width:100%;background:#065f46;color:#fff;border:none;padding:13px;border-radius:14px;font-size:15px;font-weight:700;margin-top:12px;cursor:pointer}
+.btn.ghost{background:#e5dfcc;color:#555}
+.wa{background:#f59e0b;color:#fff;border:none;padding:8px 13px;border-radius:10px;font-weight:600;font-size:12px;cursor:pointer}
+.wa.sent{background:#10b981}
+.wa:disabled{opacity:.5;cursor:default}
+.seq{display:flex;gap:6px;margin-top:8px}
+.seq span{flex:1;text-align:center;font-size:10px;padding:6px 2px;border-radius:8px;background:#f0ead9;color:#999;font-weight:600}
+.seq span.done{background:#065f46;color:#fff}
+.toast{position:absolute;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);background:#065f46;color:#fff;padding:11px 20px;border-radius:30px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;z-index:20;max-width:92%}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.view{display:none}.view.active{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.stmt-line{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px solid #f0ead9}
+.stmt-line.total{font-weight:800;font-size:16px;border-bottom:none;color:#065f46}
+select.stmtSel{width:100%;padding:11px;border:1px solid #e5dfcc;border-radius:12px;margin-bottom:10px;font-size:14px;background:#fff}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="header">
+    <button class="lang" id="langToggle" onclick="setLang(LANG==='en'?'ur':'en')">اردو</button>
+    <h1>KhataBook <span data-i18n="appUr">کھاتہ بک</span></h1>
+    <p data-i18n="store">Ahmed's General Store · Timergarah</p>
+  </div>
+  <div class="content">
+    <div class="view active" id="v-home">
+      <div class="stat"><div class="lbl" data-i18n="totalUdhaar">Total Udhaar ادھار</div><div class="val" id="totalUdhaar">Rs 0</div></div>
+      <div class="row">
+        <div class="stat amber"><div class="lbl" data-i18n="recovered">Recovered this week</div><div class="val" style="font-size:20px" id="recovered">Rs 0</div></div>
+        <div class="stat red"><div class="lbl" data-i18n="overdueC">Overdue customers</div><div class="val" style="font-size:20px" id="overdueN">0</div></div>
+      </div>
+      <div class="card"><h4 data-i18n="aging">Aging buckets — paisa kab se phansa hai</h4><div class="buckets" style="margin:0">
+        <div class="bucket"><div class="b-lbl">0–30 <span data-i18n="days">days</span></div><div class="b-val" id="b0">Rs 0</div></div>
+        <div class="bucket"><div class="b-lbl">30–60 <span data-i18n="days2">days</span></div><div class="b-val" id="b1">Rs 0</div></div>
+        <div class="bucket"><div class="b-lbl">60+ <span data-i18n="days3">days</span></div><div class="b-val" id="b2">Rs 0</div></div>
+      </div></div>
+      <div class="card"><b data-i18n="tipT">Quick tip 💡</b><br><span style="font-size:13px;color:#666" data-i18n="tipB">Customers past their credit limit are flagged risky — stop further udhaar until they pay down.</span></div>
+    </div>
+    <div class="view" id="v-cust">
+      <input class="search" id="q" data-i18n-ph="searchPh" placeholder="🔍 Search customer…" oninput="renderCust()">
+      <div id="custList"></div>
+    </div>
+    <div class="view" id="v-detail">
+      <span class="back" onclick="show('v-cust','t2')" data-i18n="back">← Back</span>
+      <div class="card"><div style="display:flex;align-items:center"><div class="avatar" id="dAv">A</div><div><div class="nm" id="dName" style="font-weight:700;font-size:16px"></div><div class="ph" id="dPhone" style="font-size:12px;color:#888"></div><div id="dLimit" style="font-size:11px;color:#888;margin-top:2px"></div></div><div class="bal" id="dBal" style="font-size:17px"></div></div></div>
+      <div class="card"><b data-i18n="ledger">Ledger کھاتہ</b> <span style="font-size:11px;color:#999" data-i18n="ledgerHint">— pay against a specific entry</span><div id="ledger" style="margin-top:6px"></div></div>
+    </div>
+    <div class="view" id="v-rem">
+      <div class="card" style="background:#fef3c7"><b data-i18n="remT">⚠️ Reminder sequences</b><br><span style="font-size:12px;color:#666" data-i18n="remB">Day 1 polite → Day 7 firmer → Day 14 final. The system escalates, you say nothing.</span></div>
+      <div id="remList"></div>
+    </div>
+    <div class="view" id="v-stmt">
+      <div class="card"><h4 data-i18n="stmtT">Monthly statement — ماہانہ حساب</h4>
+        <select class="stmtSel" id="stmtCust"></select>
+        <div id="stmtBody"></div>
+        <button class="btn" style="background:#f59e0b" onclick="shareStmt()" data-i18n="shareWa">📲 Share on WhatsApp</button>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="modal"><div class="sheet">
+    <h3><span data-i18n="newEntry">New Entry</span> <span style="color:#f59e0b" data-i18n="newEntryUr">نیا اندراج</span></h3>
+    <label data-i18n="customer">Customer</label><select id="fCust"></select>
+    <label data-i18n="amount">Amount (Rs)</label><input id="fAmt" type="number" placeholder="e.g. 2500">
+    <label data-i18n="type">Type</label><div class="toggle"><div id="tgU" class="on" onclick="setType('U')"><span data-i18n="udhaar">Udhaar</span> <span data-i18n="udhaarUr">ادھار</span></div><div id="tgP" onclick="setType('P')"><span data-i18n="payment">Payment</span> <span data-i18n="paymentUr">وصولی</span></div></div>
+    <button class="btn" onclick="saveEntry()" data-i18n="save">Save Entry</button>
+    <button class="btn ghost" onclick="closeModal()" data-i18n="cancel">Cancel</button>
+  </div></div>
+  <div class="modal" id="modalPay"><div class="sheet">
+    <h3 data-i18n="partPayT">Partial payment — جزوی ادائیگی</h3>
+    <p style="font-size:13px;color:#666" id="payInfo"></p>
+    <label data-i18n="payAmt">Amount received (Rs)</label><input id="payAmt" type="number" placeholder="e.g. 2000">
+    <button class="btn" onclick="savePartial()" data-i18n="recordPay">Record payment</button>
+    <button class="btn ghost" onclick="closePay()" data-i18n="cancel2">Cancel</button>
+  </div></div>
+  <div class="toast" id="toast"></div>
+  <div class="tabs">
+    <div class="tab active" id="t1" onclick="show('v-home','t1')"><span class="ic">🏠</span><span data-i18n="tabHome">Home</span></div>
+    <div class="tab" id="t2" onclick="show('v-cust','t2')"><span class="ic">👥</span><span data-i18n="tabCust">Customers</span></div>
+    <div class="tab" onclick="openModal()"><span class="ic">➕</span><span data-i18n="tabAdd">Add</span></div>
+    <div class="tab" id="t4" onclick="show('v-rem','t4')"><span class="ic">🔔</span><span data-i18n="tabRem">Reminders</span></div>
+    <div class="tab" id="t5" onclick="openStmt()"><span class="ic">🧾</span><span data-i18n="tabStmt">Statement</span></div>
+  </div>
+</div>
+<script>
+let LANG='en', type='U', payCtx=null;
+const T={
+appUr:{en:'کھاتہ بک',ur:'کھاتہ بک'},store:{en:"Ahmed's General Store · Timergarah",ur:'احمد جنرل اسٹور · تیمرگرہ'},
+totalUdhaar:{en:'Total Udhaar ادھار',ur:'کل ادھار'},recovered:{en:'Recovered this week',ur:'اس ہفتے وصولی'},
+overdueC:{en:'Overdue customers',ur:'واجب الادا گاہک'},aging:{en:'Aging buckets — how long money is stuck',ur:'عمر رسیدہ بقایا — پیسہ کب سے پھنسا ہے'},
+days:{en:'days',ur:'دن'},days2:{en:'days',ur:'دن'},days3:{en:'days',ur:'دن'},
+tipT:{en:'Quick tip 💡',ur:'مشورہ 💡'},tipB:{en:'Customers past their credit limit are flagged risky — stop further udhaar until they pay down.',ur:'کریڈٹ حد سے زیادہ والے گاہک خطرناک قرار — ادائیگی تک مزید ادھار بند کریں۔'},
+back:{en:'← Back',ur:'← واپس'},ledger:{en:'Ledger کھاتہ',ur:'کھاتہ'},ledgerHint:{en:'— pay against a specific entry',ur:'— مخصوص اندراج پر ادائیگی'},
+remT:{en:'⚠️ Reminder sequences',ur:'⚠️ یاد دہانی کا سلسلہ'},remB:{en:'Day 1 polite → Day 7 firmer → Day 14 final. The system escalates, you say nothing.',ur:'پہلا دن نرم → ساتواں دن سخت → چودھواں دن آخری۔ نظام خود بڑھائے گا۔'},
+stmtT:{en:'Monthly statement — ماہانہ حساب',ur:'ماہانہ حساب'},shareWa:{en:'📲 Share on WhatsApp',ur:'📲 واٹس ایپ پر بھیجیں'},
+newEntry:{en:'New Entry',ur:'نیا اندراج'},newEntryUr:{en:'نیا اندراج',ur:'نیا اندراج'},customer:{en:'Customer',ur:'گاہک'},
+amount:{en:'Amount (Rs)',ur:'رقم (روپے)'},type:{en:'Type',ur:'قسم'},udhaar:{en:'Udhaar',ur:'ادھار'},udhaarUr:{en:'ادھار',ur:'ادھار'},
+payment:{en:'Payment',ur:'وصولی'},paymentUr:{en:'وصولی',ur:'وصولی'},save:{en:'Save Entry',ur:'محفوظ کریں'},cancel:{en:'Cancel',ur:'منسوخ'},
+cancel2:{en:'Cancel',ur:'منسوخ'},partPayT:{en:'Partial payment — جزوی ادائیگی',ur:'جزوی ادائیگی'},payAmt:{en:'Amount received (Rs)',ur:'موصول رقم (روپے)'},
+recordPay:{en:'Record payment',ur:'ادائیگی درج کریں'},searchPh:{en:'🔍 Search customer…',ur:'🔍 گاہک تلاش کریں…'},
+tabHome:{en:'Home',ur:'ہوم'},tabCust:{en:'Customers',ur:'گاہک'},tabAdd:{en:'Add',ur:'شامل'},tabRem:{en:'Reminders',ur:'یاددہانی'},tabStmt:{en:'Statement',ur:'حساب'},
+overdue:{en:'overdue',ur:'واجب الادا'},risky:{en:'⚠ over limit',ur:'⚠ حد سے زیادہ'},limitLbl:{en:'Credit limit',ur:'کریڈٹ حد'},
+pay:{en:'Pay',ur:'ادا کریں'},send:{en:'Send',ur:'بھیجیں'},sent:{en:'✓ Sent',ur:'✓ بھیجا گیا'},
+seq1:{en:'Day 1 · polite',ur:'دن 1 · نرم'},seq2:{en:'Day 7 · firmer',ur:'دن 7 · سخت'},seq3:{en:'Day 14 · final',ur:'دن 14 · آخری'},
+opening:{en:'Opening balance',ur:'ابتدائی بیلنس'},credits:{en:"This month's udhaar",ur:'اس ماہ کا ادھار'},pays:{en:"This month's payments",ur:'اس ماہ کی وصولی'},
+closing:{en:'Closing balance',ur:'اختتامی بیلنس'}
+};
+const C=[
+{n:'Ahmed',ph:'0301-2345678',limit:15000,seq:1,entries:[{d:2,type:'U',amt:8000,rem:8000,ts:'Oct 1, 4:32 PM'},{d:34,type:'U',amt:12000,rem:7000,ts:'Aug 29, 11:05 AM'},{d:70,type:'U',amt:9000,rem:0,ts:'Jul 24, 6:20 PM'},{d:11,type:'P',amt:5000,rem:0,ts:'Sep 21, 2:10 PM'}]},
+{n:'Fatima',ph:'0333-9876543',limit:10000,seq:0,entries:[{d:3,type:'U',amt:3200,rem:3200,ts:'Sep 30, 2:10 PM'},{d:6,type:'U',amt:5000,rem:5000,ts:'Sep 27, 9:45 AM'}]},
+{n:'Bilal',ph:'0345-1122334',limit:12000,seq:2,entries:[{d:45,type:'U',amt:10000,rem:10000,ts:'Aug 18, 7:00 PM'},{d:9,type:'U',amt:5750,rem:5750,ts:'Sep 24, 1:15 PM'},{d:20,type:'P',amt:4250,rem:0,ts:'Sep 13, 5:40 PM'}]},
+{n:'Rashid',ph:'0321-5566778',limit:8000,seq:0,entries:[{d:5,type:'U',amt:6300,rem:6300,ts:'Sep 28, 12:30 PM'}]},
+{n:'Saima',ph:'0300-4433221',limit:10000,seq:0,entries:[{d:4,type:'U',amt:6100,rem:4100,ts:'Sep 29, 10:20 AM'},{d:8,type:'P',amt:2000,rem:0,ts:'Sep 25, 3:55 PM'}]}];
+function t(k){return T[k]?T[k][LANG]:k}
+function setLang(l){LANG=l;document.documentElement.lang=l;document.documentElement.dir=l==='ur'?'rtl':'ltr';
+document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(T[k])e.innerHTML=T[k][l]});
+document.querySelectorAll('[data-i18n-ph]').forEach(e=>{const k=e.getAttribute('data-i18n-ph');if(T[k])e.placeholder=T[k][l]});
+document.getElementById('langToggle').textContent=l==='en'?'اردو':'EN';
+renderHome();renderCust();renderRem();}
+function toast(m){const el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(el._x);el._x=setTimeout(()=>el.classList.remove('show'),2400)}
+function show(v,tb){document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));document.getElementById(v).classList.add('active');if(tb){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById(tb).classList.add('active')}}
+function bal(c){return c.entries.filter(e=>e.type==='U').reduce((s,e)=>s+e.rem,0)}
+function recovered(){return C.reduce((s,c)=>s+c.entries.filter(e=>e.type==='P'&&e.d<=7).reduce((x,e)=>x+e.amt,0),0)}
+function renderHome(){const tot=C.reduce((s,c)=>s+bal(c),0);document.getElementById('totalUdhaar').textContent='Rs '+tot.toLocaleString();
+document.getElementById('recovered').textContent='Rs '+recovered().toLocaleString();
+document.getElementById('overdueN').textContent=C.filter(c=>c.entries.some(e=>e.type==='U'&&e.rem>0&&e.d>7)).length;
+let b=[0,0,0];C.forEach(c=>c.entries.forEach(e=>{if(e.type==='U'&&e.rem>0){b[e.d<=30?0:e.d<=60?1:2]+=e.rem}}));
+document.getElementById('b0').textContent='Rs '+b[0].toLocaleString();document.getElementById('b1').textContent='Rs '+b[1].toLocaleString();document.getElementById('b2').textContent='Rs '+b[2].toLocaleString();}
+function renderCust(){const q=(document.getElementById('q').value||'').toLowerCase();
+document.getElementById('custList').innerHTML=C.filter(c=>(c.n+c.ph).toLowerCase().includes(q)).map(c=>{const i=C.indexOf(c),b=bal(c),od=c.entries.some(e=>e.type==='U'&&e.rem>0&&e.d>7),rk=b>c.limit;
+return `<div class="card cust" onclick="detail(${i})"><div class="avatar">${c.n[0]}</div><div><div class="nm">${c.n}</div><div class="ph">${c.ph}</div></div><div class="bal">Rs ${b.toLocaleString()}<br>${od?'<span class="badge od">'+t('overdue')+'</span>':''}${rk?' <span class="badge risk">'+t('risky')+'</span>':''}</div></div>`}).join('')}
+function detail(i){const c=C[i];document.getElementById('dAv').textContent=c.n[0];document.getElementById('dName').textContent=c.n;
+document.getElementById('dPhone').textContent=c.ph;document.getElementById('dLimit').textContent=t('limitLbl')+': Rs '+c.limit.toLocaleString();
+document.getElementById('dBal').textContent='Rs '+bal(c).toLocaleString();
+document.getElementById('ledger').innerHTML=c.entries.map((e,j)=>`<div class="entry"><div class="erow"><div>${e.type==='U'?t('udhaar'):t('payment')}<br><span class="t">${e.ts} · ${e.d} ${t('days')}</span></div><div class="${e.type==='U'?'plus':'minus'}">${e.type==='U'?'+':'−'} Rs ${e.amt.toLocaleString()}${e.type==='U'&&e.rem>0?'<br><span class="t">rem: Rs '+e.rem.toLocaleString()+'</span>':''}</div></div>${e.type==='U'&&e.rem>0?`<button class="paybtn" onclick="openPay(${i},${j})">${t('pay')} Rs ${e.rem.toLocaleString()}</button>`:''}</div>`).join('');
+show('v-detail');document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById('t2').classList.add('active')}
+function openPay(i,j){payCtx={i,j};const c=C[i],e=c.entries[j];document.getElementById('payInfo').textContent=c.n+' · '+t('udhaar')+' Rs '+e.amt.toLocaleString()+' · rem Rs '+e.rem.toLocaleString();document.getElementById('payAmt').value='';document.getElementById('modalPay').classList.add('open')}
+function closePay(){document.getElementById('modalPay').classList.remove('open')}
+function savePartial(){const a=+document.getElementById('payAmt').value;if(!a||!payCtx)return;const c=C[payCtx.i],e=c.entries[payCtx.j];
+const p=Math.min(a,e.rem);e.rem-=p;c.entries.unshift({d:0,type:'P',amt:p,rem:0,ts:'Today'});closePay();renderHome();renderCust();detail(payCtx.i);toast((LANG==='en'?'Partial payment recorded: Rs ':'جزوی ادائیگی درج: ') +p.toLocaleString()+' ✓')}
+function renderRem(){document.getElementById('remList').innerHTML=C.filter(c=>c.entries.some(e=>e.type==='U'&&e.rem>0&&e.d>7)).map(c=>{const i=C.indexOf(c);
+const seq=['seq1','seq2','seq3'].map((s,k)=>`<span class="${c.seq>k?'done':''}">${t(s)}</span>`).join('');
+return `<div class="card"><div style="display:flex;align-items:center"><div class="avatar" style="background:#b45309">${c.n[0]}</div><div><div class="nm">${c.n}</div><div class="ph">Rs ${bal(c).toLocaleString()} ${t('overdue')}</div></div></div><div class="seq">${seq}</div><button class="wa ${c.seq>=3?'sent':''}" style="margin-top:8px" ${c.seq>=3?'disabled':''} onclick="sendSeq(${i},this)">${c.seq>=3?t('sent'):t('send')+' · '+t('seq'+(c.seq+1))}</button></div>`}).join('')||'<div class="card">✓ '+(LANG==='en'?'No overdue customers.':'کوئی واجب الادا گاہک نہیں۔')+'</div>'}
+function sendSeq(i,btn){const c=C[i];c.seq=Math.min(3,c.seq+1);renderRem();toast((LANG==='en'?'Reminder sent to ':'یاد دہانی بھیجی گئی: ')+c.n+' 📲 ('+t('seq'+c.seq)+')')}
+function openModal(){document.getElementById('fCust').innerHTML=C.map(c=>`<option>${c.n}</option>`).join('');document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function setType(x){type=x;document.getElementById('tgU').classList.toggle('on',x==='U');document.getElementById('tgP').classList.toggle('on',x==='P')}
+function saveEntry(){const n=document.getElementById('fCust').value,a=+document.getElementById('fAmt').value;if(!a){toast(LANG==='en'?'Enter an amount':'رقم درج کریں');return}
+const c=C.find(x=>x.n===n);
+if(type==='U'){c.entries.unshift({d:0,type:'U',amt:a,rem:a,ts:'Today'})}
+else{let left=a;const us=c.entries.filter(e=>e.type==='U'&&e.rem>0).sort((x,y)=>y.d-x.d);us.forEach(e=>{const p=Math.min(left,e.rem);e.rem-=p;left-=p});c.entries.unshift({d:0,type:'P',amt:a,rem:0,ts:'Today'})}
+document.getElementById('fAmt').value='';closeModal();renderHome();renderCust();renderRem();toast((LANG==='en'?'Entry saved for ':'اندراج محفوظ: ')+n+' ✓')}
+function openStmt(){document.getElementById('stmtCust').innerHTML=C.map((c,i)=>`<option value="${i}">${c.n}</option>`).join('');renderStmt();show('v-stmt','t5')}
+function renderStmt(){const c=C[+document.getElementById('stmtCust').value||0];if(!c)return;
+const cr=c.entries.filter(e=>e.type==='U').reduce((s,e)=>s+e.amt,0),py=c.entries.filter(e=>e.type==='P').reduce((s,e)=>s+e.amt,0);
+document.getElementById('stmtBody').innerHTML=`<div class="stmt-line"><span>${t('opening')}</span><span>Rs 0</span></div><div class="stmt-line"><span>${t('credits')}</span><span class="plus">+ Rs ${cr.toLocaleString()}</span></div><div class="stmt-line"><span>${t('pays')}</span><span class="minus">− Rs ${py.toLocaleString()}</span></div><div class="stmt-line total"><span>${t('closing')}</span><span>Rs ${bal(c).toLocaleString()}</span></div>`}
+function shareStmt(){const c=C[+document.getElementById('stmtCust').value||0];toast((LANG==='en'?'Statement shared with ':'حساب بھیجا گیا: ')+(c?c.n:'')+' 📲')}
+document.getElementById('stmtCust')&&document.getElementById('stmtCust').addEventListener('change',renderStmt);
+renderHome();renderCust();renderRem();
+</script>
+</body>
+</html>

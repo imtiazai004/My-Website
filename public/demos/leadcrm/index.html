@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadCRM — Never Lose a Lead</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#f0fdfa;min-height:100vh;padding:26px}
+.wrap{max-width:1360px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:800;color:#134e4a}.top h1 span{color:#0d9488}
+.lang{margin-inline-start:auto;background:#fff;border:1px solid #99f6e4;color:#0d9488;font-size:12px;font-weight:700;padding:7px 14px;border-radius:20px;cursor:pointer}
+.forecast{background:#fff;border:1px solid #99f6e4;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.forecast .fi .fl{font-size:11px;color:#5f9e97;font-weight:600}.forecast .fi .fv{font-size:22px;font-weight:800;color:#0d9488}
+.fbar{flex:1;min-width:200px;height:12px;background:#f0fdfa;border:1px solid #99f6e4;border-radius:8px;overflow:hidden}
+.fbar div{height:100%;background:linear-gradient(90deg,#5eead4,#0d9488);border-radius:8px;transition:width .5s}
+.board{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:start}
+.col{background:#e6f7f3;border-radius:16px;padding:12px;min-height:420px}
+.col.won{background:#d1fae5}.col.lost{background:#f1f5f9}
+.col h4{font-size:13px;color:#134e4a;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center}
+.col .ctot{font-size:11px;color:#0d9488;font-weight:700}
+.card{background:#fff;border-radius:12px;padding:12px;margin-bottom:10px;box-shadow:0 2px 8px rgba(13,148,136,.1);cursor:pointer;transition:transform .15s}
+.card:active{transform:scale(.97)}
+.card b{font-size:13.5px;color:#134e4a;display:block}
+.card .biz{font-size:12px;color:#5f9e97}
+.card .cval{font-weight:800;color:#0d9488;font-size:14px;margin-top:6px}
+.score{font-size:10px;font-weight:800;padding:3px 9px;border-radius:14px;display:inline-block;margin-top:6px}
+.score.hot{background:#fee2e2;color:#b91c1c}.score.warm{background:#fef3c7;color:#92400e}.score.cold{background:#e2e8f0;color:#475569}
+.idle{font-size:10px;font-weight:700;color:#b91c1c;background:#fee2e2;padding:3px 8px;border-radius:12px;margin-inline-start:6px}
+.addlead{width:100%;border:2px dashed #99f6e4;background:transparent;color:#0d9488;font-weight:700;font-size:13px;padding:11px;border-radius:12px;cursor:pointer;margin-bottom:12px}
+.drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;width:380px;max-width:92vw;background:#fff;box-shadow:-10px 0 40px rgba(13,78,74,.15);padding:24px;z-index:20;transform:translateX(110%);transition:transform .3s ease;overflow-y:auto}
+[dir="rtl"] .drawer{transform:translateX(-110%)}
+.drawer.open{transform:none!important}
+.drawer h3{font-size:18px;color:#134e4a;margin-bottom:4px}
+.drawer .dsub{font-size:13px;color:#5f9e97;margin-bottom:14px}
+.dsec{font-size:12px;font-weight:700;color:#0d9488;text-transform:uppercase;letter-spacing:.5px;margin:16px 0 8px}
+.note{background:#f0fdfa;border-radius:10px;padding:10px;font-size:13px;color:#134e4a;margin-bottom:8px}
+.seqchips{display:flex;gap:8px;flex-wrap:wrap}
+.sq{border:1.5px solid #99f6e4;color:#0d9488;font-size:12px;font-weight:700;padding:8px 13px;border-radius:18px;cursor:pointer;background:#fff}
+.sq.on{background:#0d9488;color:#fff;border-color:#0d9488}
+.btn{width:100%;background:#0d9488;color:#fff;border:none;font-weight:800;padding:13px;border-radius:12px;font-size:14px;cursor:pointer;margin-top:14px}
+.btn.ghost{background:#f0fdfa;color:#0d9488;margin-top:8px}
+.btn.warn{background:#f1f5f9;color:#475569}
+.rtag{display:inline-block;font-size:11px;font-weight:700;padding:5px 11px;border-radius:14px;background:#f1f5f9;color:#475569;margin:3px;cursor:pointer;border:1.5px solid transparent}
+.rtag.on{background:#fee2e2;color:#b91c1c;border-color:#b91c1c}
+.overlay{position:fixed;inset:0;background:rgba(13,78,74,.25);display:none;z-index:15}
+.overlay.open{display:block}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:30}
+.modal.open{display:flex}
+.box{background:#fff;border-radius:18px;padding:26px;width:400px;max-width:92vw;animation:pop .3s}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:none;opacity:1}}
+.box h3{font-size:17px;color:#134e4a;margin-bottom:12px}
+.box label{font-size:12px;color:#5f9e97;font-weight:600;display:block;margin:10px 0 4px}
+.box input{width:100%;padding:11px;border:1.5px solid #ccfbf1;border-radius:10px;font-size:14px;outline:none}
+.box input:focus{border-color:#0d9488}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#134e4a;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:all .3s;z-index:40;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:1100px){.board{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><h1>📇 Lead<span>CRM</span></h1><button class="lang" id="langToggle" onclick="setLang(LANG==='en'?'ur':'en')">اردو</button></div>
+  <div class="forecast"><div class="fi"><div class="fl" data-i18n="pipeV">Pipeline value</div><div class="fv" id="pipeV">Rs 0</div></div>
+    <div class="fi"><div class="fl" data-i18n="wFore">Weighted forecast</div><div class="fv" id="wFore">Rs 0</div></div>
+    <div class="fbar"><div id="fbarFill" style="width:0%"></div></div>
+    <button class="addlead" style="width:auto;margin:0;padding:11px 22px" onclick="openAdd()" data-i18n="addLead">＋ Add lead</button></div>
+  <div class="board" id="board"></div>
+</div>
+<div class="overlay" id="ovl" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer"></div>
+<div class="modal" id="addModal"><div class="box"><h3 data-i18n="addT">＋ Add lead</h3>
+  <label data-i18n="fName">Name</label><input id="aName" placeholder="e.g. Kamran Sheikh">
+  <label data-i18n="fBiz">Business</label><input id="aBiz" placeholder="e.g. Sheikh Fabrics">
+  <label data-i18n="fVal">Deal value (Rs)</label><input id="aVal" type="number" placeholder="e.g. 150000">
+  <button class="btn" onclick="saveLead()" data-i18n="saveLead">Save lead</button>
+  <button class="btn ghost" onclick="closeAdd()" data-i18n="cancel">Cancel</button></div></div>
+<div class="toast" id="toast"></div>
+<script>
+let LANG='en', cur=null;
+const T={
+pipeV:{en:'Pipeline value',ur:'پائپ لائن ویلیو'},wFore:{en:'Weighted forecast',ur:'متوقع آمدنی'},addLead:{en:'＋ Add lead',ur:'＋ نیا لیڈ'},
+addT:{en:'＋ Add lead',ur:'＋ نیا لیڈ شامل کریں'},fName:{en:'Name',ur:'نام'},fBiz:{en:'Business',ur:'کاروبار'},fVal:{en:'Deal value (Rs)',ur:'ڈیل کی رقم (روپے)'},
+saveLead:{en:'Save lead',ur:'محفوظ کریں'},cancel:{en:'Cancel',ur:'منسوخ'},
+colNew:{en:'New',ur:'نئے'},colCon:{en:'Contacted',ur:'رابطہ ہوا'},colProp:{en:'Proposal sent',ur:'تجویز بھیجی'},colWon:{en:'Won 🎉',ur:'کامیاب 🎉'},colLost:{en:'Lost',ur:'ضائع'},
+hot:{en:'HOT',ur:'گرم'},warm:{en:'WARM',ur:'نیم گرم'},cold:{en:'COLD',ur:'ٹھنڈا'},
+idleD:{en:'d idle',ur:'دن سے خاموش'},notes:{en:'Notes',ur:'نوٹس'},lastC:{en:'Last contact',ur:'آخری رابطہ'},
+fuSeq:{en:'Follow-up sequence',ur:'فالو اپ کا سلسلہ'},sendFu:{en:'📤 Send follow-up → next stage',ur:'📤 فالو اپ بھیجیں → اگلا مرحلہ'},
+sched:{en:'Scheduled ✓',ur:'طے شدہ ✓'},reason:{en:'Why lost?',ur:'کیوں ضائع ہوا؟'},
+rPrice:{en:'Price',ur:'قیمت'},rTime:{en:'Timing',ur:'وقت'},rComp:{en:'Competitor',ur:'حریف'},
+winback:{en:'💪 Win back → Contacted',ur:'💪 واپس لائیں → رابطہ'},close:{en:'Close',ur:'بند کریں'}
+};
+const COLS=['new','con','prop','won','lost'];
+const W={new:.1,con:.3,prop:.6,won:1,lost:0};
+let LEADS=[
+{n:'Danish Ali',b:'Ali Textiles',v:250000,col:'new',idle:2,note:'Wants a full e-commerce website. Asked for portfolio.',last:'2 days ago'},
+{n:'Sadia Noor',b:'Noor Boutique',v:120000,col:'new',idle:9,note:'Instagram seller, needs order system.',last:'9 days ago'},
+{n:'Fahad Khan',b:'Khan Motors',v:180000,col:'con',idle:4,note:'Met at expo. Wants inventory app.',last:'4 days ago'},
+{n:'Hira Shah',b:'Glow Studio',v:95000,col:'con',idle:11,note:'Salon booking system demo sent.',last:'11 days ago'},
+{n:'Usman Tariq',b:'Tariq Foods',v:320000,col:'prop',idle:3,note:'Proposal sent for WhatsApp ordering bot.',last:'3 days ago'},
+{n:'Mahnoor Asif',b:'Asif Mart',v:140000,col:'prop',idle:8,note:'Waiting on proposal approval.',last:'8 days ago'},
+{n:'Kamran Yousaf',b:'Yousaf Traders',v:210000,col:'won',idle:0,note:'Digital khata project — 50% advance received.',last:'Today'},
+{n:'Rabia Aslam',b:'Rabia Crafts',v:80000,col:'lost',idle:21,note:'Went silent after pricing.',last:'21 days ago',reason:'rPrice'}];
+function t(k){return T[k]?T[k][LANG]:k}
+function setLang(l){LANG=l;document.documentElement.lang=l;document.documentElement.dir=l==='ur'?'rtl':'ltr';
+document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(T[k])e.innerHTML=T[k][l]});
+document.getElementById('langToggle').textContent=l==='en'?'اردو':'EN';render()}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function score(ld){if(ld.col==='won'||ld.col==='lost')return'';const s=ld.v>=200000&&ld.idle<=5?'hot':ld.idle>7?'cold':'warm';return `<span class="score ${s}">${t(s)}</span>`}
+function render(){const bd=document.getElementById('board');
+bd.innerHTML=COLS.map(c=>{const ls=LEADS.map((l,i)=>({l,i})).filter(({l})=>l.col===c);
+const tot=ls.reduce((s,{l})=>s+l.v,0);
+return `<div class="col ${c==='won'?'won':c==='lost'?'lost':''}"><h4>${t('col'+c[0].toUpperCase()+c.slice(1))}<span class="ctot">Rs ${(tot/1000).toFixed(0)}k</span></h4>
+${ls.map(({l,i})=>`<div class="card" onclick="openLead(${i})"><b>${l.n}</b><div class="biz">${l.b}</div><div class="cval">Rs ${l.v.toLocaleString()}</div>${score(l)}${l.idle>7&&l.col!=='won'?`<span class="idle">${l.idle} ${t('idleD')}</span>`:''}${l.reason?`<div style="font-size:11px;color:#b91c1c;margin-top:4px">${t(l.reason)}</div>`:''}</div>`).join('')}</div>`}).join('');
+const pipe=LEADS.filter(l=>l.col!=='lost').reduce((s,l)=>s+l.v,0),wf=LEADS.reduce((s,l)=>s+l.v*W[l.col],0);
+document.getElementById('pipeV').textContent='Rs '+pipe.toLocaleString();document.getElementById('wFore').textContent='Rs '+Math.round(wf).toLocaleString();
+document.getElementById('fbarFill').style.width=Math.min(100,wf/600000*100)+'%'}
+function openLead(i){cur=i;const l=LEADS[i];const ni=COLS.indexOf(l.col);
+const seq=l.seq||[];
+document.getElementById('drawer').innerHTML=`<h3>${l.n}</h3><div class="dsub">${l.b} · <b style="color:#0d9488">Rs ${l.v.toLocaleString()}</b> · ${t('col'+l.col[0].toUpperCase()+l.col.slice(1))}</div>
+<div class="dsec">${t('notes')}</div><div class="note">${l.note}</div><div style="font-size:12px;color:#5f9e97">🕐 ${t('lastC')}: ${l.last}</div>
+${l.col!=='won'&&l.col!=='lost'?`<div class="dsec">${t('fuSeq')}</div><div class="seqchips">${[1,3,7].map(d=>`<button class="sq ${seq.includes(d)?'on':''}" onclick="togSeq(${d})">Day ${d} ${seq.includes(d)?'✓':''}</button>`).join('')}</div>
+<button class="btn" onclick="followUp()">${t('sendFu')}</button>`:''}
+${l.col==='lost'?`<div class="dsec">${t('reason')}</div><div>${['rPrice','rTime','rComp'].map(r=>`<span class="rtag ${l.reason===r?'on':''}" onclick="setReason('${r}')">${t(r)}</span>`).join('')}</div><button class="btn" onclick="winBack()">${t('winback')}</button>`:''}
+<button class="btn warn" onclick="closeDrawer()">${t('close')}</button>`;
+document.getElementById('drawer').classList.add('open');document.getElementById('ovl').classList.add('open')}
+function togSeq(d){const l=LEADS[cur];l.seq=l.seq||[];l.seq.includes(d)?l.seq=l.seq.filter(x=>x!==d):l.seq.push(d);openLead(cur);toast('📅 '+(LANG==='en'?'Follow-up day '+d+' ':'فالو اپ دن '+d+' ')+(l.seq.includes(d)?t('sched'):''))}
+function followUp(){const l=LEADS[cur];const ni=COLS.indexOf(l.col);if(ni<3){l.col=COLS[ni+1];l.idle=0;l.last='Today'}closeDrawer();render();toast('📤 '+(LANG==='en'?'Follow-up sent — moved to ':'فالو اپ بھیجا — منتقل: ')+t('col'+l.col[0].toUpperCase()+l.col.slice(1))+' ✓')}
+function setReason(r){LEADS[cur].reason=r;openLead(cur)}
+function winBack(){const l=LEADS[cur];l.col='con';l.idle=0;l.reason=null;closeDrawer();render();toast('💪 '+(LANG==='en'?'Win-back message sent to ':'واپسی کا پیغام: ')+l.n+' ✓')}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('ovl').classList.remove('open')}
+function openAdd(){document.getElementById('addModal').classList.add('open')}
+function closeAdd(){document.getElementById('addModal').classList.remove('open')}
+function saveLead(){const n=document.getElementById('aName').value.trim()||(LANG==='en'?'New Lead':'نیا لیڈ'),b=document.getElementById('aBiz').value.trim()||'—',v=+document.getElementById('aVal').value||50000;
+LEADS.unshift({n,b,v,col:'new',idle:0,note:LANG==='en'?'Just added.':'ابھی شامل کیا۔',last:'Today'});closeAdd();render();toast('＋ '+n)}
+render();
+</script>
+</body>
+</html>

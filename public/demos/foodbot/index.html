@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoodBot — WhatsApp AI Ordering</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#1a1d21;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.phone{width:390px;height:800px;background:#0b141a;border-radius:38px;overflow:hidden;position:relative;box-shadow:0 30px 70px rgba(0,0,0,.5);display:flex;flex-direction:column}
+.wahead{background:#1f2c34;color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.wahead .av{width:40px;height:40px;border-radius:50%;background:#00a884;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.wahead .nm{font-weight:600;font-size:15px}
+.wahead .st{font-size:11px;color:#00a884}
+.lang{margin-inline-start:auto;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px;cursor:pointer}
+.chat{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;background-image:radial-gradient(rgba(255,255,255,.03) 1px,transparent 1px);background-size:18px 18px}
+.msg{max-width:82%;padding:9px 12px;border-radius:12px;font-size:14px;line-height:1.45;animation:pop .25s ease}
+@keyframes pop{from{transform:scale(.95);opacity:0}to{transform:none;opacity:1}}
+.msg.bot{background:#1f2c34;color:#e9edef;align-self:flex-start;border-top-left-radius:4px}
+.msg.user{background:#005c4b;color:#e9edef;align-self:flex-end;border-top-right-radius:4px}
+.msg .tm{display:block;font-size:10px;color:#8696a0;text-align:end;margin-top:3px}
+.typing{align-self:flex-start;background:#1f2c34;padding:12px 16px;border-radius:12px;display:flex;gap:5px}
+.typing span{width:7px;height:7px;background:#8696a0;border-radius:50%;animation:bl 1s infinite}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+@keyframes bl{50%{opacity:.3}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:4px 2px}
+.chip{background:transparent;border:1.5px solid #00a884;color:#00a884;font-size:13px;font-weight:600;padding:8px 14px;border-radius:20px;cursor:pointer;transition:all .2s}
+.chip:active{background:#00a884;color:#062a23}
+.menuitem{display:flex;align-items:center;gap:8px;background:#1f2c34;border-radius:10px;padding:9px;margin:6px 0;max-width:100%}
+.menuitem .mi{flex:1}.menuitem .mi b{font-size:13px;color:#e9edef;display:block}.menuitem .mi span{font-size:12px;color:#8696a0}
+.addb{background:#00a884;color:#062a23;border:none;font-weight:700;font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer}
+.cartbar{background:#1f2c34;border-top:1px solid #2a3942;padding:10px 14px;display:none;align-items:center;justify-content:space-between;color:#e9edef}
+.cartbar.show{display:flex}
+.cobtn{background:#00a884;color:#062a23;border:none;font-weight:700;padding:9px 18px;border-radius:10px;cursor:pointer;font-size:14px}
+.modal{position:absolute;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-end;z-index:10}
+.modal.open{display:flex}
+.sheet{background:#1f2c34;width:100%;border-radius:22px 22px 0 0;padding:20px;color:#e9edef;animation:up .3s ease}
+@keyframes up{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
+.sheet h3{font-size:16px;margin-bottom:10px}
+.opt{margin:10px 0}.opt .ol{font-size:12px;color:#8696a0;font-weight:600;margin-bottom:6px}
+.orow{display:flex;gap:8px;flex-wrap:wrap}
+.opick{border:1.5px solid #2a3942;background:#0b141a;color:#e9edef;font-size:13px;padding:8px 13px;border-radius:10px;cursor:pointer}
+.opick.on{border-color:#00a884;color:#00a884;font-weight:700}
+.confbtn{width:100%;background:#00a884;color:#062a23;border:none;font-weight:700;padding:13px;border-radius:12px;font-size:15px;margin-top:12px;cursor:pointer}
+.tl{margin:8px 0}
+.tl .step{display:flex;gap:10px;align-items:flex-start;margin:10px 0}
+.tl .dot{width:26px;height:26px;border-radius:50%;background:#00a884;color:#062a23;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.tl .dot.wait{background:#2a3942;color:#8696a0}
+.tl .sl b{font-size:13px;color:#e9edef;display:block}.tl .sl span{font-size:12px;color:#8696a0}
+.rider{background:#0b141a;border:1px solid #2a3942;border-radius:10px;padding:10px;margin-top:8px;display:flex;align-items:center;gap:10px}
+.rider .rav{width:36px;height:36px;border-radius:50%;background:#00a884;display:flex;align-items:center;justify-content:center;font-weight:700;color:#062a23}
+.rider b{font-size:13px;color:#e9edef;display:block}.rider span{font-size:12px;color:#8696a0}
+.queue{background:rgba(0,168,132,.12);border:1px solid #00a884;border-radius:10px;padding:9px 12px;font-size:13px;color:#00a884;font-weight:600;margin:6px 0}
+.addrchip{border:1.5px solid #00a884;color:#e9edef;background:#0b141a;font-size:13px;padding:9px 13px;border-radius:10px;cursor:pointer;margin:4px 6px 4px 0}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="wahead"><div class="av">🍗</div><div><div class="nm" data-i18n="shop">Lazeez Foods</div><div class="st" data-i18n="online">● online · AI assistant</div></div><button class="lang" id="langToggle" onclick="setLang(LANG==='en'?'ur':'en')">اردو</button></div>
+  <div class="chat" id="chat"></div>
+  <div class="chips" id="chips" style="padding:8px 12px;background:#0b141a"></div>
+  <div class="cartbar" id="cartbar"><span id="cartTxt"></span><button class="cobtn" id="coBtn" onclick="checkout()"></button></div>
+  <div class="modal" id="custModal"><div class="sheet"><h3 id="custTitle"></h3><div id="custOpts"></div><button class="confbtn" id="custAdd" onclick="confirmCust()"></button></div></div>
+</div>
+<script>
+let LANG='en';
+const T={
+shop:{en:'Lazeez Foods',ur:'لذیذ فوڈز'},online:{en:'● online · AI assistant',ur:'● آن لائن · اے آئی اسسٹنٹ'},
+greet:{en:'Assalam o Alaikum! 👋 Welcome to <b>Lazeez Foods</b>. I can take your order right here — no waiting on hold. What would you like to do?',ur:'السلام علیکم! 👋 <b>لذیذ فوڈز</b> میں خوش آمدید۔ میں یہیں آپ کا آرڈر لے سکتا ہوں — انتظار نہیں۔ کیا کرنا چاہیں گے؟'},
+cMenu:{en:'🍽️ View Menu',ur:'🍽️ مینیو دیکھیں'},cUsual:{en:'🔁 Reorder my usual',ur:'🔁 معمول کا آرڈر'},cTrack:{en:'🛵 Track order',ur:'🛵 آرڈر ٹریک کریں'},
+menuH:{en:'Here is our menu — tap <b>+ Add</b> on anything you like:',ur:'یہ رہا ہمارا مینیو — پسند پر <b>+ شامل کریں</b> دبائیں:'},
+checkout:{en:'Checkout →',ur:'ادائیگی →'},items:{en:'items',ur:'آئٹمز'},
+custT:{en:'Customize',ur:'اپنی پسند بنائیں'},size:{en:'Size',ur:'سائز'},reg:{en:'Regular',ur:'ریگولر'},large:{en:'Large +Rs 150',ur:'لارج +150 روپے'},
+spice:{en:'Spice level',ur:'مصالحہ'},mild:{en:'Mild',ur:'ہلکا'},med:{en:'Medium',ur:'درمیانہ'},extra:{en:'Extra hot',ur:'تیز'},
+addons:{en:'Add-ons',ur:'اضافی'},cheese:{en:'Extra cheese +Rs 120',ur:'اضافی پنیر +120 روپے'},raita:{en:'Raita +Rs 50',ur:'رائتہ +50 روپے'},
+addToOrder:{en:'Add to order',ur:'آرڈر میں شامل کریں'},added:{en:'added ✓',ur:'شامل ✓'},
+addrQ:{en:'Where should we deliver? Tap your saved address:',ur:'ڈیلیوری کہاں کرنی ہے؟ محفوظ پتہ منتخب کریں:'},
+addr1:{en:'🏠 House 12, Street 4, Timergarah',ur:'🏠 مکان 12، گلی 4، تیمرگرہ'},addrNew:{en:'📍 Send new location',ur:'📍 نیا پتہ بھیجیں'},
+confirmQ:{en:'Please confirm your order:',ur:'براہ کرم آرڈر کی تصدیق کریں:'},confirm:{en:'✅ Confirm order',ur:'✅ آرڈر پکا کریں'},
+confirmed:{en:'Order confirmed! 🎉',ur:'آرڈر پکا ہو گیا! 🎉'},ordNo:{en:'Order <b>#FB-2041</b> · ETA <b>35 min</b>',ur:'آرڈر <b>#FB-2041</b> · وقت <b>35 منٹ</b>'},
+queue:{en:'📋 Peak hours — <b>3 orders ahead of you</b>. Your food goes on the flame right after.',ur:'📋 رش کا وقت — <b>آپ سے پہلے 3 آرڈر</b> ہیں۔ ان کے بعد آپ کا کھانا چولہے پر۔'},
+riderN:{en:'Kamran · your rider',ur:'کامران · آپ کا رائڈر'},riderD:{en:'12 min away · 🛵 Honda CD-70',ur:'12 منٹ دور · 🛵 ہونڈا CD-70'},
+sRec:{en:'Received',ur:'موصول'},sRecD:{en:'Kitchen has your order',ur:'کچن کو آرڈر مل گیا'},sPrep:{en:'Preparing',ur:'تیار ہو رہا ہے'},
+sPrepD:{en:'On the flame — 15 min left',ur:'چولہے پر — 15 منٹ باقی'},sWay:{en:'On the way',ur:'راستے میں'},sWayD:{en:'Rider picked up your food',ur:'رائڈر نے کھانا اٹھا لیا'},
+usual:{en:'Your usual: <b>1x Chicken Karahi (Large)</b> + <b>4x Roghni Naan</b> — Rs 1,150. Shall I place it again?',ur:'آپ کا معمول: <b>1x چکن کڑاہی (لارج)</b> + <b>4x روغنی نان</b> — 1150 روپے۔ دوبارہ لگا دوں؟'},
+yesReorder:{en:'Yes, reorder',ur:'جی، دوبارہ لگائیں'},
+noTrack:{en:'No active order yet — order something delicious first! 👆',ur:'ابھی کوئی آرڈر نہیں — پہلے کچھ مزیدار منگوائیں! 👆'},
+total:{en:'Total',ur:'کل رقم'}
+};
+const MENU=[{n:{en:'Chicken Karahi',ur:'چکن کڑاہی'},p:850},{n:{en:'Chicken Biryani',ur:'چکن بریانی'},p:320},{n:{en:'Seekh Kabab (4 pc)',ur:'سیخ کباب (4 عدد)'},p:450},{n:{en:'Roghni Naan',ur:'روغنی نان'},p:60}];
+let cart=[], custItem=null, cust={size:0,spice:1,addons:[]}, orderPlaced=false;
+function t(k){return T[k]?T[k][LANG]:k}
+function setLang(l){LANG=l;document.documentElement.lang=l;document.documentElement.dir=l==='ur'?'rtl':'ltr';
+document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(T[k])e.innerHTML=T[k][l]});
+document.getElementById('langToggle').textContent=l==='en'?'اردو':'EN';reset();}
+function now(){return new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
+function addMsg(html,who){const d=document.createElement('div');d.className='msg '+who;d.innerHTML=html+'<span class="tm">'+now()+'</span>';document.getElementById('chat').appendChild(d);document.getElementById('chat').scrollTop=1e6}
+function typing(cb,ms){const d=document.createElement('div');d.className='typing';d.innerHTML='<span></span><span></span><span></span>';document.getElementById('chat').appendChild(d);document.getElementById('chat').scrollTop=1e6;setTimeout(()=>{d.remove();cb()},ms||900)}
+function setChips(list){document.getElementById('chips').innerHTML=list.map(c=>`<button class="chip" onclick="${c.fn}">${c.label}</button>`).join('')}
+function chip(label,fn){return{label,fn}}
+function reset(){document.getElementById('chat').innerHTML='';document.getElementById('cartbar').classList.remove('show');cart=[];orderPlaced=false;
+typing(()=>{addMsg(t('greet'),'bot');setChips([chip(t('cMenu'),'showMenu()'),chip(t('cUsual'),'reorder()'),chip(t('cTrack'),'track()')])},700)}
+function showMenu(){addMsg(t('cMenu').replace(/^[🍽️ ]+/,'').trim()||'Menu','user');typing(()=>{let h=t('menuH');MENU.forEach((m,i)=>{h+=`<div class="menuitem"><div class="mi"><b>${m.n[LANG]}</b><span>Rs ${m.p}</span></div><button class="addb" onclick="customize(${i})">+ ${LANG==='en'?'Add':'شامل'}</button></div>`});addMsg(h,'bot');setChips([chip(t('cTrack'),'track()')])},800)}
+function customize(i){custItem=i;cust={size:0,spice:1,addons:[]};document.getElementById('custTitle').textContent=t('custT')+' — '+MENU[i].n[LANG];renderCustOpts();document.getElementById('custAdd').textContent=t('addToOrder');document.getElementById('custModal').classList.add('open')}
+function renderCustOpts(){const o=document.getElementById('custOpts');
+o.innerHTML=`<div class="opt"><div class="ol">${t('size')}</div><div class="orow">${[t('reg'),t('large')].map((s,k)=>`<button class="opick ${cust.size===k?'on':''}" onclick="cust.size=${k};renderCustOpts()">${s}</button>`).join('')}</div></div>
+<div class="opt"><div class="ol">${t('spice')}</div><div class="orow">${[t('mild'),t('med'),t('extra')].map((s,k)=>`<button class="opick ${cust.spice===k?'on':''}" onclick="cust.spice=${k};renderCustOpts()">${s}</button>`).join('')}</div></div>
+<div class="opt"><div class="ol">${t('addons')}</div><div class="orow">${[{l:t('cheese'),p:120},{l:t('raita'),p:50}].map((a,k)=>`<button class="opick ${cust.addons.includes(k)?'on':''}" onclick="togAddon(${k})">${a.l}</button>`).join('')}</div></div>`}
+function togAddon(k){cust.addons.includes(k)?cust.addons=cust.addons.filter(x=>x!==k):cust.addons.push(k);renderCustOpts()}
+function confirmCust(){const m=MENU[custItem];let price=m.p+(cust.size===1?150:0)+cust.addons.reduce((s,k)=>s+(k===0?120:50),0);
+cart.push({n:m.n[LANG]+(cust.size===1?' ('+(LANG==='en'?'Large':'لارج')+')':''),p:price});document.getElementById('custModal').classList.remove('open');
+addMsg(`${m.n[LANG]} ${t('added')} — Rs ${price}`,'user');updCart()}
+function updCart(){const n=cart.length,tot=cart.reduce((s,i)=>s+i.p,0);const bar=document.getElementById('cartbar');
+if(n){bar.classList.add('show');document.getElementById('cartTxt').innerHTML=`🛒 ${n} ${t('items')} · <b>Rs ${tot}</b>`;document.getElementById('coBtn').textContent=t('checkout')}else bar.classList.remove('show')}
+function checkout(){addMsg(t('checkout'),'user');typing(()=>{addMsg(t('addrQ')+`<br><button class="addrchip" onclick="addrPick()">${t('addr1')}</button><button class="addrchip" onclick="addrPick()">${t('addrNew')}</button>`,'bot');setChips([])},700)}
+function addrPick(){addMsg(t('addr1'),'user');const tot=cart.reduce((s,i)=>s+i.p,0);
+typing(()=>{let h=t('confirmQ')+'<br><br>'+cart.map(i=>`• ${i.n} — Rs ${i.p}`).join('<br>')+`<br><br><b>${t('total')}: Rs ${tot}</b>`;addMsg(h,'bot');setChips([chip(t('confirm'),'placeOrder()')])},800)}
+function placeOrder(){addMsg(t('confirm'),'user');orderPlaced=true;
+typing(()=>{addMsg(`<b>${t('confirmed')}</b><br>${t('ordNo')}<div class="queue">${t('queue')}</div>`,'bot');setChips([chip(t('cTrack'),'track()'),chip(t('cMenu'),'showMenu()')]);document.getElementById('cartbar').classList.remove('show')},1000)}
+function track(){if(!orderPlaced){addMsg(t('cTrack'),'user');typing(()=>addMsg(t('noTrack'),'bot'),700);return}
+addMsg(t('cTrack'),'user');typing(()=>{addMsg(`<div class="tl">
+<div class="step"><div class="dot">✓</div><div class="sl"><b>${t('sRec')}</b><span>${t('sRecD')}</span></div></div>
+<div class="step"><div class="dot">✓</div><div class="sl"><b>${t('sPrep')}</b><span>${t('sPrepD')}</span></div></div>
+<div class="step"><div class="dot wait">…</div><div class="sl"><b>${t('sWay')}</b><span>${t('sWayD')}</span></div></div></div>
+<div class="rider"><div class="rav">K</div><div><b>${t('riderN')}</b><span>${t('riderD')}</span></div></div>`,'bot')},900)}
+function reorder(){addMsg(t('cUsual'),'user');typing(()=>{addMsg(t('usual'),'bot');setChips([chip(t('yesReorder'),'doReorder()'),chip(t('cMenu'),'showMenu()')])},800)}
+function doReorder(){cart=[{n:LANG==='en'?'Chicken Karahi (Large)':'چکن کڑاہی (لارج)',p:990},{n:LANG==='en'?'4x Roghni Naan':'4x روغنی نان',p:240}];orderPlaced=false;addMsg(t('yesReorder'),'user');updCart();typing(()=>{addMsg(t('addrQ')+`<br><button class="addrchip" onclick="addrPick()">${t('addr1')}</button>`,'bot')},700)}
+reset();
+</script>
+</body>
+</html>

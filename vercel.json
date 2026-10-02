@@ -14,6 +14,10 @@
   ],
   "rewrites": [
     {
+      "source": "/demos/:demo",
+      "destination": "/demos/:demo/index.html"
+    },
+    {
       "source": "/profitscout",
       "destination": "/profitscout.html"
     },

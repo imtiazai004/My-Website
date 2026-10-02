@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CODConfirm — COD Order Confirmation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#fff7ed;min-height:100vh;padding:26px}
+.wrap{max-width:1180px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:18px}
+.top h1{font-size:24px;font-weight:800;color:#7c2d12}.top h1 span{color:#ea580c}
+.lang{margin-inline-start:auto;background:#fff;border:1px solid #fed7aa;color:#ea580c;font-size:12px;font-weight:700;padding:7px 14px;border-radius:20px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1.25fr .9fr;gap:16px;align-items:start}
+.panel{background:#fff;border-radius:20px;padding:20px;box-shadow:0 4px 18px rgba(234,88,12,.08)}
+.panel h3{font-size:16px;color:#7c2d12;margin-bottom:12px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:#fff7ed;border-radius:14px;padding:14px;text-align:center}
+.kpi .v{font-size:24px;font-weight:800;color:#ea580c}.kpi .l{font-size:11px;color:#a16207;margin-top:2px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:start;padding:10px;font-size:11px;color:#a16207;text-transform:uppercase;border-bottom:2px solid #ffedd5}
+td{padding:10px;border-bottom:1px solid #fff7ed}
+tr.dup td{background:#fef3c7}
+.pill{font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;white-space:nowrap}
+.pill.cf{background:#dcfce7;color:#166534}.pill.pd{background:#fef3c7;color:#92400e}.pill.ex{background:#fee2e2;color:#b91c1c}
+.guard{font-size:11px;color:#92400e;font-weight:700}
+.phone{width:100%;max-width:360px;background:#0b141a;border-radius:32px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.25);display:flex;flex-direction:column;height:640px;margin:0 auto}
+.wahead{background:#1f2c34;color:#fff;padding:11px 13px;display:flex;align-items:center;gap:9px}
+.wahead .av{width:36px;height:36px;border-radius:50%;background:#ea580c;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;flex-shrink:0}
+.wahead .nm{font-size:14px;font-weight:600}.wahead .st{font-size:11px;color:#4ade80}
+.chat{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.msg{max-width:85%;padding:9px 12px;border-radius:12px;font-size:13.5px;line-height:1.45;animation:pop .25s ease}
+@keyframes pop{from{transform:scale(.96);opacity:0}to{transform:none;opacity:1}}
+.msg.bot{background:#1f2c34;color:#e9edef;align-self:flex-start;border-top-left-radius:4px}
+.msg.user{background:#005c4b;color:#e9edef;align-self:flex-end;border-top-right-radius:4px}
+.yn{display:flex;gap:10px;margin-top:6px}
+.yn button{flex:1;border:none;font-weight:800;font-size:15px;padding:11px;border-radius:12px;cursor:pointer;transition:transform .15s}
+.yn button:active{transform:scale(.96)}
+.yes{background:#22c55e;color:#052e16}.no{background:#ef4444;color:#fff}
+.retry{background:rgba(234,88,12,.1);border:1px solid #ea580c;color:#ea580c;border-radius:10px;padding:8px 12px;font-size:12px;font-weight:600;margin-top:8px}
+.tpl{background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:12px;margin-top:12px;font-size:13px}
+.tpl textarea{width:100%;border:1px solid #fed7aa;border-radius:8px;padding:9px;font-size:13px;font-family:'Inter',sans-serif;margin:8px 0;min-height:64px;resize:vertical;background:#fff}
+.tpl .trow{display:flex;gap:8px}
+.tpl button{flex:1;background:#ea580c;color:#fff;border:none;font-weight:700;padding:9px;border-radius:9px;cursor:pointer;font-size:13px}
+.tpl button.ghost{background:#fff;border:1px solid #fed7aa;color:#ea580c}
+.simbtn{width:100%;background:#7c2d12;color:#fff;border:none;font-weight:700;padding:12px;border-radius:12px;cursor:pointer;font-size:14px;margin-top:12px}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#7c2d12;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:all .3s;z-index:20;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:960px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><h1>📦 COD<span>Confirm</span></h1><button class="lang" id="langToggle" onclick="setLang(LANG==='en'?'ur':'en')">اردو</button></div>
+  <div class="grid">
+    <div class="panel"><h3 data-i18n="dashT">🏪 Seller dashboard — live</h3>
+      <div class="kpis">
+        <div class="kpi"><div class="v" id="kConf">82%</div><div class="l" data-i18n="k1">confirmation rate</div></div>
+        <div class="kpi"><div class="v">34</div><div class="l" data-i18n="k2">refused parcels prevented</div></div>
+        <div class="kpi"><div class="v">Rs 48.6k</div><div class="l" data-i18n="k3">courier charges saved</div></div>
+      </div>
+      <table><thead><tr><th data-i18n="cOrder">Order</th><th data-i18n="cCust">Customer</th><th data-i18n="cAmt">Amount</th><th data-i18n="cStatus">Status</th></tr></thead><tbody id="rows"></tbody></table>
+      <button class="simbtn" onclick="newOrder()" data-i18n="simBtn">➕ Simulate new COD order</button>
+    </div>
+    <div>
+      <div class="phone"><div class="wahead"><div class="av">C</div><div><div class="nm" data-i18n="custView">Customer view</div><div class="st" data-i18n="online">● online</div></div></div><div class="chat" id="chat"></div></div>
+      <div class="tpl"><b style="color:#7c2d12" data-i18n="tplT">✏️ Confirmation message template</b>
+        <div class="trow" style="margin-top:8px"><button id="tplEn" onclick="tplLang('en')">English</button><button id="tplUr" class="ghost" onclick="tplLang('ur')">اردو</button></div>
+        <textarea id="tplTxt"></textarea>
+        <div class="trow"><button onclick="saveTpl()" data-i18n="saveTpl">Save template</button><button class="ghost" onclick="previewTpl()" data-i18n="prevTpl">Preview in chat</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let LANG='en', tplL='en', ordN=4;
+const T={
+dashT:{en:'🏪 Seller dashboard — live',ur:'🏪 سیلر ڈیش بورڈ — لائیو'},k1:{en:'confirmation rate',ur:'تصدیق کی شرح'},
+k2:{en:'refused parcels prevented',ur:'مسترد پارسل روکے گئے'},k3:{en:'courier charges saved',ur:'کوریئر اخراجات بچے'},
+cOrder:{en:'Order',ur:'آرڈر'},cCust:{en:'Customer',ur:'گاہک'},cAmt:{en:'Amount',ur:'رقم'},cStatus:{en:'Status',ur:'حالت'},
+simBtn:{en:'➕ Simulate new COD order',ur:'➕ نیا سی او ڈی آرڈر بنائیں'},custView:{en:'Customer view',ur:'گاہک کا منظر'},online:{en:'● online',ur:'● آن لائن'},
+tplT:{en:'✏️ Confirmation message template',ur:'✏️ تصدیقی پیغام کا نمونہ'},saveTpl:{en:'Save template',ur:'نمونہ محفوظ کریں'},prevTpl:{en:'Preview in chat',ur:'چیٹ میں دیکھیں'},
+stC:{en:'Confirmed',ur:'تصدیق شدہ'},stP:{en:'Pending',ur:'زیر التواء'},stE:{en:'Expired',ur:'ختم شدہ'},
+dup:{en:'⚠ Same phone · 3 orders in 10 min',ur:'⚠ ایک نمبر · 10 منٹ میں 3 آرڈر'},
+retry1:{en:'⏱ Retry 1 in 1h → Retry 2 in 4h → Final in 24h',ur:'⏱ دوبارہ 1 گھنٹے میں → پھر 4 گھنٹے میں → آخری 24 گھنٹے میں'}
+};
+const TPLS={en:'Assalam o Alaikum {name}! You ordered {product} for Rs {amount} (COD). Reply YES to confirm, NO to cancel.',ur:'السلام علیکم {name}! آپ نے {product} مبلغ {amount} روپے (کیش آن ڈیلیوری) منگوایا ہے۔ تصدیق کے لیے YES لکھیں، منسوخی کے لیے NO۔'};
+let ORDERS=[
+{id:'COD-101',c:'Ayesha Khan',p:'Lawn Suit',amt:2450,st:'cf'},
+{id:'COD-102',c:'Bilal Ahmed',p:'Kurti',amt:1890,st:'pd'},
+{id:'COD-103',c:'Ayesha Khan',p:'Dupatta',amt:950,st:'pd',dup:true}];
+const NC=[['Sana Malik','Handbag',3200],['Usman Tariq','Watch',4500],['Iqra Nawaz','Shoes',2800],['Hamza Sheikh','Wallet',1500]];
+function t(k){return T[k]?T[k][LANG]:k}
+function setLang(l){LANG=l;document.documentElement.lang=l;document.documentElement.dir=l==='ur'?'rtl':'ltr';
+document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(T[k])e.innerHTML=T[k][l]});
+document.getElementById('langToggle').textContent=l==='en'?'اردو':'EN';render();renderTpl()}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function pill(s){return s==='cf'?'<span class="pill cf">'+t('stC')+'</span>':s==='ex'?'<span class="pill ex">'+t('stE')+'</span>':'<span class="pill pd">'+t('stP')+'</span>'}
+function render(){document.getElementById('rows').innerHTML=ORDERS.map((o,i)=>`<tr class="${o.dup?'dup':''}"><td><b>${o.id}</b><br><span style="font-size:11px;color:#a16207">${o.p}</span></td><td>${o.c}${o.dup?'<br><span class="guard">'+t('dup')+'</span>':''}</td><td>Rs ${o.amt.toLocaleString()}</td><td>${pill(o.st)}</td></tr>`).join('');
+const cf=ORDERS.filter(o=>o.st==='cf').length;document.getElementById('kConf').textContent=Math.round(cf/ORDERS.length*100)+'%'}
+function addMsg(html,who){const d=document.createElement('div');d.className='msg '+who;d.innerHTML=html;const c=document.getElementById('chat');c.appendChild(d);c.scrollTop=1e6}
+function fillMsg(o){return TPLS[tplL].replace('{name}',o.c.split(' ')[0]).replace('{product}',o.p).replace('{amount}',o.amt.toLocaleString())}
+function askConfirm(o){addMsg(fillMsg(o),'bot');addMsg(`<div class="retry">${t('retry1')}</div><div class="yn"><button class="yes" onclick="answer(${ORDERS.indexOf(o)},true)">YES ✓</button><button class="no" onclick="answer(${ORDERS.indexOf(o)},false)">NO ✕</button></div>`,'bot')}
+function answer(i,yes){const o=ORDERS[i];o.st=yes?'cf':'ex';addMsg(yes?'YES ✓':'NO ✕','user');render();
+toast(yes?(LANG==='en'?'Order confirmed — shipping ✓':'آرڈر پکا — بھیجا جا رہا ہے ✓'):(LANG==='en'?'Order cancelled — nothing shipped ✓':'آرڈر منسوخ — کچھ نہیں بھیجا ✓'))}
+function newOrder(){const n=NC[ordN%NC.length];ordN++;const o={id:'COD-'+(100+ORDERS.length+1),c:n[0],p:n[1],amt:n[2],st:'pd'};
+ORDERS.unshift(o);render();askConfirm(o);toast('📲 '+(LANG==='en'?'Confirmation sent via WhatsApp':'واٹس ایپ پر تصدیق بھیجی گئی'))}
+function renderTpl(){document.getElementById('tplTxt').value=TPLS[tplL];
+document.getElementById('tplEn').className=tplL==='en'?'':'ghost';document.getElementById('tplUr').className=tplL==='ur'?'':'ghost'}
+function tplLang(l){tplL=l;renderTpl()}
+function saveTpl(){TPLS[tplL]=document.getElementById('tplTxt').value;toast(LANG==='en'?'Template saved ✓':'نمونہ محفوظ ✓')}
+function previewTpl(){const o=ORDERS.find(x=>x.st==='pd')||ORDERS[0];addMsg(document.getElementById('tplTxt').value.replace('{name}',o.c.split(' ')[0]).replace('{product}',o.p).replace('{amount}',o.amt.toLocaleString()),'bot')}
+render();renderTpl();askConfirm(ORDERS[1]);
+</script>
+</body>
+</html>

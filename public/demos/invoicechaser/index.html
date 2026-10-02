@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InvoiceChaser — Get Paid On Time</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#0b1220;color:#e2e8f0;min-height:100vh;padding:26px}
+.wrap{max-width:1180px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:18px}
+.top h1{font-size:24px;font-weight:800}.top h1 span{color:#10b981}
+.lang{margin-inline-start:auto;background:#0f172a;border:1px solid #1e293b;color:#e2e8f0;font-size:12px;font-weight:700;padding:7px 14px;border-radius:20px;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.stat{background:#0f172a;border:1px solid #1e293b;border-radius:16px;padding:16px}
+.stat .l{font-size:12px;color:#94a3b8}.stat .v{font-size:28px;font-weight:800;margin-top:4px}
+.g{color:#10b981}.r{color:#f87171}.a{color:#fbbf24}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;align-items:start}
+.panel{background:#0f172a;border:1px solid #1e293b;border-radius:18px;padding:18px}
+.panel h3{font-size:15px;margin-bottom:12px}
+.filters{display:flex;gap:8px;margin-bottom:12px}
+.f{padding:7px 16px;border-radius:20px;border:1px solid #1e293b;background:#0b1220;color:#94a3b8;font-weight:600;font-size:12px;cursor:pointer}
+.f.on{background:#10b981;color:#052e1b;border-color:#10b981}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:start;padding:10px;font-size:11px;color:#64748b;text-transform:uppercase;border-bottom:1px solid #1e293b}
+td{padding:11px 10px;border-bottom:1px solid #16203200;border-bottom:1px solid #162033}
+tr.inv{cursor:pointer;transition:background .15s}tr.inv:hover{background:#162033}
+.late{color:#f87171;font-weight:700}
+.pill{font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;white-space:nowrap}
+.pill.od{background:rgba(248,113,113,.15);color:#f87171}.pill.soon{background:rgba(251,191,36,.15);color:#fbbf24}.pill.pd{background:rgba(16,185,129,.15);color:#10b981}
+.chan{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:12px;background:#1e293b;color:#94a3b8;margin-inline-start:6px}
+.drawer{background:#0f172a;border:1px solid #10b981;border-radius:18px;padding:18px}
+.tlstep{display:flex;gap:10px;margin:12px 0;align-items:flex-start}
+.tlstep .dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
+.tlstep .dot.done{background:#10b981;color:#052e1b}.tlstep .dot.next{background:transparent;border:2px dashed #10b981;color:#10b981;cursor:pointer}
+.tlstep .dot.todo{background:#1e293b;color:#64748b}
+.tlstep b{font-size:13px;display:block}.tlstep span{font-size:12px;color:#94a3b8}
+.tplprev{background:#0b1220;border:1px solid #1e293b;border-radius:10px;padding:10px;font-size:12.5px;color:#cbd5e1;margin-top:6px;font-style:italic}
+.btn{width:100%;background:#10b981;color:#052e1b;border:none;font-weight:800;padding:12px;border-radius:12px;font-size:14px;cursor:pointer;margin-top:10px;transition:transform .15s}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:#1e293b;color:#e2e8f0;margin-top:8px}
+.buckets{display:flex;gap:8px;margin-top:12px}
+.bucket{flex:1;background:#0b1220;border:1px solid #1e293b;border-radius:12px;padding:10px;text-align:center}
+.bucket .bl{font-size:10px;color:#64748b;font-weight:600}.bucket .bv{font-size:16px;font-weight:800}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:10}
+.modal.open{display:flex}
+.box{background:#0f172a;border:1px solid #1e293b;border-radius:18px;padding:24px;width:440px;max-width:92vw;animation:pop .3s}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:none;opacity:1}}
+.box h3{font-size:16px;margin-bottom:10px}
+.box label{font-size:12px;color:#94a3b8;font-weight:600;display:block;margin:10px 0 4px}
+.box textarea,.box input{width:100%;background:#0b1220;border:1px solid #1e293b;border-radius:10px;padding:10px;font-size:13px;color:#e2e8f0;font-family:'Inter',sans-serif;resize:vertical}
+.tone{font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px;display:inline-block;margin-bottom:4px}
+.tone.gentle{background:rgba(16,185,129,.15);color:#10b981}.tone.firm{background:rgba(251,191,36,.15);color:#fbbf24}.tone.final{background:rgba(248,113,113,.15);color:#f87171}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#10b981;color:#052e1b;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:20;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:960px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><h1>💸 Invoice<span>Chaser</span></h1><button class="lang" id="langToggle" onclick="setLang(LANG==='en'?'ur':'en')">اردو</button></div>
+  <div class="stats">
+    <div class="stat"><div class="l" data-i18n="sOut">Outstanding</div><div class="v" id="stOut">Rs 0</div></div>
+    <div class="stat"><div class="l" data-i18n="sOd">Overdue</div><div class="v r" id="stOd">Rs 0</div></div>
+    <div class="stat"><div class="l" data-i18n="sAvg">Avg delay</div><div class="v a">11 <span style="font-size:14px" data-i18n="days">days</span></div></div>
+  </div>
+  <div class="grid">
+    <div class="panel"><h3 data-i18n="invT">🧾 Invoices — tap a row</h3>
+      <div class="filters"><button class="f on" onclick="setF('all',this)" data-i18n="fAll">All</button><button class="f" onclick="setF('od',this)" data-i18n="fOd">Overdue</button><button class="f" onclick="setF('soon',this)" data-i18n="fSoon">Due soon</button></div>
+      <table><thead><tr><th data-i18n="cClient">Client</th><th data-i18n="cAmt">Amount</th><th data-i18n="cDue">Due</th><th data-i18n="cLate">Late by</th><th data-i18n="cStatus">Status</th></tr></thead><tbody id="rows"></tbody></table>
+      <div class="buckets" id="aging"></div>
+    </div>
+    <div class="drawer" id="drawer"><h3 data-i18n="selT">Select an invoice →</h3><p style="font-size:13px;color:#64748b" data-i18n="selB">The reminder sequence, templates and payment tools appear here.</p></div>
+  </div>
+</div>
+<div class="modal" id="tplModal"><div class="box"><h3 data-i18n="tplT">✏️ Reminder templates</h3><div id="tplFields"></div><button class="btn" onclick="saveTpl()" data-i18n="saveTpl">Save templates</button><button class="btn ghost" onclick="closeTpl()" data-i18n="cancel">Cancel</button></div></div>
+<div class="modal" id="payModal"><div class="box"><h3 data-i18n="ppT">Record partial payment</h3><p style="font-size:13px;color:#94a3b8" id="ppInfo"></p><label data-i18n="ppAmt">Amount received (Rs)</label><input id="ppAmt" type="number" placeholder="e.g. 15000"><button class="btn" onclick="savePartial()" data-i18n="ppSave">Save + issue receipt</button><button class="btn ghost" onclick="closePay()" data-i18n="cancel2">Cancel</button></div></div>
+<div class="toast" id="toast"></div>
+<script>
+let LANG='en', f='all', cur=null, payCtx=null;
+const T={
+sOut:{en:'Outstanding',ur:'واجب الوصول'},sOd:{en:'Overdue',ur:'میعاد گزشتہ'},sAvg:{en:'Avg delay',ur:'اوسط تاخیر'},days:{en:'days',ur:'دن'},
+invT:{en:'🧾 Invoices — tap a row',ur:'🧾 انوائسز — قطار دبائیں'},fAll:{en:'All',ur:'سب'},fOd:{en:'Overdue',ur:'میعاد گزشتہ'},fSoon:{en:'Due soon',ur:'جلد واجب'},
+cClient:{en:'Client',ur:'کلائنٹ'},cAmt:{en:'Amount',ur:'رقم'},cDue:{en:'Due',ur:'میعاد'},cLate:{en:'Late by',ur:'تاخیر'},cStatus:{en:'Status',ur:'حالت'},
+selT:{en:'Select an invoice →',ur:'انوائس منتخب کریں →'},selB:{en:'The reminder sequence, templates and payment tools appear here.',ur:'یاد دہانی کا سلسلہ، نمونے اور ادائیگی یہاں ظاہر ہوں گے۔'},
+stOd:{en:'Overdue',ur:'میعاد گزشتہ'},stSoon:{en:'Due soon',ur:'جلد واجب'},stPd:{en:'Paid ✓',ur:'ادا شدہ ✓'},
+d0:{en:'Day 0 · gentle nudge',ur:'دن 0 · نرم یاد دہانی'},d7:{en:'Day 7 · firmer',ur:'دن 7 · سخت'},d14:{en:'Day 14 · final notice',ur:'دن 14 · آخری نوٹس'},
+sendNext:{en:'📤 Send next reminder',ur:'📤 اگلی یاد دہانی بھیجیں'},allSent:{en:'✓ Sequence complete',ur:'✓ سلسلہ مکمل'},
+editTpl:{en:'✏️ Edit templates',ur:'✏️ نمونے تبدیل کریں'},tplT:{en:'✏️ Reminder templates',ur:'✏️ یاد دہانی کے نمونے'},
+saveTpl:{en:'Save templates',ur:'نمونے محفوظ کریں'},cancel:{en:'Cancel',ur:'منسوخ'},cancel2:{en:'Cancel',ur:'منسوخ'},
+ppT:{en:'Record partial payment',ur:'جزوی ادائیگی درج کریں'},ppAmt:{en:'Amount received (Rs)',ur:'موصول رقم (روپے)'},ppSave:{en:'Save + issue receipt',ur:'محفوظ کریں + رسید جاری کریں'},
+ppBtn:{en:'💵 Record partial payment',ur:'💵 جزوی ادائیگی درج کریں'},
+toneG:{en:'gentle',ur:'نرم'},toneF:{en:'firm',ur:'سخت'},toneFi:{en:'final',ur:'آخری'},
+agingT:{en:'Aging report',ur:'عمر رسیدہ رپورٹ'}
+};
+let TPL=[
+{tk:'toneG',tx:{en:'Hi {name}, just a friendly nudge — invoice {inv} for Rs {amt} was due {due}. Here is the payment link when ready 🙂',ur:'السلام علیکم {name}، دوستانہ یاد دہانی — انوائس {inv} مبلغ {amt} روپے کی میعاد {due} تھی۔ تیار ہوں تو ادائیگی کا لنک حاضر ہے 🙂'}},
+{tk:'toneF',tx:{en:'Hello {name}, invoice {inv} (Rs {amt}) is now 7 days overdue. Please arrange payment this week to avoid late fees.',ur:'السلام علیکم {name}، انوائس {inv} ({amt} روپے) کو 7 دن گزر چکے۔ براہ کرم اس ہفتے ادائیگی کا بندوبست کریں۔'}},
+{tk:'toneFi',tx:{en:'{name}, this is the final notice for invoice {inv} — Rs {amt}, 14 days overdue. Work pauses until this is cleared.',ur:'{name}، انوائس {inv} کا آخری نوٹس — {amt} روپے، 14 دن گزر چکے۔ ادائیگی تک کام روکا جائے گا۔'}}];
+const INV=[
+{n:'TechVista (Ahmed)',amt:85000,due:'Sep 20',late:12,st:'od',seq:2,chan:'wa',paid:0},
+{n:'BrightMedia (Sana)',amt:42000,due:'Sep 28',late:4,st:'od',seq:1,chan:'em',paid:0},
+{n:'ShopEase (Bilal)',amt:67000,due:'Oct 5',late:0,st:'soon',seq:0,chan:'wa',paid:0},
+{n:'CloudNine (Hira)',amt:20000,due:'Sep 15',late:17,st:'od',seq:3,chan:'wa',paid:8000}];
+function t(k){return T[k]?T[k][LANG]:k}
+function setLang(l){LANG=l;document.documentElement.lang=l;document.documentElement.dir=l==='ur'?'rtl':'ltr';
+document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(T[k])e.innerHTML=T[k][l]});
+document.getElementById('langToggle').textContent=l==='en'?'اردو':'EN';render();if(cur!==null)openInv(cur)}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function rem(inv){return inv.amt-inv.paid}
+function setF(x,el){f=x;document.querySelectorAll('.f').forEach(b=>b.classList.remove('on'));el.classList.add('on');render()}
+function pill(s){return s==='od'?'<span class="pill od">'+t('stOd')+'</span>':s==='soon'?'<span class="pill soon">'+t('stSoon')+'</span>':'<span class="pill pd">'+t('stPd')+'</span>'}
+function render(){const rows=INV.map((v,i)=>({v,i})).filter(({v})=>v.st!=='pd'&&(f==='all'||(f==='od'&&v.st==='od')||(f==='soon'&&v.st==='soon')));
+document.getElementById('rows').innerHTML=rows.map(({v,i})=>`<tr class="inv" onclick="openInv(${i})"><td><b>${v.n}</b><span class="chan">${v.chan==='wa'?'WhatsApp':'Email'}</span><br><span style="font-size:11px;color:#64748b">${v.paid>0?'paid Rs '+v.paid.toLocaleString()+' · ':''}rem Rs ${rem(v).toLocaleString()}</span></td><td>Rs ${v.amt.toLocaleString()}</td><td>${v.due}</td><td class="${v.late>0?'late':''}">${v.late>0?v.late+'d':'—'}</td><td>${pill(v.st)}</td></tr>`).join('');
+const out=INV.filter(v=>v.st!=='pd').reduce((s,v)=>s+rem(v),0),od=INV.filter(v=>v.st==='od').reduce((s,v)=>s+rem(v),0);
+document.getElementById('stOut').textContent='Rs '+out.toLocaleString();document.getElementById('stOd').textContent='Rs '+od.toLocaleString();
+const bk=[['0–30',0],['30–60',0],['60+',0]];INV.filter(v=>v.st==='od').forEach(v=>{bk[v.late<=30?0:v.late<=60?1:2][1]+=rem(v)});
+document.getElementById('aging').innerHTML='<div style="width:100%;font-size:12px;color:#94a3b8;font-weight:700;margin-bottom:2px">'+t('agingT')+'</div>'+bk.map(([l,v])=>`<div class="bucket"><div class="bl">${l} ${t('days')}</div><div class="bv r">Rs ${v.toLocaleString()}</div></div>`).join('')}
+function openInv(i){cur=i;const v=INV[i];const steps=[0,1,2].map(k=>{const done=v.seq>k,next=v.seq===k;
+return `<div class="tlstep"><div class="dot ${done?'done':next?'next':'todo'}">${done?'✓':k+1}</div><div style="flex:1"><b>${t('d'+[0,7,14][k])}</b><span>${v.chan==='wa'?'WhatsApp':'Email'} · ${done?(LANG==='en'?'sent':'بھیجا گیا'):(LANG==='en'?'pending':'زیر التواء')}</span><div class="tplprev">${fillTpl(k,v)}</div></div></div>`}).join('');
+document.getElementById('drawer').innerHTML=`<h3>${v.n} — Rs ${rem(v).toLocaleString()} ${t('selT').replace('Select an invoice →','')}</h3>${steps}
+${v.seq<3?`<button class="btn" onclick="sendNext(${i})">${t('sendNext')}</button>`:`<button class="btn" disabled style="opacity:.5">${t('allSent')}</button>`}
+<button class="btn ghost" onclick="openTpl()">${t('editTpl')}</button>
+<button class="btn ghost" onclick="openPay(${i})">${t('ppBtn')}</button>
+<button class="btn ghost" onclick="toggleChan(${i})">📡 ${LANG==='en'?'Channel':'چینل'}: ${v.chan==='wa'?'WhatsApp':'Email'} ⇄</button>`}
+function fillTpl(k,v){return TPL[k].tx[LANG].replace('{name}',v.n.split(' ')[0]).replace('{inv}','INV-204'+(INV.indexOf(v)+1)).replace('{amt}',rem(v).toLocaleString()).replace('{due}',v.due)}
+function sendNext(i){const v=INV[i];v.seq=Math.min(3,v.seq+1);openInv(i);render();
+if(v.seq>=3){/* stays until paid */}
+toast('📤 '+(LANG==='en'?'Reminder sent via ':'یاد دہانی بھیجی گئی: ')+(v.chan==='wa'?'WhatsApp':'Email')+' — '+t('d'+[0,7,14][v.seq-1]))}
+function openTpl(){document.getElementById('tplFields').innerHTML=TPL.map((p,k)=>`<label><span class="tone ${p.tk==='toneG'?'gentle':p.tk==='toneF'?'firm':'final'}">${t(p.tk)}</span> — ${t('d'+[0,7,14][k])}</label><textarea id="tpl${k}" rows="3">${p.tx[LANG]}</textarea>`).join('');document.getElementById('tplModal').classList.add('open')}
+function closeTpl(){document.getElementById('tplModal').classList.remove('open')}
+function saveTpl(){TPL.forEach((p,k)=>{p.tx[LANG]=document.getElementById('tpl'+k).value});closeTpl();if(cur!==null)openInv(cur);toast(LANG==='en'?'Templates saved ✓':'نمونے محفوظ ✓')}
+function openPay(i){payCtx=i;const v=INV[i];document.getElementById('ppInfo').textContent=v.n+' · '+(LANG==='en'?'remaining':'باقی')+' Rs '+rem(v).toLocaleString();document.getElementById('ppAmt').value='';document.getElementById('payModal').classList.add('open')}
+function closePay(){document.getElementById('payModal').classList.remove('open')}
+function savePartial(){const a=+document.getElementById('ppAmt').value;if(!a||payCtx===null)return;const v=INV[payCtx];v.paid+=a;
+if(v.paid>=v.amt){v.st='pd';v.seq=3}closePay();openInv(payCtx);render();
+toast('🧾 '+(LANG==='en'?'Receipt issued: Rs ':'رسید جاری: ')+a.toLocaleString()+(v.st==='pd'?' · '+(LANG==='en'?'PAID IN FULL ✓':'مکمل ادا ✓'):''))}
+function toggleChan(i){const v=INV[i];v.chan=v.chan==='wa'?'em':'wa';openInv(i);render();toast('📡 '+(v.chan==='wa'?'WhatsApp':'Email'))}
+render();
+</script>
+</body>
+</html>
