@@ -1,10 +1,15 @@
 import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
+import { readFileSync } from 'node:fs';
 import { POSTS } from '../blog-queue/posts.mjs';
 
 // Publishes the next unpublished queued post to Firestore `posts` collection.
 // Run by .github/workflows/daily-blog-publish.yml (scheduled + manual).
 // Requires FIREBASE_SERVICE_ACCOUNT_JSON env var (service account JSON).
+//
+// NOTE: this Firebase project uses a NAMED Firestore database
+// (provisioned by AI Studio), not the "(default)" one. The database ID
+// is read from firebase-applet-config.json so it stays in sync with the site.
 
 const raw = process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
 if (!raw) {
@@ -12,8 +17,12 @@ if (!raw) {
   process.exit(1);
 }
 
-initializeApp({ credential: cert(JSON.parse(raw)) });
-const db = getFirestore();
+const siteConfig = JSON.parse(
+  readFileSync(new URL('../firebase-applet-config.json', import.meta.url), 'utf-8')
+);
+
+const app = initializeApp({ credential: cert(JSON.parse(raw)) });
+const db = getFirestore(app, siteConfig.firestoreDatabaseId);
 
 const snap = await db.collection('posts').select('slug').get();
 const existing = new Set(snap.docs.map((d) => d.data().slug));
