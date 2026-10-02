@@ -98,7 +98,7 @@ export default function BlogPostPage() {
                     ))}
                   </div>
                 )}
-                <h1 className="text-4xl md:text-5xl font-display font-bold text-slate-900 tracking-tight leading-[1.1] mb-5">
+                <h1 className="text-4xl md:text-5xl font-display font-bold text-brand-accent tracking-tight leading-[1.1] mb-5">
                   {post.title}
                 </h1>
                 <div className="flex items-center gap-3 text-sm text-slate-400">
@@ -136,7 +136,7 @@ export default function BlogPostPage() {
       <style>{`
         .blog-content { color: #334155; font-size: 1.075rem; line-height: 1.85; }
         .blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4 {
-          color: #0f172a; font-family: Poppins, sans-serif; font-weight: 700;
+          color: #1a7fe6; font-family: Poppins, sans-serif; font-weight: 700;
           line-height: 1.25; margin: 2rem 0 1rem;
         }
         .blog-content h1 { font-size: 2rem; }

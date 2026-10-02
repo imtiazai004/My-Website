@@ -164,26 +164,174 @@
   flex-direction: column;
   align-items: center;
 }
-/* Phone-mockup embed: each demo page renders its own .phone (390x800).
-   ?embed=phone strips the demo page padding/background so only the phone
-   shows — no scrolling page. Scales down on narrow screens. */
-.demo-phone {
+/* ---------- iPhone 17 Pro Max mockup (mobile demos) ----------
+   Frame: dark aluminum unibody, thin uniform bezel, Dynamic Island,
+   Action button + volume keys (left), power + Camera Control (right).
+   The demo iframe (390x800, ?embed=phone) is the "screen". */
+.device-iphone {
   container-type: inline-size;
-  width: min(390px, 100%);
-  aspect-ratio: 390 / 800;
-  border-radius: 38px;
+  width: min(418px, 94%);
+  aspect-ratio: 418 / 828;
+}
+.iphone-scale {
+  width: 418px;
+  transform: scale(calc(100cqw / 418px));
+  transform-origin: top left;
+}
+.iphone-frame {
+  position: relative;
+  width: 418px;
+  padding: 14px;
+  border-radius: 62px;
+  background: linear-gradient(150deg, #545b64 0%, #26292f 28%, #0f1114 68%, #33373e 100%);
+  box-shadow:
+    0 45px 90px rgba(15, 23, 42, 0.38),
+    0 4px 14px rgba(15, 23, 42, 0.25),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.09),
+    inset 0 0 0 5px rgba(0, 0, 0, 0.55);
+}
+/* subtle glass sheen */
+.iphone-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 62px;
+  background: linear-gradient(115deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.02) 28%, transparent 45%);
+  pointer-events: none;
+  z-index: 30;
+}
+.iphone-screen {
+  position: relative;
+  width: 390px;
+  height: 800px;
+  border-radius: 48px;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.28);
 }
-.demo-phone iframe {
+.iphone-screen iframe {
   width: 390px;
   height: 800px;
   border: 0;
   display: block;
   overflow: hidden;
+}
+/* Dynamic Island */
+.iphone-island {
+  position: absolute;
+  top: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 106px;
+  height: 28px;
+  background: #000;
+  border-radius: 16px;
+  z-index: 20;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+.iphone-island::after {
+  content: "";
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #274a72 0%, #0a0f16 60%, #000 100%);
+}
+/* side keys */
+.iphone-btn { position: absolute; border-radius: 3px; z-index: 5; }
+.btn-action { left: -3px; top: 128px; width: 4px; height: 26px;
+  background: linear-gradient(90deg, #6b727c, #2b2f36); }
+.btn-volup { left: -3px; top: 176px; width: 4px; height: 52px;
+  background: linear-gradient(90deg, #6b727c, #2b2f36); }
+.btn-voldn { left: -3px; top: 236px; width: 4px; height: 52px;
+  background: linear-gradient(90deg, #6b727c, #2b2f36); }
+.btn-power { right: -3px; top: 196px; width: 4px; height: 80px;
+  background: linear-gradient(270deg, #6b727c, #2b2f36); }
+.btn-camera { right: -2px; top: 318px; width: 5px; height: 46px;
+  background: linear-gradient(270deg, #434a54, #1d2026);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); }
+
+/* ---------- MacBook Pro mockup (desktop demos, latest model w/ notch) ----------
+   Use :::demo <name> desktop::: — the demo should implement ?embed=desktop
+   rendering a desktop-width layout (856x535 viewport). */
+.device-mac {
+  container-type: inline-size;
+  width: min(880px, 100%);
+  aspect-ratio: 880 / 565;
+}
+.mac-scale {
+  width: 880px;
+  transform: scale(calc(100cqw / 880px));
   transform-origin: top left;
-  transform: scale(calc(100cqw / 390px));
+}
+.mac-screen {
+  position: relative;
+  width: 880px;
+  padding: 12px 12px 0;
+  background: linear-gradient(180deg, #33363d 0%, #14161a 100%);
+  border-radius: 20px 20px 0 0;
+  box-shadow:
+    0 45px 90px rgba(15, 23, 42, 0.30),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+}
+.mac-notch {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 168px;
+  height: 24px;
+  background: #000;
+  border-radius: 0 0 14px 14px;
+  z-index: 5;
+}
+.mac-notch::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #274a72 0%, #05070a 65%, #000 100%);
+}
+.mac-display {
+  position: relative;
+  width: 856px;
+  height: 535px;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  background: #fff;
+}
+.mac-display iframe {
+  width: 856px;
+  height: 535px;
+  border: 0;
+  display: block;
+  overflow: hidden;
+}
+.mac-base {
+  position: relative;
+  width: 880px;
+  height: 17px;
+  background: linear-gradient(180deg, #d3d7dd 0%, #a8adb6 45%, #878d97 100%);
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.25);
+}
+.mac-base::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 8px;
+  background: #6d737c;
+  border-radius: 0 0 12px 12px;
+  box-shadow: inset 0 2px 3px rgba(0,0,0,0.35);
 }
 .demo-embed-cap {
   text-align: center;

@@ -47,11 +47,16 @@ export function renderMarkdown(md: string): string {
   while (i < lines.length) {
     const line = lines[i];
 
-    // interactive demo embed: :::demo <name>:::
-    const dm = line.match(/^:::\s*demo\s+([a-z0-9-]+)\s*:::\s*$/);
+    // interactive demo embed: :::demo <name>::: (iPhone 17 Pro Max mockup)
+    // or :::demo <name> desktop::: (MacBook Pro mockup)
+    const dm = line.match(/^:::\s*demo\s+([a-z0-9-]+)(?:\s+(desktop))?\s*:::\s*$/);
     if (dm && DEMO_NAMES.has(dm[1])) {
       const dn = dm[1];
-      out.push(`<div class="demo-embed"><div class="demo-phone"><iframe src="/demos/${dn}?embed=phone" title="${dn} interactive demo" loading="lazy" scrolling="no"></iframe></div><p class="demo-embed-cap">Interactive demo — try it right here</p></div>`);
+      if (dm[2]) {
+        out.push(`<div class="demo-embed"><div class="device-mac"><div class="mac-scale"><div class="mac-screen"><div class="mac-notch"></div><div class="mac-display"><iframe src="/demos/${dn}?embed=desktop" title="${dn} interactive demo" loading="lazy" scrolling="no"></iframe></div></div><div class="mac-base"></div></div></div><p class="demo-embed-cap">Interactive demo — try it right here</p></div>`);
+      } else {
+        out.push(`<div class="demo-embed"><div class="device-iphone"><div class="iphone-scale"><div class="iphone-frame"><div class="iphone-island"></div><div class="iphone-btn btn-action"></div><div class="iphone-btn btn-volup"></div><div class="iphone-btn btn-voldn"></div><div class="iphone-btn btn-power"></div><div class="iphone-btn btn-camera"></div><div class="iphone-screen"><iframe src="/demos/${dn}?embed=phone" title="${dn} interactive demo" loading="lazy" scrolling="no"></iframe></div></div></div></div><p class="demo-embed-cap">Interactive demo — try it right here</p></div>`);
+      }
       i++; continue;
     }
 
