@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:#f8fafc;min-height:100vh;padding:26px}
+body{background:#f7f0e6;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important}
 .wrap{max-width:860px;margin:0 auto}
 .top{display:flex;align-items:center;margin-bottom:18px}
 .top h1{font-size:26px;font-weight:800;color:#831843}.top h1 span{color:#c9a227}
@@ -59,6 +59,7 @@ input.f:focus{border-color:#831843}
 </style>
 </head>
 <body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
 <div class="wrap">
   <div class="top"><h1>💇 Salon<span>Book</span></h1><button class="lang" id="langToggle" onclick="setLang(LANG==='en'?'ur':'en')">اردو</button></div>
   <div class="vtoggle"><div id="vtC" class="on" onclick="setView('c')" data-i18n="vCust">Customer view</div><div id="vtO" onclick="setView('o')" data-i18n="vOwn">Owner view</div></div>
