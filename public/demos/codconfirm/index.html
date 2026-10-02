@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:#f8fafc;min-height:100vh;padding:26px}
+body{background:#fff7ed;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important}
 .wrap{max-width:1180px;margin:0 auto}
 .top{display:flex;align-items:center;margin-bottom:18px}
 .top h1{font-size:24px;font-weight:800;color:#7c2d12}.top h1 span{color:#ea580c}
@@ -51,6 +51,7 @@ tr.dup td{background:#fef3c7}
 </style>
 </head>
 <body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
 <div class="wrap">
   <div class="top"><h1>📦 COD<span>Confirm</span></h1><button class="lang" id="langToggle" onclick="setLang(LANG==='en'?'ur':'en')">اردو</button></div>
   <div class="grid">
