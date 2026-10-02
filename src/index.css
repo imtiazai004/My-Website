@@ -160,14 +160,30 @@
 /* Interactive prototype embeds (blog :::demo::: directive) */
 .demo-embed {
   margin: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.demo-embed iframe {
-  width: 100%;
-  height: min(80vh, 840px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 1rem;
+/* Phone-mockup embed: each demo page renders its own .phone (390x800).
+   ?embed=phone strips the demo page padding/background so only the phone
+   shows — no scrolling page. Scales down on narrow screens. */
+.demo-phone {
+  container-type: inline-size;
+  width: min(390px, 100%);
+  aspect-ratio: 390 / 800;
+  border-radius: 38px;
+  overflow: hidden;
   background: #fff;
+  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.28);
+}
+.demo-phone iframe {
+  width: 390px;
+  height: 800px;
+  border: 0;
   display: block;
+  overflow: hidden;
+  transform-origin: top left;
+  transform: scale(calc(100cqw / 390px));
 }
 .demo-embed-cap {
   text-align: center;

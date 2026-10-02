@@ -51,7 +51,7 @@ export function renderMarkdown(md: string): string {
     const dm = line.match(/^:::\s*demo\s+([a-z0-9-]+)\s*:::\s*$/);
     if (dm && DEMO_NAMES.has(dm[1])) {
       const dn = dm[1];
-      out.push(`<div class="demo-embed"><iframe src="/demos/${dn}" title="${dn} interactive demo" loading="lazy"></iframe><p class="demo-embed-cap">Interactive demo — try it right here</p></div>`);
+      out.push(`<div class="demo-embed"><div class="demo-phone"><iframe src="/demos/${dn}?embed=phone" title="${dn} interactive demo" loading="lazy" scrolling="no"></iframe></div><p class="demo-embed-cap">Interactive demo — try it right here</p></div>`);
       i++; continue;
     }
 
