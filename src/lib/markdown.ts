@@ -7,6 +7,7 @@
 const DEMO_NAMES = new Set([
   'khatabook', 'foodbot', 'tikfulfill', 'supportai',
   'salonbook', 'codconfirm', 'invoicechaser', 'leadcrm',
+  'bizbot',
 ]);
 
 function escapeHtml(s: string): string {
