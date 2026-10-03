@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BizBot — AI Assistant for Any Business</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#141126;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.phone{width:390px;height:800px;background:#1c1836;border-radius:38px;overflow:hidden;position:relative;box-shadow:0 30px 70px rgba(0,0,0,.5);display:flex;flex-direction:column}
+.bhead{background:linear-gradient(135deg,#6d28d9,#4c1d95);color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.bhead .av{width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.bhead .nm{font-weight:700;font-size:15px}
+.bhead .st{font-size:11px;color:#d8b4fe}
+.lang{margin-inline-start:auto;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px;cursor:pointer}
+.bizbar{display:flex;gap:8px;padding:10px 12px;background:#221d42;overflow-x:auto}
+.biz{flex:1;min-width:0;border:1.5px solid #3b3566;background:#1c1836;color:#c4b5fd;font-size:12px;font-weight:600;padding:8px 6px;border-radius:12px;cursor:pointer;text-align:center;white-space:nowrap}
+.biz.on{border-color:#8b5cf6;background:#2d2456;color:#fff}
+.chantabs{display:flex;background:#221d42;padding:0 12px 10px;gap:8px}
+.chan{flex:1;border:none;background:#1c1836;color:#a78bfa;font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer}
+.chan.on{background:#8b5cf6;color:#fff}
+.view{flex:1;display:none;flex-direction:column;min-height:0;position:relative}
+.view.on{display:flex}
+.chat{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;background-image:radial-gradient(rgba(139,92,246,.07) 1px,transparent 1px);background-size:18px 18px}
+.msg{max-width:82%;padding:9px 12px;border-radius:12px;font-size:14px;line-height:1.45;animation:pop .25s ease;color:#ede9fe}
+@keyframes pop{from{transform:scale(.95);opacity:0}to{transform:none;opacity:1}}
+.msg.bot{background:#2d2456;align-self:flex-start;border-top-left-radius:4px}
+.msg.user{background:#6d28d9;align-self:flex-end;border-top-right-radius:4px}
+.msg .tm{display:block;font-size:10px;color:#a78bfa;text-align:end;margin-top:3px}
+.typing{align-self:flex-start;background:#2d2456;padding:12px 16px;border-radius:12px;display:flex;gap:5px}
+.typing span{width:7px;height:7px;background:#a78bfa;border-radius:50%;animation:bl 1s infinite}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+@keyframes bl{50%{opacity:.3}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:8px 12px;background:#1c1836}
+.chip{background:transparent;border:1.5px solid #8b5cf6;color:#c4b5fd;font-size:13px;font-weight:600;padding:8px 14px;border-radius:20px;cursor:pointer}
+.chip:active{background:#8b5cf6;color:#fff}
+.inputrow{display:flex;gap:8px;padding:10px 12px;background:#221d42}
+.inputrow input{flex:1;background:#1c1836;border:1.5px solid #3b3566;color:#ede9fe;font-size:14px;padding:10px 14px;border-radius:24px;outline:none}
+.inputrow button{background:#8b5cf6;border:none;color:#fff;font-weight:700;font-size:14px;padding:10px 18px;border-radius:24px;cursor:pointer}
+/* website view */
+.site{flex:1;overflow-y:auto;background:#f4f1ff;color:#1e1b3a;position:relative}
+.sitenav{background:#fff;padding:12px 16px;display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.sitenav .sic{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#6d28d9,#4c1d95);display:flex;align-items:center;justify-content:center;font-size:16px}
+.hero{background:linear-gradient(135deg,#6d28d9,#4c1d95);color:#fff;padding:26px 18px;text-align:center}
+.hero h2{font-size:19px;margin-bottom:6px}
+.hero p{font-size:13px;opacity:.85}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px}
+.scard{background:#fff;border-radius:12px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.scard b{font-size:13px;display:block;margin-bottom:4px}
+.scard span{font-size:12px;color:#6d28d9;font-weight:700}
+.sinfo{background:#fff;margin:0 14px 80px;border-radius:12px;padding:12px 14px;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.sinfo div{margin:5px 0}
+.bubble{position:absolute;bottom:18px;inset-inline-end:18px;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#6d28d9);border:none;font-size:26px;cursor:pointer;box-shadow:0 8px 24px rgba(109,40,217,.5);z-index:5}
+.weboverlay{position:absolute;inset:0;background:#1c1836;display:none;flex-direction:column;z-index:10}
+.weboverlay.open{display:flex}
+.wohead{background:linear-gradient(135deg,#6d28d9,#4c1d95);color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.wohead b{font-size:14px}
+.wohead small{display:block;font-size:11px;color:#d8b4fe;font-weight:400}
+.woclose{margin-inline-start:auto;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:16px;width:32px;height:32px;border-radius:50%;cursor:pointer}
+.svc{display:flex;justify-content:space-between;align-items:center;background:#2d2456;border-radius:10px;padding:9px 12px;margin:6px 0;font-size:13px}
+.svc b{color:#ede9fe}.svc span{color:#c4b5fd;font-weight:700}
+.bookok{background:rgba(139,92,246,.14);border:1px solid #8b5cf6;border-radius:10px;padding:10px 12px;font-size:13px;margin:6px 0}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="phone">
+  <div class="bhead"><div class="av">🤖</div><div><div class="nm" data-i18n="brand">BizBot</div><div class="st" data-i18n="tagline">AI assistant for any business</div></div><button class="lang" id="langToggle" onclick="setLang(LANG==='en'?'ur':'en')">اردو</button></div>
+  <div class="bizbar" id="bizbar"></div>
+  <div class="chantabs"><button class="chan on" id="chanWa" onclick="setChan('wa')">💬 WhatsApp</button><button class="chan" id="chanWeb" onclick="setChan('web')">🌐 <span data-i18n="website">Website</span></button></div>
+
+  <div class="view on" id="viewWa">
+    <div class="chat" id="chatWa"></div>
+    <div class="chips" id="chipsWa"></div>
+    <div class="inputrow"><input id="inWa" data-i18n-ph="ask" placeholder="Ask anything…" onkeydown="if(event.key==='Enter')sendWa()"><button onclick="sendWa()">➤</button></div>
+  </div>
+
+  <div class="view" id="viewWeb">
+    <div class="site" id="siteBox"></div>
+    <button class="bubble" onclick="openWebChat()">💬</button>
+    <div class="weboverlay" id="webOverlay">
+      <div class="wohead"><div><b id="woName"></b><small data-i18n="woSub">Chat with us — replies instantly</small></div><button class="woclose" onclick="closeWebChat()">✕</button></div>
+      <div class="chat" id="chatWeb"></div>
+      <div class="chips" id="chipsWeb"></div>
+      <div class="inputrow"><input id="inWeb" data-i18n-ph="ask" placeholder="Ask anything…" onkeydown="if(event.key==='Enter')sendWeb()"><button onclick="sendWeb()">➤</button></div>
+    </div>
+  </div>
+</div>
+<script>
+let LANG='en', BIZ=0, CHAN='wa';
+const BIZS=[
+{icon:'🍽️',name:{en:'Lazeez Foods',ur:'لذیذ فوڈز'},tag:{en:'Desi restaurant · Timergarah',ur:'دیسی ریسٹورنٹ · تیمرگرہ'},
+ services:[{n:{en:'Chicken Karahi',ur:'چکن کڑاہی'},p:850},{n:{en:'Chicken Biryani',ur:'چکن بریانی'},p:320},{n:{en:'Seekh Kabab (4 pc)',ur:'سیخ کباب (4 عدد)'},p:450},{n:{en:'Table booking',ur:'ٹیبل بکنگ'},p:0}],
+ hours:{en:'12 PM – 12 AM, daily',ur:'دوپہر 12 – رات 12، روزانہ'},addr:{en:'Main Bazaar, Timergarah',ur:'مین بازار، تیمرگرہ'}},
+{icon:'💇',name:{en:'Glow Studio',ur:'گلو اسٹوڈیو'},tag:{en:'Beauty salon · Peshawar',ur:'بیوٹی سیلون · پشاور'},
+ services:[{n:{en:'Haircut',ur:'ہیئر کٹ'},p:500},{n:{en:'Signature facial',ur:'اسپیشل فیشل'},p:1500},{n:{en:'Manicure',ur:'مینیکیور'},p:800},{n:{en:'Bridal package',ur:'دلہن پیکج'},p:8000}],
+ hours:{en:'10 AM – 8 PM, daily',ur:'صبح 10 – رات 8، روزانہ'},addr:{en:'University Road, Peshawar',ur:'یونیورسٹی روڈ، پشاور'}},
+{icon:'🏥',name:{en:'City Clinic',ur:'سٹی کلینک'},tag:{en:'Family clinic · Peshawar',ur:'فیملی کلینک · پشاور'},
+ services:[{n:{en:'General checkup',ur:'جنرل چیک اپ'},p:1000},{n:{en:'Dental cleaning',ur:'دانتوں کی صفائی'},p:2500},{n:{en:'Blood test',ur:'بلڈ ٹیسٹ'},p:800},{n:{en:'Specialist visit',ur:'ماہر ڈاکٹر سے ملاقات'},p:1500}],
+ hours:{en:'9 AM – 9 PM, Mon–Sat',ur:'صبح 9 – رات 9، پیر تا ہفتہ'},addr:{en:'Saddar, Peshawar',ur:'صدر، پشاور'}}
+];
+const T={
+brand:{en:'BizBot',ur:'بز بوٹ'},tagline:{en:'AI assistant for any business',ur:'ہر کاروبار کے لیے AI اسسٹنٹ'},
+website:{en:'Website',ur:'ویب سائٹ'},woSub:{en:'Chat with us — replies instantly',ur:'ہم سے بات کریں — فوری جواب'},
+ask:{en:'Ask anything…',ur:'کچھ بھی پوچھیں…'},
+greet:{en:'Assalam o Alaikum! 👋 I am the AI assistant of <b>{biz}</b>. I can share prices, answer questions and book for you — 24/7. What do you need?',ur:'السلام علیکم! 👋 میں <b>{biz}</b> کا AI اسسٹنٹ ہوں۔ قیمتیں بتا سکتا ہوں، سوالات کے جواب اور بکنگ کر سکتا ہوں — 24/7۔ کیا چاہیے؟'},
+cSvc:{en:'📋 Services & prices',ur:'📋 سروسز اور قیمتیں'},cBook:{en:'📅 Book now',ur:'📅 ابھی بک کریں'},cHours:{en:'🕐 Hours & location',ur:'🕐 اوقات اور پتہ'},
+svcList:{en:'Here is what we offer — tap <b>📅 Book now</b> to reserve:',ur:'یہ رہی ہماری سروسز — بکنگ کے لیے <b>📅 ابھی بک کریں</b> دبائیں:'},
+priceWord:{en:'Rs',ur:'روپے'},free:{en:'Free',ur:'مفت'},
+hoursT:{en:'🕐 <b>Hours:</b> {h}<br>📍 <b>Address:</b> {a}',ur:'🕐 <b>اوقات:</b> {h}<br>📍 <b>پتہ:</b> {a}'},
+bookQ:{en:'Which one would you like to book?',ur:'کون سی بک کرنی ہے؟'},
+dayQ:{en:'Which day?',ur:'کون سا دن؟'},today:{en:'Today',ur:'آج'},tomorrow:{en:'Tomorrow',ur:'کل'},
+timeQ:{en:'Pick a time:',ur:'وقت منتخب کریں:'},
+confirmQ:{en:'Confirm your booking?<br><br>📌 <b>{s}</b><br>📅 {d} · 🕐 {t}',ur:'بکنگ پکی کریں؟<br><br>📌 <b>{s}</b><br>📅 {d} · 🕐 {t}'},
+confirm:{en:'✅ Confirm booking',ur:'✅ بکنگ پکی کریں'},
+booked:{en:'Booked! 🎉',ur:'بک ہو گیا! 🎉'},ref:{en:'Booking ref <b>#{r}</b> — we will confirm on WhatsApp shortly.',ur:'بکنگ نمبر <b>#{r}</b> — جلد واٹس ایپ پر تصدیق کریں گے۔'},
+fallback:{en:'I can help with <b>services & prices</b>, <b>booking</b>, <b>hours</b> or <b>location</b> — just tap below 👇',ur:'میں <b>سروسز اور قیمتوں</b>، <b>بکنگ</b>، <b>اوقات</b> یا <b>پتے</b> میں مدد کر سکتا ہوں — نیچے دبائیں 👇'},
+hello:{en:'Walaikum Assalam! 👋 How can I help you today?',ur:'وعلیکم السلام! 👋 آج کیسے مدد کروں؟'},
+cta:{en:'💬 Chat with us',ur:'💬 ہم سے بات کریں'},visit:{en:'Visit us',ur:'ہمیں دیکھیں'}
+};
+const state={wa:{stage:'idle',svc:-1,day:'',time:''},web:{stage:'idle',svc:-1,day:'',time:''}};
+function t(k){return T[k]?T[k][LANG]:k}
+function B(){return BIZS[BIZ]}
+function setLang(l){LANG=l;document.documentElement.lang=l;document.documentElement.dir=l==='ur'?'rtl':'ltr';
+document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(T[k])e.innerHTML=T[k][l]});
+document.querySelectorAll('[data-i18n-ph]').forEach(e=>{const k=e.getAttribute('data-i18n-ph');if(T[k])e.placeholder=T[k][l]});
+document.getElementById('langToggle').textContent=l==='en'?'اردو':'EN';
+renderBiz();renderSite();resetChat('wa');if(document.getElementById('webOverlay').classList.contains('open'))resetChat('web');}
+function renderBiz(){document.getElementById('bizbar').innerHTML=BIZS.map((b,i)=>`<button class="biz ${i===BIZ?'on':''}" onclick="setBiz(${i})">${b.icon} ${b.name[LANG]}</button>`).join('');
+document.getElementById('chanWa').innerHTML='💬 WhatsApp';}
+function setBiz(i){BIZ=i;state.wa={stage:'idle',svc:-1,day:'',time:''};state.web={stage:'idle',svc:-1,day:'',time:''};renderBiz();renderSite();resetChat('wa');closeWebChat();}
+function setChan(c){CHAN=c;document.getElementById('chanWa').classList.toggle('on',c==='wa');document.getElementById('chanWeb').classList.toggle('on',c==='web');
+document.getElementById('viewWa').classList.toggle('on',c==='wa');document.getElementById('viewWeb').classList.toggle('on',c==='web');}
+function renderSite(){const b=B();let cards=b.services.slice(0,4).map(s=>`<div class="scard"><b>${s.n[LANG]}</b><span>${s.p?t('priceWord')+' '+s.p:t('free')}</span></div>`).join('');
+document.getElementById('siteBox').innerHTML=`<div class="sitenav"><div class="sic">${b.icon}</div>${b.name[LANG]}</div>
+<div class="hero"><h2>${b.tag[LANG]}</h2><p>${t('cta')} — ${t('woSub')}</p></div>
+<div class="sgrid">${cards}</div>
+<div class="sinfo"><div>🕐 ${b.hours[LANG]}</div><div>📍 ${b.addr[LANG]}</div></div>`;}
+function now(){return new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
+function box(p){return p==='wa'?'chatWa':'chatWeb'}
+function addMsg(p,html,who){const d=document.createElement('div');d.className='msg '+who;d.innerHTML=html+'<span class="tm">'+now()+'</span>';const c=document.getElementById(box(p));c.appendChild(d);c.scrollTop=1e6}
+function typing(p,cb,ms){const d=document.createElement('div');d.className='typing';d.innerHTML='<span></span><span></span><span></span>';const c=document.getElementById(box(p));c.appendChild(d);c.scrollTop=1e6;setTimeout(()=>{d.remove();cb()},ms||800)}
+function setChips(p,list){document.getElementById(p==='wa'?'chipsWa':'chipsWeb').innerHTML=list.map(c=>`<button class="chip" onclick="${c.fn}">${c.label}</button>`).join('')}
+function chip(label,fn){return{label:fn?label:label,fn}}
+function mainChips(p){return[{label:t('cSvc'),fn:`showSvc('${p}')`},{label:t('cBook'),fn:`startBook('${p}')`},{label:t('cHours'),fn:`showHours('${p}')`}]}
+function resetChat(p){const c=document.getElementById(box(p));c.innerHTML='';state[p]={stage:'idle',svc:-1,day:'',time:''};
+typing(p,()=>{addMsg(p,t('greet').replace('{biz}',B().name[LANG]),'bot');setChips(p,mainChips(p))},600)}
+function showSvc(p){addMsg(p,t('cSvc'),'user');typing(p,()=>{let h=t('svcList');B().services.forEach(s=>{h+=`<div class="svc"><b>${s.n[LANG]}</b><span>${s.p?t('priceWord')+' '+s.p:t('free')}</span></div>`});addMsg(p,h,'bot');setChips(p,mainChips(p))},700)}
+function showHours(p){addMsg(p,t('cHours'),'user');typing(p,()=>{addMsg(p,t('hoursT').replace('{h}',B().hours[LANG]).replace('{a}',B().addr[LANG]),'bot');setChips(p,mainChips(p))},700)}
+function startBook(p){addMsg(p,t('cBook'),'user');state[p].stage='service';
+typing(p,()=>{addMsg(p,t('bookQ'),'bot');setChips(p,B().services.map((s,i)=>({label:(s.p?s.n[LANG]+' · '+t('priceWord')+' '+s.p:s.n[LANG]),fn:`pickSvc('${p}',${i})`})))},700)}
+function pickSvc(p,i){const s=B().services[i];addMsg(p,s.n[LANG],'user');state[p].svc=i;state[p].stage='day';
+typing(p,()=>{addMsg(p,t('dayQ'),'bot');setChips(p,[{label:t('today'),fn:`pickDay('${p}','${t('today')}')`},{label:t('tomorrow'),fn:`pickDay('${p}','${t('tomorrow')}')`}])},700)}
+function pickDay(p,d){addMsg(p,d,'user');state[p].day=d;state[p].stage='time';
+typing(p,()=>{addMsg(p,t('timeQ'),'bot');setChips(p,['11:00 AM','2:00 PM','5:00 PM','7:30 PM'].map(x=>({label:x,fn:`pickTime('${p}','${x}')`})))} ,700)}
+function pickTime(p,x){addMsg(p,x,'user');state[p].time=x;state[p].stage='confirm';const s=B().services[state[p].svc];
+typing(p,()=>{addMsg(p,t('confirmQ').replace('{s}',s.n[LANG]).replace('{d}',state[p].day).replace('{t}',x),'bot');setChips(p,[{label:t('confirm'),fn:`doBook('${p}')`}])},700)}
+function doBook(p){addMsg(p,t('confirm'),'user');const s=B().services[state[p].svc];const ref='BB-'+Math.floor(1000+Math.random()*9000);
+typing(p,()=>{addMsg(p,`<div class="bookok"><b>${t('booked')}</b><br>${t('ref').replace('{r}',ref)}<br><br>📌 ${s.n[LANG]}<br>📅 ${state[p].day} · 🕐 ${state[p].time}</div>`,'bot');state[p].stage='idle';setChips(p,mainChips(p))},900)}
+function openWebChat(){document.getElementById('woName').textContent=B().icon+' '+B().name[LANG];document.getElementById('webOverlay').classList.add('open');resetChat('web')}
+function closeWebChat(){document.getElementById('webOverlay').classList.remove('open')}
+function sendWa(){const i=document.getElementById('inWa');const v=i.value.trim();if(!v)return;i.value='';addMsg('wa',v,'user');handleText('wa',v)}
+function sendWeb(){const i=document.getElementById('inWeb');const v=i.value.trim();if(!v)return;i.value='';addMsg('web',v,'user');handleText('web',v)}
+function handleText(p,raw){const v=raw.toLowerCase();const b=B();
+const svcHit=b.services.findIndex(s=>s.n.en.toLowerCase().split(' ')[0]&&v.includes(s.n.en.toLowerCase().split(' ')[0])||v.includes(s.n.en.toLowerCase()));
+typing(p,()=>{
+if(/salam|assalam|hello|hi\b/.test(v)){addMsg(p,t('hello'),'bot')}
+else if(svcHit>=0){const s=b.services[svcHit];addMsg(p,`<b>${s.n[LANG]}</b> — ${s.p?t('priceWord')+' '+s.p:t('free')}. ${t('cBook')}?`,'bot');setChips(p,[{label:t('cBook'),fn:`startBook('${p}')`},{label:t('cSvc'),fn:`showSvc('${p}')`}])}
+else if(/price|cost|rate|قیمت/.test(v)){showSvc(p);return}
+else if(/hour|open|close|timing|اوقات|ٹائم/.test(v)){showHours(p);return}
+else if(/where|location|address|پتہ|ایڈریس/.test(v)){showHours(p);return}
+else if(/book|appointment|reserve|بک/.test(v)){startBook(p);return}
+else{addMsg(p,t('fallback'),'bot')}
+if(!/price|cost|rate|قیمت|hour|open|close|timing|اوقات|ٹائم|where|location|address|پتہ|ایڈریس|book|appointment|reserve|بک/.test(v))setChips(p,mainChips(p));
+},800)}
+renderBiz();renderSite();resetChat('wa');
+</script>
+</body>
+</html>

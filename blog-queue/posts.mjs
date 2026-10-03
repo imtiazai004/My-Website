@@ -3,6 +3,30 @@
 
 export const POSTS = [
   {
+    slug: 'ai-assistant-whatsapp-website-any-business',
+    title: 'The Customer Who Messaged at Midnight Bought From Someone Else',
+    excerpt:
+      'Restaurants, salons, clinics, shops — every business loses customers to unanswered messages. One AI assistant on WhatsApp and your website replies 24/7.',
+    tags: ['AI Chatbots', 'WhatsApp Business', 'Automation'],
+    content: `11:47 PM. A customer messages your WhatsApp: "Are you open tomorrow? I need an appointment."
+
+No reply. Your phone is on silent and you're asleep. By 9 AM, they've booked with someone else.
+
+This isn't a restaurant problem or a salon problem. It's an every-business problem. Restaurants lose orders. Salons lose bookings. Clinics lose appointments. Shops lose sales. The customer who messages after hours buys from whoever replies first.
+
+The old answer was staying glued to your phone. The new answer is an AI assistant that never sleeps:
+
+:::demo bizbot:::
+
+One assistant, two places it meets your customers. On **WhatsApp** — where they already message you. And on **your website** — as a chat widget we install for you, so the midnight visitor browsing your site gets answers instantly instead of bouncing away.
+
+It answers FAQs, shares your menu, services and prices, takes bookings and orders, and confirms the details — 24/7, in English or Urdu. Ten customers at once. Zero missed messages.
+
+Try the demo above: switch the business type, then flip between WhatsApp and Website to see both channels.
+
+*Want this on your WhatsApp and website? DM me "BOT" — I'll show you what it looks like for your business.*`,
+  },
+  {
     slug: 'digital-khata-udhaar-notebook',
     title: "A Shopkeeper's Biggest Thief Is His Own Credit Notebook",
     excerpt:
