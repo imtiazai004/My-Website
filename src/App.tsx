@@ -33,6 +33,7 @@ const BlueprintDetail = lazy(() => import('./components/BlueprintDetail'));
 const TermsAndConditions = lazy(() => import('./components/TermsAndConditions'));
 const WebsitePrivacyPolicy = lazy(() => import('./components/WebsitePrivacyPolicy'));
 const AgencyVsFreelancer = lazy(() => import('./components/AgencyVsFreelancer'));
+const TikFulfillGuidePage = lazy(() => import('./components/TikFulfillGuidePage'));
 
 const ADMIN_PATH = '/sts-x9k2m7p4-console';
 
@@ -119,6 +120,10 @@ export default function App() {
           <Route
             path="/compare/agency-vs-freelancer"
             element={<Suspense fallback={LoadingSpinner}><AgencyVsFreelancer /></Suspense>}
+          />
+          <Route
+            path="/guides/tikfulfill-build-guide"
+            element={<Suspense fallback={LoadingSpinner}><TikFulfillGuidePage /></Suspense>}
           />
           <Route
             path="/blog"
