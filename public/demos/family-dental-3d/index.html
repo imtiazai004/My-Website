@@ -29,7 +29,8 @@ nav{position:fixed;inset:0 0 auto 0;z-index:50;backdrop-filter:blur(14px);-webki
   background:rgba(28,1,32,.55);border-bottom:1px solid rgba(255,255,255,.12);transition:background .3s}
 .nav-in{max-width:1180px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:14px}
 .logo{display:flex;align-items:center;gap:10px;color:#fff;font-family:'Sora';font-weight:800;font-size:17px;line-height:1.15}
-.logo svg{width:38px;height:38px;flex-shrink:0;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+.logo-badge{width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.logo-badge img{width:100%;height:100%;object-fit:cover;display:block}
 .logo small{display:block;font-family:'Plus Jakarta Sans';font-weight:600;font-size:10px;letter-spacing:3px;color:#f3c6f5}
 .nav-links{margin-left:auto;display:flex;gap:26px;color:#f3ddf4;font-size:14.5px;font-weight:600}
 .nav-links a{opacity:.85;transition:.2s}.nav-links a:hover{opacity:1;color:#fff}
@@ -161,8 +162,8 @@ section{padding:96px 0;position:relative}
 /* ---------- DOCTOR ---------- */
 .doc-card{display:grid;grid-template-columns:300px 1fr;gap:0;max-width:920px;margin:0 auto;background:#fff;border-radius:28px;
   overflow:hidden;box-shadow:var(--shadow);border:1px solid #f3e2f4}
-.doc-photo{background:linear-gradient(150deg,var(--brand2),var(--deep));display:flex;align-items:center;justify-content:center;
-  padding:48px 30px;color:#fff;position:relative;overflow:hidden}
+.doc-photo{position:relative;overflow:hidden;min-height:340px;background:var(--brand-soft)}
+.doc-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 18%;display:block}
 .doc-photo::before{content:'';position:absolute;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.08);top:-80px;right:-80px}
 .doc-avatar{width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.14);border:3px solid rgba(255,255,255,.5);
   display:flex;align-items:center;justify-content:center;font-family:'Sora';font-size:56px;font-weight:800;position:relative;z-index:1}
@@ -349,7 +350,7 @@ function checkGate(){var v=document.getElementById('gateInput').value;
 <nav>
   <div class="nav-in">
     <a class="logo" href="#top" aria-label="Family Dental home">
-      <svg viewBox="0 0 64 64"><path d="M32 6C20 6 12 14 12 26c0 9 4 16 8 24 2.6 5.4 4 10 4 10s2-6 8-6 8 6 8 6 1.4-4.6 4-10c4-8 8-15 8-24C52 14 44 6 32 6Z" fill="#fff"/><path d="M24 22c3-4 9-6 14-4M22 32c4-2 8-2 11 1" stroke="#800283" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+      <span class="logo-badge"><img id="logoImg" alt="Family Dental & Aesthetic Clinic logo"></span>
       <span>Family Dental<small>&amp; AESTHETIC CLINIC</small></span>
     </a>
     <div class="nav-links" id="navLinks">
@@ -365,15 +366,25 @@ function checkGate(){var v=document.getElementById('gateInput').value;
   <video id="heroVideo" autoplay muted loop playsinline preload="auto"><source id="heroVideoSrc" type="video/mp4"></video>
   <script>
 (function(){
+  function loadAssets(){
   var v=document.getElementById('heroVideo'), s=document.getElementById('heroVideoSrc');
   fetch('assets/video.txt').then(function(r){return r.text();}).then(function(b){
     s.src='data:video/mp4;base64,'+b.trim(); v.load();
     var pr=v.play(); if(pr&&pr.catch)pr.catch(function(){});
   }).catch(function(){});
+  fetch('assets/logo.txt').then(function(r){return r.text();}).then(function(b){
+    var el=document.getElementById('logoImg'); if(el) el.src='data:image/jpeg;base64,'+b.trim();
+  }).catch(function(){});
+  fetch('assets/doctor.txt').then(function(r){return r.text();}).then(function(b){
+    var el=document.getElementById('docPhoto'); if(el) el.src='data:image/jpeg;base64,'+b.trim();
+  }).catch(function(){});
   fetch('assets/journey.txt').then(function(r){return r.text();}).then(function(b){
-    document.getElementById('journeyPin').style.background=
+    var el=document.getElementById('journeyPin'); if(el) el.style.background=
       'linear-gradient(rgba(22,1,26,.60),rgba(22,1,26,.80)),url("data:image/webp;base64,'+b.trim()+'") center/cover no-repeat,#1c0120';
   }).catch(function(){});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',loadAssets);
+  else loadAssets();
 })();
 </script>
   <div class="hero-shade"></div>
@@ -476,12 +487,12 @@ function checkGate(){var v=document.getElementById('gateInput').value;
       <h2>Care you can trust</h2>
     </div>
     <div class="doc-card reveal">
-      <div class="doc-photo"><div class="doc-avatar">TA</div></div>
+      <div class="doc-photo"><img id="docPhoto" alt="Dr. Tabassum Ajmal treating a patient at Family Dental Clinic"></div>
       <div class="doc-body">
-        <span class="role">Lead Dentist &amp; Aesthetician</span>
+        <span class="role">Prosthodontist</span>
         <h3>Dr. Tabassum Ajmal</h3>
         <p>Known for a gentle, pain-free approach and explaining every step before it happens. Patients describe single-visit painless root canals, spotless clinical standards, and results that feel natural — teeth and skin alike.</p>
-        <div class="doc-points"><span>Painless RCT</span><span>Cosmetic Dentistry</span><span>Botox &amp; Fillers</span><span>Family Dentistry</span></div>
+        <div class="doc-points"><span>Dental Implants</span><span>Veneers &amp; Crowns</span><span>Smile Design</span><span>Painless RCT</span></div>
       </div>
     </div>
   </div>
@@ -581,6 +592,7 @@ function checkGate(){var v=document.getElementById('gateInput').value;
       <p>1st Floor, Al-Sayed Tower,<br>Nasir Bagh Road, Peshawar</p>
       <a href="tel:+923339202134">0333 9202134</a>
       <a href="https://wa.me/923339202134" target="_blank" rel="noopener">WhatsApp us</a>
+      <a href="https://www.instagram.com/familydentalclinic79/" target="_blank" rel="noopener">Instagram</a>
     </div>
   </div>
   <div class="foot-bottom">Concept demo crafted by <b>AI Soft Tech Solution</b> &mdash; modern websites, AI chatbots &amp; business automation.</div>
