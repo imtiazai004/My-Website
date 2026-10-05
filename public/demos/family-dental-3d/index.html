@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
 :root{
   --brand:#800283; --brand2:#a90fae; --brand-soft:#f6e3f7; --deep:#2a0130; --deeper:#1c0120;
@@ -209,58 +211,37 @@ footer{background:var(--deeper);color:#d9aede;padding:56px 0 30px}
 .wa-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:700;font-size:14px;
   padding:12px 20px;border-radius:999px;margin-top:8px;box-shadow:0 8px 22px rgba(37,211,102,.4)}
 .wa-btn svg{width:20px;height:20px;fill:#fff}
-/* ---------- TREATMENT EXPLORER ---------- */
-.explorer{background:#fff;border-radius:30px;box-shadow:var(--shadow);border:1px solid #f3e2f4;overflow:hidden;margin-bottom:70px}
-.xp-pills{display:flex;gap:10px;padding:22px 22px 6px;overflow-x:auto;scrollbar-width:none}
-.xp-pills::-webkit-scrollbar{display:none}
-.xp-pill{flex-shrink:0;border:2px solid #ecd3ee;background:#fdf7fe;color:var(--brand);font-weight:700;font-size:13.5px;
-  padding:10px 18px;border-radius:999px;cursor:pointer;transition:.22s;font-family:'Plus Jakarta Sans';white-space:nowrap}
-.xp-pill:hover{border-color:var(--brand2)}
-.xp-pill.on{background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;border-color:transparent;box-shadow:0 8px 22px rgba(128,2,131,.35)}
-.xp-pill .d3{font-size:10px;font-weight:800;background:var(--brand);color:#fff;border-radius:6px;padding:2px 6px;margin-left:7px;letter-spacing:1px}
-.xp-pill.on .d3{background:#fff;color:var(--brand)}
-.xp-stage{position:relative;margin:18px 22px 0;border-radius:22px;overflow:hidden;aspect-ratio:16/9;min-height:340px;max-width:100%;
-  background:radial-gradient(700px 380px at 50% 20%,#6d0a70 0%,#2a0130 65%,#1c0120 100%)}
-#xpCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
-#xpCanvas:active{cursor:grabbing}
-.xp-labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.xlabel{position:absolute;transform:translate(-50%,-130%);background:rgba(255,255,255,.94);color:var(--brand);font-size:12px;font-weight:700;
-  padding:6px 12px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.3);transition:opacity .2s}
-.xlabel::after{content:'';position:absolute;top:100%;left:50%;margin-left:-4px;border:4px solid transparent;border-top-color:rgba(255,255,255,.94)}
-.xp-hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);color:#d9aede;font-size:12px;letter-spacing:1px;
-  background:rgba(0,0,0,.35);padding:7px 16px;border-radius:999px;pointer-events:none;white-space:nowrap}
-.xp-panel{position:absolute;inset:0;display:flex;align-items:center;gap:28px;padding:40px;color:#fff}
-.xp-panel .big{font-family:'Sora';font-weight:800;font-size:clamp(60px,10vw,110px);line-height:1;color:#e066e8;opacity:.9;flex-shrink:0}
-.xp-panel h4{font-size:24px;margin-bottom:12px}
-.xp-panel ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-.xp-panel li{font-size:14.5px;color:#e9cdea;display:flex;gap:10px;align-items:flex-start;line-height:1.5}
-.xp-panel li::before{content:'\2713';color:#7CFC9A;font-weight:800;flex-shrink:0}
-.xp-controls{padding:24px 28px 30px;text-align:center}
-.xp-steps{display:flex;gap:10px;justify-content:center;margin-bottom:18px;flex-wrap:wrap}
-.xstep{width:46px;height:46px;border-radius:50%;border:2px solid #ecd3ee;background:#fff;color:var(--brand);font-weight:800;
-  font-size:16px;cursor:pointer;transition:.22s;font-family:'Sora'}
-.xstep.on{background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(128,2,131,.35)}
-.xp-sliderow{display:flex;align-items:center;gap:16px;max-width:560px;margin:0 auto 8px}
-.xp-sliderow span{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
-#xpSlider{flex:1;-webkit-appearance:none;appearance:none;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--brand2),#e066e8);outline:none;cursor:pointer}
-#xpSlider::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--brand);box-shadow:0 4px 14px rgba(128,2,131,.4)}
-#xpSlider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--brand)}
-.xp-caption{min-height:26px;color:var(--brand);font-weight:600;font-size:15px;margin:10px 0 18px}
+/* ---------- SCROLL JOURNEY ---------- */
+#treat-head{padding-bottom:10px}
+#journey{position:relative;background:#1c0120}
+#journeyPin{height:100vh;height:100svh;position:relative;overflow:hidden;
+  background:radial-gradient(900px 600px at 70% 20%,#6d0a70 0%,#2a0130 60%,#1c0120 100%)}
+#jCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.j-labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.j-cap{position:absolute;left:5%;top:50%;transform:translateY(-50%);max-width:370px;color:#fff;z-index:5;
+  background:rgba(28,1,32,.55);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-radius:22px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.j-kicker{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#f0a6f2}
+.j-cap h3{font-size:30px;margin:10px 0 12px;letter-spacing:-.5px}
+.j-cap p{font-size:15px;line-height:1.65;color:#e9cdea;min-height:76px}
+.j-cap .btn{margin-top:18px}
+.j-dots{position:absolute;right:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;z-index:5}
+.j-dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.5);background:transparent;cursor:pointer;padding:0;transition:.25s}
+.j-dot.on{background:#fff;border-color:#fff;box-shadow:0 0 12px rgba(255,255,255,.8)}
+.j-scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:#d9aede;font-size:12px;letter-spacing:2px;
+  z-index:5;transition:opacity .5s;white-space:nowrap;animation:cuefloat 2s ease-in-out infinite}
+@keyframes cuefloat{50%{transform:translate(-50%,6px)}}
+.j-chapters{position:relative}
+.j-ch{height:210vh}
 .sub-h{font-size:24px;margin:0 0 26px;text-align:center;letter-spacing:-.3px}
-/* ---------- PRIVATE GATE ---------- */
-#gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:22px;
-  background:radial-gradient(800px 500px at 50% 20%,#6d0a70 0%,#1c0120 70%)}
-.gate-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);
-  border-radius:26px;padding:44px 40px;max-width:380px;width:100%;text-align:center;color:#fff;box-shadow:0 30px 80px rgba(0,0,0,.5)}
-.gate-card svg{width:54px;height:54px;fill:#fff;margin-bottom:16px}
-.gate-card h2{font-size:24px;margin-bottom:10px}
-.gate-card p{font-size:14px;color:#d9aede;line-height:1.6;margin-bottom:20px}
-.gate-card input{width:100%;padding:13px 18px;border-radius:999px;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);
-  color:#fff;font-size:15px;text-align:center;outline:none;margin-bottom:14px;font-family:'Plus Jakarta Sans'}
-.gate-card input::placeholder{color:#b98bc0}
-.gate-card button{width:100%;padding:13px;border-radius:999px;border:none;cursor:pointer;font-weight:700;font-size:15px;color:#fff;
-  background:linear-gradient(135deg,#a90fae,#800283);font-family:'Plus Jakarta Sans'}
-.gate-err{min-height:20px;color:#ff9d9d;font-size:13px;margin-top:10px;margin-bottom:0!important}
+#more-treat{padding-top:90px}
+@media(max-width:900px){
+  .j-cap{left:14px;right:14px;top:auto;bottom:16px;transform:none;max-width:none;padding:20px}
+  .j-cap h3{font-size:22px;margin:8px 0}
+  .j-cap p{min-height:0;font-size:14px}
+  .j-dots{display:none}
+  .j-ch{height:170vh}
+}
 /* ---------- RESPONSIVE ---------- */
 @media(max-width:900px){
   .xp-stage{aspect-ratio:auto;height:380px;min-height:0}
@@ -341,32 +322,34 @@ function checkGate(){var v=document.getElementById('gateInput').value;
   <div class="scroll-hint"><i></i>SCROLL</div>
 </header>
 
-<section id="services">
+<section id="treat-head">
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="kicker">Treatments</span>
-      <h2>Explore treatments in 3D</h2>
-      <p>Pick a treatment below, drag the slider — and watch exactly what happens inside your smile. Then book it in one tap.</p>
+      <h2>Scroll through dentistry</h2>
+      <p>Keep scrolling — every treatment explodes into 3D view, step by step. When you love what you see, book it in one tap.</p>
     </div>
-    <div class="explorer reveal" id="explorer">
-      <div class="xp-pills" id="xpPills"></div>
-      <div class="xp-stage" id="xpStage">
-        <canvas id="xpCanvas"></canvas>
-        <div class="xp-labels" id="xpLabels"></div>
-        <div class="xp-panel" id="xpPanel" style="display:none"></div>
-        <div class="xp-hint" id="xpHint">Drag to rotate &middot; slide to explode</div>
-      </div>
-      <div class="xp-controls" id="xpControls">
-        <div class="xp-steps" id="xpSteps"></div>
-        <div class="xp-sliderow" id="xpSlideRow">
-          <span>Assembled</span>
-          <input type="range" id="xpSlider" min="0" max="100" value="0" aria-label="Explode view">
-          <span>Exploded</span>
-        </div>
-        <p class="xp-caption" id="xpCaption"></p>
-        <button class="btn btn-brand" id="xpBook" onclick="bookTreatment(currentXP.name)">Book this treatment</button>
-      </div>
+  </div>
+</section>
+<div id="journey">
+  <div id="journeyPin">
+    <canvas id="jCanvas"></canvas>
+    <div class="j-labels" id="jLabels"></div>
+    <div class="j-cap">
+      <span class="j-kicker" id="jKicker">Treatment 1 of 5</span>
+      <h3 id="jTitle">Dental Implant</h3>
+      <p id="jText"></p>
+      <button class="btn btn-brand btn-sm" id="jBook">Book Dental Implant</button>
     </div>
+    <div class="j-dots" id="jDots"></div>
+    <div class="j-scrollcue" id="jCue">SCROLL TO EXPLORE</div>
+  </div>
+  <div class="j-chapters" id="jChapters">
+    <div class="j-ch"></div><div class="j-ch"></div><div class="j-ch"></div><div class="j-ch"></div><div class="j-ch"></div>
+  </div>
+</div>
+<section id="more-treat">
+  <div class="wrap">
     <h3 class="sub-h reveal">More dental treatments</h3>
     <div class="svc-grid" id="grid-dental2"></div>
     <h3 class="sub-h reveal">Aesthetics &amp; Skin</h3>
@@ -532,29 +515,6 @@ function svcCard(icon, title, desc, tag){
   return '<div class="svc"><div class="ic">'+ICONS[icon]+'</div><h3>'+title+'</h3><p>'+desc+'</p><span class="tag">'+tag+'</span></div>';
 }
 function renderGrid(id, arr){ document.getElementById(id).innerHTML = arr.map(function(s){ return svcCard(s[0],s[1],s[2],s[3]); }).join(''); }
-var XP_ORDER = ['implant','crown','veneers','braces','rct','bleach','filling','extraction','denture','pdenture'];
-var XP = {
-  implant:{name:'Dental Implant',d3:true,desc:'A permanent, natural-feeling replacement for a missing tooth — a titanium root with a crown on top.',
-    steps:['A titanium post is placed into the jawbone — it becomes the new root','An abutment connector is fixed on top of the post','A natural-looking crown is secured — bite, smile, done'],build:xpBuildImplant},
-  crown:{name:'Dental Crown',d3:true,desc:'A tooth-shaped cap that restores a damaged tooth\u2019s strength, shape and appearance.',
-    steps:['The damaged tooth is gently shaped and prepared','A porcelain crown is custom-crafted to match your smile','The crown caps the tooth — strength and looks restored'],build:xpBuildCrown},
-  veneers:{name:'Dental Veneers',d3:true,desc:'Whisper-thin porcelain shells that cover imperfections for a flawless smile.',
-    steps:['A whisper-thin porcelain shell is crafted for your tooth','It bonds to the front surface with precision','Chips, stains, gaps — gone. Natural shine stays'],build:xpBuildVeneers},
-  braces:{name:'Braces',d3:true,desc:'Brackets and a gentle archwire that guide teeth into perfect alignment over time.',
-    steps:['Small brackets are bonded to each tooth','A flexible archwire threads through the brackets','Gentle, constant pressure moves teeth into alignment'],build:xpBuildBraces},
-  rct:{name:'Root Canal (RCT)',d3:true,desc:'Our most-loved treatment — saves your natural tooth, virtually painless, often single-visit.',
-    steps:['The infected pulp inside the tooth is located','It is cleaned and disinfected with fine instruments','The canals are sealed — your natural tooth is saved'],build:xpBuildRCT},
-  bleach:{name:'Dental Bleaching',d3:false,desc:'Professional whitening that lifts years of stains — a brighter smile in a single sitting.',
-    facts:['Single-sitting treatment','Safe for your enamel','Long-lasting brightness']},
-  filling:{name:'Dental Filling',d3:false,desc:'Tooth-colored fillings repair cavities and blend invisibly with your natural smile.',
-    facts:['Matches your tooth shade','Stops decay from spreading','Quick and painless']},
-  extraction:{name:'Tooth Extraction',d3:false,desc:'Gentle, safe removal of teeth beyond repair — with a clear healing plan.',
-    facts:['Painless, gentle technique','Clear aftercare guidance','Only when saving isn\u2019t possible']},
-  denture:{name:'Complete Denture',d3:false,desc:'A full removable appliance replacing all missing teeth — eat, speak and smile with confidence.',
-    facts:['Full upper / lower arch','Natural appearance','Eat and smile freely']},
-  pdenture:{name:'Partial Denture',d3:false,desc:'A cost-effective removable solution replacing several missing teeth.',
-    facts:['Easy to remove and clean','Non-permanent option','Budget-friendly']}
-};
 var DENTAL2 = [
   ['sun','Dental Bleaching','Professional whitening that lifts years of stains — brighter smile in a single sitting.','1 sitting'],
   ['grid','Dental Filling','Tooth-colored fillings repair cavities and blend invisibly with your smile.','Painless'],
@@ -562,140 +522,85 @@ var DENTAL2 = [
   ['smile','Complete Denture','Full-arch removable replacement — eat, speak and smile with confidence.','Full smile'],
   ['smile','Partial Denture','Cost-effective removable solution for several missing teeth.','Removable']
 ];
-var currentXP=null, xpF=0, xpTargetF=0;
-var xpRenderer=null, xpScene=null, xpCamera=null, xpGroup=null, xpParts=[], xpMats=null, xpStarted=false;
+
+/* ================= SCROLL JOURNEY ================= */
+var J = [
+  {name:'Dental Implant',desc:'A permanent, natural-feeling replacement for a missing tooth.',cam:{z:11,y:1.5},
+   steps:['A titanium post is placed into the jawbone — it becomes the new root','An abutment connector is fixed on top of the post','A natural-looking crown is secured — bite, smile, done'],build:jBuildImplant},
+  {name:'Dental Crown',desc:'A tooth-shaped cap restoring strength, shape and appearance.',cam:{z:10.5,y:1.5},
+   steps:['The damaged tooth is gently shaped and prepared','A porcelain crown is custom-crafted to match your smile','The crown caps the tooth — strength and looks restored'],build:jBuildCrown},
+  {name:'Dental Veneers',desc:'Whisper-thin porcelain shells for a flawless smile.',cam:{z:8.5,y:1.0},
+   steps:['A whisper-thin porcelain shell is crafted for your tooth','It bonds to the front surface with precision','Chips, stains, gaps — gone. Natural shine stays'],build:jBuildVeneers},
+  {name:'Braces',desc:'Brackets and a gentle archwire guiding teeth into alignment.',cam:{z:7.5,y:1.1},
+   steps:['Small brackets are bonded to each tooth','A flexible archwire threads through the brackets','Gentle, constant pressure moves teeth into alignment'],build:jBuildBraces},
+  {name:'Root Canal (RCT)',desc:'Our most-loved treatment — saves your natural tooth.',cam:{z:10,y:1.4},
+   steps:['The infected pulp inside the tooth is located','It is cleaned and disinfected with fine instruments','The canals are sealed — your natural tooth is saved'],build:jBuildRCT}
+];
+var jRenderer=null,jScene=null,jCamera=null,jGroup=null,jParts=[],jMats=null;
+var jProgress=0,jIdx=-1,jF=0,jTrans=1,jST=null;
+var camTz=11,camTy=1.5;
 
 function xpToothGeo(){
   var prof=[[0,-1.7],[.34,-1.62],[.55,-1.25],[.7,-.75],[.84,-.25],[.94,.3],[.9,.75],[.72,1.05],[.42,1.2],[0,1.24]]
     .map(function(p){return new THREE.Vector2(p[0],p[1]);});
   return new THREE.LatheGeometry(prof,36);
 }
-function xpPart(mesh,ax,ay,az,ox,oy,oz,label,ldy){
-  mesh.position.set(ax,ay,az); xpGroup.add(mesh);
+function jPart(mesh,ax,ay,az,ox,oy,oz,label,ldy){
+  mesh.position.set(ax,ay,az); jGroup.add(mesh);
   var p={mesh:mesh,a:[ax,ay,az],o:[ox,oy,oz],label:label,ldy:ldy||0.8,el:null};
   if(label){var d=document.createElement('div');d.className='xlabel';d.textContent=label;d.style.opacity='0';
-    document.getElementById('xpLabels').appendChild(d);p.el=d;}
-  xpParts.push(p); return p;
+    document.getElementById('jLabels').appendChild(d);p.el=d;}
+  jParts.push(p); return p;
 }
-function xpBuildImplant(){
-  xpPart(new THREE.Mesh(new THREE.BoxGeometry(3.6,1.1,2.4),xpMats.bone),0,-0.4,0, 0,-1.0,0,'Jawbone',0.9);
-  xpPart(new THREE.Mesh(new THREE.CylinderGeometry(0.24,0.3,1.7,20),xpMats.titanium),0,0.6,0, 0,0,0,'Titanium post',1.2);
-  xpPart(new THREE.Mesh(new THREE.CylinderGeometry(0.2,0.26,0.7,20),xpMats.metal),0,1.5,0, 0,0.7,0,'Abutment',0.7);
-  var c=new THREE.Mesh(xpToothGeo(),xpMats.ceramic); c.scale.set(0.62,0.62,0.5);
-  xpPart(c,0,2.3,0, 0,1.1,0,'Crown',0.6);
+function jBuildImplant(){
+  jPart(new THREE.Mesh(new THREE.BoxGeometry(3.6,1.1,2.4),jMats.bone),0,-0.4,0, 0,-1.0,0,'Jawbone',0.9);
+  jPart(new THREE.Mesh(new THREE.CylinderGeometry(0.24,0.3,1.7,20),jMats.titanium),0,0.6,0, 0,0,0,'Titanium post',1.2);
+  jPart(new THREE.Mesh(new THREE.CylinderGeometry(0.2,0.26,0.7,20),jMats.metal),0,1.5,0, 0,0.7,0,'Abutment',0.7);
+  var c=new THREE.Mesh(xpToothGeo(),jMats.ceramic); c.scale.set(0.62,0.62,0.5);
+  jPart(c,0,2.3,0, 0,1.1,0,'Crown',0.6);
 }
-function xpBuildCrown(){
-  xpPart(new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.62,0.95,24),xpMats.dentin),0,0.5,0, 0,-0.9,0,'Prepared tooth',0.8);
-  var cap=new THREE.Mesh(xpToothGeo(),xpMats.ceramic); cap.scale.set(0.66,0.66,0.54);
-  xpPart(cap,0,1.55,0, 0,1.9,0,'Porcelain crown',1.0);
+function jBuildCrown(){
+  jPart(new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.62,0.95,24),jMats.dentin),0,0.5,0, 0,-0.9,0,'Prepared tooth',0.8);
+  var cap=new THREE.Mesh(xpToothGeo(),jMats.ceramic); cap.scale.set(0.66,0.66,0.54);
+  jPart(cap,0,1.55,0, 0,1.9,0,'Porcelain crown',1.0);
 }
-function xpBuildVeneers(){
-  var t=new THREE.Mesh(xpToothGeo(),xpMats.stained);
-  xpPart(t,0,0.9,0, 0,0,-0.6,'Your tooth',1.3);
-  var s=new THREE.Mesh(xpToothGeo(),xpMats.ceramic); s.scale.set(0.68,0.68,0.28);
-  xpPart(s,0,0.9,0.3, 0,0,1.8,'Porcelain veneer',0.9);
+function jBuildVeneers(){
+  var t=new THREE.Mesh(xpToothGeo(),jMats.stained);
+  jPart(t,0,0.9,0, 0,0,-0.6,'Your tooth',1.3);
+  var s=new THREE.Mesh(xpToothGeo(),jMats.ceramic); s.scale.set(0.68,0.68,0.28);
+  jPart(s,0,0.9,0.3, 0,0,2.3,'Porcelain veneer',0.9);
 }
-function xpBuildBraces(){
+function jBuildBraces(){
   var xs=[-0.95,-0.32,0.32,0.95];
   for(var i=0;i<4;i++){
-    xpPart(new THREE.Mesh(new THREE.BoxGeometry(0.56,0.72,0.5),xpMats.tooth),xs[i],1.1,0, 0,0,0, i===1?'Teeth':null,0.7);
-    xpPart(new THREE.Mesh(new THREE.BoxGeometry(0.2,0.2,0.14),xpMats.metal),xs[i],1.1,0.3, 0,0,1.1, i===2?'Brackets':null,0.5);
+    jPart(new THREE.Mesh(new THREE.BoxGeometry(0.56,0.72,0.5),jMats.tooth),xs[i],1.1,0, 0,0,0, i===1?'Teeth':null,0.7);
+    jPart(new THREE.Mesh(new THREE.BoxGeometry(0.2,0.2,0.14),jMats.metal),xs[i],1.1,0.3, 0,0,1.1, i===2?'Brackets':null,0.5);
   }
-  var w=new THREE.Mesh(new THREE.CylinderGeometry(0.035,0.035,2.7,12),xpMats.metal);
+  var w=new THREE.Mesh(new THREE.CylinderGeometry(0.035,0.035,2.7,12),jMats.metal);
   w.rotation.z=Math.PI/2;
-  xpPart(w,0,1.1,0.42, 0,0,1.9,'Archwire',0.5);
+  jPart(w,0,1.1,0.42, 0,0,1.9,'Archwire',0.5);
 }
-function xpBuildRCT(){
-  var tooth=new THREE.Mesh(xpToothGeo(),xpMats.glass); tooth.scale.set(0.85,0.85,0.7);
-  xpPart(tooth,0,0.9,0, 0,-0.5,0,'Tooth preserved',1.4);
-  var pulp=new THREE.Mesh(xpToothGeo(),xpMats.pulp); pulp.scale.set(0.4,0.42,0.32);
-  xpPart(pulp,0,0.95,0, 0,1.7,0,'Infected pulp removed',0.7);
-  xpPart(new THREE.Mesh(new THREE.CylinderGeometry(0.045,0.015,1.9,10),xpMats.metal),0,3.1,0, 0,0.4,0,'Cleaning file',0.9);
+function jBuildRCT(){
+  var tooth=new THREE.Mesh(xpToothGeo(),jMats.glass); tooth.scale.set(0.85,0.85,0.7);
+  jPart(tooth,0,0.9,0, 0,-0.5,0,'Tooth preserved',1.4);
+  var pulp=new THREE.Mesh(xpToothGeo(),jMats.pulp); pulp.scale.set(0.4,0.42,0.32);
+  jPart(pulp,0,0.95,0, 0,1.7,0,'Infected pulp removed',0.7);
+  jPart(new THREE.Mesh(new THREE.CylinderGeometry(0.045,0.015,1.9,10),jMats.metal),0,3.1,0, 0,0.4,0,'Cleaning file',0.9);
 }
-function xpInitGL(){
-  if(xpStarted) return; xpStarted=true;
-  try{
-    if(typeof THREE==='undefined') throw 0;
-    var canvas=document.getElementById('xpCanvas');
-    xpRenderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
-    xpRenderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-    xpScene=new THREE.Scene();
-    xpCamera=new THREE.PerspectiveCamera(40,16/9,0.1,100);
-    xpCamera.position.set(0,2.2,9.0); xpCamera.lookAt(0,1.5,0);
-    xpScene.add(new THREE.AmbientLight(0xffffff,0.6));
-    var k=new THREE.DirectionalLight(0xffffff,1.0); k.position.set(4,6,6); xpScene.add(k);
-    var r1=new THREE.PointLight(0xe066e8,1.8,30); r1.position.set(-5,3,-2); xpScene.add(r1);
-    var r2=new THREE.PointLight(0x800283,1.4,30); r2.position.set(5,-2,3); xpScene.add(r2);
-    xpGroup=new THREE.Group(); xpScene.add(xpGroup);
-    xpMats={
-      tooth:new THREE.MeshPhysicalMaterial({color:0xf7f0f5,roughness:.25,clearcoat:1}),
-      ceramic:new THREE.MeshPhysicalMaterial({color:0xffffff,roughness:.15,clearcoat:1}),
-      stained:new THREE.MeshPhysicalMaterial({color:0xdcc9a3,roughness:.4,clearcoat:.4}),
-      metal:new THREE.MeshStandardMaterial({color:0xc9ccd6,roughness:.3,metalness:.9}),
-      titanium:new THREE.MeshStandardMaterial({color:0x8f96a3,roughness:.35,metalness:.85}),
-      bone:new THREE.MeshStandardMaterial({color:0xe6d9c2,roughness:.85}),
-      dentin:new THREE.MeshStandardMaterial({color:0xe8d3a8,roughness:.6}),
-      pulp:new THREE.MeshStandardMaterial({color:0xd94f5c,roughness:.5}),
-      glass:new THREE.MeshPhysicalMaterial({color:0xf7f0f5,roughness:.1,transparent:true,opacity:.32,clearcoat:1})
-    };
-    var stage=document.getElementById('xpStage');
-    function size(){var w=stage.clientWidth,h=stage.clientHeight;xpRenderer.setSize(w,h,false);
-      xpCamera.aspect=w/h;var a=w/h;
-      xpCamera.position.z=9.0*Math.min(1.9,Math.max(1,1.35/a));
-      xpCamera.updateProjectionMatrix();}
-    size(); window.addEventListener('resize',size);
-    var drag=false,px=0,py=0,ry=0.6,rx=0.05;
-    canvas.addEventListener('pointerdown',function(e){drag=true;px=e.clientX;py=e.clientY;try{canvas.setPointerCapture(e.pointerId);}catch(_){}});
-    canvas.addEventListener('pointermove',function(e){if(!drag)return;ry+=(e.clientX-px)*0.012;rx+=(e.clientY-py)*0.008;rx=Math.max(-0.7,Math.min(0.7,rx));px=e.clientX;py=e.clientY;});
-    ['pointerup','pointercancel','pointerleave'].forEach(function(ev){canvas.addEventListener(ev,function(){drag=false;});});
-    var v=new THREE.Vector3();
-    (function loop(){
-      requestAnimationFrame(loop);
-      if(!drag) ry+=0.004;
-      xpGroup.rotation.y=ry; xpGroup.rotation.x=rx;
-      xpF+=(xpTargetF-xpF)*0.09; if(Math.abs(xpTargetF-xpF)<0.001) xpF=xpTargetF;
-      for(var i=0;i<xpParts.length;i++){var p=xpParts[i];
-        p.mesh.position.set(p.a[0]+p.o[0]*xpF,p.a[1]+p.o[1]*xpF,p.a[2]+p.o[2]*xpF);}
-      var w=stage.clientWidth,h=stage.clientHeight;
-      for(var j=0;j<xpParts.length;j++){var q=xpParts[j];if(!q.el)continue;
-        q.mesh.getWorldPosition(v);v.y+=q.ldy;v.project(xpCamera);
-        if(v.z<1&&xpF>0.15){q.el.style.opacity='1';q.el.style.left=((v.x*0.5+0.5)*w)+'px';q.el.style.top=((-v.y*0.5+0.5)*h)+'px';}
-        else q.el.style.opacity='0';}
-      xpRenderer.render(xpScene,xpCamera);
-    })();
-  }catch(e){ xpRenderer=null; }
+function jClear(){
+  if(jGroup){while(jGroup.children.length){var c=jGroup.children[0];jGroup.remove(c);if(c.geometry)c.geometry.dispose();}}
+  jParts=[]; document.getElementById('jLabels').innerHTML='';
 }
-function setXPStep(i){
-  var targets=[0,0.55,1];
-  xpTargetF=targets[i];
-  document.getElementById('xpSlider').value=targets[i]*100;
-  var bs=document.querySelectorAll('.xstep');
-  for(var b=0;b<bs.length;b++) bs[b].classList.toggle('on',b===i);
-  document.getElementById('xpCaption').textContent=(i+1)+'. '+currentXP.steps[i];
-}
-function selectXP(key){
-  currentXP=XP[key];
-  var bs=document.querySelectorAll('.xp-pill');
-  for(var b=0;b<bs.length;b++) bs[b].classList.toggle('on',bs[b].dataset.k===key);
-  if(xpGroup){while(xpGroup.children.length){var c=xpGroup.children[0];xpGroup.remove(c);if(c.geometry)c.geometry.dispose();}}
-  xpParts=[]; document.getElementById('xpLabels').innerHTML='';
-  var is3d=!!(currentXP.d3&&xpRenderer);
-  document.getElementById('xpCanvas').style.display=is3d?'block':'none';
-  document.getElementById('xpLabels').style.display=is3d?'block':'none';
-  document.getElementById('xpHint').style.display=is3d?'block':'none';
-  document.getElementById('xpPanel').style.display=is3d?'none':'flex';
-  document.getElementById('xpSlideRow').style.display=is3d?'flex':'none';
-  document.getElementById('xpSteps').style.display=is3d?'flex':'none';
-  xpTargetF=0; xpF=0; document.getElementById('xpSlider').value=0;
-  if(is3d){
-    currentXP.build();
-    setXPStep(0);
-  }else{
-    var facts=currentXP.facts||currentXP.steps||[];
-    document.getElementById('xpPanel').innerHTML='<div class="big">'+currentXP.name.charAt(0)+'</div><div><h4>'+currentXP.name+'</h4><p style="color:#e9cdea;font-size:14.5px;line-height:1.6;margin-bottom:14px">'+currentXP.desc+'</p><ul>'+facts.map(function(f){return '<li>'+f+'</li>';}).join('')+'</ul></div>';
-    document.getElementById('xpCaption').textContent=currentXP.desc;
-  }
-  document.getElementById('xpBook').textContent='Book '+currentXP.name;
+function jLoad(i){
+  jClear(); J[i].build(); jTrans=0; jF=0;
+  camTz=J[i].cam.z; camTy=J[i].cam.y;
+  document.getElementById('jKicker').textContent='Treatment '+(i+1)+' of '+J.length;
+  document.getElementById('jTitle').textContent=J[i].name;
+  var bb=document.getElementById('jBook');
+  bb.textContent='Book '+J[i].name;
+  bb.onclick=function(){bookTreatment(J[i].name);};
+  var dots=document.querySelectorAll('.j-dot');
+  for(var d=0;d<dots.length;d++) dots[d].classList.toggle('on',d===i);
 }
 function bookTreatment(name){
   var p=document.getElementById('chatPanel');
@@ -704,20 +609,102 @@ function bookTreatment(name){
   document.getElementById('chatPing').style.display='none';
   setTimeout(function(){startBooking(name);},wasOpen?400:2400);
 }
-(function xpBoot(){
-  var pills=document.getElementById('xpPills');
-  pills.innerHTML=XP_ORDER.map(function(k){var t=XP[k];
-    return '<button class="xp-pill" data-k="'+k+'">'+t.name+(t.d3?'<span class="d3">3D</span>':'')+'</button>';}).join('');
-  pills.addEventListener('click',function(e){var b=e.target.closest?e.target.closest('.xp-pill'):null;if(b)selectXP(b.getAttribute('data-k'));});
-  document.getElementById('xpSteps').innerHTML=[1,2,3].map(function(n){return '<button class="xstep'+(n===1?' on':'')+'" onclick="setXPStep('+(n-1)+')">'+n+'</button>';}).join('');
-  document.getElementById('xpSlider').addEventListener('input',function(e){xpTargetF=e.target.value/100;});
-  renderGrid('grid-dental2',DENTAL2);
+function jInit(){
+  var ok=false;
+  try{
+    if(typeof THREE==='undefined'||typeof gsap==='undefined'||typeof ScrollTrigger==='undefined') throw 0;
+    gsap.registerPlugin(ScrollTrigger);
+    var canvas=document.getElementById('jCanvas');
+    jRenderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+    jRenderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    jScene=new THREE.Scene();
+    jCamera=new THREE.PerspectiveCamera(40,16/9,0.1,100);
+    jCamera.position.set(0,2.2,9.0); jCamera.lookAt(0,1.5,0);
+    jScene.add(new THREE.AmbientLight(0xffffff,0.6));
+    var k=new THREE.DirectionalLight(0xffffff,1.0); k.position.set(4,6,6); jScene.add(k);
+    var r1=new THREE.PointLight(0xe066e8,1.8,30); r1.position.set(-5,3,-2); jScene.add(r1);
+    var r2=new THREE.PointLight(0x800283,1.4,30); r2.position.set(5,-2,3); jScene.add(r2);
+    jGroup=new THREE.Group(); jScene.add(jGroup);
+    jMats={
+      tooth:new THREE.MeshPhysicalMaterial({color:0xf7f0f5,roughness:.25,clearcoat:1}),
+      ceramic:new THREE.MeshPhysicalMaterial({color:0xffffff,roughness:.15,clearcoat:1}),
+      stained:new THREE.MeshPhysicalMaterial({color:0xc7a05e,roughness:.45,clearcoat:.4}),
+      metal:new THREE.MeshStandardMaterial({color:0xc9ccd6,roughness:.3,metalness:.9}),
+      titanium:new THREE.MeshStandardMaterial({color:0x8f96a3,roughness:.35,metalness:.85}),
+      bone:new THREE.MeshStandardMaterial({color:0xe6d9c2,roughness:.85}),
+      dentin:new THREE.MeshStandardMaterial({color:0xe8d3a8,roughness:.6}),
+      pulp:new THREE.MeshStandardMaterial({color:0xd94f5c,roughness:.5}),
+      glass:new THREE.MeshPhysicalMaterial({color:0xf7f0f5,roughness:.1,transparent:true,opacity:.32,clearcoat:1})
+    };
+    var stage=document.getElementById('journeyPin');
+    var aspectF=1;
+    function size(){var w=stage.clientWidth,h=stage.clientHeight;jRenderer.setSize(w,h,false);
+      jCamera.aspect=w/h;var a=w/h;
+      aspectF=Math.min(1.9,Math.max(1,1.35/a));
+      jGroup.position.x=a>1.05?1.1:0;
+      jCamera.updateProjectionMatrix();}
+    size(); window.addEventListener('resize',size);
+    var dotsEl=document.getElementById('jDots');
+    for(var i=0;i<J.length;i++){
+      var b=document.createElement('button');b.className='j-dot'+(i===0?' on':'');b.setAttribute('aria-label',J[i].name);
+      (function(ii){b.onclick=function(){
+        var s=jST.start+(ii+0.03)/J.length*(jST.end-jST.start);
+        window.scrollTo({top:s,behavior:'smooth'});};})(i);
+      dotsEl.appendChild(b);
+    }
+    jST=ScrollTrigger.create({trigger:'#journey',start:'top top',end:'bottom bottom',
+      pin:'#journeyPin',scrub:1,anticipatePin:1,
+      onUpdate:function(self){jProgress=self.progress;}});
+    jLoad(0);
+    var v=new THREE.Vector3(),lastT=performance.now(),capEl=document.getElementById('jText'),cueEl=document.getElementById('jCue');
+    var camZ=camTz,lookY=camTy;
+    (function loop(){
+      requestAnimationFrame(loop);
+      var now=performance.now(),dt=Math.min(0.05,(now-lastT)/1000); lastT=now;
+      var seg=1/J.length;
+      var idx=Math.max(0,Math.min(J.length-1,Math.floor(jProgress/seg)));
+      if(idx!==jIdx){jIdx=idx;jLoad(idx);}
+      var local=Math.max(0,Math.min(1,(jProgress-idx*seg)/seg));
+      if(jTrans<1)jTrans=Math.min(1,jTrans+dt*2.6);
+      var sc=jTrans<1?(0.25+0.75*jTrans):1;
+      jGroup.scale.set(sc,sc,sc);
+      jGroup.rotation.y+=dt*0.18;
+      camZ+=(camTz-camZ)*0.05; lookY+=(camTy-lookY)*0.05;
+      jCamera.position.z=camZ*aspectF; jCamera.lookAt(0,lookY,0);
+      var e=Math.max(0,Math.min(1,(local-0.12)/0.66));
+      if(jTrans<1)e=0;
+      jF+=(e-jF)*0.12; if(Math.abs(e-jF)<0.002)jF=e;
+      for(var p=0;p<jParts.length;p++){var q=jParts[p];
+        q.mesh.position.set(q.a[0]+q.o[0]*jF,q.a[1]+q.o[1]*jF,q.a[2]+q.o[2]*jF);}
+      var si=jF<0.3?0:(jF<0.68?1:2);
+      var txt=(si+1)+'. '+J[idx].steps[si];
+      if(capEl.textContent!==txt)capEl.textContent=txt;
+      var w=stage.clientWidth,h=stage.clientHeight;
+      for(var l=0;l<jParts.length;l++){var L=jParts[l];if(!L.el)continue;
+        L.mesh.getWorldPosition(v);v.y+=L.ldy;v.project(jCamera);
+        if(v.z<1&&jF>0.15&&jTrans>=1){L.el.style.opacity='1';L.el.style.left=((v.x*0.5+0.5)*w)+'px';L.el.style.top=((-v.y*0.5+0.5)*h)+'px';}
+        else L.el.style.opacity='0';}
+      cueEl.style.opacity=jProgress>0.02?'0':'1';
+      jRenderer.render(jScene,jCamera);
+    })();
+    ok=true;
+  }catch(err){ ok=false; }
+  if(!ok){
+    document.getElementById('journey').style.display='none';
+    var extra=[
+      ['shield','Dental Implant','Permanent, natural-feeling replacement for a missing tooth.','Permanent'],
+      ['star','Dental Crown','Tooth-shaped cap restoring strength, shape and appearance.','Natural look'],
+      ['spark','Dental Veneers','Whisper-thin porcelain shells for a flawless smile.','Flawless'],
+      ['smile','Braces','Brackets + archwire guiding teeth into perfect alignment.','All ages'],
+      ['tooth','Root Canal (RCT)','Saves your natural tooth — virtually painless, single visit.','Most loved']];
+    renderGrid('grid-dental2',extra.concat(DENTAL2));
+  }else{
+    renderGrid('grid-dental2',DENTAL2);
+  }
   renderGrid('grid-aesthetic',AESTHETIC);
   bindTilt();
-  var io2=new IntersectionObserver(function(es){es.forEach(function(en){
-    if(en.isIntersecting){xpInitGL();if(!currentXP)selectXP('implant');io2.disconnect();}});},{threshold:0.12});
-  io2.observe(document.getElementById('explorer'));
-})();
+}
+jInit();
 
 
 /* ================= 3D TILT ================= */
