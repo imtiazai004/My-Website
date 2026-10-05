@@ -76,6 +76,45 @@ nav{position:fixed;inset:0 0 auto 0;z-index:50;backdrop-filter:blur(14px);-webki
 .scroll-hint i{width:22px;height:36px;border:2px solid #d9aede;border-radius:12px;position:relative;display:block}
 .scroll-hint i::after{content:'';position:absolute;top:7px;left:50%;width:4px;height:8px;margin-left:-2px;border-radius:4px;background:#fff;animation:wheel 1.6s infinite}
 @keyframes wheel{60%{transform:translateY(10px);opacity:0}100%{opacity:0}}
+
+/* ---------- STICKY SHRINK NAV ---------- */
+.nav-in{transition:padding .3s ease}
+nav.shrink .nav-in{padding:8px 22px}
+nav.shrink{background:rgba(28,1,32,.85)}
+.nav-phone{display:none;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:14px;
+  background:linear-gradient(135deg,var(--brand2),var(--brand));padding:10px 18px;border-radius:999px;white-space:nowrap}
+nav.shrink .nav-phone{display:inline-flex}
+@media(max-width:900px){.nav-phone{display:none!important}}
+/* ---------- WELCOME LINE ---------- */
+.welcome-line{font-size:14px;letter-spacing:3px;color:#f0a6f2;margin-bottom:14px;font-weight:600}
+.welcome-line .w-ur{font-family:'Plus Jakarta Sans'}
+/* ---------- SAFETY STRIP ---------- */
+#safety{background:linear-gradient(180deg,#fdf2fe,#fff);padding:70px 0}
+.safety-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1080px;margin:0 auto}
+.safety-item{background:#fff;border:1px solid #f3e2f5;border-radius:18px;padding:26px 22px;text-align:center;box-shadow:0 10px 30px rgba(128,2,131,.07)}
+.safety-item .ic{width:52px;height:52px;margin:0 auto 14px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#a90fae,#800283);color:#fff}
+.safety-item .ic svg{width:26px;height:26px}
+.safety-item h3{font-size:16px;margin-bottom:8px}
+.safety-item p{font-size:13.5px;color:var(--muted);line-height:1.6}
+@media(max-width:900px){.safety-grid{grid-template-columns:repeat(2,1fr)}}
+/* ---------- FAQ ---------- */
+#faq{background:#fff}
+.faq-list{max-width:760px;margin:0 auto}
+.faq-item{border:1px solid #f0dcf2;border-radius:16px;margin-bottom:12px;overflow:hidden;background:#fffdfd}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;background:none;border:none;cursor:pointer;
+  padding:20px 22px;font-size:16px;font-weight:700;color:var(--ink);text-align:left;font-family:'Plus Jakarta Sans'}
+.faq-q .pm{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;transition:transform .3s}
+.faq-item.open .faq-q .pm{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a p{padding:0 22px 22px;font-size:15px;line-height:1.7;color:var(--muted)}
+/* ---------- URGENT BAND ---------- */
+.urgent-band{background:linear-gradient(120deg,#3a0140,#800283 60%,#a90fae);color:#fff;padding:64px 0;text-align:center}
+.urgent-band h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.5px;margin-bottom:12px}
+.urgent-band p{color:#f3d3f5;font-size:16px;margin-bottom:26px}
+.urgent-band .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--brand);box-shadow:0 12px 30px rgba(0,0,0,.25)}
 /* ---------- SECTIONS ---------- */
 section{padding:96px 0;position:relative}
 .sec-head{max-width:680px;margin:0 auto 54px;text-align:center}
@@ -314,9 +353,10 @@ function checkGate(){var v=document.getElementById('gateInput').value;
       <span>Family Dental<small>&amp; AESTHETIC CLINIC</small></span>
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="#services">Treatments</a><a href="#smilelab">Smile Lab</a><a href="#doctor">Doctor</a><a href="#reviews">Reviews</a><a href="#visit">Visit Us</a>
+      <a href="#treat-head">Treatments</a><a href="#smilelab">Smile Lab</a><a href="#doctor">Doctor</a><a href="#reviews">Reviews</a><a href="#visit">Visit Us</a>
     </div>
     <button class="btn btn-brand btn-sm nav-cta" onclick="openChat('book')">Book Appointment</button>
+    <a class="nav-phone" href="tel:+923339202134"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9Z"/></svg>0333 9202134</a>
     <button class="burger" onclick="document.getElementById('navLinks').classList.toggle('mopen')" aria-label="Menu">&#9776;</button>
   </div>
 </nav>
@@ -340,6 +380,7 @@ function checkGate(){var v=document.getElementById('gateInput').value;
   <canvas id="tooth3d" aria-hidden="true"></canvas>
   <div class="hero-fallback" id="heroFallback"><div class="orb"></div></div>
   <div class="hero-in">
+    <div class="welcome-line reveal"><span class="w-ur">خوش آمدید</span> &nbsp;•&nbsp; پخير راغلئ &nbsp;•&nbsp; Welcome</div>
     <span class="eyebrow"><span class="dot"></span> Accepting new patients &mdash; Peshawar</span>
     <h1>Painless dentistry.<br><span class="grad">Radiant aesthetics.</span><br>One clinic.</h1>
     <p class="lead">Family Dental &amp; Aesthetic Clinic on Nasir Bagh Road — 5.0-star rated care for your teeth, skin and smile. Chat with <b style="color:#fff">Denti</b>, our AI assistant, and book your visit in under a minute.</p>
@@ -391,6 +432,21 @@ function checkGate(){var v=document.getElementById('gateInput').value;
   </div>
 </section>
 
+<section id="safety">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Safety First</span>
+      <h2>Strict hygiene, every single patient</h2>
+      <p>Your health is non-negotiable. Every instrument, every surface, every visit.</p>
+    </div>
+    <div class="safety-grid">
+      <div class="safety-item reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 6v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Sterilized Instruments</h3><p>Hospital-grade autoclave sterilization after every use.</p></div>
+      <div class="safety-item reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/><path d="M3 8l9 6 9-6"/></svg></div><h3>Disposable Kits</h3><p>Fresh single-use kits opened in front of every patient.</p></div>
+      <div class="safety-item reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5"/></svg></div><h3>Sanitized Clinic</h3><p>Chairs, surfaces and equipment disinfected between visits.</p></div>
+      <div class="safety-item reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.8 2.8M16.2 16.2 19 19M19 5l-2.8 2.8M7.8 16.2 5 19"/><circle cx="12" cy="12" r="3.2"/></svg></div><h3>Quality Materials</h3><p>Only certified, biocompatible dental materials — no shortcuts.</p></div>
+    </div>
+  </div>
+</section>
 <section id="smilelab">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -458,6 +514,24 @@ function checkGate(){var v=document.getElementById('gateInput').value;
   </div>
 </section>
 
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">FAQ</span>
+      <h2>Questions? Answered.</h2>
+      <p>Everything patients ask before their first visit.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal open"><button class="faq-q" onclick="toggleFaq(this)">Is a root canal painful?<span class="pm">+</span></button><div class="faq-a"><p>Not at our clinic. With modern anesthesia and a gentle technique, most patients say it feels like getting a filling — many of our root canals finish in a single, painless visit.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)">What are your clinic timings?<span class="pm">+</span></button><div class="faq-a"><p>Monday to Saturday, 4:00 PM to 8:00 PM. We are closed on Sundays. For the fastest confirmation, book through Denti or WhatsApp us at 0333 9202134.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)">Do I need an appointment, or can I walk in?<span class="pm">+</span></button><div class="faq-a"><p>Appointments are preferred so you never wait — book in under a minute with Denti, our AI assistant, or message us on WhatsApp. Walk-ins are accommodated whenever the schedule allows.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)">Do you treat children?<span class="pm">+</span></button><div class="faq-a"><p>Yes — we are a family clinic. From a child's first checkup to braces for teenagers, young patients get the same gentle, patient-first care.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)">How much do treatments cost?<span class="pm">+</span></button><div class="faq-a"><p>Every smile is different, so we give you a clear, honest estimate after a quick examination — no surprises, no hidden charges. Message us on WhatsApp for guidance.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)">Is teeth whitening safe for my enamel?<span class="pm">+</span></button><div class="faq-a"><p>Yes. Professional whitening done at the clinic is enamel-safe and far gentler than unregulated home remedies. One sitting is usually enough for a visibly brighter smile.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)">Where exactly is the clinic?<span class="pm">+</span></button><div class="faq-a"><p>1st Floor, Al-Sayed Tower, Nasir Bagh Road, near Amal Labs, Peshawar. Tap 'Get Directions' in the Visit section and your map will guide you door to door.</p></div></div>
+    </div>
+  </div>
+</section>
 <section id="visit">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -481,6 +555,16 @@ function checkGate(){var v=document.getElementById('gateInput').value;
   </div>
 </section>
 
+<section class="urgent-band">
+  <div class="wrap">
+    <h2 class="reveal">Tooth pain can't wait.</h2>
+    <p class="reveal">Call or WhatsApp us now — urgent cases are fitted in on priority.</p>
+    <div class="btn-row reveal">
+      <a class="btn btn-white" href="tel:+923339202134">Call 0333 9202134</a>
+      <a class="btn btn-ghost" href="https://wa.me/923339202134?text=Assalam-o-Alaikum!%20I%20have%20a%20dental%20emergency." target="_blank" rel="noopener">WhatsApp Us</a>
+    </div>
+  </div>
+</section>
 <footer>
   <div class="foot-grid">
     <div>
@@ -490,7 +574,7 @@ function checkGate(){var v=document.getElementById('gateInput').value;
     </div>
     <div>
       <h4>Treatments</h4>
-      <a href="#services">Root Canal (RCT)</a><a href="#services">Braces &amp; Aligners</a><a href="#services">Teeth Whitening</a><a href="#services">Botox &amp; Fillers</a>
+      <a href="#treat-head">Root Canal (RCT)</a><a href="#treat-head">Braces &amp; Aligners</a><a href="#treat-head">Teeth Whitening</a><a href="#treat-head">Botox &amp; Fillers</a>
     </div>
     <div>
       <h4>Contact</h4>
@@ -994,6 +1078,21 @@ function handle(text){
   botSay('I want to make sure I get this right — I can help with <b>booking an appointment</b>, <b>timings</b>, <b>treatments &amp; prices</b>, or <b>directions</b>. What would you like?', defaultChips());
 }
 
+
+/* ---------- NAV SHRINK + FAQ ---------- */
+window.addEventListener('scroll',function(){
+  var n=document.querySelector('nav'); if(n) n.classList.toggle('shrink',window.scrollY>70);
+},{passive:true});
+function toggleFaq(btn){
+  var item=btn.parentElement, ans=item.querySelector('.faq-a');
+  var open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(o){
+    o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight='0px';});
+  if(!open){ item.classList.add('open'); ans.style.maxHeight=ans.scrollHeight+'px'; }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var f=document.querySelector('.faq-item.open .faq-a'); if(f) f.style.maxHeight=f.scrollHeight+'px';
+});
 /* ---------- open / close ---------- */
 function toggleChat(){
   var p = document.getElementById('chatPanel');
