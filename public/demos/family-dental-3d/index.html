@@ -48,7 +48,11 @@ nav{position:fixed;inset:0 0 auto 0;z-index:50;backdrop-filter:blur(14px);-webki
   background:radial-gradient(1100px 600px at 85% 15%,#b01ab5 0%,transparent 60%),
              radial-gradient(900px 700px at 10% 90%,#5c0160 0%,transparent 55%),
              linear-gradient(160deg,#3a0140 0%,#1c0120 70%);color:#fff}
-#tooth3d{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#heroVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;z-index:0}
+.hero-shade{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(160deg,rgba(28,1,32,.72) 0%,rgba(28,1,32,.42) 45%,rgba(28,1,32,.88) 100%)}
+#tooth3d{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.hero-fallback{z-index:1}
 .hero-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:flex-end;padding-right:8%}
 .hero-fallback .orb{width:min(42vw,420px);aspect-ratio:1;border-radius:50%;
   background:radial-gradient(circle at 35% 30%,#e08be4,#800283 55%,#3a0140);filter:blur(2px);
@@ -242,6 +246,21 @@ footer{background:var(--deeper);color:#d9aede;padding:56px 0 30px}
   .j-dots{display:none}
   .j-ch{height:170vh}
 }
+/* ---------- PRIVATE GATE ---------- */
+#gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:22px;
+  background:radial-gradient(800px 500px at 50% 20%,#6d0a70 0%,#1c0120 70%)}
+.gate-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-radius:26px;padding:44px 40px;max-width:380px;width:100%;text-align:center;color:#fff;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.gate-card svg{width:54px;height:54px;fill:#fff;margin-bottom:16px}
+.gate-card h2{font-size:24px;margin-bottom:10px}
+.gate-card p{font-size:14px;color:#d9aede;line-height:1.6;margin-bottom:20px}
+.gate-card input{width:100%;padding:13px 18px;border-radius:999px;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);
+  color:#fff;font-size:15px;text-align:center;outline:none;margin-bottom:14px;font-family:'Plus Jakarta Sans'}
+.gate-card input::placeholder{color:#b98bc0}
+.gate-card button{width:100%;padding:13px;border-radius:999px;border:none;cursor:pointer;font-weight:700;font-size:15px;color:#fff;
+  background:linear-gradient(135deg,#a90fae,#800283);font-family:'Plus Jakarta Sans'}
+.gate-err{min-height:20px;color:#ff9d9d;font-size:13px;margin-top:10px;margin-bottom:0!important}
 /* ---------- RESPONSIVE ---------- */
 @media(max-width:900px){
   .xp-stage{aspect-ratio:auto;height:380px;min-height:0}
@@ -303,6 +322,21 @@ function checkGate(){var v=document.getElementById('gateInput').value;
 </nav>
 
 <header class="hero" id="top">
+  <video id="heroVideo" autoplay muted loop playsinline preload="auto"><source id="heroVideoSrc" type="video/mp4"></video>
+  <script>
+(function(){
+  var v=document.getElementById('heroVideo'), s=document.getElementById('heroVideoSrc');
+  fetch('assets/video.txt').then(function(r){return r.text();}).then(function(b){
+    s.src='data:video/mp4;base64,'+b.trim(); v.load();
+    var pr=v.play(); if(pr&&pr.catch)pr.catch(function(){});
+  }).catch(function(){});
+  fetch('assets/journey.txt').then(function(r){return r.text();}).then(function(b){
+    document.getElementById('journeyPin').style.background=
+      'linear-gradient(rgba(22,1,26,.60),rgba(22,1,26,.80)),url("data:image/webp;base64,'+b.trim()+'") center/cover no-repeat,#1c0120';
+  }).catch(function(){});
+})();
+</script>
+  <div class="hero-shade"></div>
   <canvas id="tooth3d" aria-hidden="true"></canvas>
   <div class="hero-fallback" id="heroFallback"><div class="orb"></div></div>
   <div class="hero-in">
@@ -546,7 +580,7 @@ function xpToothGeo(){
   return new THREE.LatheGeometry(prof,36);
 }
 function jPart(mesh,ax,ay,az,ox,oy,oz,label,ldy){
-  mesh.position.set(ax,ay,az); jGroup.add(mesh);
+  mesh.position.set(ax,ay,az); mesh.castShadow=true; jGroup.add(mesh);
   var p={mesh:mesh,a:[ax,ay,az],o:[ox,oy,oz],label:label,ldy:ldy||0.8,el:null};
   if(label){var d=document.createElement('div');d.className='xlabel';d.textContent=label;d.style.opacity='0';
     document.getElementById('jLabels').appendChild(d);p.el=d;}
@@ -617,11 +651,20 @@ function jInit(){
     var canvas=document.getElementById('jCanvas');
     jRenderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
     jRenderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    jRenderer.toneMapping=THREE.ACESFilmicToneMapping;
+    jRenderer.toneMappingExposure=1.15;
+    jRenderer.shadowMap.enabled=true;
+    jRenderer.shadowMap.type=THREE.PCFSoftShadowMap;
     jScene=new THREE.Scene();
     jCamera=new THREE.PerspectiveCamera(40,16/9,0.1,100);
     jCamera.position.set(0,2.2,9.0); jCamera.lookAt(0,1.5,0);
     jScene.add(new THREE.AmbientLight(0xffffff,0.6));
-    var k=new THREE.DirectionalLight(0xffffff,1.0); k.position.set(4,6,6); jScene.add(k);
+    var k=new THREE.DirectionalLight(0xffffff,1.1); k.position.set(4,6,6); jScene.add(k);
+    k.castShadow=true; k.shadow.mapSize.set(1024,1024);
+    k.shadow.camera.left=-7; k.shadow.camera.right=7; k.shadow.camera.top=7; k.shadow.camera.bottom=-7;
+    k.shadow.camera.near=1; k.shadow.camera.far=25; k.shadow.bias=-0.002;
+    var shPlane=new THREE.Mesh(new THREE.PlaneGeometry(16,16), new THREE.ShadowMaterial({opacity:0.35}));
+    shPlane.rotation.x=-Math.PI/2; shPlane.position.y=-1.75; shPlane.receiveShadow=true; jScene.add(shPlane);
     var r1=new THREE.PointLight(0xe066e8,1.8,30); r1.position.set(-5,3,-2); jScene.add(r1);
     var r2=new THREE.PointLight(0x800283,1.4,30); r2.position.set(5,-2,3); jScene.add(r2);
     jGroup=new THREE.Group(); jScene.add(jGroup);
@@ -759,6 +802,7 @@ document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
     if(typeof THREE === 'undefined') throw new Error('no three');
     var renderer = new THREE.WebGLRenderer({canvas:canvas, alpha:true, antialias:true});
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.12;
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(38, 1, .1, 100);
     camera.position.set(0, 0, 9);
