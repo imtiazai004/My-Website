@@ -3,12 +3,18 @@
   'use strict';
 
   /* ---------- asset loader (logo + doctor photo from base64 .txt) ---------- */
+  function assetBase(){
+    var s=(document.currentScript&&document.currentScript.src)||'';
+    var i=s.lastIndexOf('/');
+    return i>0?s.slice(0,i+1):'';
+  }
   function loadAssets(){
-    fetch('assets/logo.txt').then(function(r){return r.text();}).then(function(b){
+    var base=assetBase();
+    fetch(base+'logo.txt').then(function(r){return r.text();}).then(function(b){
       var src='data:image/jpeg;base64,'+b.trim();
       document.querySelectorAll('img[data-asset="logo"]').forEach(function(el){el.src=src;});
     }).catch(function(){});
-    fetch('assets/doctor.txt').then(function(r){return r.text();}).then(function(b){
+    fetch(base+'doctor.txt').then(function(r){return r.text();}).then(function(b){
       var src='data:image/jpeg;base64,'+b.trim();
       document.querySelectorAll('img[data-asset="doctor"]').forEach(function(el){el.src=src;});
     }).catch(function(){});
