@@ -302,3 +302,10 @@ footer{background:var(--ink);color:#c8d4d8;padding:70px 0 0}
 .detail-row .dtxt h3{font-size:1.6rem;color:var(--teal-dark);margin-bottom:12px;font-family:var(--head)}
 .detail-row .dtxt p{color:var(--body);font-size:16.5px;line-height:1.75}
 .tcard-sub{display:block;padding:0 20px 20px;font-size:.92rem;color:var(--body);text-align:center;line-height:1.6}
+/* ==== Stacked treatment subsections (like reference site) ==== */
+.psub{max-width:860px;margin:0 auto 64px;text-align:center}
+.psub h2{font-size:clamp(24px,3vw,32px);color:var(--ink);margin-bottom:16px}
+.psub p{color:var(--body);font-size:16.5px;line-height:1.8;margin-bottom:22px;text-align:center}
+.psub .btn{margin-bottom:30px}
+.psub-img{border-radius:24px;overflow:hidden;box-shadow:0 14px 34px rgba(66,182,177,.14);background:var(--soft)}
+.psub-img img{width:100%;display:block;object-fit:cover;max-height:480px}
