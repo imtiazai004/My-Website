@@ -21,7 +21,7 @@ export const DEMOS: Demo[] = [
     description:
       'A cinematic 3D scroll experience — take a tooth apart layer by layer, explore treatments in interactive 3D, and book through an on-page assistant.',
     category: '3D Experience',
-    url: 'https://family-dental-clinic-3d-website-wit.vercel.app/',
+    url: '/demos/family-dental/',
     dateAdded: '8 Oct 2026',
     featured: true,
     gradient: 'from-indigo-500 via-purple-500 to-fuchsia-500',

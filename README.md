@@ -26,3 +26,9 @@ Add a demo entry there to show its card and live link in both places.
 After changing demo cards, run `npx tsx scripts/sync-demo-snapshot.ts` to update
 the homepage snapshot used by search crawlers (or regenerate all snapshots
 with the existing `prerender.mjs` workflow).
+
+The 3D dental demo uses the branded URL `/demos/family-dental/`. Its Vercel
+rewrite proxies the deployed dental website and all nested assets/pages;
+the browser stays on `aisofttechsolution.com`. Keep this specific rewrite
+before the generic demo and SPA rewrites in `vercel.json`. The dental
+deployment remains the source of the demo and must stay available.

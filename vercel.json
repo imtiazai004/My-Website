@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/demos/family-dental",
+      "destination": "/demos/family-dental/",
+      "permanent": false
+    },
+    {
       "source": "/(.*)",
       "destination": "https://imtiazahmad004-composer-ai-scanner.hf.space/$1",
       "permanent": true,
@@ -13,6 +18,10 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/demos/family-dental/:path*",
+      "destination": "https://family-dental-clinic-3d-website-wit.vercel.app/:path*"
+    },
     {
       "source": "/demos/:demo",
       "destination": "/demos/:demo/index.html"
