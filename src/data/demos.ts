@@ -27,18 +27,6 @@ export const DEMOS: Demo[] = [
     gradient: 'from-indigo-500 via-purple-500 to-fuchsia-500',
   },
   {
-    id: 'family-dental-3d',
-    client: 'Family Dental & Aesthetic Clinic',
-    title: 'Business Website Demo',
-    description:
-      'Complete clinic website — home, services with 12 detailed treatment pages, about, contact, reviews and WhatsApp booking built in.',
-    category: 'Business Website',
-    url: 'https://aisofttechsolution.com/demos/family-dental-3d/',
-    passcodeProtected: true,
-    dateAdded: '6 Oct 2026',
-    gradient: 'from-sky-500 via-brand-accent to-blue-600',
-  },
-  {
     id: 'family-dental-simple',
     client: 'Family Dental & Aesthetic Clinic',
     title: 'Simple Website',
