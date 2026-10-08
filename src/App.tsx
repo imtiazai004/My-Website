@@ -34,6 +34,7 @@ const TermsAndConditions = lazy(() => import('./components/TermsAndConditions'))
 const WebsitePrivacyPolicy = lazy(() => import('./components/WebsitePrivacyPolicy'));
 const AgencyVsFreelancer = lazy(() => import('./components/AgencyVsFreelancer'));
 const TikFulfillGuidePage = lazy(() => import('./components/TikFulfillGuidePage'));
+const DemosPage = lazy(() => import('./components/DemosPage'));
 
 const ADMIN_PATH = '/sts-x9k2m7p4-console';
 
@@ -145,6 +146,11 @@ export default function App() {
           <Route path="/blueprint-library/:id" element={
             <Suspense fallback={<div className="min-h-screen bg-[#030712]" />}>
               <BlueprintDetail />
+            </Suspense>
+          } />
+          <Route path="/demos" element={
+            <Suspense fallback={LoadingSpinner}>
+              <DemosPage />
             </Suspense>
           } />
           <Route path="*" element={<MainSite />} />
