@@ -248,7 +248,8 @@ export default function Footer() {
                 <span className="text-[10px] text-slate-400 uppercase font-black tracking-widest">LATENCY</span>
               </div>
             </div>
-            <div className="flex gap-8 text-[11px] text-slate-400 font-black uppercase tracking-[0.3em]">
+            <div className="flex flex-wrap gap-8 text-[11px] text-slate-400 font-black uppercase tracking-[0.3em]">
+              <Link to="/demos" className="hover:text-white transition-colors">Demos</Link>
               <Link to="/compare/agency-vs-freelancer" className="hover:text-white transition-colors">Vs Freelancer</Link>
               <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
               <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
