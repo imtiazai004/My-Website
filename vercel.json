@@ -19,6 +19,14 @@
   ],
   "rewrites": [
     {
+      "source": "/demos/family-dental/",
+      "destination": "https://family-dental-clinic-3d-website-wit.vercel.app/"
+    },
+    {
+      "source": "/demos/family-dental/:path*/",
+      "destination": "https://family-dental-clinic-3d-website-wit.vercel.app/:path*/"
+    },
+    {
       "source": "/demos/family-dental/:path*",
       "destination": "https://family-dental-clinic-3d-website-wit.vercel.app/:path*"
     },
