@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Dental &amp; Aesthetic Clinic — Peshawar | 3D Concept by AI Soft Tech Solution</title>
+<meta name="description" content="Family Dental & Aesthetic Clinic, Nasir Bagh Road Peshawar — painless dentistry & facial aesthetics. Book online with Denti, our AI assistant.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+:root{
+  --brand:#800283; --brand2:#a90fae; --brand-soft:#f6e3f7; --deep:#2a0130; --deeper:#1c0120;
+  --ink:#2b0a2e; --muted:#6f5a72; --card:#ffffff; --gold:#f5b942;
+  --r:22px; --shadow:0 24px 60px rgba(128,2,131,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);background:#fff;overflow-x:hidden}
+h1,h2,h3,.disp{font-family:'Sora',sans-serif}
+img{max-width:100%}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+/* ---------- NAV ---------- */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(28,1,32,.55);border-bottom:1px solid rgba(255,255,255,.12);transition:background .3s}
+.nav-in{max-width:1180px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:14px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;font-family:'Sora';font-weight:800;font-size:17px;line-height:1.15}
+.logo svg{width:38px;height:38px;flex-shrink:0;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+.logo small{display:block;font-family:'Plus Jakarta Sans';font-weight:600;font-size:10px;letter-spacing:3px;color:#f3c6f5}
+.nav-links{margin-left:auto;display:flex;gap:26px;color:#f3ddf4;font-size:14.5px;font-weight:600}
+.nav-links a{opacity:.85;transition:.2s}.nav-links a:hover{opacity:1;color:#fff}
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-weight:700;font-size:15px;
+  padding:13px 26px;border-radius:999px;transition:transform .18s,box-shadow .18s;font-family:'Plus Jakarta Sans'}
+.btn:active{transform:scale(.97)}
+.btn-brand{background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;box-shadow:0 12px 30px rgba(128,2,131,.4)}
+.btn-brand:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(128,2,131,.5)}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.4);backdrop-filter:blur(6px)}
+.btn-ghost:hover{background:rgba(255,255,255,.22)}
+.btn-sm{padding:10px 20px;font-size:13.5px}
+.nav-cta{margin-left:6px}
+.burger{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;margin-left:auto}
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;
+  background:radial-gradient(1100px 600px at 85% 15%,#b01ab5 0%,transparent 60%),
+             radial-gradient(900px 700px at 10% 90%,#5c0160 0%,transparent 55%),
+             linear-gradient(160deg,#3a0140 0%,#1c0120 70%);color:#fff}
+#heroVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;z-index:0}
+.hero-shade{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(160deg,rgba(28,1,32,.72) 0%,rgba(28,1,32,.42) 45%,rgba(28,1,32,.88) 100%)}
+#tooth3d{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.hero-fallback{z-index:1}
+.hero-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:flex-end;padding-right:8%}
+.hero-fallback .orb{width:min(42vw,420px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#e08be4,#800283 55%,#3a0140);filter:blur(2px);
+  box-shadow:0 0 120px rgba(200,60,210,.55);animation:float 7s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-26px)}}
+.hero-in{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:130px 22px 90px;width:100%}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);
+  padding:8px 16px;border-radius:999px;font-size:13px;font-weight:600;color:#f6d9f7;letter-spacing:.4px}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:#7CFC9A;box-shadow:0 0 10px #7CFC9A;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.hero h1{font-size:clamp(38px,6vw,72px);font-weight:800;line-height:1.06;margin:22px 0 18px;letter-spacing:-1px;max-width:640px}
+.hero h1 .grad{background:linear-gradient(100deg,#ffb3ff,#f06ff2 45%,#c026d3);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:clamp(15px,2vw,18.5px);line-height:1.65;color:#e9cdea;max-width:560px}
+.hero-ctas{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+.hero-proof{display:flex;gap:34px;margin-top:44px;flex-wrap:wrap}
+.proof b{display:block;font-family:'Sora';font-size:27px;font-weight:800}
+.proof span{font-size:13px;color:#d9aede}
+.stars{color:var(--gold);letter-spacing:2px;font-size:15px}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:#d9aede;font-size:12px;letter-spacing:2px;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.8}
+.scroll-hint i{width:22px;height:36px;border:2px solid #d9aede;border-radius:12px;position:relative;display:block}
+.scroll-hint i::after{content:'';position:absolute;top:7px;left:50%;width:4px;height:8px;margin-left:-2px;border-radius:4px;background:#fff;animation:wheel 1.6s infinite}
+@keyframes wheel{60%{transform:translateY(10px);opacity:0}100%{opacity:0}}
+/* ---------- SECTIONS ---------- */
+section{padding:96px 0;position:relative}
+.sec-head{max-width:680px;margin:0 auto 54px;text-align:center}
+.kicker{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--brand);
+  background:var(--brand-soft);padding:8px 18px;border-radius:999px;margin-bottom:16px}
+.sec-head h2{font-size:clamp(30px,4.4vw,46px);font-weight:800;letter-spacing:-.5px;line-height:1.15}
+.sec-head p{color:var(--muted);margin-top:14px;font-size:16px;line-height:1.65}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+/* ---------- SERVICES ---------- */
+#services{background:linear-gradient(180deg,#fff, #fdf2fe 60%, #fff)}
+.tabs{display:flex;gap:12px;justify-content:center;margin-bottom:40px;flex-wrap:wrap}
+.tab{border:2px solid #ecd3ee;background:#fff;color:var(--brand);font-weight:700;font-size:15px;padding:12px 30px;border-radius:999px;cursor:pointer;transition:.25s;font-family:'Plus Jakarta Sans'}
+.tab.on{background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;border-color:transparent;box-shadow:0 12px 26px rgba(128,2,131,.3)}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;perspective:1200px}
+.svc{background:var(--card);border-radius:var(--r);padding:28px 24px;box-shadow:0 10px 34px rgba(60,10,60,.08);
+  border:1px solid #f3e2f4;transition:transform .25s ease,box-shadow .25s ease;transform-style:preserve-3d;will-change:transform}
+.svc:hover{box-shadow:var(--shadow)}
+.svc .ic{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  background:linear-gradient(135deg,var(--brand2),var(--brand));transform:translateZ(30px)}
+.svc .ic svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.svc h3{font-size:17.5px;margin-bottom:8px;transform:translateZ(18px)}
+.svc p{font-size:14px;color:var(--muted);line-height:1.6;transform:translateZ(12px)}
+.svc .tag{display:inline-block;margin-top:14px;font-size:11.5px;font-weight:700;color:var(--brand);background:var(--brand-soft);
+  padding:5px 12px;border-radius:999px;transform:translateZ(18px)}
+/* ---------- SMILE / BEFORE-AFTER ---------- */
+#smilelab{background:linear-gradient(160deg,#2a0130,#4a0148);color:#fff;overflow:hidden}
+#smilelab .sec-head h2{color:#fff}
+#smilelab .kicker{background:rgba(255,255,255,.12);color:#f6c9f7}
+#smilelab .sec-head p{color:#d9aede}
+.ba{position:relative;max-width:760px;margin:0 auto;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45);
+  aspect-ratio:16/9;user-select:none;touch-action:none;cursor:ew-resize}
+.ba-side{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+.ba-before{background:linear-gradient(135deg,#3d3d4a,#6b6b78)}
+.ba-after{background:linear-gradient(135deg,#a90fae,#e066e8);clip-path:inset(0 0 0 50%)}
+.ba-tooth{width:120px;height:120px;filter:drop-shadow(0 10px 24px rgba(0,0,0,.35))}
+.ba-label{position:absolute;top:18px;font-size:12px;font-weight:800;letter-spacing:2px;padding:8px 16px;border-radius:999px;z-index:3}
+.ba-label.b{left:18px;background:rgba(0,0,0,.5);color:#fff}
+.ba-label.a{right:18px;background:#fff;color:var(--brand)}
+.ba-handle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;z-index:2;box-shadow:0 0 16px rgba(255,255,255,.8)}
+.ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--brand);box-shadow:0 8px 24px rgba(0,0,0,.4);font-size:18px}
+.ba-cap{text-align:center;color:#d9aede;margin-top:18px;font-size:14px}
+/* ---------- DOCTOR ---------- */
+.doc-card{display:grid;grid-template-columns:300px 1fr;gap:0;max-width:920px;margin:0 auto;background:#fff;border-radius:28px;
+  overflow:hidden;box-shadow:var(--shadow);border:1px solid #f3e2f4}
+.doc-photo{background:linear-gradient(150deg,var(--brand2),var(--deep));display:flex;align-items:center;justify-content:center;
+  padding:48px 30px;color:#fff;position:relative;overflow:hidden}
+.doc-photo::before{content:'';position:absolute;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.08);top:-80px;right:-80px}
+.doc-avatar{width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.14);border:3px solid rgba(255,255,255,.5);
+  display:flex;align-items:center;justify-content:center;font-family:'Sora';font-size:56px;font-weight:800;position:relative;z-index:1}
+.doc-body{padding:44px 44px}
+.doc-body .role{color:var(--brand);font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+.doc-body h3{font-size:30px;margin:8px 0 14px}
+.doc-body p{color:var(--muted);line-height:1.7;font-size:15.5px}
+.doc-points{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.doc-points span{background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:13px;padding:9px 16px;border-radius:999px}
+/* ---------- REVIEWS ---------- */
+#reviews{background:#fdf2fe}
+.rev-track{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.rev{background:#fff;border-radius:var(--r);padding:30px 28px;box-shadow:0 10px 34px rgba(60,10,60,.08);border:1px solid #f3e2f4;display:flex;flex-direction:column;gap:14px}
+.rev .stars{font-size:14px}
+.rev p{font-size:15px;line-height:1.7;color:#4a3550;flex:1}
+.rev .who{display:flex;align-items:center;gap:12px}
+.rev .ava{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;font-family:'Sora'}
+.rev .who b{display:block;font-size:14.5px}
+.rev .who small{color:var(--muted);font-size:12.5px}
+.g-badge{display:inline-flex;align-items:center;gap:8px;justify-content:center;margin-top:36px;color:var(--muted);font-size:14px;font-weight:600}
+/* ---------- VISIT ---------- */
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:960px;margin:0 auto}
+.visit-card{background:#fff;border-radius:28px;padding:40px 36px;box-shadow:var(--shadow);border:1px solid #f3e2f4}
+.visit-card h3{font-size:22px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.visit-card h3 .ic{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--brand2),var(--brand));
+  display:inline-flex;align-items:center;justify-content:center}
+.visit-card h3 .ic svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round}
+.hours{display:flex;flex-direction:column;gap:2px}
+.hrow{display:flex;justify-content:space-between;padding:11px 4px;border-bottom:1px dashed #ecd3ee;font-size:14.5px}
+.hrow:last-child{border:none}
+.hrow.today{background:var(--brand-soft);border-radius:10px;padding:11px 12px;font-weight:700;color:var(--brand)}
+.hrow .closed{color:#b0485c;font-weight:600}
+.addr{font-size:15.5px;line-height:1.7;color:#4a3550}
+.addr b{color:var(--ink)}
+.visit-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+/* ---------- FOOTER ---------- */
+footer{background:var(--deeper);color:#d9aede;padding:56px 0 30px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;max-width:1180px;margin:0 auto 40px;padding:0 22px}
+.foot-grid h4{color:#fff;font-size:15px;margin-bottom:16px;font-family:'Sora'}
+.foot-grid a,.foot-grid p{display:block;font-size:14px;margin-bottom:10px;color:#c79ac9}
+.foot-grid a:hover{color:#fff}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;text-align:center;font-size:13px;color:#a97fae;
+  max-width:1180px;margin:0 auto;padding-left:22px;padding-right:22px}
+.foot-bottom b{color:#e7b9e9}
+/* ---------- CHATBOT ---------- */
+#chatFab{position:fixed;right:24px;bottom:24px;z-index:60;width:66px;height:66px;border-radius:50%;border:none;cursor:pointer;
+  background:linear-gradient(135deg,var(--brand2),var(--brand));box-shadow:0 14px 36px rgba(128,2,131,.5);
+  display:flex;align-items:center;justify-content:center;transition:transform .2s}
+#chatFab:hover{transform:scale(1.08)}
+#chatFab svg{width:32px;height:32px;fill:#fff}
+#chatFab .ping{position:absolute;top:-2px;right:-2px;width:18px;height:18px;border-radius:50%;background:#ff4d6d;border:3px solid #fff}
+#chatPanel{position:fixed;right:24px;bottom:102px;z-index:60;width:min(392px,calc(100vw - 32px));height:min(600px,calc(100svh - 140px));
+  background:#fff;border-radius:26px;box-shadow:0 30px 80px rgba(40,2,45,.4);display:none;flex-direction:column;overflow:hidden;
+  border:1px solid #ecd3ee;transform-origin:bottom right}
+#chatPanel.open{display:flex;animation:chatpop .28s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes chatpop{from{transform:scale(.7);opacity:0}}
+.chead{background:linear-gradient(135deg,var(--brand2),var(--deep));color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px}
+.chead .av{width:46px;height:46px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chead .av svg{width:26px;height:26px;fill:var(--brand)}
+.chead .nm{font-family:'Sora';font-weight:700;font-size:16px}
+.chead .st{font-size:12px;color:#f3c6f5;display:flex;align-items:center;gap:6px}
+.chead .st i{width:8px;height:8px;border-radius:50%;background:#7CFC9A;display:inline-block}
+.chead .x{margin-left:auto;background:rgba(255,255,255,.15);border:none;color:#fff;width:34px;height:34px;border-radius:50%;
+  font-size:18px;cursor:pointer;line-height:1}
+.cbody{flex:1;overflow-y:auto;padding:18px 14px;display:flex;flex-direction:column;gap:10px;background:
+  radial-gradient(rgba(128,2,131,.05) 1px,transparent 1px);background-size:20px 20px;background-color:#fbf5fc}
+.msg{max-width:84%;padding:11px 15px;border-radius:16px;font-size:14px;line-height:1.55;animation:msgin .25s ease;word-wrap:break-word}
+@keyframes msgin{from{transform:translateY(8px);opacity:0}}
+.msg.bot{background:#fff;align-self:flex-start;border:1px solid #ecd3ee;border-top-left-radius:5px;box-shadow:0 4px 14px rgba(60,10,60,.06);color:#3a1f3e}
+.msg.user{background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;align-self:flex-end;border-top-right-radius:5px}
+.msg .tm{display:block;font-size:10px;opacity:.55;text-align:right;margin-top:4px}
+.msg.bot b{color:var(--brand)}
+.typing{align-self:flex-start;background:#fff;border:1px solid #ecd3ee;padding:14px 18px;border-radius:16px;display:flex;gap:6px}
+.typing span{width:8px;height:8px;background:var(--brand2);border-radius:50%;animation:tbl 1s infinite}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+@keyframes tbl{50%{opacity:.25;transform:translateY(-3px)}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px;background:#fbf5fc;border-top:1px solid #f0ddf1}
+.chip{background:#fff;border:1.5px solid var(--brand2);color:var(--brand);font-size:13px;font-weight:600;padding:8px 15px;
+  border-radius:999px;cursor:pointer;transition:.2s;font-family:'Plus Jakarta Sans'}
+.chip:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+.cinput{display:flex;gap:10px;padding:12px 14px;background:#fff;border-top:1px solid #f0ddf1}
+.cinput input{flex:1;border:1.5px solid #e6cbe8;border-radius:999px;padding:12px 18px;font-size:14px;outline:none;font-family:'Plus Jakarta Sans'}
+.cinput input:focus{border-color:var(--brand2)}
+.cinput button{background:linear-gradient(135deg,var(--brand2),var(--brand));border:none;color:#fff;font-weight:700;
+  padding:12px 22px;border-radius:999px;cursor:pointer;font-size:14px;font-family:'Plus Jakarta Sans'}
+.sumcard{background:var(--brand-soft);border:1.5px dashed var(--brand2);border-radius:14px;padding:14px;margin:4px 0;font-size:13.5px;line-height:1.7}
+.sumcard b{color:var(--brand)}
+.wa-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:700;font-size:14px;
+  padding:12px 20px;border-radius:999px;margin-top:8px;box-shadow:0 8px 22px rgba(37,211,102,.4)}
+.wa-btn svg{width:20px;height:20px;fill:#fff}
+/* ---------- SCROLL JOURNEY ---------- */
+#treat-head{padding-bottom:10px}
+#journey{position:relative;background:#1c0120}
+#journeyPin{height:100vh;height:100svh;position:relative;overflow:hidden;
+  background:radial-gradient(900px 600px at 70% 20%,#6d0a70 0%,#2a0130 60%,#1c0120 100%)}
+#jCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.j-labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.j-cap{position:absolute;left:5%;top:50%;transform:translateY(-50%);max-width:370px;color:#fff;z-index:5;
+  background:rgba(28,1,32,.55);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-radius:22px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.j-kicker{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#f0a6f2}
+.j-cap h3{font-size:30px;margin:10px 0 12px;letter-spacing:-.5px}
+.j-cap p{font-size:15px;line-height:1.65;color:#e9cdea;min-height:76px}
+.j-cap .btn{margin-top:18px}
+.j-dots{position:absolute;right:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;z-index:5}
+.j-dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.5);background:transparent;cursor:pointer;padding:0;transition:.25s}
+.j-dot.on{background:#fff;border-color:#fff;box-shadow:0 0 12px rgba(255,255,255,.8)}
+.j-scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:#d9aede;font-size:12px;letter-spacing:2px;
+  z-index:5;transition:opacity .5s;white-space:nowrap;animation:cuefloat 2s ease-in-out infinite}
+@keyframes cuefloat{50%{transform:translate(-50%,6px)}}
+.j-chapters{position:relative}
+.j-ch{height:210vh}
+.sub-h{font-size:24px;margin:0 0 26px;text-align:center;letter-spacing:-.3px}
+#more-treat{padding-top:90px}
+@media(max-width:900px){
+  .j-cap{left:14px;right:14px;top:auto;bottom:16px;transform:none;max-width:none;padding:20px}
+  .j-cap h3{font-size:22px;margin:8px 0}
+  .j-cap p{min-height:0;font-size:14px}
+  .j-dots{display:none}
+  .j-ch{height:170vh}
+}
+/* ---------- PRIVATE GATE ---------- */
+#gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:22px;
+  background:radial-gradient(800px 500px at 50% 20%,#6d0a70 0%,#1c0120 70%)}
+.gate-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-radius:26px;padding:44px 40px;max-width:380px;width:100%;text-align:center;color:#fff;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.gate-card svg{width:54px;height:54px;fill:#fff;margin-bottom:16px}
+.gate-card h2{font-size:24px;margin-bottom:10px}
+.gate-card p{font-size:14px;color:#d9aede;line-height:1.6;margin-bottom:20px}
+.gate-card input{width:100%;padding:13px 18px;border-radius:999px;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);
+  color:#fff;font-size:15px;text-align:center;outline:none;margin-bottom:14px;font-family:'Plus Jakarta Sans'}
+.gate-card input::placeholder{color:#b98bc0}
+.gate-card button{width:100%;padding:13px;border-radius:999px;border:none;cursor:pointer;font-weight:700;font-size:15px;color:#fff;
+  background:linear-gradient(135deg,#a90fae,#800283);font-family:'Plus Jakarta Sans'}
+.gate-err{min-height:20px;color:#ff9d9d;font-size:13px;margin-top:10px;margin-bottom:0!important}
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){
+  .xp-stage{aspect-ratio:auto;height:380px;min-height:0}
+  .xp-panel{flex-direction:column;gap:14px;padding:28px 22px;text-align:center;justify-content:center}
+  .xp-panel .big{font-size:64px}
+  .nav-links,.nav-cta{display:none}
+  .burger{display:block}
+  .nav-links.mopen{display:flex;position:absolute;top:100%;left:0;right:0;background:rgba(28,1,32,.97);flex-direction:column;
+    padding:18px 26px 26px;gap:18px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .visit-grid,.doc-card{grid-template-columns:1fr}
+  .doc-body{padding:32px 26px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  section{padding:70px 0}
+}
+@media(max-width:560px){
+  .foot-grid{grid-template-columns:1fr}
+  .hero-ctas .btn{width:100%;justify-content:center}
+  .scroll-hint{display:none}
+  #chatPanel{right:12px;bottom:96px}
+  #chatFab{right:16px;bottom:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<div id="gate">
+  <div class="gate-card">
+    <svg viewBox="0 0 64 64"><path d="M32 6C20 6 12 14 12 26c0 9 4 16 8 24 2.6 5.4 4 10 4 10s2-6 8-6 8 6 8 6 1.4-4.6 4-10c4-8 8-15 8-24C52 14 44 6 32 6Z"/></svg>
+    <h2>Private Preview</h2>
+    <p>This demo is private. Enter the passcode to view it.</p>
+    <input type="password" id="gateInput" placeholder="Passcode" autocomplete="off">
+    <button onclick="checkGate()">Unlock Demo</button>
+    <p class="gate-err" id="gateErr"></p>
+  </div>
+</div>
+<script>
+function checkGate(){var v=document.getElementById('gateInput').value;
+  if(v==='smile2026'){try{sessionStorage.setItem('fd3d_ok','1');}catch(e){}
+    document.getElementById('gate').style.display='none';}
+  else{document.getElementById('gateErr').textContent='Wrong passcode — try again.';}}
+(function(){try{if(sessionStorage.getItem('fd3d_ok')==='1'){document.getElementById('gate').style.display='none';}}catch(e){}
+  document.getElementById('gateInput').addEventListener('keydown',function(e){if(e.key==='Enter')checkGate();});})();
+</script>
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="#top" aria-label="Family Dental home">
+      <svg viewBox="0 0 64 64"><path d="M32 6C20 6 12 14 12 26c0 9 4 16 8 24 2.6 5.4 4 10 4 10s2-6 8-6 8 6 8 6 1.4-4.6 4-10c4-8 8-15 8-24C52 14 44 6 32 6Z" fill="#fff"/><path d="M24 22c3-4 9-6 14-4M22 32c4-2 8-2 11 1" stroke="#800283" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+      <span>Family Dental<small>&amp; AESTHETIC CLINIC</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#services">Treatments</a><a href="#smilelab">Smile Lab</a><a href="#doctor">Doctor</a><a href="#reviews">Reviews</a><a href="#visit">Visit Us</a>
+    </div>
+    <button class="btn btn-brand btn-sm nav-cta" onclick="openChat('book')">Book Appointment</button>
+    <button class="burger" onclick="document.getElementById('navLinks').classList.toggle('mopen')" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <video id="heroVideo" autoplay muted loop playsinline preload="auto"><source id="heroVideoSrc" type="video/mp4"></video>
+  <script>
+(function(){
+  var v=document.getElementById('heroVideo'), s=document.getElementById('heroVideoSrc');
+  fetch('assets/video.txt').then(function(r){return r.text();}).then(function(b){
+    s.src='data:video/mp4;base64,'+b.trim(); v.load();
+    var pr=v.play(); if(pr&&pr.catch)pr.catch(function(){});
+  }).catch(function(){});
+  fetch('assets/journey.txt').then(function(r){return r.text();}).then(function(b){
+    document.getElementById('journeyPin').style.background=
+      'linear-gradient(rgba(22,1,26,.60),rgba(22,1,26,.80)),url("data:image/webp;base64,'+b.trim()+'") center/cover no-repeat,#1c0120';
+  }).catch(function(){});
+})();
+</script>
+  <div class="hero-shade"></div>
+  <canvas id="tooth3d" aria-hidden="true"></canvas>
+  <div class="hero-fallback" id="heroFallback"><div class="orb"></div></div>
+  <div class="hero-in">
+    <span class="eyebrow"><span class="dot"></span> Accepting new patients &mdash; Peshawar</span>
+    <h1>Painless dentistry.<br><span class="grad">Radiant aesthetics.</span><br>One clinic.</h1>
+    <p class="lead">Family Dental &amp; Aesthetic Clinic on Nasir Bagh Road — 5.0-star rated care for your teeth, skin and smile. Chat with <b style="color:#fff">Denti</b>, our AI assistant, and book your visit in under a minute.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-brand" onclick="openChat('book')">Book Appointment</button>
+      <a class="btn btn-ghost" href="https://wa.me/923339202134?text=Assalam-o-Alaikum!%20I%20want%20to%20book%20an%20appointment%20at%20Family%20Dental%20%26%20Aesthetic%20Clinic." target="_blank" rel="noopener">WhatsApp the Clinic</a>
+    </div>
+    <div class="hero-proof">
+      <div class="proof"><b>5.0 <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></b><span>93 Google reviews</span></div>
+      <div class="proof"><b>18+</b><span>Dental &amp; aesthetic treatments</span></div>
+      <div class="proof"><b>Mon&ndash;Sat</b><span>4:00 &ndash; 8:00 PM</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><i></i>SCROLL</div>
+</header>
+
+<section id="treat-head">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Treatments</span>
+      <h2>Scroll through dentistry</h2>
+      <p>Keep scrolling — every treatment explodes into 3D view, step by step. When you love what you see, book it in one tap.</p>
+    </div>
+  </div>
+</section>
+<div id="journey">
+  <div id="journeyPin">
+    <canvas id="jCanvas"></canvas>
+    <div class="j-labels" id="jLabels"></div>
+    <div class="j-cap">
+      <span class="j-kicker" id="jKicker">Treatment 1 of 5</span>
+      <h3 id="jTitle">Dental Implant</h3>
+      <p id="jText"></p>
+      <button class="btn btn-brand btn-sm" id="jBook">Book Dental Implant</button>
+    </div>
+    <div class="j-dots" id="jDots"></div>
+    <div class="j-scrollcue" id="jCue">SCROLL TO EXPLORE</div>
+  </div>
+  <div class="j-chapters" id="jChapters">
+    <div class="j-ch"></div><div class="j-ch"></div><div class="j-ch"></div><div class="j-ch"></div><div class="j-ch"></div>
+  </div>
+</div>
+<section id="more-treat">
+  <div class="wrap">
+    <h3 class="sub-h reveal">More dental treatments</h3>
+    <div class="svc-grid" id="grid-dental2"></div>
+    <h3 class="sub-h reveal">Aesthetics &amp; Skin</h3>
+    <div class="svc-grid" id="grid-aesthetic"></div>
+  </div>
+</section>
+
+<section id="smilelab">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Smile Lab</span>
+      <h2>Drag to see the difference</h2>
+      <p>Whitening, veneers and smile design — this is the kind of transformation our patients walk out with.</p>
+    </div>
+    <div class="ba reveal" id="baSlider" role="slider" aria-label="Before after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+      <div class="ba-side ba-before">
+        <svg class="ba-tooth" viewBox="0 0 64 64"><path d="M32 6C20 6 12 14 12 26c0 9 4 16 8 24 2.6 5.4 4 10 4 10s2-6 8-6 8 6 8 6 1.4-4.6 4-10c4-8 8-15 8-24C52 14 44 6 32 6Z" fill="#8f8f98"/></svg>
+        <span class="ba-label b">BEFORE</span>
+      </div>
+      <div class="ba-side ba-after" id="baAfter">
+        <svg class="ba-tooth" viewBox="0 0 64 64"><path d="M32 6C20 6 12 14 12 26c0 9 4 16 8 24 2.6 5.4 4 10 4 10s2-6 8-6 8 6 8 6 1.4-4.6 4-10c4-8 8-15 8-24C52 14 44 6 32 6Z" fill="#ffffff"/><path d="M20 20l6 22M32 18l2 24M44 20l-6 22" stroke="#ffe9a8" stroke-width="2" stroke-linecap="round" opacity=".8"/></svg>
+        <span class="ba-label a">AFTER</span>
+      </div>
+      <div class="ba-handle" id="baHandle"><div class="ba-knob">&#10094;&#10095;</div></div>
+    </div>
+    <p class="ba-cap">Illustrative concept &mdash; real patient results shared in-clinic.</p>
+  </div>
+</section>
+
+<section id="doctor">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Your Doctor</span>
+      <h2>Care you can trust</h2>
+    </div>
+    <div class="doc-card reveal">
+      <div class="doc-photo"><div class="doc-avatar">TA</div></div>
+      <div class="doc-body">
+        <span class="role">Lead Dentist &amp; Aesthetician</span>
+        <h3>Dr. Tabassum Ajmal</h3>
+        <p>Known for a gentle, pain-free approach and explaining every step before it happens. Patients describe single-visit painless root canals, spotless clinical standards, and results that feel natural — teeth and skin alike.</p>
+        <div class="doc-points"><span>Painless RCT</span><span>Cosmetic Dentistry</span><span>Botox &amp; Fillers</span><span>Family Dentistry</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Reviews</span>
+      <h2>5.0 stars, 93 reviews — patients say it best</h2>
+    </div>
+    <div class="rev-track">
+      <div class="rev reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>&ldquo;Hands-down the best dental experience I&rsquo;ve ever had. The doctor was incredibly professional, gentle, and took the time to explain every step. My teeth feel amazing now.&rdquo;</p>
+        <div class="who"><div class="ava">A</div><div><b>Alishba Ansari</b><small>Google review</small></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>&ldquo;Single-visit root canal that was completely painless and precise. The staff made me feel relaxed from start to finish. My tooth is now pain-free and fully functional.&rdquo;</p>
+        <div class="who"><div class="ava">H</div><div><b>Habib Ul Haq</b><small>Google review</small></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>&ldquo;Spotless clinic, warm welcome, zero discomfort afterwards. I&rsquo;ll be back for all my future checkups — highly recommend to anyone in Peshawar.&rdquo;</p>
+        <div class="who"><div class="ava">S</div><div><b>Sana K.</b><small>Google review</small></div></div>
+      </div>
+    </div>
+    <div class="g-badge reveal">&#9733; Rated <b>&nbsp;5.0 / 5&nbsp;</b> across 93 Google reviews</div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">Visit Us</span>
+      <h2>Find us on Nasir Bagh Road</h2>
+    </div>
+    <div class="visit-grid">
+      <div class="visit-card reveal">
+        <h3><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>Clinic Hours</h3>
+        <div class="hours" id="hoursList"></div>
+      </div>
+      <div class="visit-card reveal">
+        <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>Location &amp; Contact</h3>
+        <p class="addr"><b>Family Dental &amp; Aesthetic Clinic</b><br>1st Floor, Al-Sayed Tower,<br>Nasir Bagh Road, near Amal Labs,<br>Peshawar, Pakistan<br><br><b>Phone / WhatsApp:</b> 0333 9202134</p>
+        <div class="visit-actions">
+          <a class="btn btn-brand btn-sm" href="https://www.google.com/maps/search/?api=1&amp;query=Family+Dental+%26+Aesthetic+Clinic+Nasir+Bagh+Road+Peshawar" target="_blank" rel="noopener">Get Directions</a>
+          <a class="btn btn-ghost btn-sm" style="color:var(--brand);border-color:var(--brand2)" href="tel:+923339202134">Call Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <h4>Family Dental &amp; Aesthetic Clinic</h4>
+      <p>Painless dentistry and natural-looking aesthetics on Nasir Bagh Road, Peshawar.</p>
+      <p>Mon&ndash;Sat: 4:00 &ndash; 8:00 PM<br>Sunday: Closed</p>
+    </div>
+    <div>
+      <h4>Treatments</h4>
+      <a href="#services">Root Canal (RCT)</a><a href="#services">Braces &amp; Aligners</a><a href="#services">Teeth Whitening</a><a href="#services">Botox &amp; Fillers</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>1st Floor, Al-Sayed Tower,<br>Nasir Bagh Road, Peshawar</p>
+      <a href="tel:+923339202134">0333 9202134</a>
+      <a href="https://wa.me/923339202134" target="_blank" rel="noopener">WhatsApp us</a>
+    </div>
+  </div>
+  <div class="foot-bottom">Concept demo crafted by <b>AI Soft Tech Solution</b> &mdash; modern websites, AI chatbots &amp; business automation.</div>
+</footer>
+
+<!-- ============ CHATBOT : DENTI ============ -->
+<button id="chatFab" onclick="toggleChat()" aria-label="Chat with Denti">
+  <span class="ping" id="chatPing"></span>
+  <svg viewBox="0 0 64 64"><path d="M32 6C20 6 12 14 12 26c0 9 4 16 8 24 2.6 5.4 4 10 4 10s2-6 8-6 8 6 8 6 1.4-4.6 4-10c4-8 8-15 8-24C52 14 44 6 32 6Z"/><circle cx="25" cy="28" r="2.6" fill="#800283"/><circle cx="39" cy="28" r="2.6" fill="#800283"/><path d="M25 37c3 3 11 3 14 0" stroke="#800283" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+</button>
+<div id="chatPanel" role="dialog" aria-label="Chat with Denti">
+  <div class="chead">
+    <div class="av"><svg viewBox="0 0 64 64"><path d="M32 6C20 6 12 14 12 26c0 9 4 16 8 24 2.6 5.4 4 10 4 10s2-6 8-6 8 6 8 6 1.4-4.6 4-10c4-8 8-15 8-24C52 14 44 6 32 6Z"/></svg></div>
+    <div><div class="nm">Denti</div><div class="st"><i></i>Family Dental&rsquo;s AI assistant &mdash; online</div></div>
+    <button class="x" onclick="toggleChat()" aria-label="Close chat">&times;</button>
+  </div>
+  <div class="cbody" id="chatBody"></div>
+  <div class="chips" id="chatChips"></div>
+  <div class="cinput">
+    <input id="chatInput" type="text" placeholder="Type your message..." autocomplete="off" onkeydown="if(event.key==='Enter')sendUser()">
+    <button onclick="sendUser()">Send</button>
+  </div>
+</div>
+<script>
+/* ================= DATA ================= */
+var WA_NUM = '923339202134';
+var ICONS = {
+  tooth:'<svg viewBox="0 0 24 24"><path d="M12 3C8 3 5 6 5 10c0 3 1.4 5.4 2.8 8 .9 1.8 1.4 3.4 1.4 3.4s.8-2.2 2.8-2.2 2.8 2.2 2.8 2.2.5-1.6 1.4-3.4C17.6 15.4 19 13 19 10c0-4-3-7-7-7Z"/></svg>',
+  spark:'<svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4L12 3Z"/><path d="M18.5 15.5l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9.9-2.6Z"/></svg>',
+  shield:'<svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>',
+  smile:'<svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 0 16 0"/><path d="M8 14c1 1.5 2.5 2.5 4 2.5s3-1 4-2.5"/></svg>',
+  drop:'<svg viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></svg>',
+  sun:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg>',
+  star:'<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.8 6.3.8-4.6 4.3 1.2 6.1-5.6-3-5.6 3 1.2-6.1L3 9.6l6.3-.8L12 3Z"/></svg>',
+  grid:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>'
+};
+/* ================= TREATMENT EXPLORER ================= */
+var AESTHETIC = [
+  ['spark','Botox','Soften lines and refresh your look — subtle, natural results.','3–4 mo results'],
+  ['drop','Dermal Fillers','Restore volume and contour lips, cheeks and jawline.','Instant'],
+  ['sun','Chemical Peels','Improve texture, tone and glow; fade spots and dullness.','Glow'],
+  ['star','PRP Facial','Your own growth factors for natural skin rejuvenation.','Natural'],
+  ['grid','Microneedling','Boost collagen for smoother, firmer skin.','Collagen+'],
+  ['drop','Skin Boosters','Deep hydration and elasticity from within.','Hydration'],
+  ['smile','Facial Rejuvenation','Complete non-surgical refresh plans, tailored to you.','Tailored'],
+  ['shield','Non-surgical Contouring','Define and lift — no surgery, no downtime.','No downtime']
+];
+var HOURS = [['Monday','4:00 – 8:00 PM'],['Tuesday','4:00 – 8:00 PM'],['Wednesday','4:00 – 8:00 PM'],['Thursday','4:00 – 8:00 PM'],['Friday','4:00 – 8:00 PM'],['Saturday','4:00 – 8:00 PM'],['Sunday','Closed']];
+function svcCard(icon, title, desc, tag){
+  return '<div class="svc"><div class="ic">'+ICONS[icon]+'</div><h3>'+title+'</h3><p>'+desc+'</p><span class="tag">'+tag+'</span></div>';
+}
+function renderGrid(id, arr){ document.getElementById(id).innerHTML = arr.map(function(s){ return svcCard(s[0],s[1],s[2],s[3]); }).join(''); }
+var DENTAL2 = [
+  ['sun','Dental Bleaching','Professional whitening that lifts years of stains — brighter smile in a single sitting.','1 sitting'],
+  ['grid','Dental Filling','Tooth-colored fillings repair cavities and blend invisibly with your smile.','Painless'],
+  ['tooth','Tooth Extraction','Gentle, safe removal of teeth beyond repair, with a clear healing plan.','Gentle'],
+  ['smile','Complete Denture','Full-arch removable replacement — eat, speak and smile with confidence.','Full smile'],
+  ['smile','Partial Denture','Cost-effective removable solution for several missing teeth.','Removable']
+];
+
+/* ================= SCROLL JOURNEY ================= */
+var J = [
+  {name:'Dental Implant',desc:'A permanent, natural-feeling replacement for a missing tooth.',cam:{z:11,y:1.5},
+   steps:['A titanium post is placed into the jawbone — it becomes the new root','An abutment connector is fixed on top of the post','A natural-looking crown is secured — bite, smile, done'],build:jBuildImplant},
+  {name:'Dental Crown',desc:'A tooth-shaped cap restoring strength, shape and appearance.',cam:{z:10.5,y:1.5},
+   steps:['The damaged tooth is gently shaped and prepared','A porcelain crown is custom-crafted to match your smile','The crown caps the tooth — strength and looks restored'],build:jBuildCrown},
+  {name:'Dental Veneers',desc:'Whisper-thin porcelain shells for a flawless smile.',cam:{z:8.5,y:1.0},
+   steps:['A whisper-thin porcelain shell is crafted for your tooth','It bonds to the front surface with precision','Chips, stains, gaps — gone. Natural shine stays'],build:jBuildVeneers},
+  {name:'Braces',desc:'Brackets and a gentle archwire guiding teeth into alignment.',cam:{z:7.5,y:1.1},
+   steps:['Small brackets are bonded to each tooth','A flexible archwire threads through the brackets','Gentle, constant pressure moves teeth into alignment'],build:jBuildBraces},
+  {name:'Root Canal (RCT)',desc:'Our most-loved treatment — saves your natural tooth.',cam:{z:10,y:1.4},
+   steps:['The infected pulp inside the tooth is located','It is cleaned and disinfected with fine instruments','The canals are sealed — your natural tooth is saved'],build:jBuildRCT}
+];
+var jRenderer=null,jScene=null,jCamera=null,jGroup=null,jParts=[],jMats=null;
+var jProgress=0,jIdx=-1,jF=0,jTrans=1,jST=null;
+var camTz=11,camTy=1.5;
+
+function xpToothGeo(){
+  var prof=[[0,-1.7],[.34,-1.62],[.55,-1.25],[.7,-.75],[.84,-.25],[.94,.3],[.9,.75],[.72,1.05],[.42,1.2],[0,1.24]]
+    .map(function(p){return new THREE.Vector2(p[0],p[1]);});
+  return new THREE.LatheGeometry(prof,36);
+}
+function jPart(mesh,ax,ay,az,ox,oy,oz,label,ldy){
+  mesh.position.set(ax,ay,az); mesh.castShadow=true; jGroup.add(mesh);
+  var p={mesh:mesh,a:[ax,ay,az],o:[ox,oy,oz],label:label,ldy:ldy||0.8,el:null};
+  if(label){var d=document.createElement('div');d.className='xlabel';d.textContent=label;d.style.opacity='0';
+    document.getElementById('jLabels').appendChild(d);p.el=d;}
+  jParts.push(p); return p;
+}
+function jBuildImplant(){
+  jPart(new THREE.Mesh(new THREE.BoxGeometry(3.6,1.1,2.4),jMats.bone),0,-0.4,0, 0,-1.0,0,'Jawbone',0.9);
+  jPart(new THREE.Mesh(new THREE.CylinderGeometry(0.24,0.3,1.7,20),jMats.titanium),0,0.6,0, 0,0,0,'Titanium post',1.2);
+  jPart(new THREE.Mesh(new THREE.CylinderGeometry(0.2,0.26,0.7,20),jMats.metal),0,1.5,0, 0,0.7,0,'Abutment',0.7);
+  var c=new THREE.Mesh(xpToothGeo(),jMats.ceramic); c.scale.set(0.62,0.62,0.5);
+  jPart(c,0,2.3,0, 0,1.1,0,'Crown',0.6);
+}
+function jBuildCrown(){
+  jPart(new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.62,0.95,24),jMats.dentin),0,0.5,0, 0,-0.9,0,'Prepared tooth',0.8);
+  var cap=new THREE.Mesh(xpToothGeo(),jMats.ceramic); cap.scale.set(0.66,0.66,0.54);
+  jPart(cap,0,1.55,0, 0,1.9,0,'Porcelain crown',1.0);
+}
+function jBuildVeneers(){
+  var t=new THREE.Mesh(xpToothGeo(),jMats.stained);
+  jPart(t,0,0.9,0, 0,0,-0.6,'Your tooth',1.3);
+  var s=new THREE.Mesh(xpToothGeo(),jMats.ceramic); s.scale.set(0.68,0.68,0.28);
+  jPart(s,0,0.9,0.3, 0,0,2.3,'Porcelain veneer',0.9);
+}
+function jBuildBraces(){
+  var xs=[-0.95,-0.32,0.32,0.95];
+  for(var i=0;i<4;i++){
+    jPart(new THREE.Mesh(new THREE.BoxGeometry(0.56,0.72,0.5),jMats.tooth),xs[i],1.1,0, 0,0,0, i===1?'Teeth':null,0.7);
+    jPart(new THREE.Mesh(new THREE.BoxGeometry(0.2,0.2,0.14),jMats.metal),xs[i],1.1,0.3, 0,0,1.1, i===2?'Brackets':null,0.5);
+  }
+  var w=new THREE.Mesh(new THREE.CylinderGeometry(0.035,0.035,2.7,12),jMats.metal);
+  w.rotation.z=Math.PI/2;
+  jPart(w,0,1.1,0.42, 0,0,1.9,'Archwire',0.5);
+}
+function jBuildRCT(){
+  var tooth=new THREE.Mesh(xpToothGeo(),jMats.glass); tooth.scale.set(0.85,0.85,0.7);
+  jPart(tooth,0,0.9,0, 0,-0.5,0,'Tooth preserved',1.4);
+  var pulp=new THREE.Mesh(xpToothGeo(),jMats.pulp); pulp.scale.set(0.4,0.42,0.32);
+  jPart(pulp,0,0.95,0, 0,1.7,0,'Infected pulp removed',0.7);
+  jPart(new THREE.Mesh(new THREE.CylinderGeometry(0.045,0.015,1.9,10),jMats.metal),0,3.1,0, 0,0.4,0,'Cleaning file',0.9);
+}
+function jClear(){
+  if(jGroup){while(jGroup.children.length){var c=jGroup.children[0];jGroup.remove(c);if(c.geometry)c.geometry.dispose();}}
+  jParts=[]; document.getElementById('jLabels').innerHTML='';
+}
+function jLoad(i){
+  jClear(); J[i].build(); jTrans=0; jF=0;
+  camTz=J[i].cam.z; camTy=J[i].cam.y;
+  document.getElementById('jKicker').textContent='Treatment '+(i+1)+' of '+J.length;
+  document.getElementById('jTitle').textContent=J[i].name;
+  var bb=document.getElementById('jBook');
+  bb.textContent='Book '+J[i].name;
+  bb.onclick=function(){bookTreatment(J[i].name);};
+  var dots=document.querySelectorAll('.j-dot');
+  for(var d=0;d<dots.length;d++) dots[d].classList.toggle('on',d===i);
+}
+function bookTreatment(name){
+  var p=document.getElementById('chatPanel');
+  var wasOpen=p.classList.contains('open');
+  if(!wasOpen) toggleChat();
+  document.getElementById('chatPing').style.display='none';
+  setTimeout(function(){startBooking(name);},wasOpen?400:2400);
+}
+function jInit(){
+  var ok=false;
+  try{
+    if(typeof THREE==='undefined'||typeof gsap==='undefined'||typeof ScrollTrigger==='undefined') throw 0;
+    gsap.registerPlugin(ScrollTrigger);
+    var canvas=document.getElementById('jCanvas');
+    jRenderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+    jRenderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    jRenderer.toneMapping=THREE.ACESFilmicToneMapping;
+    jRenderer.toneMappingExposure=1.15;
+    jRenderer.shadowMap.enabled=true;
+    jRenderer.shadowMap.type=THREE.PCFSoftShadowMap;
+    jScene=new THREE.Scene();
+    jCamera=new THREE.PerspectiveCamera(40,16/9,0.1,100);
+    jCamera.position.set(0,2.2,9.0); jCamera.lookAt(0,1.5,0);
+    jScene.add(new THREE.AmbientLight(0xffffff,0.6));
+    var k=new THREE.DirectionalLight(0xffffff,1.1); k.position.set(4,6,6); jScene.add(k);
+    k.castShadow=true; k.shadow.mapSize.set(1024,1024);
+    k.shadow.camera.left=-7; k.shadow.camera.right=7; k.shadow.camera.top=7; k.shadow.camera.bottom=-7;
+    k.shadow.camera.near=1; k.shadow.camera.far=25; k.shadow.bias=-0.002;
+    var shPlane=new THREE.Mesh(new THREE.PlaneGeometry(16,16), new THREE.ShadowMaterial({opacity:0.35}));
+    shPlane.rotation.x=-Math.PI/2; shPlane.position.y=-1.75; shPlane.receiveShadow=true; jScene.add(shPlane);
+    var r1=new THREE.PointLight(0xe066e8,1.8,30); r1.position.set(-5,3,-2); jScene.add(r1);
+    var r2=new THREE.PointLight(0x800283,1.4,30); r2.position.set(5,-2,3); jScene.add(r2);
+    jGroup=new THREE.Group(); jScene.add(jGroup);
+    jMats={
+      tooth:new THREE.MeshPhysicalMaterial({color:0xf7f0f5,roughness:.25,clearcoat:1}),
+      ceramic:new THREE.MeshPhysicalMaterial({color:0xffffff,roughness:.15,clearcoat:1}),
+      stained:new THREE.MeshPhysicalMaterial({color:0xc7a05e,roughness:.45,clearcoat:.4}),
+      metal:new THREE.MeshStandardMaterial({color:0xc9ccd6,roughness:.3,metalness:.9}),
+      titanium:new THREE.MeshStandardMaterial({color:0x8f96a3,roughness:.35,metalness:.85}),
+      bone:new THREE.MeshStandardMaterial({color:0xe6d9c2,roughness:.85}),
+      dentin:new THREE.MeshStandardMaterial({color:0xe8d3a8,roughness:.6}),
+      pulp:new THREE.MeshStandardMaterial({color:0xd94f5c,roughness:.5}),
+      glass:new THREE.MeshPhysicalMaterial({color:0xf7f0f5,roughness:.1,transparent:true,opacity:.32,clearcoat:1})
+    };
+    var stage=document.getElementById('journeyPin');
+    var aspectF=1;
+    function size(){var w=stage.clientWidth,h=stage.clientHeight;jRenderer.setSize(w,h,false);
+      jCamera.aspect=w/h;var a=w/h;
+      aspectF=Math.min(1.9,Math.max(1,1.35/a));
+      jGroup.position.x=a>1.05?1.1:0;
+      jCamera.updateProjectionMatrix();}
+    size(); window.addEventListener('resize',size);
+    var dotsEl=document.getElementById('jDots');
+    for(var i=0;i<J.length;i++){
+      var b=document.createElement('button');b.className='j-dot'+(i===0?' on':'');b.setAttribute('aria-label',J[i].name);
+      (function(ii){b.onclick=function(){
+        var s=jST.start+(ii+0.03)/J.length*(jST.end-jST.start);
+        window.scrollTo({top:s,behavior:'smooth'});};})(i);
+      dotsEl.appendChild(b);
+    }
+    jST=ScrollTrigger.create({trigger:'#journey',start:'top top',end:'bottom bottom',
+      pin:'#journeyPin',scrub:1,anticipatePin:1,
+      onUpdate:function(self){jProgress=self.progress;}});
+    jLoad(0);
+    var v=new THREE.Vector3(),lastT=performance.now(),capEl=document.getElementById('jText'),cueEl=document.getElementById('jCue');
+    var camZ=camTz,lookY=camTy;
+    (function loop(){
+      requestAnimationFrame(loop);
+      var now=performance.now(),dt=Math.min(0.05,(now-lastT)/1000); lastT=now;
+      var seg=1/J.length;
+      var idx=Math.max(0,Math.min(J.length-1,Math.floor(jProgress/seg)));
+      if(idx!==jIdx){jIdx=idx;jLoad(idx);}
+      var local=Math.max(0,Math.min(1,(jProgress-idx*seg)/seg));
+      if(jTrans<1)jTrans=Math.min(1,jTrans+dt*2.6);
+      var sc=jTrans<1?(0.25+0.75*jTrans):1;
+      jGroup.scale.set(sc,sc,sc);
+      jGroup.rotation.y+=dt*0.18;
+      camZ+=(camTz-camZ)*0.05; lookY+=(camTy-lookY)*0.05;
+      jCamera.position.z=camZ*aspectF; jCamera.lookAt(0,lookY,0);
+      var e=Math.max(0,Math.min(1,(local-0.12)/0.66));
+      if(jTrans<1)e=0;
+      jF+=(e-jF)*0.12; if(Math.abs(e-jF)<0.002)jF=e;
+      for(var p=0;p<jParts.length;p++){var q=jParts[p];
+        q.mesh.position.set(q.a[0]+q.o[0]*jF,q.a[1]+q.o[1]*jF,q.a[2]+q.o[2]*jF);}
+      var si=jF<0.3?0:(jF<0.68?1:2);
+      var txt=(si+1)+'. '+J[idx].steps[si];
+      if(capEl.textContent!==txt)capEl.textContent=txt;
+      var w=stage.clientWidth,h=stage.clientHeight;
+      for(var l=0;l<jParts.length;l++){var L=jParts[l];if(!L.el)continue;
+        L.mesh.getWorldPosition(v);v.y+=L.ldy;v.project(jCamera);
+        if(v.z<1&&jF>0.15&&jTrans>=1){L.el.style.opacity='1';L.el.style.left=((v.x*0.5+0.5)*w)+'px';L.el.style.top=((-v.y*0.5+0.5)*h)+'px';}
+        else L.el.style.opacity='0';}
+      cueEl.style.opacity=jProgress>0.02?'0':'1';
+      jRenderer.render(jScene,jCamera);
+    })();
+    ok=true;
+  }catch(err){ ok=false; }
+  if(!ok){
+    document.getElementById('journey').style.display='none';
+    var extra=[
+      ['shield','Dental Implant','Permanent, natural-feeling replacement for a missing tooth.','Permanent'],
+      ['star','Dental Crown','Tooth-shaped cap restoring strength, shape and appearance.','Natural look'],
+      ['spark','Dental Veneers','Whisper-thin porcelain shells for a flawless smile.','Flawless'],
+      ['smile','Braces','Brackets + archwire guiding teeth into perfect alignment.','All ages'],
+      ['tooth','Root Canal (RCT)','Saves your natural tooth — virtually painless, single visit.','Most loved']];
+    renderGrid('grid-dental2',extra.concat(DENTAL2));
+  }else{
+    renderGrid('grid-dental2',DENTAL2);
+  }
+  renderGrid('grid-aesthetic',AESTHETIC);
+  bindTilt();
+}
+jInit();
+
+
+/* ================= 3D TILT ================= */
+function bindTilt(){
+  document.querySelectorAll('.svc').forEach(function(card){
+    card.onmousemove = function(e){
+      var r = card.getBoundingClientRect();
+      var x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+      card.style.transform = 'perspective(900px) rotateY('+(x*10)+'deg) rotateX('+(-y*10)+'deg) translateY(-4px)';
+    };
+    card.onmouseleave = function(){ card.style.transform = ''; };
+  });
+}
+bindTilt();
+
+/* ================= REVEAL ================= */
+var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+/* ================= HOURS ================= */
+(function(){
+  var today = new Date().getDay(); // 0=Sun..6=Sat
+  var map = [6,0,1,2,3,4,5]; // to HOURS index
+  var html = HOURS.map(function(h,i){
+    var isToday = (map[today]===i);
+    var val = h[1]==='Closed' ? '<span class="closed">Closed</span>' : h[1];
+    return '<div class="hrow'+(isToday?' today':'')+'"><span>'+h[0]+(isToday?' • today':'')+'</span><span>'+val+'</span></div>';
+  }).join('');
+  document.getElementById('hoursList').innerHTML = html;
+})();
+
+/* ================= BEFORE / AFTER ================= */
+(function(){
+  var box = document.getElementById('baSlider'), after = document.getElementById('baAfter'), handle = document.getElementById('baHandle');
+  function setP(p){ p = Math.max(2, Math.min(98, p)); after.style.clipPath = 'inset(0 0 0 '+p+'%)'; handle.style.left = p+'%'; box.setAttribute('aria-valuenow', Math.round(p)); }
+  function fromEvent(e){ var r = box.getBoundingClientRect(); var cx = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX; setP((cx - r.left)/r.width*100); }
+  var drag = false;
+  box.addEventListener('pointerdown', function(e){ drag = true; fromEvent(e); box.setPointerCapture(e.pointerId); });
+  box.addEventListener('pointermove', function(e){ if(drag) fromEvent(e); });
+  ['pointerup','pointercancel','pointerleave'].forEach(function(ev){ box.addEventListener(ev, function(){ drag = false; }); });
+  box.addEventListener('keydown', function(e){
+    var v = parseFloat(box.getAttribute('aria-valuenow'));
+    if(e.key==='ArrowLeft'){ setP(v-4); e.preventDefault(); } if(e.key==='ArrowRight'){ setP(v+4); e.preventDefault(); }
+  });
+  setP(50);
+})();
+
+/* ================= THREE.JS 3D TOOTH ================= */
+(function(){
+  var canvas = document.getElementById('tooth3d');
+  try{
+    if(typeof THREE === 'undefined') throw new Error('no three');
+    var renderer = new THREE.WebGLRenderer({canvas:canvas, alpha:true, antialias:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.12;
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(38, 1, .1, 100);
+    camera.position.set(0, 0, 9);
+    scene.add(new THREE.AmbientLight(0xffffff, .55));
+    var key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(4, 6, 6); scene.add(key);
+    var rimM = new THREE.PointLight(0xe066e8, 2.2, 30); rimM.position.set(-6, 2, -3); scene.add(rimM);
+    var rimP = new THREE.PointLight(0x800283, 2.6, 30); rimP.position.set(5, -3, -4); scene.add(rimP);
+    // stylized molar via lathe
+    var prof = [[0,-1.7],[.34,-1.62],[.55,-1.25],[.7,-.75],[.84,-.25],[.94,.3],[.9,.75],[.72,1.05],[.42,1.2],[0,1.24]]
+      .map(function(p){ return new THREE.Vector2(p[0], p[1]); });
+    var geo = new THREE.LatheGeometry(prof, 56);
+    var mat = new THREE.MeshPhysicalMaterial({color:0xf6ecf7, roughness:.22, metalness:.08, clearcoat:1, clearcoatRoughness:.25, emissive:0x800283, emissiveIntensity:.08});
+    var tooth = new THREE.Mesh(geo, mat);
+    tooth.scale.set(1, 1, .78);
+    tooth.rotation.z = .18;
+    scene.add(tooth);
+    // sparkle ring
+    var ringGeo = new THREE.TorusGeometry(3.1, .02, 12, 120);
+    var ring = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({color:0xe066e8, transparent:true, opacity:.5}));
+    ring.rotation.x = Math.PI/2.4; scene.add(ring);
+    var ring2 = new THREE.Mesh(new THREE.TorusGeometry(3.9, .014, 12, 120), new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:.22}));
+    ring2.rotation.x = Math.PI/1.8; ring2.rotation.y = .4; scene.add(ring2);
+    // particles
+    var pGeo = new THREE.BufferGeometry(), N = 260, pos = new Float32Array(N*3);
+    for(var i=0;i<N;i++){ pos[i*3]=(Math.random()-.5)*16; pos[i*3+1]=(Math.random()-.5)*10; pos[i*3+2]=(Math.random()-.5)*8-1; }
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    var pts = new THREE.Points(pGeo, new THREE.PointsMaterial({color:0xf0a6f2, size:.05, transparent:true, opacity:.75}));
+    scene.add(pts);
+    var mx = 0, my = 0, tx = 0, ty = 0;
+    window.addEventListener('pointermove', function(e){ tx = (e.clientX/window.innerWidth - .5); ty = (e.clientY/window.innerHeight - .5); });
+    function place(){
+      var w = canvas.clientWidth || canvas.parentElement.clientWidth, h = canvas.clientHeight || canvas.parentElement.clientHeight;
+      renderer.setSize(w, h, false); camera.aspect = w/h; camera.updateProjectionMatrix();
+      var isMobile = w <= 900;
+      var s = Math.min(w/1100, 1)*1.15;
+      if(isMobile) s *= 0.85;
+      tooth.scale.set(s, s, s*.78);
+      tooth.position.x = isMobile ? 0 : 2.6*s;
+      tooth.position.y = isMobile ? -2.9 : 0;
+      ring.position.copy(tooth.position); ring2.position.copy(tooth.position);
+    }
+    place(); window.addEventListener('resize', place);
+    var t0 = performance.now();
+    (function anim(){
+      requestAnimationFrame(anim);
+      var t = (performance.now()-t0)/1000;
+      tooth.rotation.y = t*.45; tooth.position.y += Math.sin(t*1.1)*.0016;
+      ring.rotation.z = t*.18; ring2.rotation.z = -t*.12;
+      pts.rotation.y = t*.02;
+      mx += (tx-mx)*.04; my += (ty-my)*.04;
+      camera.position.x = mx*1.6; camera.position.y = -my*1.1; camera.lookAt(tooth.position.x*.4, 0, 0);
+      renderer.render(scene, camera);
+    })();
+  }catch(err){
+    canvas.style.display = 'none';
+    document.getElementById('heroFallback').style.display = 'flex';
+  }
+})();
+</script>
+<script>
+/* ================= DENTI — AI ASSISTANT ================= */
+var chatBody = document.getElementById('chatBody');
+var chatChips = document.getElementById('chatChips');
+var chatInput = document.getElementById('chatInput');
+var bk = {step:'idle', treatment:'', date:'', slot:'', name:'', phone:''};
+var greeted = false;
+
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function scrollChat(){ chatBody.scrollTop = chatBody.scrollHeight; }
+function addMsg(html, who){
+  var d = document.createElement('div');
+  d.className = 'msg ' + who;
+  d.innerHTML = html;
+  chatBody.appendChild(d); scrollChat();
+  return d;
+}
+function botSay(html, chips, delay){
+  chips = chips || [];
+  var t = document.createElement('div');
+  t.className = 'typing'; t.innerHTML = '<span></span><span></span><span></span>';
+  chatBody.appendChild(t); scrollChat();
+  setTimeout(function(){
+    t.remove();
+    addMsg(html, 'bot');
+    setChips(chips);
+  }, delay || 750);
+}
+function setChips(list){
+  chatChips.innerHTML = '';
+  list.forEach(function(c){
+    var b = document.createElement('button');
+    b.className = 'chip'; b.textContent = c;
+    b.onclick = function(){ userSend(c); };
+    chatChips.appendChild(b);
+  });
+}
+function userSend(text){
+  if(!text.trim()) return;
+  addMsg(esc(text), 'user');
+  chatInput.value = '';
+  setChips([]);
+  setTimeout(function(){ handle(text.trim()); }, 350);
+}
+function sendUser(){ userSend(chatInput.value); }
+
+/* ---------- booking helpers ---------- */
+var TREATMENTS = ['General Checkup','Root Canal (RCT)','Braces / Aligners','Dental Implants','Teeth Whitening','Scaling & Polishing','Kids Dentistry','Botox','Dermal Fillers','Chemical Peel'];
+function nextDays(){
+  var out = [], d = new Date();
+  while(out.length < 6){
+    d.setDate(d.getDate()+1);
+    if(d.getDay()===0) continue; // Sunday closed
+    out.push(new Date(d));
+  }
+  return out;
+}
+function fmtDay(d){ return d.toLocaleDateString('en-GB',{weekday:'short', day:'numeric', month:'short'}); }
+var SLOTS = ['4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM','7:00 PM','7:30 PM'];
+function startBooking(preset){
+  bk = {step:'treatment', treatment:'', date:'', slot:'', name:'', phone:''};
+  if(preset){
+    bk.treatment = preset; bk.step = 'date';
+    var days = nextDays().map(fmtDay);
+    botSay('You chose <b>'+esc(preset)+'</b> — excellent! Which day works for you? <span style="font-size:12px;color:#8a7a8e">(we are closed Sundays)</span>', days);
+  }else{
+    botSay('Great choice! Which treatment would you like to book?', TREATMENTS.slice(0,6));
+  }
+}
+function bookingStep(text){
+  var low = text.toLowerCase();
+  if(/^(cancel|stop|exit|quit)/.test(low)){ bk.step='idle'; botSay('No problem — booking cancelled. Anything else I can help with?', defaultChips()); return; }
+  if(bk.step==='treatment'){
+    var match = TREATMENTS.find(function(t){ return t.toLowerCase().indexOf(low)>-1 || low.indexOf(t.toLowerCase().split(' ')[0])>-1; });
+    bk.treatment = match || text;
+    bk.step = 'date';
+    var days = nextDays().map(fmtDay);
+    botSay('You chose <b>'+esc(bk.treatment)+'</b>. Which day works for you? <span style="font-size:12px;color:#8a7a8e">(we are closed Sundays)</span>', days);
+  } else if(bk.step==='date'){
+    bk.date = text; bk.step = 'slot';
+    botSay('<b>'+esc(bk.date)+'</b> — noted. Pick a time slot:', SLOTS);
+  } else if(bk.step==='slot'){
+    bk.slot = text; bk.step = 'name';
+    botSay('Perfect — <b>'+esc(bk.slot)+'</b>. May I have your <b>full name</b>?', []);
+  } else if(bk.step==='name'){
+    if(text.length < 2){ botSay('Could you please share your full name?', []); return; }
+    bk.name = text; bk.step = 'phone';
+    botSay('Thanks <b>'+esc(bk.name)+'</b>! Lastly, your <b>mobile number</b> so the clinic can confirm:', []);
+  } else if(bk.step==='phone'){
+    var digits = text.replace(/\D/g,'');
+    if(!/^(0\d{10}|92\d{10})$/.test(digits)){ botSay('That number doesn&rsquo;t look right — please share an 11-digit mobile number like <b>0333 1234567</b>.', []); return; }
+    bk.phone = digits; bk.step = 'done';
+    var waText = encodeURIComponent('Assalam-o-Alaikum! I booked via the website assistant Denti:\n\nName: '+bk.name+'\nTreatment: '+bk.treatment+'\nDay: '+bk.date+'\nTime: '+bk.slot+'\nPhone: '+bk.phone+'\n\nPlease confirm my appointment. Thank you!');
+    var card = '<div class="sumcard"><b>Booking summary</b><br>Name: '+esc(bk.name)+'<br>Treatment: '+esc(bk.treatment)+'<br>Day: '+esc(bk.date)+'<br>Time: '+esc(bk.slot)+'<br>Phone: '+esc(bk.phone)+'</div>'
+      + '<a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/'+WA_NUM+'?text='+waText+'">'
+      + '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.9 1.5 2 2.4 1.4 1.2 2.5 1.6 2.9 1.8.3.2.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .6-.2 1.2Z"/></svg>'
+      + 'Confirm on WhatsApp</a>'
+      + '<div style="font-size:12.5px;color:#8a7a8e;margin-top:10px">Tap the button to send this booking to the clinic — they will confirm your slot shortly.</div>';
+    botSay('Your appointment request is ready, <b>'+esc(bk.name)+'</b>! '+card, ['Book another','Timings','Talk to clinic']);
+  }
+}
+function defaultChips(){ return ['Book appointment','Timings','Services','Prices','WhatsApp']; }
+
+/* ---------- intents ---------- */
+function handle(text){
+  var low = text.toLowerCase();
+  if(bk.step!=='idle' && bk.step!=='done'){ bookingStep(text); return; }
+  var has = function(){ for(var i=0;i<arguments.length;i++){ if(low.indexOf(arguments[i])>-1) return true; } return false; };
+  if(has('book','appointment','slot','reserve')){ startBooking(); return; }
+  if(has('timing','hours','open','close','khul','band','time')){ botSay('We are open <b>Mon&ndash;Sat, 4:00 &ndash; 8:00 PM</b>.<br>Sunday: closed.<br><br>Want me to book you a slot?', ['Book appointment','Location']); return; }
+  if(has('where','location','address','reach','kahan','map','direction')){ botSay('You&rsquo;ll find us at:<br><b>1st Floor, Al-Sayed Tower, Nasir Bagh Road</b>, near Amal Labs, Peshawar.<br><br><a href="https://www.google.com/maps/search/?api=1&query=Family+Dental+%26+Aesthetic+Clinic+Nasir+Bagh+Road+Peshawar" target="_blank" rel="noopener" style="color:#800283;font-weight:700">Open in Google Maps &rarr;</a>', ['Book appointment','Timings']); return; }
+  if(has('price','cost','fee','charge','rate','paisa','kimat')){ botSay('Every smile is different, so exact fees depend on your case — but here&rsquo;s the honest picture:<br>• Checkup &amp; consultation: <b>very affordable</b><br>• Scaling &amp; polishing: <b>budget-friendly</b><br>• RCT, braces, implants, Botox: <b>quoted after a quick in-clinic assessment</b><br><br>No hidden charges, ever. Shall I book you a consultation?', ['Book appointment','WhatsApp']); return; }
+  if(has('doctor','dr.','dentist','tabassum','specialist','who will')){ botSay('<b>Dr. Tabassum Ajmal</b> leads the clinic — known for a gentle, pain-free approach and explaining every step. Reviewers call the RCT &ldquo;single-visit and completely painless&rdquo;.', ['Book appointment','Reviews']); return; }
+  if(has('review','rating','feedback')){ botSay('We&rsquo;re rated <b>5.0 / 5 across 93 Google reviews</b> — patients especially love the painless treatments and spotless clinic.', ['Book appointment']); return; }
+  if(has('service','treatment','offer','what do you do')){ botSay('<b>Dental:</b> RCT, braces, implants, whitening, crowns, scaling, fillings, kids dentistry.<br><b>Aesthetics:</b> Botox, fillers, chemical peels, PRP, microneedling, skin boosters.<br><br>Which one are you interested in?', ['Book appointment','Prices']); return; }
+  if(has('brace','aligner','straighten')){ botSay('We do <b>metal, ceramic and discreet aligner</b> options for all ages. Treatment plans are fully personalized — book a consultation and Dr. Tabassum will map your smile journey.', ['Book appointment']); return; }
+  if(has('whiten','bleach','bright','yellow')){ botSay('Our <b>cosmetic teeth whitening</b> is done in a single sitting — safe, professional, and long-lasting. Ready for a brighter smile?', ['Book appointment','Prices']); return; }
+  if(has('root canal','rct','dard','pain')){ botSay('Good news: our <b>single-visit rotary RCT is virtually painless</b> — reviewers say they felt zero discomfort. Don&rsquo;t let tooth pain wait.', ['Book appointment']); return; }
+  if(has('implant')){ botSay('<b>Dental implants</b> are the closest thing to natural teeth — permanent, strong, and natural-looking. Book a consultation for a personalized plan and quote.', ['Book appointment']); return; }
+  if(has('botox')){ botSay('<b>Botox</b> results typically last 3&ndash;4 months — subtle, natural refresh, never overdone. A consultation decides the right plan for you.', ['Book appointment']); return; }
+  if(has('filler')){ botSay('<b>Dermal fillers</b> restore volume in lips, cheeks and jawline with instant, natural-looking results.', ['Book appointment']); return; }
+  if(has('peel','skin','glow','pigment','acne')){ botSay('For skin we offer <b>chemical peels, PRP facials, microneedling and skin boosters</b> — all aimed at natural glow and texture. Tell me your concern and I&rsquo;ll point you right.', ['Book appointment']); return; }
+  if(has('scaling','cleaning','polish','safai')){ botSay('<b>Scaling &amp; polishing</b> takes about 30 minutes — healthy gums, fresh breath, cleaner smile. Shall I book you in?', ['Book appointment']); return; }
+  if(has('kid','child','bacha','baby')){ botSay('We love little smiles! <b>Kids dentistry</b> here is gentle and friendly — perfect for first visits.', ['Book appointment']); return; }
+  if(has('human','whatsapp','call','phone','number','contact','agent','staff','reception')){
+    botSay('You can reach the clinic directly:<br><b>0333 9202134</b> (call / WhatsApp)<br><br><a class="wa-btn" target="_blank" rel="noopener" href="https://wa.me/'+WA_NUM+'?text='+encodeURIComponent('Assalam-o-Alaikum! I have a question about Family Dental & Aesthetic Clinic.')+'">Chat on WhatsApp</a>', defaultChips()); return; }
+  if(has('salam','assalam','hello','hi','hey','aoa','good morning','good evening')){ botSay('Walaikum-Assalam! I&rsquo;m <b>Denti</b>, Family Dental &amp; Aesthetic Clinic&rsquo;s assistant. I can book your appointment, share timings, or answer questions about treatments.', defaultChips()); return; }
+  if(has('thank','shukriya','great','nice','awesome')){ botSay('You&rsquo;re most welcome! Anything else — booking, timings, treatments?', defaultChips()); return; }
+  if(has('bye','khuda hafiz','allah hafiz')){ botSay('Khuda Hafiz! We look forward to seeing your smile. Take care!', []); return; }
+  botSay('I want to make sure I get this right — I can help with <b>booking an appointment</b>, <b>timings</b>, <b>treatments &amp; prices</b>, or <b>directions</b>. What would you like?', defaultChips());
+}
+
+/* ---------- open / close ---------- */
+function toggleChat(){
+  var p = document.getElementById('chatPanel');
+  p.classList.toggle('open');
+  document.getElementById('chatPing').style.display = 'none';
+  if(p.classList.contains('open') && !greeted){
+    greeted = true;
+    botSay('Assalam-o-Alaikum! I&rsquo;m <b>Denti</b> — Family Dental &amp; Aesthetic Clinic&rsquo;s AI assistant.<br><br>I can book your appointment in under a minute, or answer anything about our treatments.', defaultChips(), 500);
+  }
+  if(p.classList.contains('open')) setTimeout(function(){ chatInput.focus(); }, 350);
+}
+function openChat(mode){
+  var p = document.getElementById('chatPanel');
+  if(!p.classList.contains('open')) toggleChat();
+  document.getElementById('chatPing').style.display = 'none';
+  if(mode==='book' && greeted){ setTimeout(startBooking, 900); }
+  else if(mode==='book' && !greeted){ /* greeting will show; booking starts after */ setTimeout(function(){ if(bk.step==='idle') startBooking(); }, 2200); }
+}
+</script>
+</body>
+</html>
