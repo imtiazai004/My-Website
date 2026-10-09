@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { DEMOS } from '../data/demos';
 
-const DEMOS_PASSCODE = 'imtiaz@2580';
+const DEMOS_PASSCODE = 'smile2026';
 const UNLOCK_KEY = 'demos-unlocked';
 
 function PasscodeGate({ onUnlock }: { onUnlock: () => void }) {
@@ -38,7 +38,8 @@ function PasscodeGate({ onUnlock }: { onUnlock: () => void }) {
           </div>
           <h1 className="text-2xl font-bold text-slate-900 mb-3">Private Demos</h1>
           <p className="text-slate-500 font-light mb-8">
-            These client demos are password-protected. Enter the passcode to view them.
+            These client demos are password-protected. To view them, enter the
+            passcode mentioned in your email or proposal.
           </p>
           <form onSubmit={submit} className="space-y-4">
             <input
