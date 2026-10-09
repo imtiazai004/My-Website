@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { MonitorPlay, ExternalLink, Lock, ArrowLeft, Sparkles, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -6,7 +6,68 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { DEMOS } from '../data/demos';
 
+const DEMOS_PASSCODE = 'imtiaz@2580';
+const UNLOCK_KEY = 'demos-unlocked';
+
+function PasscodeGate({ onUnlock }: { onUnlock: () => void }) {
+  const [value, setValue] = useState('');
+  const [error, setError] = useState(false);
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (value === DEMOS_PASSCODE) {
+      try { sessionStorage.setItem(UNLOCK_KEY, '1'); } catch { /* ignore */ }
+      onUnlock();
+    } else {
+      setError(true);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-brand-bg text-brand-text flex flex-col">
+      <Navbar />
+      <div className="flex-1 flex items-center justify-center px-6 pt-32 pb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="glass-card !p-10 max-w-md w-full text-center"
+        >
+          <div className="w-14 h-14 mx-auto mb-6 rounded-full bg-brand-accent/10 flex items-center justify-center">
+            <Lock className="w-6 h-6 text-brand-accent" />
+          </div>
+          <h1 className="text-2xl font-bold text-slate-900 mb-3">Private Demos</h1>
+          <p className="text-slate-500 font-light mb-8">
+            These client demos are password-protected. Enter the passcode to view them.
+          </p>
+          <form onSubmit={submit} className="space-y-4">
+            <input
+              type="password"
+              value={value}
+              onChange={(e) => { setValue(e.target.value); setError(false); }}
+              placeholder="Enter passcode"
+              className="w-full px-4 py-3 rounded-xl border border-slate-900/10 bg-white/70 text-slate-900 text-center tracking-widest focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
+              autoFocus
+            />
+            {error && (
+              <p className="text-red-500 text-sm">Incorrect passcode — please try again.</p>
+            )}
+            <button type="submit" className="btn-primary w-full">
+              Unlock demos
+            </button>
+          </form>
+        </motion.div>
+      </div>
+      <Footer />
+    </div>
+  );
+}
+
 export default function DemosPage() {
+  const [unlocked, setUnlocked] = useState<boolean>(() => {
+    try { return sessionStorage.getItem(UNLOCK_KEY) === '1'; } catch { return false; }
+  });
+
   useEffect(() => {
     document.title = 'Client Demos | AI Soft Tech Solution';
     window.scrollTo(0, 0);
@@ -14,6 +75,10 @@ export default function DemosPage() {
       document.title = 'AI Soft Tech Solution';
     };
   }, []);
+
+  if (!unlocked) {
+    return <PasscodeGate onUnlock={() => setUnlocked(true)} />;
+  }
 
   return (
     <div className="min-h-screen bg-brand-bg text-brand-text">
