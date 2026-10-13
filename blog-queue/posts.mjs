@@ -186,4 +186,106 @@ New leads are expensive. Old leads are free.
 
 *Agency or service business? DM me "LEADS".*`,
   },
+  {
+    slug: 'clinic-patient-token-queues',
+    title: 'Do Your Patients Wait for You — or Do You Waste Their Time?',
+    excerpt:
+      'Paper tokens, a packed waiting room, staff shouting names — patients sit for hours with no idea when their turn will come.',
+    tags: ['Clinics', 'Healthcare', 'Automation'],
+    content: `The morning at a typical clinic: paper tokens, a packed waiting room, staff shouting names across the room. Patients sit for hours with no idea when their turn will come.
+
+The paper token gets lost. A patient steps out for tea and misses their turn. Others get tired of waiting and leave without being seen — that is your revenue walking out the door.
+
+The fix is a digital token system:
+
+:::demo clinictoken:::
+
+The patient checks in and gets a token on their phone — live position in the queue and the real waiting time. When the turn is near, a WhatsApp alert arrives: you are next. The doctor presses one button — call next. No shouting, no confusion, no lost tokens.
+
+And for the first time, the clinic sees its own numbers: average wait, busiest hours, and how many patients left without being seen. You cannot fix what you cannot see.
+
+Your patients' time is worth as much as yours. Stop wasting both.
+
+*Run a clinic? DM me "TOKEN" — I will show you what this looks like in your waiting room.*`,
+  },
+  {
+    slug: 'slow-proposals-lose-clients',
+    title: 'While You Were Writing the Proposal, the Client Hired Someone Else',
+    excerpt:
+      'Two days of careful formatting while the client talks to three other vendors. In proposals, speed wins.',
+    tags: ['Freelancing', 'Agencies', 'Sales'],
+    content: `A warm lead asks for a proposal. You open a blank document, hunt for your last proposal to copy from, rewrite the scope, redo the pricing table, make it look professional.
+
+Two days pass. By the time your PDF lands in their inbox, they have talked to three other vendors — and one of them replied in two hours.
+
+The fix is proposals that build themselves:
+
+:::demo proposalgen:::
+
+Pick your services from your own templates, set the price, and the proposal is ready in minutes — your branding, your terms. Send it through a WhatsApp link the client opens on their phone. They read, they tap accept, and you get the notification instantly.
+
+Fast proposals do not just win more clients. They signal how you will work: sharp, responsive, professional. The client who waits two days for a proposal starts wondering what delivery will look like.
+
+*Freelancer or agency? DM me "PROPOSAL" — I will show you the full client flow.*`,
+  },
+  {
+    slug: 'shopkeeper-real-profit',
+    title: 'Is Your Shop Running — or Just Spinning?',
+    excerpt:
+      'Sales are up but the bank balance is not. The shopkeeper who does not know his daily profit is flying blind.',
+    tags: ['Small Business', 'Retail', 'Finance'],
+    content: `The till is busy all day. Customers in and out. At month end, the money is not there.
+
+Where did it go? Staff wages, rent, utilities, wastage, small expenses nobody wrote down. The shopkeeper knows his sales — he has no idea what his profit is. The business is running. It might just be spinning.
+
+The fix is seeing your real number every single day:
+
+:::demo profitlens:::
+
+Log every sale and every expense — wages, rent, utilities, wastage — as it happens. The screen shows today's real profit, live. The 7-day view shows whether you are climbing or sliding. The categories show exactly where the money leaks.
+
+Most shopkeepers find the leak in a week: wastage they never measured, or a slow shift that costs more in wages than it earns. One number, seen daily, changes every decision after it.
+
+*Run a shop? DM me "PROFIT" — I will show you what your week really looks like.*`,
+  },
+  {
+    slug: 'multiple-tiktok-shops-one-dashboard',
+    title: '5 Shops, 5 Logins, Zero Idea Where the Money Is',
+    excerpt:
+      'Every TikTok shop is its own login, its own tab, its own chaos. One dashboard ends the juggling.',
+    tags: ['E-commerce', 'TikTok Shop', 'Automation'],
+    content: `Five TikTok shops. Five logins. Five tabs to keep checking. Orders in one, stock warnings in another, a return sitting unanswered in a third because nobody looked.
+
+You do not have a business problem. You have a visibility problem. Every shop runs in its own little world, and you are the only integration — logging in and out all day, stitching numbers together in your head.
+
+The fix is one dashboard for all of them:
+
+:::demo shopconsole:::
+
+Every order from every shop in one list. Stock levels across all shops on one screen — slow sellers and stock-outs flagged before they cost you. Low on something? One tap creates the purchase order and restocking starts.
+
+Sellers who consolidate do not just save time. They finally answer the question the five logins never could: which shop actually makes the money.
+
+*Running multiple shops? DM me "SHOPS" — I will show you the consolidated view.*`,
+  },
+  {
+    slug: 'expired-stock-customer-complaints',
+    title: "Your Customer Shouldn't Be Your Quality Inspector",
+    excerpt:
+      'One expired pack reaches a customer and the complaint costs more than the stock ever did. Expiry is a system problem.',
+    tags: ['Retail', 'Inventory', 'Automation'],
+    content: `One expired pack reaches one customer. The complaint goes public. Apologies, refunds, a damaged reputation — and the worst part is, you find out about the expiry from the customer, not from your own shelf.
+
+Expiry is not a carelessness problem. It is a visibility problem. Nobody remembers every batch date on every shelf. By the time someone checks, the under-30-days stock has become the expired stock.
+
+The fix is a guard that watches the dates for you:
+
+:::demo expiryguard:::
+
+Every item's expiry tracked by batch. Red flags for under 30 days, amber for under 90, green for safe — the risk is visible at a glance. Near-expiry items go on discount to clear before they die. Dead stock gets removed before a customer ever sees it. The dashboard even shows how much value you rescued.
+
+The customer should never be your quality inspector. Let the system inspect first.
+
+*Stock with expiry dates? DM me "STOCK" — I will show you the guard in action.*`,
+  },
 ];
