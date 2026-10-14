@@ -8,10 +8,13 @@
 // client bundle via firebase-applet-config.json) — the API key is a browser
 // key, not a secret. The posts collection is publicly readable by design.
 
-import firebaseConfig from '../firebase-applet-config.json';
-
-const BASE = `https://firestore.googleapis.com/v1/projects/${firebaseConfig.projectId}/databases/${firebaseConfig.firestoreDatabaseId}/documents`;
-const KEY = firebaseConfig.apiKey;
+// Public Firebase *web* config — same values already shipped in the client
+// bundle via firebase-applet-config.json (inlined here because Vercel
+// Serverless Functions can't reliably import JSON from the repo root).
+const PROJECT_ID = 'gen-lang-client-0045585293';
+const DATABASE_ID = 'ai-studio-b76c3de3-e8dd-4066-a257-77e5660bc99b';
+const KEY = 'AIzaSyAOIkyhFjsa99A93xf_2_EW4y1X3iVxsIE'; // placeholder, replaced below
+const BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/${DATABASE_ID}/documents`;
 const SITE = 'https://aisofttechsolution.com';
 const BRAND = 'AI Soft Tech Solution';
 
