@@ -55,12 +55,20 @@ export const config = {
     '/compare/agency-vs-freelancer',
     '/blog',
     '/blog/:slug',
+    '/sitemap.xml',
   ],
 };
 
 export default function middleware(request: Request) {
   const userAgent = request.headers.get('user-agent') || '';
   const url = new URL(request.url);
+
+  // Dynamic sitemap for EVERYONE (not just bots): blog URLs are fetched
+  // live from Firestore, so it never goes stale as new posts publish.
+  if (url.pathname === '/sitemap.xml') {
+    return rewrite(new URL('/api/sitemap', request.url));
+  }
+
   const snapshotPath = STATIC_SNAPSHOTS[url.pathname];
 
   if (snapshotPath && BOT_USER_AGENT.test(userAgent)) {
