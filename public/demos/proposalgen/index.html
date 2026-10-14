@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProposalGen — Proposals That Win</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#eef0ff;min-height:100vh;padding:18px;color:#1e1b4b}
+body.embed{background:transparent!important;padding:0!important;min-height:0!important}
+body.embed .app{border-radius:0!important}
+.app{max-width:430px;margin:0 auto;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 12px 40px rgba(76,58,218,.18)}
+.hdr{background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:20px;color:#fff}
+.hdr h1{font-size:22px;font-weight:800}.hdr h1 span{opacity:.75;font-weight:600}
+.hdr p{font-size:12.5px;opacity:.85;margin-top:4px}
+.bd{padding:16px}
+.sec{font-size:11px;font-weight:800;color:#6366f1;text-transform:uppercase;letter-spacing:1px;margin:16px 0 10px}
+.tpls{display:flex;gap:10px}
+.tpl{flex:1;border:2px solid #e0e3ff;border-radius:14px;padding:10px 6px;text-align:center;cursor:pointer;background:#f8f9ff;transition:all .2s}
+.tpl .sw{height:44px;border-radius:9px;margin-bottom:8px}
+.tpl b{font-size:12px;color:#1e1b4b}
+.tpl p{font-size:10.5px;color:#6d6a9e}
+.tpl.on{border-color:#4f46e5;background:#eef0ff;box-shadow:0 4px 14px rgba(79,70,229,.25)}
+.frm label{font-size:12px;font-weight:600;color:#6d6a9e;display:block;margin:10px 0 4px}
+.frm input,.frm select{width:100%;padding:11px;border:1.5px solid #e0e3ff;border-radius:10px;font-size:14px;outline:none;color:#1e1b4b;background:#fbfbff}
+.frm input:focus{border-color:#4f46e5}
+.items{display:flex;flex-direction:column;gap:8px}
+.item{display:grid;grid-template-columns:1fr 52px 84px;gap:8px;align-items:center}
+.item input{padding:9px;font-size:13px}
+.total{display:flex;justify-content:space-between;align-items:center;background:#eef0ff;border-radius:12px;padding:12px 14px;margin-top:10px}
+.total span{font-size:13px;font-weight:700;color:#4f46e5}.total b{font-size:20px;font-weight:800;color:#312e81}
+.prev{background:#fff;border:1.5px solid #e0e3ff;border-radius:14px;overflow:hidden}
+.prev .ph{padding:16px 18px;color:#fff}
+.prev .ph h3{font-size:17px;font-weight:800}
+.prev .ph p{font-size:12px;opacity:.85;margin-top:3px}
+.prev .pb{padding:14px 18px}
+.prow{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px dashed #e0e3ff;color:#1e1b4b}
+.prow .q{color:#6d6a9e;font-size:12px}
+.ptot{display:flex;justify-content:space-between;padding:12px 0 4px;font-weight:800;font-size:15px;color:#312e81}
+.valid{font-size:11px;color:#6d6a9e;text-align:end}
+.sendBtn{width:100%;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border:none;font-weight:800;padding:15px;border-radius:14px;font-size:15px;cursor:pointer;margin-top:16px;box-shadow:0 6px 20px rgba(79,70,229,.35)}
+.sendBtn:active{transform:scale(.98)}
+.sendBtn:disabled{opacity:.55}
+.track{background:#f6f7ff;border:1px solid #e0e3ff;border-radius:14px;padding:14px;margin-top:14px}
+.tl{position:relative;margin-top:6px;padding-inline-start:22px}
+.tl::before{content:'';position:absolute;inset-inline-start:7px;top:6px;bottom:6px;width:2px;background:#c7cbff}
+.ti{position:relative;font-size:13px;color:#1e1b4b;padding:8px 0}
+.ti::before{content:'';position:absolute;inset-inline-start:-19px;top:12px;width:10px;height:10px;border-radius:50%;background:#4f46e5;box-shadow:0 0 0 3px #e0e3ff}
+.ti small{display:block;color:#6d6a9e;font-size:11.5px;margin-top:2px}
+.ti.dim{opacity:.45}
+.accept{width:100%;background:#059669;color:#fff;border:none;font-weight:800;padding:13px;border-radius:12px;font-size:14px;cursor:pointer;margin-top:12px}
+.doneBanner{background:linear-gradient(135deg,#059669,#10b981);color:#fff;border-radius:14px;padding:16px;margin-top:14px;text-align:center;display:none}
+.doneBanner b{font-size:16px}.doneBanner p{font-size:12.5px;margin-top:6px;opacity:.92}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#1e1b4b;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:92vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ti{animation:slideIn .4s ease}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="app">
+<div class="hdr"><h1>📄 Proposal<span>Gen</span></h1><p>Branded proposals in minutes — sent, opened, accepted.</p></div>
+<div class="bd">
+<div class="sec">1 · Pick a template</div>
+<div class="tpls">
+<div class="tpl on" id="tpl1" onclick="pickTpl('modern',this)"><div class="sw" style="background:linear-gradient(135deg,#4f46e5,#7c3aed)"></div><b>Modern</b><p>Indigo gradient</p></div>
+<div class="tpl" id="tpl2" onclick="pickTpl('bold',this)"><div class="sw" style="background:linear-gradient(135deg,#f59e0b,#ef4444)"></div><b>Bold</b><p>Warm energy</p></div>
+<div class="tpl" id="tpl3" onclick="pickTpl('classic',this)"><div class="sw" style="background:linear-gradient(135deg,#0f172a,#64748b)"></div><b>Classic</b><p>Formal trust</p></div>
+</div>
+<div class="sec">2 · Client & project</div>
+<div class="frm">
+<label>Client name</label><input id="clientName" value="Sarah Mitchell" oninput="renderPrev()">
+<label>Project title</label><input id="projName" value="Restaurant Website Redesign" oninput="renderPrev()">
+<label>Line items</label>
+<div class="items">
+<div class="item"><input value="Logo & brand kit" oninput="renderPrev()"><input type="number" value="1" min="1" oninput="renderPrev()"><input type="number" value="450" min="0" oninput="renderPrev()"></div>
+<div class="item"><input value="Website design" oninput="renderPrev()"><input type="number" value="1" min="1" oninput="renderPrev()"><input type="number" value="1200" min="0" oninput="renderPrev()"></div>
+<div class="item"><input value="Copywriting" oninput="renderPrev()"><input type="number" value="1" min="1" oninput="renderPrev()"><input type="number" value="300" min="0" oninput="renderPrev()"></div>
+</div>
+<div class="total"><span>Total (auto)</span><b id="totalAmt">$1,950</b></div>
+</div>
+<div class="sec">3 · Live branded preview</div>
+<div class="prev"><div class="ph" id="prevHead"><h3 id="pvTitle">Restaurant Website Redesign</h3><p>Prepared for <span id="pvClient">Sarah Mitchell</span> · by Studio North</p></div>
+<div class="pb"><div id="pvRows"></div><div class="ptot"><span>Total</span><span id="pvTotal">$1,950</span></div><div class="valid">Valid for 14 days · Terms apply</div></div></div>
+<button class="sendBtn" id="sendBtn" onclick="sendProposal()">📲 Send via WhatsApp</button>
+<div class="sec">4 · Open tracking</div>
+<div class="track" id="trackTab"><div class="tl" id="timeline"><div class="ti dim">No proposal sent yet — the tracking timeline appears here.<small>You will be notified the moment the client opens it.</small></div></div>
+<button class="accept" id="acceptBtn" onclick="simulateAccept()" style="display:none">✅ Simulate: client clicks Accept</button></div>
+<div class="doneBanner" id="doneBanner"><b>🎉 Proposal accepted!</b><p>50% advance invoice drafted automatically — $975.</p></div>
+</div></div>
+<div class="toast" id="toast"></div>
+<script>
+const HEADS={modern:'linear-gradient(135deg,#4f46e5,#7c3aed)',bold:'linear-gradient(135deg,#f59e0b,#ef4444)',classic:'linear-gradient(135deg,#0f172a,#64748b)'};
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function items(){return[...document.querySelectorAll('.item')].map(r=>({d:r.children[0].value||'Item',q:+r.children[1].value||1,p:+r.children[2].value||0}))}
+function sumTotal(){return items().reduce((s,i)=>s+i.q*i.p,0)}
+function pickTpl(k,el){document.querySelectorAll('.tpl').forEach(x=>x.classList.remove('on'));el.classList.add('on');document.getElementById('prevHead').style.background=HEADS[k];toast('🎨 '+el.querySelector('b').textContent+' template applied')}
+function renderPrev(){document.getElementById('pvClient').textContent=document.getElementById('clientName').value||'—';
+document.getElementById('pvTitle').textContent=document.getElementById('projName').value||'—';
+const t=sumTotal();document.getElementById('totalAmt').textContent='$'+t.toLocaleString();document.getElementById('pvTotal').textContent='$'+t.toLocaleString();
+document.getElementById('pvRows').innerHTML=items().map(i=>`<div class="prow"><span>${i.d} <span class="q">×${i.q}</span></span><span>$${(i.q*i.p).toLocaleString()}</span></div>`).join('')}
+function addTl(html){const tl=document.getElementById('timeline');const d=tl.querySelector('.ti.dim');if(d)d.remove();const div=document.createElement('div');div.className='ti';div.innerHTML=html;tl.appendChild(div)}
+function sendProposal(){const b=document.getElementById('sendBtn');b.disabled=true;b.textContent='Sending…';
+setTimeout(()=>{b.textContent='✓ Sent via WhatsApp';addTl('📤 Proposal sent via WhatsApp<small>just now · secure link to <b>'+document.getElementById('clientName').value+'</b></small>');toast('📲 Proposal sent to the client');document.getElementById('acceptBtn').style.display='block';
+setTimeout(()=>{addTl('👀 Client opened the proposal<small>2h ago · opened 3 times</small>');toast('👀 Client opened your proposal');},2600);
+setTimeout(()=>{addTl('💰 Client viewed the pricing section twice<small>strong buying signal — follow up now</small>');toast('💰 Pricing viewed twice — hot lead!');},5600);},1400)}
+function simulateAccept(){addTl('🎉 Client clicked <b>Accept</b><small>just now · proposal '+document.getElementById('pvTitle').textContent+' · $'+sumTotal().toLocaleString()+'</small>');
+const db=document.getElementById('doneBanner');db.style.display='block';db.querySelector('p').textContent='50% advance invoice drafted automatically — $'+Math.round(sumTotal()/2).toLocaleString()+'.';
+document.getElementById('acceptBtn').style.display='none';toast('🎉 Proposal accepted!')}
+renderPrev();
+</script>
+</body>
+</html>

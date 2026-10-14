@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProfitLens — See Your Real Daily Profit</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#eef7f1;min-height:100vh;padding:18px 14px 30px}
+body.embed{background:transparent!important;padding:0!important;min-height:0!important}
+body.embed .phone{box-shadow:none!important;border-radius:0!important}
+.wrap{max-width:430px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:21px;font-weight:800;color:#06281c}.top h1 span{color:#059669}
+.top .tag{margin-inline-start:auto;font-size:10px;font-weight:700;color:#047857;background:#d1fae5;padding:5px 11px;border-radius:14px}
+.hero{background:linear-gradient(135deg,#06281c,#065f46);border-radius:20px;padding:20px;color:#fff;box-shadow:0 8px 24px rgba(6,95,70,.35);margin-bottom:14px;position:relative;overflow:hidden}
+.hero::after{content:'💹';position:absolute;top:8px;right:14px;font-size:56px;opacity:.16}
+.hero .lbl{font-size:11px;font-weight:700;letter-spacing:1.5px;color:#6ee7b7;text-transform:uppercase}
+.hero .amt{font-size:42px;font-weight:800;margin:6px 0 2px}
+.hero .sub{font-size:12px;color:#a7f3d0}
+.chip{display:inline-block;font-size:11px;font-weight:800;background:#d1fae5;color:#065f46;padding:4px 12px;border-radius:14px;margin-top:8px}
+.bars{background:#fff;border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 2px 10px rgba(6,40,28,.07)}
+.brow{display:flex;align-items:center;margin-bottom:10px}
+.brow .bl{width:52px;font-size:11px;font-weight:700;color:#065f46}
+.btrack{flex:1;height:14px;background:#ecfdf5;border-radius:8px;overflow:hidden;margin:0 8px}
+.bfill{height:100%;border-radius:8px;transition:width .6s}
+.bval{font-size:12px;font-weight:800;color:#06281c;min-width:64px;text-align:right}
+.tabs{display:flex;background:#d7efe2;border-radius:14px;padding:4px;margin-bottom:14px}
+.tab{flex:1;border:none;background:transparent;font-size:13px;font-weight:700;color:#065f46;padding:10px;border-radius:11px;cursor:pointer}
+.tab.on{background:#065f46;color:#fff;box-shadow:0 2px 8px rgba(6,95,70,.35)}
+.sect{font-size:13px;font-weight:800;color:#06281c;margin:4px 2px 10px}
+.prow{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:9px;box-shadow:0 2px 8px rgba(6,40,28,.06);cursor:pointer}
+.prow .r1{display:flex;align-items:center}
+.prow .pn{font-size:13.5px;font-weight:700;color:#06281c}
+.prow .pm{margin-inline-start:auto;font-size:13px;font-weight:800;color:#059669}
+.mbar{height:7px;background:#ecfdf5;border-radius:5px;margin-top:9px;overflow:hidden}
+.mbar div{height:100%;background:linear-gradient(90deg,#34d399,#059669);border-radius:5px}
+.pdet{display:none;margin-top:11px;padding-top:11px;border-top:1px dashed #bbf7d0}
+.prow.open .pdet{display:block}
+.dgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.dcell{background:#f0fdf4;border-radius:10px;padding:8px 4px;text-align:center}
+.dcell .dl{font-size:9.5px;color:#047857;font-weight:600}
+.dcell .dv{font-size:13px;font-weight:800;color:#06281c;margin-top:2px}
+.week{background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 10px rgba(6,40,28,.07)}
+.wbars{display:flex;align-items:flex-end;gap:8px;height:170px;padding-top:6px}
+.wcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.wbar{width:100%;max-width:38px;border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,#34d399,#059669);min-height:8px;transition:height .5s}
+.wcol.neg .wbar{background:linear-gradient(180deg,#fca5a5,#dc2626)}
+.wv{font-size:9.5px;font-weight:800;color:#06281c;margin-top:5px}
+.wd{font-size:10px;color:#047857;font-weight:600;margin-top:2px}
+.explist{background:#fff;border-radius:16px;padding:14px 16px;margin-bottom:14px;box-shadow:0 2px 10px rgba(6,40,28,.07)}
+.exprow{display:flex;font-size:12.5px;color:#334155;padding:7px 0;border-bottom:1px solid #f0fdf4}
+.exprow:last-child{border:none}
+.exprow .ea{margin-inline-start:auto;font-weight:800;color:#b91c1c}
+.bigadd{width:100%;background:#059669;color:#fff;border:none;font-weight:800;font-size:14.5px;padding:15px;border-radius:15px;cursor:pointer;box-shadow:0 6px 18px rgba(5,150,105,.4)}
+.bigadd:active{transform:scale(.98)}
+.modal{position:fixed;inset:0;display:none;align-items:flex-end;justify-content:center;z-index:30;background:rgba(6,40,28,.4)}
+.modal.open{display:flex}
+.sheet{background:#fff;border-radius:22px 22px 0 0;padding:22px;width:100%;max-width:430px;animation:up .28s}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.sheet h3{font-size:17px;color:#06281c;margin-bottom:12px}
+.presets{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:6px}
+.preset{border:1.5px solid #a7f3d0;background:#ecfdf5;color:#065f46;font-size:12px;font-weight:700;padding:8px 13px;border-radius:18px;cursor:pointer}
+.preset.on{background:#059669;color:#fff;border-color:#059669}
+.sheet label{font-size:12px;color:#047857;font-weight:600;display:block;margin:10px 0 4px}
+.sheet input{width:100%;padding:12px;border:1.5px solid #a7f3d0;border-radius:11px;font-size:14px;outline:none}
+.sheet input:focus{border-color:#059669}
+.srow{display:flex;gap:9px;margin-top:14px}
+.sbtn{flex:1;border:none;font-weight:800;padding:13px;border-radius:12px;font-size:14px;cursor:pointer}
+.sbtn.save{background:#059669;color:#fff}
+.sbtn.cancel{background:#f0fdf4;color:#065f46}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#06281c;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:all .3s;z-index:40;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.note{font-size:11.5px;color:#047857;text-align:center;margin-top:12px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>💹 Profit<span>Lens</span></h1><span class="tag">LIVE DEMO</span></div>
+  <div class="hero">
+    <div class="lbl">Today's real profit</div>
+    <div class="amt" id="todayProfit">Rs 0</div>
+    <div class="sub" id="heroSub">sales minus every cost</div>
+    <span class="chip" id="marginChip">0% kept</span>
+  </div>
+  <div class="bars">
+    <div class="brow"><span class="bl">Sales</span><div class="btrack"><div class="bfill" id="salesBar" style="width:0%;background:linear-gradient(90deg,#34d399,#059669)"></div></div><span class="bval" id="salesVal">Rs 0</span></div>
+    <div class="brow"><span class="bl">Costs</span><div class="btrack"><div class="bfill" id="costsBar" style="width:0%;background:linear-gradient(90deg,#fca5a5,#dc2626)"></div></div><span class="bval" id="costsVal">Rs 0</span></div>
+  </div>
+  <div class="tabs">
+    <button class="tab on" id="tabToday" onclick="switchTab('today')">📊 Today</button>
+    <button class="tab" id="tabWeek" onclick="switchTab('week')">📈 7 Days</button>
+  </div>
+  <div id="panelToday">
+    <div class="sect">Per-product margin ranking</div>
+    <div id="prodList"></div>
+    <div class="sect">Today's expenses</div>
+    <div class="explist" id="expList"></div>
+    <button class="bigadd" id="addExpenseBtn" onclick="openExp()">＋ Log an expense</button>
+  </div>
+  <div id="panelWeek" style="display:none">
+    <div class="sect">Daily real profit — last 7 days</div>
+    <div class="week"><div class="wbars" id="weekChart"></div></div>
+    <div class="note" id="weekNote"></div>
+  </div>
+  <div class="note">Demo data — your shop, your numbers, same clarity.</div>
+</div>
+<div class="modal" id="expModal"><div class="sheet">
+  <h3>＋ Log an expense</h3>
+  <div class="presets" id="presetRow">
+    <button class="preset" data-p="Staff wages" onclick="pickType(this)">Staff wages</button>
+    <button class="preset" data-p="Rent" onclick="pickType(this)">Rent</button>
+    <button class="preset" data-p="Utilities" onclick="pickType(this)">Utilities</button>
+    <button class="preset" data-p="Wastage" onclick="pickType(this)">Wastage</button>
+  </div>
+  <label>Type</label><input id="expName" placeholder="e.g. Staff wages">
+  <label>Amount (Rs)</label><input id="expAmt" type="number" placeholder="e.g. 1500">
+  <div class="srow">
+    <button class="sbtn save" id="expSave" onclick="saveExp()">Save</button>
+    <button class="sbtn cancel" id="expCancel" onclick="closeExp()">Cancel</button>
+  </div>
+</div></div>
+<div class="toast" id="toast"></div>
+<script>
+const PRODUCTS=[
+{n:'Basmati Rice 5kg',s:12500,c:9800},
+{n:'Cooking Oil 1L',s:8900,c:7600},
+{n:'Sugar 5kg',s:6300,c:5200},
+{n:'Detergent 1kg',s:4500,c:3100},
+{n:'Tea 950g',s:3100,c:2300}];
+let EXP=[
+{t:'Rent (daily share)',a:1667},
+{t:'Staff wages',a:2000},
+{t:'Utilities',a:667},
+{t:'Wastage / spoilage',a:900}];
+const WEEK=[
+{d:'Mon',p:6120},{d:'Tue',p:5480},{d:'Wed',p:7010},{d:'Thu',p:5890},{d:'Fri',p:7740},{d:'Sat',p:8930},{d:'Sun',p:4310}];
+const fmt=n=>'Rs '+Math.round(n).toLocaleString();
+function totals(){const s=PRODUCTS.reduce((x,p)=>x+p.s,0),g=PRODUCTS.reduce((x,p)=>x+p.c,0),e=EXP.reduce((x,p)=>x+p.a,0);
+return{s,g,e,profit:s-g-e,margin:(s-g-e)/s*100}}
+function toast(m){const el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(el._x);el._x=setTimeout(()=>el.classList.remove('show'),2400)}
+function render(){const T=totals();
+document.getElementById('todayProfit').textContent=fmt(T.profit);
+document.getElementById('heroSub').textContent=fmt(T.s)+' sales − '+fmt(T.g+T.e)+' all costs';
+document.getElementById('marginChip').textContent=Math.round(T.margin)+'% of sales kept';
+document.getElementById('salesVal').textContent=fmt(T.s);document.getElementById('costsVal').textContent=fmt(T.g+T.e);
+document.getElementById('salesBar').style.width='100%';
+document.getElementById('costsBar').style.width=Math.min(100,(T.g+T.e)/T.s*100)+'%';
+const ranked=[...PRODUCTS].sort((a,b)=>(b.s-b.c)-(a.s-a.c));
+document.getElementById('prodList').innerHTML=ranked.map((p,i)=>{
+const m=p.s-p.c,mp=Math.round(m/p.s*100),oid=PRODUCTS.indexOf(p);
+return `<div class="prow" id="prodRow${i+1}" onclick="toggleRow(this)">
+<div class="r1"><span class="pn">#${i+1} ${p.n}</span><span class="pm">${mp}% margin</span></div>
+<div class="mbar"><div style="width:${mp}%"></div></div>
+<div class="pdet" id="prodDetail${i+1}"><div class="dgrid">
+<div class="dcell"><div class="dl">Sold</div><div class="dv">${fmt(p.s)}</div></div>
+<div class="dcell"><div class="dl">Cost</div><div class="dv">${fmt(p.c)}</div></div>
+<div class="dcell"><div class="dl">Kept</div><div class="dv" style="color:#059669">${fmt(m)}</div></div>
+</div></div></div>`}).join('');
+document.getElementById('expList').innerHTML=EXP.map(e=>`<div class="exprow"><span>${e.t}</span><span class="ea">− ${fmt(e.a)}</span></div>`).join('');
+const mx=Math.max(...WEEK.map(w=>w.p));
+document.getElementById('weekChart').innerHTML=WEEK.map(w=>`<div class="wcol"><div class="wbar" style="height:${Math.round(w.p/mx*100)}%"></div><div class="wv">${(w.p/1000).toFixed(1)}k</div><div class="wd">${w.d}</div></div>`).join('');
+const tot=WEEK.reduce((x,w)=>x+w.p,0);
+document.getElementById('weekNote').textContent='7-day real profit: '+fmt(tot)+' · avg '+fmt(tot/7)+'/day'}
+function toggleRow(el){el.classList.toggle('open')}
+function switchTab(w){document.getElementById('tabToday').classList.toggle('on',w==='today');
+document.getElementById('tabWeek').classList.toggle('on',w==='week');
+document.getElementById('panelToday').style.display=w==='today'?'':'none';
+document.getElementById('panelWeek').style.display=w==='week'?'':'none'}
+function openExp(){document.getElementById('expModal').classList.add('open')}
+function closeExp(){document.getElementById('expModal').classList.remove('open');
+document.getElementById('expName').value='';document.getElementById('expAmt').value='';
+document.querySelectorAll('.preset').forEach(b=>b.classList.remove('on'))}
+function pickType(b){document.querySelectorAll('.preset').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+document.getElementById('expName').value=b.getAttribute('data-p')}
+function saveExp(){const n=document.getElementById('expName').value.trim()||'Expense',a=+document.getElementById('expAmt').value||0;
+if(a<=0){toast('Enter an amount first');return}
+EXP.push({t:n,a});closeExp();render();toast('− '+fmt(a)+' · profit updated ✓')}
+render();
+</script>
+</body>
+</html>

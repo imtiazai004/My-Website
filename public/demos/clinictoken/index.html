@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClinicToken — Digital Patient Queues</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#eef4fb;min-height:100vh;padding:22px;color:#0f2a4a}
+body.embed{background:transparent!important;padding:0!important;min-height:0!important}
+body.embed .phone{box-shadow:none!important;border-radius:0!important}
+.phone{max-width:390px;margin:0 auto;background:#fff;border-radius:26px;box-shadow:0 12px 40px rgba(15,42,74,.14);overflow:hidden;border:1px solid #dbe7f5}
+.head{background:linear-gradient(135deg,#0b3d91,#1565d8);color:#fff;padding:18px 20px 14px}
+.head h1{font-size:15px;font-weight:800;white-space:nowrap}.head h1 span{font-weight:400;opacity:.85}
+.head .clinic{font-size:12px;opacity:.85;margin-top:2px}
+.tabs{display:flex;background:#dbe9fb}
+.tabs button{flex:1;border:none;background:transparent;padding:12px;font-size:13px;font-weight:700;color:#4a6a92;cursor:pointer}
+.tabs button.on{background:#fff;color:#0b3d91;border-bottom:3px solid #1565d8}
+.view{display:none;padding:18px;min-height:480px}
+.view.on{display:block}
+.nowserve{background:linear-gradient(135deg,#0b3d91,#1565d8);border-radius:16px;color:#fff;text-align:center;padding:16px;margin-bottom:14px}
+.nowserve .lbl{font-size:11px;letter-spacing:2px;opacity:.8;font-weight:600}
+.nowserve .tok{font-size:44px;font-weight:800;letter-spacing:3px;margin:4px 0}
+.nowserve .room{font-size:13px;opacity:.9}
+.lbl2{font-size:12px;font-weight:700;color:#0b3d91;margin:12px 0 8px;text-transform:uppercase;letter-spacing:.5px}
+.btn{width:100%;background:#1565d8;color:#fff;border:none;font-weight:700;padding:13px;border-radius:12px;font-size:14px;cursor:pointer;margin-top:8px}
+.btn:active{transform:scale(.98)}
+.btn.green{background:#0e9f6e}.btn.grey{background:#e2ecf7;color:#0b3d91}
+.btnrow{display:flex;gap:8px}
+.btnrow .btn{flex:1}
+input.name{width:100%;padding:12px;border:1.5px solid #c9dcf2;border-radius:10px;font-size:14px;outline:none}
+input.name:focus{border-color:#1565d8}
+.mycard{background:#f0f7ff;border:1.5px solid #1565d8;border-radius:14px;padding:14px;margin-top:12px;display:none}
+.mycard.show{display:block}
+.mycard .tk{font-size:26px;font-weight:800;color:#0b3d91;letter-spacing:2px}
+.mycard .pos{font-size:13px;color:#4a6a92;margin-top:4px}
+.mycard .eta{font-size:13px;font-weight:700;color:#0e9f6e;margin-top:4px}
+.qlist{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto}
+.qrow{display:flex;align-items:center;background:#f4f8fd;border-radius:12px;padding:10px 12px}
+.qrow.me{background:#e3f0ff;border:1.5px solid #1565d8}
+.qrow .qt{font-weight:800;color:#0b3d91;font-size:15px;width:56px}
+.qrow .qn{font-size:13px;color:#4a6a92;flex:1}
+.qrow .qs{font-size:11px;font-weight:700;padding:4px 10px;border-radius:12px;background:#dbe9fb;color:#0b3d91}
+.qrow.serving .qs{background:#0e9f6e;color:#fff}
+.wa{display:none;background:#e7fce9;border:1px solid #b7eec0;border-radius:14px;padding:12px;margin-top:12px;animation:pop .3s}
+.wa.show{display:block}
+.wa .whead{font-size:12px;font-weight:800;color:#128c4b;display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.wa .wmsg{font-size:13px;color:#0f2a4a;line-height:1.45}
+@keyframes pop{from{transform:scale(.94);opacity:0}to{transform:none;opacity:1}}
+.stats{display:flex;gap:8px;margin-top:12px}
+.stat{flex:1;background:#f4f8fd;border-radius:12px;padding:10px;text-align:center}
+.stat .sv{font-size:18px;font-weight:800;color:#0b3d91}
+.stat .sl{font-size:10px;color:#4a6a92;font-weight:600}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#0b3d91;color:#fff;padding:11px 22px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:all .3s;z-index:50;pointer-events:none;max-width:90vw}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="phone">
+<div class="head"><h1>🎫 Clinic<span>Token</span></h1><div class="clinic">CityCare Medical Clinic · General OPD</div></div>
+<div class="tabs">
+<button id="tabPatient" class="on" onclick="showTab('patient')">🧑 Patient</button>
+<button id="tabDoctor" onclick="showTab('doctor')">🩺 Doctor</button>
+</div>
+<!-- PATIENT VIEW -->
+<div class="view on" id="viewPatient">
+<div class="nowserve"><div class="lbl">NOW SERVING</div><div class="tok" id="psServing">A-04</div><div class="room" id="psRoom">Please proceed to Room 2</div></div>
+<div class="lbl2">Check in — get your token</div>
+<input class="name" id="patientName" placeholder="Your name, e.g. Ahmed Raza">
+<button class="btn" id="checkinBtn" onclick="checkin()">Get My Token</button>
+<div class="mycard" id="myTokenCard"><div class="tk" id="myToken">A-11</div>
+<div class="pos" id="myPos">3 patients ahead of you</div><div class="eta" id="myEta">⏱ Estimated wait: ~12 min</div></div>
+<div class="wa" id="waAlert"><div class="whead">🟢 WhatsApp · ClinicToken alerts</div>
+<div class="wmsg" id="waMsg">Token A-11 — you are NEXT. Please come to Room 2 now.</div></div>
+<div class="lbl2">Live waiting list</div>
+<div class="qlist" id="pQueue"></div>
+</div>
+<!-- DOCTOR VIEW -->
+<div class="view" id="viewDoctor">
+<div class="nowserve"><div class="lbl">NOW SERVING</div><div class="tok" id="drServing">A-04</div><div class="room">Room 2 · General OPD</div></div>
+<div class="btnrow"><button class="btn green" id="nextBtn" onclick="callNext()">⏭ Call Next</button>
+<button class="btn grey" id="skipBtn" onclick="skipToken()">Skip ⏩</button></div>
+<div class="stats">
+<div class="stat"><div class="sv" id="stSeen">3</div><div class="sl">PATIENTS SEEN</div></div>
+<div class="stat"><div class="sv" id="stAvg">4 min</div><div class="sl">AVG WAIT</div></div>
+<div class="stat"><div class="sv" id="stLeft">6</div><div class="sl">WAITING</div></div>
+</div>
+<div class="lbl2">Queue</div>
+<div class="qlist" id="dQueue"></div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const NAMES=['Bilal Ahmed','Sana Malik','Tariq Aziz','Fozia Khan','Danish Iqbal','Hira Nawaz'];
+let queue=[]; // {tok,name,state:'waiting'|'serving'|'done'|'skipped'}
+let servingIdx=3, seen=3, myTok=null;
+for(let i=0;i<10;i++)queue.push({tok:'A-'+String(i+1).padStart(2,'0'),name:NAMES[i%NAMES.length],state:i<3?'done':i===3?'serving':'waiting'});
+let tokNum=10;
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function showTab(w){document.getElementById('viewPatient').classList.toggle('on',w==='patient');
+document.getElementById('viewDoctor').classList.toggle('on',w==='doctor');
+document.getElementById('tabPatient').classList.toggle('on',w==='patient');
+document.getElementById('tabDoctor').classList.toggle('on',w==='doctor')}
+function cur(){return queue[servingIdx]}
+function render(){
+const s=cur();
+document.getElementById('psServing').textContent=s.tok;document.getElementById('drServing').textContent=s.tok;
+const waiting=queue.filter(q=>q.state==='waiting');
+const rows=queue.filter(q=>q.state!=='done');
+const html=rows.map(q=>{const cls='qrow'+(q.state==='serving'?' serving':'')+(q.tok===myTok?' me':'');
+const st=q.state==='serving'?'IN ROOM':q.state==='skipped'?'SKIPPED':'WAITING';
+return `<div class="${cls}"><div class="qt">${q.tok}</div><div class="qn">${q.name}</div><div class="qs">${st}</div></div>`}).join('');
+document.getElementById('pQueue').innerHTML=html;document.getElementById('dQueue').innerHTML=html;
+document.getElementById('stSeen').textContent=seen;
+document.getElementById('stLeft').textContent=waiting.length;
+const avg=Math.max(2,Math.round((waiting.length*4)/Math.max(1,seen)));
+document.getElementById('stAvg').textContent=avg+' min';
+if(myTok){const mine=queue.find(q=>q.tok===myTok);
+const ahead=queue.slice(0,queue.indexOf(mine)).filter(q=>q.state==='waiting').length;
+document.getElementById('myPos').textContent=ahead===0?'🎉 It\u2019s your turn — head to Room 2!':ahead+' patient'+(ahead>1?'s':'')+' ahead of you';
+document.getElementById('myEta').textContent=ahead===0?'':'⏱ Est. wait: about '+(ahead*4)+' min';
+const wa=document.getElementById('waAlert');
+if(ahead<=1){wa.classList.add('show');
+document.getElementById('waMsg').textContent=ahead===0?'Token '+myTok+' — you are NEXT. Please come to Room 2 now.':'Token '+myTok+' — almost your turn. You are #'+(ahead+1)+' in the queue.';
+}else wa.classList.remove('show');}
+}
+function checkin(){const n=document.getElementById('patientName').value.trim()||'Guest';
+tokNum++;const tk='A-'+String(tokNum).padStart(2,'0');myTok=tk;
+queue.push({tok:tk,name:n,state:'waiting'});
+document.getElementById('myToken').textContent=tk;
+document.getElementById('myTokenCard').classList.add('show');render();
+toast('🎫 Token '+tk+' issued for '+n)}
+function callNext(){const s=cur();s.state='done';seen++;
+servingIdx=queue.findIndex(q=>q.state==='waiting');
+if(servingIdx<0){toast('Queue clear — well done, doctor! 👏');render();return}
+queue[servingIdx].state='serving';render();
+toast('🔔 Now serving '+queue[servingIdx].tok+' — '+queue[servingIdx].name)}
+function skipToken(){const s=cur();s.state='skipped';
+servingIdx=queue.findIndex(q=>q.state==='waiting');
+if(servingIdx>=0)queue[servingIdx].state='serving';
+render();toast('⏩ '+s.tok+' skipped — moved to end of the day list')}
+render();
+</script>
+</body>
+</html>
