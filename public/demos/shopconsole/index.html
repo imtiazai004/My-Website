@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopConsole — Every TikTok Shop, One Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:#0b0d14;min-height:100vh;padding:22px}
+body.embed{background:transparent!important;padding:0!important;min-height:0!important}
+body.embed .phone{box-shadow:none!important;border-radius:0!important}
+.phone{max-width:430px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:#10131c;border-radius:26px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.hdr{padding:20px 18px 14px;background:linear-gradient(135deg,#161a26,#10131c)}
+.hdr .brand{font-size:13px;font-weight:800;letter-spacing:1px;color:#69c9d0;text-transform:uppercase}
+.hdr h2{font-size:21px;font-weight:800;color:#fff;margin-top:6px}
+.hdr h2 span{color:#fe2c55}
+.hdr .sub{font-size:12px;color:#8b93a7;margin-top:5px}
+.gmvbar{display:flex;gap:10px;padding:0 18px 14px;background:linear-gradient(180deg,#161a26,#10131c)}
+.gcard{flex:1;background:#1a1f2e;border-radius:14px;padding:11px 12px;border:1px solid #262d42}
+.gcard .gl{font-size:10px;color:#8b93a7;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.gcard .gv{font-size:18px;font-weight:800;color:#fff;margin-top:3px}
+.gcard .gd{font-size:10.5px;font-weight:700;margin-top:2px}
+.gd.up{color:#25f4ee}.gd.dn{color:#fe2c55}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:14px 18px 6px;background:#10131c}
+.tab{flex:0 0 auto;background:#1a1f2e;border:1.5px solid #262d42;color:#c3cad9;font-size:12px;font-weight:700;padding:9px 14px;border-radius:18px;cursor:pointer}
+.tab.on{background:#fe2c55;border-color:#fe2c55;color:#fff}
+.tab .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#25f4ee;margin-inline-end:6px}
+.seg{display:flex;background:#1a1f2e;border-radius:14px;margin:12px 18px 4px;padding:4px}
+.seg button{flex:1;background:transparent;border:none;color:#8b93a7;font-weight:700;font-size:13px;padding:10px;border-radius:10px;cursor:pointer}
+.seg button.on{background:#262d42;color:#fff}
+.list{padding:12px 18px 20px;max-height:340px;overflow-y:auto;flex:1}
+.orow{background:#1a1f2e;border:1px solid #262d42;border-radius:14px;padding:12px 13px;margin-bottom:10px;display:flex;align-items:center;gap:11px;cursor:pointer;transition:transform .15s}
+.orow:active{transform:scale(.97)}
+.orow img{width:40px;height:40px;border-radius:10px;background:#262d42;flex:0 0 auto}
+.orow .oi{flex:1;min-width:0}
+.orow .oi b{font-size:13px;color:#fff;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.orow .oi .os{font-size:11.5px;color:#8b93a7;margin-top:2px}
+.orow .amt{font-size:14px;font-weight:800;color:#25f4ee}
+.badge{font-size:10px;font-weight:800;padding:4px 10px;border-radius:12px}
+.badge.pend{background:#fef3c7;color:#92400e}.badge.ship{background:#d1fae5;color:#065f46}.badge.canc{background:#1f2433;color:#5b6478}
+.al{background:#1a1f2e;border:1px solid #262d42;border-inline-start:4px solid #fe2c55;border-radius:14px;padding:12px 13px;margin-bottom:10px;cursor:pointer}
+.al.fixed{border-inline-start-color:#25f4ee;opacity:.65}
+.al .alT{font-size:13px;font-weight:700;color:#fff}
+.al .alS{font-size:11.5px;color:#8b93a7;margin-top:3px}
+.al .fix{font-size:12px;font-weight:800;color:#25f4ee;background:transparent;border:none;cursor:pointer;margin-top:8px;padding:0}
+.srow{background:#1a1f2e;border:1px solid #262d42;border-radius:14px;padding:12px 13px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.srow .sn{flex:1}.srow .sn b{font-size:13px;color:#fff}.srow .sn .sq{font-size:11.5px;color:#8b93a7;margin-top:2px}
+.meter{width:84px;height:8px;background:#262d42;border-radius:5px;overflow:hidden}
+.meter div{height:100%;border-radius:5px}
+.empty{font-size:13px;color:#8b93a7;text-align:center;padding:26px 0}
+.toast{position:sticky;bottom:14px;margin:0 auto;width:max-content;max-width:90%;background:#25f4ee;color:#0b0d14;padding:11px 20px;border-radius:26px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;pointer-events:none;transform:translateY(10px)}
+.toast.show{opacity:1;transform:none}
+.ftr{padding:14px 18px;background:#161a26;font-size:11px;color:#5b6478;text-align:center;border-top:1px solid #262d42}
+.ftr b{color:#25f4ee}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="phone">
+<div class="hdr">
+  <div class="brand">🔗 ShopConsole</div>
+  <h2>All your shops. <span>One login.</span></h2>
+  <div class="sub">Orders, stock &amp; GMV across every TikTok Shop — live.</div>
+</div>
+<div class="gmvbar">
+  <div class="gcard"><div class="gl">Today's GMV</div><div class="gv" id="gmvT">$0</div><div class="gd up" id="gmvD">▲ live</div></div>
+  <div class="gcard"><div class="gl">Orders today</div><div class="gv" id="ordT">0</div><div class="gd up" id="pendD">live</div></div>
+  <div class="gcard"><div class="gl">Low-stock alerts</div><div class="gv" id="alT">0</div><div class="gd dn" id="alD">action needed</div></div>
+</div>
+<div class="tabs" id="tabs"></div>
+<div class="seg">
+  <button id="ordersTab" class="on" onclick="setView('orders')">📦 Orders</button>
+  <button id="stockTab" onclick="setView('stock')">📊 Stock</button>
+</div>
+<div class="list" id="list"></div>
+<div class="toast" id="toast"></div>
+<div class="ftr">💡 One dashboard · <b>5 shops synced</b> · no more logging in &amp; out</div>
+</div>
+<script>
+const SHOPS=[
+ {id:'s1',name:'Glow & Go Beauty',color:'#fe2c55'},
+ {id:'s2',name:'FitFuel Store',color:'#25f4ee'},
+ {id:'s3',name:'PetPalace',color:'#f7b500'},
+ {id:'s4',name:'Kitchen Kings',color:'#8b5cf6'},
+ {id:'s5',name:'Urban Threads',color:'#3b82f6'}];
+const ORDERS=[
+ {id:'o1',shop:'s1',item:'Vitamin C Serum 30ml',sku:'GG-VCS',amt:18.99,st:'pend',cust:'Emma W.'},
+ {id:'o2',shop:'s1',item:'Rose Quartz Roller',sku:'GG-RQR',amt:12.50,st:'ship',cust:'Liam H.'},
+ {id:'o3',shop:'s1',item:'Hyaluronic Toner 120ml',sku:'GG-HYT',amt:15.99,st:'pend',cust:'Ava P.'},
+ {id:'o4',shop:'s2',item:'Protein Bars (Box of 12)',sku:'FF-PB12',amt:24.99,st:'pend',cust:'Noah B.'},
+ {id:'o5',shop:'s2',item:'Resistance Bands Set',sku:'FF-RBS',amt:29.99,st:'ship',cust:'Mia K.'},
+ {id:'o6',shop:'s3',item:'Slow Feeder Bowl',sku:'PP-SFB',amt:21.75,st:'pend',cust:'Oliver T.'},
+ {id:'o7',shop:'s4',item:'Cast Iron Skillet 26cm',sku:'KK-CIS',amt:45.00,st:'ship',cust:'Sophia R.'},
+ {id:'o8',shop:'s4',item:'Knife Set 5-Piece',sku:'KK-KS5',amt:39.99,st:'pend',cust:'Ethan M.'},
+ {id:'o9',shop:'s5',item:'Oversized Hoodie',sku:'UT-OHD',amt:32.50,st:'pend',cust:'Isabella L.'},
+ {id:'o10',shop:'s5',item:'Cargo Jeans',sku:'UT-CJ',amt:41.00,st:'ship',cust:'James D.'},
+ {id:'o11',shop:'s2',item:'Creatine 500g',sku:'FF-CR5',amt:34.99,st:'canc',cust:'Lucas F.'},
+ {id:'o12',shop:'s3',item:'Cat Tower 120cm',sku:'PP-CT1',amt:59.99,st:'pend',cust:'Amelia S.'}];
+const STOCK=[
+ {id:'k1',shop:'s1',item:'Vitamin C Serum 30ml',q:6,low:10},
+ {id:'k2',shop:'s1',item:'Clay Mask 100ml',q:42,low:10},
+ {id:'k3',shop:'s2',item:'Protein Bars (Box of 12)',q:4,low:12},
+ {id:'k4',shop:'s2',item:'Creatine 500g',q:58,low:10},
+ {id:'k5',shop:'s3',item:'Slow Feeder Bowl',q:3,low:8},
+ {id:'k6',shop:'s4',item:'Cast Iron Skillet 26cm',q:31,low:8},
+ {id:'k7',shop:'s5',item:'Oversized Hoodie',q:5,low:15},
+ {id:'k8',shop:'s5',item:'Denim Jacket',q:64,low:10}];
+let curShop='all', curView='orders', fixedAlerts={};
+function shopName(id){const s=SHOPS.find(x=>x.id===id);return s?s.name:'All shops'}
+function filteredOrders(){return curShop==='all'?ORDERS:ORDERS.filter(o=>o.shop===curShop)}
+function filteredStock(){return curShop==='all'?STOCK:STOCK.filter(s=>s.shop===curShop)}
+function alerts(){return STOCK.filter(s=>s.q<=s.low)}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function stats(){
+  const os=filteredOrders().filter(o=>o.st!=='canc');
+  const gmv=os.reduce((s,o)=>s+o.amt,0);
+  const pend=os.filter(o=>o.st==='pend').length;
+  const al=(curShop==='all'?alerts():alerts().filter(s=>s.shop===curShop)).filter(s=>!fixedAlerts[s.id]).length;
+  document.getElementById('gmvT').textContent='$'+gmv.toFixed(2);
+  document.getElementById('ordT').textContent=os.length;
+  document.getElementById('pendD').textContent=pend+' pending';
+  document.getElementById('alT').textContent=al;
+  document.getElementById('alD').textContent=al?'action needed':'all clear ✓';
+  document.getElementById('alD').className='gd '+(al?'dn':'up');
+}
+function renderTabs(){
+  document.getElementById('tabs').innerHTML=[{id:'all',name:'All shops'}].concat(SHOPS).map(s=>
+   `<button class="tab${curShop===s.id?' on':''}" id="${s.id==='all'?'shopTabAll':'shopTab'+SHOPS.findIndex(x=>x.id===s.id)}" onclick="setShop('${s.id}')"><span class="dot" style="background:${s.color||'#fff'}"></span>${s.name}</button>`).join('');
+}
+function renderList(){
+  const L=document.getElementById('list');
+  if(curView==='orders'){
+    const os=filteredOrders();
+    L.innerHTML=os.length?os.map((o,i)=>{
+      const bc=o.st==='pend'?'pend':o.st==='ship'?'ship':'canc';
+      const bl=o.st==='pend'?'⏳ PENDING':o.st==='ship'?'🚚 SHIPPED':'CANCELLED';
+      return `<div class="orow" id="orderRow${i}" onclick="tapOrder('${o.id}')"><div class="oi"><b>${o.item}</b><div class="os">#${o.id.toUpperCase()} · ${o.cust} · ${shopName(o.shop)}</div></div><span class="amt">$${o.amt.toFixed(2)}</span><span class="badge ${bc}">${bl}</span></div>`}).join(''):'<div class="empty">No orders for this shop yet.</div>';
+  }else{
+    const st=filteredStock();const al=alerts();
+    const html=al.filter(s=>curShop==='all'||s.shop===curShop).filter(s=>!fixedAlerts[s.id]).map((s,i)=>{
+      return `<div class="al" id="alertRow${i}" onclick="fixStock('${s.id}')"><div class="alT">⚠️ Low stock: ${s.item}</div><div class="alS">${shopName(s.shop)} · only <b style="color:#fe2c55">${s.q}</b> left (reorder at ${s.low})</div><button class="fix" id="alertFix${i}" onclick="event.stopPropagation();fixStock('${s.id}')">＋ Create PO → restock</button></div>`}).join('');
+    const rows=st.map((s,i)=>{
+      const pct=Math.min(100,s.q/80*100);const col=s.q<=s.low?'#fe2c55':s.q<=s.low*2?'#f7b500':'#25f4ee';
+      return `<div class="srow"><div class="sn"><b>${s.item}</b><div class="sq">${shopName(s.shop)} · SKU synced</div></div><div class="meter"><div style="width:${pct}%;background:${col}"></div></div><div style="font-size:13px;font-weight:800;color:${col}">${s.q}</div></div>`}).join('');
+    L.innerHTML=(html||'')+rows;
+  }
+}
+function render(){renderTabs();renderList();stats();
+  document.getElementById('ordersTab').className=curView==='orders'?'on':'';
+  document.getElementById('stockTab').className=curView==='stock'?'on':'';}
+function setShop(id){curShop=id;render();toast(id==='all'?'🏪 All shops unified':('🏪 '+shopName(id)))}
+function setView(v){curView=v;render()}
+function tapOrder(id){const o=ORDERS.find(x=>x.id===id);if(o.st==='pend'){o.st='ship';render();toast('🚚 Order '+o.id.toUpperCase()+' marked shipped ✓')}else{toast('Order '+o.id.toUpperCase()+' — '+o.cust)}}
+function fixStock(id){fixedAlerts[id]=true;render();const s=STOCK.find(x=>x.id===id);toast('📋 PO created — '+s.item+' restocking ✓')}
+render();
+</script>
+</body>
+</html>

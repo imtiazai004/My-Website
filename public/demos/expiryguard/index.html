@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExpiryGuard — Never Sell Expired Stock</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#fff7ed;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#7c2d12}.top h1 span{color:#ea580c}
+.alert{background:linear-gradient(135deg,#b91c1c,#ef4444);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(185,28,28,.25)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(124,45,18,.08);border-top:3px solid #ea580c}
+.stat .sv{font-size:20px;font-weight:900;color:#7c2d12}.stat .sl{font-size:10.5px;color:#a16207;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(124,45,18,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:13px;font-weight:800;color:#a16207;border-radius:10px;cursor:pointer}
+.tab.on{background:#ea580c;color:#fff}
+.filters{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.f{border:1.5px solid #fed7aa;background:#fff;color:#9a3412;font-size:12px;font-weight:800;padding:7px 13px;border-radius:18px;cursor:pointer}
+.f.on{background:#7c2d12;color:#fff;border-color:#7c2d12}
+.card{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(124,45,18,.08);border-inline-start:5px solid #22c55e;display:flex;gap:10px;align-items:center}
+.card.red{border-color:#dc2626}.card.amber{border-color:#f59e0b}
+.dot{width:12px;height:12px;border-radius:50%;flex:none}
+.dot.red{background:#dc2626;box-shadow:0 0 0 4px #fee2e2}.dot.amber{background:#f59e0b;box-shadow:0 0 0 4px #fef3c7}.dot.green{background:#22c55e;box-shadow:0 0 0 4px #dcfce7}
+.info{flex:1}.info b{font-size:14px;color:#7c2d12;display:block}
+.info .meta{font-size:11.5px;color:#a16207;font-weight:600}
+.info .left{font-size:12px;font-weight:800;margin-top:2px}
+.left.red{color:#b91c1c}.left.amber{color:#b45309}.left.green{color:#15803d}
+.badge{display:inline-block;font-size:10px;font-weight:800;padding:3px 9px;border-radius:12px;background:#fef3c7;color:#b45309;margin-top:5px}
+.badge.disc{background:#dcfce7;color:#15803d}
+.acts{display:flex;flex-direction:column;gap:6px}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 12px;border-radius:10px;cursor:pointer;white-space:nowrap}
+.abtn.d{background:#f59e0b;color:#fff}.abtn.r{background:#fee2e2;color:#b91c1c}.abtn:disabled{background:#e7e5e4;color:#a8a29e;cursor:default}
+.logcard{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(124,45,18,.08);display:flex;gap:10px;align-items:center}
+.logcard .ic{font-size:22px}
+.logcard b{font-size:13.5px;color:#7c2d12;display:block}.logcard .m{font-size:11.5px;color:#a16207;font-weight:600}
+.empty{background:#fff;border-radius:14px;padding:28px;text-align:center;color:#a16207;font-weight:700;font-size:14px;box-shadow:0 2px 8px rgba(124,45,18,.08)}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#7c2d12;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#c2410c;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>⏳ Expiry<span>Guard</span></h1></div>
+  <div class="alert" id="alertBanner"><div class="big" id="alertNum">3</div><div class="txt" id="alertTxt">items expire within 30 days — check them before your customers do.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv" id="stRisk">3</div><div class="sl">Expiring &lt;30 days</div></div>
+    <div class="stat"><div class="sv" id="stVal">Rs 940</div><div class="sl">Value at risk</div></div>
+    <div class="stat"><div class="sv" id="stSave">Rs 0</div><div class="sl">Saved via discount</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="invTab" onclick="setTab('inv')">📦 Inventory</div>
+    <div class="tab" id="clearTab" onclick="setTab('clear')">💸 Clearance <span id="clearCount"></span></div>
+    <div class="tab" id="logTab" onclick="setTab('log')">📋 Removed log</div>
+  </div>
+  <div class="filters" id="filterBar">
+    <button class="f on" id="filterAll" onclick="setFilter('all')">All</button>
+    <button class="f" id="filterRed" onclick="setFilter('red')">🔴 &lt;30 days</button>
+    <button class="f" id="filterAmber" onclick="setFilter('amber')">🟡 &lt;90 days</button>
+    <button class="f" id="filterGreen" onclick="setFilter('green')">🟢 Safe</button>
+  </div>
+  <div id="list"></div>
+  <div class="foot">ExpiryGuard watches every batch date — you don't have to.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='inv', FILT='all';
+let ITEMS=[
+{id:0,n:'Fresh Milk 1L',b:'Batch B-241',d:12,v:340},
+{id:1,n:'Yogurt Cups ×24',b:'Batch B-238',d:22,v:380},
+{id:2,n:'Chicken Breast 500g',b:'Batch B-244',d:28,v:220},
+{id:3,n:'Glucose Biscuits',b:'Batch B-220',d:45,v:150},
+{id:4,n:'Cooking Oil 1.5L',b:'Batch B-215',d:67,v:420},
+{id:5,n:'Shampoo 400ml',b:'Batch B-209',d:40,v:260},
+{id:6,n:'Basmati Rice 5kg',b:'Batch B-198',d:210,v:890},
+{id:7,n:'Detergent Powder 1kg',b:'Batch B-191',d:320,v:540}];
+function st(d){return d<30?'red':d<90?'amber':'green'}
+function left(d){return d===1?'1 day left':d+' days left'}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function setTab(t){TAB=t;['inv','clear','log'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));document.getElementById('filterBar').style.display=t==='inv'?'flex':'none';render()}
+function setFilter(f){FILT=f;['all','red','amber','green'].forEach(x=>document.getElementById('filter'+x[0].toUpperCase()+x.slice(1)).classList.toggle('on',x===f));render()}
+function discount(id){const it=ITEMS.find(i=>i.id===id);if(it.disc)return;it.disc=20;render();toast('💸 '+it.n+' — 20% off, moved to Clearance')}
+function removeItem(id){const ix=ITEMS.findIndex(i=>i.id===id);const it=ITEMS[ix];ITEMS.splice(ix,1);LOG.unshift({n:it.n,b:it.b,d:it.d,v:it.v});render();toast('🗑 '+it.n+' removed from shelf — logged')}
+const LOG=[{n:'Strawberry Milk 500ml',b:'Batch B-199',d:0,v:180},{n:'Cream Cheese 200g',b:'Batch B-186',d:0,v:240}];
+function card(it){const s=st(it.d);
+const acts=it.disc?`<span class="badge disc">💸 ON DISCOUNT −20%</span>`:s!=='green'?`<div class="acts"><button class="abtn d" id="discountBtn${it.id}" onclick="discount(${it.id})">💸 Put on discount</button>${s==='red'?`<button class="abtn r" id="removeBtn${it.id}" onclick="removeItem(${it.id})">🗑 Remove</button>`:''}</div>`:'';
+return `<div class="card ${s}"><div class="dot ${s}"></div><div class="info"><b>${it.n}</b><div class="meta">${it.b} · Rs ${it.v}</div><div class="left ${s}">${left(it.d)}</div>${it.disc?'':s!=='green'?`<span class="badge">${s==='red'?'⚠ Action needed':'⏳ Watch closely'}</span>`:''}</div>${acts}</div>`}
+function render(){
+const list=document.getElementById('list');
+if(TAB==='inv'){
+const items=ITEMS.filter(i=>FILT==='all'||st(i.d)===FILT);
+list.innerHTML=items.length?items.map(card).join(''):'<div class="empty">No items in this group. 🎉</div>';
+}else if(TAB==='clear'){
+const items=ITEMS.filter(i=>i.disc);
+document.getElementById('clearCount').textContent=items.length?`(${items.length})`:'';
+list.innerHTML=items.length?items.map(it=>`<div class="card amber"><div class="dot amber"></div><div class="info"><b>${it.n}</b><div class="meta">${it.b} · <s>Rs ${it.v}</s> <b style="display:inline;color:#15803d">Rs ${Math.round(it.v*.8)}</b></div><div class="left amber">${left(it.d)}</div></div><span class="badge disc">💸 −20% CLEARANCE</span></div>`).join(''):'<div class="empty">Nothing on clearance yet.<br>Tap “Put on discount” on any near-expiry item.</div>';
+}else{
+list.innerHTML=LOG.length?LOG.map(l=>`<div class="logcard"><div class="ic">🗑</div><div><b>${l.n}</b><div class="m">${l.b} · removed today · Rs ${l.v} written off</div></div></div>`).join(''):'<div class="empty">Nothing removed yet.</div>';
+}
+const red=ITEMS.filter(i=>i.d<30);
+document.getElementById('alertNum').textContent=red.length;
+document.getElementById('alertTxt').textContent=red.length?`items expire within 30 days — check them before your customers do.`:'all stock is safe. Nice work! 🎉';
+document.getElementById('stRisk').textContent=red.length;
+document.getElementById('stVal').textContent='Rs '+red.filter(i=>!i.disc).reduce((s,i)=>s+i.v,0);
+document.getElementById('stSave').textContent='Rs '+ITEMS.filter(i=>i.disc).reduce((s,i)=>s+i.v,0)}
+render();
+</script>
+</body>
+</html>
