@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RentGuard — Rent Collected On Time, Every Time</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#eff6ff;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .wrap{padding-top:46px}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#1e3a8a}.top h1 span{color:#2563eb}
+.alert{background:linear-gradient(135deg,#b91c1c,#ef4444);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(185,28,28,.25)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(30,58,138,.08);border-top:3px solid #2563eb}
+.stat .sv{font-size:19px;font-weight:900;color:#1e3a8a}.stat .sl{font-size:10.5px;color:#475569;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(30,58,138,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:13px;font-weight:800;color:#475569;border-radius:10px;cursor:pointer}
+.tab.on{background:#2563eb;color:#fff}
+.filters{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.f{border:1.5px solid #bfdbfe;background:#fff;color:#1d4ed8;font-size:12px;font-weight:800;padding:7px 13px;border-radius:18px;cursor:pointer}
+.f.on{background:#1e3a8a;color:#fff;border-color:#1e3a8a}
+.card{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(30,58,138,.08);border-inline-start:5px solid #22c55e;display:flex;gap:10px;align-items:center}
+.card.red{border-color:#dc2626}.card.amber{border-color:#f59e0b}
+.dot{width:12px;height:12px;border-radius:50%;flex:none}
+.dot.red{background:#dc2626;box-shadow:0 0 0 4px #fee2e2}.dot.amber{background:#f59e0b;box-shadow:0 0 0 4px #fef3c7}.dot.green{background:#22c55e;box-shadow:0 0 0 4px #dcfce7}
+.info{flex:1}.info b{font-size:14px;color:#1e3a8a;display:block}
+.info .meta{font-size:11.5px;color:#475569;font-weight:600}
+.info .left{font-size:12px;font-weight:800;margin-top:2px}
+.left.red{color:#b91c1c}.left.amber{color:#b45309}.left.green{color:#15803d}
+.badge{display:inline-block;font-size:10px;font-weight:800;padding:3px 9px;border-radius:12px;background:#fef3c7;color:#b45309;margin-top:5px}
+.badge.paid{background:#dcfce7;color:#15803d}.badge.late{background:#fee2e2;color:#b91c1c}
+.acts{display:flex;flex-direction:column;gap:6px}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 12px;border-radius:10px;cursor:pointer;white-space:nowrap}
+.abtn.w{background:#2563eb;color:#fff}.abtn.g{background:#dcfce7;color:#15803d}.abtn:disabled{background:#e2e8f0;color:#94a3b8;cursor:default}
+.sum{background:#fff;border-radius:14px;padding:13px 16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(30,58,138,.08);border:1.5px solid #fecaca}
+.sum b{color:#b91c1c;font-size:14px;display:block}.sum .m{font-size:12px;color:#475569;font-weight:700;margin-top:3px}
+.logcard{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(30,58,138,.08);display:flex;gap:10px;align-items:center}
+.logcard .ic{font-size:22px}
+.logcard b{font-size:13.5px;color:#1e3a8a;display:block}.logcard .m{font-size:11.5px;color:#475569;font-weight:600}
+.empty{background:#fff;border-radius:14px;padding:28px;text-align:center;color:#475569;font-weight:700;font-size:14px;box-shadow:0 2px 8px rgba(30,58,138,.08)}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#1e3a8a;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#3b82f6;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🏠 Rent<span>Guard</span></h1></div>
+  <div class="alert" id="alertBanner"><div class="big" id="alertNum">2</div><div class="txt" id="alertTxt">tenants overdue — RentGuard follows them up so you don't have to.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv" id="stCol">$0</div><div class="sl">Collected this month</div></div>
+    <div class="stat"><div class="sv" id="stPend">$0</div><div class="sl">Pending</div></div>
+    <div class="stat"><div class="sv" id="stOver">$0</div><div class="sl">Overdue</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="tenTab" onclick="setTab('ten')">🏠 Tenants</div>
+    <div class="tab" id="defTab" onclick="setTab('def')">⚠️ Defaulters <span id="defCount"></span></div>
+    <div class="tab" id="logTab" onclick="setTab('log')">📲 Reminders</div>
+  </div>
+  <div class="filters" id="filterBar">
+    <button class="f on" id="filterAll" onclick="setFilter('all')">All</button>
+    <button class="f" id="filterPaid" onclick="setFilter('paid')">🟢 Paid</button>
+    <button class="f" id="filterPending" onclick="setFilter('pending')">🟡 Pending</button>
+    <button class="f" id="filterOverdue" onclick="setFilter('overdue')">🔴 Overdue</button>
+  </div>
+  <div id="list"></div>
+  <div class="foot">RentGuard watches every due date — you don't have to.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='ten', FILT='all';
+let TENANTS=[
+{id:0,n:'James Miller',u:'Unit 4A',r:1200,st:'paid'},
+{id:1,n:'Sarah Thompson',u:'Unit 2B',r:950,st:'pending',days:3},
+{id:2,n:'David Wilson',u:'Unit 7C',r:1400,st:'overdue',days:12},
+{id:3,n:'Robert Johnson',u:'Unit 1A',r:1100,st:'paid'},
+{id:4,n:'Lisa Brown',u:'Unit 5B',r:875,st:'overdue',days:26},
+{id:5,n:'Mark Davis',u:'Unit 3D',r:1050,st:'pending',days:2},
+{id:6,n:'Jennifer White',u:'Unit 6A',r:1300,st:'paid'},
+{id:7,n:'Tom Harris',u:'Unit 8B',r:990,st:'pending',days:5}];
+const LOG=[{n:'Sarah Thompson',m:'gentle reminder sent · 2 days ago'}];
+function dot(st){return st==='paid'?'green':st==='pending'?'amber':'red'}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function setTab(t){TAB=t;['ten','def','log'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));document.getElementById('filterBar').style.display=t==='ten'?'flex':'none';render()}
+function setFilter(f){FILT=f;['all','paid','pending','overdue'].forEach(x=>document.getElementById('filter'+x[0].toUpperCase()+x.slice(1)).classList.toggle('on',x===f));render()}
+function remind(id){const t=TENANTS.find(i=>i.id===id);LOG.unshift({n:t.n,m:'WhatsApp reminder sent · just now'});render();toast('📲 WhatsApp reminder sent to '+t.n)}
+function paid(id){const t=TENANTS.find(i=>i.id===id);t.st='paid';delete t.days;render();toast('✅ '+t.n+' marked paid — stats updated')}
+function card(t){
+const d=dot(t.st);
+const stLine=t.st==='paid'?'<div class="left green">Paid in full ✅</div>':t.st==='pending'?'<div class="left amber">Due in '+t.days+' days</div>':'<div class="left red">'+t.days+' days overdue</div>';
+const badge=t.st==='paid'?'<span class="badge paid">✅ PAID</span>':t.st==='overdue'?'<span class="badge late">⚠ OVERDUE</span>':'<span class="badge">⏳ DUE SOON</span>';
+const acts=t.st==='paid'?'':
+'<div class="acts"><button class="abtn w" id="remBtn'+t.id+'" onclick="remind('+t.id+')">📲 Send reminder</button><button class="abtn g" id="paidBtn'+t.id+'" onclick="paid('+t.id+')">✅ Mark paid</button></div>';
+return '<div class="card '+d+'"><div class="dot '+d+'"></div><div class="info"><b>'+t.n+'</b><div class="meta">'+t.u+' · $'+t.r+'/month</div>'+stLine+badge+'</div>'+acts+'</div>'}
+function render(){
+const list=document.getElementById('list');
+if(TAB==='ten'){
+const items=TENANTS.filter(t=>FILT==='all'||t.st===FILT);
+list.innerHTML=items.length?items.map(card).join(''):'<div class="empty">No tenants in this group. 🎉</div>';
+}else if(TAB==='def'){
+const items=TENANTS.filter(t=>t.st==='overdue');
+const total=items.reduce((s,t)=>s+t.r,0);
+document.getElementById('defCount').textContent=items.length?'('+items.length+')':'';
+const old=items.length?items.reduce((a,b)=>a.days>b.days?a:b):null;
+const sum=items.length?'<div class="sum"><b>⚠ Defaulter report — October</b><div class="m">'+items.length+' tenants owe <b>$'+total.toLocaleString()+'</b> total · oldest: '+old.days+' days ('+old.n+')</div></div>':'';
+list.innerHTML=sum+(items.length?items.map(t=>'<div class="card red"><div class="dot red"></div><div class="info"><b>'+t.n+'</b><div class="meta">'+t.u+' · $'+t.r+'/month</div><div class="left red">'+t.days+' days overdue · $'+t.r+' owed</div><span class="badge late">⚠ DEFAULTER</span></div><div class="acts"><button class="abtn w" id="dremBtn'+t.id+'" onclick="remind('+t.id+')">📲 Send reminder</button></div></div>').join(''):'<div class="empty">No defaulters. Every tenant is current. 🎉</div>');
+}else{
+list.innerHTML=LOG.length?LOG.map(l=>'<div class="logcard"><div class="ic">📲</div><div><b>'+l.n+'</b><div class="m">'+l.m+'</div></div></div>').join(''):'<div class="empty">No reminders sent yet.</div>';
+}
+const col=TENANTS.filter(t=>t.st==='paid').reduce((s,t)=>s+t.r,0);
+const pen=TENANTS.filter(t=>t.st==='pending').reduce((s,t)=>s+t.r,0);
+const ov=TENANTS.filter(t=>t.st==='overdue');
+document.getElementById('stCol').textContent='$'+col.toLocaleString();
+document.getElementById('stPend').textContent='$'+pen.toLocaleString();
+document.getElementById('stOver').textContent='$'+ov.reduce((s,t)=>s+t.r,0).toLocaleString();
+document.getElementById('alertNum').textContent=ov.length;
+document.getElementById('alertTxt').textContent=ov.length?'tenants overdue — RentGuard follows them up so you don\'t have to.':'all rents collected. Nice work! 🎉';
+}
+render();
+</script>
+</body>
+</html>

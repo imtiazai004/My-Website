@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ViewBook — Viewings That Turn Into Sales</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#faf5ff;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .wrap{padding-top:46px}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#4c1d95}.top h1 span{color:#7c3aed}
+.alert{background:linear-gradient(135deg,#6d28d9,#a855f7);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(109,40,217,.25)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(76,29,149,.08);border-top:3px solid #7c3aed}
+.stat .sv{font-size:19px;font-weight:900;color:#4c1d95}.stat .sl{font-size:10.5px;color:#7e6a94;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(76,29,149,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12.5px;font-weight:800;color:#7e6a94;border-radius:10px;cursor:pointer}
+.tab.on{background:#7c3aed;color:#fff}
+.card{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(76,29,149,.08);border-inline-start:5px solid #22c55e;display:flex;gap:10px;align-items:center}
+.card.pending{border-color:#f59e0b}.card.noshow{border-color:#dc2626}
+.dot{width:12px;height:12px;border-radius:50%;flex:none}
+.dot.pending{background:#f59e0b;box-shadow:0 0 0 4px #fef3c7}.dot.confirmed{background:#22c55e;box-shadow:0 0 0 4px #dcfce7}.dot.noshow{background:#dc2626;box-shadow:0 0 0 4px #fee2e2}
+.info{flex:1}.info b{font-size:14px;color:#4c1d95;display:block}
+.info .meta{font-size:11.5px;color:#7e6a94;font-weight:600}
+.info .time{font-size:12.5px;font-weight:800;margin-top:3px;color:#4c1d95}
+.time.confirmed{color:#15803d}.time.pending{color:#b45309}.time.noshow{color:#b91c1c}
+.badge{display:inline-block;font-size:10px;font-weight:800;padding:3px 9px;border-radius:12px;margin-top:5px;margin-right:4px}
+.badge.hot{background:#fed7aa;color:#9a3412}.badge.cf{background:#dcfce7;color:#15803d}.badge.ns{background:#fee2e2;color:#b91c1c}.badge.pen{background:#fef3c7;color:#b45309}
+.acts{display:flex;flex-direction:column;gap:6px}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 12px;border-radius:10px;cursor:pointer;white-space:nowrap}
+.abtn.g{background:#7c3aed;color:#fff}.abtn.l{background:#ede9fe;color:#6d28d9}.abtn.r{background:#fee2e2;color:#b91c1c}.abtn:disabled{background:#e2e8f0;color:#94a3b8;cursor:default}
+.score{height:8px;background:#ede9fe;border-radius:6px;margin-top:6px;overflow:hidden}
+.score i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#f59e0b,#ef4444)}
+.switch{position:relative;width:46px;height:26px;flex:none;cursor:pointer}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;background:#d8b4fe;border-radius:20px;transition:.2s}
+.slider:before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+.switch input:checked + .slider{background:#7c3aed}
+.switch input:checked + .slider:before{transform:translateX(20px)}
+.tgl{display:flex;align-items:center;gap:8px;margin-top:8px}
+.tgl .tl{font-size:11.5px;font-weight:800;color:#6d28d9}
+.logcard{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(76,29,149,.08);display:flex;gap:10px;align-items:center}
+.logcard .ic{font-size:22px}
+.logcard b{font-size:13.5px;color:#4c1d95;display:block}.logcard .m{font-size:11.5px;color:#7e6a94;font-weight:600}
+.empty{background:#fff;border-radius:14px;padding:28px;text-align:center;color:#7e6a94;font-weight:700;font-size:14px;box-shadow:0 2px 8px rgba(76,29,149,.08)}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#4c1d95;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#a855f7;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🏡 View<span>Book</span></h1></div>
+  <div class="alert" id="alertBanner"><div class="big" id="alertNum">3</div><div class="txt" id="alertTxt">viewings still unconfirmed — ViewBook chases them automatically.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv" id="stWeek">0</div><div class="sl">Viewings this week</div></div>
+    <div class="stat"><div class="sv" id="stConf">0</div><div class="sl">Confirmed</div></div>
+    <div class="stat"><div class="sv" id="stHot">0</div><div class="sl">🔥 Hot buyers</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="vwTab" onclick="setTab('vw')">📅 Viewings</div>
+    <div class="tab" id="hotTab" onclick="setTab('hot')">🔥 Hot buyers</div>
+    <div class="tab" id="folTab" onclick="setTab('fol')">📲 Follow-ups <span id="folCount"></span></div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">ViewBook turns phone bookings into confirmed sales.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='vw';
+const RETIMES=['Tomorrow · 10:30 AM','Fri · 11:00 AM','Sat · 12:00 PM','Sun · 1:00 PM'];
+let VIEWS=[
+{id:0,b:'Emily Carter',p:'42 Maple Street',t:'Tomorrow · 10:30 AM',st:'pending',hot:true,score:92,auto:false},
+{id:1,b:'Michael Brown',p:'17 Oak Avenue',t:'Today · 4:00 PM',st:'confirmed',hot:false,score:61,auto:false},
+{id:2,b:'Jessica Davis',p:'8 Pine Road',t:'Fri · 11:00 AM',st:'pending',hot:true,score:88,auto:true},
+{id:3,b:'Daniel Moore',p:'23 Birch Lane',t:'Sat · 2:00 PM',st:'confirmed',hot:true,score:95,auto:true},
+{id:4,b:'Ashley Taylor',p:'5 Cedar Court',t:'Sat · 10:00 AM',st:'noshow',hot:false,score:34,auto:false},
+{id:5,b:'Kevin White',p:'9 Willow Drive',t:'Sun · 1:00 PM',st:'pending',hot:false,score:55,auto:false}];
+const LOG=[];
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function setTab(t){TAB=t;['vw','hot','fol'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function confirmV(id){const v=VIEWS.find(i=>i.id===id);v.st='confirmed';render();toast('✅ Viewing confirmed — '+v.b+' notified')}
+function resched(id){const v=VIEWS.find(i=>i.id===id);const ix=RETIMES.indexOf(v.t);v.t=RETIMES[(ix+1)%RETIMES.length];render();toast('🔁 Rescheduled to '+v.t+' — buyer notified')}
+function noshow(id){const v=VIEWS.find(i=>i.id===id);v.st='noshow';render();toast('⚠️ '+v.b+' marked no-show — moved to follow-ups')}
+function followup(id){const v=VIEWS.find(i=>i.id===id);LOG.unshift({n:v.b,m:'re-engagement message sent · just now'});render();toast('📲 Follow-up sent to '+v.b)}
+function autoTgl(id,el){const v=VIEWS.find(i=>i.id===id);v.auto=el.checked;toast(el.checked?'🤖 Auto follow-up ON for '+v.b:'🤖 Auto follow-up OFF for '+v.b)}
+function card(v){
+const dc=v.st==='pending'?'pending':v.st==='confirmed'?'confirmed':'noshow';
+const cls=v.st==='noshow'?'noshow':v.st==='pending'?'pending':'';
+const badge=v.st==='confirmed'?'<span class="badge cf">✅ CONFIRMED</span>':v.st==='noshow'?'<span class="badge ns">⚠ NO-SHOW</span>':'<span class="badge pen">⏳ UNCONFIRMED</span>';
+const hot=v.hot?'<span class="badge hot">🔥 HOT BUYER</span>':'';
+const acts=v.st==='pending'?'<div class="acts"><button class="abtn g" id="cfBtn'+v.id+'" onclick="confirmV('+v.id+')">✅ Confirm</button><button class="abtn l" id="rsBtn'+v.id+'" onclick="resched('+v.id+')">🔁 Reschedule</button><button class="abtn r" id="nsBtn'+v.id+'" onclick="noshow('+v.id+')">⚠ No-show</button></div>'
+:v.st==='confirmed'?'<div class="acts"><button class="abtn l" id="rsBtn'+v.id+'" onclick="resched('+v.id+')">🔁 Reschedule</button></div>'
+:'<div class="acts"><button class="abtn g" id="fuBtn'+v.id+'" onclick="followup('+v.id+')">📲 Send follow-up</button></div>';
+return '<div class="card '+cls+'"><div class="dot '+dc+'"></div><div class="info"><b>'+v.b+'</b><div class="meta">'+v.p+'</div><div class="time '+dc+'">'+v.t+'</div>'+badge+hot+'</div>'+acts+'</div>'}
+function render(){
+const list=document.getElementById('list');
+if(TAB==='vw'){
+list.innerHTML=VIEWS.map(card).join('');
+}else if(TAB==='hot'){
+const items=VIEWS.filter(v=>v.hot);
+list.innerHTML=items.length?items.map(v=>'<div class="card"><div class="dot confirmed"></div><div class="info"><b>'+v.b+'</b><div class="meta">'+v.p+' · '+v.t+'</div><span class="badge hot">🔥 HOT BUYER · '+v.score+'% engaged</span><div class="score"><i style="width:'+v.score+'%"></i></div><div class="tgl"><label class="switch"><input type="checkbox" id="auto'+v.id+'" '+(v.auto?'checked':'')+' onchange="autoTgl('+v.id+',this)"><span class="slider"></span></label><span class="tl">🤖 Auto follow-up</span></div></div></div>').join(''):'<div class="empty">No hot buyers right now.</div>';
+}else{
+const items=VIEWS.filter(v=>v.st==='noshow');
+document.getElementById('folCount').textContent=LOG.length+items.length?'('+(LOG.length+items.length)+')':'';
+let html=items.length?items.map(card).join(''):'<div class="empty">No no-shows. Nobody slipped away. 🎉</div>';
+if(LOG.length)html+=LOG.map(l=>'<div class="logcard"><div class="ic">📲</div><div><b>'+l.n+'</b><div class="m">'+l.m+'</div></div></div>').join('');
+list.innerHTML=html;
+}
+const week=VIEWS.length, conf=VIEWS.filter(v=>v.st==='confirmed').length, hot=VIEWS.filter(v=>v.hot).length;
+document.getElementById('stWeek').textContent=week;
+document.getElementById('stConf').textContent=conf;
+document.getElementById('stHot').textContent=hot;
+const un=VIEWS.filter(v=>v.st==='pending').length;
+document.getElementById('alertNum').textContent=un;
+document.getElementById('alertTxt').textContent=un?'viewings still unconfirmed — ViewBook chases them automatically.':'every viewing confirmed. No buyer left hanging. 🎉';
+}
+render();
+</script>
+</body>
+</html>
