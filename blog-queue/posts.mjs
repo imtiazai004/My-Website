@@ -288,4 +288,219 @@ The customer should never be your quality inspector. Let the system inspect firs
 
 *Stock with expiry dates? DM me "STOCK" — I will show you the guard in action.*`,
   },
+
+  {
+    slug: 'late-rent-reminders-property-managers',
+    title: `Late Rent Is Not a Tenant Problem — It's a System Problem`,
+    excerpt: `Rents arrive late because reminders live on paper and in WhatsApp chats. A collection dashboard with automatic follow-ups changes that.`,
+    tags: ['Property Management', 'Automation', 'WhatsApp Business'],
+    content: `The rent was due on the 1st. On the 12th, you're texting James Miller a polite nudge. On the 26th, you're calling Lisa Brown. By month end, your "system" is a phone full of one-sided WhatsApp chats and a spreadsheet that hasn't been opened since spring.
+
+Late rent feels like a tenant problem. It isn't. Tenants forget. Tenants delay. Tenants prioritize — and the landlord who never follows up drops to the bottom of the list. The problem is that following up is manual, awkward, and always late.
+
+The fix is a collection dashboard that does the chasing:
+
+:::demo rentguard:::
+
+Every tenant, every due date, every payment status on one screen. Overdue tenants get flagged in red with the days late staring back at you. One tap sends a WhatsApp reminder — and the reminders log proves it was sent. Defaulters get their own list with the total owed, so you never "forget" the big one. And the month's numbers — collected vs pending vs overdue — update themselves the moment a payment is recorded.
+
+RentGuard turns collection from an awkward monthly ritual into a system that runs while you sleep.
+
+*Manage rentals? DM me "RENT" — I'll show you what this looks like with your properties.*`,
+  },
+  {
+    slug: 'real-estate-viewing-no-shows',
+    title: `Every No-Show Viewing Is a Buyer You Lost to Someone Else`,
+    excerpt: `Viewings booked by phone, no-shows with no follow-up, hot buyers cooling off — agents lose sales to a process that lives in their head.`,
+    tags: ['Real Estate', 'Automation', 'CRM'],
+    content: `Emily Carter books a viewing for Saturday. Saturday morning, she doesn't show up. You find out when you're already at the property, waiting on the doorstep.
+
+One no-show costs you an hour. But the real cost is bigger: Emily was engaged — she asked for photos, she called twice. She was hot. Now nobody follows up, and by Monday she's signed with another agent who did.
+
+The agent's diary is a phone, a notebook, and memory. Viewings get booked by call, confirmed by hope, and forgotten by everyone.
+
+The fix is a viewing scheduler that never lets a buyer slip:
+
+:::demo viewbook:::
+
+Every viewing — buyer, property, time — in one list. One tap confirms, one tap reschedules, one tap flags a no-show. Hot buyers get a 🔥 badge with an engagement score, so you know exactly who deserves the callback today. Turn on auto follow-up for the hot ones and the system chases them between viewings. And the no-shows? They land in a follow-up queue with a one-tap re-engagement message instead of rotting in your call history.
+
+The viewing you confirm today is the commission you collect next month.
+
+*Estate agent? DM me "VIEW" — I'll show you what this looks like with your listings.*`,
+  },
+  {
+    slug: 'school-fee-defaulters-reminders',
+    title: `Stop Chasing Fees by Hand — Let the System Do It`,
+    excerpt: `Fee invoices go out late, parents "forget," and teachers spend mornings chasing money instead of teaching. A collection dashboard fixes it.`,
+    tags: ['Schools', 'Education', 'Automation'],
+    content: `It's the 18th of the month. Three students haven't paid their fees. The accountant's list is on paper. The class teacher is supposed to remind the parents — between lessons, during break, in the evening.
+
+Nobody does. The reminder is awkward, it's manual, and it always loses to the day's hundred other tasks. By the 28th, the same three fees are still unpaid, plus two more.
+
+The fix is a fee collection dashboard that chases politely and automatically:
+
+:::demo feechaser:::
+
+Every student, every fee status, in one view. Overdue fees glow red with the days late. One tap sends a WhatsApp reminder to the parents — no teacher has to make the awkward call. When the money comes in, one tap records the payment, updates the balance, and issues a receipt. And the defaulter report always knows the total outstanding and the longest overdue — no end-of-month surprises.
+
+Teachers should teach. The system should chase.
+
+*Run a school or tuition center? DM me "FEES" — I'll show you what this looks like for your students.*`,
+  },
+  {
+    slug: 'gym-membership-churn-early-warning',
+    title: `Members Quit in Month 3. Your App Should See It in Month 1.`,
+    excerpt: `Nobody quits a gym suddenly. Attendance drops first — for weeks. ClassFlow flags the quiet quitters so you can win them back before they leave.`,
+    tags: ['Fitness Studios', 'Customer Retention', 'Automation'],
+    content: `Nobody quits a gym on a Tuesday. They quit slowly — three visits a week becomes two, becomes one, becomes a monthly charge they finally notice and cancel.
+
+The gym owner never sees it coming, because the signal is scattered: a sign-in sheet here, a memory there. By month 3 the member is gone, and winning back a churned member costs five times more than keeping one.
+
+The problem isn't motivation. It's visibility. Daniel Moore's attendance fell from 5 visits a week to zero over five weeks — and nobody called him. Nobody sent an offer. Nobody noticed.
+
+That's what a membership dashboard changes:
+
+:::demo classflow:::
+
+One screen, every member. Attendance trends as simple bars — green when they're training, red when they're going quiet. Churn-risk flags on the members whose numbers are sliding. One tap sends a win-back offer on WhatsApp: 20% off next month plus a free personal training session.
+
+And the silent killer — expired memberships. The app watches every expiry date and nudges you before a renewal lapses, so a payment that should have been automatic never becomes a cancellation.
+
+Try the demo above: filter by risk level, send a win-back offer, check the expiring tab.
+
+*Run a gym or fitness studio? DM me "CLASSFLOW" — I'll show you what this looks like with your members in it.*`,
+  },
+  {
+    slug: 'home-service-job-scheduling-chaos',
+    title: `The Plumber Who Shows Up Late Loses Twice.`,
+    excerpt: `Jobs in a notebook, quotes lost in WhatsApp, customers calling to ask where you are. JobTrack puts every job, tech and quote on one board.`,
+    tags: ['Home Services', 'Scheduling', 'WhatsApp Business'],
+    content: `A plumber loses a job twice when he runs late. Once to the customer waiting at home, angry. And once to the next customer, whose slot just slid too.
+
+It starts innocently: jobs written in a notebook, quotes typed into WhatsApp and forgotten, the customer never told when the technician will actually arrive. By midday the whole schedule is fiction and the phone won't stop ringing.
+
+Customers don't leave over one late arrival. They leave over the pattern — never knowing when you'll show up, never getting a straight answer, chasing quotes that vanished into a chat thread.
+
+One board fixes the whole day:
+
+:::demo jobtrack:::
+
+A daily timeline with every job — time, customer, address, assigned technician. One tap sends the customer an ETA on WhatsApp, so "where is the plumber?" calls stop happening. Technicians get assigned from a dropdown as the day shifts. Start a job, mark it done, and the board updates itself.
+
+And the quotes stop drowning in WhatsApp. Every quote sits in one list with its amount — accept or decline, and accepted quotes are right there ready to schedule.
+
+Try the demo above: notify a customer, reassign a technician, accept a quote.
+
+*Run a plumbing, electrical or home-service business? DM me "JOBTRACK" — I'll show you what this looks like with your jobs on it.*`,
+  },
+  {
+    slug: 'wedding-hall-double-booking',
+    title: `One Double-Booked Hall Costs More Than Software Ever Will.`,
+    excerpt: `Two families, one date, one hall — a double booking is a reputation fire. HallBook locks booked dates, tracks vendors and chases payment milestones.`,
+    tags: ['Event Venues', 'Booking Management', 'Automation'],
+    content: `Two families arrive for the same Saturday. One hall. That single moment costs more than the refund — it costs the reviews, the referrals, the reputation a venue spent years building.
+
+Double bookings don't happen because owners are careless. They happen because the booking lives in a diary, the vendor coordination lives in five different WhatsApp chats, and the payment milestones live in someone's head. Three systems, zero of them talking to each other.
+
+Then the balance payment slips through the cracks too — remembered the week after the event, when collecting it has become awkward.
+
+One calendar holds everything:
+
+:::demo hallbook:::
+
+A month view where booked dates are locked — red, unclickable, impossible to double-book. Tap a booked date and the whole event opens up: the vendor checklist (catering, decor, sound, photography) with checkboxes, so nothing falls through a chat crack. The payment milestones with due dates and amounts — advance, mid, balance — each marked as it lands, with a progress bar showing exactly what's collected.
+
+Tap a free date and you book it live: name, guests, done. The date locks the instant it's taken.
+
+Try the demo above: open a booked date, confirm a vendor, mark a milestone paid, then book a free date yourself.
+
+*Run a wedding hall or event venue? DM me "HALLBOOK" — I'll show you what this looks like with your calendar on it.*`,
+  },
+  {
+    slug: 'pharmacy-refill-reminders',
+    title: `Your Best Customers Forget. Your Pharmacy Shouldn't.`,
+    excerpt: `Chronic patients run out of medicine, forget to reorder, and buy from the nearest shop instead. A refill-reminder system keeps them yours.`,
+    tags: ['Pharmacies', 'Customer Retention', 'Automation'],
+    content: `Blood pressure, diabetes, thyroid — your most loyal patients take the same medicine every single month. You'd think the refill is automatic. It isn't.
+
+The bottle empties. Nobody reminds them. A day slips by, and the patient who trusted you for two years walks into the pharmacy next door because it's closer at that moment. You didn't lose one sale — you lost months of repeat business, and you never even knew the patient was about to run out.
+
+This isn't a loyalty problem. It's a memory problem. Pharmacies track stock carefully and patients not at all — while the patient's own memory is the weakest link in your revenue chain.
+
+The fix is a refill system that remembers for everyone:
+
+:::demo scriptrefill:::
+
+Every patient with a refill due date, overdue cases flagged red, adherence streaks that reward the on-time patients, and one-tap SMS/WhatsApp reminders that go out before the bottle is empty — not after the patient is gone.
+
+Try the demo above: send a reminder, mark a refill recovered, watch the recovery rate climb. Then imagine your whole patient list covered.
+
+*Run a pharmacy? DM me "REFILL" — I'll show you what this looks like with your own patients.*`,
+  },
+  {
+    slug: 'candidate-ghosting-recruiters',
+    title: `Great Candidates Don't Wait. Neither Should Your Hiring.`,
+    excerpt: `Interviews scheduled by email ping-pong, pipelines tracked in spreadsheets, and good candidates accepting other offers while you search a thread.`,
+    tags: ['Recruitment', 'HR Tech', 'Automation'],
+    content: `You found the perfect candidate. The CV is strong, the screening went well — and then the email ping-pong begins. "Does Tuesday work?" "Actually, how about Thursday?" "Can we do next week instead?"
+
+Every round trip costs you days. And days are exactly what you don't have, because that candidate has three other processes running. While your thread sits unanswered, they accept another offer — and your spreadsheet still says "in progress."
+
+Small HR teams lose candidates in three places: interviews scheduled by hand, follow-ups that never get sent, and pipelines that exist only as a spreadsheet nobody opens until Friday.
+
+The fix is a pipeline that keeps every candidate moving:
+
+:::demo hirepipe:::
+
+A kanban from Sourced to Offer. Candidates advance with one click, stalled ones get flagged before they cool off, interviews book without the email tennis match, and follow-ups go out on time — every time.
+
+Try the demo above: advance a candidate, book their interview, nudge a stalled one back. Hiring is a speed game, and speed is a system.
+
+*Hiring right now? DM me "HIRE" — I'll show you what this looks like for your open roles.*`,
+  },
+  {
+    slug: 'auto-workshop-service-reminders',
+    title: `Your Customers Forget Their Car Service. Your Workshop Remembers.`,
+    excerpt: `Service intervals slip, paper job cards bury the day's work, and customers never hear when their car is ready. The workshop that remembers wins.`,
+    tags: ['Auto Workshops', 'Customer Retention', 'Automation'],
+    content: `Every 5,000 km an oil change. Every six months a general check. Your customer knows this in theory — and remembers none of it in practice.
+
+So the interval slips. The job card stays buried in a drawer. And the customer who would have paid you this week pays your competitor next month, because nobody reminded them the service was due.
+
+Meanwhile inside the workshop, the day runs on paper and phone calls. Job cards get lost, nobody knows which car is in which stage, and the customer keeps calling to ask the one question that should never need asking: "Is my car ready?"
+
+The fix is a workshop system with a memory:
+
+:::demo carcare:::
+
+Every vehicle's service date tracked, overdue ones flagged, automatic nudges before the interval slips — and digital job cards that move from check-in to in-progress to ready, with a WhatsApp update to the customer at every stage. Full service history, one click.
+
+Try the demo above: nudge a customer, advance a job card, send the pickup update. Your bays stay full because your system never forgets.
+
+*Run a workshop? DM me "SERVICE" — I'll show you what this looks like with your own vehicles.*`,
+  },
+  {
+    slug: 'coworking-space-booking-chaos',
+    title: `Your Meeting Rooms Are Booked. Your Calendar Doesn't Know.`,
+    excerpt: `Room bookings in WhatsApp chats, seat plans on paper, invoices from memory. Co-working spaces lose money and trust to manual booking chaos.`,
+    tags: ['Co-working', 'Small Business', 'Automation'],
+    content: `Two teams. One meeting room. One time slot. Both standing at the door at 10 AM.
+
+The booking lived in a WhatsApp chat nobody re-read. The seats were assigned on paper. The invoices came from memory at month's end — and nobody could say for sure who used what, when.
+
+This is how co-working spaces quietly bleed. Double-booked rooms embarrass you in front of paying members. Untracked seats mean empty desks nobody re-sells. Manual invoices mean late payments nobody chases.
+
+You sell space for a living. Every hour of space should be tracked, billed, and clash-free.
+
+The fix is one system for rooms, seats, and billing:
+
+:::demo leasemind:::
+
+A meeting-room calendar that warns and blocks the moment you try to book a taken slot. A seat-booking grid for the hot-desk floor. Invoices for shared spaces with one-tap payment reminders — all in one place.
+
+Try the demo above: attempt a double-booking and watch it get blocked, grab seats on the floor grid, chase an unpaid invoice. Chaos out, system in.
+
+*Run a co-working or shared office? DM me "LEASE" — I'll show you what this looks like for your space.*`,
+  },
 ];
