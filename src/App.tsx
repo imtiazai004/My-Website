@@ -35,6 +35,8 @@ const TermsAndConditions = lazy(() => import('./components/TermsAndConditions'))
 const WebsitePrivacyPolicy = lazy(() => import('./components/WebsitePrivacyPolicy'));
 const AgencyVsFreelancer = lazy(() => import('./components/AgencyVsFreelancer'));
 const TikFulfillGuidePage = lazy(() => import('./components/TikFulfillGuidePage'));
+const GuidesLibraryPage = lazy(() => import('./components/GuidesLibraryPage'));
+const SellerCopilotGuidePage = lazy(() => import('./components/SellerCopilotGuidePage'));
 const DemosPage = lazy(() => import('./components/DemosPage'));
 
 const ADMIN_PATH = '/sts-x9k2m7p4-console';
@@ -125,8 +127,16 @@ export default function App() {
             element={<Suspense fallback={LoadingSpinner}><AgencyVsFreelancer /></Suspense>}
           />
           <Route
+            path="/guides"
+            element={<Suspense fallback={LoadingSpinner}><GuidesLibraryPage /></Suspense>}
+          />
+          <Route
             path="/guides/tikfulfill-build-guide"
             element={<Suspense fallback={LoadingSpinner}><TikFulfillGuidePage /></Suspense>}
+          />
+          <Route
+            path="/guides/build-your-own-ai-seller-copilot"
+            element={<Suspense fallback={LoadingSpinner}><SellerCopilotGuidePage /></Suspense>}
           />
           <Route
             path="/blog"
