@@ -9,6 +9,8 @@ const DEMO_NAMES = new Set([
   'salonbook', 'codconfirm', 'invoicechaser', 'leadcrm',
   'bizbot', 'clinictoken', 'proposalgen', 'profitlens',
   'shopconsole', 'expiryguard',
+  'rentguard', 'viewbook', 'feechaser', 'classflow', 'jobtrack',
+  'hallbook', 'scriptrefill', 'hirepipe', 'carcare', 'leasemind',
 ]);
 
 function escapeHtml(s: string): string {

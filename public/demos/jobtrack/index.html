@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobTrack — The Plumber Who Shows Up Late Loses Twice</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#eff6ff;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .wrap{box-shadow:none!important;border-radius:0!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#1e3a8a}.top h1 span{color:#f59e0b}
+.top .biz{font-size:11px;font-weight:800;color:#1d4ed8;background:#fff;padding:6px 12px;border-radius:20px;box-shadow:0 2px 8px rgba(30,58,138,.08)}
+.alert{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(29,78,216,.25)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(30,58,138,.08);border-top:3px solid #3b82f6}
+.stat .sv{font-size:20px;font-weight:900;color:#1e3a8a}.stat .sl{font-size:10.5px;color:#1d4ed8;font-weight:700}
+.stat.prog{border-top-color:#f59e0b}.stat.prog .sl{color:#b45309}
+.stat.quote{border-top-color:#8b5cf6}.stat.quote .sl{color:#7c3aed}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(30,58,138,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:13px;font-weight:800;color:#60a5fa;border-radius:10px;cursor:pointer}
+.tab.on{background:#1d4ed8;color:#fff}
+.tl{position:relative;margin:4px 0 6px 8px;padding-inline-start:22px}
+.tl::before{content:'';position:absolute;inset-inline-start:6px;top:6px;bottom:6px;width:2px;background:#bfdbfe}
+.tlnode{position:relative;background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(30,58,138,.08)}
+.tlnode::before{content:'';position:absolute;inset-inline-start:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#3b82f6;box-shadow:0 0 0 4px #dbeafe}
+.tlnode.now::before{background:#f59e0b;box-shadow:0 0 0 4px #fef3c7}
+.tltime{font-size:11px;font-weight:900;color:#1d4ed8}
+.tljob{font-size:13.5px;font-weight:800;color:#1e3a8a;margin-top:2px}
+.tlmeta{font-size:11.5px;color:#64748b;font-weight:600}
+.card{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(30,58,138,.08);border-inline-start:5px solid #3b82f6}
+.card.prog{border-color:#f59e0b}.card.done{border-color:#22c55e;opacity:.75}
+.custrow{display:flex;gap:10px;align-items:flex-start}
+.info{flex:1}.info b{font-size:14px;color:#1e3a8a;display:block}
+.info .meta{font-size:11.5px;color:#64748b;font-weight:600}
+.info .addr{font-size:12px;font-weight:700;color:#334155;margin-top:3px}
+.st{font-size:10px;font-weight:900;padding:3px 10px;border-radius:12px;display:inline-block;margin-top:6px}
+.st.sched{background:#dbeafe;color:#1d4ed8}.st.prog{background:#fef3c7;color:#b45309}.st.done{background:#dcfce7;color:#15803d}
+.techsel{font-size:12px;font-weight:700;border:1.5px solid #bfdbfe;border-radius:10px;padding:7px 9px;margin-top:8px;color:#1e3a8a;background:#f8fafc;width:100%}
+.acts{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 12px;border-radius:10px;cursor:pointer}
+.abtn.wa{background:#22c55e;color:#fff}.abtn.start{background:#f59e0b;color:#fff}.abtn.fin{background:#1d4ed8;color:#fff}.abtn.acc{background:#22c55e;color:#fff}.abtn.dec{background:#fee2e2;color:#b91c1c}.abtn.ghost{background:#f1f5f9;color:#64748b}
+.abtn:disabled{background:#e7e5e4;color:#a8a29e;cursor:default}
+.quoteamt{font-size:18px;font-weight:900;color:#5b21b6}
+.qbadge{display:inline-block;font-size:10px;font-weight:800;padding:3px 9px;border-radius:12px;background:#ede9fe;color:#6d28d9;margin-top:5px}
+.qbadge.ok{background:#dcfce7;color:#15803d}.qbadge.no{background:#fee2e2;color:#b91c1c}
+.empty{background:#fff;border-radius:14px;padding:28px;text-align:center;color:#3b82f6;font-weight:700;font-size:14px;box-shadow:0 2px 8px rgba(30,58,138,.08)}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#1e3a8a;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#60a5fa;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🔧 Job<span>Track</span></h1><div class="biz">Clark &amp; Sons Plumbing</div></div>
+  <div class="alert"><div class="big" id="alertNum">5</div><div class="txt">jobs on today's schedule. Every customer gets an ETA on WhatsApp — no more "where is the plumber?" calls.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv" id="stSched">3</div><div class="sl">Scheduled today</div></div>
+    <div class="stat prog"><div class="sv" id="stProg">1</div><div class="sl">In progress</div></div>
+    <div class="stat quote"><div class="sv" id="stQuote">3</div><div class="sl">Quotes pending</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="schedTab" onclick="setTab('sched')">📅 Schedule</div>
+    <div class="tab" id="jobsTab" onclick="setTab('jobs')">🧰 Jobs</div>
+    <div class="tab" id="quotesTab" onclick="setTab('quotes')">💰 Quotes <span id="qCount"></span></div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">JobTrack keeps the day on rails — and the customer in the loop.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='sched';
+const TECHS=['Jake Thompson','Ryan Mitchell','Oliver Bennett'];
+let JOBS=[
+{id:0,t:'09:00',cust:'Matthew Clark',job:'Boiler service',addr:'42 Maple Avenue',tech:0,st:'sched',notified:false},
+{id:1,t:'11:30',cust:'Ashley Lewis',job:'Kitchen tap leak repair',addr:'17 Oak Drive',tech:1,st:'prog',notified:true},
+{id:2,t:'14:00',cust:'Joshua Walker',job:'Bathroom re-fit quote visit',addr:'8 Pine Close',tech:2,st:'sched',notified:false},
+{id:3,t:'16:00',cust:'Olivia Turner',job:'Radiator replacement',addr:'23 Birch Lane',tech:0,st:'sched',notified:false}];
+let QUOTES=[
+{id:0,cust:'Joshua Walker',job:'Bathroom re-fit (full)',amt:'$1,850',st:'pending'},
+{id:1,cust:'Sophia Parker',job:'Water heater install',amt:'$640',st:'pending'},
+{id:2,cust:'Daniel Reed',job:'Drain unblock + camera survey',amt:'$220',st:'pending'}];
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function setTab(t){TAB=t;['sched','jobs','quotes'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function techName(i){return TECHS[i]}
+function notify(id){const j=JOBS.find(x=>x.id===id);j.notified=true;render();toast('📲 ETA sent to '+j.cust+' via WhatsApp ✓')}
+function setStatus(id,s){const j=JOBS.find(x=>x.id===id);j.st=s;render();toast(s==='prog'?'▶ Job started — '+j.cust:s==='done'?'✅ Job completed — '+j.cust:'↩ Job re-scheduled')}
+function assignTech(id,v){const j=JOBS.find(x=>x.id===id);j.tech=+v;toast('🧰 '+techName(j.tech)+' assigned to '+j.cust)}
+function quoteDecide(id,ok){const q=QUOTES.find(x=>x.id===id);q.st=ok?'accepted':'declined';render();toast(ok?'💰 '+q.cust+' accepted the '+q.amt+' quote':'❌ Quote for '+q.cust+' declined')}
+function stClass(s){return s==='sched'?'sched':s==='prog'?'prog':'done'}
+function stLabel(s){return s==='sched'?'SCHEDULED':s==='prog'?'IN PROGRESS':'DONE'}
+function schedCard(j){
+return '<div class="tlnode'+(j.st==='prog'?' now':'')+'"><div class="tltime">'+j.t+(j.st==='prog'?' · NOW':'')+'</div><div class="tljob">'+j.job+'</div><div class="tlmeta">'+j.cust+' · '+j.addr+'</div><div class="tlmeta">🧰 '+techName(j.tech)+(j.notified?' · <b style="color:#15803d">✓ customer notified</b>':' · <b style="color:#b45309">not notified yet</b>')+'</div></div>'}
+function jobCard(j){
+const cls=j.st==='prog'?'prog':j.st==='done'?'done':'';
+let acts='';
+if(j.st==='sched')acts='<button class="abtn wa" onclick="notify('+j.id+')">'+(j.notified?'✓ ETA sent':'📲 Notify customer')+'</button><button class="abtn start" onclick="setStatus('+j.id+',\'prog\')">▶ Start job</button>';
+else if(j.st==='prog')acts='<button class="abtn wa" onclick="notify('+j.id+')">📲 Send update</button><button class="abtn fin" onclick="setStatus('+j.id+',\'done\')">✅ Mark done</button>';
+else acts='<button class="abtn ghost" onclick="setStatus('+j.id+',\'sched\')">↩ Reopen</button>';
+return '<div class="card '+cls+'"><div class="custrow"><div class="info"><b>'+j.cust+'</b><div class="meta">'+j.t+' · '+techName(j.tech)+'</div><div class="addr">'+j.job+' — '+j.addr+'</div><span class="st '+stClass(j.st)+'">'+stLabel(j.st)+'</span><select class="techsel" onchange="assignTech('+j.id+',this.value)">'+TECHS.map((t,i)=>'<option value="'+i+'"'+(i===j.tech?' selected':'')+'>🧰 '+t+'</option>').join('')+'</select><div class="acts">'+acts+'</div></div></div></div>'}
+function quoteCard(q){
+let acts='';
+if(q.st==='pending')acts='<div class="acts"><button class="abtn acc" onclick="quoteDecide('+q.id+',true)">✔ Accept</button><button class="abtn dec" onclick="quoteDecide('+q.id+',false)">✖ Decline</button></div>';
+return '<div class="card"><div class="custrow"><div class="info"><b>'+q.cust+'</b><div class="meta">'+q.job+'</div><div class="quoteamt">'+q.amt+'</div>'+(q.st==='pending'?'<span class="qbadge">⏳ WAITING IN WHATSAPP</span>':q.st==='accepted'?'<span class="qbadge ok">✅ ACCEPTED — SCHEDULE IT</span>':'<span class="qbadge no">❌ DECLINED</span>')+'<div class="acts">'+acts+'</div></div></div></div>'}
+function render(){
+const list=document.getElementById('list');
+if(TAB==='sched'){
+const js=JOBS.filter(j=>j.st!=='done');
+list.innerHTML=js.length?'<div class="tl">'+js.map(schedCard).join('')+'</div>':'<div class="empty">Day is clear. 🎉</div>';
+}else if(TAB==='jobs'){
+list.innerHTML=JOBS.map(jobCard).join('');
+}else{
+const qs=QUOTES.filter(q=>q.st==='pending');
+document.getElementById('qCount').textContent=qs.length?`(${qs.length})`:'';
+list.innerHTML=QUOTES.map(quoteCard).join('');
+}
+document.getElementById('stSched').textContent=JOBS.filter(j=>j.st==='sched').length;
+document.getElementById('stProg').textContent=JOBS.filter(j=>j.st==='prog').length;
+document.getElementById('stQuote').textContent=QUOTES.filter(q=>q.st==='pending').length;
+}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HallBook — One Double-Booked Hall Costs More Than Software Ever Will</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#fdf8f0;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .wrap{box-shadow:none!important;border-radius:0!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#7f1d1d}.top h1 span{color:#b45309}
+.top .venue{font-size:11px;font-weight:800;color:#b45309;background:#fff;padding:6px 12px;border-radius:20px;box-shadow:0 2px 8px rgba(127,29,29,.08)}
+.alert{background:linear-gradient(135deg,#7f1d1d,#b45309);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(127,29,29,.25)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(127,29,29,.08);border-top:3px solid #b45309}
+.stat .sv{font-size:20px;font-weight:900;color:#7f1d1d}.stat .sl{font-size:10.5px;color:#b45309;font-weight:700}
+.stat.book{border-top-color:#dc2626}.stat.book .sl{color:#b91c1c}
+.stat.paid{border-top-color:#22c55e}.stat.paid .sl{color:#15803d}
+.cal{background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(127,29,29,.08);margin-bottom:12px}
+.calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.calhead b{font-size:15px;font-weight:900;color:#7f1d1d}
+.cnav{border:1.5px solid #fde68a;background:#fff;color:#92400e;font-weight:900;font-size:14px;width:34px;height:34px;border-radius:10px;cursor:pointer}
+.dow{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:6px}
+.dow span{font-size:10px;font-weight:900;color:#b45309;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.day{min-height:44px;border-radius:10px;font-size:12px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:#f8fafc;color:#334155;border:1.5px solid transparent}
+.day small{font-size:8px;font-weight:700}
+.day.avail:hover{border-color:#b45309;background:#fffbeb}
+.day.booked{background:#fee2e2;color:#991b1b;cursor:default}
+.day.booked small{color:#b91c1c}
+.day.past{background:transparent;color:#cbd5e1;cursor:default}
+.day.sel{border-color:#7f1d1d;background:#fffbeb}
+.day.blank{background:transparent;cursor:default}
+.legend{display:flex;gap:14px;justify-content:center;margin-top:10px;font-size:11px;font-weight:800;color:#92400e}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-inline-end:4px}
+.detail{background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(127,29,29,.08);margin-bottom:12px}
+.detail h3{font-size:16px;font-weight:900;color:#7f1d1d;margin-bottom:2px}
+.detail .sub{font-size:12px;font-weight:700;color:#b45309;margin-bottom:12px}
+.sect{font-size:12px;font-weight:900;color:#7f1d1d;margin:12px 0 8px;text-transform:uppercase;letter-spacing:.5px}
+.vrow{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;background:#fdf8f0;margin-bottom:6px;cursor:pointer;font-size:13px;font-weight:800;color:#78350f}
+.vrow.done{text-decoration:line-through;opacity:.55}
+.vrow input{width:18px;height:18px;accent-color:#b45309;cursor:pointer}
+.mile{background:#fdf8f0;border-radius:10px;padding:10px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.mile .amt{font-size:15px;font-weight:900;color:#7f1d1d}
+.mile .lbl{font-size:11.5px;font-weight:700;color:#92400e}
+.mile.paid{background:#f0fdf4}
+.mbtn{margin-inline-start:auto;border:none;font-size:11px;font-weight:900;padding:7px 12px;border-radius:9px;cursor:pointer;background:#b45309;color:#fff}
+.mbtn.done{background:#22c55e}
+.pbar{height:10px;background:#fde68a;border-radius:6px;overflow:hidden;margin-top:4px}
+.pbar i{display:block;height:100%;background:linear-gradient(90deg,#b45309,#f59e0b);border-radius:6px;transition:width .4s}
+.nbk input,.nbk select{width:100%;font-size:13px;font-weight:700;border:1.5px solid #fde68a;border-radius:10px;padding:10px;margin-bottom:8px;color:#78350f}
+.nbk .abtn{width:100%;font-size:13px}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:10px 14px;border-radius:10px;cursor:pointer;background:#b45309;color:#fff}
+.lock{display:flex;gap:8px;align-items:center;background:#fef3c7;border-radius:10px;padding:10px 12px;font-size:11.5px;font-weight:800;color:#92400e;margin-bottom:12px}
+.empty{background:#fff;border-radius:14px;padding:24px;text-align:center;color:#b45309;font-weight:700;font-size:14px;box-shadow:0 2px 8px rgba(127,29,29,.08)}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#7f1d1d;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#b45309;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>💒 Hall<span>Book</span></h1><div class="venue">The Grand Rose Hall</div></div>
+  <div class="alert"><div class="big">🔒</div><div class="txt">Double-booking is impossible here — booked dates lock automatically, so a clash can never happen.</div></div>
+  <div class="stats">
+    <div class="stat book"><div class="sv" id="stBooked">4</div><div class="sl">Events booked</div></div>
+    <div class="stat"><div class="sv" id="stAvail">57</div><div class="sl">Open dates (2 mo)</div></div>
+    <div class="stat paid"><div class="sv" id="stPaid">$7.5k</div><div class="sl">Collected</div></div>
+  </div>
+  <div class="cal">
+    <div class="calhead"><button class="cnav" onclick="moveMonth(-1)">‹</button><b id="calTitle">October 2026</b><button class="cnav" onclick="moveMonth(1)">›</button></div>
+    <div class="dow"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+    <div class="grid" id="grid"></div>
+    <div class="legend"><span><i style="background:#dc2626"></i>Booked · locked</span><span><i style="background:#cbd5e1"></i>Available</span></div>
+  </div>
+  <div class="lock">🔒 Tap a red date to see the event. Tap a free date to book it — booked dates can't be double-booked.</div>
+  <div id="detail"></div>
+  <div class="foot">HallBook — every date, vendor and dollar in one place.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+let Y=2026,M=9,SEL=null;
+let EVENTS={
+'2026-10-23':{name:'Mehndi Night — Andrew Hall',type:'Family celebration',guests:220,
+ vendors:[{t:'Catering — Royal Dine',d:true},{t:'Decor — Bloom & Co.',d:true},{t:'Sound & DJ — Pulse Audio',d:false},{t:'Photography — LensCraft',d:true}],
+ pay:[{l:'Advance (50%)',a:2500,paid:true,due:'Oct 10'},{l:'Balance (50%)',a:2500,paid:false,due:'Oct 30'}]},
+'2026-10-24':{name:'Wedding — Stephanie Young',type:'Wedding reception',guests:350,
+ vendors:[{t:'Catering — Royal Dine',d:true},{t:'Decor — Bloom & Co.',d:false},{t:'Sound & DJ — Pulse Audio',d:false},{t:'Photography — LensCraft',d:false}],
+ pay:[{l:'Advance (30%)',a:3000,paid:true,due:'Sep 24'},{l:'Mid (40%)',a:4000,paid:false,due:'Oct 24'},{l:'Balance (30%)',a:3000,paid:false,due:'Nov 01'}]},
+'2026-10-31':{name:'Annual Gala — Kevin King',type:'Corporate event',guests:180,
+ vendors:[{t:'Catering — Royal Dine',d:true},{t:'Decor — Bloom & Co.',d:true},{t:'Sound & DJ — Pulse Audio',d:true},{t:'Photography — LensCraft',d:true}],
+ pay:[{l:'Advance (50%)',a:2000,paid:true,due:'Oct 15'},{l:'Balance (50%)',a:2000,paid:true,due:'Oct 28'}]},
+'2026-11-07':{name:'Wedding — Laura Mitchell',type:'Wedding ceremony',guests:280,
+ vendors:[{t:'Catering — Royal Dine',d:false},{t:'Decor — Bloom & Co.',d:false},{t:'Sound & DJ — Pulse Audio',d:false},{t:'Photography — LensCraft',d:false}],
+ pay:[{l:'Advance (30%)',a:2700,paid:true,due:'Oct 07'},{l:'Mid (40%)',a:3600,paid:false,due:'Nov 07'},{l:'Balance (30%)',a:2700,paid:false,due:'Nov 14'}]}};
+function pad(n){return String(n).padStart(2,'0')}
+function key(y,m,d){return y+'-'+pad(m+1)+'-'+pad(d)}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function moveMonth(d){M+=d;if(M<0){M=11;Y--}if(M>11){M=0;Y++}SEL=null;render()}
+function pick(k){if(EVENTS[k]){SEL=k;renderDetail();toast('📋 '+EVENTS[k].name)}else{SEL=k;renderDetail()}}
+function toggleVendor(k,i){EVENTS[k].vendors[i].d=!EVENTS[k].vendors[i].d;renderDetail();updateStats();if(EVENTS[k].vendors[i].d)toast('✅ '+EVENTS[k].vendors[i].t.split(' — ')[0]+' confirmed')}
+function togglePay(k,i){EVENTS[k].pay[i].paid=!EVENTS[k].pay[i].paid;renderDetail();updateStats();toast(EVENTS[k].pay[i].paid?'💰 '+EVENTS[k].pay[i].l+' marked received':'↩ '+EVENTS[k].pay[i].l+' marked unpaid')}
+function newBooking(){
+const n=document.getElementById('nbName').value.trim();
+if(!n){toast('⚠ Type the event name first');return}
+const g=document.getElementById('nbGuests').value||'100';
+EVENTS[SEL]={name:n,type:'New event',guests:+g,vendors:[{t:'Catering — Royal Dine',d:false},{t:'Decor — Bloom & Co.',d:false},{t:'Sound & DJ — Pulse Audio',d:false},{t:'Photography — LensCraft',d:false}],pay:[{l:'Advance (50%)',a:1500,paid:false,due:'ASAP'},{l:'Balance (50%)',a:1500,paid:false,due:'Event day'}]};
+render();toast('🎉 Date locked — no one else can book it')}
+function render(){
+document.getElementById('calTitle').textContent=MONTHS[M]+' '+Y;
+const first=new Date(Y,M,1).getDay(),days=new Date(Y,M+1,0).getDate();
+let h='';
+for(let i=0;i<first;i++)h+='<div class="day blank"></div>';
+for(let d=1;d<=days;d++){const k=key(Y,M,d);const past=new Date(Y,M,d)<new Date(2026,9,18);
+if(EVENTS[k])h+='<div class="day booked'+(SEL===k?' sel':'')+'" onclick="pick(\''+k+'\')">'+d+'<small>BOOKED</small></div>';
+else if(past)h+='<div class="day past">'+d+'</div>';
+else h+='<div class="day avail'+(SEL===k?' sel':'')+'" onclick="pick(\''+k+'\')">'+d+'</div>'}
+document.getElementById('grid').innerHTML=h;
+renderDetail();updateStats()}
+function renderDetail(){
+const el=document.getElementById('detail');
+if(!SEL){el.innerHTML='<div class="empty">Tap any date on the calendar 👆</div>';return}
+const e=EVENTS[SEL];
+if(!e){el.innerHTML='<div class="detail nbk"><h3>📅 '+SEL+'</h3><div class="sub">This date is FREE — book it before someone else does.</div><input id="nbName" placeholder="Event name (e.g. Wedding — Emily Carter)"><input id="nbGuests" type="number" placeholder="Expected guests"><button class="abtn" onclick="newBooking()">🔒 Lock this date</button></div>';return}
+const vp=e.pay.filter(p=>p.paid).reduce((s,p)=>s+p.a,0),vt=e.pay.reduce((s,p)=>s+p.a,0);
+el.innerHTML='<div class="detail"><h3>📋 '+e.name+'</h3><div class="sub">'+e.type+' · '+e.guests+' guests · '+SEL+'</div>'
++'<div class="sect">Vendor checklist</div>'
++e.vendors.map((v,i)=>'<label class="vrow'+(v.d?' done':'')+'"><input type="checkbox"'+(v.d?' checked':'')+' onclick="toggleVendor(\''+SEL+'\','+i+')"> '+v.t+'</label>').join('')
++'<div class="sect">Payment milestones — $'+vp.toLocaleString()+' / $'+vt.toLocaleString()+'</div><div class="pbar"><i style="width:'+Math.round(vp/vt*100)+'%"></i></div><div style="height:8px"></div>'
++e.pay.map((p,i)=>'<div class="mile'+(p.paid?' paid':'')+'"><div><div class="amt">$'+p.a.toLocaleString()+'</div><div class="lbl">'+p.l+' · due '+p.due+'</div></div><button class="mbtn'+(p.paid?' done':'')+'" onclick="togglePay(\''+SEL+'\','+i+')">'+(p.paid?'✓ Received':'Mark paid')+'</button></div>').join('')
++'</div>'}
+function updateStats(){
+const ks=Object.keys(EVENTS);
+document.getElementById('stBooked').textContent=ks.length;
+document.getElementById('stAvail').textContent=61-ks.length;
+let c=0;ks.forEach(k=>EVENTS[k].pay.forEach(p=>{if(p.paid)c+=p.a}));
+document.getElementById('stPaid').textContent='$'+(c/1000).toFixed(1)+'k'}
+render();
+</script>
+</body>
+</html>

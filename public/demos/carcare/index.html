@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CarCare — Your Customers Forget. Your Workshop Remembers.</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#fff7ed;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#431407}.top h1 span{color:#f97316}
+.alert{background:linear-gradient(135deg,#b91c1c,#ef4444);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(185,28,28,.25)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(67,20,7,.08);border-top:3px solid #f97316}
+.stat .sv{font-size:20px;font-weight:900;color:#431407}.stat .sl{font-size:10.5px;color:#ea580c;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(67,20,7,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12.5px;font-weight:800;color:#ea580c;border-radius:10px;cursor:pointer}
+.tab.on{background:#f97316;color:#fff}
+.card{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(67,20,7,.08);border-inline-start:5px solid #f97316}
+.card.overdue{border-color:#dc2626}
+.info b{font-size:14px;color:#431407;display:block}
+.info .meta{font-size:11.5px;color:#c2410c;font-weight:600}
+.due{font-size:12px;font-weight:800;margin-top:3px}.due.red{color:#b91c1c}.due.amber{color:#b45309}.due.green{color:#15803d}
+.stag{display:inline-block;font-size:10.5px;font-weight:900;padding:4px 11px;border-radius:12px;margin-top:7px}
+.stag.ci{background:#fef3c7;color:#92400e}.stag.ip{background:#dbeafe;color:#1d4ed8}.stag.rd{background:#dcfce7;color:#15803d}
+.row{display:flex;gap:10px;align-items:center}
+.acts{display:flex;flex-direction:column;gap:6px}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:9px 13px;border-radius:10px;cursor:pointer;white-space:nowrap}
+.abtn.u{background:#25d366;color:#fff}.abtn.n{background:#f97316;color:#fff}.abtn:disabled{background:#e7e5e4;color:#a8a29e;cursor:default}
+.hlist{background:#fff7ed;border-radius:10px;padding:9px 12px;margin-top:8px}
+.hlist .h{font-size:11px;font-weight:700;color:#9a3412;line-height:1.6}
+.empty{background:#fff;border-radius:14px;padding:28px;text-align:center;color:#c2410c;font-weight:700;font-size:14px;box-shadow:0 2px 8px rgba(67,20,7,.08)}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#431407;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#c2410c;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🔧 Car<span>Care</span></h1></div>
+  <div class="alert"><div class="big" id="alertNum">2</div><div class="txt" id="alertTxt">vehicles are overdue their service — skipped intervals mean skipped revenue.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv" id="stDue">5</div><div class="sl">Services due</div></div>
+    <div class="stat"><div class="sv" id="stJobs">4</div><div class="sl">Active job cards</div></div>
+    <div class="stat"><div class="sv" id="stDone">9</div><div class="sl">Completed this wk</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="svcTab" onclick="setTab('svc')">🚗 Services due</div>
+    <div class="tab" id="jobTab" onclick="setTab('job')">🧾 Job cards</div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">CarCare remembers every vehicle — so your customers never have to.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='svc';
+let VEH=[
+{id:0,owner:'Mark Hill',car:'Toyota Corolla · ABC-1234',d:-6,sent:false,hist:['Oil change — Mar 2026','Brake pads — Nov 2025']},
+{id:1,owner:'Linda Roberts',car:'Honda City · XYZ-5678',d:-2,sent:false,hist:['Oil change — Apr 2026','AC service — Jul 2025']},
+{id:2,owner:'Paul Carter',car:'Suzuki Swift · KLM-9012',d:2,sent:false,hist:['Oil change — May 2026']},
+{id:3,owner:'Dorothy Ellis',car:'Kia Sportage · DEF-3456',d:5,sent:false,hist:['Wheel alignment — Feb 2026']},
+{id:4,owner:'George Barnes',car:'Hyundai Tucson · GHI-7890',d:9,sent:false,hist:['Oil change — Jan 2026','Battery — Oct 2025']}];
+let JOBS=[
+{id:10,v:'Toyota Corolla · ABC-1234',owner:'Mark Hill',job:'Full service + brakes',stage:0,upd:false},
+{id:11,v:'Honda City · XYZ-5678',owner:'Linda Roberts',job:'AC repair + coolant flush',stage:1,upd:false},
+{id:12,v:'Nissan Juke · JKL-2345',owner:'Betty Morgan',job:'Engine tuning + spark plugs',stage:1,upd:false},
+{id:13,v:'Suzuki Alto · MNO-6789',owner:'Edward Bell',job:'Denting + paint touch-up',stage:2,upd:false}];
+const STAGES=['Check-in','In progress','Ready'];
+let done=9;
+function dueL(d){return d<0?('Overdue '+(-d)+' days'):d===0?'Due today':('Due in '+d+' days')}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2400)}
+function setTab(t){TAB=t;['svc','job'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function nudge(id){const v=VEH.find(x=>x.id===id);if(v.sent)return;v.sent=true;render();toast('📩 Service reminder sent to '+v.owner.split(' ')[0])}
+function upd(id){const j=JOBS.find(x=>x.id===id);j.upd=true;render();toast('💬 WhatsApp update sent to '+j.owner.split(' ')[0])}
+function adv(id){const j=JOBS.find(x=>x.id===id);if(j.stage<2){j.stage++;render();toast('🧾 Job "'+j.job+'" → '+STAGES[j.stage])}else{JOBS=JOBS.filter(x=>x.id!==id);done++;render();toast('✅ Job delivered & invoiced — Rs 8,500')}}
+function vehCard(v){const c=v.d<0?'red':v.d<=3?'amber':'green';
+return `<div class="card ${v.d<0?'overdue':''}"><div class="row"><div class="info" style="flex:1"><b>${v.owner}</b><div class="meta">${v.car}</div><div class="due ${c}">${dueL(v.d)}</div><div class="hlist"><div class="h">📜 ${v.hist.join('<br>📜 ')}</div></div></div><div class="acts"><button class="abtn n" onclick="nudge(${v.id})" ${v.sent?'disabled':''}>${v.sent?'✓ Sent':'🔔 Nudge'}</button></div></div></div>`}
+function jobCard(j){const st=j.stage===0?'ci':j.stage===1?'ip':'rd';
+return `<div class="card"><div class="row"><div class="info" style="flex:1"><b>${j.v}</b><div class="meta">${j.owner} · ${j.job}</div><span class="stag ${st}">${STAGES[j.stage]}</span></div><div class="acts"><button class="abtn u" onclick="upd(${j.id})" ${j.upd?'disabled':''}>${j.upd?'✓ Sent':'💬 Pickup update'}</button><button class="abtn n" onclick="adv(${j.id})">${j.stage<2?'Next stage →':'✅ Deliver'}</button></div></div></div>`}
+function render(){
+const list=document.getElementById('list');
+if(TAB==='svc'){list.innerHTML=[...VEH].sort((a,b)=>a.d-b.d).map(vehCard).join('')}
+else{list.innerHTML=JOBS.length?JOBS.map(jobCard).join(''):'<div class="empty">All job cards closed. Bay is free. 🎉</div>'}
+const od=VEH.filter(v=>v.d<0&&!v.sent).length;
+document.getElementById('alertNum').textContent=od;
+document.getElementById('alertTxt').textContent=od?`vehicles are overdue their service — skipped intervals mean skipped revenue.`:`every service on schedule. Bays full next week. 🎉`;
+document.getElementById('stDue').textContent=VEH.length;
+document.getElementById('stJobs').textContent=JOBS.length;
+document.getElementById('stDone').textContent=done;
+}
+render();
+</script>
+</body>
+</html>
