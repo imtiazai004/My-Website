@@ -18,6 +18,27 @@ export default function SellerCopilotGuidePage() {
     description:
       'Free step-by-step guide: turn your sales playbooks into an AI copilot that answers like a specialist. Pick your coding agent, build the app, go from basic to advanced. No coding required.',
     canonical: `${BUSINESS.websiteUrl}/guides/build-your-own-ai-seller-copilot`,
+    type: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: 'Build Your Own AI Seller Copilot — Free Guide',
+      description:
+        'Turn your sales playbooks into an AI copilot that answers like a specialist. Pick your coding agent, build the app step by step — no coding required.',
+      author: {
+        '@type': 'Organization',
+        name: BUSINESS.brandName,
+        url: BUSINESS.websiteUrl,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: BUSINESS.brandName,
+        url: BUSINESS.websiteUrl,
+      },
+      mainEntityOfPage: `${BUSINESS.websiteUrl}/guides/build-your-own-ai-seller-copilot`,
+      datePublished: '2026-10-18',
+      inLanguage: 'en',
+    },
   });
 
   return (

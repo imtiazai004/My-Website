@@ -18,6 +18,27 @@ export default function TikFulfillGuidePage() {
     description:
       'Free step-by-step guide: build your own TikTok Shop auto-fulfilment dashboard in VS Code with Claude Code. Every prompt included, copy-paste ready.',
     canonical: `${BUSINESS.websiteUrl}/guides/tikfulfill-build-guide`,
+    type: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: 'TikFulfill Build Guide — Free PDF',
+      description:
+        'Build your own TikTok Shop auto-fulfilment dashboard in VS Code with Claude Code. Every prompt included, copy-paste ready.',
+      author: {
+        '@type': 'Organization',
+        name: BUSINESS.brandName,
+        url: BUSINESS.websiteUrl,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: BUSINESS.brandName,
+        url: BUSINESS.websiteUrl,
+      },
+      mainEntityOfPage: `${BUSINESS.websiteUrl}/guides/tikfulfill-build-guide`,
+      datePublished: '2026-06-17',
+      inLanguage: 'en',
+    },
   });
 
   return (
