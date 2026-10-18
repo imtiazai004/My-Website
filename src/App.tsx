@@ -35,7 +35,6 @@ const TermsAndConditions = lazy(() => import('./components/TermsAndConditions'))
 const WebsitePrivacyPolicy = lazy(() => import('./components/WebsitePrivacyPolicy'));
 const AgencyVsFreelancer = lazy(() => import('./components/AgencyVsFreelancer'));
 const TikFulfillGuidePage = lazy(() => import('./components/TikFulfillGuidePage'));
-const EcommerceSkillsPage = lazy(() => import('./components/EcommerceSkillsPage'));
 const DemosPage = lazy(() => import('./components/DemosPage'));
 
 const ADMIN_PATH = '/sts-x9k2m7p4-console';
@@ -128,10 +127,6 @@ export default function App() {
           <Route
             path="/guides/tikfulfill-build-guide"
             element={<Suspense fallback={LoadingSpinner}><TikFulfillGuidePage /></Suspense>}
-          />
-          <Route
-            path="/guides/ecommerce-skills"
-            element={<Suspense fallback={LoadingSpinner}><EcommerceSkillsPage /></Suspense>}
           />
           <Route
             path="/blog"
