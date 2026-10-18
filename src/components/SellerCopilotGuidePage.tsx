@@ -88,6 +88,77 @@ export default function SellerCopilotGuidePage() {
             />
           </div>
 
+          <article className="mx-auto mt-14 max-w-3xl">
+            <h2
+              className="mb-6 text-2xl font-bold text-slate-900"
+              style={{ fontFamily: 'Poppins, sans-serif' }}
+            >
+              The full breakdown
+            </h2>
+            <div className="space-y-5 text-[17px] leading-relaxed text-slate-700">
+              <p>
+                Sellers are paying $49–$99/month for tools that show them
+                dashboards.
+              </p>
+              <p>
+                But no dashboard ever answered the real question:{' '}
+                <em>"okay, but what should I DO next?"</em>
+              </p>
+              <p>
+                That's the gap. And you don't need another subscription to
+                close it — you can build your own AI seller copilot. No
+                coding. Here's the exact path:
+              </p>
+              <ol className="list-decimal space-y-4 pl-6">
+                <li>
+                  <strong>Pick ONE niche</strong> and list the 10 questions
+                  your copilot must answer. (e.g. TikTok Shop affiliates:
+                  what to sell, what commission, who to partner with.)
+                </li>
+                <li>
+                  <strong>Pick your coding agent</strong> — the AI that writes
+                  the app for you. (For non-technical founders, start with
+                  Lovable: idea to live link, zero setup. The giants — Claude,
+                  ChatGPT, Google Antigravity — are brilliant coders, but
+                  they're built for developers.)
+                </li>
+                <li>
+                  <strong>Feed it your playbooks</strong> — plain-text files
+                  with your product research method, your pricing rules, your
+                  listing checklist.
+                </li>
+                <li>
+                  <strong>Connect the AI chat to those playbooks</strong>, so
+                  it answers like a specialist — not a generic chatbot.
+                </li>
+                <li>
+                  <strong>Test it with 5 real questions</strong> from your own
+                  business. Generic answer? Your playbook is thin. Fix the
+                  input, not the AI.
+                </li>
+                <li>
+                  <strong>Deploy it.</strong> You now have a live link — your
+                  own tool, built in an afternoon.
+                </li>
+              </ol>
+              <p>
+                The complete guide covers which coding agent to pick (and which
+                to avoid), the exact copy-paste prompt for every step,
+                troubleshooting, and the advanced moves — live data, logins,
+                turning it into a product you can sell.
+              </p>
+            </div>
+            <div className="mt-8">
+              <a
+                href={PDF_URL}
+                download="Build-Your-Own-AI-Seller-Copilot-Guide.pdf"
+                className="inline-flex items-center gap-2 rounded-xl bg-brand-accent px-6 py-3 font-semibold text-white transition-colors hover:opacity-90"
+              >
+                <Download size={18} /> Download the Guide
+              </a>
+            </div>
+          </article>
+
           <p className="mt-8 text-center text-sm text-slate-500">
             Written by {BUSINESS.brandName} — we build websites, tools and
             applications that help businesses grow.
