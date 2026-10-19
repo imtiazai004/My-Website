@@ -38,6 +38,7 @@ const TikFulfillGuidePage = lazy(() => import('./components/TikFulfillGuidePage'
 const GuidesLibraryPage = lazy(() => import('./components/GuidesLibraryPage'));
 const SellerCopilotGuidePage = lazy(() => import('./components/SellerCopilotGuidePage'));
 const AgentSafetyAuditGuidePage = lazy(() => import('./components/AgentSafetyAuditGuidePage'));
+const TikTokShopOutreachSellerGuidePage = lazy(() => import('./components/TikTokShopOutreachSellerGuidePage'));
 const DemosPage = lazy(() => import('./components/DemosPage'));
 
 const ADMIN_PATH = '/sts-x9k2m7p4-console';
@@ -142,6 +143,10 @@ export default function App() {
           <Route
             path="/guides/ai-agent-safety-audit"
             element={<Suspense fallback={LoadingSpinner}><AgentSafetyAuditGuidePage /></Suspense>}
+          />
+          <Route
+            path="/guides/tiktok-shop-outreach-seller-guide"
+            element={<Suspense fallback={LoadingSpinner}><TikTokShopOutreachSellerGuidePage /></Suspense>}
           />
           <Route
             path="/blog"

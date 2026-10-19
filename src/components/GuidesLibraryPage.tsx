@@ -8,8 +8,16 @@ import { BUSINESS } from '../config/business';
 
 const GUIDES = [
   {
-    slug: 'ai-agent-safety-audit',
+    slug: 'tiktok-shop-outreach-seller-guide',
     badge: 'New',
+    title: 'TikTok Shop Outreach — Seller Guide',
+    description:
+      'The AffiliatePilot playbook: a custom app that recruits TikTok creators to sell your products through shoppable videos and LIVE streams — on commission, zero ad spend up front.',
+    meta: 'PDF · 6 pages · English',
+  },
+  {
+    slug: 'ai-agent-safety-audit',
+    badge: 'Guide',
     title: 'The Agent Safety Audit',
     description:
       '10 guardrails to demand before any AI agent touches your business — sandboxing, approval gates, secret masking, audit trails, data boundaries and more. Plain English, no jargon.',
