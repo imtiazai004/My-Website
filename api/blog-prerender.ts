@@ -7,7 +7,7 @@ import { fetchPost, postHtml } from './_blog-html.js';
 
 export default async function handler(req: any, res: any) {
   const slug = String(req.query.slug || '').trim();
-  if (!slug || !/^[a-z0-9-]+$/.test(slug)) {
+  if (!slug || !/^[A-Za-z0-9_-]{1,128}$/.test(slug)) {
     res.status(400).send('Bad slug');
     return;
   }

@@ -4,7 +4,7 @@ import { Download, BookOpen, FileText, Megaphone } from 'lucide-react';
 import Navbar from './Navbar';
 import ShaderBackground from './ui/shader-background';
 import { usePageSeo } from '../lib/seo';
-import { BUSINESS } from '../config/business';
+import { BUSINESS, FOUNDER } from '../config/business';
 
 const PDF_URL = '/guides/tiktok-shop-outreach-seller-guide.pdf';
 
@@ -25,11 +25,7 @@ export default function TikTokShopOutreachSellerGuidePage() {
       headline: 'TikTok Shop Outreach — Seller Guide — Free Guide',
       description:
         'The AffiliatePilot playbook: a custom TikTok Shop affiliate outreach app — creator discovery and scoring, automated outreach sequences, sample tracking, commission plans, per-creator analytics. Built with vibe coding, no coding required.',
-      author: {
-        '@type': 'Organization',
-        name: BUSINESS.brandName,
-        url: BUSINESS.websiteUrl,
-      },
+      author: { '@type': 'Person', name: FOUNDER.name, url: FOUNDER.url },
       publisher: {
         '@type': 'Organization',
         name: BUSINESS.brandName,

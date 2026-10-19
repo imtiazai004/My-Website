@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { motion } from 'motion/react';
 import ShaderBackground from './ui/shader-background';
 import Navbar from './Navbar';
+import { usePageSeo } from '../lib/seo';
 import {
   Search, BarChart3, TrendingUp, Star, Shield, Zap, Globe, Bot,
   Download, CheckCircle, ArrowRight, Target, AlertTriangle, Users,
@@ -121,8 +122,13 @@ const FAQS = [
 export default function ProfitScoutPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = 'ProfitScout v1 — Free Product Research Chrome Extension | AI Soft Tech Solution';
   }, []);
+
+  usePageSeo({
+    title: 'ProfitScout v1 — Free Product Research Chrome Extension | AI Soft Tech Solution',
+    description: '44 features for e-commerce product research. X-Ray niche scanner, ROI calculator, lead manager, AI-powered analysis, price tracker & more — 100% free, no sign-up.',
+    canonical: 'https://aisofttechsolution.com/profitscout',
+  });
 
   return (
     <div className="min-h-screen selection:bg-brand-accent selection:text-white scroll-smooth relative overflow-x-hidden">

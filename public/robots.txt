@@ -1,35 +1,42 @@
 # AI Soft Tech Solution — robots.txt
 
-# All crawlers: allow everything except the hidden admin panel and the raw
-# prerendered snapshots (served automatically at the real URLs to bot user
-# agents by middleware.ts — the /prerendered/ copies exist only for that
-# rewrite and would otherwise look like duplicate content if crawled directly)
+# All crawlers: allow everything except the raw prerendered snapshots (served
+# automatically at the real URLs to bot user agents by middleware.ts — the
+# /prerendered/ copies would otherwise look like duplicate content).
+# Private pages are kept out of search with <meta name="robots" content="noindex">
+# instead of being listed here, because robots.txt is public.
 User-agent: *
 Allow: /
-Disallow: /sts-x9k2m7p4-console
 Disallow: /prerendered/
 
 # Explicitly welcome major AI crawlers (training / index crawls)
 User-agent: GPTBot
 Allow: /
+Disallow: /prerendered/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /prerendered/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /prerendered/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /prerendered/
 
 User-agent: CCBot
 Allow: /
+Disallow: /prerendered/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /prerendered/
 
 User-agent: cohere-ai
 Allow: /
+Disallow: /prerendered/
 
 # Retrieval crawlers — these are the ones that fetch a page live when an
 # assistant answers a user's question and cites this site. They were already
@@ -37,17 +44,22 @@ Allow: /
 # removes any ambiguity and survives a future tightening of the catch-all.
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /prerendered/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /prerendered/
 
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /prerendered/
 
 User-agent: Claude-User
 Allow: /
+Disallow: /prerendered/
 
 User-agent: Perplexity-User
 Allow: /
+Disallow: /prerendered/
 
 Sitemap: https://aisofttechsolution.com/sitemap.xml

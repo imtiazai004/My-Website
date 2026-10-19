@@ -1,14 +1,14 @@
-import { lazy, Suspense, useState, useEffect } from 'react';
+import { lazy, Suspense, useState, useEffect, type ReactNode } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
-import { trackActivity, subscribeToSectionSettings } from './services/dataService';
-import { AuthProvider } from './context/AuthContext';
 import { DEFAULT_SECTION_SETTINGS } from './constants';
 import { SectionSettings } from './types';
 import Navbar from './components/Navbar';
 import { SplineSceneBasic } from './components/SplineSceneBasic';
 import ShaderBackground from './components/ui/shader-background';
 import BusinessDisclosureFooter from './components/BusinessDisclosureFooter';
+import { usePageSeo } from './lib/seo';
+import { HOME_JSONLD, HOME_SEO } from './lib/homeSeo';
 
 // Below-fold sections: lazy-loaded so they don't block initial parse
 const ClientLogos = lazy(() => import('./components/ClientLogos'));
@@ -17,14 +17,12 @@ const Services = lazy(() => import('./components/Services'));
 const ProjectGrid = lazy(() => import('./components/ProjectGrid'));
 const DemosSection = lazy(() => import('./components/DemosSection'));
 const WhyChooseUs = lazy(() => import('./components/WhyChooseUs'));
-const Skills = lazy(() => import('./components/Skills'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
 const FAQ = lazy(() => import('./components/FAQ'));
 const Footer = lazy(() => import('./components/Footer'));
-const AdminPage = lazy(() => import('./components/AdminPage'));
+const AdminRoute = lazy(() => import('./components/AdminRoute'));
 const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
 const ProfitScoutPage = lazy(() => import('./components/ProfitScoutPage'));
-const SoftClipperPage = lazy(() => import('./components/SoftClipperPage'));
 const BlogPage = lazy(() => import('./components/BlogPage'));
 const BlogPostPage = lazy(() => import('./components/BlogPostPage'));
 const SubmitTestimonial = lazy(() => import('./components/SubmitTestimonial'));
@@ -40,8 +38,10 @@ const SellerCopilotGuidePage = lazy(() => import('./components/SellerCopilotGuid
 const AgentSafetyAuditGuidePage = lazy(() => import('./components/AgentSafetyAuditGuidePage'));
 const TikTokShopOutreachSellerGuidePage = lazy(() => import('./components/TikTokShopOutreachSellerGuidePage'));
 const DemosPage = lazy(() => import('./components/DemosPage'));
+const WorkPage = lazy(() => import('./components/WorkPage'));
+const NotFound = lazy(() => import('./components/NotFound'));
 
-const ADMIN_PATH = '/sts-x9k2m7p4-console';
+export const ADMIN_PATH = '/sts-x9k2m7p4-console';
 
 function PublicBusinessDisclosure() {
   const { pathname } = useLocation();
@@ -50,12 +50,39 @@ function PublicBusinessDisclosure() {
 
 function MainSite() {
   const [sections, setSections] = useState<SectionSettings>(DEFAULT_SECTION_SETTINGS);
+  const { hash } = useLocation();
 
+  usePageSeo({ ...HOME_SEO, jsonLd: HOME_JSONLD });
+
+  // Firebase is loaded after first paint, so it never blocks the hero.
   useEffect(() => {
-    trackActivity('PAGE_VIEW');
-    const unsub = subscribeToSectionSettings(setSections);
-    return unsub;
+    let unsub: (() => void) | undefined;
+    let cancelled = false;
+    import('./services/dataService').then(({ trackActivity, subscribeToSectionSettings }) => {
+      if (cancelled) return;
+      trackActivity('PAGE_VIEW');
+      unsub = subscribeToSectionSettings((s) => setSections({ ...DEFAULT_SECTION_SETTINGS, ...s }));
+    });
+    return () => {
+      cancelled = true;
+      unsub?.();
+    };
   }, []);
+
+  // Arriving from another page with /#section: wait for the lazy section, then scroll to it.
+  useEffect(() => {
+    if (!hash) return;
+    const id = hash.slice(1);
+    let tries = 0;
+    const timer = setInterval(() => {
+      const el = document.getElementById(id);
+      if (el || ++tries > 30) {
+        clearInterval(timer);
+        el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+    return () => clearInterval(timer);
+  }, [hash]);
 
   return (
     <div className="min-h-screen selection:bg-brand-accent selection:text-white scroll-smooth relative overflow-x-hidden">
@@ -63,8 +90,6 @@ function MainSite() {
       <div className="grain-bg" />
       <div className="grid-texture" />
       <div className="soft-vignette" />
-      <div className="fixed top-0 left-1/4 w-[1200px] h-[1200px] bg-brand-accent/5 rounded-full blur-[180px] -translate-y-1/2 -translate-x-1/2 pointer-events-none animate-pulse-glow" aria-hidden="true" />
-      <div className="fixed bottom-0 right-0 w-[1000px] h-[1000px] bg-blue-500/5 rounded-full blur-[160px] translate-y-1/2 translate-x-1/2 pointer-events-none animate-pulse-glow" style={{ animationDelay: '-5s' }} aria-hidden="true" />
       <Navbar />
       <main className="relative z-20">
         <SplineSceneBasic />
@@ -75,7 +100,6 @@ function MainSite() {
           {sections.projects && <ProjectGrid />}
           <DemosSection />
           {sections.whyChooseUs && <WhyChooseUs />}
-          {sections.skills && <Skills />}
           {sections.testimonials && <Testimonials />}
           {sections.faq && <FAQ />}
         </Suspense>
@@ -93,95 +117,44 @@ const LoadingSpinner = (
   </div>
 );
 
+const page = (el: ReactNode) => <Suspense fallback={LoadingSpinner}>{el}</Suspense>;
+
 export default function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Analytics />
-        <Routes>
-          <Route path="/" element={<MainSite />} />
-          <Route
-            path={ADMIN_PATH}
-            element={<Suspense fallback={LoadingSpinner}><AdminPage /></Suspense>}
-          />
-          <Route
-            path="/profitscout"
-            element={<Suspense fallback={LoadingSpinner}><ProfitScoutPage /></Suspense>}
-          />
-          <Route
-            path="/soft-clipper"
-            element={<Suspense fallback={LoadingSpinner}><SoftClipperPage /></Suspense>}
-          />
-          <Route
-            path="/profitscout-privacy"
-            element={<Suspense fallback={LoadingSpinner}><PrivacyPolicy /></Suspense>}
-          />
-          <Route
-            path="/privacy"
-            element={<Suspense fallback={LoadingSpinner}><WebsitePrivacyPolicy /></Suspense>}
-          />
-          <Route
-            path="/terms"
-            element={<Suspense fallback={LoadingSpinner}><TermsAndConditions /></Suspense>}
-          />
-          <Route
-            path="/compare/agency-vs-freelancer"
-            element={<Suspense fallback={LoadingSpinner}><AgencyVsFreelancer /></Suspense>}
-          />
-          <Route
-            path="/guides"
-            element={<Suspense fallback={LoadingSpinner}><GuidesLibraryPage /></Suspense>}
-          />
-          <Route
-            path="/guides/tikfulfill-build-guide"
-            element={<Suspense fallback={LoadingSpinner}><TikFulfillGuidePage /></Suspense>}
-          />
-          <Route
-            path="/guides/build-your-own-ai-seller-copilot"
-            element={<Suspense fallback={LoadingSpinner}><SellerCopilotGuidePage /></Suspense>}
-          />
-          <Route
-            path="/guides/ai-agent-safety-audit"
-            element={<Suspense fallback={LoadingSpinner}><AgentSafetyAuditGuidePage /></Suspense>}
-          />
-          <Route
-            path="/guides/tiktok-shop-outreach-seller-guide"
-            element={<Suspense fallback={LoadingSpinner}><TikTokShopOutreachSellerGuidePage /></Suspense>}
-          />
-          <Route
-            path="/blog"
-            element={<Suspense fallback={LoadingSpinner}><BlogPage /></Suspense>}
-          />
-          <Route
-            path="/blog/:slug"
-            element={<Suspense fallback={LoadingSpinner}><BlogPostPage /></Suspense>}
-          />
-          <Route
-            path="/submit-testimonial"
-            element={<Suspense fallback={LoadingSpinner}><SubmitTestimonial /></Suspense>}
-          />
-          <Route path="/blueprint-library" element={
-            <Suspense fallback={<div className="min-h-screen bg-[#030712]" />}>
-              <BlueprintLibrary />
-            </Suspense>
-          } />
-          <Route path="/blueprint-library/:id" element={
-            <Suspense fallback={<div className="min-h-screen bg-[#030712]" />}>
-              <BlueprintDetail />
-            </Suspense>
-          } />
-          <Route path="/demos" element={
-            <Suspense fallback={LoadingSpinner}>
-              <DemosPage />
-            </Suspense>
-          } />
-          <Route path="*" element={<MainSite />} />
-        </Routes>
-        <PublicBusinessDisclosure />
-        <Suspense fallback={null}>
-          <ChatWidget />
-        </Suspense>
-      </BrowserRouter>
-    </AuthProvider>
+    <BrowserRouter>
+      <Analytics />
+      <Routes>
+        <Route path="/" element={<MainSite />} />
+        <Route path={ADMIN_PATH} element={page(<AdminRoute />)} />
+        <Route path="/work" element={page(<WorkPage />)} />
+        <Route path="/demos" element={page(<DemosPage />)} />
+        <Route path="/profitscout" element={page(<ProfitScoutPage />)} />
+        <Route path="/profitscout-privacy" element={page(<PrivacyPolicy />)} />
+        <Route path="/privacy" element={page(<WebsitePrivacyPolicy />)} />
+        <Route path="/terms" element={page(<TermsAndConditions />)} />
+        <Route path="/compare/agency-vs-freelancer" element={page(<AgencyVsFreelancer />)} />
+        <Route path="/guides" element={page(<GuidesLibraryPage />)} />
+        <Route path="/guides/tikfulfill-build-guide" element={page(<TikFulfillGuidePage />)} />
+        <Route path="/guides/build-your-own-ai-seller-copilot" element={page(<SellerCopilotGuidePage />)} />
+        <Route path="/guides/ai-agent-safety-audit" element={page(<AgentSafetyAuditGuidePage />)} />
+        <Route path="/guides/tiktok-shop-outreach-seller-guide" element={page(<TikTokShopOutreachSellerGuidePage />)} />
+        <Route path="/blog" element={page(<BlogPage />)} />
+        <Route path="/blog/:slug" element={page(<BlogPostPage />)} />
+        <Route path="/submit-testimonial" element={page(<SubmitTestimonial />)} />
+        <Route
+          path="/blueprint-library"
+          element={<Suspense fallback={<div className="min-h-screen bg-[#030712]" />}><BlueprintLibrary /></Suspense>}
+        />
+        <Route
+          path="/blueprint-library/:id"
+          element={<Suspense fallback={<div className="min-h-screen bg-[#030712]" />}><BlueprintDetail /></Suspense>}
+        />
+        <Route path="*" element={page(<NotFound />)} />
+      </Routes>
+      <PublicBusinessDisclosure />
+      <Suspense fallback={null}>
+        <ChatWidget />
+      </Suspense>
+    </BrowserRouter>
   );
 }

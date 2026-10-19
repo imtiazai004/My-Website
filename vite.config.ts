@@ -1,16 +1,12 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, '.', '');
+export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss()],
-    define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
@@ -28,12 +24,11 @@ export default defineConfig(({ mode }) => {
         },
         output: {
           manualChunks(id) {
-            if (id.includes('node_modules/three') || id.includes('@react-three')) {
-              return 'three'
-            }
-            if (id.includes('node_modules/firebase')) {
-              return 'firebase'
-            }
+            // Split Firebase so public pages load only app + Firestore;
+            // Auth and Storage are admin-only and stay in their own chunks.
+            if (/node_modules\/@?firebase\/auth/.test(id)) return 'firebase-auth'
+            if (/node_modules\/@?firebase\/storage/.test(id)) return 'firebase-storage'
+            if (/node_modules\/@?firebase\//.test(id)) return 'firebase'
             if (id.includes('node_modules/framer-motion') || id.includes('node_modules/motion')) {
               return 'motion'
             }

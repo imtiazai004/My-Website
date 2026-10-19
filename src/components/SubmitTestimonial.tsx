@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { CheckCircle, Send, User, Briefcase, Building2, MessageSquare } from "lucide-react";
-import { saveTestimonial } from "../services/dataService";
+import { submitTestimonial } from "../services/dataService";
+import { usePageSeo } from "../lib/seo";
 
 export default function SubmitTestimonial() {
+  usePageSeo({ title: "Leave a review | AI Soft Tech Solution", noindex: true });
   const [form, setForm] = useState({ name: "", role: "", company: "", content: "" });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -20,12 +22,11 @@ export default function SubmitTestimonial() {
 
     setLoading(true);
     try {
-      await saveTestimonial({
+      await submitTestimonial({
         name: form.name.trim(),
         role: form.role.trim(),
         company: form.company.trim(),
         content: form.content.trim(),
-        avatarUrl: `https://ui-avatars.com/api/?name=${encodeURIComponent(form.name.trim())}&background=random&color=fff&size=128`,
       });
       setSubmitted(true);
     } catch {
@@ -46,7 +47,7 @@ export default function SubmitTestimonial() {
           <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-6" />
           <h2 className="text-2xl font-bold text-white mb-3">Thank You!</h2>
           <p className="text-brand-text-muted">
-            Your testimonial has been submitted and is now live on the website.
+            Thank you — we’ll publish your review on the website after confirming it with you.
           </p>
         </motion.div>
       </div>

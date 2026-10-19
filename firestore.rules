@@ -55,8 +55,11 @@ service cloud.firestore {
 
     // Testimonials
     match /testimonials/{testimonialId} {
-      allow read: if true;
-      allow create: if isValidId(testimonialId) && isValidTestimonial(incoming());
+      // Public sees approved reviews only (queries must filter approved == true).
+      allow read: if resource.data.approved == true || isAdmin();
+      // Anyone may submit, but a public submission always starts unapproved.
+      allow create: if isValidId(testimonialId) && isValidTestimonial(incoming())
+        && (incoming().get('approved', false) == false || isAdmin());
       allow update: if isAdmin() && isValidTestimonial(incoming());
       allow delete: if isAdmin();
     }
@@ -67,7 +70,8 @@ service cloud.firestore {
         && data.role is string && data.role.size() <= 100
         && data.company is string && data.company.size() <= 100
         && data.content is string && data.content.size() <= 1000
-        && data.avatarUrl is string && data.avatarUrl.size() <= 1000;
+        && data.avatarUrl is string && data.avatarUrl.size() <= 1000
+        && data.get('approved', false) is bool;
     }
 
     // Blueprints

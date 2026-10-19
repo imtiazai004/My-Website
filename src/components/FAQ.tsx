@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { Plus, Minus } from 'lucide-react';
 import { BILLING_FAQ, FAQS as DEFAULT_FAQS } from '../constants';
 import { subscribeToFAQs } from '../services/dataService';
@@ -21,7 +21,22 @@ export default function FAQ() {
   }, []);
 
   return (
-    <section id="faq" className="py-32 px-6 relative overflow-hidden bg-white">
+    <section id="faq" aria-labelledby="faq-heading" className="py-32 px-6 relative overflow-hidden bg-white">
+      {/* FAQPage data generated from exactly the questions shown below, so it always matches the page. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: faqs.map((f) => ({
+              '@type': 'Question',
+              name: f.question,
+              acceptedAnswer: { '@type': 'Answer', text: f.answer },
+            })),
+          }),
+        }}
+      />
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{ backgroundImage: 'radial-gradient(circle, rgba(15,23,42,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
@@ -37,15 +52,15 @@ export default function FAQ() {
           viewport={{ once: true }}
           className="text-center space-y-6 mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.04] text-[10px] font-bold tracking-[0.2em] text-slate-500">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
-            COMMON QUESTIONS
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.04] text-xs font-semibold text-slate-600">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
+            Common questions
           </div>
-          <h2 className="text-5xl md:text-6xl font-display font-medium text-slate-900 tracking-tight leading-tight">
+          <h2 id="faq-heading" className="text-4xl md:text-6xl font-display font-medium text-slate-900 tracking-tight leading-tight">
             Everything You <br />
             <span className="text-brand-accent italic">Need to Know</span>
           </h2>
-          <p className="text-slate-500 text-xl font-light max-w-xl mx-auto">
+          <p className="text-slate-600 text-xl max-w-xl mx-auto">
             Clear answers to the questions we hear most often. Still curious? Start a conversation.
           </p>
         </motion.div>
@@ -67,11 +82,13 @@ export default function FAQ() {
               >
                 <button
                   onClick={() => setOpenId(isOpen ? null : faq.id)}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${faq.id}`}
                   className="w-full flex items-center justify-between gap-6 p-6 text-left"
                 >
-                  <span className={`text-base font-medium leading-snug transition-colors ${isOpen ? 'text-slate-900' : 'text-slate-600'}`}>
+                  <h3 className={`text-base font-medium leading-snug transition-colors ${isOpen ? 'text-slate-900' : 'text-slate-700'}`}>
                     {faq.question}
-                  </span>
+                  </h3>
                   <div className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-all ${
                     isOpen ? 'bg-brand-accent border-brand-accent text-white' : 'border-slate-900/10 text-slate-500'
                   }`}>
@@ -79,22 +96,11 @@ export default function FAQ() {
                   </div>
                 </button>
 
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 pb-6 pt-0">
-                        <div className="h-px bg-slate-900/[0.04] mb-5" />
-                        <p className="text-slate-500 font-light leading-relaxed">{faq.answer}</p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {/* Answers stay in the HTML (hidden, not removed) so search and AI crawlers can read them. */}
+                <div id={`faq-answer-${faq.id}`} hidden={!isOpen} className="px-6 pb-6 pt-0 fade-in">
+                  <div className="h-px bg-slate-900/[0.04] mb-5" />
+                  <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
+                </div>
               </motion.div>
             );
           })}
@@ -112,7 +118,7 @@ export default function FAQ() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="px-10 py-4 bg-brand-accent text-slate-900 font-bold uppercase tracking-widest text-[11px] hover:bg-blue-400 transition-all rounded-2xl"
+            className="px-10 py-4 bg-brand-accent text-white font-bold uppercase tracking-widest text-xs hover:bg-blue-600 transition-all rounded-2xl"
           >
             Get a Free Consultation
           </motion.button>

@@ -10,11 +10,11 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { auth, signInWithPopup, googleProvider } from '../lib/firebase';
+import { auth, signInWithPopup, googleProvider } from '../lib/firebase-auth';
 import {
   subscribeToProjects, saveProject, deleteProject,
   subscribeToSkills, saveSkill, deleteSkill,
-  subscribeToTestimonials, saveTestimonial, deleteTestimonial,
+  subscribeToAllTestimonials, saveTestimonial, deleteTestimonial,
   subscribeToActivity, subscribeToContacts,
   subscribeToFAQs, saveFAQ, deleteFAQ,
   subscribeToSectionSettings, saveSectionSettings,
@@ -24,8 +24,7 @@ import {
 import { Project, Skill, Testimonial, FAQ, SectionSettings, BlogPost, Blueprint } from '../types';
 import { slugify } from '../lib/seo';
 import {
-  PROJECTS as INITIAL_PROJECTS, SKILLS as INITIAL_SKILLS,
-  TESTIMONIALS as INITIAL_TESTIMONIALS, FAQS as INITIAL_FAQS,
+  FAQS as INITIAL_FAQS,
   DEFAULT_SECTION_SETTINGS,
 } from '../constants';
 
@@ -189,7 +188,7 @@ export default function AdminPage() {
       subscribeToProjects(setProjects),
       subscribeToPosts(setPosts),
       subscribeToSkills(setSkills),
-      subscribeToTestimonials(setTestimonials),
+      subscribeToAllTestimonials(setTestimonials),
       subscribeToFAQs(setFaqs),
       subscribeToBlueprints(setBlueprints),
       subscribeToSectionSettings(setSectionSettings),
@@ -249,9 +248,8 @@ export default function AdminPage() {
 
   const seedData = async () => {
     if (!window.confirm('Seed default data to Firestore?')) return;
-    if (activeTab === 'projects')     for (const p of INITIAL_PROJECTS)     await saveProject(p);
-    if (activeTab === 'skills')       for (const s of INITIAL_SKILLS)       await saveSkill(s);
-    if (activeTab === 'testimonials') for (const t of INITIAL_TESTIMONIALS) await saveTestimonial(t);
+    // Only FAQs have real defaults. Projects live in src/data/projects.ts, and
+    // testimonials must come from real clients — never seed those.
     if (activeTab === 'faqs')         for (const f of INITIAL_FAQS)         await saveFAQ(f);
   };
 
@@ -424,9 +422,12 @@ export default function AdminPage() {
                     <div>
                       <h2 className="text-2xl font-display font-bold capitalize">{activeTab}</h2>
                       <p className="text-white/30 text-sm mt-1">{(crudItems as any[]).length} items</p>
+                      {activeTab === 'projects' && (
+                        <p className="text-amber-300/80 text-xs mt-2">The public Work section now reads src/data/projects.ts (real projects, in git). Items here are no longer shown on the site.</p>
+                      )}
                     </div>
                     <div className="flex gap-3">
-                      {activeTab !== 'posts' && activeTab !== 'blueprints' && (
+                      {activeTab === 'faqs' && (
                         <button onClick={seedData} className="px-4 py-2 border border-white/10 rounded-xl text-[10px] font-bold uppercase tracking-widest text-white/40 hover:border-brand-accent hover:text-white transition-all flex items-center gap-2">
                           <UploadCloud className="w-4 h-4" /> Seed Defaults
                         </button>
@@ -480,6 +481,7 @@ export default function AdminPage() {
                             <div><label className="lbl">Role / Title</label><input className={inp} value={editingItem.role||''} onChange={e=>setEditingItem({...editingItem,role:e.target.value})} required /></div>
                             <div><label className="lbl">Avatar URL</label><input className={inp} value={editingItem.avatarUrl||''} onChange={e=>setEditingItem({...editingItem,avatarUrl:e.target.value})} /></div>
                             <div className="md:col-span-2"><label className="lbl">Testimonial Text</label><textarea className={inp} rows={4} value={editingItem.content||''} onChange={e=>setEditingItem({...editingItem,content:e.target.value})} required /></div>
+                            <div className="md:col-span-2"><label className="flex items-center gap-3 cursor-pointer select-none"><input type="checkbox" checked={!!editingItem.approved} onChange={e=>setEditingItem({...editingItem,approved:e.target.checked})} className="w-4 h-4 accent-[#1a7fe6]" /><span className="text-[10px] font-bold text-white/60 uppercase tracking-widest">{editingItem.approved ? 'Approved — shown on the website' : 'Pending — hidden until you approve it'}</span></label></div>
                           </>)}
                           {activeTab === 'faqs' && (<>
                             <div className="md:col-span-2"><label className="lbl">Question</label><input className={inp} value={editingItem.question||''} onChange={e=>setEditingItem({...editingItem,question:e.target.value})} required /></div>
@@ -517,6 +519,9 @@ export default function AdminPage() {
                           <p className="font-medium text-sm text-white truncate flex items-center gap-2">
                             {activeTab === 'posts' && (
                               <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest border shrink-0 ${item.published ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'}`}>{item.published ? 'LIVE' : 'DRAFT'}</span>
+                            )}
+                            {activeTab === 'testimonials' && (
+                              <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-widest border shrink-0 ${item.approved ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'}`}>{item.approved ? 'APPROVED' : 'PENDING'}</span>
                             )}
                             <span className="truncate">{item.title || item.name || item.question}</span>
                           </p>

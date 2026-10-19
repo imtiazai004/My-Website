@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { usePageSeo } from '../lib/seo';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowLeft, Download, BookOpen, Calendar, Tag, ExternalLink, FileText, ChevronDown } from 'lucide-react';
@@ -164,10 +165,16 @@ export default function BlueprintDetail() {
     getBlueprint(id).then(bp => {
       setBlueprint(bp);
       setLoading(false);
-      if (bp) document.title = `${bp.title} | Blueprint Library`;
     });
-    return () => { document.title = 'Blueprint Library | AI Soft Tech Solution'; };
   }, [id]);
+
+  usePageSeo({
+    title: blueprint ? `${blueprint.title} | Blueprint Library` : 'Blueprint Library | AI Soft Tech Solution',
+    description: blueprint?.description,
+    canonical: id ? `https://aisofttechsolution.com/blueprint-library/${id}` : undefined,
+    type: 'article',
+    noindex: !loading && !blueprint,
+  });
 
   const handleDownload = () => {
     if (!blueprint) return;

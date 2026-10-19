@@ -6,6 +6,11 @@
       "permanent": false
     },
     {
+      "source": "/soft-clipper",
+      "destination": "https://softclipper.pro/",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "destination": "https://imtiazahmad004-composer-ai-scanner.hf.space/$1",
       "permanent": true,

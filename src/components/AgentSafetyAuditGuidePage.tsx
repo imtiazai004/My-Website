@@ -4,7 +4,7 @@ import { Download, BookOpen, FileText, ShieldCheck } from 'lucide-react';
 import Navbar from './Navbar';
 import ShaderBackground from './ui/shader-background';
 import { usePageSeo } from '../lib/seo';
-import { BUSINESS } from '../config/business';
+import { BUSINESS, FOUNDER } from '../config/business';
 
 const PDF_URL = '/guides/ai-agent-safety-audit.pdf';
 
@@ -25,11 +25,7 @@ export default function AgentSafetyAuditGuidePage() {
       headline: 'The Agent Safety Audit — Free Guide',
       description:
         '10 guardrails to demand before any AI agent touches your business: sandboxed access, approval gates, secret masking, traffic inspection, audit trails, data boundaries and more.',
-      author: {
-        '@type': 'Organization',
-        name: BUSINESS.brandName,
-        url: BUSINESS.websiteUrl,
-      },
+      author: { '@type': 'Person', name: FOUNDER.name, url: FOUNDER.url },
       publisher: {
         '@type': 'Organization',
         name: BUSINESS.brandName,

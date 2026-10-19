@@ -50,7 +50,7 @@ export default function ChatWidget() {
         return;
       }
 
-      if (!res.ok || !data.message) {
+      if (!data.message) {
         setMessages(prev => [...prev, { role: 'assistant', content: 'I\'m having trouble responding right now. Please try again shortly.' }]);
         return;
       }

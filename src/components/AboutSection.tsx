@@ -1,13 +1,25 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Award, Clock, Users, Zap, CheckCircle2, Globe } from 'lucide-react';
+import { ArrowRight, Award, Clock, Zap, CheckCircle2, Globe } from 'lucide-react';
+import { PROJECTS } from '../data/projects';
+import { DEMO_APPS } from '../data/demos';
+import { GUIDE_COUNT } from '../data/guides';
+import { BUSINESS, FOUNDER } from '../config/business';
 
+/* Every number here is counted from data in this repo — nothing to inflate, nothing to go stale. */
 const STATS = [
-  { value: '100+', label: 'Projects Shipped' },
-  { value: '3+', label: 'Years Experience' },
-  { value: '100%', label: 'Client Satisfaction' },
-  { value: '<24h', label: 'Response Time' },
+  { value: String(PROJECTS.length), label: 'Products & apps built' },
+  { value: String(DEMO_APPS.length), label: 'Live demos to try' },
+  { value: String(GUIDE_COUNT), label: 'Free build guides' },
+  { value: '<24h', label: 'Reply time' },
 ];
+
+/** Skip the count-up for reduced-motion users and for headless prerendering, so the HTML always holds the real number. */
+function shouldAnimate() {
+  if (typeof window === 'undefined') return false;
+  if (navigator.webdriver) return false;
+  return !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+}
 
 /* Counts up to the numeric part of a value when scrolled into view (IntersectionObserver). */
 function CountUp({ value, duration = 1600 }: { value: string; duration?: number }) {
@@ -18,11 +30,14 @@ function CountUp({ value, duration = 1600 }: { value: string; duration?: number 
   const target = match ? parseFloat(match[2]) : 0;
   const suffix = match ? match[3] : value;
   const decimals = match && match[2].includes('.') ? match[2].split('.')[1].length : 0;
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(target);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || !shouldAnimate()) return;
+    // Only animate numbers that start below the fold; anything already visible just shows its value.
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
+    setDisplay(0);
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !started.current) {
@@ -49,17 +64,17 @@ function CountUp({ value, duration = 1600 }: { value: string; duration?: number 
 }
 
 const HIGHLIGHTS = [
-  'Full-stack web & mobile engineering',
-  'AI/LLM integration & automation',
-  'Cloud infrastructure & DevOps',
-  'Performance-first architecture',
-  'Security-audited codebases',
-  'Post-launch support included',
+  'WhatsApp & website AI assistants',
+  'Booking, reminder & payment-collection systems',
+  'TikTok Shop & e-commerce automation',
+  'Custom web, mobile & desktop apps',
+  'Fixed-price quote after a free call',
+  '30 days of free support after launch',
 ];
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-32 px-6 relative overflow-hidden bg-white">
+    <section id="about" aria-labelledby="about-heading" className="py-32 px-6 relative overflow-hidden bg-white">
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{ backgroundImage: 'radial-gradient(circle, rgba(15,23,42,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
@@ -69,33 +84,33 @@ export default function AboutSection() {
       <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center [&>*]:min-w-0">
 
           {/* Left — Story */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="space-y-10"
           >
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.04] text-[10px] font-bold tracking-[0.2em] text-slate-500">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
-                WHO WE ARE
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.04] text-xs font-semibold text-slate-600">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
+                Who we are
               </div>
-              <h2 className="text-5xl md:text-6xl font-display font-medium text-slate-900 tracking-tight leading-tight">
-                Built by Engineers, <br />
-                <span className="text-brand-accent italic">For Visionaries</span>
+              <h2 id="about-heading" className="text-4xl md:text-6xl font-display font-medium text-slate-900 tracking-tight leading-tight">
+                A small studio <br />
+                <span className="text-brand-accent italic">that ships real products</span>
               </h2>
-              <p className="text-slate-500 text-xl font-light leading-relaxed">
-                AI Soft Tech Solution was founded with one belief: great software should be both technically
-                uncompromising and visually extraordinary. We bridge the gap between raw engineering
-                precision and cinematic digital experiences.
+              <p className="text-slate-600 text-xl leading-relaxed">
+                {BUSINESS.brandName} builds AI assistants, automation systems and custom apps for online sellers, shops,
+                clinics, schools and government offices. We also build and run our own products — Soft Clipper,
+                ProfitScout and the District Nerve Center — so the team building your software has shipped its own.
               </p>
-              <p className="text-slate-500 text-lg font-light leading-relaxed">
-                Based in the UK, we work with startups, scale-ups, and enterprises globally — delivering
-                systems that don't just meet requirements, they define new standards.
+              <p className="text-slate-600 text-lg leading-relaxed">
+                The company is registered in England and Wales as {BUSINESS.legalCompanyName}. We work with clients in
+                the UK and Pakistan over WhatsApp, email and video calls.
               </p>
             </div>
 
@@ -105,9 +120,11 @@ export default function AboutSection() {
                 IA
               </div>
               <div>
-                <p className="font-display font-medium text-slate-900 text-lg">Imtiaz Ahmad</p>
-                <p className="text-[11px] font-mono text-brand-accent uppercase tracking-widest mt-0.5">Founder & Lead Engineer</p>
-                <p className="text-slate-500 text-sm mt-2 leading-relaxed">Full-stack engineer specializing in AI-powered systems and performance-critical applications.</p>
+                <p className="font-display font-medium text-slate-900 text-lg">
+                  <a href={FOUNDER.url} target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent transition-colors">{FOUNDER.name}</a>
+                </p>
+                <p className="text-xs font-semibold text-brand-accent mt-0.5">{FOUNDER.jobTitle}</p>
+                <p className="text-slate-600 text-sm mt-2 leading-relaxed">Builds with AI coding agents to ship working software fast — from WhatsApp bots to a district emergency platform.</p>
               </div>
             </div>
 
@@ -123,30 +140,30 @@ export default function AboutSection() {
 
           {/* Right — Stats + Highlights */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.15 }}
             className="space-y-8"
           >
             {/* Stats — single horizontal bar, 4 columns with thin dividers + count-up */}
-            <div className="flex divide-x divide-slate-900/10">
+            <dl className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 sm:divide-x divide-slate-900/10">
               {STATS.map((stat, i) => (
-                <div key={i} className="flex-1 px-3 sm:px-5 text-center">
-                  <p className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-brand-accent tracking-tighter tabular-nums">
+                <div key={i} className="px-3 sm:px-4 text-center flex flex-col-reverse">
+                  <dt className="text-xs font-semibold text-slate-500 mt-2">{stat.label}</dt>
+                  <dd className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-brand-accent tracking-tighter tabular-nums">
                     <CountUp value={stat.value} />
-                  </p>
-                  <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 mt-2">{stat.label}</p>
+                  </dd>
                 </div>
               ))}
-            </div>
+            </dl>
 
             {/* Highlights */}
             <div className="p-8 bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl space-y-4">
-              <p className="text-[10px] font-mono font-bold text-brand-accent uppercase tracking-widest mb-6">WHAT WE DELIVER</p>
+              <p className="text-xs font-semibold text-brand-accent mb-6">What we deliver</p>
               <div className="grid grid-cols-1 gap-3">
                 {HIGHLIGHTS.map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 text-slate-500 text-sm font-medium">
+                  <div key={i} className="flex items-center gap-3 text-slate-700 text-sm font-medium">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
                     {item}
                   </div>
@@ -157,12 +174,12 @@ export default function AboutSection() {
             {/* Trust badges */}
             <div className="flex flex-wrap gap-3">
               {[
-                { icon: Globe, text: 'UK Based' },
-                { icon: Clock, text: '24h Response' },
-                { icon: Award, text: 'NDA Ready' },
-                { icon: Zap, text: 'Fast Delivery' },
+                { icon: Globe, text: 'UK-registered company' },
+                { icon: Clock, text: 'Reply within 24h' },
+                { icon: Award, text: 'NDA on request' },
+                { icon: Zap, text: 'Fixed-price quotes' },
               ].map(({ icon: Icon, text }, i) => (
-                <div key={i} className="flex items-center gap-2 px-4 py-2 bg-slate-900/[0.03] border border-slate-900/10 rounded-full text-[10px] font-mono font-bold text-slate-500 uppercase tracking-widest">
+                <div key={i} className="flex items-center gap-2 px-4 py-2 bg-slate-900/[0.03] border border-slate-900/10 rounded-full text-xs font-semibold text-slate-600">
                   <Icon className="w-3 h-3 text-brand-accent" />
                   {text}
                 </div>

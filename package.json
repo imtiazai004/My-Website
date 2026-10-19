@@ -1,5 +1,5 @@
 {
-  "name": "react-example",
+  "name": "aisofttechsolution-website",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,12 +9,12 @@
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
-    "prerender": "node prerender.mjs"
+    "prerender": "node prerender.mjs",
+    "llms": "tsx scripts/generate-llms.ts > public/llms.txt",
+    "thumbs": "node scripts/demo-thumbnails.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.6.1",
     "@tailwindcss/vite": "^4.1.14",
     "@vercel/analytics": "^2.0.1",
     "@vercel/functions": "^3.9.5",
@@ -29,12 +29,10 @@
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.14.2",
     "remark-gfm": "^4.0.1",
-    "tailwind-merge": "^3.5.0",
-    "three": "^0.184.0"
+    "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
-    "@types/three": "^0.184.0",
     "autoprefixer": "^10.4.21",
     "playwright": "^1.48.0",
     "tailwindcss": "^4.1.14",

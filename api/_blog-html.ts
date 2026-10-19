@@ -28,6 +28,17 @@ export interface BlogPost {
   tags: string[];
   published: boolean;
   createdAt: string | null;
+  updatedAt: string | null;
+}
+
+export interface BlueprintDoc {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  content: string;
+  tags: string[];
+  createdAt: string | null;
 }
 
 // ---------- Firestore REST decoding ----------
@@ -46,7 +57,9 @@ function tagList(f: any): string[] {
 }
 
 function parsePost(name: string, fields: any): BlogPost {
-  const slug = name.split('/').pop() || '';
+  // Posts created by the daily publisher use the slug as the document ID;
+  // posts created in the admin panel have an auto ID plus a `slug` field.
+  const slug = str(fields.slug) || name.split('/').pop() || '';
   return {
     slug,
     title: str(fields.title),
@@ -57,17 +70,67 @@ function parsePost(name: string, fields: any): BlogPost {
     tags: tagList(fields.tags),
     published: bool(fields.published),
     createdAt: fields.createdAt?.timestampValue ?? null,
+    updatedAt: fields.updatedAt?.timestampValue ?? null,
   };
+}
+
+async function runQuery(structuredQuery: object): Promise<any[]> {
+  const res = await fetch(`${BASE}:runQuery?key=${KEY}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ structuredQuery }),
+  });
+  if (!res.ok) throw new Error(`Firestore query failed: ${res.status}`);
+  return res.json();
 }
 
 export async function fetchPost(slug: string): Promise<BlogPost | null> {
   const url = `${BASE}/posts/${encodeURIComponent(slug)}?key=${KEY}`;
   const res = await fetch(url);
+  if (res.ok) {
+    const doc = await res.json();
+    const post = parsePost(doc.name, doc.fields || {});
+    return post.published ? post : null;
+  }
+  if (res.status !== 404) throw new Error(`Firestore get failed: ${res.status}`);
+  // Not a document ID — look the post up by its `slug` field instead.
+  const rows = await runQuery({
+    from: [{ collectionId: 'posts' }],
+    where: { fieldFilter: { field: { fieldPath: 'slug' }, op: 'EQUAL', value: { stringValue: slug } } },
+    limit: 1,
+  });
+  const row = rows.find((r: any) => r.document);
+  if (!row) return null;
+  const post = parsePost(row.document.name, row.document.fields || {});
+  return post.published ? post : null;
+}
+
+function parseBlueprint(name: string, fields: any): BlueprintDoc {
+  return {
+    id: name.split('/').pop() || '',
+    title: str(fields.title),
+    description: str(fields.description),
+    category: str(fields.category),
+    content: str(fields.content),
+    tags: tagList(fields.tags),
+    createdAt: fields.createdAt?.timestampValue ?? null,
+  };
+}
+
+export async function fetchBlueprints(): Promise<BlueprintDoc[]> {
+  const rows = await runQuery({
+    from: [{ collectionId: 'blueprints' }],
+    orderBy: [{ field: { fieldPath: 'createdAt' }, direction: 'DESCENDING' }],
+  });
+  return rows.filter((r: any) => r.document).map((r: any) => parseBlueprint(r.document.name, r.document.fields || {}));
+}
+
+export async function fetchBlueprint(id: string): Promise<BlueprintDoc | null> {
+  const res = await fetch(`${BASE}/blueprints/${encodeURIComponent(id)}?key=${KEY}`);
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`Firestore get failed: ${res.status}`);
   const doc = await res.json();
-  const post = parsePost(doc.name, doc.fields || {});
-  return post.published ? post : null;
+  return parseBlueprint(doc.name, doc.fields || {});
 }
 
 export async function fetchPublishedPosts(): Promise<BlogPost[]> {
@@ -258,9 +321,9 @@ ${jsonLd}
 <style>${STYLE}</style>
 </head>
 <body>
-<header><a href="${SITE}"><span class="brand">AI Soft Tech Solution</span></a> · <a href="${SITE}/blog">Blog</a></header>
+<header><a href="${SITE}"><span class="brand">AI Soft Tech Solution</span></a> · <a href="${SITE}/work">Work</a> · <a href="${SITE}/demos">Demos</a> · <a href="${SITE}/guides">Guides</a> · <a href="${SITE}/blog">Blog</a></header>
 ${opts.body}
-<footer>${BRAND} — AI &amp; Web Development Agency · <a href="${SITE}/">aisofttechsolution.com</a></footer>
+<footer>${BRAND} — AI automation and custom apps for online sellers and small businesses. Operated by Atlantic LTD STORE LIMITED (England and Wales). · <a href="${SITE}/">aisofttechsolution.com</a> · WhatsApp +44 7462 086661 / +92 300 5863032</footer>
 </body></html>`;
 }
 
@@ -274,15 +337,19 @@ export function postHtml(post: BlogPost): string {
     headline: post.title,
     description: post.excerpt,
     image,
-    author: { '@type': 'Person', name: post.author || BRAND },
+    author: post.author && post.author !== 'Imtiaz Ahmad'
+      ? { '@type': 'Person', name: post.author }
+      : { '@type': 'Person', name: 'Imtiaz Ahmad', url: 'https://www.linkedin.com/in/imtiazahmad004' },
     publisher: {
       '@type': 'Organization',
+      '@id': `${SITE}/#organization`,
       name: BRAND,
       legalName: 'Atlantic LTD STORE LIMITED',
-      logo: { '@type': 'ImageObject', url: `${SITE}/og-image.jpg` },
+      logo: { '@type': 'ImageObject', url: `${SITE}/logo.png` },
     },
     mainEntityOfPage: canonical,
     ...(date ? { datePublished: date } : {}),
+    ...(post.updatedAt ? { dateModified: new Date(post.updatedAt).toISOString().split('T')[0] } : {}),
   };
   const tags = post.tags.length
     ? `<div class="tags">${post.tags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>`
@@ -295,7 +362,47 @@ export function postHtml(post: BlogPost): string {
     ogType: 'article',
     image,
     jsonLd,
-    body: `<main><article>${tags}<h1>${escapeHtml(post.title)}</h1>${byline}${renderMarkdown(post.content)}</article></main>`,
+    body: `<main><article>${tags}<h1>${escapeHtml(post.title)}</h1>${byline}${renderMarkdown(post.content)}</article>${CTA}</main>`,
+  });
+}
+
+const CTA = `<aside class="demo-link"><p>Want this for your business? Try our <a href="${SITE}/demos">live demos</a>, see <a href="${SITE}/work">what we have built</a>, or message us on WhatsApp: <a href="https://wa.me/447462086661">+44 7462 086661</a> (UK) · <a href="https://wa.me/923005863032">+92 300 5863032</a> (Pakistan).</p></aside>`;
+
+export function blueprintHtml(bp: BlueprintDoc): string {
+  const canonical = `${SITE}/blueprint-library/${bp.id}`;
+  const date = bp.createdAt ? new Date(bp.createdAt).toISOString().split('T')[0] : undefined;
+  return shell({
+    title: `${bp.title} | Blueprint Library — ${BRAND}`,
+    description: bp.description,
+    canonical,
+    ogType: 'article',
+    image: `${SITE}/og-image.jpg`,
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: bp.title,
+      description: bp.description,
+      url: canonical,
+      ...(date ? { datePublished: date } : {}),
+      author: { '@type': 'Person', name: 'Imtiaz Ahmad', url: 'https://www.linkedin.com/in/imtiazahmad004' },
+      publisher: { '@type': 'Organization', '@id': `${SITE}/#organization`, name: BRAND },
+    },
+    body: `<main><article><div class="tags"><span class="tag">${escapeHtml(bp.category)}</span></div><h1>${escapeHtml(bp.title)}</h1><p><strong>${escapeHtml(bp.description)}</strong></p>${renderMarkdown(bp.content)}</article>${CTA}</main>`,
+  });
+}
+
+export function blueprintListHtml(items: BlueprintDoc[]): string {
+  const cards = items
+    .map((b) => `<div class="post-card"><h2><a href="${SITE}/blueprint-library/${b.id}">${escapeHtml(b.title)}</a></h2><p>${escapeHtml(b.description)}</p></div>`)
+    .join('\n');
+  return shell({
+    title: `Blueprint Library — Free Build Blueprints | ${BRAND}`,
+    description: 'Free step-by-step blueprints for building websites, tools and AI apps with coding agents. Read online or download.',
+    canonical: `${SITE}/blueprint-library`,
+    ogType: 'website',
+    image: `${SITE}/og-image.jpg`,
+    jsonLd: { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Blueprint Library', url: `${SITE}/blueprint-library` },
+    body: `<main><h1>Blueprint Library</h1><p>Free step-by-step blueprints for building websites, tools and AI apps with coding agents.</p>${cards || '<p>New blueprints are published regularly.</p>'}</main>`,
   });
 }
 

@@ -1,222 +1,198 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { motion } from 'motion/react';
-import { MonitorPlay, ExternalLink, Lock, ArrowLeft, Sparkles, MessageCircle } from 'lucide-react';
+import { MonitorPlay, ExternalLink, ArrowLeft, MessageCircle, ArrowRight, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { DEMOS } from '../data/demos';
+import { DEMOS, DEMO_APPS, DEMO_INDUSTRIES } from '../data/demos';
+import { BUSINESS, ORGANIZATION_JSONLD } from '../config/business';
+import { usePageSeo } from '../lib/seo';
 
-const DEMOS_PASSCODE = 'smile2026';
-const UNLOCK_KEY = 'demos-unlocked';
+const CANONICAL = `${BUSINESS.websiteUrl}/demos`;
 
-function PasscodeGate({ onUnlock }: { onUnlock: () => void }) {
-  const [value, setValue] = useState('');
-  const [error, setError] = useState(false);
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (value === DEMOS_PASSCODE) {
-      try { sessionStorage.setItem(UNLOCK_KEY, '1'); } catch { /* ignore */ }
-      onUnlock();
-    } else {
-      setError(true);
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-brand-bg text-brand-text flex flex-col">
-      <Navbar />
-      <div className="flex-1 flex items-center justify-center px-6 pt-32 pb-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="glass-card !p-10 max-w-md w-full text-center"
-        >
-          <div className="w-14 h-14 mx-auto mb-6 rounded-full bg-brand-accent/10 flex items-center justify-center">
-            <Lock className="w-6 h-6 text-brand-accent" />
-          </div>
-          <h1 className="text-2xl font-bold text-slate-900 mb-3">Private Demos</h1>
-          <p className="text-slate-500 font-light mb-8">
-            These client demos are password-protected. To view them, enter the
-            passcode mentioned in your email or proposal.
-          </p>
-          <form onSubmit={submit} className="space-y-4">
-            <input
-              type="password"
-              value={value}
-              onChange={(e) => { setValue(e.target.value); setError(false); }}
-              placeholder="Enter passcode"
-              className="w-full px-4 py-3 rounded-xl border border-slate-900/10 bg-white/70 text-slate-900 text-center tracking-widest focus:outline-none focus:ring-2 focus:ring-brand-accent/50"
-              autoFocus
-            />
-            {error && (
-              <p className="text-red-500 text-sm">Incorrect passcode — please try again.</p>
-            )}
-            <button type="submit" className="btn-primary w-full">
-              Unlock demos
-            </button>
-          </form>
-        </motion.div>
-      </div>
-      <Footer />
-    </div>
-  );
-}
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    ORGANIZATION_JSONLD,
+    {
+      '@type': 'CollectionPage',
+      '@id': `${CANONICAL}#page`,
+      url: CANONICAL,
+      name: `Live demos — ${BUSINESS.brandName}`,
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: DEMO_APPS.length + DEMOS.length,
+        itemListElement: [
+          ...DEMO_APPS.map((d, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            url: `${BUSINESS.websiteUrl}/demos/${d.slug}`,
+            name: d.name,
+            description: d.description,
+          })),
+          ...DEMOS.map((d, i) => ({
+            '@type': 'ListItem',
+            position: DEMO_APPS.length + i + 1,
+            url: d.url.startsWith('http') ? d.url : `${BUSINESS.websiteUrl}${d.url}`,
+            name: `${d.client} — ${d.title}`,
+            description: d.description,
+          })),
+        ],
+      },
+    },
+  ],
+};
 
 export default function DemosPage() {
-  const [unlocked, setUnlocked] = useState<boolean>(() => {
-    try { return sessionStorage.getItem(UNLOCK_KEY) === '1'; } catch { return false; }
-  });
-
   useEffect(() => {
-    document.title = 'Client Demos | AI Soft Tech Solution';
     window.scrollTo(0, 0);
-    return () => {
-      document.title = 'AI Soft Tech Solution';
-    };
   }, []);
 
-  if (!unlocked) {
-    return <PasscodeGate onUnlock={() => setUnlocked(true)} />;
-  }
+  usePageSeo({
+    title: `${DEMO_APPS.length} Live Business App Demos — Try Before You Buy | ${BUSINESS.brandName}`,
+    description: `Click through ${DEMO_APPS.length} working demos: COD order confirmation, digital khata, WhatsApp ordering, salon booking, clinic tokens, school fee reminders, TikTok Shop fulfilment and more. Each one can be set up for your business.`,
+    canonical: CANONICAL,
+    jsonLd: JSON_LD,
+  });
 
   return (
     <div className="min-h-screen bg-brand-bg text-brand-text">
       <Navbar />
 
-      {/* Hero */}
-      <section className="pt-40 pb-16 px-6 relative overflow-hidden">
+      <section className="pt-40 pb-12 px-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-[160px] pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
-
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center space-y-6 max-w-3xl mx-auto"
-          >
+          <div className="text-center space-y-6 max-w-3xl mx-auto">
             <div className="pill-badge mx-auto">
-              <MonitorPlay className="w-3 h-3" />
-              Client Demos
+              <MonitorPlay className="w-3 h-3" aria-hidden="true" />
+              Live demos
             </div>
             <h1 className="heading-lg">
-              Live Website <br /> Demos
+              Try it before <br /> you pay for it
             </h1>
-            <p className="text-slate-500 text-xl font-light">
-              Real previews built for real clients. Open one and look around —
-              every demo is fully interactive.
+            <p className="text-slate-600 text-xl leading-relaxed">
+              {DEMO_APPS.length} working business apps and {DEMOS.length} clinic websites. Each demo solves one everyday
+              problem — open it, click around, and if it fits, we set it up for your business.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Demo grid */}
-      <section className="px-6 pb-20">
+      {/* Industry jump links */}
+      <nav aria-label="Demo industries" className="px-6 pb-10">
+        <ul className="max-w-7xl mx-auto flex flex-wrap justify-center gap-2">
+          {DEMO_INDUSTRIES.map((ind) => (
+            <li key={ind}>
+              <a href={`#${slugifyIndustry(ind)}`} className="inline-block rounded-full border border-slate-900/10 bg-white px-4 py-2 text-sm text-slate-700 hover:border-brand-accent hover:text-brand-accent transition-colors">
+                {ind}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href="#websites" className="inline-block rounded-full border border-slate-900/10 bg-white px-4 py-2 text-sm text-slate-700 hover:border-brand-accent hover:text-brand-accent transition-colors">
+              Websites
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      {DEMO_INDUSTRIES.map((industry) => (
+        <section key={industry} id={slugifyIndustry(industry)} aria-labelledby={`${slugifyIndustry(industry)}-h`} className="px-6 pb-16 scroll-mt-28">
+          <div className="max-w-7xl mx-auto">
+            <h2 id={`${slugifyIndustry(industry)}-h`} className="text-2xl md:text-3xl font-display font-bold text-slate-900 mb-6">{industry}</h2>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {DEMO_APPS.filter((d) => d.industry === industry).map((d) => (
+                <article key={d.slug} className="glass-card !p-0 overflow-hidden flex flex-col">
+                  <a href={`/demos/${d.slug}`} target="_blank" rel="noopener" className="block aspect-[16/10] bg-slate-100 overflow-hidden border-b border-slate-900/[0.07]" aria-label={`Open the ${d.name} demo`}>
+                    <img
+                      src={`/demos/thumbs/${d.slug}.webp`}
+                      alt={`${d.name} demo screenshot`}
+                      width={640}
+                      height={400}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover object-top hover:scale-[1.03] transition-transform duration-500"
+                    />
+                  </a>
+                  <div className="p-6 flex flex-col flex-1 gap-3">
+                    <h3 className="text-xl font-bold text-slate-900">{d.name}</h3>
+                    <p className="text-sm font-medium text-slate-800">{d.problem}</p>
+                    <p className="text-sm text-slate-600 leading-relaxed flex-1">{d.description}</p>
+                    <div className="flex flex-wrap items-center gap-4 pt-3 border-t border-slate-900/[0.07]">
+                      <a href={`/demos/${d.slug}`} target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent hover:gap-2.5 transition-all">
+                        Open demo <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                      </a>
+                      {d.post && (
+                        <Link to={`/blog/${d.post}`} className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-900">
+                          <BookOpen className="w-4 h-4" aria-hidden="true" /> Read why
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <section id="websites" aria-labelledby="websites-h" className="px-6 pb-20 scroll-mt-28">
         <div className="max-w-7xl mx-auto">
+          <h2 id="websites-h" className="text-2xl md:text-3xl font-display font-bold text-slate-900 mb-6">Websites</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            {DEMOS.map((demo, i) => (
-              <motion.a
+            {DEMOS.map((demo) => (
+              <a
                 key={demo.id}
                 href={demo.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.12 }}
                 className="glass-card group !p-0 overflow-hidden flex flex-col"
               >
-                {/* Thumbnail */}
-                <div className={`relative h-56 bg-gradient-to-br ${demo.gradient} overflow-hidden`}>
-                  <div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                      backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)',
-                      backgroundSize: '28px 28px',
-                    }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <MonitorPlay className="w-16 h-16 text-white/80 group-hover:scale-110 transition-transform duration-500" />
-                  </div>
-                  <div className="absolute top-4 left-4 flex gap-2">
-                    <span className="px-3 py-1 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-[10px] font-bold text-white uppercase tracking-[0.2em]">
-                      {demo.category}
-                    </span>
-                    {demo.featured && (
-                      <span className="px-3 py-1 bg-white/90 rounded-full text-[10px] font-bold text-slate-900 uppercase tracking-[0.2em] flex items-center gap-1">
-                        <Sparkles className="w-3 h-3" /> Featured
-                      </span>
-                    )}
-                  </div>
-                  {demo.passcodeProtected && (
-                    <div className="absolute top-4 right-4">
-                      <span className="px-3 py-1 bg-slate-900/60 backdrop-blur-md border border-white/20 rounded-full text-[10px] font-bold text-white uppercase tracking-[0.2em] flex items-center gap-1">
-                        <Lock className="w-3 h-3" /> Private preview
-                      </span>
-                    </div>
-                  )}
-                  <div className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ExternalLink className="w-4 h-4 text-white" />
-                  </div>
+                <div className={`relative h-44 bg-gradient-to-br ${demo.gradient} flex items-center justify-center`}>
+                  <MonitorPlay className="w-14 h-14 text-white/80 group-hover:scale-110 transition-transform duration-500" aria-hidden="true" />
+                  <span className="absolute top-4 left-4 px-3 py-1 bg-white/20 border border-white/30 rounded-full text-xs font-semibold text-white">
+                    {demo.category}
+                  </span>
                 </div>
-
-                {/* Body */}
-                <div className="p-8 flex flex-col flex-1">
-                  <p className="text-[11px] font-bold text-brand-accent uppercase tracking-[0.25em] mb-2">
-                    {demo.client}
-                  </p>
-                  <h2 className="text-2xl font-bold text-slate-900 mb-3">{demo.title}</h2>
-                  <p className="text-slate-500 font-light leading-relaxed flex-1">{demo.description}</p>
-
-                  <div className="flex items-center justify-between pt-6 mt-6 border-t border-slate-900/[0.07]">
-                    <span className="text-xs text-slate-400">Added {demo.dateAdded}</span>
-                    <span className="inline-flex items-center gap-2 text-brand-accent font-bold text-sm group-hover:gap-3 transition-all">
-                      View live demo <ExternalLink className="w-4 h-4" />
-                    </span>
-                  </div>
+                <div className="p-7 flex flex-col flex-1">
+                  <p className="text-xs font-semibold text-brand-accent mb-2">{demo.client}</p>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-3">{demo.title}</h3>
+                  <p className="text-slate-600 leading-relaxed flex-1">{demo.description}</p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-brand-accent font-semibold text-sm">
+                    View live demo <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                  </span>
                 </div>
-              </motion.a>
+              </a>
             ))}
           </div>
-
-          {/* Empty-state hint for future demos */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-center text-slate-400 text-sm mt-12 font-light"
-          >
-            More client demos are added here as they are built.
-          </motion.p>
         </div>
       </section>
 
-      {/* CTA */}
       <section className="px-6 pb-24">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="glass-card text-center !p-12"
           >
-            <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-slate-900 mb-4">Want a demo like this for your business?</h2>
-            <p className="text-slate-500 font-light text-lg mb-8 max-w-xl mx-auto">
-              Tell us about your business and we will build you a free, no-obligation
-              preview — customised for you, just like these.
+            <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-slate-900 mb-4">Want one of these for your business?</h2>
+            <p className="text-slate-600 text-lg mb-8 max-w-xl mx-auto">
+              Tell us which demo is closest and what your business does. We will reply within 24 hours with a free,
+              no-obligation preview plan and a fixed price.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href="https://wa.me/447462086661?text=Hi!%20I%20saw%20your%20client%20demos%20and%20I%27d%20like%20a%20free%20demo%20for%20my%20business."
+                href={`${BUSINESS.whatsapp.uk.href}?text=${encodeURIComponent('Hi! I saw your demos and would like one for my business.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"
               >
-                <MessageCircle className="w-5 h-5" /> Chat on WhatsApp
+                <MessageCircle className="w-5 h-5" aria-hidden="true" /> Chat on WhatsApp
               </a>
-              <Link to="/#contact" className="btn-secondary">
-                Contact us
+              <Link to="/work" className="btn-secondary inline-flex items-center gap-2">
+                See our products <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </div>
           </motion.div>
@@ -224,12 +200,16 @@ export default function DemosPage() {
       </section>
 
       <div className="px-6 pb-16 text-center">
-        <Link to="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-900 text-sm transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Back to main site
+        <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 text-sm transition-colors">
+          <ArrowLeft className="w-4 h-4" aria-hidden="true" /> Back to main site
         </Link>
       </div>
 
       <Footer />
     </div>
   );
+}
+
+function slugifyIndustry(s: string) {
+  return s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
