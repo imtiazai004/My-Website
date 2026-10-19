@@ -1,107 +1,110 @@
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  Zap, ShieldCheck, Cpu, BarChart3, Users2, Code2,
+  ShieldCheck, Cpu, MonitorPlay, Receipt, Rocket, LifeBuoy,
   MousePointerClick, X, ArrowRight, Activity, Lock, Workflow
 } from 'lucide-react';
+import { DEMO_APPS, DEMO_INDUSTRIES } from '../data/demos';
+import { PROJECTS } from '../data/projects';
 
+// Every claim here is a commitment already in our FAQ and contracts — no invented metrics.
 const REASONS = [
   {
-    id: 'perf',
-    title: 'Engineered for Performance',
-    description: 'We don\'t just write code; we architect systems. Our solutions are optimized for sub-second response times and high concurrency from day one.',
-    icon: Zap,
-    stat: '< 200ms',
-    statLabel: 'Avg. Latency',
+    id: 'demos',
+    title: 'Try it before you pay',
+    description: `Most problems we solve already have a working demo. Open it, click around, then decide — and ask for a free preview set up for your business.`,
+    icon: MonitorPlay,
+    stat: String(DEMO_APPS.length),
+    statLabel: 'Live demos',
     details: {
       metrics: [
-        { label: 'Time to First Byte', value: '45ms' },
-        { label: 'Hydration Time', value: '1.2s' },
-        { label: 'Core Web Vitals', value: '100/100' }
+        { label: 'Working demos', value: String(DEMO_APPS.length) },
+        { label: 'Industries covered', value: String(DEMO_INDUSTRIES.length) },
+        { label: 'Preview for your business', value: 'Free' },
       ],
-      points: ['Edge-computed rendering paths', 'Advanced tree-shaking architectures', 'Sub-millisecond data fetching']
-    }
+      points: ['Real apps you can click through, not screenshots', 'Covers shops, clinics, schools, property, e-commerce and more', 'A free, no-obligation preview for your own business'],
+    },
   },
   {
-    id: 'sec',
-    title: 'Security-First Protocol',
-    description: 'Deep-level security is baked into our development lifecycle. From zero-trust architectures to encrypted data pipelines.',
-    icon: ShieldCheck,
-    stat: '100%',
-    statLabel: 'Audit Ready',
+    id: 'price',
+    title: 'Fixed price, in writing',
+    description: 'We price per project, not per hour. After a free discovery call you get a written, fixed-price proposal — no surprise invoices.',
+    icon: Receipt,
+    stat: 'Fixed',
+    statLabel: 'Project price',
     details: {
       metrics: [
-        { label: 'Encryption Level', value: 'AES-256' },
-        { label: 'Auth Protocol', value: 'OAuth2/OIDC' },
-        { label: 'Uptime', value: '99.99%' }
+        { label: 'Discovery call', value: '30 min' },
+        { label: 'Cost of the call', value: 'Free' },
+        { label: 'Billing', value: 'Per project' },
       ],
-      points: ['Automated penetration testing', 'End-to-end data sanitization', 'Zero-trust network topology']
-    }
+      points: ['Free 30-minute discovery call', 'Written fixed-price proposal before any work starts', 'Monthly retainer only if you want ongoing work'],
+    },
   },
   {
     id: 'ai',
-    title: 'AI-Native Integration',
-    description: 'We leverage cutting-edge LLMs and machine learning models to automate complex workflows and give your business a decisive edge.',
+    title: 'AI that does real work',
+    description: 'Our assistants answer customers, confirm orders and send reminders on WhatsApp and your website — trained on your own prices, timings and policies.',
     icon: Cpu,
-    stat: '40%+',
-    statLabel: 'Efficiency Gained',
-    details: {
-      metrics: [
-        { label: 'Inference Speed', value: 'Fast' },
-        { label: 'Model Support', value: 'Multi-LLM' },
-        { label: 'Automation', value: 'Deep' }
-      ],
-      points: ['Custom RAG pipeline development', 'Vector database optimization', 'Intelligent agent orchestration']
-    }
-  },
-  {
-    id: 'scale',
-    title: 'Scalability at Core',
-    description: 'Our cloud-native approach ensures your infrastructure grows as you do. Whether 100 or 1,000,000 users — elastic, zero downtime.',
-    icon: BarChart3,
-    stat: 'ELASTIC',
-    statLabel: 'Auto-Scaling',
-    details: {
-      metrics: [
-        { label: 'Cluster Type', value: 'K8s Edge' },
-        { label: 'Deployment', value: 'Blue/Green' },
-        { label: 'Throttling', value: 'Dynamic' }
-      ],
-      points: ['Distributed microservices mesh', 'Global Content Delivery (CDN)', 'Serverless compute isolation']
-    }
-  },
-  {
-    id: 'squad',
-    title: 'Dedicated Engineering Squad',
-    description: 'You get a direct line to the architects, not account managers. We act as your extended CTO office with strategic advisory.',
-    icon: Users2,
     stat: '24/7',
-    statLabel: 'Architect Level',
+    statLabel: 'Replies to customers',
     details: {
       metrics: [
-        { label: 'Avg. Seniority', value: '8+ Years' },
-        { label: 'Response Time', value: '< 1hr' },
-        { label: 'Communication', value: 'Slack/Discord' }
+        { label: 'Channels', value: 'WhatsApp + web' },
+        { label: 'Languages', value: 'English + Urdu' },
+        { label: 'Models', value: 'Gemini, Claude' },
       ],
-      points: ['Weekly architectural reviews', 'Shared technical roadmapping', 'Direct developer access']
-    }
+      points: ['Answers from your own business information', 'Hands the chat to a person when it should', 'Works in English and Urdu'],
+    },
   },
   {
-    id: 'tech',
-    title: 'Modern Tech Stack',
-    description: 'We stay at the bleeding edge. Using Next.js 15, Tailwind 4, and Rust components to deliver future-proof software.',
-    icon: Code2,
-    stat: 'v2025',
-    statLabel: 'Standard',
+    id: 'products',
+    title: 'We run our own products',
+    description: 'Soft Clipper, ProfitScout and the District Nerve Center are built and run by us — the same way we build yours.',
+    icon: Rocket,
+    stat: String(PROJECTS.filter((p) => ['In daily use', 'Live product', 'Live'].includes(p.status)).length),
+    statLabel: 'Live products',
     details: {
       metrics: [
-        { label: 'Framework', value: 'React 19' },
-        { label: 'Language', value: 'TypeScript' },
-        { label: 'Build Tool', value: 'Vite/Turbopack' }
+        { label: 'Projects on our work page', value: String(PROJECTS.length) },
+        { label: 'Live or in daily use', value: String(PROJECTS.filter((p) => ['In daily use', 'Live product', 'Live'].includes(p.status)).length) },
+        { label: 'Open source', value: String(PROJECTS.filter((p) => p.status === 'Open source').length) },
       ],
-      points: ['Strict-mode type engineering', 'Headless component architecture', 'Atomic design principles']
-    }
-  }
+      points: ['District Nerve Center — in daily use at a district control room', 'Soft Clipper — a paid desktop app', 'ProfitScout — a free Chrome extension'],
+    },
+  },
+  {
+    id: 'ownership',
+    title: 'You own everything',
+    description: 'We sign an NDA before any confidential discussion, and every contract assigns 100% of the code, designs and assets to you.',
+    icon: ShieldCheck,
+    stat: '100%',
+    statLabel: 'IP assigned to you',
+    details: {
+      metrics: [
+        { label: 'NDA', value: 'Before we talk details' },
+        { label: 'IP ownership', value: 'Yours' },
+        { label: 'Source code', value: 'Handed over' },
+      ],
+      points: ['NDA before any confidential discussion', 'Full IP assignment in every contract', 'Source code and accounts handed over at the end'],
+    },
+  },
+  {
+    id: 'support',
+    title: 'Support after launch',
+    description: 'Every project includes 30 days of free fixes after launch, and we reply within 24 hours. Ongoing plans are there if you want them.',
+    icon: LifeBuoy,
+    stat: '30 days',
+    statLabel: 'Free support',
+    details: {
+      metrics: [
+        { label: 'Free support', value: '30 days' },
+        { label: 'Reply time', value: '< 24h' },
+        { label: 'Ongoing plans', value: '3 levels' },
+      ],
+      points: ['30 days of free post-launch fixes', 'Basic, Standard or Premium plans afterwards', 'WhatsApp and email support'],
+    },
+  },
 ];
 
 function ReasonCard({ reason, index, onClick }: { reason: typeof REASONS[0]; index: number; onClick: () => void }) {
@@ -165,9 +168,8 @@ function ReasonCard({ reason, index, onClick }: { reason: typeof REASONS[0]; ind
       <div className="mt-8 pt-6 border-t border-slate-900/[0.07] flex items-end justify-between relative z-10">
         <div className="space-y-1">
           <p className="text-2xl font-display font-bold text-slate-900 tracking-tighter">{reason.stat}</p>
-          <p className="text-[9px] font-mono font-bold uppercase tracking-widest text-slate-400">{reason.statLabel}</p>
+          <p className="text-xs font-semibold text-slate-500">{reason.statLabel}</p>
         </div>
-        <div className="text-[10px] font-mono font-bold text-slate-900/10">S_VAL_{index + 1}</div>
       </div>
     </motion.div>
   );
@@ -181,7 +183,7 @@ export default function WhyChooseUs() {
     <section id="why-choose-us" className="py-32 px-6 relative bg-[#f1f5f9] overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.015] pointer-events-none select-none overflow-hidden">
         <div className="text-[20rem] font-black font-mono leading-none rotate-90 translate-x-1/2 text-slate-900/[0.04]">
-          WHY_US
+          WHY US
         </div>
       </div>
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-[150px] pointer-events-none" />
@@ -198,7 +200,7 @@ export default function WhyChooseUs() {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.04] text-[10px] font-bold tracking-[0.2em] text-slate-500"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
-              THE_SOFT_TECH_ADVANTAGE
+              Why work with us
             </motion.div>
 
             <div className="space-y-6">
@@ -209,7 +211,7 @@ export default function WhyChooseUs() {
                 transition={{ delay: 0.1 }}
                 className="text-5xl md:text-6xl font-display font-medium text-slate-900 leading-tight tracking-tight"
               >
-                Why Leaders <span className="text-brand-accent italic">Trust</span> Us
+                Why businesses <span className="text-brand-accent italic">choose</span> us
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -218,7 +220,7 @@ export default function WhyChooseUs() {
                 transition={{ delay: 0.2 }}
                 className="text-slate-500 text-xl font-light leading-relaxed max-w-md"
               >
-                We don't just build websites; we engineer digital competitive advantages. Combining mathematical precision with artistic UI execution.
+                Proof over promises: working demos, fixed prices, and products we run ourselves.
               </motion.p>
             </div>
 
@@ -230,15 +232,15 @@ export default function WhyChooseUs() {
               className="p-8 bg-brand-accent/10 border border-brand-accent/20 rounded-[2rem] text-slate-800 space-y-6 relative overflow-hidden group"
             >
               <div className="relative z-10 space-y-4">
-                <h3 className="text-2xl font-display font-medium">Ready for the Next Level?</h3>
+                <h3 className="text-2xl font-display font-medium">Not sure what you need?</h3>
                 <p className="text-slate-500 text-sm leading-relaxed">
-                  Join 50+ hyper-growth startups and enterprises that have scaled their vision with our specialized engineering.
+                  Tell us the problem in two lines. We reply within 24 hours with the demo that fits — or a plan if none does.
                 </p>
                 <button
                   className="flex items-center gap-2 text-brand-accent font-bold text-sm group-hover:gap-4 transition-all"
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  Book a strategic audit <MousePointerClick className="w-4 h-4" />
+                  Book a free call <MousePointerClick className="w-4 h-4" />
                 </button>
               </div>
               <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-accent/20 blur-[80px] group-hover:bg-brand-accent/40 transition-all duration-700" />
@@ -306,14 +308,14 @@ export default function WhyChooseUs() {
                 </button>
 
                 <div className="space-y-4">
-                  <h4 className="text-xs font-mono font-bold text-brand-accent uppercase tracking-[0.2em]">Engineering_Brief</h4>
+                  <h4 className="text-xs font-mono font-bold text-brand-accent uppercase tracking-[0.2em]">In short</h4>
                   <p className="text-xl text-slate-600 font-light leading-relaxed italic">
                     "{selectedReason.description}"
                   </p>
                 </div>
 
                 <div className="space-y-6">
-                  <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Protocol_Framework</h4>
+                  <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">What you get</h4>
                   <div className="space-y-4">
                     {selectedReason.details.points.map((point, i) => (
                       <div key={i} className="flex items-start gap-4">

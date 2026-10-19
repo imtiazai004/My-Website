@@ -4,7 +4,7 @@ import { Download, BookOpen, FileText, Bot } from 'lucide-react';
 import Navbar from './Navbar';
 import ShaderBackground from './ui/shader-background';
 import { usePageSeo } from '../lib/seo';
-import { BUSINESS } from '../config/business';
+import { BUSINESS, FOUNDER } from '../config/business';
 
 const PDF_URL = '/guides/build-your-own-ai-seller-copilot.pdf';
 
@@ -25,11 +25,7 @@ export default function SellerCopilotGuidePage() {
       headline: 'Build Your Own AI Seller Copilot — Free Guide',
       description:
         'Turn your sales playbooks into an AI copilot that answers like a specialist. Pick your coding agent, build the app step by step — no coding required.',
-      author: {
-        '@type': 'Organization',
-        name: BUSINESS.brandName,
-        url: BUSINESS.websiteUrl,
-      },
+      author: { '@type': 'Person', name: FOUNDER.name, url: FOUNDER.url },
       publisher: {
         '@type': 'Organization',
         name: BUSINESS.brandName,

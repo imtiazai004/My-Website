@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import { subscribeToBlueprints } from '../services/dataService';
 import { Blueprint } from '../types';
+import { usePageSeo } from '../lib/seo';
+import { BUSINESS } from '../config/business';
 
 
 export default function BlueprintLibrary() {
@@ -12,10 +14,11 @@ export default function BlueprintLibrary() {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
 
-  useEffect(() => {
-    document.title = 'Blueprint Library | AI Soft Tech Solution';
-    return () => { document.title = 'AI Soft Tech Solution'; };
-  }, []);
+  usePageSeo({
+    title: `Blueprint Library — Free Build Blueprints | ${BUSINESS.brandName}`,
+    description: 'Free step-by-step blueprints for building websites, tools and AI apps with coding agents. Read online or download.',
+    canonical: `${BUSINESS.websiteUrl}/blueprint-library`,
+  });
 
   useEffect(() => {
     return subscribeToBlueprints(setBlueprints);

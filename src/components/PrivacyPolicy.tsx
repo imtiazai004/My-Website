@@ -2,12 +2,18 @@ import { useEffect } from 'react';
 import ShaderBackground from './ui/shader-background';
 import Navbar from './Navbar';
 import { BUSINESS } from '../config/business';
+import { usePageSeo } from '../lib/seo';
 
 export default function PrivacyPolicy() {
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = 'Privacy Policy — ProfitScout | AI Soft Tech Solution';
   }, []);
+
+  usePageSeo({
+    title: 'Privacy Policy — ProfitScout | AI Soft Tech Solution',
+    description: 'Privacy policy for the ProfitScout Chrome extension. Your data stays in your browser. No personal data collected, no data sold, no account required.',
+    canonical: `${BUSINESS.websiteUrl}/profitscout-privacy`,
+  });
 
   return (
     <div className="min-h-screen selection:bg-brand-accent selection:text-white scroll-smooth relative overflow-x-hidden">

@@ -4,7 +4,7 @@ import { Download, BookOpen, FileText } from 'lucide-react';
 import Navbar from './Navbar';
 import ShaderBackground from './ui/shader-background';
 import { usePageSeo } from '../lib/seo';
-import { BUSINESS } from '../config/business';
+import { BUSINESS, FOUNDER } from '../config/business';
 
 const PDF_URL = '/guides/tikfulfill-build-guide.pdf';
 
@@ -25,11 +25,7 @@ export default function TikFulfillGuidePage() {
       headline: 'TikFulfill Build Guide — Free PDF',
       description:
         'Build your own TikTok Shop auto-fulfilment dashboard in VS Code with Claude Code. Every prompt included, copy-paste ready.',
-      author: {
-        '@type': 'Organization',
-        name: BUSINESS.brandName,
-        url: BUSINESS.websiteUrl,
-      },
+      author: { '@type': 'Person', name: FOUNDER.name, url: FOUNDER.url },
       publisher: {
         '@type': 'Organization',
         name: BUSINESS.brandName,

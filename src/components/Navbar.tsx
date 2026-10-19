@@ -3,52 +3,44 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Logo } from './Logo';
 import {
-  Globe, Smartphone, MonitorSmartphone, Building2, Brain,
-  ShoppingCart, Server, Blocks, Code2, Briefcase,
+  Globe, ShoppingCart, Bot, BellRing, AppWindow, Landmark,
   ChevronDown, ArrowRight, Mail, MessageCircle,
-  Layers, Star, Cpu, Users, HelpCircle, X, Menu,
-  Zap, Shield, BarChart3, Bot, PenLine, BookOpen, MonitorPlay,
+  Layers, Star, Users, HelpCircle, X, Menu, Scale,
+  Zap, PenLine, BookOpen, MonitorPlay, LibraryBig,
 } from 'lucide-react';
 import { BUSINESS } from '../config/business';
+import { SERVICES as SERVICE_DATA } from '../data/services';
 
 /* ─── Data ─────────────────────────────────────────────────── */
 
-const SERVICES = [
-  { icon: Globe,            label: 'Website Development',   desc: 'Fast, responsive sites that convert',        color: '#1a7fe6' },
-  { icon: MonitorSmartphone,label: 'Web App Development',   desc: 'Powerful browser-based applications',        color: '#8b5cf6' },
-  { icon: Smartphone,       label: 'Mobile App Development',desc: 'Native iOS & Android experiences',           color: '#06b6d4' },
-  { icon: Code2,            label: 'App Development',       desc: 'Cross-platform apps built to scale',         color: '#10b981' },
-  { icon: Building2,        label: 'Business Websites',     desc: 'Professional sites for growing businesses',  color: '#f59e0b' },
-  { icon: Briefcase,        label: 'Firm & Agency Sites',   desc: 'Authority-driven sites for law & finance',   color: '#f43f5e' },
-  { icon: Brain,            label: 'AI Automation',         desc: 'Intelligent workflows that save hours',       color: '#a855f7' },
-  { icon: ShoppingCart,     label: 'E-commerce Solutions',  desc: 'Stores that sell while you sleep',           color: '#FF9900' },
-  { icon: Server,           label: 'SaaS Development',      desc: 'Scalable software-as-a-service platforms',   color: '#1a7fe6' },
-  { icon: Blocks,           label: 'API & Integrations',    desc: 'Connect your systems seamlessly',            color: '#06b6d4' },
-  { icon: Bot,              label: 'Chatbot & AI Agents',   desc: 'Deploy AI that handles queries 24/7',        color: '#a855f7' },
-  { icon: Shield,           label: 'Security & Compliance', desc: 'Harden your stack against threats',         color: '#ef4444' },
-];
+const SERVICE_ICONS = { bot: Bot, bell: BellRing, cart: ShoppingCart, app: AppWindow, globe: Globe, landmark: Landmark } as const;
+
+const SERVICES = SERVICE_DATA.map((sv) => ({
+  icon: SERVICE_ICONS[sv.icon],
+  label: sv.label,
+  desc: sv.tagline,
+  color: sv.color,
+}));
 
 const WORK_ITEMS = [
-  { icon: Layers,    label: 'All Projects',      desc: 'Browse our full portfolio',            href: '#work' },
-  { icon: Server,    label: 'SaaS Platforms',    desc: 'Enterprise-grade software products',   href: '#work' },
-  { icon: Globe,     label: 'Web Applications',  desc: 'Complex, interactive systems',         href: '#work' },
-  { icon: Smartphone,label: 'Mobile Apps',       desc: 'iOS & Android experiences',            href: '#work' },
-  { icon: Bot,       label: 'AI Solutions',      desc: 'Machine learning in production',       href: '#work' },
-  { icon: Cpu,       label: 'Desktop Tools',     desc: 'Windows & macOS applications',         href: '#work' },
+  { icon: Layers,      label: 'All projects',      desc: 'Products we built and run',        href: '/work' },
+  { icon: MonitorPlay, label: 'Live demos',        desc: 'Try business apps before you buy', href: '/demos' },
+  { icon: LibraryBig,  label: 'Free guides',       desc: 'Build-it-yourself playbooks',      href: '/guides' },
+  { icon: BookOpen,    label: 'Blueprint library', desc: 'Step-by-step build blueprints',    href: '/blueprint-library' },
 ];
 
 const COMPANY_ITEMS = [
-  { icon: Users,      label: 'About Us',       desc: 'Our story, mission & team',      href: '#about' },
-  { icon: Star,       label: 'Why Choose Us',  desc: 'What sets us apart',             href: '#whyChooseUs' },
-  { icon: BarChart3,  label: 'Our Tech Stack', desc: 'Technologies we master',         href: '#skills' },
-  { icon: HelpCircle, label: 'FAQ',            desc: 'Common questions answered',      href: '#faq' },
-  { icon: Zap,        label: 'Testimonials',   desc: 'What our clients say',           href: '#testimonials' },
+  { icon: Users,      label: 'About us',             desc: 'Who we are and how we work',   href: '#about' },
+  { icon: Star,       label: 'Why choose us',        desc: 'Demos, fixed prices, support', href: '#why-choose-us' },
+  { icon: Scale,      label: 'Agency vs freelancer', desc: 'An honest comparison',         href: '/compare/agency-vs-freelancer' },
+  { icon: HelpCircle, label: 'FAQ',                  desc: 'Common questions answered',    href: '#faq' },
+  { icon: Zap,        label: 'Blog',                 desc: 'Problems we solve, explained', href: '/blog' },
 ];
 
 const CONTACT_ITEMS = [
-  { icon: Mail,          label: 'Email Us',       desc: BUSINESS.supportEmail, href: `mailto:${BUSINESS.supportEmail}` },
-  { icon: MessageCircle, label: 'WhatsApp (UK)',  desc: '+44 7462 086661',             href: 'https://wa.me/447462086661' },
-  { icon: MessageCircle, label: 'WhatsApp (PK)',  desc: '+92 300 5863032',             href: 'https://wa.me/923005863032' },
+  { icon: Mail,          label: 'Email us',       desc: BUSINESS.supportEmail,       href: `mailto:${BUSINESS.supportEmail}` },
+  { icon: MessageCircle, label: 'WhatsApp (UK)',  desc: BUSINESS.whatsapp.uk.display, href: BUSINESS.whatsapp.uk.href },
+  { icon: MessageCircle, label: 'WhatsApp (PK)',  desc: BUSINESS.whatsapp.pk.display, href: BUSINESS.whatsapp.pk.href },
 ];
 
 type DropdownKey = 'services' | 'work' | 'company' | 'contact' | null;
@@ -109,9 +101,18 @@ export default function Navbar() {
   const scrollTo = useCallback((href: string) => {
     setOpen(null);
     setMobileOpen(false);
+    if (href.startsWith('/')) {
+      navigate(href);
+      return;
+    }
     const id = href.replace('#', '');
+    if (location.pathname !== '/') {
+      // Anchor on the homepage: go there first; MainSite scrolls to the hash once sections load.
+      navigate(`/#${id}`);
+      return;
+    }
     setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 80);
-  }, []);
+  }, [navigate, location.pathname]);
 
   const handleMouseEnter = (key: DropdownKey) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -134,19 +135,19 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-8">
 
           {/* Logo */}
-          <motion.button
-            onClick={() => {
+          <Link
+            to="/"
+            aria-label={`${BUSINESS.brandName} — home`}
+            onClick={(e) => {
               if (location.pathname === '/') {
+                e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-              } else {
-                navigate('/');
               }
             }}
-            whileHover={{ opacity: 0.85 }}
-            className="cursor-pointer shrink-0"
+            className="cursor-pointer shrink-0 hover:opacity-85 transition-opacity"
           >
             <Logo variant="compact" size={40} />
-          </motion.button>
+          </Link>
 
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-1 flex-1 justify-center" onMouseLeave={handleMouseLeave}>
@@ -155,29 +156,20 @@ export default function Navbar() {
             <NavItem label="Services" icon={<Globe className="w-3.5 h-3.5" />} active={open === 'services'} onEnter={() => handleMouseEnter('services')} />
 
             {/* Work */}
-            <NavItem label="Our Work" icon={<Layers className="w-3.5 h-3.5" />} active={open === 'work'} onEnter={() => handleMouseEnter('work')} />
+            <NavItem label="Work" icon={<Layers className="w-3.5 h-3.5" />} active={open === 'work'} onEnter={() => handleMouseEnter('work')} />
 
             {/* Company */}
             <NavItem label="Company" icon={<Users className="w-3.5 h-3.5" />} active={open === 'company'} onEnter={() => handleMouseEnter('company')} />
 
             {/* Direct links */}
-            <a
-              href="/blog"
-              className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-slate-900/[0.04]"
-            >
-              Blog
-            </a>
-            <Link
-              to="/blueprint-library"
-              className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-slate-900/[0.04]"
-            >
-              Blueprints
-            </Link>
-            <Link
-              to="/demos"
-              className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-slate-900/[0.04]"
-            >
+            <Link to="/demos" className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-600 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-slate-900/[0.04]">
               Demos
+            </Link>
+            <Link to="/guides" className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-600 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-slate-900/[0.04]">
+              Guides
+            </Link>
+            <Link to="/blog" className="px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-600 hover:text-slate-900 transition-colors duration-200 rounded-lg hover:bg-slate-900/[0.04]">
+              Blog
             </Link>
 
             <button
@@ -202,7 +194,7 @@ export default function Navbar() {
                   <div className="px-6 pt-5 pb-4 border-b border-slate-900/[0.07] flex items-center justify-between">
                     <div>
                       <p className="text-slate-900 font-bold tracking-tight text-sm">Our Services</p>
-                      <p className="text-slate-500 text-[11px] mt-0.5">Everything you need to build, launch, and scale</p>
+                      <p className="text-slate-500 text-[11px] mt-0.5">Each one backed by a working demo</p>
                     </div>
                     <button
                       onClick={() => scrollTo('#services')}
@@ -242,8 +234,8 @@ export default function Navbar() {
                   className="absolute top-[76px] left-1/2 -translate-x-1/2 w-[440px] bg-white/95 backdrop-blur-2xl border border-slate-900/10 rounded-2xl shadow-[0_24px_80px_rgba(15,23,42,0.15)] overflow-hidden"
                 >
                   <div className="px-5 pt-4 pb-3 border-b border-slate-900/[0.07]">
-                    <p className="text-slate-900 font-bold tracking-tight text-sm">Portfolio</p>
-                    <p className="text-slate-500 text-[11px] mt-0.5">Real products. Real impact.</p>
+                    <p className="text-slate-900 font-bold tracking-tight text-sm">Our work</p>
+                    <p className="text-slate-500 text-[11px] mt-0.5">Real products, live demos and free guides.</p>
                   </div>
                   <div className="p-3 grid grid-cols-2 gap-1">
                     {WORK_ITEMS.map((item, i) => {
@@ -270,7 +262,7 @@ export default function Navbar() {
                     })}
                   </div>
                   <div className="px-5 py-3 border-t border-slate-900/[0.07] bg-slate-900/[0.02]">
-                    <button onClick={() => scrollTo('#work')} className="w-full flex items-center justify-center gap-2 py-2 text-[11px] font-bold text-brand-accent hover:text-slate-900 transition-colors uppercase tracking-widest group">
+                    <button onClick={() => scrollTo('/work')} className="w-full flex items-center justify-center gap-2 py-2 text-[11px] font-bold text-brand-accent hover:text-slate-900 transition-colors uppercase tracking-widest group">
                       See All Projects <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
@@ -382,7 +374,7 @@ export default function Navbar() {
 
             <div className="flex-1 px-4 py-6 space-y-1">
               <MobileSection title="Services">
-                {SERVICES.slice(0, 8).map(s => {
+                {SERVICES.map(s => {
                   const Icon = s.icon;
                   return (
                     <button key={s.label} onClick={() => scrollTo('#services')} className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-900/[0.04] transition-all group text-left">
@@ -423,40 +415,15 @@ export default function Navbar() {
                 })}
               </MobileSection>
 
-              <a href="/blog" className="flex items-center gap-3 w-full p-3 mt-2 rounded-xl hover:bg-slate-900/[0.04] transition-all group text-left">
+              <button
+                onClick={() => scrollTo('#contact')}
+                className="flex items-center gap-3 w-full p-3 mt-2 rounded-xl hover:bg-slate-900/[0.04] transition-all group text-left"
+              >
                 <div className="w-8 h-8 rounded-lg bg-brand-accent/10 text-brand-accent flex items-center justify-center shrink-0">
                   <PenLine className="w-4 h-4" />
                 </div>
-                <span className="text-[13px] font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">Blog</span>
-              </a>
-
-              <Link
-                to="/blueprint-library"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-900/[0.04] transition-all group text-left"
-              >
-                <div className="w-8 h-8 rounded-lg bg-brand-accent/10 text-brand-accent flex items-center justify-center shrink-0">
-                  <BookOpen className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-[13px] font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">Blueprint Library</p>
-                  <p className="text-[10px] text-slate-400">Free daily building guides</p>
-                </div>
-              </Link>
-
-              <Link
-                to="/demos"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-900/[0.04] transition-all group text-left"
-              >
-                <div className="w-8 h-8 rounded-lg bg-brand-accent/10 text-brand-accent flex items-center justify-center shrink-0">
-                  <MonitorPlay className="w-4 h-4" />
-                </div>
-                <div>
-                  <p className="text-[13px] font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">Client Demos</p>
-                  <p className="text-[10px] text-slate-400">Live website previews</p>
-                </div>
-              </Link>
+                <span className="text-[13px] font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">Contact us</span>
+              </button>
             </div>
 
             <div className="p-6 border-t border-slate-900/[0.07] space-y-3">

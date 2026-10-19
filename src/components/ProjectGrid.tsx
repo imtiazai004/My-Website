@@ -1,272 +1,147 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Link } from 'react-router-dom';
+import { Bot, Code, X, ArrowRight, Github } from 'lucide-react';
 import ProjectCard from './ProjectCard';
-import { Bot, Code, X, ExternalLink, Github, Layers, Target, LineChart } from 'lucide-react';
-import { PROJECTS as INITIAL_PROJECTS, PROJECT_LOGO_MAP } from '../constants';
-import { subscribeToProjects } from '../services/dataService';
-import { Project } from '../types';
+import { FEATURED_PROJECTS, PROJECTS } from '../data/projects';
+import { DEMO_APPS } from '../data/demos';
+import { BUSINESS } from '../config/business';
+import { ProjectVisual, StatusBadge } from './work/ProjectIcon';
+import { ProjectLinks } from './work/ProjectLinks';
 
 export default function ProjectGrid() {
-  const [projects, setProjects] = useState<Project[]>(INITIAL_PROJECTS);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const selectedProject = projects.find(p => p.id === selectedId);
+  const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
+  const selected = PROJECTS.find((p) => p.slug === selectedSlug);
 
+  // Close on Escape
   useEffect(() => {
-    const unsubscribe = subscribeToProjects((data) => {
-      if (data.length > 0) {
-        const firestoreIds = new Set(data.map(p => p.id));
-        const localOnly = INITIAL_PROJECTS.filter(p => !firestoreIds.has(p.id));
-        setProjects([...data, ...localOnly]);
-      }
-    });
-    return unsubscribe;
-  }, []);
-
-  // Open project modal from URL on first load (?project=5)
-  useEffect(() => {
-    const pid = new URLSearchParams(window.location.search).get('project');
-    if (pid) setSelectedId(pid);
-  }, []);
-
-  // Keep URL in sync with open/closed modal
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    if (selectedId) {
-      url.searchParams.set('project', selectedId);
-    } else {
-      url.searchParams.delete('project');
-    }
-    window.history.replaceState({}, '', url.toString());
-  }, [selectedId]);
+    if (!selectedSlug) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setSelectedSlug(null);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [selectedSlug]);
 
   return (
-    <section id="work" className="py-40 px-6 relative overflow-hidden bg-white">
+    <section id="work" aria-labelledby="work-heading" className="py-32 px-6 relative overflow-hidden bg-white">
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
         style={{ backgroundImage: 'radial-gradient(circle, rgba(15,23,42,0.4) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
       />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-900/10 to-transparent" />
-      <div className="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-brand-accent/5 rounded-full blur-[200px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto mb-32 px-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.04] text-[10px] font-bold tracking-[0.2em] text-slate-500 mb-10">
-          <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
-          CORE_PHILOSOPHY & CAPABILITIES
+      <div className="max-w-7xl mx-auto mb-20">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-900/10 bg-slate-900/[0.04] text-xs font-semibold text-slate-600 mb-10">
+          <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
+          Our work
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          {/* Left Column */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-10"
+            transition={{ duration: 0.7 }}
+            className="space-y-8 min-w-0"
           >
-            <h2 className="text-5xl md:text-6xl font-display font-medium text-slate-900 leading-tight tracking-tight">
-              Engineering <span className="text-brand-accent italic">Intelligent</span> <br />
-              Digital Ecosystems
+            <h2 id="work-heading" className="text-4xl md:text-6xl font-display font-medium text-slate-900 leading-tight tracking-tight">
+              Products we built <br />
+              <span className="text-brand-accent italic">and still run</span>
             </h2>
-
-            <div className="space-y-8 text-slate-600 text-xl font-light leading-relaxed">
+            <div className="space-y-5 text-slate-600 text-lg leading-relaxed">
               <p>
-                Soft Tech empowers businesses with intelligent, high-performance digital solutions designed to solve complex operational challenges and accelerate growth.
+                Every project below is real: a system in daily use at a district control room, products people pay for
+                or install, and open-source apps you can read on GitHub. The status label tells you where each one stands.
               </p>
               <p>
-                Leveraging expertise in AI development, intelligent automation, and cloud infrastructure, we create solutions that help businesses streamline operations and unlock new growth opportunities.
+                Want to see the business tools? Try our {DEMO_APPS.length} working demos — from COD order confirmation to
+                school fee reminders.
               </p>
             </div>
-
-            <div className="flex items-center gap-4 pt-6">
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-12 h-12 rounded-full border-2 border-[#f8fafc] bg-slate-900/[0.06] flex items-center justify-center overflow-hidden shadow-sm">
-                    <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="Expert" className="w-full h-full object-cover" />
-                  </div>
-                ))}
-              </div>
-              <p className="text-[12px] font-mono text-slate-400 tracking-widest uppercase">
-                <span className="text-brand-accent font-bold">24+</span> SENIOR_SYSTEM_ENGINEERS
-              </p>
+            <div className="flex flex-wrap gap-4">
+              <Link to="/work" className="btn-primary !px-7 !py-4 text-sm">
+                All {PROJECTS.length} projects <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
+              <a
+                href={BUSINESS.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary !px-7 !py-4 text-sm inline-flex items-center gap-2"
+              >
+                <Github className="w-4 h-4" aria-hidden="true" /> GitHub
+              </a>
             </div>
           </motion.div>
 
-          {/* Right Column: Laptop Illustration */}
-          <div className="relative flex items-center justify-center py-20">
+          <div className="relative hidden md:flex items-center justify-center py-16 min-w-0" aria-hidden="true">
             <div className="absolute inset-0 bg-brand-accent/5 rounded-full blur-3xl opacity-60" />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-              className="relative z-10"
-            >
-              <div className="relative bg-white rounded-xl p-2 shadow-[0_50px_100px_-20px_rgba(26,127,230,0.3)] border border-slate-900/10 w-80 h-52 md:w-96 md:h-64">
-                <div className="absolute inset-x-0 bottom-0 h-2 bg-slate-200 rounded-b-xl border-t border-slate-900/[0.07]" />
-                <div className="w-full h-full bg-[#f8fafc] rounded-lg relative overflow-hidden flex items-center justify-center">
-                  <Code className="w-16 h-16 text-brand-accent animate-pulse" />
-                </div>
-                <AnimatePresence>
-                  <motion.div
-                    animate={{ y: [0, -40, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                    className="absolute -top-10 left-1/4 bg-brand-accent/20 backdrop-blur-md p-3 rounded-full border border-brand-accent/30"
-                  >
-                    <Bot className="w-6 h-6 text-brand-accent" />
-                  </motion.div>
-                </AnimatePresence>
+            <div className="relative z-10 bg-white rounded-xl p-2 shadow-[0_50px_100px_-20px_rgba(26,127,230,0.3)] border border-slate-900/10 w-80 h-52 md:w-96 md:h-64">
+              <div className="absolute inset-x-0 bottom-0 h-2 bg-slate-200 rounded-b-xl border-t border-slate-900/[0.07]" />
+              <div className="w-full h-full bg-[#f8fafc] rounded-lg relative overflow-hidden flex items-center justify-center">
+                <Code className="w-16 h-16 text-brand-accent" />
               </div>
-            </motion.div>
+              <div className="absolute -top-10 left-1/4 bg-brand-accent/20 backdrop-blur-md p-3 rounded-full border border-brand-accent/30">
+                <Bot className="w-6 h-6 text-brand-accent" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-20 mb-32 items-start opacity-60">
-          <div className="space-y-6">
-            <h3 className="text-slate-500 font-bold tracking-widest text-xs uppercase">PROTOCOL_ACTIVE</h3>
-            <p className="text-slate-500 text-lg font-light leading-relaxed max-w-xl">
-              Matrix contains our most critical production deployments.
-              Each node represents a distinct architecture optimized for specific operational vectors.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-4 border-l border-slate-900/10 pl-12">
-            <div className="space-y-4">
-              <h4 className="text-slate-400 font-bold tracking-widest text-[10px] uppercase">Architecture-First</h4>
-              <p className="text-slate-400 text-sm font-light leading-relaxed">
-                Infinite scalability from day zero. We bridge backends and cinematic frontends.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {(projects || []).map((project, index) => (
-            <div key={project.id || `project-${index}`} onClick={() => setSelectedId(project.id)}>
-              <ProjectCard project={project} index={index} />
-            </div>
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {FEATURED_PROJECTS.map((project, index) => (
+            <ProjectCard key={project.slug} project={project} index={index} onOpen={() => setSelectedSlug(project.slug)} />
           ))}
         </div>
+        <div className="mt-12 text-center">
+          <Link to="/work" className="inline-flex items-center gap-2 text-brand-accent font-semibold hover:gap-3 transition-all">
+            See all {PROJECTS.length} projects <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          </Link>
+        </div>
       </div>
 
-      {/* Detail Modal */}
       <AnimatePresence>
-        {selectedId && selectedProject && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-12">
+        {selected && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setSelectedId(null)}
+              onClick={() => setSelectedSlug(null)}
               className="absolute inset-0 bg-slate-900/40 backdrop-blur-2xl"
             />
             <motion.div
-              layoutId={selectedId}
-              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              initial={{ opacity: 0, y: 40, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 50, scale: 0.95 }}
-              className="w-full max-w-5xl bg-white border border-slate-900/10 rounded-[2.5rem] shadow-2xl overflow-hidden relative z-10 flex flex-col lg:flex-row max-h-[90vh]"
+              exit={{ opacity: 0, y: 40, scale: 0.97 }}
+              className="w-full max-w-4xl bg-white border border-slate-900/10 rounded-3xl shadow-2xl overflow-hidden relative z-10 flex flex-col md:flex-row max-h-[90vh]"
             >
-              <div className="lg:w-1/2 relative bg-[#f8fafc] overflow-hidden">
-                <img
-                  src={(() => { const u = selectedProject.imageUrl?.trim(); return (u && u !== '#') ? u : (PROJECT_LOGO_MAP[selectedProject.title] ?? u); })()}
-                  alt={selectedProject.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
-                <div className="absolute bottom-10 left-10 text-white">
-                  <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase opacity-50 mb-2 block">
-                    PROJECT_ID: {selectedProject.id}
-                  </span>
-                  <h3 className="text-4xl font-display font-medium">{selectedProject.title}</h3>
-                </div>
+              <div className="md:w-5/12 relative h-48 md:h-auto">
+                <ProjectVisual project={selected} iconSize="w-20 h-20" />
               </div>
-
-              <div className="lg:w-1/2 p-12 overflow-y-auto bg-white">
+              <div className="md:w-7/12 p-8 md:p-10 overflow-y-auto space-y-6">
                 <button
-                  onClick={() => setSelectedId(null)}
-                  className="absolute top-8 right-8 p-3 rounded-full hover:bg-slate-900/[0.06] transition-colors z-20"
+                  onClick={() => setSelectedSlug(null)}
+                  aria-label="Close"
+                  className="absolute top-5 right-5 p-2 rounded-full bg-white/80 hover:bg-slate-900/[0.06] transition-colors z-20"
                 >
-                  <X className="w-6 h-6 text-slate-500" />
+                  <X className="w-5 h-5 text-slate-600" />
                 </button>
-
-                <div className="space-y-12">
-                  <div className="space-y-4">
-                    <h4 className="text-xs font-mono font-bold text-brand-accent uppercase tracking-widest flex items-center gap-2">
-                      <Target className="w-4 h-4" /> OBJECTIVE & BRIEF
-                    </h4>
-                    <p className="text-slate-600 text-lg font-light leading-relaxed">
-                      {selectedProject.description}
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-8">
-                    <div className="space-y-4">
-                      <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                        <Layers className="w-4 h-4" /> TECH_STACK
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedProject.tags?.map((tag, i) => (
-                          <span key={i} className="px-3 py-1 bg-slate-900/[0.04] border border-slate-900/10 rounded-full text-[10px] font-bold text-slate-500 uppercase">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="space-y-4">
-                      <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                        <LineChart className="w-4 h-4" /> IMPACT_METRIC
-                      </h4>
-                      {selectedProject.stats && selectedProject.stats.length > 0 ? (
-                        <div className="flex flex-col gap-2">
-                          {selectedProject.stats.map((stat, i) => (
-                            <div key={i} className="p-4 bg-brand-accent/10 rounded-2xl border border-brand-accent/20">
-                              <p className="text-2xl font-display font-bold text-brand-accent tracking-tighter">{stat.value}</p>
-                              <p className="text-[9px] font-mono text-slate-500 font-bold uppercase tracking-widest">{stat.label}</p>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="p-4 bg-brand-accent/10 rounded-2xl border border-brand-accent/20">
-                          <p className="text-[9px] font-mono text-slate-500 font-bold uppercase tracking-widest">No metrics available</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="pt-10 border-t border-slate-900/[0.07] flex flex-col md:flex-row gap-4 items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      {selectedProject.demoUrl && selectedProject.demoUrl !== '#' ? (
-                        <a
-                          href={selectedProject.demoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-6 py-3 bg-brand-accent text-white rounded-full text-xs font-bold hover:bg-blue-400 transition-all"
-                        >
-                          Launch Deployment <ExternalLink className="w-3 h-3" />
-                        </a>
-                      ) : (
-                        <span className="flex items-center gap-2 px-6 py-3 bg-slate-900/[0.04] text-slate-400 rounded-full text-xs font-bold cursor-not-allowed border border-slate-900/10">
-                          Launch Deployment <ExternalLink className="w-3 h-3" />
-                        </span>
-                      )}
-                      {selectedProject.downloadUrl && selectedProject.downloadUrl !== '#' ? (
-                        <a
-                          href={selectedProject.downloadUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-6 py-3 bg-slate-900/[0.06] text-slate-600 rounded-full text-xs font-bold hover:bg-white/20 transition-all"
-                        >
-                          Review Source <Github className="w-3 h-3" />
-                        </a>
-                      ) : (
-                        <span className="flex items-center gap-2 px-6 py-3 bg-slate-900/[0.04] text-slate-300 rounded-full text-xs font-bold cursor-not-allowed">
-                          Review Source <Github className="w-3 h-3" />
-                        </span>
-                      )}
-                    </div>
+                <div className="flex items-center gap-3">
+                  <StatusBadge status={selected.status} />
+                  <span className="text-xs font-semibold text-brand-accent">{selected.category}</span>
+                </div>
+                <h3 id="project-modal-title" className="text-3xl font-display font-semibold text-slate-900">{selected.title}</h3>
+                <p className="text-slate-600 text-lg leading-relaxed">{selected.description}</p>
+                <div>
+                  <p className="text-xs font-semibold text-slate-500 mb-2">Built with</p>
+                  <div className="flex flex-wrap gap-2">
+                    {selected.tags.map((tag) => (
+                      <span key={tag} className="px-2.5 py-1 bg-slate-900/[0.04] border border-slate-900/10 rounded-md text-xs text-slate-600">{tag}</span>
+                    ))}
                   </div>
                 </div>
+                <ProjectLinks project={selected} />
               </div>
             </motion.div>
           </div>

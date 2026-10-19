@@ -8,6 +8,8 @@ interface SeoOptions {
   image?: string;
   type?: 'website' | 'article';
   jsonLd?: object | null;
+  /** Adds <meta name="robots" content="noindex, follow"> (404, admin, form pages). */
+  noindex?: boolean;
 }
 
 const DEFAULTS = {
@@ -60,7 +62,14 @@ export function usePageSeo(opts: SeoOptions) {
     if (opts.canonical) {
       setMeta('property', 'og:url', opts.canonical);
       setLink('canonical', opts.canonical);
+    } else {
+      // Never leave a previous page's canonical behind after client-side navigation.
+      document.head.querySelector('link[rel="canonical"]')?.remove();
     }
+
+    const robots = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
+    if (opts.noindex) setMeta('name', 'robots', 'noindex, follow');
+    else robots?.remove();
 
     // Injected JSON-LD (id-scoped so we replace, not duplicate)
     const ID = 'page-jsonld';
@@ -73,8 +82,11 @@ export function usePageSeo(opts: SeoOptions) {
       document.head.appendChild(script);
     }
 
-    return () => { document.getElementById(ID)?.remove(); };
-  }, [opts.title, opts.description, opts.canonical, opts.image, opts.type, opts.jsonLd]);
+    return () => {
+      document.getElementById(ID)?.remove();
+      document.head.querySelector('meta[name="robots"]')?.remove();
+    };
+  }, [opts.title, opts.description, opts.canonical, opts.image, opts.type, opts.jsonLd, opts.noindex]);
 }
 
 export function slugify(text: string): string {

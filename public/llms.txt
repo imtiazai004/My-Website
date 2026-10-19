@@ -1,103 +1,135 @@
 # AI Soft Tech Solution
 
-> AI & Web Development Agency — we build high-performance web applications, SaaS platforms, and custom digital tools that combine cinematic design with uncompromising engineering precision.
+> UK-registered software studio that builds AI assistants, automation systems and custom apps for online sellers and small businesses — WhatsApp AI assistants, COD order confirmation, booking and reminder systems, TikTok Shop tools, custom web/mobile/desktop apps and government office systems. Visitors can try 24 working demos before they pay.
+
+This file is generated from the same data files the website uses (src/data/*.ts). Every project listed is real; statuses are stated honestly.
 
 ## Facts
 
-- Company: AI Soft Tech Solution, a digital engineering agency and customer-facing brand operated by Atlantic LTD STORE LIMITED, a company registered in England and Wales.
-- Track record: 100+ projects shipped.
-- Services: full-stack web development, mobile app engineering, AI & LLM integration, cloud infrastructure & DevOps, custom API development, enterprise software, embedded systems & IoT, blockchain & Web3, data engineering & analytics.
-- Pricing model: fixed-price proposals, not hourly billing. No published catalogue price — every quote is scoped per project after a free discovery call.
-- Typical timelines: a landing page takes 1-2 weeks, a full web app 4-8 weeks, an enterprise system 3-6 months.
-- Discovery: a free 30-minute discovery call before any commitment.
-- Post-launch support: 30 days included free on every project; ongoing plans beyond that are Basic, Standard or Premium.
-- Contracts: an NDA is signed before any confidential discussion, and every contract assigns 100% IP ownership of code, designs and assets to the client.
-- Payment descriptor: charges appear on a bank statement as "AI SOFT TECH SOLUTION", processed by Atlantic LTD STORE LIMITED.
-- Contact: info@aisofttechsolution.com, WhatsApp UK +44 7462 086661, WhatsApp Pakistan +92 300 5863032.
-
-## About
-
-AI Soft Tech Solution is a digital engineering agency and customer-facing brand operated by Atlantic LTD STORE LIMITED, a company registered in England and Wales. We specialize in full-stack web development, AI/LLM integration, mobile apps, cloud infrastructure, and custom enterprise software. Every product we ship is engineered for performance and designed for impact.
-
-- Website: https://aisofttechsolution.com
-- Email: info@aisofttechsolution.com
-- WhatsApp (UK): +44 7462 086661
-- WhatsApp (PK): +92 300 5863032
-- Twitter/X: https://x.com/imtiazahmadPTI
-- LinkedIn: https://www.linkedin.com/in/imtiazahmad004
+- Company: AI Soft Tech Solution, a brand operated by Atlantic LTD STORE LIMITED, a company registered in England and Wales.
+- Founder: Imtiaz Ahmad, founder and lead engineer (https://www.linkedin.com/in/imtiazahmad004, https://github.com/imtiazai004).
+- Clients: businesses in the United Kingdom and Pakistan. Languages: English and Urdu.
+- Proof of work: 18 projects at https://aisofttechsolution.com/work and 24 interactive demos at https://aisofttechsolution.com/demos.
+- Pricing model: fixed-price proposals after a free 30-minute discovery call; no hourly billing; no published price list.
+- Typical timelines: landing page 1–2 weeks, full web app 4–8 weeks, larger systems 3–6 months.
+- Support: 30 days of free post-launch support; Basic, Standard or Premium plans after that.
+- Contracts: NDA before confidential discussion; 100% IP assignment to the client.
+- Payment descriptor: charges appear as "AI SOFT TECH SOLUTION", processed by Atlantic LTD STORE LIMITED.
+- Contact: info@aisofttechsolution.com · WhatsApp UK +44 7462 086661 · WhatsApp Pakistan +92 300 5863032. Replies within 24 hours.
 
 ## Services
 
-- **Full-Stack Web Development** — React, Next.js, Node.js, TypeScript. SSR, PWAs, WCAG compliance, sub-500ms global load times.
-- **Mobile App Engineering** — React Native and Flutter for iOS and Android. Native performance, offline-first, biometric auth.
-- **AI & LLM Integration** — OpenAI, Gemini, custom ML models. RAG pipelines, fine-tuning, semantic search, chatbot orchestration.
-- **Cloud Infrastructure & DevOps** — AWS, GCP, Azure. Kubernetes, Docker, zero-downtime CI/CD, 99.99% uptime SLAs.
-- **Custom API Development** — REST and GraphQL APIs. OAuth, rate limiting, WebSocket real-time feeds.
-- **Enterprise Software Solutions** — ERP systems, internal dashboards, legacy migration, RBAC, SaaS multi-tenancy.
-- **Embedded Systems & IoT** — C/C++, Rust, firmware, RTOS, edge AI, MQTT/CoAP protocols.
-- **Blockchain & Web3 Engineering** — Solidity, smart contract audits, DeFi, NFT ecosystems on Ethereum and Solana.
-- **Data Engineering & Analytics** — Python, Spark, Kafka, BigQuery. ETL pipelines, real-time streaming, data lakehouse architecture.
+- **WhatsApp & website AI assistants** — An AI assistant trained on your prices, timings and policies answers customers on WhatsApp and your website, takes orders and bookings, and hands the conversation to a person when it should. For: Restaurants, clinics, salons, shops and online stores that lose customers to unanswered messages. Examples: BizBot demo (https://aisofttechsolution.com/demos/bizbot), FoodBot demo (https://aisofttechsolution.com/demos/foodbot), SupportAI demo (https://aisofttechsolution.com/demos/supportai).
+- **Booking, reminder & payment-collection systems** — Appointments without double bookings, digital queue tokens, and automatic WhatsApp reminders for fees, rent, invoices, refills and services — with a dashboard that shows who has paid. For: Salons, clinics, pharmacies, schools, landlords, workshops and freelancers. Examples: SalonBook demo (https://aisofttechsolution.com/demos/salonbook), ClinicToken demo (https://aisofttechsolution.com/demos/clinictoken), FeeChaser demo (https://aisofttechsolution.com/demos/feechaser).
+- **E-commerce & TikTok Shop tools** — COD order confirmation, automatic TikTok Shop fulfilment, one dashboard for several shops, order-status bots and product research — the tools online sellers need once orders start piling up. For: Online sellers in Pakistan and TikTok Shop sellers and agencies in the UK. Examples: CODConfirm demo (https://aisofttechsolution.com/demos/codconfirm), TikFulfill demo (https://aisofttechsolution.com/demos/tikfulfill), ProfitScout (https://aisofttechsolution.com/profitscout).
+- **Custom web, mobile & desktop apps** — CRMs, digital khata and profit dashboards, school management, ride-booking apps and offline Windows tools — built for your workflow, with your data in your hands. For: Businesses that have outgrown notebooks, spreadsheets and WhatsApp groups. Examples: KhataBook demo (https://aisofttechsolution.com/demos/khatabook), LeadCRM demo (https://aisofttechsolution.com/demos/leadcrm), All projects (https://aisofttechsolution.com/work).
+- **Business websites & 3D experiences** — Clean business websites with service pages, reviews and WhatsApp booking built in — or an immersive 3D site when you want to stand out. For: Clinics, firms and local businesses that need to be found and trusted online. Examples: 3D dental website (https://aisofttechsolution.com/demos/family-dental/), Website demos (https://aisofttechsolution.com/demos).
+- **Government & office systems** — Emergency coordination, file tracking and reporting systems for district offices — every case logged once, routed to the right officer, and tracked until it is closed. For: District administrations, control rooms and government departments. Examples: District Nerve Center (https://aisofttechsolution.com/work#district-nerve-center).
 
-## Portfolio
+## Products and projects
 
-- **SoftFlow SaaS** — Project management platform with real-time collaboration and AI-powered task prioritization. Stack: React, Node.js, PostgreSQL.
-- **ZenEngine Web App** — Focus and meditation app with generative soundscapes. Stack: Next.js, WebAudio API, Framer Motion.
-- **Pulse Analytics Tool** — Privacy-first real-time analytics dashboard. Stack: TypeScript, D3.js, Redis. <50ms latency.
-- **Amazon Product Hunting** — Desktop tool for Amazon FBA sellers: BSR tracking, competitor analysis, profit calculators, keyword research. Stack: Python, Tkinter, Amazon API.
-- **Nursing App** — HIPAA-compliant mobile platform for nursing professionals: patient care, medication reminders, shift logs. Stack: React Native, Firebase.
-- **School Finance System** — Offline-first Windows fee management system for schools: student records, receipts, network access, no internet required. Stack: Python, Flask, SQLite.
-- **Composer — AI OCR Scanner** — AI-powered document scanner that extracts text from any image. Supports multi-page scanning, 10+ languages, Gemini AI engine with EasyOCR fallback. Available as a PWA. Live at: https://composer.aisofttechsolution.com. Stack: Python, Streamlit, Gemini AI.
+- **District Nerve Center (DNC)** (Government system; status: In daily use) — Emergency coordination platform for a district control room in Khyber Pakhtunkhwa — in daily use. Every emergency reported in the district is logged once, sent to the responsible department and officer on WhatsApp, and must be acknowledged within a set time or it escalates automatically. Supervisors see every open case in one command view and download response-time reports. Designed with the control room staff around how they actually work. Built with TypeScript, Node.js, PostgreSQL, WhatsApp alerts.
+- **Soft Clipper** (Desktop app; status: Live product) — Windows app that turns long videos into ready-to-post vertical clips for TikTok, Reels and Shorts. AI finds the strongest moments in a long video, reframes them to 9:16 while keeping the speaker in frame, burns in captions and exports finished clips. Sold as a one-time purchase through its own website. Built with Python, FastAPI, React, Gemini. live: https://softclipper.pro
+- **ProfitScout** (Chrome extension; status: Live product) — Free Chrome extension for product research on Amazon, eBay, TikTok Shop, Walmart and Etsy. Analyses listings in the browser with an X-Ray niche scanner, ROI calculator, price tracker, lead manager and Gemini-powered insights. No sign-up; data stays in the browser. Built with JavaScript, Chrome Extension, Gemini. page: https://aisofttechsolution.com/profitscout
+- **SellOps** (SaaS; status: Open source) — Operations dashboard for TikTok Shop agencies and Etsy sellers. Revenue tracking, creator management, invoicing and payroll for TikTok Shop agencies, plus AI niche research and listing generation for Etsy — in one login. Built with Next.js, PostgreSQL (Neon), Better Auth, Claude API. source: https://github.com/imtiazai004/SellOps
+- **Composer — AI Document Scanner** (AI tool; status: Live) — Extracts text from photos and scans in 10+ languages; installs as an app on phone or desktop. Upload one or many pages and get clean, editable text back. Uses Gemini with an EasyOCR fallback and runs as a progressive web app. Built with Python, Streamlit, Gemini, OCR. live: https://composer.aisofttechsolution.com · source: https://github.com/imtiazai004/Compsoser-by-Imtiaz-Ahmad
+- **Family Dental — 3D Clinic Website** (Website; status: Live) — Immersive 3D scroll website for a dental clinic, with an on-page booking assistant. Visitors take a tooth apart layer by layer, explore treatments in interactive 3D and book through a chat assistant. A second, simpler version covers 15 treatment pages for clinics that want speed over spectacle. Built with Three.js, GSAP, Vite. live: https://aisofttechsolution.com/demos/family-dental/ · source: https://github.com/imtiazai004/family-dental-clinic-3d-website-with-Claude-desktop
+- **Dir Ride** (Mobile app; status: In development) — Bike-taxi app for Timergara that replaces booking rides through WhatsApp groups. One Flutter app for customers and riders with role-based screens, a Supabase backend and a Next.js admin dashboard with Google Maps. Built with Flutter, Supabase, Next.js, Google Maps.
+- **Fixr AI** (AI agent; status: Hackathon build) — Voice-first booking agent for local services like AC repair, electricians and plumbers. Five cooperating agents (intent, discovery, ranking, booking, follow-up) turn a spoken request in English, Roman Urdu or Urdu into a confirmed booking, with a visible trace of every decision. Built for the Google Antigravity Hackathon 2026. Built with Node.js, Multi-agent, Web Speech API, Leaflet. source: https://github.com/imtiazai004/fixr-ai
+- **Etsy Automation Tool** (E-commerce automation; status: Prototype) — From niche research to a published Etsy listing: research, product files and auto-listing. Claude scores niches for demand and competition, scans top sellers for gaps, writes titles, descriptions and 13 tags, generates the PDF/SVG/PNG product files and publishes through the official Etsy API with seller consent. Built with FastAPI, React, Claude API, Etsy API.
+- **School Finance System** (Desktop app; status: Open source) — Offline fee management for schools on Windows — no internet needed. Student records, fee collection, receipts and payment tracking, shared across the school network from one PC. One-click setup. Built with Python, Flask, SQLite, Windows. source: https://github.com/imtiazai004/school-finance-system
+- **Nursify — Nursing Study Assistant** (EdTech; status: Open source) — Turns a nursing student’s own slides and notes into summaries, MCQs and a study plan. Answers and questions are generated strictly from the uploaded material, so students revise what their course actually covers. Built with React, Gemini, Firebase. source: https://github.com/imtiazai004/Nursing-app-2
+- **ProfitFlow** (Finance tool; status: Open source) — Profit & loss and balance-sheet reports for small businesses, built from uploaded statements. AI reads bank and sales statements, categorises entries and produces P&L and balance-sheet PDFs a shop owner can hand to an accountant. Built with React, Express, SQLite, Gemini. source: https://github.com/imtiazai004/Profit-and-Loss-maker
+- **Smart Education — School Management** (Web app; status: Open source) — School management system with separate portals for admin, staff and guardians. Admissions and onboarding, role-based operations, fee and finance records, staff directory and Gemini-powered analytics. Built with React, Firebase, Gemini. source: https://github.com/imtiazai004/School-Management-
+- **Niche Researcher** (AI tool; status: Open source) — Finds similar YouTube channels and the topics trending in a niche over the last 24 hours. Scrapes channel data and uses Gemini to surface peak-performing videos, rising topics and look-alike creators. Built with React, Express, Gemini. source: https://github.com/imtiazai004/Niche-Researcher
+- **FormulaWizard** (AI tool; status: Prototype) — Write what you want in plain English and get the Excel formula. Generates and explains complex spreadsheet formulas from a plain-language request. Built with React, Gemini.
+- **VoxGen** (AI tool; status: Open source) — Text-to-speech app with several natural-sounding voices. Gemini-powered speech generation with voice selection and natural prosody. Built with React, Gemini TTS. source: https://github.com/imtiazai004/VoxGen-AI
+- **ReportAnalyzer AI** (AI tool; status: Hackathon build) — Upload a report and get a command-centre view of its findings. Hackathon build that reads long reports and turns them into a structured dashboard of key points and actions. Built with React, Express, Gemini. source: https://github.com/imtiazai004/anty-gravity-hakathon2
+- **Googly Eyes for Windows** (AI agent; status: Prototype) — A voice desktop companion on an Android phone that can point at and operate a Windows PC. Talks through OpenAI Realtime and, when asked, uses the computer — with a master kill switch (Ctrl+Alt+S), a self-check mode and guardrails on every action. Built with C#, Kotlin, OpenAI Realtime.
 
-## Pricing & Process
+## Live demos
 
-- Fixed-price proposals (not hourly billing)
-- Free 30-minute discovery call before any commitment
-- 30 days free post-launch support on all projects
-- Flexible ongoing support plans: Basic, Standard, Premium
-- NDA signed before any confidential discussion
-- Full IP assignment — clients own 100% of all code, designs, and assets
+All demos: https://aisofttechsolution.com/demos
 
-## Tech Stack
+- **BizBot** (Sales & admin) — An AI assistant for any business that answers on WhatsApp and the website 24/7, in English or Urdu. Problem it solves: Customers message after hours and buy elsewhere. https://aisofttechsolution.com/demos/bizbot · explained: https://aisofttechsolution.com/blog/ai-assistant-whatsapp-website-any-business
+- **FoodBot** (Food & hospitality) — A WhatsApp ordering bot that takes the menu order, confirms it and sends it to the kitchen. Problem it solves: Rush-hour calls go unanswered and orders go to competitors. https://aisofttechsolution.com/demos/foodbot · explained: https://aisofttechsolution.com/blog/whatsapp-ai-restaurant-ordering
+- **SupportAI** (E-commerce) — An AI support agent connected to order and courier data that gives real tracking answers instantly. Problem it solves: “Where is my order?” eats hours of support time. https://aisofttechsolution.com/demos/supportai · explained: https://aisofttechsolution.com/blog/wismo-most-expensive-sentence
+- **CODConfirm** (E-commerce) — Confirms every COD order on WhatsApp before it ships, so fake and impulse orders never leave the warehouse. Problem it solves: Unconfirmed cash-on-delivery orders get refused at the door. https://aisofttechsolution.com/demos/codconfirm · explained: https://aisofttechsolution.com/blog/unconfirmed-cod-orders
+- **TikFulfill** (E-commerce) — Automatic TikTok Shop fulfilment: orders pulled in, labels printed and dispatch tracked against the deadline. Problem it solves: A viral day means hundreds of orders and missed dispatch deadlines. https://aisofttechsolution.com/demos/tikfulfill · explained: https://aisofttechsolution.com/blog/tiktok-shop-dispatch-penalty
+- **ShopConsole** (E-commerce) — One dashboard for every TikTok shop: orders, revenue and stock side by side. Problem it solves: Five TikTok shops, five logins, no idea where the money is. https://aisofttechsolution.com/demos/shopconsole · explained: https://aisofttechsolution.com/blog/multiple-tiktok-shops-one-dashboard
+- **KhataBook** (Retail & shops) — A digital khata for shopkeepers that records credit and sends polite WhatsApp payment reminders. Problem it solves: Udhaar in paper notebooks quietly goes missing. https://aisofttechsolution.com/demos/khatabook · explained: https://aisofttechsolution.com/blog/digital-khata-udhaar-notebook
+- **ProfitLens** (Retail & shops) — Shows real daily profit after costs, so the owner sees whether the shop is growing or just busy. Problem it solves: Sales are up but the shopkeeper doesn’t know the real profit. https://aisofttechsolution.com/demos/profitlens · explained: https://aisofttechsolution.com/blog/shopkeeper-real-profit
+- **ExpiryGuard** (Retail & shops) — Tracks batch expiry dates and warns before stock goes bad, so nothing expired is sold. Problem it solves: Expired stock reaches customers and costs trust. https://aisofttechsolution.com/demos/expiryguard · explained: https://aisofttechsolution.com/blog/expired-stock-customer-complaints
+- **SalonBook** (Services & trades) — Salon booking with locked slots, automatic WhatsApp reminders and client history. Problem it solves: Double bookings and no-shows leave chairs empty. https://aisofttechsolution.com/demos/salonbook · explained: https://aisofttechsolution.com/blog/salon-empty-chair
+- **ClinicToken** (Health) — Digital patient tokens with live queue status, so patients arrive when it is nearly their turn. Problem it solves: Patients wait for hours with no idea when their turn comes. https://aisofttechsolution.com/demos/clinictoken · explained: https://aisofttechsolution.com/blog/clinic-patient-token-queues
+- **ScriptRefill** (Health) — Refill reminders for pharmacies that bring chronic patients back before their medicine runs out. Problem it solves: Regular patients run out of medicine and buy elsewhere. https://aisofttechsolution.com/demos/scriptrefill · explained: https://aisofttechsolution.com/blog/pharmacy-refill-reminders
+- **FeeChaser** (Education & fitness) — A fee-collection dashboard for schools with automatic reminders to parents and a live defaulters list. Problem it solves: Teachers spend mornings chasing unpaid fees. https://aisofttechsolution.com/demos/feechaser · explained: https://aisofttechsolution.com/blog/school-fee-defaulters-reminders
+- **ClassFlow** (Education & fitness) — Flags members whose attendance is dropping so the gym can win them back early. Problem it solves: Gym members quit in month three without warning. https://aisofttechsolution.com/demos/classflow · explained: https://aisofttechsolution.com/blog/gym-membership-churn-early-warning
+- **RentGuard** (Property & venues) — A rent-collection dashboard with automatic follow-ups for landlords and property managers. Problem it solves: Rent arrives late because reminders live on paper. https://aisofttechsolution.com/demos/rentguard · explained: https://aisofttechsolution.com/blog/late-rent-reminders-property-managers
+- **ViewBook** (Property & venues) — Property-viewing booking with confirmations, reminders and follow-ups after every visit. Problem it solves: Viewing no-shows and cold buyers cost agents sales. https://aisofttechsolution.com/demos/viewbook · explained: https://aisofttechsolution.com/blog/real-estate-viewing-no-shows
+- **HallBook** (Property & venues) — Wedding-hall booking that locks dates, tracks vendors and chases payment milestones. Problem it solves: One double-booked hall is a reputation disaster. https://aisofttechsolution.com/demos/hallbook · explained: https://aisofttechsolution.com/blog/wedding-hall-double-booking
+- **LeaseMind** (Property & venues) — Room and seat booking plus invoicing for co-working spaces. Problem it solves: Room bookings in WhatsApp chats and invoices from memory. https://aisofttechsolution.com/demos/leasemind · explained: https://aisofttechsolution.com/blog/coworking-space-booking-chaos
+- **JobTrack** (Services & trades) — One board for every job, technician and quote, with WhatsApp updates to customers. Problem it solves: Jobs in a notebook and customers asking where the technician is. https://aisofttechsolution.com/demos/jobtrack · explained: https://aisofttechsolution.com/blog/home-service-job-scheduling-chaos
+- **CarCare** (Services & trades) — Digital job cards and service-due reminders for auto workshops. Problem it solves: Customers forget their car service and go elsewhere. https://aisofttechsolution.com/demos/carcare · explained: https://aisofttechsolution.com/blog/auto-workshop-service-reminders
+- **LeadCRM** (Sales & admin) — A simple CRM that keeps every lead, conversation and follow-up in one place. Problem it solves: Warm leads die in spreadsheets and inboxes. https://aisofttechsolution.com/demos/leadcrm · explained: https://aisofttechsolution.com/blog/cold-leads-buried-money
+- **ProposalGen** (Sales & admin) — Branded proposals in minutes — sent, tracked when opened, and accepted online. Problem it solves: Two days writing a proposal while the client hires someone else. https://aisofttechsolution.com/demos/proposalgen · explained: https://aisofttechsolution.com/blog/slow-proposals-lose-clients
+- **InvoiceChaser** (Sales & admin) — Automatic invoice reminder sequences with templates and payment links. Problem it solves: Freelancers spend hours chasing their own payments. https://aisofttechsolution.com/demos/invoicechaser · explained: https://aisofttechsolution.com/blog/freelancer-invoice-chasing
+- **HirePipe** (Sales & admin) — A hiring pipeline with interview scheduling and candidate follow-ups. Problem it solves: Great candidates accept other offers while hiring stalls. https://aisofttechsolution.com/demos/hirepipe · explained: https://aisofttechsolution.com/blog/candidate-ghosting-recruiters
+- **Family Dental & Aesthetic Clinic — Immersive 3D Website** (3D Experience) — A cinematic 3D scroll experience — take a tooth apart layer by layer, explore treatments in interactive 3D, and book through an on-page assistant. https://aisofttechsolution.com/demos/family-dental/
+- **Family Dental & Aesthetic Clinic — Simple Website** (Business Website) — Clean and fast clinic website — home, about, services with 15 treatment pages, reviews and contact, with a chat booking assistant built in. https://flourishing-figolla-d8bb17.netlify.app/
 
-Frontend: React, Next.js, TypeScript, Tailwind CSS, Framer Motion
-Backend: Node.js, Python, Flask, GraphQL, REST
-Mobile: React Native, Flutter
-Database: PostgreSQL, Firebase Firestore, SQLite, Redis
-Cloud: AWS, GCP, Azure, Docker, Kubernetes
-AI/ML: OpenAI, Gemini, custom models, RAG pipelines
-Blockchain: Solidity, Web3.js, Ethereum, Solana
+## Free guides
+
+- **TikTok Shop Outreach — Seller Guide** — The AffiliatePilot playbook: a custom app that recruits TikTok creators to sell your products through shoppable videos and LIVE streams — on commission, zero ad spend up front. PDF · 6 pages · English. https://aisofttechsolution.com/guides/tiktok-shop-outreach-seller-guide
+- **The Agent Safety Audit** — 10 guardrails to demand before any AI agent touches your business — sandboxing, approval gates, secret masking, audit trails, data boundaries and more. Plain English, no jargon. PDF · 8 pages · English. https://aisofttechsolution.com/guides/ai-agent-safety-audit
+- **Build Your Own AI Seller Copilot** — Turn your sales playbooks into an AI copilot that answers like a specialist. Pick your coding agent, build the app step by step — no coding required. PDF · 11 pages · English. https://aisofttechsolution.com/guides/build-your-own-ai-seller-copilot
+- **TikFulfill Build Guide** — Build your own TikTok Shop auto-fulfilment dashboard in VS Code with Claude Code — every prompt included, copy-paste ready. PDF · 13 pages · English. https://aisofttechsolution.com/guides/tikfulfill-build-guide
+
+All guides: https://aisofttechsolution.com/guides
 
 ## Compare
 
-- [AI Soft Tech Solution vs hiring a freelancer](https://aisofttechsolution.com/compare/agency-vs-freelancer) — honest side-by-side on pricing model, skill coverage, continuity risk, NDA/IP terms and typical timelines.
+- [AI Soft Tech Solution vs hiring a freelancer](https://aisofttechsolution.com/compare/agency-vs-freelancer) — side-by-side on pricing model, skill coverage, continuity risk, NDA/IP terms and timelines.
 
 ## FAQs
 
+**Can I see your work before hiring you?**
+Yes. You can try 24 working demos at aisofttechsolution.com/demos, see the products we built and run at /work, and read the source code of our open-source projects on GitHub (github.com/imtiazai004).
+
 **How long does a typical project take?**
-A landing page: 1–2 weeks. A full web app: 4–8 weeks. Enterprise systems: 3–6 months.
+Project timelines vary by scope. A landing page takes 1–2 weeks, a full web app 4–8 weeks, and larger systems 3–6 months. We give you a detailed timeline during the free consultation before any work begins.
+
+**How does your pricing work?**
+We price per project, not per hour. After your free discovery call, we send a fixed-price proposal scoped to your requirements. No surprise invoices. For ongoing work, we offer monthly retainer arrangements.
+
+**What technologies do you use?**
+React and TypeScript for web apps, Node.js and Python (FastAPI, Flask) on the server, PostgreSQL, Supabase or Firebase for data, Flutter for mobile apps, and Gemini, Claude and OpenAI models for AI features. We pick what fits your project and budget.
+
+**Can you integrate AI into my existing business?**
+Yes — this is our core work. We build WhatsApp and website assistants that answer from your own business information, document readers that turn photos and PDFs into text, and automations that confirm orders or send reminders inside the tools you already use.
+
+**Do you work with clients in the UK and Pakistan?**
+Yes. The company is registered in England and Wales as Atlantic LTD STORE LIMITED, and we work with clients in the UK and Pakistan over WhatsApp (+44 7462 086661 and +92 300 5863032), email and video calls.
 
 **Do you offer ongoing support after launch?**
-Yes. Basic (bug fixes), Standard (monthly updates + monitoring), Premium (dedicated developer on-call). All projects include 30 days of free post-launch support.
+Yes. Every project comes with 30 days of free post-launch support. After that we offer Basic (bug fixes only), Standard (monthly updates + monitoring) and Premium (dedicated developer on-call) plans.
 
-**Can you integrate AI into my existing product?**
-Yes. We integrate OpenAI, Gemini, and custom models via RAG pipelines, fine-tuning, or API orchestration depending on your needs and data sensitivity.
+**Can you work with an existing codebase?**
+Yes. We regularly audit, refactor and extend existing systems, starting with a technical review to identify risks before writing new code.
 
-**How does pricing work?**
-Per-project fixed pricing. Free discovery call first, then a scoped proposal with no surprise invoices.
+**Do you sign NDAs and IP agreements?**
+Yes. We sign NDAs before any confidential discussion and full IP assignment agreements are included in every project contract. You own 100% of the code, designs and assets we produce for you.
+
+**How do we get started?**
+Message us on WhatsApp or use the contact form with two lines about your project. We reply within 24 hours and book a free 30-minute discovery call. No commitment required at that stage.
 
 **Why does AI Soft Tech Solution appear on my bank statement?**
 AI SOFT TECH SOLUTION is our payment statement descriptor. Payments for AI Soft Tech Solution are processed by Atlantic LTD STORE LIMITED. AI Soft Tech Solution is operated by Atlantic LTD STORE LIMITED.
 
-**Do you sign NDAs?**
-Yes. NDAs before any confidential discussion; full IP assignment in every contract.
+## Other pages
 
-## Free Guides
-
-Step-by-step playbooks anyone can read or download free — no signup.
-
-- **TikTok Shop Outreach — Seller Guide** — the AffiliatePilot playbook: a custom app that recruits TikTok creators to sell your products through shoppable videos and LIVE streams, on commission, with zero ad spend up front. Build it yourself with vibe coding — prompt template included. PDF, 6 pages, English. https://aisofttechsolution.com/guides/tiktok-shop-outreach-seller-guide
-- **The Agent Safety Audit** — 10 guardrails to demand before any AI agent touches your business: sandboxing, approval gates, secret masking, audit trails, data boundaries and more. Plain English, no jargon. PDF, 8 pages, English. https://aisofttechsolution.com/guides/ai-agent-safety-audit
-- **Build Your Own AI Seller Copilot** — turn your sales playbooks into an AI copilot that answers like a specialist. Pick your coding agent, build the app step by step, no coding required. PDF, 11 pages, English. https://aisofttechsolution.com/guides/build-your-own-ai-seller-copilot
-- **TikFulfill Build Guide** — build your own TikTok Shop auto-fulfilment dashboard in VS Code with Claude Code. Every prompt included, copy-paste ready. PDF, 13 pages, English. https://aisofttechsolution.com/guides/tikfulfill-build-guide
-
-All guides: https://aisofttechsolution.com/guides
+- Blog (problems we solve, explained): https://aisofttechsolution.com/blog
+- Blueprint library: https://aisofttechsolution.com/blueprint-library
+- ProfitScout Chrome extension: https://aisofttechsolution.com/profitscout
+- Soft Clipper: https://softclipper.pro
+- Privacy: https://aisofttechsolution.com/privacy · Terms: https://aisofttechsolution.com/terms

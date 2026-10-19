@@ -1,8 +1,8 @@
-import { Twitter, Linkedin, Send, CheckCircle2, Mail, MessageCircle } from 'lucide-react';
+import { Twitter, Linkedin, Github, Send, CheckCircle2, Mail, MessageCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 import { trackActivity, sendContactMessage } from '../services/dataService';
 import { Logo } from './Logo';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BUSINESS } from '../config/business';
 
@@ -12,10 +12,17 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  // Spam guard: a hidden field bots fill in, and a minimum time on the page before sending.
+  const [website, setWebsite] = useState('');
+  const mountedAt = useRef(Date.now());
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !message) return;
+    if (website || Date.now() - mountedAt.current < 3000) {
+      setStatus('sent'); // quietly drop bot submissions
+      return;
+    }
 
     setStatus('sending');
     try {
@@ -36,19 +43,19 @@ export default function Footer() {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-accent/15 rounded-full blur-[140px]" />
 
       <div className="max-w-7xl mx-auto space-y-32 relative z-10">
-        <div id="contact" className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+        <div id="contact" className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center [&>*]:min-w-0">
           <div className="space-y-12">
             <div className="space-y-8">
               <div className="pill-badge !bg-white/5 !border-white/15">
                 <Send className="w-3 h-3" />
-                INITIATE PROTOCOL
+                Contact
               </div>
               <h2 className="heading-lg text-white">
-                Ready to Build the <br />
-                <span className="text-brand-accent italic font-light tracking-tighter">Global Future?</span>
+                Tell us what <br />
+                <span className="text-brand-accent italic font-light tracking-tighter">slows you down.</span>
               </h2>
               <p className="text-slate-400 text-xl leading-relaxed font-light max-w-lg">
-                We combine high-performance engineering with cinematic design to build applications that don't just work—they inspire.
+                Two lines about your business and the problem is enough. We reply within 24 hours with the demo that fits, or a plan and a fixed price.
               </p>
             </div>
 
@@ -56,20 +63,20 @@ export default function Footer() {
               <motion.a
                 whileHover={{ y: -5 }}
                 href={`mailto:${BUSINESS.supportEmail}`}
-                className={`flex items-center gap-5 p-6 ${CARD} hover:bg-white/[0.08] transition-all group`}
+                className={`flex items-center gap-5 p-6 min-w-0 sm:col-span-2 ${CARD} hover:bg-white/[0.08] transition-all group`}
               >
                 <div className="w-12 h-12 rounded-xl bg-brand-accent/15 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition-all">
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Email Control</p>
-                  <p className="text-sm font-medium tracking-tight text-white">{BUSINESS.supportEmail}</p>
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Email</p>
+                  <p className="text-sm font-medium tracking-tight text-white [overflow-wrap:anywhere]">{BUSINESS.supportEmail}</p>
                 </div>
               </motion.a>
 
               <motion.a
                 whileHover={{ y: -5 }}
-                href="https://wa.me/447462086661"
+                href={BUSINESS.whatsapp.uk.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex items-center gap-5 p-6 ${CARD} hover:bg-green-500/10 transition-all group`}
@@ -78,13 +85,13 @@ export default function Footer() {
                   <MessageCircle className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">WhatsApp (UK)</p>
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">WhatsApp (UK)</p>
                   <p className="text-sm font-medium tracking-tight text-white">+44 7462 086661</p>
                 </div>
               </motion.a>
               <motion.a
                 whileHover={{ y: -5 }}
-                href="https://wa.me/923005863032"
+                href={BUSINESS.whatsapp.pk.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex items-center gap-5 p-6 ${CARD} hover:bg-green-500/10 transition-all group`}
@@ -93,7 +100,7 @@ export default function Footer() {
                   <MessageCircle className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">WhatsApp (PK)</p>
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">WhatsApp (PK)</p>
                   <p className="text-sm font-medium tracking-tight text-white">+92 300 5863032</p>
                 </div>
               </motion.a>
@@ -131,8 +138,9 @@ export default function Footer() {
 
             <div className="flex items-center gap-6 pt-4">
               {[
-                { icon: Twitter, label: 'Twitter', href: 'https://x.com/imtiazahmadPTI' },
-                { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/imtiazahmad004' }
+                { icon: Linkedin, label: 'LinkedIn', href: BUSINESS.social.linkedin },
+                { icon: Github, label: 'GitHub', href: BUSINESS.social.github },
+                { icon: Twitter, label: 'X (Twitter)', href: BUSINESS.social.x },
               ].map((social, i) => (
                 <motion.a
                   key={i}
@@ -154,8 +162,8 @@ export default function Footer() {
 
             <div className="space-y-10 relative z-10">
               <div className="space-y-2">
-                <h3 className="text-3xl font-bold tracking-tight text-white">Quick Discovery</h3>
-                <p className="text-slate-400 text-sm tracking-wide">Tell us about your project vision.</p>
+                <h3 className="text-3xl font-bold tracking-tight text-white">Send us a message</h3>
+                <p className="text-slate-300 text-sm">We reply within 24 hours.</p>
               </div>
 
               {status === 'sent' ? (
@@ -168,33 +176,39 @@ export default function Footer() {
                     <CheckCircle2 className="w-10 h-10 animate-bounce" />
                   </div>
                   <div className="space-y-2">
-                    <h4 className="text-2xl font-bold text-white">Transmission Received</h4>
-                    <p className="text-slate-400">Our team will establish contact shortly.</p>
+                    <h4 className="text-2xl font-bold text-white">Message received</h4>
+                    <p className="text-slate-300">We will reply within 24 hours.</p>
                   </div>
                 </motion.div>
               ) : (
-                <form className="space-y-8" onSubmit={handleSubmit}>
+                <form className="space-y-8 relative" onSubmit={handleSubmit}>
                   <div className="space-y-4">
-                    <label className="text-[11px] font-black text-brand-accent uppercase tracking-[0.3em] ml-1">Identity/Email</label>
+                    <label htmlFor="contact-email" className="text-xs font-bold text-brand-accent uppercase tracking-widest ml-1">Your email</label>
                     <input
+                      id="contact-email"
                       type="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="commander@enterprise.com"
+                      placeholder="you@business.com"
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-accent focus:bg-white/10 transition-all"
                     />
                   </div>
                   <div className="space-y-4">
-                    <label className="text-[11px] font-black text-brand-accent uppercase tracking-[0.3em] ml-1">Mission Brief</label>
+                    <label htmlFor="contact-message" className="text-xs font-bold text-brand-accent uppercase tracking-widest ml-1">Your project</label>
                     <textarea
+                      id="contact-message"
                       required
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="What are we building today?"
+                      placeholder="What does your business do, and what should the software fix?"
                       rows={4}
                       className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-accent focus:bg-white/10 transition-all resize-none"
                     />
+                  </div>
+                  {/* Honeypot — invisible to people, tempting to bots */}
+                  <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
+                    <label>Website<input type="text" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} /></label>
                   </div>
                   <motion.button
                     type="submit"
@@ -206,17 +220,17 @@ export default function Footer() {
                     {status === 'sending' ? (
                       <div className="flex items-center gap-3">
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        UPLOADING_DATA...
+                        Sending…
                       </div>
                     ) : (
                       <>
-                        SEND TRANSMISSION
+                        Send message
                         <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                       </>
                     )}
                   </motion.button>
                   {status === 'error' && (
-                    <p className="text-red-400 text-xs text-center font-bold animate-pulse">TRANSMISSION ERROR. RETRY PROTOCOL.</p>
+                    <p className="text-red-400 text-sm text-center font-semibold">Could not send. Please try again or message us on WhatsApp.</p>
                   )}
                 </form>
               )}
@@ -228,32 +242,22 @@ export default function Footer() {
           {/* Logo + tagline signature */}
           <div className="flex flex-col gap-5">
             <Logo variant="full" size={40} />
-            <span className="text-[10px] text-slate-500 uppercase tracking-[0.4em] font-mono">
+            <span className="text-xs text-slate-400 uppercase tracking-[0.2em] font-mono">
               &copy; {new Date().getFullYear()} {BUSINESS.brandName} — All rights reserved.
             </span>
           </div>
 
           <div className="flex flex-col md:items-end gap-4">
-            <div className="flex gap-16 font-display mb-4">
-              <div className="flex flex-col">
-                <span className="text-4xl font-bold tracking-tighter text-white">12</span>
-                <span className="text-[10px] text-slate-400 uppercase font-black tracking-widest">SHIPPED</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-4xl font-bold tracking-tighter text-white">99+</span>
-                <span className="text-[10px] text-slate-400 uppercase font-black tracking-widest">PERFORMANCE</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-4xl font-bold tracking-tighter text-white">&lt;100ms</span>
-                <span className="text-[10px] text-slate-400 uppercase font-black tracking-widest">LATENCY</span>
-              </div>
-            </div>
-            <div className="flex flex-wrap gap-8 text-[11px] text-slate-400 font-black uppercase tracking-[0.3em]">
+            <nav aria-label="Footer" className="flex flex-wrap gap-x-8 gap-y-3 text-xs text-slate-300 font-bold uppercase tracking-widest">
+              <Link to="/work" className="hover:text-white transition-colors">Work</Link>
               <Link to="/demos" className="hover:text-white transition-colors">Demos</Link>
-              <Link to="/compare/agency-vs-freelancer" className="hover:text-white transition-colors">Vs Freelancer</Link>
+              <Link to="/guides" className="hover:text-white transition-colors">Guides</Link>
+              <Link to="/blog" className="hover:text-white transition-colors">Blog</Link>
+              <Link to="/blueprint-library" className="hover:text-white transition-colors">Blueprints</Link>
+              <Link to="/compare/agency-vs-freelancer" className="hover:text-white transition-colors">Agency vs freelancer</Link>
               <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
               <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
-            </div>
+            </nav>
           </div>
         </div>
       </div>

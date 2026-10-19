@@ -5,41 +5,9 @@ import Navbar from './Navbar';
 import ShaderBackground from './ui/shader-background';
 import { usePageSeo } from '../lib/seo';
 import { BUSINESS } from '../config/business';
+import { GUIDES } from '../data/guides';
 
-const GUIDES = [
-  {
-    slug: 'tiktok-shop-outreach-seller-guide',
-    badge: 'New',
-    title: 'TikTok Shop Outreach — Seller Guide',
-    description:
-      'The AffiliatePilot playbook: a custom app that recruits TikTok creators to sell your products through shoppable videos and LIVE streams — on commission, zero ad spend up front.',
-    meta: 'PDF · 6 pages · English',
-  },
-  {
-    slug: 'ai-agent-safety-audit',
-    badge: 'Guide',
-    title: 'The Agent Safety Audit',
-    description:
-      '10 guardrails to demand before any AI agent touches your business — sandboxing, approval gates, secret masking, audit trails, data boundaries and more. Plain English, no jargon.',
-    meta: 'PDF · 8 pages · English',
-  },
-  {
-    slug: 'build-your-own-ai-seller-copilot',
-    badge: 'Guide',
-    title: 'Build Your Own AI Seller Copilot',
-    description:
-      'Turn your sales playbooks into an AI copilot that answers like a specialist. Pick your coding agent, build the app step by step — no coding required.',
-    meta: 'PDF · 11 pages · English',
-  },
-  {
-    slug: 'tikfulfill-build-guide',
-    badge: 'Guide',
-    title: 'TikFulfill Build Guide',
-    description:
-      'Build your own TikTok Shop auto-fulfilment dashboard in VS Code with Claude Code — every prompt included, copy-paste ready.',
-    meta: 'PDF · 13 pages · English',
-  },
-];
+
 
 export default function GuidesLibraryPage() {
   useEffect(() => {

@@ -1,6 +1,5 @@
-import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, Timestamp, addDoc, serverTimestamp, limit, getDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { db, storage, handleFirestoreError } from '../lib/firebase';
+import { collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, Timestamp, addDoc, serverTimestamp, limit, getDoc, where } from 'firebase/firestore';
+import { app, db, handleFirestoreError, logFirestoreError } from '../lib/firebase';
 import { Project, Testimonial, Skill, FAQ, SectionSettings, BlogPost, Blueprint } from '../types';
 import { DEFAULT_SECTION_SETTINGS } from '../constants';
 
@@ -12,18 +11,26 @@ export const subscribeToProjects = (callback: (projects: Project[]) => void) => 
       ...doc.data()
     } as Project));
     callback(projects);
-  }, (error) => { handleFirestoreError(error, 'list', 'projects'); callback([]); });
+  }, (error) => { logFirestoreError(error, 'list', 'projects'); callback([]); });
 };
 
+/** Public: only testimonials an admin has approved. Sorted client-side so no composite index is needed. */
 export const subscribeToTestimonials = (callback: (testimonials: Testimonial[]) => void) => {
+  const q = query(collection(db, 'testimonials'), where('approved', '==', true));
+  return onSnapshot(q, (snapshot) => {
+    const testimonials = snapshot.docs
+      .map(d => ({ id: d.id, ...d.data() } as Testimonial & { createdAt?: { seconds?: number } }))
+      .sort((a, b) => (b.createdAt?.seconds ?? 0) - (a.createdAt?.seconds ?? 0));
+    callback(testimonials);
+  }, (error) => { logFirestoreError(error, 'list', 'testimonials'); callback([]); });
+};
+
+/** Admin: every testimonial, approved or pending. */
+export const subscribeToAllTestimonials = (callback: (testimonials: Testimonial[]) => void) => {
   const q = query(collection(db, 'testimonials'), orderBy('createdAt', 'desc'));
   return onSnapshot(q, (snapshot) => {
-    const testimonials = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    } as Testimonial));
-    callback(testimonials);
-  }, (error) => { handleFirestoreError(error, 'list', 'testimonials'); callback([]); });
+    callback(snapshot.docs.map(d => ({ id: d.id, ...d.data() } as Testimonial)));
+  }, (error) => { logFirestoreError(error, 'list', 'testimonials'); callback([]); });
 };
 
 export const subscribeToSkills = (callback: (skills: Skill[]) => void) => {
@@ -37,7 +44,7 @@ export const subscribeToSkills = (callback: (skills: Skill[]) => void) => {
       } as any as Skill;
     });
     callback(skills);
-  }, (error) => { handleFirestoreError(error, 'list', 'skills'); callback([]); });
+  }, (error) => { logFirestoreError(error, 'list', 'skills'); callback([]); });
 };
 
 export const saveProject = async (project: any) => {
@@ -92,6 +99,7 @@ export const submitTestimonial = async (data: { name: string; role: string; comp
   await addDoc(collection(db, 'testimonials'), {
     ...data,
     avatarUrl,
+    approved: false, // shown only after an admin approves it
     createdAt: serverTimestamp(),
   });
 };
@@ -101,6 +109,7 @@ export const saveTestimonial = async (testimonial: any) => {
     const { id, ...fields } = testimonial;
     const data = {
       ...fields,
+      approved: fields.approved === true,
       createdAt: id ? (fields.createdAt || serverTimestamp()) : serverTimestamp(),
     };
     if (id) {
@@ -168,7 +177,7 @@ export const subscribeToFAQs = (callback: (faqs: FAQ[]) => void) => {
   return onSnapshot(q, (snapshot) => {
     const faqs = snapshot.docs.map(d => ({ id: d.id, ...d.data() } as FAQ));
     callback(faqs);
-  }, (error) => { handleFirestoreError(error, 'list', 'faqs'); callback([]); });
+  }, (error) => { logFirestoreError(error, 'list', 'faqs'); callback([]); });
 };
 
 export const saveFAQ = async (faq: Partial<FAQ> & { id?: string }) => {
@@ -213,7 +222,7 @@ export const subscribeToPosts = (callback: (posts: BlogPost[]) => void) => {
   return onSnapshot(q, (snapshot) => {
     const posts = snapshot.docs.map(d => ({ id: d.id, ...d.data() } as BlogPost));
     callback(posts);
-  }, (error) => { handleFirestoreError(error, 'list', 'posts'); callback([]); });
+  }, (error) => { logFirestoreError(error, 'list', 'posts'); callback([]); });
 };
 
 export const subscribeToPublishedPosts = (callback: (posts: BlogPost[]) => void) => {
@@ -249,7 +258,9 @@ export const deletePost = async (id: string) => {
 // ---------- Blueprints ----------
 
 export const uploadBlueprintFile = async (file: File): Promise<{ fileUrl: string; fileName: string }> => {
-  const storageRef = ref(storage, `blueprints/${Date.now()}_${file.name}`);
+  // Storage SDK is only needed by the admin, so load it on demand.
+  const { getStorage, ref, uploadBytes, getDownloadURL } = await import('firebase/storage');
+  const storageRef = ref(getStorage(app), `blueprints/${Date.now()}_${file.name}`);
   await uploadBytes(storageRef, file, {
     contentDisposition: `attachment; filename="${file.name}"`,
   });
@@ -268,7 +279,7 @@ export const subscribeToBlueprints = (callback: (blueprints: Blueprint[]) => voi
   return onSnapshot(q, (snapshot) => {
     const blueprints = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Blueprint));
     callback(blueprints);
-  }, (error) => { handleFirestoreError(error, 'list', 'blueprints'); callback([]); });
+  }, (error) => { logFirestoreError(error, 'list', 'blueprints'); callback([]); });
 };
 
 export const saveBlueprint = async (blueprint: any) => {
@@ -304,5 +315,5 @@ export const subscribeToContacts = (callback: (contacts: any[]) => void) => {
       ...doc.data()
     }));
     callback(contacts);
-  }, (error) => { handleFirestoreError(error, 'list', 'contacts'); callback([]); });
+  }, (error) => { logFirestoreError(error, 'list', 'contacts'); callback([]); });
 };
