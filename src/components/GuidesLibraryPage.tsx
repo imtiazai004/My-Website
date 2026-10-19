@@ -8,8 +8,16 @@ import { BUSINESS } from '../config/business';
 
 const GUIDES = [
   {
-    slug: 'build-your-own-ai-seller-copilot',
+    slug: 'ai-agent-safety-audit',
     badge: 'New',
+    title: 'The Agent Safety Audit',
+    description:
+      '10 guardrails to demand before any AI agent touches your business — sandboxing, approval gates, secret masking, audit trails, data boundaries and more. Plain English, no jargon.',
+    meta: 'PDF · 8 pages · English',
+  },
+  {
+    slug: 'build-your-own-ai-seller-copilot',
+    badge: 'Guide',
     title: 'Build Your Own AI Seller Copilot',
     description:
       'Turn your sales playbooks into an AI copilot that answers like a specialist. Pick your coding agent, build the app step by step — no coding required.',
