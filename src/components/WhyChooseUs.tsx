@@ -60,7 +60,7 @@ const REASONS = [
   {
     id: 'products',
     title: 'We run our own products',
-    description: 'Soft Clipper, ProfitScout and the District Nerve Center are built and run by us — the same team that builds your software.',
+    description: 'Soft Clipper, ProfitScout and the District Nerve Center are built and run by us — the same way we build yours.',
     icon: Rocket,
     stat: String(PROJECTS.filter((p) => ['In daily use', 'Live product', 'Live'].includes(p.status)).length),
     statLabel: 'Live products',

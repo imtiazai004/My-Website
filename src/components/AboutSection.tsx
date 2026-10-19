@@ -14,6 +14,9 @@ const STATS = [
   { value: '<24h', label: 'Reply time' },
 ];
 
+/** The founder/team card in this section is switched off for now. */
+const SHOW_TEAM_CARD = false;
+
 /** Skip the count-up for reduced-motion users and for headless prerendering, so the HTML always holds the real number. */
 function shouldAnimate() {
   if (typeof window === 'undefined') return false;
@@ -106,7 +109,7 @@ export default function AboutSection() {
               <p className="text-slate-600 text-xl leading-relaxed">
                 {BUSINESS.brandName} builds AI assistants, automation systems and custom apps for online sellers, shops,
                 clinics, schools and government offices. We also build and run our own products — Soft Clipper,
-                ProfitScout and the District Nerve Center — so the team building your software has shipped its own.
+                ProfitScout and the District Nerve Center.
               </p>
               <p className="text-slate-600 text-lg leading-relaxed">
                 The company is registered in England and Wales as {BUSINESS.legalCompanyName}. We work with clients in
@@ -114,8 +117,8 @@ export default function AboutSection() {
               </p>
             </div>
 
-            {/* Founder card */}
-            <div className="flex items-center gap-6 p-6 bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl">
+            {/* Founder / team card — hidden for now; set SHOW_TEAM_CARD to true to bring it back. */}
+            {SHOW_TEAM_CARD && <div className="flex items-center gap-6 p-6 bg-slate-900/[0.03] border border-slate-900/10 rounded-2xl">
               <div className="w-16 h-16 rounded-2xl bg-brand-accent/20 border border-brand-accent/30 flex items-center justify-center text-2xl font-display font-black text-brand-accent shrink-0">
                 IA
               </div>
@@ -126,7 +129,7 @@ export default function AboutSection() {
                 <p className="text-xs font-semibold text-brand-accent mt-0.5">{FOUNDER.jobTitle}</p>
                 <p className="text-slate-600 text-sm mt-2 leading-relaxed">Builds with AI coding agents to ship working software fast — from WhatsApp bots to a district emergency platform.</p>
               </div>
-            </div>
+            </div>}
 
             <motion.button
               whileHover={{ scale: 1.02, x: 6 }}
