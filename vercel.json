@@ -6,6 +6,16 @@
       "permanent": false
     },
     {
+      "source": "/demos/sinma-3d",
+      "destination": "/demos/sinma-3d/",
+      "permanent": false
+    },
+    {
+      "source": "/demos/sinma-classic",
+      "destination": "/demos/sinma-classic/",
+      "permanent": false
+    },
+    {
       "source": "/soft-clipper",
       "destination": "https://softclipper.pro/",
       "permanent": true
@@ -34,6 +44,30 @@
     {
       "source": "/demos/family-dental/:path*",
       "destination": "https://family-dental-clinic-3d-website-wit.vercel.app/:path*"
+    },
+    {
+      "source": "/demos/sinma-3d/",
+      "destination": "https://hair-saloon-3d.vercel.app/"
+    },
+    {
+      "source": "/demos/sinma-3d/:path*/",
+      "destination": "https://hair-saloon-3d.vercel.app/:path*/"
+    },
+    {
+      "source": "/demos/sinma-3d/:path*",
+      "destination": "https://hair-saloon-3d.vercel.app/:path*"
+    },
+    {
+      "source": "/demos/sinma-classic/",
+      "destination": "https://hair-saloon-simple-classic.vercel.app/"
+    },
+    {
+      "source": "/demos/sinma-classic/:path*/",
+      "destination": "https://hair-saloon-simple-classic.vercel.app/:path*/"
+    },
+    {
+      "source": "/demos/sinma-classic/:path*",
+      "destination": "https://hair-saloon-simple-classic.vercel.app/:path*"
     },
     {
       "source": "/demos/:demo",
