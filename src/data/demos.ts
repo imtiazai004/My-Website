@@ -38,6 +38,28 @@ export const DEMOS: Demo[] = [
     dateAdded: '8 Oct 2026',
     gradient: 'from-emerald-500 via-teal-500 to-cyan-600',
   },
+  {
+    id: 'sinma-hair-3d-immersive',
+    client: 'Sinma Hair And Beauty',
+    title: 'Immersive 3D Website',
+    description:
+      'A cinematic 3D salon website — floating 3D cards and a rotating 3D gallery, online booking, a 24/7 assistant and WhatsApp automation that confirms every booking and reminds every client.',
+    category: '3D Experience',
+    url: '/demos/sinma-3d/',
+    dateAdded: '21 Oct 2026',
+    gradient: 'from-fuchsia-500 via-purple-600 to-indigo-600',
+  },
+  {
+    id: 'sinma-hair-simple',
+    client: 'Sinma Hair And Beauty',
+    title: 'Simple Website',
+    description:
+      'Clean and fast salon website — services, gallery and contact, with online booking, a chat booking assistant and WhatsApp confirmations and reminders built in.',
+    category: 'Business Website',
+    url: '/demos/sinma-classic/',
+    dateAdded: '21 Oct 2026',
+    gradient: 'from-amber-400 via-orange-500 to-rose-500',
+  },
 ];
 
 /**
