@@ -21,6 +21,7 @@ const routes = {
   '/work': 'work.html',
   '/demos': 'demos.html',
   '/guides': 'guides.html',
+  '/guides/client-website-prompt-pack': 'guides-client-website-prompt-pack.html',
   '/guides/tiktok-shop-outreach-seller-guide': 'guides-tiktok-shop-outreach-seller-guide.html',
   '/guides/ai-agent-safety-audit': 'guides-ai-agent-safety-audit.html',
   '/guides/build-your-own-ai-seller-copilot': 'guides-build-your-own-ai-seller-copilot.html',
