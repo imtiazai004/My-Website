@@ -11,9 +11,18 @@ export interface Guide {
 
 export const GUIDES: Guide[] = [
   {
-    slug: 'client-website-prompt-pack',
+    slug: 'sellerradar-part-1',
     updated: '2026-10-20',
     badge: 'New',
+    title: 'SellerRadar Part 1 — TikTok Shop Product Research',
+    description:
+      'Modules 1-2 of the custom TikTok Shop research app: the Product Finder (rank products by sales velocity, rating and price) and the Shop & Competitor X-Ray (gaps, ratings, service metrics). Filters, sample X-ray and the full build roadmap.',
+    meta: 'PDF · 8 pages · English',
+  },
+  {
+    slug: 'client-website-prompt-pack',
+    updated: '2026-10-20',
+    badge: 'Guide',
     title: 'The Prompt Pack — Client Website in a Weekend',
     description:
       'The exact 4 prompts behind every client website we ship: the discovery interview, the design brief, the copy polisher, and the QA gate — copy-paste ready, plus the weekend build checklist.',
