@@ -53,7 +53,7 @@ const STATUS_STYLE: Record<WorkProject['status'], string> = {
   'In daily use': 'bg-emerald-500/90 text-white',
   'Live product': 'bg-emerald-500/90 text-white',
   Live: 'bg-emerald-500/90 text-white',
-  'Open source': 'bg-white/90 text-slate-900',
+  'Completed': 'bg-white/90 text-slate-900',
   'In development': 'bg-amber-400/95 text-slate-900',
   Prototype: 'bg-white/90 text-slate-700',
   'Hackathon build': 'bg-white/90 text-slate-700',

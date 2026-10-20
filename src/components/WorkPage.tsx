@@ -39,7 +39,6 @@ const JSON_LD = {
             applicationCategory: p.category,
             creator: { '@id': `${BUSINESS.websiteUrl}/#organization` },
             ...(p.links?.live?.startsWith('http') ? { url: p.links.live } : {}),
-            ...(p.links?.github ? { sameAs: p.links.github } : {}),
           },
         })),
       },
@@ -78,9 +77,8 @@ export default function WorkPage() {
             <h1 className="mb-4 text-4xl font-bold text-slate-900 md:text-5xl font-display">Our work</h1>
             <p className="text-lg text-slate-600 leading-relaxed">
               {PROJECTS.length} projects built by {BUSINESS.brandName}, from a government emergency platform in daily use
-              to products people buy and open-source apps on{' '}
-              <a href={BUSINESS.social.github} target="_blank" rel="noopener noreferrer" className="text-brand-accent underline underline-offset-4">GitHub</a>.
-              Each one says honestly whether it is live, in use, open source or still a prototype.
+              to products people buy and apps we built for clients.
+              Each one says honestly whether it is live, in use, completed or still a prototype.
             </p>
           </header>
 

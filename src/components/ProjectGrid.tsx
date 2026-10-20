@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link } from 'react-router-dom';
-import { Bot, Code, X, ArrowRight, Github } from 'lucide-react';
+import { Bot, Code, X, ArrowRight } from 'lucide-react';
 import ProjectCard from './ProjectCard';
 import { FEATURED_PROJECTS, PROJECTS } from '../data/projects';
 import { DEMO_APPS } from '../data/demos';
@@ -50,7 +50,7 @@ export default function ProjectGrid() {
             <div className="space-y-5 text-slate-600 text-lg leading-relaxed">
               <p>
                 Every project below is real: a system in daily use at a district control room, products people pay for
-                or install, and open-source apps you can read on GitHub. The status label tells you where each one stands.
+                or install, and apps we built for clients. The status label tells you where each one stands.
               </p>
               <p>
                 Want to see the business tools? Try our {DEMO_APPS.length} working demos — from COD order confirmation to
@@ -61,14 +61,6 @@ export default function ProjectGrid() {
               <Link to="/work" className="btn-primary !px-7 !py-4 text-sm">
                 All {PROJECTS.length} projects <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Link>
-              <a
-                href={BUSINESS.social.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary !px-7 !py-4 text-sm inline-flex items-center gap-2"
-              >
-                <Github className="w-4 h-4" aria-hidden="true" /> GitHub
-              </a>
             </div>
           </motion.div>
 

@@ -1,6 +1,6 @@
 /**
- * Real projects only. Every entry here maps to a product we run, a public
- * repo on github.com/imtiazai004, or a live deployment. No stock photos, no
+ * Real projects only. Every entry here maps to a product we run, a build
+ * we delivered, or a live deployment. Source code is never linked from the site. No stock photos, no
  * invented metrics — the `status` label says honestly where each one stands.
  *
  * This file is the single source of truth for the Work section on the
@@ -11,7 +11,7 @@ export type ProjectStatus =
   | 'In daily use'
   | 'Live product'
   | 'Live'
-  | 'Open source'
+  | 'Completed'
   | 'In development'
   | 'Prototype'
   | 'Hackathon build';
@@ -30,7 +30,6 @@ export interface WorkProject {
   image?: string;
   links?: {
     live?: string;
-    github?: string;
     download?: string;
     page?: string;
   };
@@ -40,8 +39,6 @@ export interface WorkProject {
   gradient: string;
   icon: 'shield' | 'scissors' | 'search' | 'scan' | 'store' | 'tooth' | 'bike' | 'bot' | 'sparkles' | 'school' | 'chart' | 'book' | 'youtube' | 'mic' | 'file' | 'eye' | 'table';
 }
-
-const GH = 'https://github.com/imtiazai004';
 
 export const PROJECTS: WorkProject[] = [
   {
@@ -93,9 +90,8 @@ export const PROJECTS: WorkProject[] = [
     description:
       'Revenue tracking, creator management, invoicing and payroll for TikTok Shop agencies, plus AI niche research and listing generation for Etsy — in one login.',
     category: 'SaaS',
-    status: 'Open source',
+    status: 'Completed',
     tags: ['Next.js', 'PostgreSQL (Neon)', 'Better Auth', 'Claude API'],
-    links: { github: `${GH}/SellOps` },
     featured: true,
     gradient: 'from-fuchsia-600 to-purple-700',
     icon: 'store',
@@ -109,7 +105,7 @@ export const PROJECTS: WorkProject[] = [
     category: 'AI tool',
     status: 'Live',
     tags: ['Python', 'Streamlit', 'Gemini', 'OCR'],
-    links: { live: 'https://composer.aisofttechsolution.com', github: `${GH}/Compsoser-by-Imtiaz-Ahmad` },
+    links: { live: 'https://composer.aisofttechsolution.com' },
     featured: true,
     gradient: 'from-indigo-500 to-violet-600',
     icon: 'scan',
@@ -123,7 +119,7 @@ export const PROJECTS: WorkProject[] = [
     category: 'Website',
     status: 'Live',
     tags: ['Three.js', 'GSAP', 'Vite'],
-    links: { live: '/demos/family-dental/', github: `${GH}/family-dental-clinic-3d-website-with-Claude-desktop` },
+    links: { live: '/demos/family-dental/' },
     featured: true,
     gradient: 'from-cyan-500 to-teal-600',
     icon: 'tooth',
@@ -149,7 +145,6 @@ export const PROJECTS: WorkProject[] = [
     category: 'AI agent',
     status: 'Hackathon build',
     tags: ['Node.js', 'Multi-agent', 'Web Speech API', 'Leaflet'],
-    links: { github: `${GH}/fixr-ai` },
     gradient: 'from-violet-600 to-blue-700',
     icon: 'bot',
   },
@@ -172,12 +167,8 @@ export const PROJECTS: WorkProject[] = [
     description:
       'Student records, fee collection, receipts and payment tracking, shared across the school network from one PC. One-click setup.',
     category: 'Desktop app',
-    status: 'Open source',
+    status: 'Completed',
     tags: ['Python', 'Flask', 'SQLite', 'Windows'],
-    links: {
-      github: `${GH}/school-finance-system`,
-      download: `${GH}/school-finance-system/releases/download/v1.0/SchoolFinance-v1.0-Windows.zip`,
-    },
     gradient: 'from-blue-600 to-blue-800',
     icon: 'school',
   },
@@ -188,10 +179,9 @@ export const PROJECTS: WorkProject[] = [
     description:
       'Answers and questions are generated strictly from the uploaded material, so students revise what their course actually covers.',
     category: 'EdTech',
-    status: 'Open source',
+    status: 'Completed',
     tags: ['React', 'Gemini', 'Firebase'],
     image: '/projects/nursing-app.svg',
-    links: { github: `${GH}/Nursing-app-2` },
     gradient: 'from-teal-500 to-emerald-600',
     icon: 'book',
   },
@@ -202,9 +192,8 @@ export const PROJECTS: WorkProject[] = [
     description:
       'AI reads bank and sales statements, categorises entries and produces P&L and balance-sheet PDFs a shop owner can hand to an accountant.',
     category: 'Finance tool',
-    status: 'Open source',
+    status: 'Completed',
     tags: ['React', 'Express', 'SQLite', 'Gemini'],
-    links: { github: `${GH}/Profit-and-Loss-maker` },
     gradient: 'from-lime-500 to-emerald-600',
     icon: 'chart',
   },
@@ -215,9 +204,8 @@ export const PROJECTS: WorkProject[] = [
     description:
       'Admissions and onboarding, role-based operations, fee and finance records, staff directory and Gemini-powered analytics.',
     category: 'Web app',
-    status: 'Open source',
+    status: 'Completed',
     tags: ['React', 'Firebase', 'Gemini'],
-    links: { github: `${GH}/School-Management-` },
     gradient: 'from-sky-500 to-blue-700',
     icon: 'school',
   },
@@ -227,9 +215,8 @@ export const PROJECTS: WorkProject[] = [
     summary: 'Finds similar YouTube channels and the topics trending in a niche over the last 24 hours.',
     description: 'Scrapes channel data and uses Gemini to surface peak-performing videos, rising topics and look-alike creators.',
     category: 'AI tool',
-    status: 'Open source',
+    status: 'Completed',
     tags: ['React', 'Express', 'Gemini'],
-    links: { github: `${GH}/Niche-Researcher` },
     gradient: 'from-red-500 to-rose-700',
     icon: 'youtube',
   },
@@ -250,9 +237,8 @@ export const PROJECTS: WorkProject[] = [
     summary: 'Text-to-speech app with several natural-sounding voices.',
     description: 'Gemini-powered speech generation with voice selection and natural prosody.',
     category: 'AI tool',
-    status: 'Open source',
+    status: 'Completed',
     tags: ['React', 'Gemini TTS'],
-    links: { github: `${GH}/VoxGen-AI` },
     gradient: 'from-pink-500 to-fuchsia-600',
     icon: 'mic',
   },
@@ -264,7 +250,6 @@ export const PROJECTS: WorkProject[] = [
     category: 'AI tool',
     status: 'Hackathon build',
     tags: ['React', 'Express', 'Gemini'],
-    links: { github: `${GH}/anty-gravity-hakathon2` },
     gradient: 'from-slate-600 to-slate-800',
     icon: 'file',
   },

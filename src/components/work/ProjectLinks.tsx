@@ -1,4 +1,4 @@
-import { ExternalLink, Github, Download, ArrowRight } from 'lucide-react';
+import { ExternalLink, Download, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { ReactElement } from 'react';
 import type { WorkProject } from '../../data/projects';
@@ -34,13 +34,6 @@ export function ProjectLinks({ project, size = 'md' }: { project: WorkProject; s
     items.push(
       <a key="dl" href={l.download} rel="noopener noreferrer" className={secondary}>
         Download <Download className="w-4 h-4" aria-hidden="true" />
-      </a>
-    );
-  }
-  if (l.github) {
-    items.push(
-      <a key="gh" href={l.github} target="_blank" rel="noopener noreferrer" className={secondary}>
-        Source on GitHub <Github className="w-4 h-4" aria-hidden="true" />
       </a>
     );
   }

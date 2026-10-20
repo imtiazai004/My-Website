@@ -13,7 +13,7 @@ export const BILLING_FAQ: FAQ = {
 };
 
 export const FAQS: FAQ[] = [
-  { id: '9', question: 'Can I see your work before hiring you?', answer: `Yes. You can try ${DEMO_APPS.length} working demos at aisofttechsolution.com/demos, see the products we built and run at /work, and read the source code of our open-source projects on GitHub (github.com/imtiazai004).`, order: 1 },
+  { id: '9', question: 'Can I see your work before hiring you?', answer: `Yes. You can try ${DEMO_APPS.length} working demos at aisofttechsolution.com/demos and see the products we built and run at /work.`, order: 1 },
   { id: '1', question: 'How long does a typical project take?', answer: 'Project timelines vary by scope. A landing page takes 1–2 weeks, a full web app 4–8 weeks, and larger systems 3–6 months. We give you a detailed timeline during the free consultation before any work begins.', order: 2 },
   { id: '4', question: 'How does your pricing work?', answer: 'We price per project, not per hour. After your free discovery call, we send a fixed-price proposal scoped to your requirements. No surprise invoices. For ongoing work, we offer monthly retainer arrangements.', order: 3 },
   { id: '2', question: 'What technologies do you use?', answer: 'React and TypeScript for web apps, Node.js and Python (FastAPI, Flask) on the server, PostgreSQL, Supabase or Firebase for data, Flutter for mobile apps, and Gemini, Claude and OpenAI models for AI features. We pick what fits your project and budget.', order: 4 },
