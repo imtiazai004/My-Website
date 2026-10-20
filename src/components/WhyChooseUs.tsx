@@ -68,7 +68,6 @@ const REASONS = [
       metrics: [
         { label: 'Projects on our work page', value: String(PROJECTS.length) },
         { label: 'Live or in daily use', value: String(PROJECTS.filter((p) => ['In daily use', 'Live product', 'Live'].includes(p.status)).length) },
-        { label: 'Open source', value: String(PROJECTS.filter((p) => p.status === 'Open source').length) },
       ],
       points: ['District Nerve Center — in daily use at a district control room', 'Soft Clipper — a paid desktop app', 'ProfitScout — a free Chrome extension'],
     },

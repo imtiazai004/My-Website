@@ -14,7 +14,7 @@ L.push(`> UK-registered software studio that builds AI assistants, automation sy
 L.push('This file is generated from the same data files the website uses (src/data/*.ts). Every project listed is real; statuses are stated honestly.', '');
 L.push('## Facts', '');
 L.push('- Company: AI Soft Tech Solution, a brand operated by Atlantic LTD STORE LIMITED, a company registered in England and Wales.');
-L.push('- Founder: Imtiaz Ahmad, founder and lead engineer (https://www.linkedin.com/in/imtiazahmad004, https://github.com/imtiazai004).');
+L.push('- Founder: Imtiaz Ahmad, founder and lead engineer (https://www.linkedin.com/in/imtiazahmad004).');
 L.push('- Clients: businesses in the United Kingdom and Pakistan. Languages: English and Urdu.');
 L.push(`- Proof of work: ${PROJECTS.length} projects at ${SITE}/work and ${DEMO_APPS.length} interactive demos at ${SITE}/demos.`);
 L.push('- Pricing model: fixed-price proposals after a free 30-minute discovery call; no hourly billing; no published price list.');
@@ -29,7 +29,7 @@ for (const s of SERVICES) {
 }
 L.push('', '## Products and projects', '');
 for (const p of PROJECTS) {
-  const links = [p.links?.live && `live: ${abs(p.links.live)}`, p.links?.page && `page: ${abs(p.links.page)}`, p.links?.github && `source: ${p.links.github}`].filter(Boolean).join(' · ');
+  const links = [p.links?.live && `live: ${abs(p.links.live)}`, p.links?.page && `page: ${abs(p.links.page)}`].filter(Boolean).join(' · ');
   L.push(`- **${p.title}** (${p.category}; status: ${p.status}) — ${p.summary} ${p.description} Built with ${p.tags.join(', ')}.${links ? ' ' + links : ''}`);
 }
 L.push('', '## Live demos', '');

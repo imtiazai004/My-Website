@@ -1,4 +1,4 @@
-import { Twitter, Linkedin, Github, Send, CheckCircle2, Mail, MessageCircle } from 'lucide-react';
+import { Twitter, Linkedin, Send, CheckCircle2, Mail, MessageCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 import { trackActivity, sendContactMessage } from '../services/dataService';
 import { Logo } from './Logo';
@@ -139,7 +139,6 @@ export default function Footer() {
             <div className="flex items-center gap-6 pt-4">
               {[
                 { icon: Linkedin, label: 'LinkedIn', href: BUSINESS.social.linkedin },
-                { icon: Github, label: 'GitHub', href: BUSINESS.social.github },
                 { icon: Twitter, label: 'X (Twitter)', href: BUSINESS.social.x },
               ].map((social, i) => (
                 <motion.a
