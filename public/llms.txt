@@ -80,6 +80,7 @@ All demos: https://aisofttechsolution.com/demos
 
 ## Free guides
 
+- **SellerRadar Part 1 — TikTok Shop Product Research** — Modules 1-2 of the custom TikTok Shop research app: the Product Finder (rank products by sales velocity, rating and price) and the Shop & Competitor X-Ray (gaps, ratings, service metrics). Filters, sample X-ray and the full build roadmap. PDF · 8 pages · English. https://aisofttechsolution.com/guides/sellerradar-part-1
 - **The Prompt Pack — Client Website in a Weekend** — The exact 4 prompts behind every client website we ship: the discovery interview, the design brief, the copy polisher, and the QA gate — copy-paste ready, plus the weekend build checklist. PDF · 8 pages · English. https://aisofttechsolution.com/guides/client-website-prompt-pack
 - **TikTok Shop Outreach — Seller Guide** — The AffiliatePilot playbook: a custom app that recruits TikTok creators to sell your products through shoppable videos and LIVE streams — on commission, zero ad spend up front. PDF · 6 pages · English. https://aisofttechsolution.com/guides/tiktok-shop-outreach-seller-guide
 - **The Agent Safety Audit** — 10 guardrails to demand before any AI agent touches your business — sandboxing, approval gates, secret masking, audit trails, data boundaries and more. Plain English, no jargon. PDF · 8 pages · English. https://aisofttechsolution.com/guides/ai-agent-safety-audit
