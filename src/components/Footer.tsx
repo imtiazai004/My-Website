@@ -240,7 +240,7 @@ export default function Footer() {
         <div className="pt-24 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
           {/* Logo + tagline signature */}
           <div className="flex flex-col gap-5">
-            <Logo variant="full" size={40} />
+            <Logo variant="full" size={40} tone="light" className="self-start" />
             <span className="text-xs text-slate-400 uppercase tracking-[0.2em] font-mono">
               &copy; {new Date().getFullYear()} {BUSINESS.brandName} — All rights reserved.
             </span>

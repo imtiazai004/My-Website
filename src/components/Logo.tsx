@@ -3,22 +3,25 @@ export const TAGLINE = 'Engineered to Perform. Designed to Inspire.';
 interface LogoProps {
   variant?: 'full' | 'compact' | 'icon';
   size?: number;
+  /** 'light' swaps the dark navy lettering to white, for dark backgrounds. */
+  tone?: 'dark' | 'light';
   className?: string;
 }
 
 /**
- * Brand logo — single full-lockup image.
- * `size` controls the rendered height in px; width scales automatically.
+ * Brand logo — the SoftTech Solution lockup (S + T mark, wordmark beside it).
+ * `size` sets the rendered height in px; width scales automatically.
  */
-export function Logo({ variant = 'compact', size = 40, className }: LogoProps) {
-  // The lockup sits inside a square canvas, so display it a bit taller
-  // than the old constructed mark to keep visual weight similar.
-  const height = variant === 'full' ? size * 1.9 : size * 1.6;
+export function Logo({ variant = 'compact', size = 40, tone = 'dark', className }: LogoProps) {
+  if (variant === 'icon') return <LogoMark size={size} className={className} />;
+  const height = variant === 'full' ? size * 1.3 : size * 1.15;
 
   return (
     <img
-      src="/logo-full.png"
-      alt="AI Soft Tech Solution"
+      src={tone === 'light' ? '/logo-full-light.png' : '/logo-full.png'}
+      alt="SoftTech Solution"
+      width={1452}
+      height={390}
       style={{ height, width: 'auto' }}
       className={`object-contain select-none ${className ?? ''}`}
       draggable={false}
@@ -29,8 +32,10 @@ export function Logo({ variant = 'compact', size = 40, className }: LogoProps) {
 export function LogoMark({ size = 44, className }: { size?: number; className?: string }) {
   return (
     <img
-      src="/logo-full.png"
-      alt="AI Soft Tech Solution"
+      src="/logo-s.png"
+      alt="SoftTech Solution"
+      width={312}
+      height={373}
       style={{ height: size, width: 'auto' }}
       className={`object-contain select-none ${className ?? ''}`}
       draggable={false}
