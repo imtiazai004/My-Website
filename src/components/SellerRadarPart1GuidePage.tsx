@@ -16,7 +16,7 @@ export default function SellerRadarPart1GuidePage() {
   usePageSeo({
     title: 'SellerRadar Part 1 — TikTok Shop Product Research (Free Guide)',
     description:
-      'Part 1 of the SellerRadar guide: a custom TikTok Shop research app — the Product Finder (rank products by sales velocity, rating and price) and the Shop & Competitor X-Ray (gaps, ratings, service metrics). Filters, sample X-ray and the full build roadmap.',
+      'SellerRadar Part 1: a TikTok Shop research app that ranks products by sales velocity and X-rays competitor shops for gaps. Free guide with the build roadmap.',
     canonical: `${BUSINESS.websiteUrl}/guides/sellerradar-part-1`,
     type: 'article',
     jsonLd: {

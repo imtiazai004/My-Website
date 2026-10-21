@@ -48,7 +48,7 @@ export default function AgencyVsFreelancer() {
 
   usePageSeo({
     title: `${BUSINESS.brandName} vs Hiring a Freelancer`,
-    description: `An honest comparison of hiring ${BUSINESS.brandName} versus a freelancer: fixed-price scoped delivery with NDA and IP assignment built in, versus hourly, single-person work. Checked ${CHECKED}.`,
+    description: `${BUSINESS.brandName} vs a freelancer: fixed price, NDA and full IP ownership versus hourly, one-person work. An honest side-by-side comparison.`,
     canonical: `${BUSINESS.websiteUrl}/compare/agency-vs-freelancer`,
     jsonLd: {
       '@context': 'https://schema.org',

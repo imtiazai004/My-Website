@@ -6,7 +6,7 @@ import { DEMO_APPS } from '../data/demos';
 export const HOME_SEO = {
   title: `WhatsApp AI Assistants & Seller Apps | ${BUSINESS.brandName}`,
   description:
-    `WhatsApp AI assistants, COD order confirmation, booking and reminder systems, TikTok Shop tools and custom web apps. UK-registered studio — try ${DEMO_APPS.length} live demos before you pay.`,
+    `WhatsApp AI assistants, COD order confirmation, booking systems, TikTok Shop tools and custom apps. UK-registered studio. Try ${DEMO_APPS.length} live demos before you pay.`,
   canonical: `${BUSINESS.websiteUrl}/`,
 };
 

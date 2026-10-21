@@ -16,7 +16,7 @@ export default function TikTokShopOutreachSellerGuidePage() {
   usePageSeo({
     title: 'TikTok Shop Outreach — Seller Guide — Free Guide',
     description:
-      'Free guide: build AffiliatePilot — a custom app that recruits TikTok Shop creators to sell your products through shoppable videos and LIVE streams, on commission, zero ad spend up front. No coding needed.',
+      'Free guide: build AffiliatePilot, an app that recruits TikTok Shop creators to sell your products on commission, with zero ad spend up front.',
     canonical: `${BUSINESS.websiteUrl}/guides/tiktok-shop-outreach-seller-guide`,
     type: 'article',
     jsonLd: {

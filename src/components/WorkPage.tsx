@@ -58,7 +58,7 @@ export default function WorkPage() {
 
   usePageSeo({
     title: `Our Work — ${PROJECTS.length} Real Products & Apps | ${BUSINESS.brandName}`,
-    description: `Real projects by ${BUSINESS.brandName}: the District Nerve Center emergency platform, Soft Clipper, ProfitScout, SellOps and ${PROJECTS.length - 4} more apps — each with an honest status and links to the live product or source code.`,
+    description: `${PROJECTS.length} real projects by ${BUSINESS.brandName}, including the District Nerve Center, Soft Clipper, ProfitScout and SellOps, each with an honest status and a live link.`,
     canonical: CANONICAL,
     jsonLd: JSON_LD,
   });

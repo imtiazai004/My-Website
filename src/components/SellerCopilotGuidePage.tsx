@@ -16,7 +16,7 @@ export default function SellerCopilotGuidePage() {
   usePageSeo({
     title: 'Build Your Own AI Seller Copilot — Free Guide',
     description:
-      'Free step-by-step guide: turn your sales playbooks into an AI copilot that answers like a specialist. Pick your coding agent, build the app, go from basic to advanced. No coding required.',
+      'Free guide: turn your sales playbooks into an AI copilot that answers like a specialist. Pick a coding agent and build it step by step. No coding needed.',
     canonical: `${BUSINESS.websiteUrl}/guides/build-your-own-ai-seller-copilot`,
     type: 'article',
     jsonLd: {

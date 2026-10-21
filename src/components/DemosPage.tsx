@@ -50,7 +50,7 @@ export default function DemosPage() {
 
   usePageSeo({
     title: `${DEMO_APPS.length} Live Business App Demos — Try Before You Buy | ${BUSINESS.brandName}`,
-    description: `Click through ${DEMO_APPS.length} working demos: COD order confirmation, digital khata, WhatsApp ordering, salon booking, clinic tokens, school fee reminders, TikTok Shop fulfilment and more. Each one can be set up for your business.`,
+    description: `Try ${DEMO_APPS.length} working demos: COD confirmation, digital khata, WhatsApp ordering, salon booking, clinic tokens, TikTok Shop fulfilment and more.`,
     canonical: CANONICAL,
     jsonLd: JSON_LD,
   });

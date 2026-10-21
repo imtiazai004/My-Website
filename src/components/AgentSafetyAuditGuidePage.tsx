@@ -16,7 +16,7 @@ export default function AgentSafetyAuditGuidePage() {
   usePageSeo({
     title: 'The Agent Safety Audit — Free Guide',
     description:
-      'Free checklist guide: 10 guardrails to demand before any AI agent touches your business — sandboxing, approval gates, secret masking, audit trails, data boundaries and more. Plain English, no jargon.',
+      'Free checklist: 10 guardrails to demand before any AI agent touches your business, from approval gates to audit trails. Plain English, no jargon.',
     canonical: `${BUSINESS.websiteUrl}/guides/ai-agent-safety-audit`,
     type: 'article',
     jsonLd: {

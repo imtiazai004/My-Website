@@ -16,7 +16,7 @@ export default function PromptPackGuidePage() {
   usePageSeo({
     title: 'The Prompt Pack — Build a Client Website in a Weekend (Free Guide)',
     description:
-      'The exact 4 prompts behind every client website we ship: the discovery interview, the design brief, the copy polisher, and the QA gate — copy-paste ready, plus the weekend build checklist.',
+      'The 4 prompts behind every client website we ship: discovery, design brief, copy polish and QA. Copy-paste ready, plus a weekend build checklist.',
     canonical: `${BUSINESS.websiteUrl}/guides/client-website-prompt-pack`,
     type: 'article',
     jsonLd: {
