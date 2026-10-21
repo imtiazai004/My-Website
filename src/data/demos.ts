@@ -12,6 +12,11 @@ export interface Demo {
   featured?: boolean;
   /** Gradient classes for the card thumbnail */
   gradient: string;
+  /** Optional real preview image for the card thumbnail (same-origin path) */
+  image?: string;
+  /** Optional client brand wordmark rendered as a logo plate over the thumbnail */
+  brandName?: string;
+  brandSub?: string;
 }
 
 export const DEMOS: Demo[] = [
@@ -48,6 +53,9 @@ export const DEMOS: Demo[] = [
     url: '/demos/sinma-3d/',
     dateAdded: '21 Oct 2026',
     gradient: 'from-fuchsia-500 via-purple-600 to-indigo-600',
+    image: '/demos/sinma-3d/assets/img/hero.jpg',
+    brandName: 'Sinma',
+    brandSub: 'Hair & Beauty Salon',
   },
   {
     id: 'sinma-hair-simple',
@@ -59,17 +67,9 @@ export const DEMOS: Demo[] = [
     url: '/demos/sinma-classic/',
     dateAdded: '21 Oct 2026',
     gradient: 'from-amber-400 via-orange-500 to-rose-500',
-  },
-  {
-    id: 'sinma-hair-owner-dashboard',
-    client: 'Sinma Hair And Beauty',
-    title: 'Owner Booking Dashboard',
-    description:
-      'Every booking from the website form and chatbot lands in one dashboard — today’s schedule, revenue in £, client history, double-booking protection and WhatsApp alerts and reminders. Try a booking and watch it appear live.',
-    category: 'Booking Dashboard',
-    url: '/demos/sinma-dashboard/',
-    dateAdded: '21 Oct 2026',
-    gradient: 'from-indigo-500 via-violet-500 to-purple-500',
+    image: '/demos/sinma-classic/assets/img/hero.jpg',
+    brandName: 'Sinma',
+    brandSub: 'Hair & Beauty Salon',
   },
 ];
 

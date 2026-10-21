@@ -148,12 +148,46 @@ export default function DemosPage() {
                 rel="noopener noreferrer"
                 className="glass-card group !p-0 overflow-hidden flex flex-col"
               >
-                <div className={`relative h-44 bg-gradient-to-br ${demo.gradient} flex items-center justify-center`}>
-                  <MonitorPlay className="w-14 h-14 text-white/80 group-hover:scale-110 transition-transform duration-500" aria-hidden="true" />
-                  <span className="absolute top-4 left-4 px-3 py-1 bg-white/20 border border-white/30 rounded-full text-xs font-semibold text-white">
-                    {demo.category}
-                  </span>
-                </div>
+                {demo.image ? (
+                  <div className="relative h-44 overflow-hidden">
+                    <img
+                      src={demo.image}
+                      alt={`${demo.client} — website preview`}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#2b1c1d]/60 via-transparent to-[#2b1c1d]/10" />
+                    {demo.brandName && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="flex items-center gap-3 rounded-2xl bg-white/95 px-5 py-3 shadow-2xl ring-1 ring-black/5 backdrop-blur">
+                          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinejoin="round" className="h-10 w-10 text-[#8a3f46]" aria-hidden="true">
+                            <path d="M20 30c-3-4-4-9 0-17 4 8 3 13 0 17Z" />
+                            <path d="M20 30c-5-2-9-6-9-13 6 1 9 6 9 13Z" />
+                            <path d="M20 30c5-2 9-6 9-13-6 1-9 6-9 13Z" />
+                            <path d="M20 30c-6 0-11-3-13-8 5-1 10 2 13 8Zm0 0c6 0 11-3 13-8-5-1-10 2-13 8Z" />
+                          </svg>
+                          <span className="grid leading-none">
+                            <span className="font-display text-[30px] font-semibold text-[#2b1c1d]">{demo.brandName}</span>
+                            {demo.brandSub && (
+                              <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.32em] text-[#7d6865]">{demo.brandSub}</span>
+                            )}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    <span className="absolute left-4 top-4 rounded-full border border-white/40 bg-black/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                      {demo.category}
+                    </span>
+                  </div>
+                ) : (
+                  <div className={`relative h-44 bg-gradient-to-br ${demo.gradient} flex items-center justify-center`}>
+                    <MonitorPlay className="w-14 h-14 text-white/80 group-hover:scale-110 transition-transform duration-500" aria-hidden="true" />
+                    <span className="absolute top-4 left-4 px-3 py-1 bg-white/20 border border-white/30 rounded-full text-xs font-semibold text-white">
+                      {demo.category}
+                    </span>
+                  </div>
+                )}
                 <div className="p-7 flex flex-col flex-1">
                   <p className="text-xs font-semibold text-brand-accent mb-2">{demo.client}</p>
                   <h3 className="text-2xl font-bold text-slate-900 mb-3">{demo.title}</h3>
