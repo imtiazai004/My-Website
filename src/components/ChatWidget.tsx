@@ -7,7 +7,7 @@ type Message = { role: 'user' | 'assistant'; content: string };
 
 const GREETING: Message = {
   role: 'assistant',
-  content: "Hi! I'm the AI assistant for AI Soft Tech Solution. Ask me anything about our services, or tell me about your project idea! 👋",
+  content: "Hi! I'm the AI assistant for Soft Tech Solution. Ask me anything about our services, or tell me about your project idea! 👋",
 };
 
 export default function ChatWidget() {
@@ -114,7 +114,7 @@ export default function ChatWidget() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-white leading-none">AI Assistant</p>
-                  <p className="text-[10px] text-brand-accent mt-0.5">AI Soft Tech Solution</p>
+                  <p className="text-[10px] text-brand-accent mt-0.5">Soft Tech Solution</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">

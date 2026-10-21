@@ -1,4 +1,4 @@
-# AI Soft Tech Solution — robots.txt
+# Soft Tech Solution — robots.txt
 
 # All crawlers: allow everything except the raw prerendered snapshots (served
 # automatically at the real URLs to bot user agents by middleware.ts — the

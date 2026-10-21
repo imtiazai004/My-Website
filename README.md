@@ -1,6 +1,6 @@
 # aisofttechsolution.com
 
-Website for **AI Soft Tech Solution** — AI automation and custom apps for online
+Website for **Soft Tech Solution** — AI automation and custom apps for online
 sellers and small businesses. Vite + React 19 SPA on Vercel, with Firestore for
 blog posts, blueprints, FAQs, testimonials and contact messages.
 

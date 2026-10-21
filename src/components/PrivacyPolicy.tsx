@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
   }, []);
 
   usePageSeo({
-    title: 'Privacy Policy — ProfitScout | AI Soft Tech Solution',
+    title: 'Privacy Policy — ProfitScout | Soft Tech Solution',
     description: 'Privacy policy for the ProfitScout Chrome extension. Your data stays in your browser. No personal data collected, no data sold, no account required.',
     canonical: `${BUSINESS.websiteUrl}/profitscout-privacy`,
   });

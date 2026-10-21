@@ -16,7 +16,7 @@ export default function ClaimbackGuidePage() {
   usePageSeo({
     title: 'ClaimBack — The FBA Reimbursement Finder (Free Guide)',
     description:
-      'ClaimBack is the custom app AI Soft Tech Solution builds for Amazon FBA sellers: it pulls Seller Central reports, flags every lost, damaged or miscounted unit, builds the claim case with evidence, and tracks it to payout. Full guide with the business math and build roadmap.',
+      'ClaimBack is the custom app Soft Tech Solution builds for Amazon FBA sellers: it pulls Seller Central reports, flags every lost, damaged or miscounted unit, builds the claim case with evidence, and tracks it to payout. Full guide with the business math and build roadmap.',
     canonical: `${BUSINESS.websiteUrl}/guides/claimback`,
     type: 'article',
     jsonLd: {
@@ -24,7 +24,7 @@ export default function ClaimbackGuidePage() {
       '@type': 'Article',
       headline: 'ClaimBack — The FBA Reimbursement Finder (Free Guide)',
       description:
-        'How ClaimBack (a custom app by AI Soft Tech Solution) recovers the $2,000–$8,000 in FBA reimbursements Amazon owes most sellers: report pulling, mismatch auditing, claim case building and payout tracking — plus the step-by-step build roadmap.',
+        'How ClaimBack (a custom app by Soft Tech Solution) recovers the $2,000–$8,000 in FBA reimbursements Amazon owes most sellers: report pulling, mismatch auditing, claim case building and payout tracking — plus the step-by-step build roadmap.',
       author: { '@type': 'Person', name: FOUNDER.name, url: FOUNDER.url },
       publisher: {
         '@type': 'Organization',

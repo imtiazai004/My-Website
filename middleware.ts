@@ -72,7 +72,7 @@ function isPassThrough(p: string): boolean {
   );
 }
 
-const NOT_FOUND_HTML = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Page not found | AI Soft Tech Solution</title><meta name="robots" content="noindex"></head><body><h1>Page not found</h1><p>This page does not exist. Try <a href="https://aisofttechsolution.com/">the homepage</a>, <a href="https://aisofttechsolution.com/work">our work</a> or <a href="https://aisofttechsolution.com/demos">live demos</a>.</p></body></html>`;
+const NOT_FOUND_HTML = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Page not found | Soft Tech Solution</title><meta name="robots" content="noindex"></head><body><h1>Page not found</h1><p>This page does not exist. Try <a href="https://aisofttechsolution.com/">the homepage</a>, <a href="https://aisofttechsolution.com/work">our work</a> or <a href="https://aisofttechsolution.com/demos">live demos</a>.</p></body></html>`;
 
 export const config = {
   // Everything except API routes, build assets, snapshots and files with an

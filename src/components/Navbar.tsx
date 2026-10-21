@@ -280,7 +280,7 @@ export default function Navbar() {
                 >
                   <div className="px-5 pt-4 pb-3 border-b border-slate-900/[0.07]">
                     <p className="text-slate-900 font-bold tracking-tight text-sm">Company</p>
-                    <p className="text-slate-500 text-[11px] mt-0.5">Get to know AI Soft Tech Solution</p>
+                    <p className="text-slate-500 text-[11px] mt-0.5">Get to know Soft Tech Solution</p>
                   </div>
                   <div className="p-3 flex flex-col gap-1">
                     {COMPANY_ITEMS.map((item, i) => {

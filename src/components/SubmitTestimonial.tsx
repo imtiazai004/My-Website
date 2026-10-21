@@ -5,7 +5,7 @@ import { submitTestimonial } from "../services/dataService";
 import { usePageSeo } from "../lib/seo";
 
 export default function SubmitTestimonial() {
-  usePageSeo({ title: "Leave a review | AI Soft Tech Solution", noindex: true });
+  usePageSeo({ title: "Leave a review | Soft Tech Solution", noindex: true });
   const [form, setForm] = useState({ name: "", role: "", company: "", content: "" });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);

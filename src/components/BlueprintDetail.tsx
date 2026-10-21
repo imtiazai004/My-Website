@@ -169,7 +169,7 @@ export default function BlueprintDetail() {
   }, [id]);
 
   usePageSeo({
-    title: blueprint ? `${blueprint.title} | Blueprint Library` : 'Blueprint Library | AI Soft Tech Solution',
+    title: blueprint ? `${blueprint.title} | Blueprint Library` : 'Blueprint Library | Soft Tech Solution',
     description: blueprint?.description,
     canonical: id ? `https://aisofttechsolution.com/blueprint-library/${id}` : undefined,
     type: 'article',

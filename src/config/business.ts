@@ -1,5 +1,5 @@
 export const BUSINESS = {
-  brandName: 'AI Soft Tech Solution',
+  brandName: 'Soft Tech Solution',
   legalCompanyName: 'Atlantic LTD STORE LIMITED',
   statementDescriptor: 'AI SOFT TECH SOLUTION',
   companyNumber: null as string | null,

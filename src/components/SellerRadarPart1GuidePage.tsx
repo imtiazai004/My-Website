@@ -24,7 +24,7 @@ export default function SellerRadarPart1GuidePage() {
       '@type': 'Article',
       headline: 'SellerRadar Part 1 — TikTok Shop Product Research (Free Guide)',
       description:
-        'How SellerRadar (a custom research app by AI Soft Tech Solution) finds winning TikTok Shop products and X-rays competitor shops: filters by region, price, rating, units sold and velocity, plus competitor gap analysis. Part 1 of 2.',
+        'How SellerRadar (a custom research app by Soft Tech Solution) finds winning TikTok Shop products and X-rays competitor shops: filters by region, price, rating, units sold and velocity, plus competitor gap analysis. Part 1 of 2.',
       author: { '@type': 'Person', name: FOUNDER.name, url: FOUNDER.url },
       publisher: {
         '@type': 'Organization',

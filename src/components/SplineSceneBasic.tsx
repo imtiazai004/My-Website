@@ -141,7 +141,7 @@ export function SplineSceneBasic() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="answer mt-8 text-slate-600 max-w-xl text-lg md:text-xl leading-relaxed"
           >
-            AI Soft Tech Solution builds WhatsApp AI assistants, order-confirmation and booking systems, TikTok Shop
+            Soft Tech Solution builds WhatsApp AI assistants, order-confirmation and booking systems, TikTok Shop
             tools and custom web apps. We run our own products — Soft Clipper, ProfitScout and the District Nerve
             Center — and you can try {DEMO_APPS.length} working demos before you pay.
           </motion.p>

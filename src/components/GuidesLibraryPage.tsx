@@ -15,9 +15,9 @@ export default function GuidesLibraryPage() {
   }, []);
 
   usePageSeo({
-    title: 'Free Guides — AI Soft Tech Solution',
+    title: 'Free Guides — Soft Tech Solution',
     description:
-      'Free step-by-step guides from AI Soft Tech Solution: build your own AI seller copilot, your own TikTok Shop fulfilment dashboard, and more. Download the PDFs free.',
+      'Free step-by-step guides from Soft Tech Solution: build your own AI seller copilot, your own TikTok Shop fulfilment dashboard, and more. Download the PDFs free.',
     canonical: `${BUSINESS.websiteUrl}/guides`,
   });
 

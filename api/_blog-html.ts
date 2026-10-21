@@ -16,7 +16,7 @@ const DATABASE_ID = 'ai-studio-b76c3de3-e8dd-4066-a257-77e5660bc99b';
 const KEY = 'AIzaSyAOIkyhFjsa99A93xf_2_EW4y1X3iVxsIE'; // placeholder, replaced below
 const BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/${DATABASE_ID}/documents`;
 const SITE = 'https://aisofttechsolution.com';
-const BRAND = 'AI Soft Tech Solution';
+const BRAND = 'Soft Tech Solution';
 
 export interface BlogPost {
   slug: string;
@@ -321,7 +321,7 @@ ${jsonLd}
 <style>${STYLE}</style>
 </head>
 <body>
-<header><a href="${SITE}"><span class="brand">AI Soft Tech Solution</span></a> · <a href="${SITE}/work">Work</a> · <a href="${SITE}/demos">Demos</a> · <a href="${SITE}/guides">Guides</a> · <a href="${SITE}/blog">Blog</a></header>
+<header><a href="${SITE}"><span class="brand">Soft Tech Solution</span></a> · <a href="${SITE}/work">Work</a> · <a href="${SITE}/demos">Demos</a> · <a href="${SITE}/guides">Guides</a> · <a href="${SITE}/blog">Blog</a></header>
 ${opts.body}
 <footer>${BRAND} — AI automation and custom apps for online sellers and small businesses. Operated by Atlantic LTD STORE LIMITED (England and Wales). · <a href="${SITE}/">aisofttechsolution.com</a> · WhatsApp +44 7462 086661 / +92 300 5863032</footer>
 </body></html>`;

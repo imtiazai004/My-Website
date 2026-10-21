@@ -125,7 +125,7 @@ export default function ProfitScoutPage() {
   }, []);
 
   usePageSeo({
-    title: 'ProfitScout v1 — Free Product Research Chrome Extension | AI Soft Tech Solution',
+    title: 'ProfitScout v1 — Free Product Research Chrome Extension | Soft Tech Solution',
     description: '44 features for e-commerce product research. X-Ray niche scanner, ROI calculator, lead manager, AI-powered analysis, price tracker & more — 100% free, no sign-up.',
     canonical: 'https://aisofttechsolution.com/profitscout',
   });
@@ -159,7 +159,7 @@ export default function ProfitScoutPage() {
               The only product research extension you'll ever need — 44 features across 12 platforms, completely free, forever. Score any Amazon, eBay, TikTok Shop, Walmart or Etsy listing in one click, see competitor revenue, and track price history for a year, with no account or sign-up required.
             </p>
             <p className="text-sm text-slate-400 mb-10">
-              Built by <a href="https://aisofttechsolution.com" className="text-brand-accent hover:text-blue-300 transition-colors">Imtiaz Ahmad</a> · AI Soft Tech Solution
+              Built by <a href="https://aisofttechsolution.com" className="text-brand-accent hover:text-blue-300 transition-colors">Imtiaz Ahmad</a> · Soft Tech Solution
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
