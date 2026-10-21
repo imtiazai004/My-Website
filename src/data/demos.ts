@@ -60,6 +60,17 @@ export const DEMOS: Demo[] = [
     dateAdded: '21 Oct 2026',
     gradient: 'from-amber-400 via-orange-500 to-rose-500',
   },
+  {
+    id: 'sinma-hair-owner-dashboard',
+    client: 'Sinma Hair And Beauty',
+    title: 'Owner Booking Dashboard',
+    description:
+      'Every booking from the website form and chatbot lands in one dashboard — today’s schedule, revenue in £, client history, double-booking protection and WhatsApp alerts and reminders. Try a booking and watch it appear live.',
+    category: 'Booking Dashboard',
+    url: '/demos/sinma-dashboard/',
+    dateAdded: '21 Oct 2026',
+    gradient: 'from-indigo-500 via-violet-500 to-purple-500',
+  },
 ];
 
 /**
