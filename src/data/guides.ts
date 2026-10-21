@@ -11,9 +11,18 @@ export interface Guide {
 
 export const GUIDES: Guide[] = [
   {
+    slug: 'claimback',
+    updated: '2026-10-21',
+    badge: 'New',
+    title: 'ClaimBack — The FBA Reimbursement Finder',
+    description:
+      'The custom app built for Amazon FBA sellers: it pulls Seller Central reports, flags every lost, damaged or miscounted unit, builds the claim case with evidence, and tracks it to payout. Plus the returns-fee leak, the business math and the full build roadmap.',
+    meta: 'PDF · 9 pages · English',
+  },
+  {
     slug: 'sellerradar-part-1',
     updated: '2026-10-20',
-    badge: 'New',
+    badge: 'Guide',
     title: 'SellerRadar Part 1 — TikTok Shop Product Research',
     description:
       'Modules 1-2 of the custom TikTok Shop research app: the Product Finder (rank products by sales velocity, rating and price) and the Shop & Competitor X-Ray (gaps, ratings, service metrics). Filters, sample X-ray and the full build roadmap.',
