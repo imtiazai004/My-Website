@@ -17,6 +17,8 @@ export interface Demo {
   /** Optional client brand wordmark rendered as a logo plate over the thumbnail */
   brandName?: string;
   brandSub?: string;
+  /** If true, the card is hidden from the /demos listing (direct link still works) */
+  hidden?: boolean;
 }
 
 export const DEMOS: Demo[] = [
@@ -70,6 +72,7 @@ export const DEMOS: Demo[] = [
     image: '/demos/sinma-classic/assets/img/hero.jpg',
     brandName: 'Sinma',
     brandSub: 'Hair & Beauty Salon',
+    hidden: true,
   },
 ];
 

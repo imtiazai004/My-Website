@@ -71,7 +71,7 @@ export default function DemosPage() {
               Try it before <br /> you pay for it
             </h1>
             <p className="text-slate-600 text-xl leading-relaxed">
-              {DEMO_APPS.length} working business apps and {DEMOS.length} clinic websites. Each demo solves one everyday
+              {DEMO_APPS.length} working business apps and {DEMOS.filter((d) => !d.hidden).length} clinic websites. Each demo solves one everyday
               problem — open it, click around, and if it fits, we set it up for your business.
             </p>
           </div>
@@ -140,7 +140,7 @@ export default function DemosPage() {
         <div className="max-w-7xl mx-auto">
           <h2 id="websites-h" className="text-2xl md:text-3xl font-display font-bold text-slate-900 mb-6">Websites</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            {DEMOS.map((demo) => (
+            {DEMOS.filter((demo) => !demo.hidden).map((demo) => (
               <a
                 key={demo.id}
                 href={demo.url}
