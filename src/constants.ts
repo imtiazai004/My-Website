@@ -7,7 +7,7 @@ import { DEMO_APPS } from './data/demos';
 
 export const BILLING_FAQ: FAQ = {
   id: 'billing-statement-descriptor',
-  question: `Why does ${BUSINESS.brandName} appear on my bank statement?`,
+  question: `Why does ${BUSINESS.statementDescriptor} appear on my bank statement?`,
   answer: `${BUSINESS.statementDescriptor} is our payment statement descriptor. ${PAYMENT_DISCLOSURE} ${BUSINESS.brandName} is operated by ${BUSINESS.legalCompanyName}.`,
   order: 11,
 };
