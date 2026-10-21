@@ -11,9 +11,9 @@
 <style>
 /* Layout: soft neumorphic shell (per client reference). Sidebar + content grid on desktop; bottom tab bar on phones. Single light theme by design. */
 :root{
-  --bg:#eceff4; --card:#eef1f6; --hi:#ffffff; --lo:#cdd3de; --fg:#1c1f3a; --muted:#7b8197; --line:#dde2ea;
-  --accent:#5b5fe0; --accent2:#7d81f0;
-  --pink:#f9c9cf; --pink-d:#e45a6b; --blue:#bfe0fb; --blue-d:#3b9be8; --yellow:#fde3ae; --yellow-d:#d99a17; --purple:#dccdfb; --purple-d:#8b63e8; --green:#bfeccc; --green-d:#2fae5c;
+  --bg:#f8eeea; --card:#f9f0ec; --hi:#ffffff; --lo:#e3cbc4; --fg:#2b1c1d; --muted:#7d6865; --line:#efdcd6;
+  --accent:#8a3f46; --accent2:#c27a73;
+  --pink:#f2d3cc; --pink-d:#8a3f46; --blue:#f6e7e2; --blue-d:#c0574e; --yellow:#f8e4c2; --yellow-d:#b98222; --purple:#ead2d4; --purple-d:#6e3036; --green:#d6ecdf; --green-d:#3d9c6a;
   --font:"Poppins",system-ui,sans-serif;
   --raise:6px 6px 14px var(--lo),-6px -6px 14px var(--hi);
   --raise-sm:3px 3px 8px var(--lo),-3px -3px 8px var(--hi);
@@ -39,7 +39,7 @@ nav{display:flex;flex-direction:column;gap:10px}
 .nv.on .ic{box-shadow:var(--inset);color:var(--accent)}
 .nv .badge{position:absolute;top:-5px;right:-5px;background:var(--pink-d);color:#fff;font-size:10px;border-radius:99px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 4px}
 svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.promo{margin-top:auto;background:linear-gradient(150deg,var(--accent2),var(--accent));color:#fff;border-radius:16px;padding:20px 16px;text-align:center;box-shadow:0 10px 24px #5b5fe055}
+.promo{margin-top:auto;background:linear-gradient(150deg,var(--accent2),var(--accent));color:#fff;border-radius:16px;padding:20px 16px;text-align:center;box-shadow:0 10px 24px #8a3f4655}
 .promo .logo-box{margin:0 auto 10px;background:#ffffff33;box-shadow:none;color:#fff}
 .promo b{font-size:15px;font-weight:600}
 .promo p{font-size:11px;opacity:.85;margin:4px 0 12px}
@@ -94,7 +94,7 @@ main{min-width:0;padding-block:24px 40px;padding-left:max(24px,env(safe-area-ins
 .tips .bulb{width:54px;height:54px;color:var(--accent)}
 .tips p{color:var(--muted);font-size:12px;margin:0 0 6px}
 .btn{border:0;border-radius:99px;padding:8px 18px;background:var(--card);box-shadow:var(--raise-sm);font-weight:500}
-.btn.pri{background:var(--accent);color:#fff;box-shadow:0 6px 14px #5b5fe055}
+.btn.pri{background:var(--accent);color:#fff;box-shadow:0 6px 14px #8a3f4655}
 .btn.sm{padding:5px 12px;font-size:11px}
 .sched{display:flex;flex-direction:column;gap:10px;max-height:260px;overflow:auto;padding:4px}
 .srow{display:grid;grid-template-columns:46px 1fr auto;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;box-shadow:var(--inset)}
@@ -102,10 +102,10 @@ main{min-width:0;padding-block:24px 40px;padding-left:max(24px,env(safe-area-ins
 .srow .who{font-weight:500;font-size:12px}
 .srow .what{font-size:11px;color:var(--muted)}
 .pill{display:inline-block;font-size:10px;font-weight:500;padding:2px 9px;border-radius:99px;white-space:nowrap}
-.p-pending{background:var(--yellow);color:#8a5e00}
-.p-confirmed{background:var(--blue);color:#1d6bb0}
+.p-pending{background:var(--yellow);color:#8a5a12}
+.p-confirmed{background:var(--purple);color:#6e3036}
 .p-completed{background:var(--green);color:#1d7a40}
-.p-cancelled,.p-noshow{background:var(--pink);color:#b02a3c}
+.p-cancelled,.p-noshow{background:var(--pink);color:#a83f37}
 .src{font-size:11px;color:var(--muted)}
 .filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
 .filters input,.filters select{border:0;background:var(--card);box-shadow:var(--inset);border-radius:10px;padding:9px 12px}
@@ -137,8 +137,8 @@ td select{border:0;background:var(--card);box-shadow:var(--raise-sm);border-radi
 .feed-item time{display:block;font-size:10px;color:var(--muted)}
 .proto{font-size:11px;color:var(--muted);margin-bottom:16px;padding:8px 14px;border-radius:10px;box-shadow:var(--inset)}
 /* drawer */
-.scrim{position:fixed;inset:0;background:#1c1f3a40;z-index:19}
-.drawer{position:fixed;inset:0 0 0 auto;width:min(430px,100%);background:var(--bg);z-index:20;display:flex;flex-direction:column;box-shadow:-10px 0 30px #1c1f3a30;padding-top:env(safe-area-inset-top,0px);padding-right:env(safe-area-inset-right,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.scrim{position:fixed;inset:0;background:#1d141540;z-index:19}
+.drawer{position:fixed;inset:0 0 0 auto;width:min(430px,100%);background:var(--bg);z-index:20;display:flex;flex-direction:column;box-shadow:-10px 0 30px #1d141530;padding-top:env(safe-area-inset-top,0px);padding-right:env(safe-area-inset-right,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 .dr-head{padding:18px 20px;display:flex;justify-content:space-between;align-items:center}
 .dr-head h3{margin:0;font-size:17px;font-weight:600}
 .tabs{display:flex;gap:8px;margin:0 20px;padding:5px;border-radius:12px;box-shadow:var(--inset)}
@@ -177,7 +177,7 @@ td select{border:0;background:var(--card);box-shadow:var(--raise-sm);border-radi
   .tabbar button .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center}
   .tabbar button.on{color:var(--accent)}
   .tabbar button.on .ic{box-shadow:var(--inset)}
-  .tabbar .fab .ic{background:var(--accent);color:#fff;box-shadow:0 6px 14px #5b5fe066;border-radius:50%;width:44px;height:44px;margin-top:-18px}
+  .tabbar .fab .ic{background:var(--accent);color:#fff;box-shadow:0 6px 14px #8a3f4666;border-radius:50%;width:44px;height:44px;margin-top:-18px}
   .tabbar .badge{position:absolute;top:0;right:4px;background:var(--pink-d);color:#fff;font-size:9px;border-radius:99px;min-width:16px;height:16px;display:grid;place-items:center}
   .top-btn{display:none}
 }
