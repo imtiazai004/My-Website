@@ -20,8 +20,8 @@ export function Logo({ variant = 'compact', size = 40, tone = 'dark', className 
     <img
       src={tone === 'light' ? '/logo-full-light.png' : '/logo-full.png'}
       alt="SoftTech Solution"
-      width={1452}
-      height={390}
+      width={1413}
+      height={397}
       style={{ height, width: 'auto' }}
       className={`object-contain select-none ${className ?? ''}`}
       draggable={false}
@@ -34,8 +34,8 @@ export function LogoMark({ size = 44, className }: { size?: number; className?: 
     <img
       src="/logo-s.png"
       alt="SoftTech Solution"
-      width={312}
-      height={373}
+      width={251}
+      height={396}
       style={{ height: size, width: 'auto' }}
       className={`object-contain select-none ${className ?? ''}`}
       draggable={false}
