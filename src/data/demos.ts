@@ -17,6 +17,12 @@ export interface Demo {
   /** Optional client brand wordmark rendered as a logo plate over the thumbnail */
   brandName?: string;
   brandSub?: string;
+  /** Brand mark drawn on the logo plate: 'lotus' (default) or 'tooth' */
+  brandMark?: 'lotus' | 'tooth';
+  /** Accent colour (hex) for the logo-plate mark */
+  brandAccent?: string;
+  /** object-position for the preview image (defaults to top) */
+  imagePosition?: string;
   /** If true, the card is hidden from the /demos listing (direct link still works) */
   hidden?: boolean;
 }
@@ -33,6 +39,12 @@ export const DEMOS: Demo[] = [
     dateAdded: '8 Oct 2026',
     featured: true,
     gradient: 'from-indigo-500 via-purple-500 to-fuchsia-500',
+    image: '/demos/family-dental/media/journey-4-treatment.jpg',
+    imagePosition: 'center 32%',
+    brandName: 'Family Dental',
+    brandSub: '& Aesthetic Clinic',
+    brandMark: 'tooth',
+    brandAccent: '#5E3A5C',
   },
   {
     id: 'family-dental-simple',
@@ -44,6 +56,11 @@ export const DEMOS: Demo[] = [
     url: 'https://flourishing-figolla-d8bb17.netlify.app/',
     dateAdded: '8 Oct 2026',
     gradient: 'from-emerald-500 via-teal-500 to-cyan-600',
+    image: 'https://flourishing-figolla-d8bb17.netlify.app/images/media/hero-family.jpg',
+    brandName: 'Family Dental',
+    brandSub: '& Aesthetic Clinic',
+    brandMark: 'tooth',
+    brandAccent: '#5E3A5C',
   },
   {
     id: 'sinma-hair-3d-immersive',

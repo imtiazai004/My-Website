@@ -155,18 +155,25 @@ export default function DemosPage() {
                       alt={`${demo.client} — website preview`}
                       loading="lazy"
                       decoding="async"
+                      style={demo.imagePosition ? { objectPosition: demo.imagePosition } : undefined}
                       className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#2b1c1d]/60 via-transparent to-[#2b1c1d]/10" />
                     {demo.brandName && (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="flex items-center gap-3 rounded-2xl bg-white/95 px-5 py-3 shadow-2xl ring-1 ring-black/5 backdrop-blur">
-                          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinejoin="round" className="h-10 w-10 text-[#8a3f46]" aria-hidden="true">
-                            <path d="M20 30c-3-4-4-9 0-17 4 8 3 13 0 17Z" />
-                            <path d="M20 30c-5-2-9-6-9-13 6 1 9 6 9 13Z" />
-                            <path d="M20 30c5-2 9-6 9-13-6 1-9 6-9 13Z" />
-                            <path d="M20 30c-6 0-11-3-13-8 5-1 10 2 13 8Zm0 0c6 0 11-3 13-8-5-1-10 2-13 8Z" />
-                          </svg>
+                          {demo.brandMark === 'tooth' ? (
+                            <svg viewBox="0 0 24 24" fill="currentColor" className="h-10 w-10" style={{ color: demo.brandAccent ?? '#5E3A5C' }} aria-hidden="true">
+                              <path d="M8.2 5c-2 0-3.3 1.6-3.3 3.8 0 1.8.8 3 1.3 4.1.7 1.3.8 2.6 1.1 4.1.2 1.2.7 2 1.5 2 .9 0 1.1-1.1 1.4-2.5.3-1.3.7-2.4 1.8-2.4s1.5 1.1 1.8 2.4c.3 1.4.5 2.5 1.4 2.5.8 0 1.2-.8 1.5-2 .3-1.5.4-2.8 1.1-4.1.5-1.1 1.3-2.3 1.3-4.1 0-2.2-1.3-3.8-3.3-3.8-1.5 0-2.2.8-3.7.8S9.7 5 8.2 5z" />
+                            </svg>
+                          ) : (
+                            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinejoin="round" className="h-10 w-10 text-[#8a3f46]" aria-hidden="true">
+                              <path d="M20 30c-3-4-4-9 0-17 4 8 3 13 0 17Z" />
+                              <path d="M20 30c-5-2-9-6-9-13 6 1 9 6 9 13Z" />
+                              <path d="M20 30c5-2 9-6 9-13-6 1-9 6-9 13Z" />
+                              <path d="M20 30c-6 0-11-3-13-8 5-1 10 2 13 8Zm0 0c6 0 11-3 13-8-5-1-10 2-13 8Z" />
+                            </svg>
+                          )}
                           <span className="grid leading-none">
                             <span className="font-display text-[30px] font-semibold text-[#2b1c1d]">{demo.brandName}</span>
                             {demo.brandSub && (
