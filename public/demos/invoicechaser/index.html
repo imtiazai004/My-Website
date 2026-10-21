@@ -63,6 +63,18 @@ tr.inv{cursor:pointer;transition:background .15s}tr.inv:hover{background:#162033
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media(max-width:960px){.grid{grid-template-columns:1fr}}
 </style>
+<style id="sts-about-css">
+body:has(>.sts-about){flex-direction:column}
+.sts-about{box-sizing:border-box;width:100%;max-width:760px;margin:40px auto 8px;padding:24px 24px 20px;background:#ffffff;color:#1f2937;border:1px solid #e5e7eb;border-radius:14px;font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:left;flex:0 0 auto}
+.sts-about h1,.sts-about h2{font-size:20px;line-height:1.3;margin:0 0 10px;color:#111827;font-weight:700}
+.sts-about h3{font-size:15px;margin:18px 0 6px;color:#111827;font-weight:700}
+.sts-about p{margin:0 0 10px}
+.sts-about ul{margin:0 0 6px;padding-left:20px}
+.sts-about li{margin:2px 0}
+.sts-about a{color:#1d4ed8;text-decoration:underline}
+.sts-about .sts-meta{margin-top:16px;font-size:13px;color:#4b5563;border-top:1px solid #e5e7eb;padding-top:10px}
+.sts-about .sts-note{font-size:13px;color:#4b5563}
+</style>
 </head>
 <body>
 <script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
@@ -147,5 +159,17 @@ toast('🧾 '+(LANG==='en'?'Receipt issued: Rs ':'رسید جاری: ')+a.toLoca
 function toggleChan(i){const v=INV[i];v.chan=v.chan==='wa'?'em':'wa';openInv(i);render();toast('📡 '+(v.chan==='wa'?'WhatsApp':'Email'))}
 render();
 </script>
+
+<section class="sts-about" aria-labelledby="sts-about-title">
+<h2 id="sts-about-title">InvoiceChaser: automatic invoice reminders</h2>
+<p>InvoiceChaser is for freelancers and small firms who spend hours chasing their own payments. It sends reminder sequences automatically until the invoice is paid.</p>
+<h3>What this demo shows</h3>
+<ul><li>Invoices filtered as overdue or due soon, with days late</li><li>Editable reminder templates in English or Urdu</li><li>Partial payments with a receipt</li><li>Reminders by WhatsApp or email</li></ul>
+<p class="sts-note">The demo runs on sample data, so you can click through it freely.</p>
+<h3>What we build for your business</h3>
+<p>We connect it to your invoicing tool or sheet and send reminders on the schedule and tone you choose. You get a fixed-price proposal after a free 30-minute call, and you own the code.</p>
+<p><a href="/blog/freelancer-invoice-chasing">Read the problem it solves</a> · <a href="/demos">See all 24 demos</a> · <a href="https://wa.me/447462086661">WhatsApp UK</a> · <a href="https://wa.me/923005863032">WhatsApp Pakistan</a></p>
+<p class="sts-meta">Built by <a href="/">Soft Tech Solution</a> · Last updated: <time datetime="2026-10-22">22 October 2026</time></p>
+</section>
 </body>
 </html>

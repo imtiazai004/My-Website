@@ -61,6 +61,18 @@ body.embed .phone{box-shadow:none!important;border-radius:0!important}
 .ftr{padding:14px 18px;background:#161a26;font-size:11px;color:#5b6478;text-align:center;border-top:1px solid #262d42}
 .ftr b{color:#25f4ee}
 </style>
+<style id="sts-about-css">
+body:has(>.sts-about){flex-direction:column}
+.sts-about{box-sizing:border-box;width:100%;max-width:760px;margin:40px auto 8px;padding:24px 24px 20px;background:#ffffff;color:#1f2937;border:1px solid #e5e7eb;border-radius:14px;font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:left;flex:0 0 auto}
+.sts-about h1,.sts-about h2{font-size:20px;line-height:1.3;margin:0 0 10px;color:#111827;font-weight:700}
+.sts-about h3{font-size:15px;margin:18px 0 6px;color:#111827;font-weight:700}
+.sts-about p{margin:0 0 10px}
+.sts-about ul{margin:0 0 6px;padding-left:20px}
+.sts-about li{margin:2px 0}
+.sts-about a{color:#1d4ed8;text-decoration:underline}
+.sts-about .sts-meta{margin-top:16px;font-size:13px;color:#4b5563;border-top:1px solid #e5e7eb;padding-top:10px}
+.sts-about .sts-note{font-size:13px;color:#4b5563}
+</style>
 </head>
 <body>
 <script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
@@ -162,5 +174,17 @@ function tapOrder(id){const o=ORDERS.find(x=>x.id===id);if(o.st==='pend'){o.st='
 function fixStock(id){fixedAlerts[id]=true;render();const s=STOCK.find(x=>x.id===id);toast('📋 PO created — '+s.item+' restocking ✓')}
 render();
 </script>
+
+<section class="sts-about" aria-labelledby="sts-about-title">
+<h1 id="sts-about-title">ShopConsole: every TikTok Shop in one dashboard</h1>
+<p>ShopConsole is for sellers and agencies running several TikTok shops, each with its own login. It shows orders, revenue and stock for every shop side by side, so you can see where the money is.</p>
+<h3>What this demo shows</h3>
+<ul><li>Four sample shops in one view, from beauty to kitchenware</li><li>Orders and stock per shop with one click to switch</li><li>Low-stock items flagged with a purchase order to restock</li><li>Totals across all shops</li></ul>
+<p class="sts-note">The demo runs on sample data, so you can click through it freely.</p>
+<h3>What we build for your business</h3>
+<p>We connect each of your shops through the TikTok Shop API and add the reports your team actually uses, such as per-shop profit or creator sales. You get a fixed-price proposal after a free 30-minute call, and you own the code.</p>
+<p><a href="/blog/multiple-tiktok-shops-one-dashboard">Read the problem it solves</a> · <a href="/demos">See all 24 demos</a> · <a href="https://wa.me/447462086661">WhatsApp UK</a> · <a href="https://wa.me/923005863032">WhatsApp Pakistan</a></p>
+<p class="sts-meta">Built by <a href="/">Soft Tech Solution</a> · Last updated: <time datetime="2026-10-22">22 October 2026</time></p>
+</section>
 </body>
 </html>

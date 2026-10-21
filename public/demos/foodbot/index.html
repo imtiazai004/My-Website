@@ -61,6 +61,18 @@ body{background:#1a1d21;min-height:100vh;display:flex;align-items:center;justify
 .queue{background:rgba(0,168,132,.12);border:1px solid #00a884;border-radius:10px;padding:9px 12px;font-size:13px;color:#00a884;font-weight:600;margin:6px 0}
 .addrchip{border:1.5px solid #00a884;color:#e9edef;background:#0b141a;font-size:13px;padding:9px 13px;border-radius:10px;cursor:pointer;margin:4px 6px 4px 0}
 </style>
+<style id="sts-about-css">
+body:has(>.sts-about){flex-direction:column}
+.sts-about{box-sizing:border-box;width:100%;max-width:760px;margin:40px auto 8px;padding:24px 24px 20px;background:#ffffff;color:#1f2937;border:1px solid #e5e7eb;border-radius:14px;font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:left;flex:0 0 auto}
+.sts-about h1,.sts-about h2{font-size:20px;line-height:1.3;margin:0 0 10px;color:#111827;font-weight:700}
+.sts-about h3{font-size:15px;margin:18px 0 6px;color:#111827;font-weight:700}
+.sts-about p{margin:0 0 10px}
+.sts-about ul{margin:0 0 6px;padding-left:20px}
+.sts-about li{margin:2px 0}
+.sts-about a{color:#1d4ed8;text-decoration:underline}
+.sts-about .sts-meta{margin-top:16px;font-size:13px;color:#4b5563;border-top:1px solid #e5e7eb;padding-top:10px}
+.sts-about .sts-note{font-size:13px;color:#4b5563}
+</style>
 </head>
 <body>
 <script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
@@ -136,5 +148,17 @@ function reorder(){addMsg(t('cUsual'),'user');typing(()=>{addMsg(t('usual'),'bot
 function doReorder(){cart=[{n:LANG==='en'?'Chicken Karahi (Large)':'چکن کڑاہی (لارج)',p:990},{n:LANG==='en'?'4x Roghni Naan':'4x روغنی نان',p:240}];orderPlaced=false;addMsg(t('yesReorder'),'user');updCart();typing(()=>{addMsg(t('addrQ')+`<br><button class="addrchip" onclick="addrPick()">${t('addr1')}</button>`,'bot')},700)}
 reset();
 </script>
+
+<section class="sts-about" aria-labelledby="sts-about-title">
+<h1 id="sts-about-title">FoodBot: WhatsApp ordering for restaurants</h1>
+<p>FoodBot is for restaurants and takeaways whose phones ring non-stop at rush hour. Missed calls become orders at the place next door. FoodBot takes the order on WhatsApp, confirms it and sends it straight to the kitchen.</p>
+<h3>What this demo shows</h3>
+<ul><li>A WhatsApp menu where the customer adds items such as Chicken Karahi or Biryani</li><li>Saved delivery addresses and a new-address option</li><li>Order status updates: kitchen has the order, rider picked it up</li><li>English and Urdu in the same flow</li></ul>
+<p class="sts-note">The demo runs on sample data, so you can click through it freely.</p>
+<h3>What we build for your business</h3>
+<p>We set it up with your real menu, prices, delivery areas and kitchen screen or printer, so orders arrive confirmed and complete without anyone picking up the phone. You get a fixed-price proposal after a free 30-minute call, and you own the code.</p>
+<p><a href="/blog/whatsapp-ai-restaurant-ordering">Read the problem it solves</a> · <a href="/demos">See all 24 demos</a> · <a href="https://wa.me/447462086661">WhatsApp UK</a> · <a href="https://wa.me/923005863032">WhatsApp Pakistan</a></p>
+<p class="sts-meta">Built by <a href="/">Soft Tech Solution</a> · Last updated: <time datetime="2026-10-22">22 October 2026</time></p>
+</section>
 </body>
 </html>

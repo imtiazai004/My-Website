@@ -64,6 +64,18 @@ body{background:#eef0ff;min-height:100vh;padding:26px}body.embed{background:tran
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media(max-width:900px){.grid{grid-template-columns:1fr}}
 </style>
+<style id="sts-about-css">
+body:has(>.sts-about){flex-direction:column}
+.sts-about{box-sizing:border-box;width:100%;max-width:760px;margin:40px auto 8px;padding:24px 24px 20px;background:#ffffff;color:#1f2937;border:1px solid #e5e7eb;border-radius:14px;font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:left;flex:0 0 auto}
+.sts-about h1,.sts-about h2{font-size:20px;line-height:1.3;margin:0 0 10px;color:#111827;font-weight:700}
+.sts-about h3{font-size:15px;margin:18px 0 6px;color:#111827;font-weight:700}
+.sts-about p{margin:0 0 10px}
+.sts-about ul{margin:0 0 6px;padding-left:20px}
+.sts-about li{margin:2px 0}
+.sts-about a{color:#1d4ed8;text-decoration:underline}
+.sts-about .sts-meta{margin-top:16px;font-size:13px;color:#4b5563;border-top:1px solid #e5e7eb;padding-top:10px}
+.sts-about .sts-note{font-size:13px;color:#4b5563}
+</style>
 </head>
 <body>
 <script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
@@ -126,5 +138,17 @@ function renderIntents(){const rows=[['i1',64,'1,204'],['i2',38,'712'],['i3',27,
 document.getElementById('intents').innerHTML='<b style="font-size:13px;color:#1e1b4b">'+(LANG==='en'?'Top intents this week':'اس ہفتے کے اہم سوالات')+'</b>'+rows.map(([k,p,n])=>`<div class="intent"><b>${t(k)}</b><div class="ibar"><div style="width:${p}%"></div></div><span>${n}</span></div>`).join('')}
 resetChat();renderBars();renderIntents();
 </script>
+
+<section class="sts-about" aria-labelledby="sts-about-title">
+<h2 id="sts-about-title">SupportAI: answers “Where is my order?” instantly</h2>
+<p>SupportAI is for online stores where “Where is my order?” messages take hours of support time every day. It connects to order and courier data and gives the customer a real tracking answer in seconds.</p>
+<h3>What this demo shows</h3>
+<ul><li>A live support chat for a sample store, KhaasStores</li><li>Answers for tracking, returns policy, refund status and damaged items</li><li>Priority tickets handed to a named agent when needed</li><li>A deflection dashboard with the week&#x27;s top questions</li></ul>
+<p class="sts-note">The demo runs on sample data, so you can click through it freely.</p>
+<h3>What we build for your business</h3>
+<p>We connect it to your store platform and couriers, write the answers from your own policies, and route anything sensitive to your team with the full conversation attached. You get a fixed-price proposal after a free 30-minute call, and you own the code.</p>
+<p><a href="/blog/wismo-most-expensive-sentence">Read the problem it solves</a> · <a href="/demos">See all 24 demos</a> · <a href="https://wa.me/447462086661">WhatsApp UK</a> · <a href="https://wa.me/923005863032">WhatsApp Pakistan</a></p>
+<p class="sts-meta">Built by <a href="/">Soft Tech Solution</a> · Last updated: <time datetime="2026-10-22">22 October 2026</time></p>
+</section>
 </body>
 </html>
