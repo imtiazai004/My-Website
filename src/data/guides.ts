@@ -11,9 +11,18 @@ export interface Guide {
 
 export const GUIDES: Guide[] = [
   {
+    slug: 'morning-briefing-agent',
+    updated: '2026-10-22',
+    badge: 'New',
+    title: 'The Morning Briefing Agent — An AI Agent That Briefs You at 6 AM',
+    description:
+      'The custom agent built for business owners: it collects overnight email, messages, orders and invoices, ranks them (money waiting first, customers waiting second), delivers one WhatsApp brief at 6 AM, and never acts without your YES. Includes the exact ranking prompt, the business math and the full build roadmap.',
+    meta: 'PDF · 9 pages · English',
+  },
+  {
     slug: 'claimback',
     updated: '2026-10-21',
-    badge: 'New',
+    badge: 'Guide',
     title: 'ClaimBack — The FBA Reimbursement Finder',
     description:
       'The custom app built for Amazon FBA sellers: it pulls Seller Central reports, flags every lost, damaged or miscounted unit, builds the claim case with evidence, and tracks it to payout. Plus the returns-fee leak, the business math and the full build roadmap.',

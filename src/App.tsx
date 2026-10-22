@@ -41,6 +41,7 @@ const TikTokShopOutreachSellerGuidePage = lazy(() => import('./components/TikTok
 const PromptPackGuidePage = lazy(() => import('./components/PromptPackGuidePage'));
 const SellerRadarPart1GuidePage = lazy(() => import('./components/SellerRadarPart1GuidePage'));
 const ClaimbackGuidePage = lazy(() => import('./components/ClaimbackGuidePage'));
+const MorningBriefingGuidePage = lazy(() => import('./components/MorningBriefingGuidePage'));
 const DemosPage = lazy(() => import('./components/DemosPage'));
 const WorkPage = lazy(() => import('./components/WorkPage'));
 const NotFound = lazy(() => import('./components/NotFound'));
@@ -146,6 +147,7 @@ export default function App() {
         <Route path="/guides/client-website-prompt-pack" element={page(<PromptPackGuidePage />)} />
         <Route path="/guides/sellerradar-part-1" element={page(<SellerRadarPart1GuidePage />)} />
         <Route path="/guides/claimback" element={page(<ClaimbackGuidePage />)} />
+        <Route path="/guides/morning-briefing-agent" element={page(<MorningBriefingGuidePage />)} />
         <Route path="/blog" element={page(<BlogPage />)} />
         <Route path="/blog/:slug" element={page(<BlogPostPage />)} />
         <Route path="/submit-testimonial" element={page(<SubmitTestimonial />)} />

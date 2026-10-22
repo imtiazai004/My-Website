@@ -21,6 +21,7 @@ const routes = {
   '/work': 'work.html',
   '/demos': 'demos.html',
   '/guides': 'guides.html',
+  '/guides/morning-briefing-agent': 'guides-morning-briefing-agent.html',
   '/guides/claimback': 'guides-claimback.html',
   '/guides/sellerradar-part-1': 'guides-sellerradar-part-1.html',
   '/guides/client-website-prompt-pack': 'guides-client-website-prompt-pack.html',
