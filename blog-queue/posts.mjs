@@ -503,4 +503,116 @@ Try the demo above: attempt a double-booking and watch it get blocked, grab seat
 
 *Run a co-working or shared office? DM me "LEASE" — I'll show you what this looks like for your space.*`,
   },
+  {
+    slug: 'confirm-cod-orders-whatsapp-pakistan',
+    title: 'How to Confirm COD Orders on WhatsApp in Pakistan (Step by Step)',
+    excerpt:
+      'A step-by-step way to confirm every cash-on-delivery order on WhatsApp before it ships: the message to send, when to remind, and what to do when nobody replies.',
+    tags: ['E-commerce', 'Pakistan', 'WhatsApp Business'],
+    content: `## Short answer
+
+Send every new COD order a WhatsApp message within minutes, ask the customer to reply YES to confirm or NO to cancel, remind twice if there is no reply, and ship only the orders that say YES. Do it automatically, so no order skips the check on a busy day.
+
+## Why COD orders need confirming
+
+Cash on delivery is still how most Pakistani shoppers pay online. One e-commerce platform estimates it at 60 to 80% of online purchases ([eGrow](https://www.egrow.com/en/blog/pakistan-cod-whatsapp-2026)). Every order that is refused at the door costs you the courier charge both ways, keeps your stock in transit for days, and often comes back damaged.
+
+Most refusals are not fraud. They are impulse orders, wrong addresses and people who forgot they ordered. A short confirmation catches almost all of them before you pay a courier.
+
+## Step 1: Send the confirmation within minutes
+
+The customer is most likely to reply while the order is fresh. A good message has the name, product, amount and two clear choices:
+
+> Assalam o Alaikum Ayesha! You ordered a Lawn Suit for Rs 2,450 (Cash on Delivery). Reply YES to confirm or NO to cancel.
+
+Send it in Urdu as well for customers who prefer it.
+
+## Step 2: Remind before you give up
+
+If there is no reply, send a reminder after about an hour, another after a few hours, and a final one the next day. Many customers simply miss the first message.
+
+## Step 3: Ship only what is confirmed
+
+- **YES:** move the order to packing and book the courier.
+- **NO:** cancel it and put the stock back.
+- **No reply after the last reminder:** hold it or call once. Do not ship it blind.
+
+## Step 4: Flag suspicious orders
+
+Watch for the same phone number placing several orders in minutes, incomplete addresses and very high order values from new customers. Hold these for a quick call before they ship.
+
+## Step 5: Track your confirmation rate
+
+Count how many orders were confirmed, cancelled and left unanswered each week. If the unanswered share is high, your message or timing needs work.
+
+## Your options
+
+1. **By hand:** staff copy each order into WhatsApp. Fine for 10 orders a day, breaks at 100.
+2. **A ready-made app:** if you sell on Shopify, apps such as Confirmify add WhatsApp confirmation.
+3. **A custom system:** connects to your store, order sheet or Instagram orders, your couriers and your own WhatsApp number, with your rules for reminders and red flags.
+
+Try how a custom system works:
+
+:::demo codconfirm:::
+
+## Common questions
+
+**Do I need the WhatsApp Business API?** For automatic messages at volume, yes. For a handful of orders, the WhatsApp Business app is enough.
+
+**Will customers be annoyed?** A short, polite message with their order details reads as good service, not spam.
+
+**What about orders from Instagram or Facebook?** They can feed the same confirmation flow, as long as the order details are captured in one place.
+
+*Selling on Instagram, Facebook or your own store? Message us on WhatsApp and we'll show you the full flow.*`,
+  },
+  {
+    slug: 'tiktok-shop-uk-dispatch-rules',
+    title: 'TikTok Shop UK Dispatch Rules, Explained for Sellers',
+    excerpt:
+      'TikTok Shop UK gives sellers two working days to get an order out. Here is what the policy says, what happens when you miss it, and how to stay on time when orders spike.',
+    tags: ['E-commerce', 'TikTok Shop', 'UK'],
+    content: `## Short answer
+
+Under TikTok Shop's UK order shipping policy, you have **two working days** from the moment a customer places an order to confirm it, pack it, label it and (with Ship by TikTok) hand it to the carrier. Orders not handed over within **seven working days** are cancelled automatically. Late orders count against your Late Dispatch Rate, and poor delivery performance can bring fees and order limits.
+
+## What the UK policy says
+
+From TikTok Shop's [UK Customer Order Shipping Policy](https://seller-uk.tiktok.com/university/essay?knowledge_id=7753847099426562):
+
+- **Confirm, pack and label:** within two working days of receiving the order.
+- **Hand to the carrier (Ship by TikTok):** within two working days of the order being placed.
+- **Auto-cancellation:** orders not handed to the carrier within seven working days are cancelled.
+- **Late Dispatch Rate (LDR):** the share of packages, over seven days, that take more than two working days to reach "Shipped".
+- **Late delivery fees:** can apply when on-time delivery falls below 70%, and may be charged even when the carrier caused the delay.
+
+TikTok updates this policy from time to time, so check Seller Centre for the current version.
+
+## Why sellers miss it
+
+The deadline is easy on a normal day. It breaks on a viral day. One video can bring hundreds of orders overnight, and a team that packs by hand from a spreadsheet falls behind within hours. Weekends make it worse, because Friday orders still count against Monday's clock.
+
+## How to stay on time
+
+1. **See the deadline on every order.** Sort by time left, not by order number.
+2. **Print labels in bulk.** One click for every ready order instead of one by one.
+3. **Flag at-risk orders early.** Anything close to the two-day limit goes to the top.
+4. **Separate the exceptions.** Out-of-stock items, address problems and payment mismatches go to their own queue so they don't block the rest.
+5. **Plan for spikes.** Know who packs on Saturday before the video goes viral, not after.
+
+## What a fulfilment system does
+
+A fulfilment system pulls orders from TikTok Shop automatically, shows each dispatch deadline, prints labels in bulk and keeps exceptions apart. Try how it works:
+
+:::demo tikfulfill:::
+
+## Common questions
+
+**Do working days include weekends?** Working days normally exclude weekends and UK bank holidays. Check the policy's definitions in Seller Centre.
+
+**Does this apply if I use Fulfilled by TikTok?** If TikTok fulfils the order from its own warehouse, dispatch is handled by TikTok. The rules above are for orders you pack yourself.
+
+**Can I get the time extended?** Some products allow a longer handling time when set up in advance. Set realistic handling times before a sale, not during it.
+
+*TikTok Shop seller in the UK? Message us on WhatsApp and we'll review your fulfilment workflow.*`,
+  },
 ];
