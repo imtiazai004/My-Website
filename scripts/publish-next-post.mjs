@@ -2,6 +2,7 @@ import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
 import { readFileSync } from 'node:fs';
 import { POSTS } from '../blog-queue/posts.mjs';
+import { pingIndexNow } from './indexnow.mjs';
 
 // Publishes the next unpublished queued post to Firestore `posts` collection.
 // Run by .github/workflows/daily-blog-publish.yml (scheduled + manual).
@@ -55,3 +56,14 @@ await db.collection('posts').doc(next.slug).set({
 });
 
 console.log(`PUBLISHED: ${next.slug} — ${next.title}`);
+
+// Tell Bing/IndexNow about the new post. Never fail the publish over this.
+try {
+  const r = await pingIndexNow([
+    `https://aisofttechsolution.com/blog/${next.slug}`,
+    'https://aisofttechsolution.com/blog',
+  ]);
+  console.log(`IndexNow: HTTP ${r.status}`);
+} catch (e) {
+  console.log(`IndexNow skipped: ${e.message}`);
+}

@@ -1,0 +1,17 @@
+name: IndexNow submit
+
+# Manual run: tells Bing (via IndexNow) about every URL in the sitemap.
+# New blog posts are pinged automatically by the daily publish workflow.
+on:
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Submit sitemap URLs
+        run: node scripts/indexnow.mjs sitemap
