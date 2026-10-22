@@ -18,6 +18,7 @@ const ProjectGrid = lazy(() => import('./components/ProjectGrid'));
 const DemosSection = lazy(() => import('./components/DemosSection'));
 const WhyChooseUs = lazy(() => import('./components/WhyChooseUs'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
+const LatestPosts = lazy(() => import('./components/LatestPosts'));
 const FAQ = lazy(() => import('./components/FAQ'));
 const Footer = lazy(() => import('./components/Footer'));
 const AdminRoute = lazy(() => import('./components/AdminRoute'));
@@ -104,6 +105,7 @@ function MainSite() {
           <DemosSection />
           {sections.whyChooseUs && <WhyChooseUs />}
           {sections.testimonials && <Testimonials />}
+          <LatestPosts />
           {sections.faq && <FAQ />}
         </Suspense>
       </main>
