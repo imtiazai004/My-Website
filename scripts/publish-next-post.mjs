@@ -26,10 +26,19 @@ const db = getFirestore(app, siteConfig.firestoreDatabaseId);
 
 const snap = await db.collection('posts').select('slug').get();
 const existing = new Set(snap.docs.map((d) => d.data().slug));
-const next = POSTS.find((p) => !existing.has(p.slug));
+// Optional: POST_SLUG publishes one specific queued post now (manual run).
+// Scheduled runs leave it empty and keep the normal queue order.
+const wanted = (process.env.POST_SLUG || '').trim();
+if (wanted && !POSTS.some((p) => p.slug === wanted)) {
+  console.error(`Slug not in queue: ${wanted}`);
+  process.exit(1);
+}
+const next = wanted
+  ? POSTS.find((p) => p.slug === wanted && !existing.has(p.slug))
+  : POSTS.find((p) => !existing.has(p.slug));
 
 if (!next) {
-  console.log('DONE: all queued posts are already published');
+  console.log(wanted ? `SKIP: ${wanted} is already published` : 'DONE: all queued posts are already published');
   process.exit(0);
 }
 

@@ -7,6 +7,11 @@ on:
   schedule:
     - cron: '0 5 * * *'
   workflow_dispatch:
+    inputs:
+      slug:
+        description: 'Publish this queued post now (leave empty for the next in queue)'
+        required: false
+        default: ''
 
 jobs:
   publish:
@@ -27,3 +32,4 @@ jobs:
         run: node scripts/publish-next-post.mjs
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+          POST_SLUG: ${{ inputs.slug }}
