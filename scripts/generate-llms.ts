@@ -22,7 +22,7 @@ L.push('- Typical timelines: landing page 1–2 weeks, full web app 4–8 weeks,
 L.push('- Support: 30 days of free post-launch support; Basic, Standard or Premium plans after that.');
 L.push('- Contracts: NDA before confidential discussion; 100% IP assignment to the client.');
 L.push('- Payment descriptor: charges appear as "AI SOFT TECH SOLUTION", processed by Atlantic LTD STORE LIMITED.');
-L.push('- Contact: info@aisofttechsolution.com · WhatsApp UK +44 7462 086661 · WhatsApp Pakistan +92 300 5863032. Replies within 24 hours.', '');
+L.push('- Contact: info@aisofttechsolution.com · WhatsApp UK +44 7462 086661 · WhatsApp Pakistan +92 300 5863032. Open Monday to Saturday, 24 hours (closed Sunday). Replies within 24 hours.', '');
 L.push('## Services', '');
 for (const s of SERVICES) {
   L.push(`- **${s.label}** — ${s.description} For: ${s.forWho} Examples: ${s.examples.map((e) => `${e.label} (${abs(e.href)})`).join(', ')}.`);

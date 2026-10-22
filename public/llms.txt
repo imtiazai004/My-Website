@@ -15,7 +15,7 @@ This file is generated from the same data files the website uses (src/data/*.ts)
 - Support: 30 days of free post-launch support; Basic, Standard or Premium plans after that.
 - Contracts: NDA before confidential discussion; 100% IP assignment to the client.
 - Payment descriptor: charges appear as "AI SOFT TECH SOLUTION", processed by Atlantic LTD STORE LIMITED.
-- Contact: info@aisofttechsolution.com · WhatsApp UK +44 7462 086661 · WhatsApp Pakistan +92 300 5863032. Replies within 24 hours.
+- Contact: info@aisofttechsolution.com · WhatsApp UK +44 7462 086661 · WhatsApp Pakistan +92 300 5863032. Open Monday to Saturday, 24 hours (closed Sunday). Replies within 24 hours.
 
 ## Services
 
