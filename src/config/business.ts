@@ -16,6 +16,7 @@ export const BUSINESS = {
   social: {
     linkedin: 'https://www.linkedin.com/in/imtiazahmad004',
     x: 'https://x.com/imtiazahmadPTI',
+    linkedinCompany: 'https://www.linkedin.com/company/ai-soft-tech-solution',
   },
 } as const;
 
@@ -57,5 +58,5 @@ export const ORGANIZATION_JSONLD = {
   email: BUSINESS.supportEmail,
   founder: { '@id': `${BUSINESS.websiteUrl}/#founder` },
   address: { '@type': 'PostalAddress', addressCountry: BUSINESS.registeredCountry },
-  sameAs: [BUSINESS.social.linkedin, BUSINESS.social.x],
+  sameAs: [BUSINESS.social.linkedinCompany, BUSINESS.social.linkedin, BUSINESS.social.x],
 };
