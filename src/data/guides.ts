@@ -11,9 +11,18 @@ export interface Guide {
 
 export const GUIDES: Guide[] = [
   {
+    slug: 'agent-hardening-guide',
+    updated: '2026-10-23',
+    badge: 'New',
+    title: 'From Demo to Production — The AI Agent Hardening Guide',
+    description:
+      'Why AI agent demos always work and production agents fail silently — and the six hardening layers that close the gap: guardrails, approval gates, observability, evals, fallbacks and recovery, and cost controls. Includes the hardened skeleton prompt, the business math, the step-by-step build roadmap and the 7-point pre-launch checklist.',
+    meta: 'PDF · 10 pages · English',
+  },
+  {
     slug: 'morning-briefing-agent',
     updated: '2026-10-22',
-    badge: 'New',
+    badge: 'Guide',
     title: 'The Morning Briefing Agent — An AI Agent That Briefs You at 6 AM',
     description:
       'The custom agent built for business owners: it collects overnight email, messages, orders and invoices, ranks them (money waiting first, customers waiting second), delivers one WhatsApp brief at 6 AM, and never acts without your YES. Includes the exact ranking prompt, the business math and the full build roadmap.',
