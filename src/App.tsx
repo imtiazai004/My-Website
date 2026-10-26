@@ -43,6 +43,7 @@ const SellerRadarPart1GuidePage = lazy(() => import('./components/SellerRadarPar
 const ClaimbackGuidePage = lazy(() => import('./components/ClaimbackGuidePage'));
 const MorningBriefingGuidePage = lazy(() => import('./components/MorningBriefingGuidePage'));
 const AgentHardeningGuidePage = lazy(() => import('./components/AgentHardeningGuidePage'));
+const FeeStackCalculatorGuidePage = lazy(() => import('./components/FeeStackCalculatorGuidePage'));
 const DemosPage = lazy(() => import('./components/DemosPage'));
 const WorkPage = lazy(() => import('./components/WorkPage'));
 const NotFound = lazy(() => import('./components/NotFound'));
@@ -150,6 +151,7 @@ export default function App() {
         <Route path="/guides/claimback" element={page(<ClaimbackGuidePage />)} />
         <Route path="/guides/morning-briefing-agent" element={page(<MorningBriefingGuidePage />)} />
         <Route path="/guides/agent-hardening-guide" element={page(<AgentHardeningGuidePage />)} />
+        <Route path="/guides/fee-stack-calculator" element={page(<FeeStackCalculatorGuidePage />)} />
         <Route path="/blog" element={page(<BlogPage />)} />
         <Route path="/blog/:slug" element={page(<BlogPostPage />)} />
         <Route path="/submit-testimonial" element={page(<SubmitTestimonial />)} />

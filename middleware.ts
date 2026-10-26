@@ -46,6 +46,7 @@ const STATIC_SNAPSHOTS: Record<string, string> = {
   '/work': '/prerendered/work.html',
   '/demos': '/prerendered/demos.html',
   '/guides': '/prerendered/guides.html',
+  '/guides/fee-stack-calculator': '/prerendered/guides-fee-stack-calculator.html',
   '/guides/agent-hardening-guide': '/prerendered/guides-agent-hardening-guide.html',
   '/guides/morning-briefing-agent': '/prerendered/guides-morning-briefing-agent.html',
   '/guides/claimback': '/prerendered/guides-claimback.html',

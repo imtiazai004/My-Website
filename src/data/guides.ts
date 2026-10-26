@@ -11,9 +11,18 @@ export interface Guide {
 
 export const GUIDES: Guide[] = [
   {
+    slug: 'fee-stack-calculator',
+    updated: '2026-10-26',
+    badge: 'New',
+    title: 'The Fee-Stack Calculator',
+    description:
+      'The app Imtiaz is building for an agency that shows marketplace sellers the fees their calculator misses — across TikTok Shop, Amazon, Etsy, and eBay. The verified fee stacks, the $50,000-month math, the multi-marketplace adapter architecture and the full build roadmap.',
+    meta: 'PDF · 8 pages · English',
+  },
+  {
     slug: 'agent-hardening-guide',
     updated: '2026-10-23',
-    badge: 'New',
+    badge: 'Guide',
     title: 'From Demo to Production — The AI Agent Hardening Guide',
     description:
       'Why AI agent demos always work and production agents fail silently — and the six hardening layers that close the gap: guardrails, approval gates, observability, evals, fallbacks and recovery, and cost controls. Includes the hardened skeleton prompt, the business math, the step-by-step build roadmap and the 7-point pre-launch checklist.',
