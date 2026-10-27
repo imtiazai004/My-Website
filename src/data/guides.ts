@@ -11,9 +11,18 @@ export interface Guide {
 
 export const GUIDES: Guide[] = [
   {
+    slug: 'competitor-price-watch',
+    updated: '2026-10-27',
+    badge: 'New',
+    title: 'Competitor Price Watch — The App That Tracks Competitors Prices',
+    description:
+      'The app that tracks competitors prices — alerts you the moment a rival cuts a price, guards your margin with a floor, and reprices by your rules. The five pieces, the illustrative leak math, and the full build roadmap.',
+    meta: 'PDF · 3 pages · English',
+  },
+  {
     slug: 'fee-stack-calculator',
     updated: '2026-10-26',
-    badge: 'New',
+    badge: 'Guide',
     title: 'The Fee-Stack Calculator',
     description:
       'The app Imtiaz is building for an agency that shows marketplace sellers the fees their calculator misses — across TikTok Shop, Amazon, Etsy, and eBay. The verified fee stacks, the $50,000-month math, the multi-marketplace adapter architecture and the full build roadmap.',
