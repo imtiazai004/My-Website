@@ -45,6 +45,7 @@ const MorningBriefingGuidePage = lazy(() => import('./components/MorningBriefing
 const AgentHardeningGuidePage = lazy(() => import('./components/AgentHardeningGuidePage'));
 const FeeStackCalculatorGuidePage = lazy(() => import('./components/FeeStackCalculatorGuidePage'));
 const CompetitorPriceWatchGuidePage = lazy(() => import('./components/CompetitorPriceWatchGuidePage'));
+const AccountHealthGuidePage = lazy(() => import('./components/AccountHealthGuidePage'));
 const DemosPage = lazy(() => import('./components/DemosPage'));
 const WorkPage = lazy(() => import('./components/WorkPage'));
 const NotFound = lazy(() => import('./components/NotFound'));
@@ -154,6 +155,7 @@ export default function App() {
         <Route path="/guides/agent-hardening-guide" element={page(<AgentHardeningGuidePage />)} />
         <Route path="/guides/fee-stack-calculator" element={page(<FeeStackCalculatorGuidePage />)} />
         <Route path="/guides/competitor-price-watch" element={page(<CompetitorPriceWatchGuidePage />)} />
+        <Route path="/guides/account-health" element={page(<AccountHealthGuidePage />)} />
         <Route path="/blog" element={page(<BlogPage />)} />
         <Route path="/blog/:slug" element={page(<BlogPostPage />)} />
         <Route path="/submit-testimonial" element={page(<SubmitTestimonial />)} />

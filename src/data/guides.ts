@@ -11,9 +11,18 @@ export interface Guide {
 
 export const GUIDES: Guide[] = [
   {
+    slug: 'account-health',
+    updated: '2026-10-29',
+    badge: 'New',
+    title: 'The Account-Health App — Stops One Bad Week From Freezing a TikTok Shop',
+    description:
+      'The app that watches a TikTok Shop Account Health Rating — live score and milestone distance, WhatsApp alerts before the freeze, violation breakdown, cancellation and dispatch gauges, and the policy-quiz recovery path. The illustrative slide math and the full build roadmap.',
+    meta: 'PDF · 3 pages · English',
+  },
+  {
     slug: 'competitor-price-watch',
     updated: '2026-10-27',
-    badge: 'New',
+    badge: 'Guide',
     title: 'Competitor Price Watch — The App That Tracks Competitors Prices',
     description:
       'The app that tracks competitors prices — alerts you the moment a rival cuts a price, guards your margin with a floor, and reprices by your rules. The five pieces, the illustrative leak math, and the full build roadmap.',
