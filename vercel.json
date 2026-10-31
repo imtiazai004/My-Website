@@ -6,6 +6,11 @@
       "permanent": false
     },
     {
+      "source": "/demos/family-dental-classic",
+      "destination": "/demos/family-dental-classic/",
+      "permanent": false
+    },
+    {
       "source": "/demos/sinma-3d",
       "destination": "/demos/sinma-3d/",
       "permanent": false
@@ -44,6 +49,18 @@
     {
       "source": "/demos/family-dental/:path*",
       "destination": "https://family-dental-clinic-3d-website-wit.vercel.app/:path*"
+    },
+    {
+      "source": "/demos/family-dental-classic/",
+      "destination": "https://flourishing-figolla-d8bb17.netlify.app/"
+    },
+    {
+      "source": "/demos/family-dental-classic/:path*/",
+      "destination": "https://flourishing-figolla-d8bb17.netlify.app/:path*/"
+    },
+    {
+      "source": "/demos/family-dental-classic/:path*",
+      "destination": "https://flourishing-figolla-d8bb17.netlify.app/:path*"
     },
     {
       "source": "/demos/sinma-3d/",
