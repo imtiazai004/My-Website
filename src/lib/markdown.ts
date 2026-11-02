@@ -11,6 +11,8 @@ const DEMO_NAMES = new Set([
   'shopconsole', 'expiryguard',
   'rentguard', 'viewbook', 'feechaser', 'classflow', 'jobtrack',
   'hallbook', 'scriptrefill', 'hirepipe', 'carcare', 'leasemind',
+  'clawdesk', 'shopagent', 'voicefront', 'profilebot', 'dotdesk',
+  'shopshield', 'memocare', 'flowdesk', 'winback', 'reviewdesk',
 ]);
 
 function escapeHtml(s: string): string {

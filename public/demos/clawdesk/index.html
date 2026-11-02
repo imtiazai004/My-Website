@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClawDesk — Your AI Agent's Morning Shift</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#eef4ff;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#0b2545}.top h1 span{color:#1a7fe6}
+.alert{background:linear-gradient(135deg,#0b2545,#1a7fe6);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(26,127,230,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(11,37,69,.08);border-top:3px solid #1a7fe6}
+.stat .sv{font-size:20px;font-weight:900;color:#0b2545}.stat .sl{font-size:10.5px;color:#1a7fe6;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(11,37,69,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12px;font-weight:800;color:#1a7fe6;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#1a7fe6;color:#fff}
+.msg{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(11,37,69,.08)}
+.msg b{font-size:14px;color:#0b2545;display:block}
+.msg .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px}
+.msg .draft{background:#eef4ff;border-left:3px solid #1a7fe6;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#0b2545;font-weight:600;margin-bottom:9px}
+.msg .row{display:flex;gap:8px;align-items:center}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.draft{background:#dbeafe;color:#1d4ed8}.flag.sent{background:#dcfce7;color:#15803d}.flag.human{background:#fee2e2;color:#b91c1c}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.send{background:#1a7fe6;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}
+.appt{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(11,37,69,.08)}
+.appt b{font-size:14px;color:#0b2545;display:block}
+.appt .meta{font-size:11.5px;color:#1a7fe6;font-weight:700}
+.appr{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(11,37,69,.08)}
+.appr b{font-size:14px;color:#0b2545;display:block}
+.appr .meta{font-size:12px;color:#475569;font-weight:600;margin:3px 0 9px}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#0b2545;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#1a7fe6;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🤖 Claw<span>Desk</span></h1></div>
+  <div class="alert"><div class="big">🌙</div><div class="txt">Overnight shift complete — your agent handled 9 of 12 messages while you slept. One needs you.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv">12</div><div class="sl">Messages triaged</div></div>
+    <div class="stat"><div class="sv" id="stSent">0</div><div class="sl">Replies sent</div></div>
+    <div class="stat"><div class="sv">3</div><div class="sl">Bookings made</div></div>
+    <div class="stat"><div class="sv" id="stHuman">1</div><div class="sl">Needs a human</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="inboxTab" onclick="setTab('inbox')">📥 Inbox</div>
+    <div class="tab" id="calTab" onclick="setTab('cal')">📅 Calendar</div>
+    <div class="tab" id="apprTab" onclick="setTab('appr')">✅ Approvals <span id="apprN">(2)</span></div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">ClawDesk — the morning shift, done before your coffee. Willow &amp; Oak Home Store.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='inbox';
+const MSGS=[
+{n:'Emily Carter',q:'"Hi! Is the oak bookshelf in stock in walnut?"',d:'Yes — 3 in walnut, ready for pickup today or delivery tomorrow. Want me to hold one for you?',s:'draft'},
+{n:'James Wilson',q:'"Can I book a sofa consultation for Saturday morning?"',d:'Booked — Saturday 10:30 AM with our design team. A confirmation is on its way to you.',s:'draft'},
+{n:'Sophia Bennett',q:'"Where is my order #4821? It was due yesterday."',d:'Your order left our warehouse this morning — tracking link sent. It arrives tomorrow by 6 PM.',s:'draft'},
+{n:'Michael Thompson',q:'"My table arrived scratched. This is the second time. I want a manager."',d:'',s:'human'},
+{n:'Olivia Parker',q:'"Are you open today? What time do you close?"',d:'Yes — we are open today until 8 PM. See you soon!',s:'draft'}];
+const APPTS=[
+{n:'James Wilson',m:'Sofa consultation · Sat 10:30 AM · Design team'},
+{n:'Emily Carter',m:'Bookshelf pickup · Today 4:00 PM · Held in walnut'},
+{n:'Daniel Brooks',m:'Delivery window · Tomorrow 2–6 PM · Order #4819'}];
+const APPR=[
+{n:'Refund offer — Michael Thompson',m:'Agent suggests: $12 goodwill refund + free repair visit for the scratched table. Needs your yes.',s:'pending'},
+{n:'Discount — first-time buyer',m:'Agent suggests: 10% welcome code for Olivia Parker, who asked about opening hours twice.',s:'pending'}];
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function setTab(t){TAB=t;['inbox','cal','appr'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function sendReply(i){if(MSGS[i].s!=='draft')return;MSGS[i].s='sent';render();toast('✅ Reply sent to '+MSGS[i].n.split(' ')[0])}
+function escalate(i){MSGS[i].s='human2';render();toast('🧑‍💼 Flagged for you — agent drafted a manager callback note')}
+function decide(i,ok){APPR[i].s=ok?'approved':'declined';render();toast(ok?'✅ Approved — agent is on it':'↩️ Declined — agent will not send it')}
+function render(){
+const list=document.getElementById('list');
+document.getElementById('stSent').textContent=MSGS.filter(m=>m.s==='sent').length;
+document.getElementById('stHuman').textContent=MSGS.filter(m=>m.s==='human').length;
+const pend=APPR.filter(a=>a.s==='pending').length;
+document.getElementById('apprN').textContent='('+pend+')';
+if(TAB==='inbox'){
+list.innerHTML=MSGS.map((m,i)=>{
+if(m.s==='human')return `<div class="msg"><b>${m.n}</b><div class="q">${m.q}</div><div class="row"><span class="flag human">⚠️ NEEDS A HUMAN</span><button class="abtn send" id="esc${i}" onclick="escalate(${i})">Draft callback note</button></div></div>`;
+if(m.s==='human2')return `<div class="msg"><b>${m.n}</b><div class="q">${m.q}</div><div class="row"><span class="flag human">🧑‍💼 WITH YOU NOW</span></div></div>`;
+if(m.s==='sent')return `<div class="msg"><b>${m.n}</b><div class="q">${m.q}</div><div class="draft">✍️ ${m.d}</div><div class="row"><span class="flag sent">✅ SENT</span></div></div>`;
+return `<div class="msg"><b>${m.n}</b><div class="q">${m.q}</div><div class="draft">✍️ Draft: ${m.d}</div><div class="row"><span class="flag draft">DRAFT READY</span><button class="abtn send" id="send${i}" onclick="sendReply(${i})">Send reply</button></div></div>`}).join('');
+}else if(TAB==='cal'){
+list.innerHTML=APPTS.map(a=>`<div class="appt"><b>📅 ${a.n}</b><div class="meta">${a.m}</div></div>`).join('')+`<div class="appt"><b>🤖 Booked by your agent</b><div class="meta">3 appointments arranged overnight — no phone tag, no missed slots.</div></div>`;
+}else{
+list.innerHTML=APPR.map((a,i)=>{
+if(a.s==='pending')return `<div class="appr"><b>${a.n}</b><div class="meta">${a.m}</div><div class="row"><button class="abtn ok" id="ok${i}" onclick="decide(${i},true)">✅ Approve</button><button class="abtn no" id="no${i}" onclick="decide(${i},false)">Decline</button></div></div>`;
+return `<div class="appr"><b>${a.n}</b><div class="meta">${a.m}</div><div class="row"><span class="flag ${a.s==='approved'?'sent':'human'}">${a.s==='approved'?'✅ APPROVED':'↩️ DECLINED'}</span></div></div>`}).join('');
+}
+}
+render();
+</script>
+</body>
+</html>
