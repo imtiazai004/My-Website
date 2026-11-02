@@ -780,4 +780,27 @@ Try the demo above: send a memory-aware reply, open the Memory tab, and resolve 
 *Run a shop? DM me "MEMORY" — I'll show you what a chatbot that remembers looks like for your business.*`,
   },
 
+  {
+    slug: 'n8n-workflows-save-43-hours',
+    title: 'A $5 Server Just Gave a Small Business Its Weekends Back.',
+    excerpt:
+      'Forty unread emails, invoices to chase, enquiries unanswered — before the bakery even opens. Twelve small businesses handed that work to five n8n workflows and got an average of 43 hours a month back.',
+    tags: ["Automation", "Small Business", "AI Workflows"],
+    content: `Saturday morning. The bakery opens at 8. By 7:30 the owner is already behind — 40 unread emails, three invoices to chase, two new enquiries sitting unanswered, and a regular customer who left a glowing visit yesterday and will never be asked for a review.
+
+None of that work is hard. All of it is relentless. And it eats the weekend before the weekend starts.
+
+One team of 12 small businesses tried a different answer: five small workflows, built on n8n — an open-source automation tool with over 200,000 GitHub stars. Email triage that sorts the inbox and drafts replies. Lead scoring that flags the hot enquiries in minutes. Invoice follow-ups that chase late payments politely. Review requests that go out while the customer is still smiling. Onboarding that welcomes every new customer on its own.
+
+The published result across those 12 businesses: an average of 43 hours saved per month, with a median payback of 11 days. Not a new hire. Not a bigger team. Five workflows doing the repetitive work while the humans do the work only humans can do.
+
+:::demo flowdesk:::
+
+This is FlowDesk — one dashboard for all five workflows. Watch the hours-saved counter, pause a workflow, run one on demand, and see the inbox the email triage already cleared.
+
+Try the demo above: pause the invoice follow-up, run the review request, send a drafted reply. Five workflows, 43 hours back — every month.
+
+*Run a small business? DM me "FLOW" — I'll show you which five workflows would hand your weekends back.*`,
+  },
+
 ];
