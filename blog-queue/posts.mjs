@@ -851,4 +851,26 @@ Try the demo above: approve a drafted reply, flag the 1-star review for a human,
 *Got reviews sitting unanswered? DM me "REVIEW" — I'll show you what an agent answering your Google reviews looks like for your business.*`,
   },
 
+  {
+    slug: 'show-once-automation-repetitive-tasks',
+    title: 'Show Your Computer the Job Once. It Does It Every Day After That.',
+    excerpt:
+      'Eleven orders, eleven identical copy-paste jobs before lunch. A new tool called Click — #2 on Product Hunt today — watches you do a repetitive task once and turns it into an automation that runs across your systems.',
+    tags: ["AI Agents", "Small Business", "Automation"],
+    content: `It's 8 in the morning. A customer messages on WhatsApp: two sourdough loaves and a chocolate cake for Saturday. You copy the name, the items, the quantities, the pickup day — into the order sheet. Then you type the confirmation back.
+
+By lunch you've done the same copy-paste dance eleven times. Eleven orders, eleven identical little jobs, each one stealing minutes from the work only you can do: the baking, the customers standing in front of you, the business itself.
+
+Nobody hires a person to copy orders all day. And nobody should have to. The newest idea in AI agents is the simplest one yet: show your computer the job once, and it does it every day after that. A new tool called Click — number two on Product Hunt today — watches you demonstrate a repetitive workflow and turns it into an AI-agent automation that runs across your connected systems.
+
+No flowcharts. No code. You just do the job once, the way you always do it.
+
+:::demo showonce:::
+
+One screen for the whole idea. Emily records herself copying a single WhatsApp order into the order sheet. ShowOnce learns the four steps — read the order, copy the details, add the row, send the confirmation — and replays them for every new order after that. The log shows each job done, and the hours saved keep climbing.
+
+Try the demo above: replay the recorded job, run one of the saved jobs, switch one off. The boring work, done before you've finished your first coffee.
+
+*Run a shop? DM me "SHOW" — I'll show you which of your daily jobs an agent could take over.*`,
+  },
 ];
