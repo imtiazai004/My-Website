@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DotDesk — Your Agent's Night Shift</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#17112e;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#fff}.top h1 span{color:#c084fc}
+.alert{background:linear-gradient(135deg,#4c1d95,#7c3aed);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(124,58,237,.4)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.25);border-top:3px solid #7c3aed}
+.stat .sv{font-size:20px;font-weight:900;color:#17112e}.stat .sl{font-size:10.5px;color:#7c3aed;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.tab{flex:1;text-align:center;padding:10px 4px;font-size:12px;font-weight:800;color:#7c3aed;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#7c3aed;color:#fff}
+.msg{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.msg b{font-size:14px;color:#17112e;display:block}
+.msg .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px}
+.msg .draft{background:#f3e8ff;border-left:3px solid #7c3aed;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#17112e;font-weight:600;margin-bottom:9px}
+.msg .row{display:flex;gap:8px;align-items:center}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.done{background:#dcfce7;color:#15803d}.flag.wait{background:#fef3c7;color:#b45309}.flag.sent{background:#dcfce7;color:#15803d}.flag.human{background:#fee2e2;color:#b91c1c}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.send{background:#7c3aed;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}
+.appt{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.appt b{font-size:14px;color:#17112e;display:block}
+.appt .meta{font-size:11.5px;color:#7c3aed;font-weight:700}
+.appr{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.appr b{font-size:14px;color:#17112e;display:block}
+.appr .meta{font-size:12px;color:#475569;font-weight:600;margin:3px 0 9px}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#17112e;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#c084fc;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🌙 Dot<span>Desk</span></h1></div>
+  <div class="alert"><div class="big">🌙</div><div class="txt">Night shift complete — your agent worked 6 PM to 6 AM while you slept. 8 jobs done, 4 waiting for your yes.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv">8</div><div class="sl">Jobs done overnight</div></div>
+    <div class="stat"><div class="sv" id="stWait">4</div><div class="sl">Awaiting your yes</div></div>
+    <div class="stat"><div class="sv">3</div><div class="sl">Invoices chased</div></div>
+    <div class="stat"><div class="sv" id="stSent">0</div><div class="sl">Approved &amp; sent</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="nightTab" onclick="setTab('night')">🌙 Night shift</div>
+    <div class="tab" id="apprTab" onclick="setTab('appr')">✅ Approval queue <span id="apprN">(4)</span></div>
+    <div class="tab" id="reportTab" onclick="setTab('report')">📋 Morning report</div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">DotDesk — the night shift, done before your alarm. Willow &amp; Oak Home Store.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='night';
+const NIGHT=[
+{n:'Invoice chase — James Wilson',q:'Overdue invoice, 14 days. Agent drafted a polite reminder with the payment link.',s:'done'},
+{n:'Warm lead follow-up — Emily Carter',q:'She asked about the oak bookshelf twice. Agent drafted a follow-up with the walnut stock update.',s:'done'},
+{n:'Invoice chase — Daniel Brooks',q:'Overdue invoice, 9 days. Agent drafted a second reminder, firmer tone, payment link attached.',s:'done'},
+{n:'Tomorrow\u2019s posts — drafted',q:'Agent wrote 3 social posts for tomorrow from this week\u2019s bestsellers. Waiting in your approval queue.',s:'done'},
+{n:'Lead follow-up — Olivia Parker',q:'Asked about opening hours on Saturday. Agent drafted a reply plus a design-team booking offer.',s:'done'}];
+const APPR=[
+{n:'Send invoice reminder — James Wilson',m:'Agent suggests: polite reminder for the overdue invoice, payment link included. Nothing sent yet.',s:'pending'},
+{n:'Send follow-up — Emily Carter',m:'Agent suggests: "The walnut bookshelf is back in stock — shall I hold one for you?"',s:'pending'},
+{n:'Post tomorrow\u2019s promo',m:'Agent suggests: publish the drafted bestseller post at 9 AM tomorrow. Preview ready.',s:'pending'},
+{n:'Win-back offer — Sophia Bennett',m:'Agent suggests: a 10% welcome-back code for a customer who has not ordered in 60 days.',s:'pending'}];
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function setTab(t){TAB=t;['night','appr','report'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function decide(i,ok){APPR[i].s=ok?'approved':'declined';render();toast(ok?'✅ Approved — agent sent it':'↩️ Declined — agent will not send it')}
+function markRead(){document.getElementById('reportBtn').textContent='✅ Report read — have a great day!';toast('📋 Morning report marked as read')}
+function render(){
+const list=document.getElementById('list');
+document.getElementById('stSent').textContent=APPR.filter(a=>a.s==='approved').length;
+const pend=APPR.filter(a=>a.s==='pending').length;
+document.getElementById('stWait').textContent=pend;
+document.getElementById('apprN').textContent='('+pend+')';
+if(TAB==='night'){
+list.innerHTML=NIGHT.map(m=>`<div class="msg"><b>${m.n}</b><div class="q">${m.q}</div><div class="row"><span class="flag done">✅ DONE OVERNIGHT</span></div></div>`).join('')+`<div class="msg"><b>🌙 12 hours, zero interruptions</b><div class="q">Your agent worked the whole night shift — and never spent a cent or sent a message without your rules.</div></div>`;
+}else if(TAB==='appr'){
+list.innerHTML=APPR.map((a,i)=>{
+if(a.s==='pending')return `<div class="appr"><b>${a.n}</b><div class="meta">${a.m}</div><div class="row"><button class="abtn ok" id="ok${i}" onclick="decide(${i},true)">✅ Approve</button><button class="abtn no" id="no${i}" onclick="decide(${i},false)">Decline</button></div></div>`;
+return `<div class="appr"><b>${a.n}</b><div class="meta">${a.m}</div><div class="row"><span class="flag ${a.s==='approved'?'sent':'human'}">${a.s==='approved'?'✅ APPROVED & SENT':'↩️ DECLINED'}</span></div></div>`}).join('')+(pend===0?`<div class="msg"><b>🎉 Queue clear</b><div class="q">Every overnight action is decided. Your agent is standing by for tonight.</div></div>`:'');
+}else{
+list.innerHTML=`<div class="appt"><b>📋 Morning report — 6:00 AM</b><div class="meta">Night shift: 6 PM – 6 AM · 12 hours worked</div></div>
+<div class="appt"><b>💰 Money chased</b><div class="meta">3 overdue invoices followed up — reminders drafted, none sent without your yes.</div></div>
+<div class="appt"><b>🤝 Leads warmed</b><div class="meta">2 warm leads followed up — Emily Carter and Olivia Parker, replies drafted and waiting.</div></div>
+<div class="appt"><b>📣 Tomorrow, ready</b><div class="meta">3 social posts drafted from this week\u2019s bestsellers — approve once, they go out at 9 AM.</div></div>
+<div class="appt"><b>⚠️ The honest catch</b><div class="meta">OpenAI\u2019s own tests: nearly 1 in 5 long task chains drifts off brief. That is why nothing here sends itself.</div></div>
+<div class="msg"><b>Your move</b><div class="q">Clear the approval queue above, and tonight\u2019s shift starts clean.</div><div class="row"><button class="abtn send" id="reportBtn" onclick="markRead()">Mark report as read</button></div></div>`;
+}
+}
+render();
+</script>
+</body>
+</html>
