@@ -686,4 +686,27 @@ Try the demo above: answer the ringing call, book the emergency visit, hand the 
 *Miss calls after hours? DM me "CALLS" — I'll show you what an AI receptionist looks like for your business.*`,
   },
 
+  {
+    slug: 'google-profile-answers-customers-for-you',
+    title: 'Your Google Listing Now Answers Customers While You Sleep.',
+    excerpt:
+      'A customer taps Message on your Google listing at 8:47 PM. Nobody replies — and by morning she\'s booked elsewhere. Google\'s invite-only AI messaging pilot changes that: an agent answers from your hours and services, at no cost.',
+    tags: ["AI Agents", "Small Business", "Google Business Profile"],
+    content: `Saturday, 8:47 PM. A customer Googles your salon and taps Message: "Are you open tomorrow?" Nobody replies — you're closed, the phone is on silent, and by morning she has booked somewhere else.
+
+That message was a paying customer. And until now, the only fix was hiring someone to watch the phone.
+
+Google is changing that. On 29 October 2026, Search Engine Roundtable reported Google is opening its invite-only AI messaging pilot to more Business Profiles. An AI agent behind the Message button on Search and Maps answers routine questions — your hours, your services, your next free slot — instantly, and Google says at no cost. What it cannot answer gets handed to you, and you can take over anytime.
+
+It is invite-only — you cannot switch it on today. And there is fine print: the agent only answers customers on RCS phones; everyone else's texts still land on your phone. Google also launched Business Home on 22 October — a closed beta for select US and UK businesses — a Gemini-run hub for your profile, ads and reviews, with the same AI messaging built in.
+
+The listing that used to sit there waiting is becoming the front desk:
+
+:::demo profilebot:::
+
+Try the demo above: a customer asks if you're open Saturday — the agent answers from your hours, offers a booking slot, and hands the tricky question to you. Check the bookings it arranged. Your hours and services are the agent's brain — keep them right, and it answers like your best receptionist.
+
+*Run a local business? DM me "PROFILE" — I'll show you what an AI front desk looks like for your listing.*`,
+  },
+
 ];
