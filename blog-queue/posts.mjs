@@ -665,4 +665,25 @@ Try the demo above: ask the agent for a gift, check out with Shop Pay, and watch
 *Run a store? DM me "AGENT" — I'll show you what selling inside AI agents looks like for your shop.*`,
   },
 
+  {
+    slug: 'ai-voice-receptionist-missed-calls',
+    title: '62% of Your Calls Go Unanswered. Each One Was a Paying Customer.',
+    excerpt:
+      '62% of calls to small businesses go unanswered — and home-service phone leads convert at 46%. An AI receptionist answers in seconds, books into the calendar and hands urgent jobs to a human.',
+    tags: ["AI Voice", "Small Business", "Automation"],
+    content: `7:12 PM. The phone rings at a heating company. The technician is on a job, the office is closed, and the call goes to voicemail. The caller doesn't leave a message — they call the next company on Google.
+
+That call was a furnace replacement. Industry studies put the number at 62% — nearly two-thirds of calls to small businesses go unanswered. And these are not tyre-kickers: Invoca's 2025 analysis of over 60 million calls found home-service phone leads convert at 46%. A missed call costs around $1,200 on average, and an HVAC replacement call can run to $3,500 or more.
+
+Voice AI is now the fastest-growing buying category in small business. Twilio's voice AI revenue grew over 60% year over year in its latest quarter — because answering the phone is finally something software can do well.
+
+The fix is an AI receptionist: it answers in seconds, qualifies the caller, books straight into the calendar, and hands the urgent jobs to a human — with a transcript and a summary for every call.
+
+:::demo voicefront:::
+
+Try the demo above: answer the ringing call, book the emergency visit, hand the urgent job to a human, then check the bookings and transcripts your receptionist made after hours.
+
+*Miss calls after hours? DM me "CALLS" — I'll show you what an AI receptionist looks like for your business.*`,
+  },
+
 ];
