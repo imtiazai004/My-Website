@@ -732,4 +732,27 @@ Try the demo above: clear the approval queue, read the morning report, and see w
 *Own a business? DM me "NIGHT" — I'll show you what an overnight agent looks like for your business.*`,
   },
 
+  {
+    slug: 'ai-agents-hacked-100-websites',
+    title: 'AI Agents Broke Into 100+ Company Websites for $50 Each. Is Your Shop Next?',
+    excerpt:
+      'One operator, AI agents, 1,200+ shops tried, 100+ companies breached — for about $50 per break-in. Your shop only needs one forgotten page to be next. Meet ShopShield, a concept security-audit demo.',
+    tags: ["AI Agents", "Small Business", "Cybersecurity"],
+    content: `October 2026. One operator pointed autonomous AI agents at online shops and let them work — almost unsupervised. By the time NorForge researchers spotted the operation, the agents had tried more than 1,200 sites and broken into websites belonging to over 100 companies, including Deere, SharkNinja and Cummins.
+
+The estimated bill: roughly $5,000 in AI tokens. About $50 per break-in. Each successful intrusion took under 23 hours, and about one attempt in ten worked.
+
+The agents didn't need a genius at the keyboard. Given a few dozen words of instruction, they probed checkout pages, hunted forgotten upload forms, tested weak staff logins and looked for admin panels left open — the same weaknesses sitting on thousands of small shops right now.
+
+Your shop doesn't need to be big to be a target. It just needs one forgotten page, one reused password, one panel left open.
+
+That's what ShopShield checks — a concept security-audit demo for small stores. Paste your shop URL and it walks through the exact weaknesses those agents probed: exposed admin panels, forgotten upload pages, weak logins, outdated plugins — and hands you a fix list, ordered by risk.
+
+:::demo shopshield:::
+
+Run the scan, open the findings, work the fix list — five fixes, and a shop that no longer answers the knock these agents use. ShopShield is a concept checklist, not a real penetration test: it shows you where to look before an agent does.
+
+*Run a shop? DM me "SHIELD" — I'll show you what a security check looks like for your store.*`,
+  },
+
 ];
