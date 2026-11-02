@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoiceFront — Your AI Receptionist Never Misses a Call</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#ecfdf5;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#064e3b}.top h1 span{color:#059669}
+.alert{background:linear-gradient(135deg,#064e3b,#059669);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(5,150,105,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(6,78,59,.08);border-top:3px solid #059669}
+.stat .sv{font-size:20px;font-weight:900;color:#064e3b}.stat .sl{font-size:10.5px;color:#059669;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(6,78,59,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12px;font-weight:800;color:#059669;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#059669;color:#fff}
+.call{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(6,78,59,.08)}
+.call b{font-size:14px;color:#064e3b;display:block}
+.call .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px}
+.call .sum{background:#ecfdf5;border-left:3px solid #059669;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#064e3b;font-weight:600;margin-bottom:9px}
+.call .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.answered{background:#d1fae5;color:#065f46}.flag.booked{background:#dcfce7;color:#15803d}.flag.urgent{background:#fee2e2;color:#b91c1c}.flag.live{background:#fef3c7;color:#b45309}.flag.human{background:#fee2e2;color:#b91c1c}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.send{background:#059669;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}.abtn.warn{background:#b45309;color:#fff}
+.appt{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(6,78,59,.08)}
+.appt b{font-size:14px;color:#064e3b;display:block}
+.appt .meta{font-size:11.5px;color:#059669;font-weight:700}
+.tran{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(6,78,59,.08)}
+.tran b{font-size:14px;color:#064e3b;display:block}
+.tran .meta{font-size:11px;color:#059669;font-weight:700;margin-bottom:7px}
+.tran .line{font-size:12.5px;color:#475569;font-weight:600;line-height:1.5}
+.tran .line span{color:#064e3b;font-weight:800}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#064e3b;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#059669;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>📞 Voice<span>Front</span></h1></div>
+  <div class="alert"><div class="big">🌙</div><div class="txt">Tonight, 7:12 PM — 3 calls came in after hours. Your AI receptionist answered all three. Zero went to voicemail.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv">14</div><div class="sl">Calls answered</div></div>
+    <div class="stat"><div class="sv" id="stBooked">6</div><div class="sl">Bookings made</div></div>
+    <div class="stat"><div class="sv">0</div><div class="sl">Calls missed</div></div>
+    <div class="stat"><div class="sv" id="stEsc">1</div><div class="sl">Handed to human</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="liveTab" onclick="setTab('live')">📞 Live calls</div>
+    <div class="tab" id="bookTab" onclick="setTab('book')">📅 Bookings</div>
+    <div class="tab" id="transTab" onclick="setTab('trans')">📝 Transcripts</div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">VoiceFront — every call answered, every job booked. Summit Heating &amp; Air.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='live';
+const CALLS=[
+{n:'Robert Hayes',q:'"Hi, my furnace just stopped — it\'s getting cold in here."',s:'live',sum:''},
+{n:'Sarah Mitchell',q:'"My AC stopped cooling and the house is already 29 degrees."',s:'urgent',sum:'Urgent: no cooling, two kids at home. Agent flagged it for a human callback within 10 minutes.'},
+{n:'David Harper',q:'"Can I book the annual furnace check for next week?"',s:'booked',sum:'Qualified: existing customer, furnace 6 years old. Booked Tue 9:00 AM.'},
+{n:'Emily Carter',q:'"How much is a new water heater, installed?"',s:'answered',sum:'Answered with the standard range, then offered a free in-home estimate. She asked to think it over — agent will follow up tomorrow.'},
+{n:'James Wilson',q:'"I need to move my Thursday visit to Friday morning."',s:'answered',sum:'Rescheduled Thursday 2:00 PM → Friday 9:30 AM. Confirmation text sent.'},
+{n:'Olivia Parker',q:'"What time do you close today?"',s:'answered',sum:'Answered: open until 8 PM. Offered a same-day filter-change slot — she booked it.'}];
+const APPTS=[
+{n:'David Harper',m:'Furnace check · Tue 9:00 AM · Technician: Mark'},
+{n:'Olivia Parker',m:'Filter change · Today 5:30 PM · Technician: Mark'},
+{n:'James Wilson',m:'Boiler service · Fri 9:30 AM · Rescheduled by agent'},
+{n:'Daniel Brooks',m:'AC repair · Tomorrow 8:00 AM · Urgent — no cooling'},
+{n:'Sophia Bennett',m:'Water heater estimate · Wed 11:00 AM · Free visit'},
+{n:'Michael Thompson',m:'Duct cleaning · Sat 10:00 AM · Booked after hours'}];
+const TRANS=[
+{n:'Sarah Mitchell — 7:02 PM · 1 min 48 sec',m:'Urgent · handed to a human',l:'<span>Agent:</span> "Hi Sarah, this is Summit Heating &amp; Air. How can I help?"<br><span>Sarah:</span> "My AC just died and the house is getting hot."<br><span>Agent:</span> "I\'m sorry — let me get a technician to call you back within 10 minutes. Is this the best number?"'},
+{n:'David Harper — 6:41 PM · 58 sec',m:'Booked · Tue 9:00 AM',l:'<span>Agent:</span> "Would Tuesday at 9 AM work for the furnace check?"<br><span>David:</span> "Perfect, yes."<br><span>Agent:</span> "Booked. I\'ve sent a confirmation text — see you Tuesday."'},
+{n:'Olivia Parker — 6:15 PM · 44 sec',m:'Answered · booked same day',l:'<span>Agent:</span> "We\'re open until 8 PM today. I can fit a filter change in at 5:30 — shall I book it?"<br><span>Olivia:</span> "Yes, please."<br><span>Agent:</span> "Done — 5:30 PM today."'}];
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function setTab(t){TAB=t;['live','book','trans'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function answerCall(i){if(CALLS[i].s!=='live')return;CALLS[i].s='answered';CALLS[i].sum='Answered in 2 seconds. Agent is qualifying the caller now — furnace fault, no heat. Offering the next available slot.';render();toast('✅ VoiceFront answered — qualifying Robert now')}
+function bookCall(i){if(CALLS[i].s==='booked')return;CALLS[i].s='booked';CALLS[i].sum='Booked by your agent — visit confirmed and a text sent to the caller.';APPTS.unshift({n:CALLS[i].n,m:'Booked just now · by VoiceFront'});render();toast('📅 Visit booked for '+CALLS[i].n.split(' ')[0])}
+function escalate(i){if(CALLS[i].s==='human')return;CALLS[i].s='human';render();toast('🧑‍💼 Handed to you — agent sent you the full summary')}
+function render(){
+const list=document.getElementById('list');
+document.getElementById('stBooked').textContent=APPTS.length;
+document.getElementById('stEsc').textContent=CALLS.filter(c=>c.s==='human').length;
+if(TAB==='live'){
+list.innerHTML=CALLS.map((c,i)=>{
+if(c.s==='live')return `<div class="call"><b>📞 ${c.n} — calling now</b><div class="q">${c.q}</div><div class="row"><span class="flag live">🔴 RINGING</span><button class="abtn send" id="ans${i}" onclick="answerCall(${i})">Answer with AI</button></div></div>`;
+if(c.s==='urgent')return `<div class="call"><b>${c.n}</b><div class="q">${c.q}</div><div class="sum">🤖 ${c.sum}</div><div class="row"><span class="flag urgent">⚠️ URGENT</span><button class="abtn warn" id="esc${i}" onclick="escalate(${i})">Hand to a human</button><button class="abtn send" id="book${i}" onclick="bookCall(${i})">Book emergency visit</button></div></div>`;
+if(c.s==='human')return `<div class="call"><b>${c.n}</b><div class="q">${c.q}</div><div class="sum">🤖 ${c.sum}</div><div class="row"><span class="flag human">🧑‍💼 WITH YOU NOW</span></div></div>`;
+if(c.s==='booked')return `<div class="call"><b>${c.n}</b><div class="q">${c.q}</div><div class="sum">🤖 ${c.sum}</div><div class="row"><span class="flag booked">📅 BOOKED</span></div></div>`;
+return `<div class="call"><b>${c.n}</b><div class="q">${c.q}</div><div class="sum">🤖 ${c.sum}</div><div class="row"><span class="flag answered">✅ ANSWERED BY AI</span><button class="abtn send" id="book${i}" onclick="bookCall(${i})">Book a visit</button></div></div>`}).join('');
+}else if(TAB==='book'){
+list.innerHTML=APPTS.map(a=>`<div class="appt"><b>📅 ${a.n}</b><div class="meta">${a.m}</div></div>`).join('')+`<div class="appt"><b>🤖 Booked by your agent</b><div class="meta">${APPTS.length} appointments arranged — including after hours, with no phone tag.</div></div>`;
+}else{
+list.innerHTML=TRANS.map(t=>`<div class="tran"><b>${t.n}</b><div class="meta">${t.m}</div><div class="line">${t.l}</div></div>`).join('')+`<div class="tran"><b>🤖 Every call, on record</b><div class="meta">Transcript + summary</div><div class="line">Each call leaves a transcript, a one-line summary and the booking — so you always know what was said and what was promised.</div></div>`;
+}
+}
+render();
+</script>
+</body>
+</html>
