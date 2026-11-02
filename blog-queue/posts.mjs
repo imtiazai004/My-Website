@@ -803,4 +803,29 @@ Try the demo above: pause the invoice follow-up, run the review request, send a 
 *Run a small business? DM me "FLOW" — I'll show you which five workflows would hand your weekends back.*`,
   },
 
+  {
+    slug: 'ai-agent-reactivates-dormant-customers',
+    title: 'They Bought From You Once. Then Silence. An Agent Can Fix That.',
+    excerpt:
+      'She came in every three weeks for a year. Then nothing. AI agents are now winning back quiet customers — 58% of small employers already use them, and reactivation is one of the top jobs agents actually do.',
+    tags: ["AI Agents", "Small Business", "Customer Retention"],
+    content: `She came in every three weeks for a year. Then nothing. No complaint, no goodbye — just silence. And she wasn't the only one.
+
+Every small business has them: customers who bought once, twice, ten times — then quietly disappeared. They didn't leave angry. They just drifted, and nobody noticed, because nobody was watching the quiet ones.
+
+That silence is expensive. Winning a brand-new customer costs far more than bringing back one who already trusts you — yet most owners spend all their energy chasing strangers while their regulars slip away unnoticed.
+
+This is exactly the job AI agents are quietly taking over. In 2026, 58% of small employers already use AI agents, and usage surged 5x in the first half of the year. Re-engaging dormant customers with tailored messages is one of the top things those agents actually do — and 48% of small businesses using AI tools now save 4+ hours a week. Only 23% of agent deployments see real ROI. The ones that do are aimed at a real, measurable job — and bringing a customer back is exactly that.
+
+Meet WinBack:
+
+:::demo winback:::
+
+One screen for the customers you already won. The agent spots who went quiet 30, 60 or 90 days ago, drafts a personal message for each one — referencing their last visit, not a generic blast — sends it, and tracks who replies and rebooks.
+
+Try the demo above: send a win-back to Emily, watch the replies come in, book them back in. These aren't new leads. They're your regulars. They just need a nudge.
+
+*Customers going quiet on you? DM me "WINBACK" — I'll show you what a win-back agent looks like for your business.*`,
+  },
+
 ];
