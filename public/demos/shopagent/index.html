@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopAgent — Your Store Sells Inside ChatGPT</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#f3eefc;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#2e1065}.top h1 span{color:#7c3aed}
+.alert{background:linear-gradient(135deg,#2e1065,#7c3aed);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(124,58,237,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(46,16,101,.08);border-top:3px solid #7c3aed}
+.stat .sv{font-size:20px;font-weight:900;color:#2e1065}.stat .sl{font-size:10.5px;color:#7c3aed;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(46,16,101,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12px;font-weight:800;color:#7c3aed;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#7c3aed;color:#fff}
+.prod{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(46,16,101,.08)}
+.prod b{font-size:14px;color:#2e1065;display:block}
+.prod .meta{font-size:12px;color:#7c3aed;font-weight:700;margin:2px 0 3px}
+.prod .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 9px}
+.prod .row{display:flex;gap:8px;align-items:center}
+.chat{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(46,16,101,.08)}
+.bubble{border-radius:12px;padding:10px 12px;font-size:13px;font-weight:600;line-height:1.45;margin-bottom:8px}
+.bubble.user{background:#ede9fe;color:#2e1065;margin-left:34px}
+.bubble.agent{background:#f3eefc;border-left:3px solid #7c3aed;color:#2e1065;margin-right:34px}
+.bubble.agent .who{font-size:10.5px;font-weight:900;color:#7c3aed;display:block;margin-bottom:2px}
+.bubble .price{font-size:15px;font-weight:900;color:#2e1065}
+.ord{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(46,16,101,.08)}
+.ord b{font-size:14px;color:#2e1065;display:block}
+.ord .meta{font-size:12px;color:#475569;font-weight:600;margin:3px 0 9px}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.paid{background:#dcfce7;color:#15803d}.flag.agent{background:#ede9fe;color:#6d28d9}.flag.shop{background:#f3eefc;color:#7c3aed}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.buy{background:#7c3aed;color:#fff}.abtn.ask{background:#ede9fe;color:#6d28d9}.abtn.ok{background:#dcfce7;color:#15803d}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#2e1065;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#7c3aed;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🛍️ Shop<span>Agent</span></h1></div>
+  <div class="alert"><div class="big">🤖</div><div class="txt">A shopper just bought from your store — inside ChatGPT. No website visit. No cart. Just a chat.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv" id="stAgent">1</div><div class="sl">Agent sales today</div></div>
+    <div class="stat"><div class="sv" id="stOrders">1</div><div class="sl">Orders placed</div></div>
+    <div class="stat"><div class="sv">$86</div><div class="sl">Agent revenue</div></div>
+    <div class="stat"><div class="sv">0</div><div class="sl">Website visits</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="shopTab" onclick="setTab('shop')">🛍️ Shop</div>
+    <div class="tab" id="chatTab" onclick="setTab('chat')">🤖 Agent chat</div>
+    <div class="tab" id="ordersTab" onclick="setTab('orders')">📦 Orders <span id="ordN">(1)</span></div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">ShopAgent — the sale that happened without a website visit. Maple &amp; Main Home Goods.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='shop';
+const PRODS=[
+{n:'Handmade Ceramic Vase',m:'$48 · In stock · Ships in 2 days',q:'Glazed stoneware in sage green. The bestseller agents recommend for housewarming gifts.'},
+{n:'Woven Linen Throw',m:'$64 · In stock · Ships in 2 days',q:'Soft, washed linen in warm oat. The cosy gift shoppers ask for by name.'},
+{n:'Oak Side Table',m:'$129 · 3 left · Ships in 4 days',q:'Solid oak, hand-finished. The piece every agent suggests for small living rooms.'}];
+const CHAT=[
+{who:'user',t:'"I need a gift for my mum — something cosy, under $70."'},
+{who:'agent',t:'Found it — the Woven Linen Throw, $64. Washed linen, warm oat, ships in 2 days. Want me to check it out for you?'}];
+let ORDERED=false;
+const ORDERS=[
+{n:'Order #4822 — Emily Carter',m:'Handmade Ceramic Vase · $48 · Paid with Shop Pay · Arriving Fri'}];
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function setTab(t){TAB=t;['shop','chat','orders'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function askAgent(i){setTab('chat');toast('🤖 Agent found it — see the chat')}
+function buyNow(i){
+if(ORDERED&&i===1)return;
+if(i===1){ORDERED=true;ORDERS.unshift({n:'Order #4823 — Sophia Bennett',m:'Woven Linen Throw · $64 · Paid with Shop Pay · Arriving Sat'});document.getElementById('stAgent').textContent='2';document.getElementById('stOrders').textContent='2';toast('✅ Order #4823 placed — paid with Shop Pay');setTab('orders');return}
+toast('✅ Added to the agent checkout — ask the agent to finish it')}
+function checkoutAgent(){
+if(ORDERED){toast('✅ Already checked out — order #4823 is on its way');return}
+ORDERED=true;ORDERS.unshift({n:'Order #4823 — Sophia Bennett',m:'Woven Linen Throw · $64 · Paid with Shop Pay · Arriving Sat'});document.getElementById('stAgent').textContent='2';document.getElementById('stOrders').textContent='2';CHAT.push({who:'agent',t:'Done — checked out with Shop Pay. Order #4823 is on its way, arriving Saturday. Anything else?'});render();toast('✅ Checked out with Shop Pay — order #4823')}
+function render(){
+const list=document.getElementById('list');
+document.getElementById('ordN').textContent='('+ORDERS.length+')';
+if(TAB==='shop'){
+list.innerHTML=PRODS.map((p,i)=>`<div class="prod"><b>${p.n}</b><div class="meta">${p.m}</div><div class="q">${p.q}</div><div class="row"><button class="abtn ask" id="ask${i}" onclick="askAgent(${i})">🤖 Ask the agent</button><button class="abtn buy" id="buy${i}" onclick="buyNow(${i})">Buy with Shop Pay</button></div></div>`).join('')+`<div class="prod"><b>🤖 Your store, inside every AI agent</b><div class="q">Shoppers ask ChatGPT, Claude or Gemini — the agent finds your products, checks out with Shop Pay, and the order lands here. No website visit needed.</div></div>`;
+}else if(TAB==='chat'){
+list.innerHTML=CHAT.map(c=>c.who==='user'?`<div class="chat"><div class="bubble user">Sophia Bennett<br>${c.t}</div></div>`:`<div class="chat"><div class="bubble agent"><span class="who">🤖 SHOP AGENT · shop.md</span>${c.t}</div></div>`).join('')+`<div class="chat"><div class="bubble agent"><span class="who">🤖 SHOP AGENT · shop.md</span>Woven Linen Throw — <span class="price">$64</span><br>Washed linen, warm oat. In stock, ships in 2 days.</div><div class="row"><button class="abtn buy" id="checkoutBtn" onclick="checkoutAgent()">💳 Check out with Shop Pay</button><span class="flag agent">CARD NEVER SHARED</span></div></div>`;
+}else{
+list.innerHTML=ORDERS.map(o=>`<div class="ord"><b>📦 ${o.n}</b><div class="meta">${o.m}</div><div class="row"><span class="flag paid">✅ PAID</span><span class="flag agent">🤖 VIA AGENT</span></div></div>`).join('')+`<div class="ord"><b>🤖 Every agent sale lands here</b><div class="meta">No website visit, no cart, no abandoned checkout — the agent found it, the shopper approved it, Shop Pay paid it.</div></div>`;
+}
+}
+render();
+</script>
+</body>
+</html>
