@@ -640,4 +640,29 @@ Try the demo above: send a drafted reply, check the bookings your agent arranged
 *Run a shop? DM me "CLAW" — I'll show you what an always-on agent looks like for your business.*`,
   },
 
+  {
+    slug: 'ai-agents-buy-from-your-store',
+    title: 'Your Customers Just Bought From You Without Visiting Your Website.',
+    excerpt:
+      'A customer bought from you today — without ever visiting your website. Shopify\'s Fall \'26 Edition made agentic commerce default, but only 11% of small merchants are ready. Here\'s the sale, start to finish.',
+    tags: ["AI Agents", "E-commerce", "Shopify"],
+    content: `A customer bought from you today. You never saw them. They never visited your website, never opened your homepage, never touched a cart.
+
+They asked ChatGPT for a cosy gift for their mum. The agent found your linen throw, recommended it, and checked out with Shop Pay — while you were doing something else entirely.
+
+This is not a prediction. On 28 October 2026, Shopify's Fall '26 Edition made agentic commerce default. A new skill called shop.md turns ChatGPT, Claude and other AI agents into personal shoppers that search more than a billion products, recommend the right one, and check out with Shop Pay — a checkout over 400 million people already trust. Connectors now link your store to nine AI agents.
+
+Here is the gap: only 11% of small and mid-sized merchants are agent-ready, according to a PYMNTS and Visa survey. The other 89% are invisible in the place customers now ask first.
+
+The fix is not a new website. It is a store agents can read, recommend and sell from:
+
+:::demo shopagent:::
+
+ShopAgent shows the whole sale in one screen. A shopper asks the agent in plain language, the agent finds the product, the shopper checks out with Shop Pay — card never shared with the agent — and the order lands in your dashboard. No website visit. No abandoned cart.
+
+Try the demo above: ask the agent for a gift, check out with Shop Pay, and watch the order land.
+
+*Run a store? DM me "AGENT" — I'll show you what selling inside AI agents looks like for your shop.*`,
+  },
+
 ];
