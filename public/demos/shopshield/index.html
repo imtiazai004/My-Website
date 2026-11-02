@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopShield — Is Your Shop Next?</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#fdf3f0;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#4a0e0e}.top h1 span{color:#c2410c}
+.alert{background:linear-gradient(135deg,#4a0e0e,#c2410c);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(194,65,12,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(74,14,14,.08);border-top:3px solid #c2410c}
+.stat .sv{font-size:20px;font-weight:900;color:#4a0e0e}.stat .sl{font-size:10.5px;color:#c2410c;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(74,14,14,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12px;font-weight:800;color:#c2410c;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#c2410c;color:#fff}
+.card{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(74,14,14,.08)}
+.card b{font-size:14px;color:#4a0e0e;display:block}
+.card .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px}
+.card .fix{background:#fdf3f0;border-left:3px solid #c2410c;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#4a0e0e;font-weight:600;margin-bottom:9px}
+.card .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.crit{background:#fee2e2;color:#b91c1c}.flag.high{background:#ffedd5;color:#c2410c}.flag.med{background:#fef9c3;color:#a16207}.flag.done{background:#dcfce7;color:#15803d}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.scan{background:#c2410c;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}
+.urlin{width:100%;border:2px solid #fed7aa;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;color:#4a0e0e;margin-bottom:10px;outline:none}
+.urlin:focus{border-color:#c2410c}
+.prog{height:10px;background:#ffedd5;border-radius:6px;overflow:hidden;margin:10px 0 4px}
+.prog .bar{height:100%;width:0%;background:#c2410c;border-radius:6px;transition:width .4s}
+.scanlog{font-size:12px;color:#475569;font-weight:600;line-height:1.7}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#4a0e0e;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#c2410c;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🛡️ Shop<span>Shield</span></h1></div>
+  <div class="alert"><div class="big">⚠️</div><div class="txt">AI agents broke into 100+ company websites for about $50 each. This demo checks your shop for the same weak spots — before they do.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv">5</div><div class="sl">Weaknesses found</div></div>
+    <div class="stat"><div class="sv" id="stCrit">2</div><div class="sl">Critical</div></div>
+    <div class="stat"><div class="sv" id="stFixed">0</div><div class="sl">Fixed</div></div>
+    <div class="stat"><div class="sv">23h</div><div class="sl">Avg. break-in time</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="scanTab" onclick="setTab('scan')">🔍 Scan</div>
+    <div class="tab" id="findTab" onclick="setTab('find')">⚠️ Findings <span id="findN">(5)</span></div>
+    <div class="tab" id="fixTab" onclick="setTab('fix')">✅ Fix list</div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">ShopShield — a concept security checklist for small shops. Not a real penetration test. Maple &amp; Main Home Goods.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='scan';
+let scanned=false;
+const FINDINGS=[
+{n:'Exposed admin panel',sev:'crit',q:'Your admin login answers on a public address with no extra lock. Agents probe this first — it is the front door.',f:'Move the panel behind a private address, add two-factor login, and block repeated login tries.'},
+{n:'Forgotten upload page',sev:'crit',q:'An old file-upload form still lives in a hidden folder. Attackers plant uploaders here to run their own code.',f:'Delete every upload form you no longer use. Keep the one you need behind staff login only.'},
+{n:'Weak staff logins',sev:'high',q:'Two staff accounts use short, reused passwords — and one has no second step at login.',f:'Turn on two-factor for every staff account and require long, unique passwords.'},
+{n:'Out-of-date shop plugin',sev:'high',q:'One checkout plugin is two versions behind. Old plugins are the shortcut agents test next.',f:'Update the plugin this week, then set a monthly update reminder.'},
+{n:'Exposed control panel (port 8000)',sev:'med',q:'A control panel answers on port 8000 without a login prompt. Open panels leak targets and secrets.',f:'Close the port or put the panel behind a login — nothing admin-facing should answer without one.'}];
+const FIXES=[
+{n:'Lock the admin panel',m:'Private address + two-factor login + lockout after failed tries.'},
+{n:'Remove the forgotten upload page',m:'Delete the old form. Staff uploads go through the logged-in dashboard only.'},
+{n:'Turn on two-factor for staff',m:'Every staff account gets a second login step. No exceptions.'},
+{n:'Update the checkout plugin',m:'Patch to the latest version and schedule monthly updates.'},
+{n:'Close port 8000',m:'Nothing admin-facing answers on the open internet without a login.'}];
+let fixed=new Array(FINDINGS.length).fill(false);
+let fixDone=new Array(FIXES.length).fill(false);
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function setTab(t){TAB=t;['scan','find','fix'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function runScan(){
+  const bar=document.getElementById('bar');
+  const log=document.getElementById('scanlog');
+  const steps=['Checking checkout pages…','Probing admin login…','Hunting forgotten pages…','Testing staff logins…','Checking plugins and open ports…'];
+  let i=0;
+  document.getElementById('scanBtn').disabled=true;
+  const iv=setInterval(()=>{
+    if(i<steps.length){bar.style.width=((i+1)/steps.length*100)+'%';log.innerHTML+='✔ '+steps[i]+'<br>';i++;}
+    else{clearInterval(iv);scanned=true;log.innerHTML+='<b style="color:#b91c1c">Scan complete — 5 weaknesses found. 2 critical.</b><br>Open the Findings tab to see them.';toast('🔍 Scan complete — 5 weaknesses found');document.getElementById('scanBtn').disabled=false;}
+  },700);
+}
+function markFixed(i){if(fixed[i])return;fixed[i]=true;render();toast('✅ Marked fixed — '+FINDINGS[i].n)}
+function approveFix(i){if(fixDone[i])return;fixDone[i]=true;render();toast('✅ Fix queued — '+FIXES[i].n)}
+function render(){
+const list=document.getElementById('list');
+document.getElementById('stCrit').textContent=FINDINGS.filter((f,i)=>f.sev==='crit'&&!fixed[i]).length;
+document.getElementById('stFixed').textContent=fixed.filter(Boolean).length;
+const open=FINDINGS.filter((f,i)=>!fixed[i]).length;
+document.getElementById('findN').textContent='('+open+')';
+if(TAB==='scan'){
+list.innerHTML=`<div class="card"><b>🔍 Scan your shop</b><div class="q">Paste your shop URL. ShopShield walks the checkout and admin pages and checks for the exact weaknesses those AI agents probed. This is a concept checklist demo — not a real penetration test.</div><input class="urlin" id="shopUrl" value="https://mapleandmain.example.com" readonly><div class="row"><button class="abtn scan" id="scanBtn" onclick="runScan()">▶ Run security scan</button></div><div class="prog"><div class="bar" id="bar"></div></div><div class="scanlog" id="scanlog">${scanned?'✔ Scan complete — 5 weaknesses found. 2 critical.<br>Open the Findings tab to see them.':'Press run — the scan checks 5 spots in about 4 seconds.'}</div></div><div class="card"><b>📊 What the agents did in October 2026</b><div class="q">One operator, AI agents, 1,200+ shops tried, 100+ companies breached — roughly $50 per break-in, about 23 hours each. The fix list below covers the same weak spots.</div></div>`;
+}else if(TAB==='find'){
+list.innerHTML=FINDINGS.map((f,i)=>{
+if(fixed[i])return `<div class="card"><b>${f.n}</b><div class="q">${f.q}</div><div class="row"><span class="flag done">✅ FIXED</span></div></div>`;
+const sev=f.sev==='crit'?'CRITICAL':f.sev==='high'?'HIGH':'MEDIUM';
+return `<div class="card"><b>${f.n}</b><div class="q">${f.q}</div><div class="fix">🛠 Fix: ${f.f}</div><div class="row"><span class="flag ${f.sev}">${sev}</span><button class="abtn ok" id="fix${i}" onclick="markFixed(${i})">Mark fixed</button></div></div>`}).join('');
+}else{
+list.innerHTML=FIXES.map((f,i)=>{
+if(fixDone[i])return `<div class="card"><b>${f.n}</b><div class="q">${f.m}</div><div class="row"><span class="flag done">✅ QUEUED</span></div></div>`;
+return `<div class="card"><b>${f.n}</b><div class="q">${f.m}</div><div class="row"><button class="abtn scan" id="ok${i}" onclick="approveFix(${i})">Queue this fix</button></div></div>`}).join('')+`<div class="card"><b>🛡️ Done right, in one afternoon</b><div class="q">Five fixes. No new software. A shop that no longer answers the knock these agents use.</div></div>`;
+}
+}
+render();
+</script>
+</body>
+</html>
