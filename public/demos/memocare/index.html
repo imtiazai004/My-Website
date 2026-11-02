@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MemoCare — The Chatbot That Remembers Your Customers</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#eafaf3;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#042f2e}.top h1 span{color:#0d9488}
+.alert{background:linear-gradient(135deg,#042f2e,#0d9488);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(13,148,136,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(4,47,46,.08);border-top:3px solid #0d9488}
+.stat .sv{font-size:20px;font-weight:900;color:#042f2e}.stat .sl{font-size:10.5px;color:#0d9488;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(4,47,46,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12px;font-weight:800;color:#0d9488;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#0d9488;color:#fff}
+.msg{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(4,47,46,.08)}
+.msg b{font-size:14px;color:#042f2e;display:block}
+.msg .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px}
+.msg .draft{background:#eafaf3;border-left:3px solid #0d9488;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#042f2e;font-weight:600;margin-bottom:9px}
+.msg .memline{font-size:11px;color:#0d9488;font-weight:800;margin-bottom:8px}
+.msg .row{display:flex;gap:8px;align-items:center}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.draft{background:#ccfbf1;color:#0f766e}.flag.sent{background:#dcfce7;color:#15803d}.flag.human{background:#fee2e2;color:#b91c1c}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.send{background:#0d9488;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}
+.mem{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(4,47,46,.08)}
+.mem b{font-size:14px;color:#042f2e;display:block}
+.mem .meta{font-size:12px;color:#475569;font-weight:600;margin:3px 0 9px;line-height:1.5}
+.mem .meta span{color:#0d9488;font-weight:800}
+.tick{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(4,47,46,.08)}
+.tick b{font-size:14px;color:#042f2e;display:block}
+.tick .meta{font-size:12px;color:#475569;font-weight:600;margin:3px 0 9px;line-height:1.5}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#042f2e;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#0d9488;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🧠 Memo<span>Care</span></h1></div>
+  <div class="alert"><div class="big">👋</div><div class="txt">Emily Carter is back. The bot already knows her last order, her size and her open ticket — no re-explaining.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv">14</div><div class="sl">Memories recalled</div></div>
+    <div class="stat"><div class="sv" id="stSent">0</div><div class="sl">Replies sent</div></div>
+    <div class="stat"><div class="sv">0</div><div class="sl">Questions repeated</div></div>
+    <div class="stat"><div class="sv" id="stTickets">1</div><div class="sl">Tickets open</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="chatTab" onclick="setTab('chat')">💬 Chat</div>
+    <div class="tab" id="memTab" onclick="setTab('mem')">🧠 Memory</div>
+    <div class="tab" id="tickTab" onclick="setTab('tick')">🎫 Tickets</div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">MemoCare — the chatbot that remembers. Maple &amp; Main Boutique.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='chat';
+const CHATS=[
+{n:'Emily Carter',q:'"Hi! Where is my order?"',m:'🧠 Remembers: linen blazer · navy · size M · order #4821 · open ticket #1042',d:'Hi Emily! Your linen blazer (navy, size M) left our warehouse this morning — it arrives tomorrow by 6 PM. Your exchange ticket #1042 is still open — shall I keep the replacement in size M?',s:'draft'},
+{n:'James Wilson',q:'"Do you have the same jacket in green?"',m:'🧠 Remembers: size L · buys outdoor gear · prefers email updates',d:'Yes, James — the same jacket in forest green is in stock in your size L. Want me to hold one for pickup, or email you the link?',s:'draft'},
+{n:'Sophia Bennett',q:'"I need a gift for my sister — nothing wool, please."',m:'🧠 Remembers: allergic to wool · prefers navy · last gift: silk scarf',d:'Of course, Sophia — no wool, noted. The navy silk scarf you liked last time is back in stock, and it makes a lovely gift. Shall I add gift wrap?',s:'draft'}];
+const MEMS=[
+{n:'Emily Carter',m:'Last order: linen blazer, navy, size M · Order #4821 · Prefers free returns · Open ticket #1042 (wrong-size exchange)'},
+{n:'James Wilson',m:'Size L · Buys outdoor gear · Prefers email updates · Last order: trail jacket, forest green, order #4819'},
+{n:'Sophia Bennett',m:'Allergic to wool · Prefers navy · Last gift: silk scarf · Shops for birthdays, usually in May'}];
+const TICKS=[
+{n:'Ticket #1042 — Emily Carter',m:'Wrong-size exchange: linen blazer, navy, size M. Replacement reserved, awaiting her yes.',s:'open'},
+{n:'Ticket #1038 — James Wilson',m:'Delivery question on order #4819. Answered from memory — tracking sent, no follow-up needed.',s:'done'}];
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function setTab(t){TAB=t;['chat','mem','tick'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function sendReply(i){if(CHATS[i].s!=='draft')return;CHATS[i].s='sent';render();toast('✅ Memory-aware reply sent to '+CHATS[i].n.split(' ')[0])}
+function recall(i){toast('🧠 Recalled: '+MEMS[i].n.split(' ')[0]+' — last order, size & preferences loaded')}
+function resolveTick(i){if(TICKS[i].s!=='open')return;TICKS[i].s='done';render();toast('✅ Ticket resolved — Emily\u2019s exchange is on its way')}
+function render(){
+const list=document.getElementById('list');
+document.getElementById('stSent').textContent=CHATS.filter(m=>m.s==='sent').length;
+document.getElementById('stTickets').textContent=TICKS.filter(t=>t.s==='open').length;
+if(TAB==='chat'){
+list.innerHTML=CHATS.map((m,i)=>{
+if(m.s==='sent')return `<div class="msg"><b>${m.n}</b><div class="q">${m.q}</div><div class="memline">${m.m}</div><div class="draft">✍️ ${m.d}</div><div class="row"><span class="flag sent">✅ SENT — NO REPEATED QUESTIONS</span></div></div>`;
+return `<div class="msg"><b>${m.n}</b><div class="q">${m.q}</div><div class="memline">${m.m}</div><div class="draft">✍️ Draft: ${m.d}</div><div class="row"><span class="flag draft">DRAFT READY</span><button class="abtn send" id="send${i}" onclick="sendReply(${i})">Send reply</button></div></div>`}).join('');
+}else if(TAB==='mem'){
+list.innerHTML=MEMS.map((m,i)=>`<div class="mem"><b>🧠 ${m.n}</b><div class="meta">${m.m}</div><div class="row"><button class="abtn send" id="recall${i}" onclick="recall(${i})">Recall memory</button></div></div>`).join('')+`<div class="mem"><b>🤖 Memory never sleeps</b><div class="meta">Every chat adds to what the bot knows — <span>last order, size, preferences, open tickets</span> — so the next visit starts where the last one ended.</div></div>`;
+}else{
+list.innerHTML=TICKS.map((t,i)=>{
+if(t.s==='open')return `<div class="tick"><b>${t.n}</b><div class="meta">${t.m}</div><div class="row"><span class="flag human">🎫 OPEN</span><button class="abtn ok" id="ok${i}" onclick="resolveTick(${i})">✅ Resolve ticket</button></div></div>`;
+return `<div class="tick"><b>${t.n}</b><div class="meta">${t.m}</div><div class="row"><span class="flag sent">✅ RESOLVED</span></div></div>`}).join('');
+}
+}
+render();
+</script>
+</body>
+</html>
