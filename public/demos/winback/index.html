@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WinBack — Bring Your Quiet Customers Back</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#f0fdfa;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#134e4a}.top h1 span{color:#0d9488}
+.alert{background:linear-gradient(135deg,#134e4a,#0d9488);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(13,148,136,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(19,78,74,.08);border-top:3px solid #0d9488}
+.stat .sv{font-size:20px;font-weight:900;color:#134e4a}.stat .sl{font-size:10.5px;color:#0d9488;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(19,78,74,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12px;font-weight:800;color:#0d9488;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#0d9488;color:#fff}
+.msg{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(19,78,74,.08)}
+.msg b{font-size:14px;color:#134e4a;display:block}
+.msg .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px}
+.msg .draft{background:#f0fdfa;border-left:3px solid #0d9488;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#134e4a;font-weight:600;margin-bottom:9px}
+.msg .row{display:flex;gap:8px;align-items:center}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.quiet30{background:#fef3c7;color:#92400e}.flag.quiet60{background:#ffedd5;color:#9a3412}.flag.quiet90{background:#fee2e2;color:#b91c1c}.flag.draft{background:#ccfbf1;color:#0f766e}.flag.sent{background:#dcfce7;color:#15803d}.flag.reply{background:#dbeafe;color:#1d4ed8}.flag.booked{background:#dcfce7;color:#15803d}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.send{background:#0d9488;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}
+.appt{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(19,78,74,.08)}
+.appt b{font-size:14px;color:#134e4a;display:block}
+.appt .meta{font-size:11.5px;color:#0d9488;font-weight:700}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#134e4a;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#0d9488;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>💤 Win<span>Back</span></h1></div>
+  <div class="alert"><div class="big">😴</div><div class="txt">27 customers went quiet this quarter. Your agent already drafted a personal win-back message for each one.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv">27</div><div class="sl">Quiet customers</div></div>
+    <div class="stat"><div class="sv" id="stDraft">5</div><div class="sl">Drafts ready</div></div>
+    <div class="stat"><div class="sv" id="stSent">0</div><div class="sl">Win-backs sent</div></div>
+    <div class="stat"><div class="sv" id="stBook">0</div><div class="sl">Rebooked</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="quietTab" onclick="setTab('quiet')">😴 Quiet customers</div>
+    <div class="tab" id="draftTab" onclick="setTab('draft')">✉️ Win-back drafts</div>
+    <div class="tab" id="replyTab" onclick="setTab('reply')">📈 Replies</div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">WinBack — your regulars, back in the chair. The Velvet Chair Salon.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='quiet';
+const QUIET=[
+{n:'Emily Carter',q:'Last visit: balayage + cut · 92 days ago · 6 visits before she went quiet',d:'quiet90'},
+{n:'James Wilson',q:'Last visit: beard trim + hot towel shave · 61 days ago · a regular every 3 weeks',d:'quiet60'},
+{n:'Sophia Bennett',q:'Last visit: bridal trial + blowout · 88 days ago · booked twice a month',d:'quiet90'},
+{n:'Daniel Brooks',q:'Last visit: grey blending + cut · 34 days ago · usually back every 4 weeks',d:'quiet30'},
+{n:'Olivia Parker',q:'Last visit: manicure + pedicure · 58 days ago · brought a friend last time',d:'quiet60'}];
+const DRAFTS=[
+{n:'Emily Carter',q:'Quiet 92 days · last order: balayage + cut',d:'Hi Emily! It has been a while since your balayage — your colour would be due a refresh. We saved your usual slot this Saturday. Shall I hold it for you?',s:'draft'},
+{n:'James Wilson',q:'Quiet 61 days · last order: beard trim + hot towel shave',d:'Hi James! You are overdue your usual trim — the chair misses you. I can fit you in Thursday at 6 PM if that works?',s:'draft'},
+{n:'Sophia Bennett',q:'Quiet 88 days · last order: bridal trial + blowout',d:'Hi Sophia! Your blowout routine has been missed — we have a new Friday slot open with your usual stylist. Want it?',s:'draft'},
+{n:'Daniel Brooks',q:'Quiet 34 days · last order: grey blending + cut',d:'Hi Daniel! Just a nudge — your usual 4-week cut is due. I kept Tuesday 5:30 PM open for you.',s:'draft'},
+{n:'Olivia Parker',q:'Quiet 58 days · last order: manicure + pedicure',d:'Hi Olivia! It has been almost two months since your last mani-pedi. Your friend asked about you too — shall I book you both in Saturday?',s:'draft'}];
+const REPLIES=[
+{n:'Emily Carter',q:'"Yes please! Saturday works — book me in. I have missed this place!"',s:'reply'},
+{n:'James Wilson',q:'"Thursday 6 PM is perfect. See you then."',s:'reply'},
+{n:'Sophia Bennett',q:'"Friday sounds lovely, thank you for thinking of me!"',s:'reply'}];
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function setTab(t){TAB=t;['quiet','draft','reply'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function sendWin(i){if(DRAFTS[i].s!=='draft')return;DRAFTS[i].s='sent';render();toast('✅ Win-back sent to '+DRAFTS[i].n.split(' ')[0])}
+function bookReply(i){if(REPLIES[i].s!=='reply')return;REPLIES[i].s='booked';render();toast('📅 '+REPLIES[i].n.split(' ')[0]+' is rebooked — welcome back!')}
+function quietLabel(d){return d==='quiet30'?'😴 QUIET 30 DAYS':d==='quiet60'?'😴 QUIET 60 DAYS':'😴 QUIET 90 DAYS'}
+function render(){
+const list=document.getElementById('list');
+document.getElementById('stDraft').textContent=DRAFTS.filter(d=>d.s==='draft').length;
+document.getElementById('stSent').textContent=DRAFTS.filter(d=>d.s==='sent').length;
+document.getElementById('stBook').textContent=REPLIES.filter(r=>r.s==='booked').length;
+if(TAB==='quiet'){
+list.innerHTML=QUIET.map((m,i)=>`<div class="msg"><b>${m.n}</b><div class="q">${m.q}</div><div class="row"><span class="flag ${m.d}">${quietLabel(m.d)}</span><button class="abtn send" id="draft${i}" onclick="setTab('draft')">See draft ✉️</button></div></div>`).join('')+`<div class="appt"><b>🤖 Segmented automatically</b><div class="meta">30 / 60 / 90 days quiet — no spreadsheet, no guessing who drifted away.</div></div>`;
+}else if(TAB==='draft'){
+list.innerHTML=DRAFTS.map((m,i)=>{
+if(m.s==='sent')return `<div class="msg"><b>${m.n}</b><div class="q">${m.q}</div><div class="draft">✍️ ${m.d}</div><div class="row"><span class="flag sent">✅ SENT</span></div></div>`;
+return `<div class="msg"><b>${m.n}</b><div class="q">${m.q}</div><div class="draft">✍️ Draft: ${m.d}</div><div class="row"><span class="flag draft">DRAFT READY</span><button class="abtn send" id="send${i}" onclick="sendWin(${i})">Send win-back</button></div></div>`}).join('');
+}else{
+list.innerHTML=REPLIES.map((m,i)=>{
+if(m.s==='booked')return `<div class="msg"><b>${m.n}</b><div class="q">${m.q}</div><div class="row"><span class="flag booked">📅 REBOOKED</span></div></div>`;
+return `<div class="msg"><b>${m.n}</b><div class="q">${m.q}</div><div class="row"><span class="flag reply">💬 REPLIED</span><button class="abtn send" id="book${i}" onclick="bookReply(${i})">Book them in</button></div></div>`}).join('')+`<div class="appt"><b>📈 Win-back working</b><div class="meta">3 replies from the first 5 messages sent — quiet customers answer when the message remembers them.</div></div>`;
+}
+}
+render();
+</script>
+</body>
+</html>
