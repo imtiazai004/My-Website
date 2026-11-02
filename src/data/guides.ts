@@ -13,10 +13,19 @@ export const GUIDES: Guide[] = [
   {
     slug: 'account-health',
     updated: '2026-10-29',
-    badge: 'New',
+    badge: 'Guide',
     title: 'The Account-Health App — Stops One Bad Week From Freezing a TikTok Shop',
     description:
       'The app that watches a TikTok Shop Account Health Rating — live score and milestone distance, WhatsApp alerts before the freeze, violation breakdown, cancellation and dispatch gauges, and the policy-quiz recovery path. The illustrative slide math and the full build roadmap.',
+    meta: 'PDF · 3 pages · English',
+  },
+  {
+    slug: 'show-once-automation-repetitive-tasks',
+    updated: '2026-11-02',
+    badge: 'New',
+    title: 'ShowOnce — The App That Learns Any Repetitive Job by Watching You Do It Once',
+    description:
+      'The app that learns any repetitive job by watching you do it once — the demonstration recorder, the replay engine, connected systems in one workflow, the human checkpoint, the exception queue, and the time-saved dashboard. The illustrative time math and the full build roadmap.',
     meta: 'PDF · 3 pages · English',
   },
   {
