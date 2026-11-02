@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProfileBot — Your Google Listing Answers While You Sleep</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#ecfdf5;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#064e3b}.top h1 span{color:#059669}
+.alert{background:linear-gradient(135deg,#064e3b,#059669);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(5,150,105,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(6,78,59,.08);border-top:3px solid #059669}
+.stat .sv{font-size:20px;font-weight:900;color:#064e3b}.stat .sl{font-size:10.5px;color:#059669;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(6,78,59,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12px;font-weight:800;color:#059669;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#059669;color:#fff}
+.msg{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(6,78,59,.08)}
+.msg b{font-size:14px;color:#064e3b;display:block}
+.msg .via{font-size:10.5px;color:#059669;font-weight:800;margin-bottom:2px}
+.msg .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px}
+.msg .draft{background:#ecfdf5;border-left:3px solid #059669;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#064e3b;font-weight:600;margin-bottom:9px}
+.msg .row{display:flex;gap:8px;align-items:center}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.draft{background:#d1fae5;color:#065f46}.flag.sent{background:#dcfce7;color:#15803d}.flag.human{background:#fee2e2;color:#b91c1c}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.send{background:#059669;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}
+.appt{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(6,78,59,.08)}
+.appt b{font-size:14px;color:#064e3b;display:block}
+.appt .meta{font-size:11.5px;color:#059669;font-weight:700}
+.slots{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.slot{font-size:11.5px;font-weight:800;padding:8px 11px;border-radius:10px;border:1.5px solid #a7f3d0;background:#fff;color:#065f46;cursor:pointer}
+.slot.taken{background:#f1f5f9;border-color:#e2e8f0;color:#94a3b8;cursor:not-allowed;text-decoration:line-through}
+.slot.sel{background:#059669;color:#fff;border-color:#059669;text-decoration:none}
+.prof{background:#fff;border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(6,78,59,.08)}
+.prof b{font-size:15px;color:#064e3b;display:block}
+.prof .sub{font-size:12px;color:#059669;font-weight:700;margin:2px 0 10px}
+.prof .line{font-size:12.5px;color:#475569;font-weight:600;padding:5px 0;border-bottom:1px solid #f0fdf4}
+.prof .line span{float:right;color:#064e3b;font-weight:800}
+.warn{background:#fef2f2;border:1.5px solid #fecaca;color:#b91c1c;font-size:12px;font-weight:800;border-radius:12px;padding:11px 14px;margin-bottom:10px}
+.toggle{width:52px;height:28px;border-radius:20px;background:#059669;border:none;cursor:pointer;position:relative;flex-shrink:0}
+.toggle.off{background:#cbd5e1}
+.toggle::after{content:'';position:absolute;top:3px;left:29px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .2s}
+.toggle.off::after{left:3px}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#064e3b;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#059669;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🤖 Profile<span>Bot</span></h1></div>
+  <div class="alert"><div class="big">📍</div><div class="txt">A customer found Maple &amp; Main Salon on Google — the agent answered her before you woke up.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv">9</div><div class="sl">Messages answered</div></div>
+    <div class="stat"><div class="sv" id="stBooked">3</div><div class="sl">Bookings made</div></div>
+    <div class="stat"><div class="sv" id="stHuman">1</div><div class="sl">Needs a human</div></div>
+    <div class="stat"><div class="sv">4 sec</div><div class="sl">Avg reply time</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="msgTab" onclick="setTab('msg')">💬 Messages</div>
+    <div class="tab" id="calTab" onclick="setTab('cal')">📅 Bookings</div>
+    <div class="tab" id="profTab" onclick="setTab('prof')">⚙️ Profile</div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">ProfileBot — your Google listing, answering while you sleep. Maple &amp; Main Salon.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='msg';
+let aiOn=true;
+let bridalAdded=false;
+let bookedNow=3;
+const MSGS=[
+{n:'Emily Carter',via:'📍 From Google Search · 8:47 PM',q:'"Are you open Saturday?"',d:'Yes — we are open Saturday 9 AM to 5 PM. Want me to book you a slot?',s:'draft'},
+{n:'Sophia Bennett',via:'📍 From Google Maps · 9:12 PM',q:'"Can I book a haircut for Saturday morning?"',d:'Of course — Saturday 10:30 AM is free. Shall I hold it for you?',s:'draft'},
+{n:'Olivia Parker',via:'📍 From Google Search · 9:40 PM',q:'"Where are you located? Is there parking nearby?"',d:'We are at 12 Maple Street — free parking right behind the salon. See you soon!',s:'draft'},
+{n:'Daniel Brooks',via:'📍 From Google Maps · 10:05 PM',q:'"Do you do bridal hair for a wedding party of six? I need it this month."',d:'',s:'human'}];
+const APPTS=[
+{n:'James Wilson',m:'Haircut · Sat 10:30 AM · Booked by the agent'},
+{n:'Emily Carter',m:'Cut & style · Sat 11:00 AM · Booked by the agent'},
+{n:'Daniel Brooks',m:'Bridal consult · Fri 3:00 PM · Waiting on you'}];
+const SLOTS=[
+{t:'9:00',taken:true},{t:'10:30',taken:true},{t:'12:00',taken:false},{t:'2:00',taken:false},{t:'3:30',taken:false}];
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function setTab(t){TAB=t;['msg','cal','prof'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function sendReply(i){if(MSGS[i].s!=='draft')return;MSGS[i].s='sent';render();toast('✅ Reply sent to '+MSGS[i].n.split(' ')[0])}
+function takeover(i){if(MSGS[i].s!=='human')return;MSGS[i].s='human2';render();toast('🧑‍💼 You took over — Daniel is waiting for your reply')}
+function bookSlot(i){const s=SLOTS[i];if(s.taken)return;s.taken=true;bookedNow++;render();toast('✅ Saturday '+s.t+' booked — invite sent')}
+function addBridal(){if(bridalAdded)return;bridalAdded=true;render();toast('✅ Bridal hair added — the agent can now answer those questions')}
+function toggleAI(){aiOn=!aiOn;render();toast(aiOn?'✅ AI messaging ON — the agent is answering':'⏸️ AI messaging OFF — messages go straight to your phone')}
+function render(){
+const list=document.getElementById('list');
+document.getElementById('stBooked').textContent=bookedNow;
+document.getElementById('stHuman').textContent=MSGS.filter(m=>m.s==='human').length;
+if(TAB==='msg'){
+list.innerHTML=MSGS.map((m,i)=>{
+if(m.s==='human')return `<div class="msg"><div class="via">${m.via}</div><b>${m.n}</b><div class="q">${m.q}</div><div class="row"><span class="flag human">⚠️ NEEDS A HUMAN</span><button class="abtn send" id="takeover${i}" onclick="takeover(${i})">Take over</button></div></div>`;
+if(m.s==='human2')return `<div class="msg"><div class="via">${m.via}</div><b>${m.n}</b><div class="q">${m.q}</div><div class="row"><span class="flag human">🧑‍💼 WITH YOU NOW</span></div></div>`;
+if(m.s==='sent')return `<div class="msg"><div class="via">${m.via}</div><b>${m.n}</b><div class="q">${m.q}</div><div class="draft">🤖 ${m.d}</div><div class="row"><span class="flag sent">✅ SENT BY AGENT</span></div></div>`;
+return `<div class="msg"><div class="via">${m.via}</div><b>${m.n}</b><div class="q">${m.q}</div><div class="draft">🤖 Draft: ${m.d}</div><div class="row"><span class="flag draft">DRAFT READY</span><button class="abtn send" id="send${i}" onclick="sendReply(${i})">Send reply</button></div></div>`}).join('');
+}else if(TAB==='cal'){
+list.innerHTML=APPTS.map(a=>`<div class="appt"><b>📅 ${a.n}</b><div class="meta">${a.m}</div></div>`).join('')
++`<div class="appt"><b>🕐 Open slots — Saturday</b><div class="slots">${SLOTS.map((s,i)=>`<button class="slot ${s.taken?'taken':''}" id="slot${i}" onclick="bookSlot(${i})">${s.t}</button>`).join('')}</div></div>`;
+}else{
+list.innerHTML=`
+<div class="prof"><b>📍 Maple &amp; Main Salon</b><div class="sub">⭐ 4.8 · 214 reviews · 12 Maple Street</div>
+<div class="line">Mon – Fri <span>9 AM – 7 PM</span></div>
+<div class="line">Saturday <span>9 AM – 5 PM</span></div>
+<div class="line">Sunday <span>Closed</span></div>
+<div class="line">Cut &amp; style <span>Listed</span></div>
+<div class="line">Colour &amp; balayage <span>Listed</span></div>
+<div class="line">Bridal hair <span>${bridalAdded?'Listed ✅':'Not listed ⚠️'}</span></div>
+</div>
+${bridalAdded?'':`<div class="warn">⚠️ "Bridal hair" is not on your profile — so the agent could not answer Daniel's question. Add it and the agent handles the next one.</div>`}
+${bridalAdded?'':`<div class="prof"><div class="row" style="display:flex;gap:8px;align-items:center"><button class="abtn send" id="addBridal" onclick="addBridal()">➕ Add "Bridal hair" to services</button></div></div>`}
+<div class="prof"><div class="row" style="display:flex;gap:10px;align-items:center;justify-content:space-between"><div><b>AI messaging</b><div class="sub" style="margin:2px 0 0">Agent answers from this profile</div></div><button class="toggle ${aiOn?'':'off'}" id="aiToggle" onclick="toggleAI()" aria-label="Toggle AI messaging"></button></div></div>
+<div class="prof"><b>🤖 The agent's brain is this profile</b><div class="sub" style="margin-top:6px">Wrong hours or missing services = wrong answers. Keep the profile right and it answers like your best receptionist.</div></div>`;
+}
+}
+render();
+</script>
+</body>
+</html>
