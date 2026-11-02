@@ -709,4 +709,27 @@ Try the demo above: a customer asks if you're open Saturday — the agent answer
 *Run a local business? DM me "PROFILE" — I'll show you what an AI front desk looks like for your listing.*`,
   },
 
+  {
+    slug: 'always-on-ai-agent-overnight-tasks',
+    title: 'You Closed Your Laptop at 6 PM. Your Agent Kept Working Until 6 AM.',
+    excerpt:
+      'You closed your laptop at 6 PM. Your agent chased invoices, followed up warm leads and drafted tomorrow\'s posts until 6 AM — and nothing went out without your yes. OpenAI\'s Dots make the night shift real.',
+    tags: ["AI Agents", "Small Business", "Automation"],
+    content: `6:04 PM. You close your laptop. Three invoices are still overdue. A warm lead who asked about your bestseller twice has gone quiet. Tomorrow's posts are unwritten, and the inbox will be fuller by morning.
+
+6:00 AM. While you slept, your agent worked the whole night shift — chasing overdue invoices, following up the warm lead, drafting tomorrow's posts. Nothing was sent without your rules — every action waited for your morning yes.
+
+This is the shift OpenAI just made real. At DevDay on 29 September 2026, it launched Dots: always-on ChatGPT agents, each with its own cloud computer, connected to more than 4,000 apps. The old chatbot era is closing — new Custom GPT creation ended for Enterprise workspaces on 26 October 2026, with full retirement set for 11 December.
+
+The honest catch, from OpenAI's own safety tests: on long task chains, nearly one in five drifted outside its brief. An agent that works all night is powerful. Unsupervised, it is a risk. That is why the approval queue is the product:
+
+:::demo dotdesk:::
+
+One dashboard for the night shift. Invoices chased, leads followed up, tomorrow's posts drafted — every action waiting for your yes before a single message goes out. The agent does the night's work. You keep the morning's decisions.
+
+Try the demo above: clear the approval queue, read the morning report, and see what twelve hours of work looks like when you stay in charge.
+
+*Own a business? DM me "NIGHT" — I'll show you what an overnight agent looks like for your business.*`,
+  },
+
 ];
