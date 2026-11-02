@@ -25,6 +25,7 @@ const routes = {
   '/guides/fee-stack-calculator': 'guides-fee-stack-calculator.html',
   '/guides/competitor-price-watch': 'guides-competitor-price-watch.html',
   '/guides/account-health': 'guides-account-health.html',
+  '/guides/show-once-automation-repetitive-tasks': 'guides-show-once-automation-repetitive-tasks.html',
   '/guides/morning-briefing-agent': 'guides-morning-briefing-agent.html',
   '/guides/claimback': 'guides-claimback.html',
   '/guides/sellerradar-part-1': 'guides-sellerradar-part-1.html',
