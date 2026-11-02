@@ -828,4 +828,27 @@ Try the demo above: send a win-back to Emily, watch the replies come in, book th
 *Customers going quiet on you? DM me "WINBACK" — I'll show you what a win-back agent looks like for your business.*`,
   },
 
+  {
+    slug: 'ai-agent-answers-your-google-reviews',
+    title: 'A Customer Left a 1-Star Review. Nobody Replied for 21 Days.',
+    excerpt:
+      'A 1-star review sat unanswered for 21 days while hundreds of people read it. Google is now automating the whole reputation surface — and an agent can draft every reply in minutes, with the angry ones escalated to you.',
+    tags: ["AI Agents", "Google Reviews", "Small Business"],
+    content: `A customer left a 1-star review on a Tuesday. Nobody on the team saw it until three weeks later — by then, hundreds of people had read it, and the damage was done.
+
+That is how most small businesses lose customers they never meet. A review is the first thing a stranger reads before deciding whether to walk in — and the reply matters as much as the review. A fast, human reply can turn a critic into a regular; silence reads like you do not care.
+
+Google is automating this whole surface now. Its Business Home hub — a closed beta that opened on 22 October 2026 — lets owners answer reviews inside one Gemini-run dashboard, and its AI messaging pilot replies to customers straight from Search and Maps. The shift is real: 95% of small businesses using AI for customer service report better response quality.
+
+The point is not the robot. It is the minutes. Answered in minutes, a review reads like a business that cares; answered in three weeks, like one that gave up:
+
+:::demo reviewdesk:::
+
+One inbox for every Google review. The agent drafts a warm reply for the 5-star fans, a careful one for the unhappy ones — and the 1-star review is escalated to you before anything goes out. One click approves it.
+
+Try the demo above: approve a drafted reply, flag the 1-star review for a human, and check your rating breakdown. The review sat there for 21 days. It did not have to.
+
+*Got reviews sitting unanswered? DM me "REVIEW" — I'll show you what an agent answering your Google reviews looks like for your business.*`,
+  },
+
 ];
