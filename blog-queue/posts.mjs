@@ -755,4 +755,29 @@ Run the scan, open the findings, work the fix list — five fixes, and a shop th
 *Run a shop? DM me "SHIELD" — I'll show you what a security check looks like for your store.*`,
   },
 
+  {
+    slug: 'ai-chatbot-remembers-your-customers',
+    title: 'Your Chatbot Asks Every Customer the Same Question Twice. It Doesn\'t Have To.',
+    excerpt:
+      'Emily has ordered from you three times — and your chatbot greets her like a stranger. Memory layers for AI agents are now among GitHub\'s most-starred projects. Meet MemoCare: a support chatbot that remembers every customer.',
+    tags: ["AI Agents", "Customer Support", "Automation"],
+    content: `"Hi! Where is my order?"
+
+Emily has ordered from you three times. Your chatbot greets her like a stranger. What is your order number? What is your name? What did you buy? She typed it all in last month. Now she types it again — or she closes the tab and buys somewhere else.
+
+Every returning customer gets the same treatment. The chatbot forgets everything the moment the chat ends: the last order, the size, the preference, the open ticket. Your best customers get the worst experience — they are the ones with the most history to repeat.
+
+The whole AI world is racing to fix this. Memory layers for AI agents are now among GitHub's most-starred projects — one passed 100,000 stars in October — and the leading one's own benchmarks score 92.5 on LoCoMo and 94.4 on LongMemEval. An assistant that forgets is one you retrain every single day.
+
+The fix is a chatbot with a memory. Meet MemoCare:
+
+:::demo memocare:::
+
+A returning customer asks about an order, and the bot already knows the last purchase, the size, the preference and the open ticket. No re-explaining, no repeated questions. The Memory tab holds what the bot knows; the Tickets tab keeps every open issue in view.
+
+Try the demo above: send a memory-aware reply, open the Memory tab, and resolve Emily's open exchange ticket.
+
+*Run a shop? DM me "MEMORY" — I'll show you what a chatbot that remembers looks like for your business.*`,
+  },
+
 ];
