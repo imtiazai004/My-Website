@@ -21,6 +21,7 @@ const routes = {
   '/work': 'work.html',
   '/demos': 'demos.html',
   '/guides': 'guides.html',
+  '/guides/amazon-return-rule': 'guides-amazon-return-rule.html',
   '/guides/agent-hardening-guide': 'guides-agent-hardening-guide.html',
   '/guides/fee-stack-calculator': 'guides-fee-stack-calculator.html',
   '/guides/competitor-price-watch': 'guides-competitor-price-watch.html',

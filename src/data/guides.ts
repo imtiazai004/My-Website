@@ -11,6 +11,15 @@ export interface Guide {
 
 export const GUIDES: Guide[] = [
   {
+    slug: 'amazon-return-rule',
+    updated: '2026-11-03',
+    badge: 'New',
+    title: 'The Amazon Return-Rule Dashboard',
+    description:
+      'The app that saves Amazon sellers from losing dollars — a 7-day label clock on every FBM return, auto prepaid labels through the returns workflow, a returnless-refund guard, and fee-category alerts for the 31 October move. The illustrative $3,000-a-year refund math and the full build roadmap.',
+    meta: 'PDF · 5 pages · English',
+  },
+  {
     slug: 'account-health',
     updated: '2026-10-29',
     badge: 'Guide',
@@ -22,7 +31,7 @@ export const GUIDES: Guide[] = [
   {
     slug: 'show-once-automation-repetitive-tasks',
     updated: '2026-11-02',
-    badge: 'New',
+    badge: 'Guide',
     title: 'ShowOnce — The App That Learns Any Repetitive Job by Watching You Do It Once',
     description:
       'The app that learns any repetitive job by watching you do it once — the demonstration recorder, the replay engine, connected systems in one workflow, the human checkpoint, the exception queue, and the time-saved dashboard. The illustrative time math and the full build roadmap.',

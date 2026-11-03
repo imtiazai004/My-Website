@@ -47,6 +47,7 @@ const FeeStackCalculatorGuidePage = lazy(() => import('./components/FeeStackCalc
 const CompetitorPriceWatchGuidePage = lazy(() => import('./components/CompetitorPriceWatchGuidePage'));
 const AccountHealthGuidePage = lazy(() => import('./components/AccountHealthGuidePage'));
 const ShowOnceGuidePage = lazy(() => import('./components/ShowOnceGuidePage'));
+const AmazonReturnRuleGuidePage = lazy(() => import('./components/AmazonReturnRuleGuidePage'));
 const DemosPage = lazy(() => import('./components/DemosPage'));
 const WorkPage = lazy(() => import('./components/WorkPage'));
 const NotFound = lazy(() => import('./components/NotFound'));
@@ -158,6 +159,7 @@ export default function App() {
         <Route path="/guides/competitor-price-watch" element={page(<CompetitorPriceWatchGuidePage />)} />
         <Route path="/guides/account-health" element={page(<AccountHealthGuidePage />)} />
         <Route path="/guides/show-once-automation-repetitive-tasks" element={page(<ShowOnceGuidePage />)} />
+        <Route path="/guides/amazon-return-rule" element={page(<AmazonReturnRuleGuidePage />)} />
         <Route path="/blog" element={page(<BlogPage />)} />
         <Route path="/blog/:slug" element={page(<BlogPostPage />)} />
         <Route path="/submit-testimonial" element={page(<SubmitTestimonial />)} />
