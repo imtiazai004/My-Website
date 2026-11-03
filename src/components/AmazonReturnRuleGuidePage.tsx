@@ -7,8 +7,8 @@ import { usePageSeo } from '../lib/seo';
 import { BUSINESS, FOUNDER } from '../config/business';
 
 const PDF_URL = '/guides/amazon-return-rule.pdf';
-const SLIDE_1_URL = '/guides/amazon-return-rule-slide-1.png';
-const SLIDE_4_URL = '/guides/amazon-return-rule-slide-4.png';
+const SLIDE_1_URL = '/guides/amazon-return-rule-cover.png';
+const SLIDE_4_URL = '/guides/amazon-return-rule-fees.png';
 
 export default function AmazonReturnRuleGuidePage() {
   useEffect(() => {
