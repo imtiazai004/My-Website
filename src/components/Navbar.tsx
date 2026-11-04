@@ -6,7 +6,7 @@ import {
   Globe, ShoppingCart, Bot, BellRing, AppWindow, Landmark,
   ChevronDown, ArrowRight, Mail, MessageCircle,
   Layers, Star, Users, HelpCircle, X, Menu, Scale,
-  Zap, PenLine, BookOpen, MonitorPlay, LibraryBig,
+  Zap, PenLine, BookOpen, MonitorPlay, LibraryBig, Download,
 } from 'lucide-react';
 import { BUSINESS } from '../config/business';
 import { SERVICES as SERVICE_DATA } from '../data/services';
@@ -26,6 +26,7 @@ const WORK_ITEMS = [
   { icon: Layers,      label: 'All projects',      desc: 'Products we built and run',        href: '/work' },
   { icon: MonitorPlay, label: 'Live demos',        desc: 'Try business apps before you buy', href: '/demos' },
   { icon: LibraryBig,  label: 'Free guides',       desc: 'Build-it-yourself playbooks',      href: '/guides' },
+  { icon: Download,    label: 'Source',            desc: 'Downloadable source repos',        href: '/source' },
   { icon: BookOpen,    label: 'Blueprint library', desc: 'Step-by-step build blueprints',    href: '/blueprint-library' },
 ];
 
