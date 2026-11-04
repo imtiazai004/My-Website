@@ -97,6 +97,12 @@ All demos: https://aisofttechsolution.com/demos
 
 All guides: https://aisofttechsolution.com/guides
 
+## Source
+
+- **ecommerce-ai-tools** — AI product video workflows, ecommerce data APIs and free product listings for online sellers — turn product photos, a listing link, an avatar or a reference clip into a product video with five workflows (Image to Video, URL to Video, Avatar Video, Video Clone, Bulk Video); look up marketplace data for Amazon, TikTok, 1688, Shopify, Shopee and Walmart — product search, reviews, sourcing and keywords; and list a product on a free public page built for search and AI discovery. ZIP · English. Origin: https://github.com/nexscope-ai/ecommerce-ai-tools — Download: https://aisofttechsolution.com/source/ecommerce-ai-tools.zip
+
+All source: https://aisofttechsolution.com/source
+
 ## Compare
 
 - [Soft Tech Solution vs hiring a freelancer](https://aisofttechsolution.com/compare/agency-vs-freelancer) — side-by-side on pricing model, skill coverage, continuity risk, NDA/IP terms and timelines.
