@@ -17,6 +17,7 @@ const STATIC_PAGES: Entry[] = [
   { loc: '/demos/sinma-3d', lastmod: '2026-10-21', changefreq: 'monthly', priority: '0.5' },
   { loc: '/profitscout', lastmod: '2026-06-17', changefreq: 'monthly', priority: '0.8' },
   { loc: '/guides', lastmod: '2026-11-03', changefreq: 'weekly', priority: '0.8' },
+  { loc: '/source', lastmod: '2026-11-04', changefreq: 'weekly', priority: '0.7' },
   { loc: '/guides/amazon-return-rule', lastmod: '2026-11-03', changefreq: 'monthly', priority: '0.7' },
   { loc: '/guides/account-health', lastmod: '2026-10-29', changefreq: 'monthly', priority: '0.7' },
   { loc: '/guides/show-once-automation-repetitive-tasks', lastmod: '2026-11-02', changefreq: 'monthly', priority: '0.7' },
