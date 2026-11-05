@@ -48,6 +48,7 @@ const STATIC_SNAPSHOTS: Record<string, string> = {
   '/guides': '/prerendered/guides.html',
   '/source': '/prerendered/source.html',
   '/guides/amazon-return-rule': '/prerendered/guides-amazon-return-rule.html',
+  '/guides/ecommerce-ai-tools': '/prerendered/guides-ecommerce-ai-tools.html',
   '/guides/competitor-price-watch': '/prerendered/guides-competitor-price-watch.html',
   '/guides/account-health': '/prerendered/guides-account-health.html',
   '/guides/show-once-automation-repetitive-tasks': '/prerendered/guides-show-once-automation-repetitive-tasks.html',

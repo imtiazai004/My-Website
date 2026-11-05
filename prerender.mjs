@@ -23,6 +23,7 @@ const routes = {
   '/guides': 'guides.html',
   '/source': 'source.html',
   '/guides/amazon-return-rule': 'guides-amazon-return-rule.html',
+  '/guides/ecommerce-ai-tools': 'guides-ecommerce-ai-tools.html',
   '/guides/agent-hardening-guide': 'guides-agent-hardening-guide.html',
   '/guides/fee-stack-calculator': 'guides-fee-stack-calculator.html',
   '/guides/competitor-price-watch': 'guides-competitor-price-watch.html',
