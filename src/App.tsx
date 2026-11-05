@@ -48,6 +48,7 @@ const CompetitorPriceWatchGuidePage = lazy(() => import('./components/Competitor
 const AccountHealthGuidePage = lazy(() => import('./components/AccountHealthGuidePage'));
 const ShowOnceGuidePage = lazy(() => import('./components/ShowOnceGuidePage'));
 const AmazonReturnRuleGuidePage = lazy(() => import('./components/AmazonReturnRuleGuidePage'));
+const EcommerceAiToolsGuidePage = lazy(() => import('./components/EcommerceAiToolsGuidePage'));
 const SourcePage = lazy(() => import('./components/SourcePage'));
 const DemosPage = lazy(() => import('./components/DemosPage'));
 const WorkPage = lazy(() => import('./components/WorkPage'));
@@ -161,6 +162,7 @@ export default function App() {
         <Route path="/guides/account-health" element={page(<AccountHealthGuidePage />)} />
         <Route path="/guides/show-once-automation-repetitive-tasks" element={page(<ShowOnceGuidePage />)} />
         <Route path="/guides/amazon-return-rule" element={page(<AmazonReturnRuleGuidePage />)} />
+        <Route path="/guides/ecommerce-ai-tools" element={page(<EcommerceAiToolsGuidePage />)} />
         <Route path="/source" element={page(<SourcePage />)} />
         <Route path="/blog" element={page(<BlogPage />)} />
         <Route path="/blog/:slug" element={page(<BlogPostPage />)} />

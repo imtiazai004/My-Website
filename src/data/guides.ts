@@ -11,9 +11,18 @@ export interface Guide {
 
 export const GUIDES: Guide[] = [
   {
+    slug: 'ecommerce-ai-tools',
+    updated: '2026-11-05',
+    badge: 'New',
+    title: 'The Ecommerce AI Tools Guide',
+    description:
+      'The repo that helps ecommerce sellers — five AI product-video workflows (Image to Video, URL to Video, Avatar Video, Video Clone, Bulk Video), a marketplace data directory for Amazon, TikTok, 1688, Shopify, Shopee and Walmart, and a free Product Gallery page built for search and AI discovery — plus the dashboard I will build out of it and the full build roadmap.',
+    meta: 'PDF · 5 pages · English',
+  },
+  {
     slug: 'amazon-return-rule',
     updated: '2026-11-03',
-    badge: 'New',
+    badge: 'Guide',
     title: 'The Amazon Return-Rule Dashboard',
     description:
       'The app that saves Amazon sellers from losing dollars — a 7-day label clock on every FBM return, auto prepaid labels through the returns workflow, a returnless-refund guard, and fee-category alerts for the 31 October move. The illustrative $3,000-a-year refund math and the full build roadmap.',
