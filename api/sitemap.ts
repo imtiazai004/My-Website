@@ -14,6 +14,7 @@ const STATIC_PAGES: Entry[] = [
   { loc: '/work', lastmod: '2026-10-20', changefreq: 'monthly', priority: '0.9' },
   { loc: '/demos', lastmod: '2026-10-20', changefreq: 'weekly', priority: '0.9' },
   { loc: '/demos/family-dental', lastmod: '2026-10-08', changefreq: 'monthly', priority: '0.5' },
+  { loc: '/demos/family-dental-classic', lastmod: '2026-10-31', changefreq: 'monthly', priority: '0.5' },
   { loc: '/demos/sinma-3d', lastmod: '2026-10-21', changefreq: 'monthly', priority: '0.5' },
   { loc: '/profitscout', lastmod: '2026-06-17', changefreq: 'monthly', priority: '0.8' },
   { loc: '/guides', lastmod: '2026-11-03', changefreq: 'weekly', priority: '0.8' },
