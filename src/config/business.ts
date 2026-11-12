@@ -2,8 +2,8 @@ export const BUSINESS = {
   brandName: 'Soft Tech Solution',
   legalCompanyName: 'Atlantic LTD STORE LIMITED',
   statementDescriptor: 'AI SOFT TECH SOLUTION',
-  companyNumber: null as string | null,
-  registeredOffice: null as string | null,
+  companyNumber: '15025294',
+  registeredOffice: '#243 4 Blenheim Court, Peppercorn Close, Peterborough, PE1 2DU, United Kingdom',
   /** ISO country of registration (England and Wales). */
   registeredCountry: 'GB',
   supportEmail: 'info@aisofttechsolution.com',

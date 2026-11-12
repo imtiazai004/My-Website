@@ -4,7 +4,7 @@ import { trackActivity, sendContactMessage } from '../services/dataService';
 import { Logo } from './Logo';
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BUSINESS } from '../config/business';
+import { BUSINESS, FOUNDER } from '../config/business';
 
 const CARD = 'bg-white/[0.04] border border-white/10 backdrop-blur-xl rounded-2xl';
 
@@ -115,6 +115,8 @@ export default function Footer() {
                 <dd className="text-slate-200">{BUSINESS.brandName}</dd>
                 <dt className="font-semibold text-slate-400">Operated by</dt>
                 <dd className="text-slate-200">{BUSINESS.legalCompanyName}</dd>
+                <dt className="font-semibold text-slate-400">Founder</dt>
+                <dd className="text-slate-200">{FOUNDER.name} — {FOUNDER.jobTitle}</dd>
                 {BUSINESS.companyNumber && (
                   <>
                     <dt className="font-semibold text-slate-400">Company registration number</dt>
