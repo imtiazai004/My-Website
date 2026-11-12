@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AfterCall — The Work After the Call</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#eef2ff;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#3730a3}.top h1 span{color:#0d9488}
+.alert{background:linear-gradient(135deg,#3730a3,#0d9488);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(55,48,163,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(55,48,163,.08);border-top:3px solid #4f46e5}
+.stat .sv{font-size:20px;font-weight:900;color:#3730a3}.stat .sl{font-size:10.5px;color:#4f46e5;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(55,48,163,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12px;font-weight:800;color:#4f46e5;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#4f46e5;color:#fff}
+.card{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(55,48,163,.08)}
+.card b{font-size:14px;color:#3730a3;display:block}
+.card .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px}
+.card .draft{background:#eef2ff;border-left:3px solid #4f46e5;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#3730a3;font-weight:600;margin-bottom:9px}
+.card .act{font-size:12px;color:#0d9488;font-weight:800;margin-bottom:9px}
+.card .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.wait{background:#fef3c7;color:#92400e}.flag.ok{background:#dcfce7;color:#15803d}.flag.no{background:#fee2e2;color:#b91c1c}.flag.run{background:#e0e7ff;color:#3730a3}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.run{background:#4f46e5;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}
+.line{padding:9px 2px;border-bottom:1px solid #eef2ff;font-size:13px;font-weight:600;color:#3730a3;line-height:1.5}
+.line:last-child{border-bottom:none}
+.line .who{font-weight:900}
+.line .who.a{color:#4f46e5}.line .who.c{color:#0d9488}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#3730a3;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#4f46e5;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🎙️ After<span>Call</span></h1></div>
+  <div class="alert"><div class="big">📞</div><div class="txt">Call ended 11:02 AM — Sarah Mitchell booked Saturday 11:00 AM. The Routine is running the rest.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv" id="stDone">0/4</div><div class="sl">Routine steps done</div></div>
+    <div class="stat"><div class="sv" id="stAppr">2</div><div class="sl">Need your approval</div></div>
+    <div class="stat"><div class="sv">1</div><div class="sl">Call handled</div></div>
+    <div class="stat"><div class="sv">0</div><div class="sl">Missed follow-ups</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="callTab" onclick="setTab('call')">📞 The call</div>
+    <div class="tab" id="afterTab" onclick="setTab('after')">⚙️ After the call</div>
+    <div class="tab" id="apprTab" onclick="setTab('appr')">✅ Approvals <span id="apprN">(2)</span></div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">AfterCall — the call is only half the job. Luxe &amp; Lather Salon.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='call';
+const CALL=[
+{w:'a',t:'Hi, thanks for calling Luxe & Lather — how can I help?'},
+{w:'c',t:'Hi! I need a haircut and colour — Saturday morning if you have anything.'},
+{w:'a',t:'Saturday 11:00 AM with Maya is free. Shall I book it for you?'},
+{w:'c',t:'Yes please. And can someone text me a reminder? I always forget.'},
+{w:'a',t:'Done — Saturday 11:00 AM with Maya, and I\u2019ll send you a reminder text. See you then!'}];
+const STEPS=[
+{n:'1 · Appointment booked',m:'Saturday 11:00 AM — haircut + colour with Maya',s:'waiting',kind:'run',btn:'Run step'},
+{n:'2 · CRM updated',m:'Sarah Mitchell — prefers Saturday mornings, wants text reminders',s:'waiting',kind:'run',btn:'Run step'},
+{n:'3 · Confirmation WhatsApp sent',m:'\u201cHi Sarah, you\u2019re booked for Saturday 11:00 AM with Maya. Reply YES to confirm.\u201d',s:'waiting',kind:'run',btn:'Run step'},
+{n:'4 · No-show chase scheduled',m:'If Sarah hasn\u2019t confirmed by Friday 6 PM, send a reminder — a promise, so it waits for you.',s:'waiting',kind:'appr',btn:'Approve'}];
+const APPR=[
+{n:'No-show chase — Sarah Mitchell',m:'Send Friday 6 PM if unconfirmed: \u201cHi Sarah, still good for Saturday 11:00 AM? Reply YES or NO.\u201d',s:'pending',step:3},
+{n:'Offer the cancelled slot — Emma Collins',m:'Emma is on the waitlist for Saturday. Offer her the 2:00 PM slot that opened up today.',s:'pending',step:-1}];
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function setTab(t){TAB=t;['call','after','appr'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function runStep(i){
+  if(STEPS[i].s!=='waiting')return;
+  STEPS[i].s='done';render();
+  toast('✅ '+STEPS[i].n.split(' · ')[1]+' — done');
+}
+function decideStep(i,ok){
+  if(STEPS[i].s!=='waiting')return;
+  STEPS[i].s=ok?'approved':'declined';
+  const a=APPR.find(x=>x.step===i); if(a)a.s=ok?'approved':'declined';
+  render();
+  toast(ok?'✅ Approved — chase scheduled for Friday 6 PM':'↩️ Declined — no chase will be sent');
+}
+function decideAppr(i,ok){
+  if(APPR[i].s!=='pending')return;
+  APPR[i].s=ok?'approved':'declined';
+  if(APPR[i].step>=0)STEPS[APPR[i].step].s=ok?'approved':'declined';
+  render();
+  toast(ok?'✅ Approved — '+APPR[i].n:'↩️ Declined — agent will not send it');
+}
+function render(){
+const list=document.getElementById('list');
+const done=STEPS.filter(s=>s.s==='done'||s.s==='approved').length;
+document.getElementById('stDone').textContent=done+'/4';
+const pend=APPR.filter(a=>a.s==='pending').length;
+document.getElementById('stAppr').textContent=pend;
+document.getElementById('apprN').textContent='('+pend+')';
+if(TAB==='call'){
+list.innerHTML='<div class="card">'+CALL.map(l=>`<div class="line"><span class="who ${l.w}">${l.w==='a'?'🤖 Agent':'👩 Sarah'}:</span> ${l.t}</div>`).join('')+'</div>'
++`<div class="card"><b>📋 What the agent heard</b><div class="q">Sarah wants Saturday morning, haircut + colour, with Maya — and a reminder text so she doesn\u2019t forget. The Routine takes it from here.</div></div>`;
+}else if(TAB==='after'){
+list.innerHTML=STEPS.map((s,i)=>{
+const chip=s.s==='done'?'<span class="flag ok">✅ DONE</span>':s.s==='approved'?'<span class="flag ok">✅ APPROVED</span>':s.s==='declined'?'<span class="flag no">↩️ DECLINED</span>':'<span class="flag wait">⏸️ WAITING</span>';
+let btn='';
+if(s.s==='waiting'&&s.kind==='run')btn=`<button class="abtn run" id="run${i}" onclick="runStep(${i})">▶ ${s.btn}</button>`;
+if(s.s==='waiting'&&s.kind==='appr')btn=`<button class="abtn ok" id="ap${i}" onclick="decideStep(${i},true)">✅ Approve</button><button class="abtn no" id="dec${i}" onclick="decideStep(${i},false)">Decline</button>`;
+return `<div class="card"><b>${s.n}</b><div class="q">${s.m}</div><div class="row">${chip}${btn}</div></div>`}).join('');
+}else{
+list.innerHTML=APPR.map((a,i)=>{
+if(a.s==='pending')return `<div class="card"><b>${a.n}</b><div class="q">${a.m}</div><div class="row"><span class="flag wait">⏸️ WAITING FOR YOU</span><button class="abtn ok" id="apw${i}" onclick="decideAppr(${i},true)">✅ Approve</button><button class="abtn no" id="decw${i}" onclick="decideAppr(${i},false)">Decline</button></div></div>`;
+return `<div class="card"><b>${a.n}</b><div class="q">${a.m}</div><div class="row"><span class="flag ${a.s==='approved'?'ok':'no'}">${a.s==='approved'?'✅ APPROVED':'↩️ DECLINED'}</span></div></div>`}).join('')
++`<div class="card"><b>🛡️ The rule that never breaks</b><div class="q">The Routine books, writes and confirms on its own — but anything that is a promise to a customer waits for your tap first.</div></div>`;
+}
+}
+render();
+</script>
+</body>
+</html>
