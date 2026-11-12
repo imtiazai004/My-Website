@@ -873,4 +873,54 @@ Try the demo above: replay the recorded job, run one of the saved jobs, switch o
 
 *Run a shop? DM me "SHOW" — I'll show you which of your daily jobs an agent could take over.*`,
   },
+
+  {
+    slug: 'ai-agent-money-moves-need-your-approval',
+    title: 'Your AI Agent Just Refunded the Wrong Customer — 29% of Retailers Already Lost One This Way',
+    excerpt:
+      "OpenAI's business agent answers shoppers about refunds in a chat you cannot read. Talkdesk found 31% of retailers say their AI already took a wrong action — and of those, 29% lost a customer.",
+    tags: ["AI Agents", "Small Business", "Automation"],
+    content: `Tuesday, 9:41 AM. A customer messages your shop: the bookshelf arrived scratched, she wants a refund. Before you have finished your coffee, your AI agent has already answered — in your name, about your money.
+
+That is exactly what happened to a lot of shops this year, and the numbers are now public. On November 10, OpenAI let businesses put their own agent inside ChatGPT. It answers shoppers about prices, shipping and refunds — in a chat the business cannot read. OpenAI says it does not share those conversations, or the agent's chats, with the business.
+
+Talkdesk asked 312 US retail leaders about it. 58% said their AI caused at least one problem in the last 12 months. 31% said it took an action it should not have — a wrong refund, a wrong order change. Of the retailers whose AI made a mistake, 29% lost a customer over it. A quarter said customers got wrong product information, and 18% cited false or misleading output.
+
+The problem is not the agent answering. It is the agent acting — on money — without a human in the loop.
+
+The fix is a gate, not a ban:
+
+:::demo approvaldesk:::
+
+One screen for every money move. The agent drafts the exact reply and the exact action — refund $42, discount 10%, move a delivery — and nothing leaves the shop until you tap Approve. The full log keeps every word the agent said.
+
+Try the demo above: approve the refund, approve the discount, decline the delivery change. No money moves without you.
+
+*Run a shop? DM me "APPROVE" — I'll show you an approval gate for your money moves.*`,
+  },
+
+  {
+    slug: 'voice-agent-after-call-work',
+    title: 'Your Voice Agent Finally Remembers Your Customers — and Does the Follow-Up Work After the Call',
+    excerpt:
+      "The call ends and the real work starts. ElevenLabs' new Routines run the follow-up — booking, CRM, confirmation, chase — and Poland's e-Health platform is building a voice agent for 40 million appointments a year.",
+    tags: ["AI Agents", "Small Business", "Automation"],
+    content: `The call ends at 11:02 AM. Sarah just booked Saturday 11:00 AM — haircut and colour, with Maya. She asked for a reminder text, because she always forgets.
+
+That is when the real work starts. The booking has to reach the calendar. The CRM has to learn that Sarah prefers Saturday mornings and text reminders. A confirmation has to go out. And if she does not confirm by Friday, someone has to chase her — or Saturday 11:00 sits empty.
+
+Most voice agents stop at the call. On November 11, ElevenLabs showed what comes next. At its New York Summit, its ElevenAgents platform gained Memory — it recognises returning customers and keeps a structured record of their preferences and constraints — and Routines, which run the multi-step work before, during and after every conversation: pre-screening, callbacks, CRM writes, email reports. The catch: Memory and Routines were announced, not switched on for everyone — they are rolling out, so not everything is live today.
+
+The proof it is serious: Poland's national e-Health platform handles about 40 million appointments a year, and a voice agent is being built for it.
+
+Your shop does not need Poland's scale. It needs the same after-call worker, as one app:
+
+:::demo aftercall:::
+
+The call books the appointment. The Routine does the rest — booked, written to the CRM, confirmed on WhatsApp, chase scheduled — and anything that is a promise to a customer waits for your approval first.
+
+Try the demo above: run the booking, the CRM update and the confirmation, then approve the Friday chase.
+
+*Run a salon, clinic or shop? DM me "ROUTINE" — I'll show you the after-call shift for your business.*`,
+  },
 ];
