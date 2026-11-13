@@ -49,6 +49,15 @@ const DEMO_SLUGS = [
   'hallbook', 'leasemind', 'jobtrack', 'carcare', 'leadcrm', 'proposalgen', 'invoicechaser', 'hirepipe',
 ];
 
+// Blog-demo apps (Batch 4–5). Same list as DEMO_APPS in src/data/demos.ts —
+// keep the two in sync: any demo added to one must be added to the other,
+// or it is invisible to crawlers (no sitemap entry) and to visitors (no
+// /demos card). Added to the sitemap 2026-11-13 (SEO audit F2).
+const BLOG_DEMO_SLUGS = [
+  'clawdesk', 'shopagent', 'voicefront', 'profilebot', 'dotdesk', 'shopshield',
+  'memocare', 'flowdesk', 'winback', 'reviewdesk', 'showonce', 'approvaldesk', 'aftercall',
+];
+
 function esc(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
@@ -69,6 +78,11 @@ export default async function handler(_req: any, res: any) {
     entries.push({ loc: `/demos/${slug}`, lastmod: '2026-10-14', changefreq: 'monthly', priority: '0.5' });
   }
 
+  // Blog-demo apps (Batch 4–5): lastmod is the day they joined the sitemap.
+  for (const slug of BLOG_DEMO_SLUGS) {
+    entries.push({ loc: `/demos/${slug}`, lastmod: '2026-11-13', changefreq: 'monthly', priority: '0.5' });
+  }
+
   // Firestore content: a failure here must not take the whole sitemap down.
   const [posts, blueprints] = await Promise.allSettled([fetchPublishedPosts(), fetchBlueprints()]);
   if (posts.status === 'fulfilled') {
@@ -76,6 +90,25 @@ export default async function handler(_req: any, res: any) {
       if (!/^[A-Za-z0-9_-]{1,128}$/.test(p.slug)) continue;
       entries.push({ loc: `/blog/${p.slug}`, lastmod: day(p.updatedAt || p.createdAt, today), changefreq: 'monthly', priority: '0.7' });
     }
+    // Hub lastmods come from live data, not hardcoded dates (SEO audit F7):
+    // /blog = newest post, / = today (deploy date proxy), /demos = newest demo,
+    // /guides = newest guide in STATIC_PAGES.
+    const setLastmod = (loc: string, lastmod: string) => {
+      const e = entries.find((x) => x.loc === loc);
+      if (e) e.lastmod = lastmod;
+    };
+    const newestPost = posts.value
+      .map((p) => day(p.updatedAt || p.createdAt, today))
+      .sort()
+      .pop();
+    if (newestPost) setLastmod('/blog', newestPost);
+    setLastmod('/', today);
+    setLastmod('/demos', '2026-11-13');
+    const newestGuide = STATIC_PAGES.filter((x) => x.loc.startsWith('/guides/'))
+      .map((x) => x.lastmod)
+      .sort()
+      .pop();
+    if (newestGuide) setLastmod('/guides', newestGuide);
   } else {
     console.error('sitemap: posts failed', posts.reason);
   }

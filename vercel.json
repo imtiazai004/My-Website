@@ -1,6 +1,17 @@
 {
   "redirects": [
     {
+      "source": "/(.*)",
+      "destination": "https://aisofttechsolution.com/$1",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.aisofttechsolution.com"
+        }
+      ]
+    },
+    {
       "source": "/demos/family-dental",
       "destination": "/demos/family-dental/",
       "permanent": false

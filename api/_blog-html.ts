@@ -8,6 +8,16 @@
 // client bundle via firebase-applet-config.json) — the API key is a browser
 // key, not a secret. The posts collection is publicly readable by design.
 
+// Related-link data: the client template (src/components/BlogPostPage.tsx)
+// renders the same "Keep reading" block for humans — keep the two in sync.
+import { GUIDES } from '../src/data/guides.js';
+import { DEMO_APPS } from '../src/data/demos.js';
+
+// Post slug -> guide twin where the guide slug differs from the post slug.
+const GUIDE_TWIN_BY_POST: Record<string, string> = {
+  'tiktok-shop-dispatch-penalty': 'tikfulfill-build-guide',
+};
+
 // Public Firebase *web* config — same values already shipped in the client
 // bundle via firebase-applet-config.json (inlined here because Vercel
 // Serverless Functions can't reliably import JSON from the repo root).
@@ -327,7 +337,10 @@ ${opts.body}
 </body></html>`;
 }
 
-export function postHtml(post: BlogPost): string {
+export function postHtml(
+  post: BlogPost,
+  related?: { newer?: { slug: string; title: string } | null; older?: { slug: string; title: string } | null }
+): string {
   const canonical = `${SITE}/blog/${post.slug}`;
   const image = post.coverImage || `${SITE}/og-image.jpg`;
   const date = post.createdAt ? new Date(post.createdAt).toISOString().split('T')[0] : undefined;
@@ -355,6 +368,32 @@ export function postHtml(post: BlogPost): string {
     ? `<div class="tags">${post.tags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>`
     : '';
   const byline = `<div class="meta">By ${escapeHtml(post.author || BRAND)}${date ? ` · ${date}` : ''}</div>`;
+  // Related links (SEO audit F4): same "Keep reading" block the client
+  // template renders for humans — crawlers must see the same internal links.
+  const guide =
+    GUIDES.find((g) => g.slug === post.slug) ??
+    (GUIDE_TWIN_BY_POST[post.slug] ? GUIDES.find((g) => g.slug === GUIDE_TWIN_BY_POST[post.slug]) : undefined);
+  const demo = DEMO_APPS.find((d) => d.post === post.slug);
+  const relatedItems: string[] = [];
+  if (demo)
+    relatedItems.push(
+      `<p>Try the interactive demo: <a href="${SITE}/demos/${demo.slug}"><strong>${escapeHtml(demo.name)} — ${escapeHtml(demo.description)}</strong></a></p>`
+    );
+  if (guide)
+    relatedItems.push(
+      `<p>Free guide: <a href="${SITE}/guides/${guide.slug}"><strong>${escapeHtml(guide.title)}</strong></a></p>`
+    );
+  if (related?.newer)
+    relatedItems.push(
+      `<p>Newer: <a href="${SITE}/blog/${related.newer.slug}"><strong>${escapeHtml(related.newer.title)}</strong></a></p>`
+    );
+  if (related?.older)
+    relatedItems.push(
+      `<p>Older: <a href="${SITE}/blog/${related.older.slug}"><strong>${escapeHtml(related.older.title)}</strong></a></p>`
+    );
+  const relatedNav = relatedItems.length
+    ? `<nav><h2>Keep reading</h2>${relatedItems.join('\n')}</nav>`
+    : '';
   return shell({
     title: `${post.title} — ${BRAND} Blog`,
     description: post.excerpt,
@@ -362,7 +401,7 @@ export function postHtml(post: BlogPost): string {
     ogType: 'article',
     image,
     jsonLd,
-    body: `<main><article>${tags}<h1>${escapeHtml(post.title)}</h1>${byline}${renderMarkdown(post.content)}</article>${CTA}</main>`,
+    body: `<main><article>${tags}<h1>${escapeHtml(post.title)}</h1>${byline}${renderMarkdown(post.content)}</article>${relatedNav}${CTA}</main>`,
   });
 }
 

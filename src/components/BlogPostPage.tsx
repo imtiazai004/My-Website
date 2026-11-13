@@ -9,6 +9,14 @@ import { BlogPost } from '../types';
 import { usePageSeo } from '../lib/seo';
 import { renderMarkdown, readingTime } from '../lib/markdown';
 import { BUSINESS } from '../config/business';
+import { DEMO_APPS } from '../data/demos';
+import { GUIDES } from '../data/guides';
+
+// Post slug -> guide twin where the guide slug differs from the post slug.
+// (Most twins share the post slug exactly; this covers the exceptions.)
+const GUIDE_TWIN_BY_POST: Record<string, string> = {
+  'tiktok-shop-dispatch-penalty': 'tikfulfill-build-guide',
+};
 
 function formatDate(ts: any): string {
   try {
@@ -60,6 +68,20 @@ export default function BlogPostPage() {
   });
 
   const html = useMemo(() => (post ? renderMarkdown(post.content) : ''), [post]);
+
+  // Related links (SEO audit F4): posts were internal-linking islands — each
+  // one linked only to its demo. Posts arrive newest-first (createdAt desc),
+  // so the previous item is newer and the next one is older.
+  const postIndex = useMemo(() => (posts ?? []).findIndex((p) => p.slug === slug), [posts, slug]);
+  const newerPost = postIndex > 0 ? (posts ?? [])[postIndex - 1] : null;
+  const olderPost = postIndex >= 0 && postIndex < (posts ?? []).length - 1 ? (posts ?? [])[postIndex + 1] : null;
+  const guideTwin = useMemo(
+    () =>
+      GUIDES.find((g) => g.slug === slug) ??
+      (slug && GUIDE_TWIN_BY_POST[slug] ? GUIDES.find((g) => g.slug === GUIDE_TWIN_BY_POST[slug]) : undefined),
+    [slug]
+  );
+  const demoApp = useMemo(() => DEMO_APPS.find((d) => d.post === slug), [slug]);
 
   return (
     <div className="min-h-screen selection:bg-brand-accent selection:text-white scroll-smooth relative overflow-x-hidden">
@@ -126,6 +148,47 @@ export default function BlogPostPage() {
                 <p className="text-slate-500 text-sm mb-6">We build high-performance web apps, AI tools, and SaaS platforms.</p>
                 <a href="/#contact" className="inline-block btn-primary !py-3 !px-8 text-xs">Get a Free Consultation</a>
               </div>
+
+              {/* Related — internal linking (SEO audit F4). Only renders links that exist. */}
+              {(newerPost || olderPost || guideTwin || demoApp) && (
+                <section className="mt-16 pt-10 border-t border-slate-900/10" aria-label="Keep reading">
+                  <h2 className="text-2xl font-display font-bold text-slate-900 mb-6">Keep reading</h2>
+                  <div className="space-y-4">
+                    {demoApp && (
+                      <p className="text-slate-600 leading-relaxed">
+                        Try the interactive demo:{' '}
+                        <a href={`/demos/${demoApp.slug}`} target="_blank" rel="noopener" className="font-semibold text-brand-accent hover:underline">
+                          {demoApp.name} — {demoApp.description}
+                        </a>
+                      </p>
+                    )}
+                    {guideTwin && (
+                      <p className="text-slate-600 leading-relaxed">
+                        Free guide:{' '}
+                        <Link to={`/guides/${guideTwin.slug}`} className="font-semibold text-brand-accent hover:underline">
+                          {guideTwin.title}
+                        </Link>
+                      </p>
+                    )}
+                    {newerPost && (
+                      <p className="text-slate-600 leading-relaxed">
+                        Newer:{' '}
+                        <Link to={`/blog/${newerPost.slug}`} className="font-semibold text-brand-accent hover:underline">
+                          {newerPost.title}
+                        </Link>
+                      </p>
+                    )}
+                    {olderPost && (
+                      <p className="text-slate-600 leading-relaxed">
+                        Older:{' '}
+                        <Link to={`/blog/${olderPost.slug}`} className="font-semibold text-brand-accent hover:underline">
+                          {olderPost.title}
+                        </Link>
+                      </p>
+                    )}
+                  </div>
+                </section>
+              )}
             </article>
           )}
         </div>
