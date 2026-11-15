@@ -941,14 +941,12 @@ Be honest about where this is today. ChatGPT Wallet is rolling out to a small gr
 
 So what should a seller do this week? Four things, none of them a rebuild. First, stop blocking the buyer: make sure your firewall and bot protection let ChatGPT's agent through instead of treating it as a scraper. Second, feed it: complete product data — real prices, stock, delivery times, clear descriptions — is what the agent compares. Third, keep your checkout standard: Wallet uses your existing checkout pages, so a clean, working checkout is already compatible. Fourth, tell ChatGPT you exist: a product feed and a business profile in ChatGPT, the way the Commerce Partner Playbook describes. The shops that do this now are ready when the rollout widens; the rest will be fixing it after the orders have already gone elsewhere.
 
-Here is what that looks like from your side of the counter:
+Here is what an agent checkout looks like in action:
 
 :::demo agentcheckout:::
 
-The agent visits your shop, finds the product, and checks out — and the order waits for your approval before any money moves. Try the demo above: let the agent find the gift, watch the checkout, then approve the sale.
+The demo above shows the flow: the agent finds the product, the shopper approves with Face ID, the payment moves instantly, and the order lands in the shop's inbox.
 
-The checkout is changing hands — from your customer's fingers to your customer's agent. The sale still belongs to the shop the agent can read, reach and trust.
-
-*Run a shop? DM me "WALLET" — I'll show you the agent-ready checkout for your business.*`,
+The checkout is changing hands — from your customer's fingers to your customer's agent. The shops that win will be the ones an agent can read, reach and trust: product information a machine can understand, a checkout it can complete, reviews it can believe. The question is not whether agents will shop. It is whether your shop is ready to be shopped by one.`,
   },
 ];
