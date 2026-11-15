@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgentCheckout — The Agent That Pays You</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#eaf4fe;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#1a7fe6}.top h1 span{color:#0d9488}
+.alert{background:linear-gradient(135deg,#1a7fe6,#0d9488);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(26,127,230,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(26,127,230,.08);border-top:3px solid #1a7fe6}
+.stat .sv{font-size:20px;font-weight:900;color:#1a7fe6}.stat .sl{font-size:10.5px;color:#1a7fe6;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(26,127,230,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12px;font-weight:800;color:#1a7fe6;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#1a7fe6;color:#fff}
+.card{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(26,127,230,.08)}
+.card b{font-size:14px;color:#1a7fe6;display:block}
+.card .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px}
+.card .draft{background:#eaf4fe;border-left:3px solid #1a7fe6;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#1a7fe6;font-weight:600;margin-bottom:9px}
+.card .act{font-size:12px;color:#0d9488;font-weight:800;margin-bottom:9px}
+.card .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.wait{background:#fef3c7;color:#92400e}.flag.ok{background:#dcfce7;color:#15803d}.flag.no{background:#fee2e2;color:#b91c1c}.flag.run{background:#e0e7ff;color:#1a7fe6}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.run{background:#1a7fe6;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}
+.line{padding:9px 2px;border-bottom:1px solid #eaf4fe;font-size:13px;font-weight:600;color:#1a7fe6;line-height:1.5}
+.line:last-child{border-bottom:none}
+.line .who{font-weight:900}
+.line .who.a{color:#1a7fe6}.line .who.c{color:#0d9488}
+.price{font-size:22px;font-weight:900;color:#1a7fe6}
+.strike{font-size:13px;color:#94a3b8;text-decoration:line-through;font-weight:700;margin-left:6px}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a7fe6;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#1a7fe6;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🛍️ Agent<span>Checkout</span></h1></div>
+  <div class="alert"><div class="big">🤖</div><div class="txt">A ChatGPT agent is shopping for Emma — a gift under £40, delivery by Friday. It found your shop.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv">3</div><div class="sl">Agent visits today</div></div>
+    <div class="stat"><div class="sv" id="stAppr">1</div><div class="sl">Needs your approval</div></div>
+    <div class="stat"><div class="sv">£35.95</div><div class="sl">Order waiting</div></div>
+    <div class="stat"><div class="sv">0</div><div class="sl">Real cards seen</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="shopTab" onclick="setTab('shop')">🔍 Why it picked you</div>
+    <div class="tab" id="checkTab" onclick="setTab('check')">🛒 Checkout</div>
+    <div class="tab" id="apprTab" onclick="setTab('appr')">✅ Approval <span id="apprN">(1)</span></div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">AgentCheckout — your customer's AI can now pay you. Willow &amp; Fern Gifts.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='shop';
+const WHY=[
+{n:'✅ Product data the agent can read',m:'Price £32.00, in stock, delivery by Friday, clear description — the agent compared it in seconds and did not have to guess anything.'},
+{n:'✅ Agent access allowed',m:'Your site lets ChatGPT\u2019s agent through instead of blocking it as a bot. Two competing gift shops block agents — the order came to you.'},
+{n:'✅ Standard checkout',m:'ChatGPT Wallet uses your existing checkout pages. No new integration, no special plugin — the agent filled the same form a human would.'},
+{n:'⭐ 4.8 from 214 reviews',m:'The agent reads reviews before it buys. Your rating beat the two shops it compared you with.'}];
+const COMPARE=[
+{w:'y',t:'Willow & Fern Gifts — Scented Candle Gift Set — £32.00 — delivery Friday — 4.8★ (214 reviews)'},
+{w:'c',t:'GiftBox Direct — same set — £36.00 — delivery Monday — 4.3★ (96 reviews)'},
+{w:'c',t:'The Candle Loft — same set — £38.50 — delivery Monday — 4.6★ (61 reviews)'}];
+const STEPS=[
+{n:'1 · Agent found the gift',m:'Emma asked her dot for a scented candle gift set under £40, delivered by Friday.',s:'waiting',kind:'run',btn:'Run step'},
+{n:'2 · Agent compared 3 shops',m:'Price, delivery and reviews — yours won on all three. The order came to you, not to GiftBox Direct.',s:'waiting',kind:'run',btn:'Run step'},
+{n:'3 · Shopper approved with Face ID',m:'Emma reviewed the items, the £35.95 total and her card, then approved with a fingerprint check.',s:'waiting',kind:'run',btn:'Run step'},
+{n:'4 · Payment token issued',m:'The network issued a substitute card •••• 4242. The real card number was never seen by the agent — or by you.',s:'waiting',kind:'run',btn:'Run step'},
+{n:'5 · Sale waits for your approval',m:'£35.95 — Scented Candle Gift Set + delivery. No money moves until you tap Approve.',s:'waiting',kind:'appr',btn:'Approve sale'}];
+let SALE='pending';
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function setTab(t){TAB=t;['shop','check','appr'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function runStep(i){
+  if(STEPS[i].s!=='waiting')return;
+  STEPS[i].s='done';render();
+  toast('✅ '+STEPS[i].n.split(' · ')[1]+' — done');
+}
+function decideSale(ok){
+  if(SALE!=='pending')return;
+  SALE=ok?'approved':'declined';
+  if(ok)STEPS[4].s='approved';else STEPS[4].s='declined';
+  render();
+  toast(ok?'✅ Sale approved — £35.95. Order confirmed, dispatch today.':'↩️ Declined — no charge was made');
+}
+function render(){
+const list=document.getElementById('list');
+const pend=SALE==='pending'?1:0;
+document.getElementById('stAppr').textContent=pend;
+document.getElementById('apprN').textContent='('+pend+')';
+if(TAB==='shop'){
+list.innerHTML=WHY.map(w=>`<div class="card"><b>${w.n}</b><div class="q">${w.m}</div></div>`).join('')
++`<div class="card"><b>🛍️ The product it found</b><div class="q">Scented Candle Gift Set — hand-poured soy candles, gift-wrapped.</div><div class="row"><span class="price">£32.00</span><span class="strike">£38.00</span><span class="flag ok">✅ IN STOCK</span><span class="flag run">🚚 FRIDAY DELIVERY</span></div></div>`;
+}else if(TAB==='check'){
+list.innerHTML=STEPS.map((s,i)=>{
+const chip=s.s==='done'?'<span class="flag ok">✅ DONE</span>':s.s==='approved'?'<span class="flag ok">✅ APPROVED</span>':s.s==='declined'?'<span class="flag no">↩️ DECLINED</span>':'<span class="flag wait">⏸️ WAITING</span>';
+let btn='';
+if(s.s==='waiting'&&s.kind==='run')btn=`<button class="abtn run" id="run${i}" onclick="runStep(${i})">▶ ${s.btn}</button>`;
+if(s.s==='waiting'&&s.kind==='appr')btn=`<button class="abtn ok" id="ap${i}" onclick="decideSale(true)">✅ Approve sale</button><button class="abtn no" id="dec${i}" onclick="decideSale(false)">Decline</button>`;
+return `<div class="card"><b>${s.n}</b><div class="q">${s.m}</div><div class="row">${chip}${btn}</div></div>`}).join('')
++`<div class="card"><b>🔍 What the agent compared</b>${COMPARE.map(l=>`<div class="line"><span class="who ${l.w}">${l.w==='y'?'✅ YOU':'•'}</span> ${l.t}</div>`).join('')}</div>`;
+}else{
+const chip=SALE==='approved'?'<span class="flag ok">✅ APPROVED — £35.95</span>':SALE==='declined'?'<span class="flag no">↩️ DECLINED — NO CHARGE</span>':'<span class="flag wait">⏸️ WAITING FOR YOU</span>';
+const btns=SALE==='pending'?`<button class="abtn ok" id="apw0" onclick="decideSale(true)">✅ Approve sale — £35.95</button><button class="abtn no" id="decw0" onclick="decideSale(false)">Decline</button>`:'';
+list.innerHTML=`<div class="card"><b>Order #WG-2481 — Emma Collins</b><div class="q">Scented Candle Gift Set £32.00 + delivery £3.95 = <b>£35.95</b>. Delivery by Friday to Manchester.</div><div class="draft">💳 Payment token •••• 4242 — substitute card issued by the network. The real card number was never shared with the agent or with your shop.</div><div class="row">${chip}${btns}</div></div>`
++`<div class="card"><b>🛡️ The rule that never breaks</b><div class="q">The agent shops, compares and pays — but the sale only completes when you approve it. Nothing leaves your shop on the agent's say-so alone.</div></div>`;
+}
+}
+render();
+</script>
+</body>
+</html>

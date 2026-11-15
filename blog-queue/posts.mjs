@@ -923,4 +923,32 @@ Try the demo above: run the booking, the CRM update and the confirmation, then a
 
 *Run a salon, clinic or shop? DM me "ROUTINE" — I'll show you the after-call shift for your business.*`,
   },
+  {
+    slug: 'your-customers-ai-can-now-pay-you',
+    title: "ChatGPT Wallet for Sellers: Your Customers' AI Agent Can Now Pay You at Checkout",
+    excerpt:
+      'On November 13, OpenAI launched ChatGPT Wallet: a customer\'s AI agent can now find your product and pay for it on your own website. The shops that win this buyer are the ones the agent can read, reach and trust.',
+    tags: ['AI Agents', 'E-commerce', 'Small Business'],
+    content: `Your next customer may never visit your website. On November 13, OpenAI launched ChatGPT Wallet — and for the first time, a customer's AI agent can not only find your product, it can pay for it. The shopper tells ChatGPT what they want. The agent finds it, checks out on your own website, and the order lands in your inbox. Your customer never opened your homepage.
+
+Here is how ChatGPT Wallet works. The shopper saves a card in ChatGPT once. When the agent finds something to buy, the shopper reviews the items, the total and the card, then approves with Face ID or a fingerprint. Only then does the payment network issue a token — a substitute card number, security code and expiry — and the merchant is charged. The real card number is never seen by the agent or by you. It was built with American Express, Mastercard and Visa, and OpenAI takes no cut of the transaction at launch.
+
+That changes who your buyer is. Until now, every sale started with a human scrolling your site. Now a buyer can be software: it compares prices, reads reviews, checks delivery times and product details, and buys the best match. It does not care about your Instagram following. It cares whether it can read your product, reach your checkout and trust your store. The shops that win this buyer are the ones the agent can read.
+
+This is not a side project. OpenAI also published a Commerce Partner Playbook telling businesses how to prepare: product feeds, a business profile inside ChatGPT, signed agent requests. It is working with fraud-prevention firms Forter, Riskified, Sardine and Signifyd, and payment providers Adyen, Checkout.com and Stripe, so their systems recognise a legitimate agent purchase instead of blocking it as a bot. The message to retailers is blunt: if your site blocks agents by accident, or your product data is thin, those orders go to someone else when the rollout widens.
+
+Be honest about where this is today. ChatGPT Wallet is rolling out to a small group of US ChatGPT Pro subscribers, aged 18 and over, with eligible US-issued cards — and only through dots, OpenAI's always-on agents. Volumes will start small, and there is no date yet for other countries. This is also OpenAI's second attempt: Instant Checkout, launched in September 2025 with Stripe and US Etsy sellers, shut down in March 2026. And not everyone is playing along — Amazon blocks outside shopping agents, and Delta and United have banned agent purchases. Spending limits and category rules are coming later, so shoppers can pre-approve some purchases and let the agent act alone.
+
+So what should a seller do this week? Four things, none of them a rebuild. First, stop blocking the buyer: make sure your firewall and bot protection let ChatGPT's agent through instead of treating it as a scraper. Second, feed it: complete product data — real prices, stock, delivery times, clear descriptions — is what the agent compares. Third, keep your checkout standard: Wallet uses your existing checkout pages, so a clean, working checkout is already compatible. Fourth, tell ChatGPT you exist: a product feed and a business profile in ChatGPT, the way the Commerce Partner Playbook describes. The shops that do this now are ready when the rollout widens; the rest will be fixing it after the orders have already gone elsewhere.
+
+Here is what that looks like from your side of the counter:
+
+:::demo agentcheckout:::
+
+The agent visits your shop, finds the product, and checks out — and the order waits for your approval before any money moves. Try the demo above: let the agent find the gift, watch the checkout, then approve the sale.
+
+The checkout is changing hands — from your customer's fingers to your customer's agent. The sale still belongs to the shop the agent can read, reach and trust.
+
+*Run a shop? DM me "WALLET" — I'll show you the agent-ready checkout for your business.*`,
+  },
 ];
