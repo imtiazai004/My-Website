@@ -32,6 +32,16 @@
       "permanent": false
     },
     {
+      "source": "/demos/greater-heights",
+      "destination": "/demos/greater-heights/",
+      "permanent": false
+    },
+    {
+      "source": "/demos/greater-heights/admin",
+      "destination": "/demos/greater-heights/admin/",
+      "permanent": false
+    },
+    {
       "source": "/soft-clipper",
       "destination": "https://softclipper.pro/",
       "permanent": true
@@ -96,6 +106,18 @@
     {
       "source": "/demos/sinma-classic/:path*",
       "destination": "https://hair-saloon-simple-classic.vercel.app/:path*"
+    },
+    {
+      "source": "/demos/greater-heights/",
+      "destination": "https://greater-heights-hair.netlify.app/"
+    },
+    {
+      "source": "/demos/greater-heights/:path*/",
+      "destination": "https://greater-heights-hair.netlify.app/:path*/"
+    },
+    {
+      "source": "/demos/greater-heights/:path*",
+      "destination": "https://greater-heights-hair.netlify.app/:path*"
     },
     {
       "source": "/demos/:demo",
