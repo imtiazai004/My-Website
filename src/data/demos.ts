@@ -17,8 +17,8 @@ export interface Demo {
   /** Optional client brand wordmark rendered as a logo plate over the thumbnail */
   brandName?: string;
   brandSub?: string;
-  /** Brand mark drawn on the logo plate: 'lotus' (default) or 'tooth' */
-  brandMark?: 'lotus' | 'tooth';
+  /** Brand mark drawn on the logo plate: 'lotus' (default), 'tooth' or 'braided-bun' */
+  brandMark?: 'lotus' | 'tooth' | 'braided-bun';
   /** Accent colour (hex) for the logo-plate mark */
   brandAccent?: string;
   /** object-position for the preview image (defaults to top) */
@@ -28,6 +28,23 @@ export interface Demo {
 }
 
 export const DEMOS: Demo[] = [
+  {
+    id: 'greater-heights-hair',
+    client: 'Greater Heights Hair',
+    title: 'Salon Website + Booking Dashboard',
+    description:
+      'An Afro-Caribbean salon website with its own booking system — clients pick a style and a free time, the owner and her team confirm it in a salon dashboard, and WhatsApp confirmations, reminders and new-booking alerts go out from the salon number.',
+    category: 'Website + Dashboard',
+    url: '/demos/greater-heights/',
+    dateAdded: '18 Nov 2026',
+    featured: true,
+    gradient: 'from-amber-500 via-orange-700 to-rose-900',
+    image: '/demos/greater-heights/images/hero-braids.jpg',
+    imagePosition: 'center 22%',
+    brandName: 'Greater Heights',
+    brandSub: 'Afro Hair · Tooting',
+    brandMark: 'braided-bun',
+  },
   {
     id: 'family-dental-3d-immersive',
     client: 'Family Dental & Aesthetic Clinic',
