@@ -55,7 +55,7 @@ const DEMO_SLUGS = [
 // /demos card). Added to the sitemap 2026-11-13 (SEO audit F2).
 const BLOG_DEMO_SLUGS = [
   'clawdesk', 'shopagent', 'voicefront', 'profilebot', 'dotdesk', 'shopshield',
-  'memocare', 'flowdesk', 'winback', 'reviewdesk', 'showonce', 'approvaldesk', 'aftercall', 'agentcheckout',
+  'memocare', 'flowdesk', 'winback', 'reviewdesk', 'showonce', 'approvaldesk', 'aftercall', 'agentcheckout', 'adpilot',
 ];
 
 function esc(s: string): string {

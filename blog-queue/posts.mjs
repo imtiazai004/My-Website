@@ -949,4 +949,30 @@ The demo above shows the flow: the agent finds the product, the shopper approves
 
 The checkout is changing hands — from your customer's fingers to your customer's agent. The shops that win will be the ones an agent can read, reach and trust: product information a machine can understand, a checkout it can complete, reviews it can believe. The question is not whether agents will shop. It is whether your shop is ready to be shopped by one.`,
   },
+  {
+    slug: 'ai-agents-run-your-ads-inmobi-accelerate',
+    title: 'Seven AI Agents Now Run Your Ads on Google, Meta, TikTok and ChatGPT — While You Sell',
+    excerpt:
+      'On November 18, InMobi launched Accelerate: seven AI agents that plan, write, launch and optimise your ads across Google, Meta, TikTok and ChatGPT. 93% of small advertisers cannot measure performance across platforms — one team of agents, one report, changes that.',
+    tags: ['AI Agents', 'E-commerce', 'Small Business'],
+    content: `Seven AI agents now run your ads — across Google, Meta, TikTok and ChatGPT — while you sell. On November 18, InMobi launched InMobi Accelerate, a self-serve AI platform for small businesses and agencies. Seven AI agents take the jobs that used to eat a seller's week: audience planning, ad creation, campaign launches and optimisation, across Google Ads, Meta Ads, Microsoft Advertising, TikTok Ads and ChatGPT Ads. One team of agents, five channels, one report.
+
+Here is why that matters. A May 2026 NewtonX survey of 800 US small-business advertisers and agencies found 93% could not confidently measure performance across platforms. Read that again: nine out of ten advertisers cannot say, with confidence, which platform earned their money. The budget is split five ways, each platform reports its own win, and the seller is left guessing. Ads are the biggest money leak most small sellers have — and the leak is invisible, because no single dashboard shows all five channels at once.
+
+Accelerate's answer is to put the agents in charge of the whole loop. The agents plan the audience, write the ad, launch the campaign and optimise it daily — and they combine the campaign data from every platform into one view, so a seller finally sees what each pound earned on each channel. And there is a gate that matters: plans, creative assets and budgets must be approved before a campaign goes live. The agents do the work; the seller still signs it off.
+
+The fifth channel is the one to watch. OpenAI now lets brands advertise in ChatGPT, and Accelerate runs ads there alongside Google and Meta. That means the ad can now appear inside the conversation where the customer is already asking what to buy — not just on a search page or a feed. The shop that shows up there is the one the buying agent can see.
+
+Be honest about where this is today. Accelerate launched on November 18 — it is days old, and the 93% number comes from a survey conducted for InMobi, so treat it as their case, not gospel. AI-written ads still need a human eye on brand voice, and an agent that optimises daily can also spend daily if the budget gate is loose. This is a tool for sellers who already run ads on more than one platform — if you only run one channel, the problem it solves is not yours yet.
+
+So what should a seller do this week? Four things. First, get one view of your ad spend — if you cannot see all five channels in one place, you are guessing. Second, fix measurement before you scale spend: if you cannot say which platform earned the money, more budget just buys more guessing. Third, keep the approval gate: approve the plan, the creative and the budget before anything goes live, and check the first week's report yourself. Fourth, test one channel with the agents before you hand them all five. The sellers who do this now will know, pound for pound, where their ads pay — the rest will keep paying five platforms to tell them five different stories.
+
+Here is what that looks like from your side of the counter:
+
+:::demo adpilot:::
+
+The demo above shows the flow: connect your ad accounts, let the seven agents plan the audience and write the ad, approve the plan and budget, then watch one report of what each pound earned on each channel.
+
+The ad account is changing hands — from five dashboards that never talk to each other to one team of agents that sees them all. The sellers who win will be the ones who can say, for every pound, which channel earned it. Which of your channels wastes the most money today?`,
+  },
 ];

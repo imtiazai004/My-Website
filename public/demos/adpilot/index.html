@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AdPilot — Seven AI Agents Run Your Ads</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#eaf4fe;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#1a7fe6}.top h1 span{color:#0d9488}
+.alert{background:linear-gradient(135deg,#1a7fe6,#0d9488);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(26,127,230,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(26,127,230,.08);border-top:3px solid #1a7fe6}
+.stat .sv{font-size:20px;font-weight:900;color:#1a7fe6}.stat .sl{font-size:10.5px;color:#1a7fe6;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(26,127,230,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12px;font-weight:800;color:#1a7fe6;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#1a7fe6;color:#fff}
+.card{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(26,127,230,.08)}
+.card b{font-size:14px;color:#1a7fe6;display:block}
+.card .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px}
+.card .draft{background:#eaf4fe;border-left:3px solid #1a7fe6;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#1a7fe6;font-weight:600;margin-bottom:9px}
+.card .act{font-size:12px;color:#0d9488;font-weight:800;margin-bottom:9px}
+.card .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.wait{background:#fef3c7;color:#92400e}.flag.ok{background:#dcfce7;color:#15803d}.flag.no{background:#fee2e2;color:#b91c1c}.flag.run{background:#e0e7ff;color:#1a7fe6}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.run{background:#1a7fe6;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}
+.line{padding:9px 2px;border-bottom:1px solid #eaf4fe;font-size:13px;font-weight:600;color:#1a7fe6;line-height:1.5}
+.line:last-child{border-bottom:none}
+.line .who{font-weight:900}
+.line .who.a{color:#1a7fe6}.line .who.c{color:#0d9488}
+.price{font-size:22px;font-weight:900;color:#1a7fe6}
+.strike{font-size:13px;color:#94a3b8;text-decoration:line-through;font-weight:700;margin-left:6px}
+table.rep{width:100%;border-collapse:collapse;font-size:12.5px}
+table.rep th{text-align:left;color:#1a7fe6;font-size:11px;padding:6px 4px;border-bottom:2px solid #eaf4fe}
+table.rep td{padding:7px 4px;border-bottom:1px solid #eaf4fe;font-weight:700;color:#334155}
+table.rep td.num{text-align:right}
+table.rep th.num{text-align:right}
+table.rep tr.tot td{color:#1a7fe6;border-bottom:none;font-weight:900}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a7fe6;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#1a7fe6;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>📣 Ad<span>Pilot</span></h1></div>
+  <div class="alert"><div class="big">🤖</div><div class="txt">7 AI agents are running your ads — Google, Meta, TikTok, Microsoft &amp; ChatGPT. One team, five channels, one report.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv">5</div><div class="sl">Channels connected</div></div>
+    <div class="stat"><div class="sv">£1,240</div><div class="sl">Spent this week</div></div>
+    <div class="stat"><div class="sv">£3,272</div><div class="sl">Sales from ads</div></div>
+    <div class="stat"><div class="sv" id="stAppr">1</div><div class="sl">Plan needs approval</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="agentsTab" onclick="setTab('agents')">🤖 Agents</div>
+    <div class="tab" id="campTab" onclick="setTab('camp')">📣 Campaigns</div>
+    <div class="tab" id="apprTab" onclick="setTab('appr')">✅ Approval <span id="apprN">(1)</span></div>
+    <div class="tab" id="repTab" onclick="setTab('rep')">📊 Report</div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">AdPilot — seven AI agents run your ads. Willow &amp; Fern Gifts.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='agents';
+let PLAN='pending';
+let OPT=false;
+const AGENTS=[
+{n:'🤖 1 · Audience Planner',m:'Found 3 audiences: gift buyers 25–54, last-minute shoppers, candle lovers.',s:'done'},
+{n:'✍️ 2 · Ad Writer',m:'Wrote 6 ads from your product photos and prices — 2 new headlines this week.',s:'done'},
+{n:'🚀 3 · Campaign Launcher',m:'Launched on Google, Meta and TikTok. ChatGPT Ads waits for your approval.',s:'run'},
+{n:'💷 4 · Budget Optimiser',m:'Meta\u2019s return fell to 2.4x. It wants to move £120 of next week\u2019s budget to Google (3.1x).',s:'run'},
+{n:'🧪 5 · Creative Tester',m:'Testing 2 headlines: \u201cGift-ready in 24h\u201d is beating \u201cHand-poured\u201d by 31%.',s:'run'},
+{n:'📊 6 · Performance Reporter',m:'One report, all 5 channels, updated daily — no more five dashboards.',s:'done'},
+{n:'💬 7 · ChatGPT Ads Agent',m:'Your gift set shows inside ChatGPT gift searches. Needs your approval to go live.',s:'wait'}];
+const CAMPS=[
+{n:'Winter Gift Set',p:'Google Ads',sp:420,sa:1310,r:'3.1x',s:'LIVE'},
+{n:'Candle Gift Set',p:'Meta Ads',sp:380,sa:912,r:'2.4x',s:'LIVE'},
+{n:'Skincare Bundle',p:'TikTok Ads',sp:290,sa:638,r:'2.2x',s:'LIVE'},
+{n:'Gift Guide',p:'ChatGPT Ads',sp:150,sa:412,r:'2.7x',s:'WAITING'}];
+function chip(s){
+ if(s==='done'||s==='LIVE')return '<span class="flag ok">✅ '+(s==='done'?'DONE':'LIVE')+'</span>';
+ if(s==='run')return '<span class="flag run">▶ RUNNING</span>';
+ if(s==='wait'||s==='WAITING')return '<span class="flag wait">⏸️ WAITING</span>';
+ return '<span class="flag wait">⏸️ WAITING</span>';
+}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function setTab(t){TAB=t;['agents','camp','appr','rep'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function approvePlan(){
+ if(PLAN!=='pending')return;
+ PLAN='approved';
+ AGENTS[2].s='done';AGENTS[2].m='Launched on Google, Meta, TikTok and ChatGPT Ads. All 5 channels live.';
+ AGENTS[6].s='done';AGENTS[6].m='Your gift set is live inside ChatGPT gift searches.';
+ CAMPS[3].s='LIVE';
+ render();
+ toast('✅ Plan approved — ChatGPT Ads is live. All 5 channels running.');
+}
+function runOptimise(){
+ if(OPT)return;
+ OPT=true;
+ CAMPS[1].sp=260;CAMPS[1].sa=624;
+ CAMPS[0].sp=540;CAMPS[0].sa=1674;
+ render();
+ toast('✅ Optimisation applied — £120 moved Meta → Google');
+}
+function render(){
+const list=document.getElementById('list');
+const pend=PLAN==='pending'?1:0;
+document.getElementById('stAppr').textContent=pend;
+document.getElementById('apprN').textContent='('+pend+')';
+if(TAB==='agents'){
+ list.innerHTML=AGENTS.map(a=>`<div class="card"><b>${a.n}</b><div class="q">${a.m}</div><div class="row">${chip(a.s)}</div></div>`).join('');
+}else if(TAB==='camp'){
+ list.innerHTML=CAMPS.map(c=>`<div class="card"><b>${c.n} — ${c.p}</b><div class="q">£${c.sp} spent → £${c.sa} in sales. Return ${c.r} per £1.</div><div class="row">${chip(c.s)}<span class="price">£${c.sa}</span></div></div>`).join('')
+ +`<div class="card"><b>💷 Where the money went</b><div class="q">Google earns the most per pound (3.1x). Meta earns the least (2.4x). The agents want to move £120 from Meta to Google next week.</div><div class="row"><button class="abtn run" id="optBtn" onclick="runOptimise()" ${OPT?'disabled style="opacity:.5"':''}>▶ Run today\u2019s optimisation</button></div></div>`;
+}else if(TAB==='appr'){
+ const ch=PLAN==='approved'?'<span class="flag ok">✅ APPROVED — ALL 5 CHANNELS LIVE</span>':'<span class="flag wait">⏸️ WAITING FOR YOU</span>';
+ const btns=PLAN==='pending'?`<button class="abtn ok" id="apPlan" onclick="approvePlan()">✅ Approve plan — £1,240/week</button><button class="abtn no" id="edPlan" onclick="toast('✏️ Edit the plan — change audience, ads or budget first')">Edit plan</button>`:'';
+ list.innerHTML=`<div class="card"><b>Week 2 plan — £1,240/week across 5 channels</b><div class="q">Audience: gift buyers 25–54. Creative: 6 ads (2 new headlines). Budget shift: £120 Meta → Google.</div><div class="draft">🛡️ Nothing goes live until you approve it — plan, creative and budget all wait for your sign-off.</div><div class="row">${ch}${btns}</div></div>`
+ +`<div class="card"><b>📋 What you are approving</b><div class="q">1 · Audience — gift buyers, last-minute shoppers, candle lovers.<br>2 · Creative — 6 ads, your photos and prices, nothing invented.<br>3 · Budget — £1,240/week, capped per channel, never more.</div></div>`;
+}else{
+ const totSp=CAMPS.reduce((a,c)=>a+c.sp,0), totSa=CAMPS.reduce((a,c)=>a+c.sa,0);
+ const rows=CAMPS.map(c=>`<tr><td>${c.p}</td><td class="num">£${c.sp}</td><td class="num">£${c.sa}</td><td class="num">${c.r}</td></tr>`).join('');
+ list.innerHTML=`<div class="card"><b>📊 One report — all 5 channels</b><table class="rep"><tr><th>Channel</th><th class="num">Spent</th><th class="num">Sales</th><th class="num">Return</th></tr>${rows}<tr class="tot"><td>Total</td><td class="num">£${totSp}</td><td class="num">£${totSa}</td><td class="num">${(totSa/totSp).toFixed(1)}x</td></tr></table></div>`
+ +`<div class="card"><b>💡 What the agents found</b><div class="q">Meta is your weakest channel this week (2.4x). Google is your strongest (3.1x). ${OPT?'£120 already moved from Meta to Google — watch next week\u2019s report.':'The agents recommend moving £120 from Meta to Google next week.'}</div><div class="act">93% of small advertisers cannot measure performance across platforms. This report is the fix.</div></div>`;
+}
+}
+render();
+</script>
+</body>
+</html>
