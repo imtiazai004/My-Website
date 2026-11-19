@@ -200,6 +200,12 @@ export const DEMO_APPS: DemoApp[] = [
   { slug: 'hirepipe', name: 'HirePipe', industry: 'Sales & admin', post: 'candidate-ghosting-recruiters',
     problem: 'Great candidates accept other offers while hiring stalls.',
     description: 'A hiring pipeline with interview scheduling and candidate follow-ups.' },
+  { slug: 'agentcheckout', name: 'AgentCheckout', industry: 'E-commerce', post: 'your-customers-ai-can-now-pay-you',
+    problem: 'A customer’s AI agent can shop your store but can’t pay you at checkout.',
+    description: 'Lets a customer’s AI agent pay you at checkout through ChatGPT Wallet — the order lands with payment, no app-switching.' },
+  { slug: 'adpilot', name: 'AdPilot', industry: 'Sales & admin', post: 'ai-agents-run-your-ads-inmobi-accelerate',
+    problem: 'Ad spend is scattered across five platforms and nobody can see what each pound earned.',
+    description: 'Seven AI agents plan the audience, write the ad, launch it on Google, Meta, TikTok and ChatGPT Ads, and optimise daily — with one combined report of what each channel earned.' },
 ];
 
 /** Display order on /demos — our core customers first. */
