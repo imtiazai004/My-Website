@@ -206,6 +206,9 @@ export const DEMO_APPS: DemoApp[] = [
   { slug: 'adpilot', name: 'AdPilot', industry: 'Sales & admin', post: 'ai-agents-run-your-ads-inmobi-accelerate',
     problem: 'Ad spend is scattered across five platforms and nobody can see what each pound earned.',
     description: 'Seven AI agents plan the audience, write the ad, launch it on Google, Meta, TikTok and ChatGPT Ads, and optimise daily — with one combined report of what each channel earned.' },
+  { slug: 'sourcepilot', name: 'SourcePilot', industry: 'E-commerce', post: 'ai-sourcing-agent-finds-your-supplier-accio',
+    problem: 'Finding a reliable supplier and knowing the margin before ordering takes weeks of spreadsheets.',
+    description: 'An AI sourcing agent that finds and vets suppliers, compares landed prices, shows the margin per unit, and drafts the first order for your approval.' },
 ];
 
 /** Display order on /demos — our core customers first. */

@@ -975,4 +975,30 @@ The demo above shows the flow: connect your ad accounts, let the seven agents pl
 
 The ad account is changing hands — from five dashboards that never talk to each other to one team of agents that sees them all. The sellers who win will be the ones who can say, for every pound, which channel earned it. Which of your channels wastes the most money today?`,
   },
+  {
+    slug: 'ai-sourcing-agent-finds-your-supplier-accio',
+    title: 'Alibaba Just Gave Small Sellers a Free AI Sourcing Team — the Sourcing Agent That Vets Suppliers and Prices the Margin In',
+    excerpt:
+      'On November 19, Alibaba.com made Accio Sourcing Expert free for European SMEs. An AI sourcing agent finds suppliers, vets them, and shows your margin before you order — while only 5% of UK small businesses use agentic AI at all.',
+    tags: ['AI Agents', 'E-commerce', 'Small Business'],
+    content: `An AI sourcing agent just became free for small sellers. On November 19, Alibaba.com launched its European SME Startup Pack at the CoCreate Europe summit in London, opening free access to Accio Sourcing Expert in Auto Mode for small and medium-sized businesses across Europe. Tell it what you want to sell, and its agents do the jobs that used to eat a founder's month: product research, supplier vetting, profit analysis — then show you the margin before you spend a pound.
+
+Sourcing is the first money decision every e-commerce seller makes, and it is usually made blind. The cheapest unit price on the page is not the cheapest order: shipping, import fees and the platform's cut all land after the quote. A supplier who answers fast is not the same as a supplier who ships on time. Most sellers compare two or three suppliers in a spreadsheet, pick the one that looks cheapest, and find out the truth when the stock arrives — late, damaged, or priced so tight there is no margin left to advertise with. A bad supplier costs weeks, returns and dead stock. A good one is the difference between a product that sells and a product that sits.
+
+The numbers say most sellers have not tried the other way yet. European sellers on Alibaba.com now list 1.28 million products, up 78% on a year ago. But only 5% of UK small businesses use agentic AI regularly, while 68% want to learn how — that is Alibaba.com and Small Business Britain's survey of 1,000 UK owners from August 2026. The appetite is there; the habit is not. The sellers who close that gap first get the free tool while everyone else is still scrolling supplier pages at midnight.
+
+Accio is not a chatbot that answers questions about sourcing. It is an agentic AI workspace: its agents act as a digital operations team across the business lifecycle, handling market analysis, product design, sourcing, store optimisation and inventory monitoring. In practice that means it contacts several suppliers at once, issues requests for quotes, compares the replies side by side, and keeps negotiating while you sell. And there is a gate that matters: the agent cannot close a deal on its own. Pricing, commercial terms and purchase orders still need your approval, and payments need your explicit confirmation. The agent does the chasing; you still sign the order.
+
+Be honest about where this is today. Accio Sourcing Expert became free on November 19 — it is days old, and free access is for European SMEs in Auto Mode. Alibaba.com's own 107-task benchmark says Accio matches the task quality of Codex and Claude Code at around 50% of the cost — that is their evaluation, not an independent one, so treat it as their claim. The wider platform is not new, though: more than 230,000 businesses have deployed Accio agent teams, and Accio Work now has over 10 million monthly active users. The free tier is the new part, not the idea.
+
+So what should a seller do this week? Four things. First, price the margin before the order: landed cost per unit — product, shipping, fees — against your selling price. If you cannot see the margin per unit, do not order. Second, vet beyond price: years on the platform, response time, ratings, and a sample before a bulk order. Third, keep the approval gate: let the agent draft the supplier shortlist and the first order, but approve the supplier, the price and the order yourself. Fourth, start with one product: run a single sourcing job end to end before you hand the agent your whole catalogue. The sellers who do this now will know their margin before they order — the rest will find it out when the stock arrives.
+
+Here is what that looks like from your side of the counter:
+
+:::demo sourcepilot:::
+
+The demo above shows the flow: describe the product, the agent finds and vets suppliers, compares landed prices, shows the margin per unit, and drafts the first order — you approve it.
+
+The supplier search is changing hands — from late-night spreadsheets to an agent that works while you sell. The sellers who win will be the ones who know their margin before they order, not after the stock arrives. What costs you more today — finding the supplier, or trusting the one you found?`,
+  },
 ];

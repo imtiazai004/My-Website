@@ -13,7 +13,7 @@ const DEMO_NAMES = new Set([
   'hallbook', 'scriptrefill', 'hirepipe', 'carcare', 'leasemind',
   'clawdesk', 'shopagent', 'voicefront', 'profilebot', 'dotdesk',
   'shopshield', 'memocare', 'flowdesk', 'winback', 'reviewdesk',
-  'showonce', 'approvaldesk', 'aftercall', 'agentcheckout', 'adpilot',
+  'showonce', 'approvaldesk', 'aftercall', 'agentcheckout', 'adpilot', 'sourcepilot',
 ]);
 
 function escapeHtml(s: string): string {

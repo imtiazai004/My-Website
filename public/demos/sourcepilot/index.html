@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SourcePilot — Your AI Sourcing Agent Finds the Supplier</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#eaf4fe;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#1a7fe6}.top h1 span{color:#0d9488}
+.alert{background:linear-gradient(135deg,#1a7fe6,#0d9488);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(26,127,230,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(26,127,230,.08);border-top:3px solid #1a7fe6}
+.stat .sv{font-size:20px;font-weight:900;color:#1a7fe6}.stat .sl{font-size:10.5px;color:#1a7fe6;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(26,127,230,.08)}
+.tab{flex:1;text-align:center;padding:10px;font-size:12px;font-weight:800;color:#1a7fe6;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#1a7fe6;color:#fff}
+.card{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(26,127,230,.08)}
+.card b{font-size:14px;color:#1a7fe6;display:block}
+.card .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px}
+.card .draft{background:#eaf4fe;border-left:3px solid #1a7fe6;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#1a7fe6;font-weight:600;margin-bottom:9px}
+.card .act{font-size:12px;color:#0d9488;font-weight:800;margin-bottom:9px}
+.card .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.wait{background:#fef3c7;color:#92400e}.flag.ok{background:#dcfce7;color:#15803d}.flag.no{background:#fee2e2;color:#b91c1c}.flag.run{background:#e0e7ff;color:#1a7fe6}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.run{background:#1a7fe6;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}
+.line{padding:9px 2px;border-bottom:1px solid #eaf4fe;font-size:13px;font-weight:600;color:#1a7fe6;line-height:1.5}
+.line:last-child{border-bottom:none}
+.line .who{font-weight:900}
+.line .who.a{color:#1a7fe6}.line .who.c{color:#0d9488}
+.price{font-size:22px;font-weight:900;color:#1a7fe6}
+.strike{font-size:13px;color:#94a3b8;text-decoration:line-through;font-weight:700;margin-left:6px}
+table.rep{width:100%;border-collapse:collapse;font-size:12.5px}
+table.rep th{text-align:left;color:#1a7fe6;font-size:11px;padding:6px 4px;border-bottom:2px solid #eaf4fe}
+table.rep td{padding:7px 4px;border-bottom:1px solid #eaf4fe;font-weight:700;color:#334155}
+table.rep td.num{text-align:right}
+table.rep th.num{text-align:right}
+table.rep tr.tot td{color:#1a7fe6;border-bottom:none;font-weight:900}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a7fe6;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#1a7fe6;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🔍 Source<span>Pilot</span></h1></div>
+  <div class="alert"><div class="big">🤖</div><div class="txt">Your AI sourcing agent — describe the product, it finds and vets suppliers, compares landed prices, and prices the margin in.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv">3</div><div class="sl">Suppliers vetted</div></div>
+    <div class="stat"><div class="sv">£4.82</div><div class="sl">Best landed cost</div></div>
+    <div class="stat"><div class="sv">58%</div><div class="sl">Margin per unit</div></div>
+    <div class="stat"><div class="sv" id="stAppr">1</div><div class="sl">Order needs approval</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="supTab" onclick="setTab('sup')">🏭 Suppliers</div>
+    <div class="tab" id="vetTab" onclick="setTab('vet')">✅ Vetting</div>
+    <div class="tab" id="marTab" onclick="setTab('mar')">💷 Margin</div>
+    <div class="tab" id="ordTab" onclick="setTab('ord')">📦 Order <span id="ordN">(1)</span></div>
+  </div>
+  <div id="list"></div>
+  <div class="foot">SourcePilot — your AI sourcing agent. Willow &amp; Fern Gifts.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='sup';
+let ORDER='pending';
+let ASKED=false;
+const SUPPLIERS=[
+{n:'🏭 1 · BrightHome Trading — Shenzhen',m:'Verified 6 yrs · 98.2% positive · replies in under 4 hours. Unit £3.90, shipping £0.62, landed £4.82. Sells at £11.99 — margin 58%.',s:'best'},
+{n:'🏭 2 · HomeGoods Co — Guangzhou',m:'Verified 4 yrs · 97.1% positive · replies in under 8 hours. Unit £4.10, shipping £0.74, landed £5.14. Sells at £11.99 — margin 54%.',s:'ok'},
+{n:'🏭 3 · Festive Source — Yiwu',m:'Verified 2 yrs · 95.4% positive. Cheapest unit at £3.60 — but 18-day shipping and £0.91 freight push landed to £5.31. Margin 52%.',s:'slow'}];
+const VETTING=[
+{n:'📄 Business licence verified',m:'BrightHome Trading — licence, export history and factory photos all check out. 6 years on the platform, 2,400+ orders shipped.',s:'done'},
+{n:'⭐ Ratings checked across 12 months',m:'98.2% positive over the last year. The 1.8% negatives are all late shipping — none about product quality.',s:'done'},
+{n:'📦 Sample ordered first',m:'One gift set ordered as a sample before any bulk order. Arrived in 9 days, matches the listing photos.',s:'done'},
+{n:'💬 Negotiation running',m:'Agent asked for a better unit price at 500 units. Supplier offered £3.72 — that would lift margin to 60%. Waiting on your call.',s:'run'}];
+function chip(s){
+ if(s==='done'||s==='best')return '<span class="flag ok">✅ '+(s==='done'?'CHECKED':'BEST MARGIN')+'</span>';
+ if(s==='run')return '<span class="flag run">▶ RUNNING</span>';
+ if(s==='ok')return '<span class="flag run">✓ VETTED</span>';
+ if(s==='slow')return '<span class="flag wait">⏸️ SLOW SHIPPING</span>';
+ return '<span class="flag wait">⏸️ WAITING</span>';
+}
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2600)}
+function setTab(t){TAB=t;['sup','vet','mar','ord'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));render()}
+function askAgent(){
+ if(ASKED)return;
+ ASKED=true;
+ render();
+ toast('🤖 Agent asked BrightHome for £3.72 at 500 units — reply expected within 4 hours.');
+}
+function approveOrder(){
+ if(ORDER!=='pending')return;
+ ORDER='approved';
+ render();
+ toast('✅ Order approved — 500 units from BrightHome Trading at £3.90. Nothing was ordered before your approval.');
+}
+function render(){
+const list=document.getElementById('list');
+const pend=ORDER==='pending'?1:0;
+document.getElementById('stAppr').textContent=pend;
+document.getElementById('ordN').textContent='('+pend+')';
+if(TAB==='sup'){
+ list.innerHTML=`<div class="card"><b>🕯️ Scented candle gift set — 500 units wanted</b><div class="q">You described the product once. The agent contacted 9 suppliers, got 5 quotes, and shortlisted 3. Here they are, ranked by the margin you actually keep.</div><div class="row"><button class="abtn run" id="askBtn" onclick="askAgent()" ${ASKED?'disabled style="opacity:.5"':''}>🤖 Ask agent to negotiate</button></div></div>`
+ +SUPPLIERS.map(s=>`<div class="card"><b>${s.n}</b><div class="q">${s.m}</div><div class="row">${chip(s.s)}</div></div>`).join('');
+}else if(TAB==='vet'){
+ list.innerHTML=VETTING.map(v=>`<div class="card"><b>${v.n}</b><div class="q">${v.m}</div><div class="row">${chip(v.s)}</div></div>`).join('')
+ +`<div class="card"><b>🛡️ What the agent never skips</b><div class="q">Licence, ratings history, response time, and a sample before bulk. A supplier that fails any one of these never reaches your shortlist — however cheap the unit price looks.</div></div>`;
+}else if(TAB==='mar'){
+ list.innerHTML=`<div class="card"><b>💷 Margin per unit — BrightHome Trading</b><table class="rep"><tr><th>Cost</th><th class="num">Per unit</th></tr><tr><td>Selling price</td><td class="num">£11.99</td></tr><tr><td>Unit price</td><td class="num">−£3.90</td></tr><tr><td>Shipping</td><td class="num">−£0.62</td></tr><tr><td>Import fees</td><td class="num">−£0.30</td></tr><tr><td>Platform fee</td><td class="num">−£0.00</td></tr><tr class="tot"><td>Landed cost</td><td class="num">£4.82</td></tr><tr class="tot"><td>Margin kept</td><td class="num">£7.17 (58%)</td></tr></table></div>`
+ +`<div class="card"><b>💡 What the agent found</b><div class="q">Festive Source has the cheapest unit (£3.60) but the worst landed cost (£5.31) — slow shipping eats the saving. BrightHome keeps £7.17 per unit. At 500 units that is £3,585 of margin before ads.</div><div class="act">The cheapest quote is rarely the cheapest order. Landed cost is the number that matters.</div></div>`;
+}else{
+ const ch=ORDER==='approved'?'<span class="flag ok">✅ APPROVED — ORDER PLACED WITH BRIGHTHOME</span>':'<span class="flag wait">⏸️ WAITING FOR YOU</span>';
+ const btns=ORDER==='pending'?`<button class="abtn ok" id="apOrder" onclick="approveOrder()">✅ Approve order — 500 units, £1,950</button><button class="abtn no" id="edOrder" onclick="toast('✏️ Change the order — supplier, quantity or price first')">Change order</button>`:'';
+ list.innerHTML=`<div class="card"><b>📦 Draft order — BrightHome Trading</b><div class="q">500 × scented candle gift set at £3.90 = £1,950. Shipping £310. Landed £2,260 total. Expected margin £3,585 at £11.99 selling price.</div><div class="draft">🛡️ Nothing is ordered until you approve it — supplier, price and quantity all wait for your sign-off.</div><div class="row">${ch}${btns}</div></div>`
+ +`<div class="card"><b>📋 What you are approving</b><div class="q">1 · Supplier — BrightHome Trading, vetted: licence, ratings, sample.<br>2 · Price — £3.90 per unit, £4.82 landed, 58% margin.<br>3 · Quantity — 500 units, £1,950 + £310 shipping.</div></div>`;
+}
+}
+render();
+</script>
+</body>
+</html>
