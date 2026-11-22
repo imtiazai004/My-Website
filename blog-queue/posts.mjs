@@ -1001,4 +1001,32 @@ The demo above shows the flow: describe the product, the agent finds and vets su
 
 The supplier search is changing hands — from late-night spreadsheets to an agent that works while you sell. The sellers who win will be the ones who know their margin before they order, not after the stock arrives. What costs you more today — finding the supplier, or trusting the one you found?`,
   },
+  {
+    slug: 'ai-agents-live-in-text-messages',
+    title: "Your Customers Won't Open Your App — They'll Just Text You. Now the AI Agent Lives in the Message",
+    excerpt:
+      "Your customers will not download your app — they will just text you. The AI agents in TechCrunch's 21 November 2026 roundup live inside SMS, WhatsApp, iMessage and Telegram, answering stock questions, booking appointments and chasing no-shows without a download or a dashboard.",
+    tags: ['AI Agents', 'Small Business', 'WhatsApp'],
+    content: `Your customer already decided how they want to reach you, and it is not your app. They will not download it, they will not remember the password, and they will not open it to check whether the white lilies are in stock or whether Saturday morning is free. They will do what they already do a hundred times a day: open the messaging app and type a sentence. If your business cannot answer inside that thread, the question goes to the shop down the road that can — not because your flowers are worse, but because you asked the customer to do extra work first.
+
+That is the shift TechCrunch mapped on 21 November 2026, in a roundup of the AI agents now living inside text messages. These agents do not sit on a website waiting to be visited, or in a dashboard your customer has to learn. They live in SMS, WhatsApp, iMessage and Telegram — the apps your customers already have open. There is nothing to download, nothing to install, and no menu to navigate. The customer just texts, the way they text a friend, and the agent works in the background: checking the diary and the stock, sending the reminder, following up when the customer goes quiet.
+
+The money following this idea is serious. Instinct raised $1B at a $10B valuation. Poke is the first AI agent approved on Apple Messages for Business. Ask Proxy runs over plain SMS at $1/day. Comma is free and open-source, and works across Signal, Telegram and WeChat. Fambot raised $3.5M pre-seed. Different tools, same bet: the conversation is the interface, and the business that meets the customer inside the message wins the job before the website loads.
+
+And the work these agents do is not futuristic. It is the daily grind of a small business: scheduling an appointment, sending a reminder the day before, chasing a customer who did not show up, answering the same stock question for the twentieth time that week, doing a bit of research, booking a reservation. None of it is glamorous, but it is the difference between a full diary and one with holes in it — and until now, it all needed a human sitting by the phone.
+
+Here is what that looks like from your side of the counter:
+
+:::demo textpilot:::
+
+The demo above shows the flow for a florist shop: a customer asks about white lilies and the agent checks the stock; the same customer books for Saturday and the agent checks the diary; a reminder goes out the day before on its own; and when the customer does not show up, the agent sends the chase message. Nothing that costs the business money moves without the owner approving it first.
+
+Add up what that saves across a month. Every unanswered stock question is a sale that walked away. Every missed reminder is an empty slot that could have been filled. Every no-show nobody chases is a customer quietly drifting to a competitor. A text thread answers in seconds, at any hour, in the customer's own words — and it remembers the conversation, so the customer never has to repeat themselves. The businesses that feel effortless to buy from are the ones where the follow-up happens without anyone remembering to do it.
+
+So how does a small business get there? Start with one channel, not four: the messaging app most of your customers already use to reach you. Write down the ten questions you answer every week and the five jobs you repeat every day — bookings, reminders, stock checks, follow-ups, reservations. That list is your prompt template: the agent's job description in plain language. Build it with vibe-coding tools — v0, Lovable, Bolt or Replit — connect it to your calendar and stock list through APIs, and deploy it on Vercel or Netlify. Keep the approval gate from the start: the agent drafts every message that spends money or moves a booking, and you approve it before it goes out.
+
+Before you switch it on, check four things. One: the agent answers in the customer's own messaging app, not yours. Two: it is connected to the real diary and the real stock list, not a guess. Three: reminders and no-show chases go out automatically, without anyone remembering. Four: nothing is booked, cancelled or promised without your approval. If all four are true, your front door stays open while you serve the customer in front of you.
+
+The storefront used to be a shop window, then a website, then an app. Now it is a text thread — and the businesses answering inside it are the ones customers keep coming back to. Which job in your day would you hand to a text message first — the booking, the reminder, or the follow-up?`,
+  },
 ];

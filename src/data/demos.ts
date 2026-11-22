@@ -209,6 +209,9 @@ export const DEMO_APPS: DemoApp[] = [
   { slug: 'sourcepilot', name: 'SourcePilot', industry: 'E-commerce', post: 'ai-sourcing-agent-finds-your-supplier-accio',
     problem: 'Finding a reliable supplier and knowing the margin before ordering takes weeks of spreadsheets.',
     description: 'An AI sourcing agent that finds and vets suppliers, compares landed prices, shows the margin per unit, and drafts the first order for your approval.' },
+  { slug: 'textpilot', name: 'TextPilot', industry: 'Retail & shops', post: 'ai-agents-live-in-text-messages',
+    problem: 'Customers text instead of opening your app — and the message sits unanswered after hours.',
+    description: 'A WhatsApp/SMS agent that answers stock questions, confirms bookings, sends reminders and chases no-shows — all inside the customer’s own chat thread, with the owner approving every send.' },
 ];
 
 /** Display order on /demos — our core customers first. */
