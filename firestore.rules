@@ -55,13 +55,23 @@ service cloud.firestore {
 
     // Testimonials
     match /testimonials/{testimonialId} {
-      // Public sees approved reviews only (queries must filter approved == true).
-      allow read: if resource.data.approved == true || isAdmin();
-      // Anyone may submit, but a public submission always starts unapproved.
-      allow create: if isValidId(testimonialId) && isValidTestimonial(incoming())
-        && (incoming().get('approved', false) == false || isAdmin());
+      // Open reviews: anyone can read, anyone can post (strict shape), live instantly. Admin can edit/delete.
+      allow read: if true;
+      allow create: if (isAdmin() && isValidId(testimonialId) && isValidTestimonial(incoming()))
+        || isValidPublicTestimonial(incoming());
       allow update: if isAdmin() && isValidTestimonial(incoming());
       allow delete: if isAdmin();
+    }
+
+    // Public (anyone can post) - strict shape + sizes to limit abuse
+    function isValidPublicTestimonial(data) {
+      return data.keys().hasOnly(['name', 'role', 'company', 'content', 'avatarUrl', 'approved', 'createdAt'])
+        && isValidTestimonial(data)
+        && data.name.size() >= 2
+        && data.role.size() >= 2
+        && data.content.size() >= 10
+        && data.avatarUrl.matches('^https://ui-avatars\\.com/api/.*')
+        && data.createdAt == request.time;
     }
 
     function isValidTestimonial(data) {

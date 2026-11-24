@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { Quote } from "lucide-react";
+import { Quote, PenLine } from "lucide-react";
 import { Link } from "react-router-dom";
 import { TestimonialsColumn } from "./ui/testimonials-columns-1";
 import { subscribeToTestimonials } from "../services/dataService";
@@ -8,9 +8,9 @@ import { subscribeToTestimonials } from "../services/dataService";
 type CardData = { text: string; image: string; name: string; role: string };
 
 /**
- * Shows only testimonials an admin has approved in the dashboard. There is no
- * placeholder fallback: if there are no approved reviews yet, the section
- * renders nothing — an empty section is better than invented praise.
+ * Open reviews: anyone can post via /submit-testimonial and it goes live
+ * instantly (admin can still hide or delete). No placeholder praise: with zero
+ * reviews the section shows only an invitation to write the first one.
  */
 export default function Testimonials() {
   const [cards, setCards] = useState<CardData[]>([]);
@@ -27,8 +27,6 @@ export default function Testimonials() {
       );
     });
   }, []);
-
-  if (cards.length === 0) return null;
 
   const col1 = cards.filter((_, i) => i % 3 === 0);
   const col2 = cards.filter((_, i) => i % 3 === 1);
@@ -54,9 +52,19 @@ export default function Testimonials() {
           <h2 id="testimonials-heading" className="heading-lg text-white">
             What our clients say
           </h2>
+          <p className="text-white/70">
+            Open to everyone. Every review goes live instantly, unfiltered.
+          </p>
+          <Link
+            to="/submit-testimonial"
+            className="inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold px-7 py-3.5 rounded-full transition-colors"
+          >
+            <PenLine className="w-4 h-4" aria-hidden="true" />
+            {cards.length === 0 ? "Be the first to leave a review" : "Write a review"}
+          </Link>
         </motion.div>
 
-        {scrolling ? (
+        {cards.length === 0 ? null : scrolling ? (
           <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] max-h-[740px] overflow-hidden">
             <TestimonialsColumn testimonials={col1} duration={15} />
             <TestimonialsColumn testimonials={col2} className="hidden md:block" duration={19} />
@@ -78,10 +86,6 @@ export default function Testimonials() {
             ))}
           </div>
         )}
-
-        <p className="mt-12 text-center text-sm text-white/70">
-          Worked with us? <Link to="/submit-testimonial" className="text-brand-accent underline underline-offset-4">Leave a review</Link> — it appears here after we confirm it.
-        </p>
       </div>
     </section>
   );

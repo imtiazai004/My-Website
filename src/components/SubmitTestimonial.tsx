@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { CheckCircle, Send, User, Briefcase, Building2, MessageSquare } from "lucide-react";
+import { Link } from "react-router-dom";
+import { CheckCircle, Send, User, Briefcase, Building2, MessageSquare, ArrowLeft } from "lucide-react";
 import { submitTestimonial } from "../services/dataService";
 import { usePageSeo } from "../lib/seo";
 
 export default function SubmitTestimonial() {
   usePageSeo({ title: "Leave a review | Soft Tech Solution", noindex: true });
   const [form, setForm] = useState({ name: "", role: "", company: "", content: "" });
+  const [honeypot, setHoneypot] = useState("");
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -15,8 +17,22 @@ export default function SubmitTestimonial() {
     e.preventDefault();
     setError("");
 
+    // Bots fill hidden fields; silently pretend success
+    if (honeypot) {
+      setSubmitted(true);
+      return;
+    }
+
     if (!form.name.trim() || !form.role.trim() || !form.content.trim()) {
       setError("Name, role and feedback are required.");
+      return;
+    }
+    if (form.name.trim().length < 2 || form.role.trim().length < 2) {
+      setError("Please enter your full name and role.");
+      return;
+    }
+    if (form.content.trim().length < 10) {
+      setError("Feedback must be at least 10 characters.");
       return;
     }
 
@@ -47,8 +63,14 @@ export default function SubmitTestimonial() {
           <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-6" />
           <h2 className="text-2xl font-bold text-white mb-3">Thank You!</h2>
           <p className="text-brand-text-muted">
-            Thank you — we’ll publish your review on the website after confirming it with you.
+            Your review is now live on the website.
           </p>
+          <Link
+            to="/#testimonials"
+            className="inline-flex items-center gap-2 mt-8 bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold px-6 py-3 rounded-xl transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" /> See it on the website
+          </Link>
         </motion.div>
       </div>
     );
@@ -83,6 +105,18 @@ export default function SubmitTestimonial() {
           onSubmit={handleSubmit}
           className="bg-white/5 border border-white/10 rounded-2xl p-8 space-y-5 backdrop-blur-sm"
         >
+          {/* Honeypot: hidden from humans, bots fill it */}
+          <input
+            type="text"
+            name="website"
+            value={honeypot}
+            onChange={e => setHoneypot(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute -left-[9999px] w-px h-px opacity-0"
+          />
+
           <div className="space-y-2">
             <label className="text-sm font-medium text-white/70 flex items-center gap-2">
               <User className="w-4 h-4" /> Your Name *
@@ -92,6 +126,7 @@ export default function SubmitTestimonial() {
               value={form.name}
               onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
               placeholder="e.g. Ali Hassan"
+              maxLength={100}
               className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent/50 transition-colors"
               required
             />
@@ -106,6 +141,7 @@ export default function SubmitTestimonial() {
               value={form.role}
               onChange={e => setForm(p => ({ ...p, role: e.target.value }))}
               placeholder="e.g. CEO, Project Manager"
+              maxLength={100}
               className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent/50 transition-colors"
               required
             />
@@ -120,6 +156,7 @@ export default function SubmitTestimonial() {
               value={form.company}
               onChange={e => setForm(p => ({ ...p, company: e.target.value }))}
               placeholder="e.g. TechCorp Pvt Ltd"
+              maxLength={100}
               className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent/50 transition-colors"
             />
           </div>
@@ -133,6 +170,7 @@ export default function SubmitTestimonial() {
               onChange={e => setForm(p => ({ ...p, content: e.target.value }))}
               placeholder="Share your experience working with us..."
               rows={5}
+              maxLength={1000}
               className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent/50 transition-colors resize-none"
               required
             />

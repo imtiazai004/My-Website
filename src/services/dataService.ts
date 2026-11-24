@@ -14,7 +14,7 @@ export const subscribeToProjects = (callback: (projects: Project[]) => void) => 
   }, (error) => { logFirestoreError(error, 'list', 'projects'); callback([]); });
 };
 
-/** Public: only testimonials an admin has approved. Sorted client-side so no composite index is needed. */
+/** Public: visible testimonials (public submissions are approved on creation; admin can un-approve to hide). Sorted client-side so no composite index is needed. */
 export const subscribeToTestimonials = (callback: (testimonials: Testimonial[]) => void) => {
   const q = query(collection(db, 'testimonials'), where('approved', '==', true));
   return onSnapshot(q, (snapshot) => {
@@ -99,7 +99,7 @@ export const submitTestimonial = async (data: { name: string; role: string; comp
   await addDoc(collection(db, 'testimonials'), {
     ...data,
     avatarUrl,
-    approved: false, // shown only after an admin approves it
+    approved: true, // open reviews: live instantly; admin can still edit or delete
     createdAt: serverTimestamp(),
   });
 };
