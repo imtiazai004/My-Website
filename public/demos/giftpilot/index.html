@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GiftPilot — The Gift That Gets You the Meeting</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#fdf2e9;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#c2410c}.top h1 span{color:#0d9488}
+.alert{background:linear-gradient(135deg,#c2410c,#ea580c);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(194,65,12,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(194,65,12,.08);border-top:3px solid #c2410c}
+.stat .sv{font-size:20px;font-weight:900;color:#c2410c}.stat .sl{font-size:10.5px;color:#c2410c;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(194,65,12,.08)}
+.tab{flex:1;text-align:center;padding:10px 4px;font-size:12px;font-weight:800;color:#c2410c;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#c2410c;color:#fff}
+.panel{background:#fff;border-radius:14px;padding:16px 14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(194,65,12,.08)}
+.panel b{font-size:15px;color:#c2410c;display:block}
+.panel .q{font-size:12.5px;color:#475569;font-weight:600;margin:4px 0 8px;line-height:1.5}
+.panel .src{font-size:11px;color:#94a3b8;font-weight:700;margin-top:2px}
+.chip{display:inline-block;font-size:11px;font-weight:800;padding:5px 10px;border-radius:12px;background:#ffedd5;color:#9a3412;margin:3px 4px 3px 0}
+.gifts{display:flex;gap:10px;margin-top:10px}
+.gift{flex:1;border:2px solid #fed7aa;border-radius:12px;padding:10px;text-align:center;cursor:pointer}
+.gift.pick{border-color:#c2410c;background:#fff7ed}
+.gift .gi{font-size:26px}
+.gift .gn{font-size:12px;font-weight:800;color:#1e293b;margin-top:4px;line-height:1.3}
+.gift .gp{font-size:13px;font-weight:900;color:#c2410c;margin-top:3px}
+.gift .gw{font-size:10.5px;font-weight:700;color:#64748b;margin-top:3px}
+.card{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(194,65,12,.08)}
+.card b{font-size:14px;color:#c2410c;display:block}
+.card .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px;line-height:1.5}
+.card .draft{background:#fdf2e9;border-left:3px solid #c2410c;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#9a3412;font-weight:600;margin-bottom:9px;line-height:1.5}
+.card .act{font-size:12px;color:#0d9488;font-weight:800;margin-bottom:9px}
+.card .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.wait{background:#fef3c7;color:#92400e}.flag.ok{background:#dcfce7;color:#15803d}.flag.run{background:#e0e7ff;color:#c2410c}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.run{background:#c2410c;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}
+.next{width:100%;border:none;background:#c2410c;color:#fff;font-size:13.5px;font-weight:900;padding:13px;border-radius:14px;cursor:pointer;box-shadow:0 4px 14px rgba(194,65,12,.35)}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#c2410c;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#c2410c;font-weight:700;margin-top:14px}
+.msg{max-width:82%;padding:9px 11px 6px;border-radius:12px;font-size:13.5px;font-weight:600;line-height:1.45;margin-bottom:9px;clear:both;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.msg.in{background:#fff;float:left;border-top-left-radius:2px;color:#1e293b}
+.msg.out{background:#ffedd5;float:right;border-top-right-radius:2px;color:#1e293b}
+.msg .who{font-size:10.5px;font-weight:900;color:#c2410c;display:block;margin-bottom:2px}
+.msg .who.cust{color:#0d9488}
+.msg .tm{font-size:10px;color:#94a3b8;font-weight:700;text-align:right;margin-top:3px}
+.sys{text-align:center;clear:both;font-size:11px;font-weight:800;color:#64748b;background:#fff8dc;border-radius:10px;padding:7px 10px;margin:4px 0 10px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.clear{clear:both}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🎁 Gift<span>Pilot</span></h1></div>
+  <div class="alert"><div class="big">🎁</div><div class="txt">Your cold email was ignored. A personal gift is not — the agent researches the prospect, picks the gift, and you approve it before anything is sent.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv" id="stR">8</div><div class="sl">Prospects researched</div></div>
+    <div class="stat"><div class="sv" id="stG">5</div><div class="sl">Gifts sent</div></div>
+    <div class="stat"><div class="sv" id="stM">3</div><div class="sl">Meetings booked</div></div>
+    <div class="stat"><div class="sv" id="stP">6</div><div class="sl">Replies</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="resTab" onclick="setTab('res')">🔍 Research</div>
+    <div class="tab" id="pickTab" onclick="setTab('pick')">🎁 Gift</div>
+    <div class="tab" id="sendTab" onclick="setTab('send')">✉️ Send</div>
+    <div class="tab" id="meetTab" onclick="setTab('meet')">📅 Meeting</div>
+  </div>
+  <div id="panel"></div>
+  <div id="gate"></div>
+  <button class="next" id="nextBtn" onclick="nextStep()">Next step → Pick the gift</button>
+  <div class="foot">GiftPilot — the gift that gets you the meeting. Daniel Reeves · Northwind Software.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='res';
+let SENT=false;
+let GIFT='espresso';
+const ORDER=['res','pick','send','meet'];
+const LABEL={res:'Pick the gift',pick:'Send the gift',send:'See the meeting',meet:'Replay the research'};
+const GIFTS={
+ espresso:{gi:'☕',gn:'Specialty espresso tasting set',gp:'£28',gw:'Matches his espresso interest'},
+ cycling:{gi:'🚴',gn:'Cycling cap + energy gels',gp:'£22',gw:'Matches his weekend rides'},
+ vinyl:{gi:'🎵',gn:'Jazz vinyl — classic pressing',gp:'£30',gw:'Matches his record collection'}
+};
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2800)}
+function setTab(t){TAB=t;['res','pick','send','meet'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));document.getElementById('nextBtn').textContent='Next step → '+LABEL[t];render()}
+function nextStep(){const i=ORDER.indexOf(TAB);setTab(ORDER[(i+1)%ORDER.length])}
+function pickGift(g){GIFT=g;render();toast('🎁 '+GIFTS[g].gn+' selected — '+GIFTS[g].gp+' · within the £30 budget')}
+function approveSend(){
+ if(SENT)return;
+ SENT=true;
+ document.getElementById('stG').textContent='6';
+ render();
+ toast('✅ Gift approved and sent — espresso set on its way to Daniel Reeves, in your branding.');
+}
+function render(){
+ const panel=document.getElementById('panel');
+ const gate=document.getElementById('gate');
+ if(TAB==='res'){
+  panel.innerHTML=`<div class="panel"><b>🔍 Daniel Reeves — VP Sales, Northwind Software</b><div class="q">Agent researched his LinkedIn and company site in one run. Three real interests, each verified from a public post — not a guess.</div><div><span class="chip">☕ Specialty espresso — follows 3 roasters</span><span class="chip">🚴 Road cycling — weekend rides</span><span class="chip">🎵 Vinyl records — jazz collection</span></div><div class="src">Sources: LinkedIn · Northwind Software site · 1 research run (~$10)</div></div>`;
+  gate.innerHTML=`<div class="card"><b>🔍 What just happened</b><div class="q">One prospect, three verified interests. Generic gifting fails because the gift could have gone to anyone — this one could only have gone to Daniel.</div><div class="row"><span class="flag ok">✅ 3 INTERESTS VERIFIED</span><span class="flag run">📋 BUDGET SET — £30</span></div></div>`;
+ }else if(TAB==='pick'){
+  panel.innerHTML=`<div class="panel"><b>🎁 Pick the gift — budget £30</b><div class="q">Three options inside budget, ranked by how well they match what Daniel actually cares about. Tap one to select it.</div><div class="gifts">`
+  +Object.keys(GIFTS).map(k=>`<div class="gift ${GIFT===k?'pick':''}" onclick="pickGift('${k}')"><div class="gi">${GIFTS[k].gi}</div><div class="gn">${GIFTS[k].gn}</div><div class="gp">${GIFTS[k].gp}</div><div class="gw">${GIFTS[k].gw}</div></div>`).join('')
+  +`</div></div>`;
+  gate.innerHTML=`<div class="card"><b>🎁 Recommended — ${GIFTS[GIFT].gn} · ${GIFTS[GIFT].gp}</b><div class="q">${GIFTS[GIFT].gw}. The espresso set wins because it is the interest Daniel posts about most — and it is the easiest to enjoy the week it arrives.</div><div class="row"><span class="flag ok">✅ BEST MATCH — ESPRESSO</span><span class="flag run">📦 REPACKED IN YOUR BRANDING</span></div></div>`;
+ }else if(TAB==='send'){
+  panel.innerHTML=`<div class="panel"><b>✉️ The message that rides with the gift</b><div class="q">Short, personal, no pitch. The gift does the talking — the note just says who it is from and why.</div></div>`;
+  gate.innerHTML = SENT
+  ? `<div class="card"><b>✅ Gift sent — ${GIFTS[GIFT].gn} · ${GIFTS[GIFT].gp}</b><div class="q">Sent in your branding, with the note below. Daniel received it on Thursday morning — and replied the same afternoon.</div><div class="draft">“Hi Daniel — saw you are deep into specialty espresso, so I sent a small tasting set your way. No pitch, just a thanks for the work you share. Enjoy it — Imtiaz”</div><div class="row"><span class="flag ok">✅ APPROVED — SENT THURSDAY 09:12</span></div></div>`
+  : `<div class="card"><b>🛡️ Approval gate — nothing sends itself</b><div class="q">The agent drafted the gift and the note, but NOTHING has been sent or spent yet. Gifts cost real money — the choice and the message always wait for you.</div><div class="draft">“Hi Daniel — saw you are deep into specialty espresso, so I sent a small tasting set your way. No pitch, just a thanks for the work you share. Enjoy it — Imtiaz”</div><div class="row"><button class="abtn ok" onclick="approveSend()">✅ Approve &amp; send gift</button><button class="abtn no" onclick="toast('✏️ Change the gift or the note first')">Change gift / note</button></div></div>`;
+ }else{
+  if(!SENT){
+   panel.innerHTML=`<div class="panel"><b>📅 Meeting — not yet</b><div class="q">No reply yet, because the gift has not been sent. Go back to step 3 and approve the send — the meeting only happens after the gift lands.</div></div>`;
+   gate.innerHTML=`<div class="card"><b>⏸️ Waiting for your approval</b><div class="q">The meeting tab stays empty until the gift is sent. Nothing here is automatic — you approve the spend, then the reply comes.</div><div class="row"><span class="flag wait">⏸️ GIFT NOT SENT YET</span></div></div>`;
+  }else{
+   document.getElementById('stM').textContent='4';
+   document.getElementById('stP').textContent='7';
+   panel.innerHTML=`<div class="panel"><b>📅 Daniel replied — same afternoon</b><div class="q"></div>`
+   +`<div class="msg in"><span class="who cust">Daniel Reeves</span>Imtiaz — the espresso set just landed, what a great pick. Happy to have a chat next week if you are free?<div class="tm">14:37</div></div><div class="clear"></div>`
+   +`<div class="msg out"><span class="who">🤖 GiftPilot agent</span>Tuesday 10:00 works for us — I have held the slot and sent the invite. Enjoy the coffee!<div class="tm">14:38 ✓✓</div></div><div class="clear"></div>`
+   +`<div class="sys">✅ Meeting booked — Tuesday 10:00 · Daniel Reeves · Northwind Software</div></div>`;
+   gate.innerHTML=`<div class="card"><b>📅 Meeting booked — Tuesday 10:00</b><div class="q">One £28 gift, one reply, one meeting. The gift did not close the deal — it did the one thing the cold email could not: it got the reply.</div><div class="row"><span class="flag ok">✅ MEETING BOOKED</span><span class="flag run">💬 REPLIED IN 5 HOURS</span></div></div>`;
+  }
+ }
+}
+render();
+</script>
+</body>
+</html>

@@ -1029,4 +1029,30 @@ Before you switch it on, check four things. One: the agent answers in the custom
 
 The storefront used to be a shop window, then a website, then an app. Now it is a text thread — and the businesses answering inside it are the ones customers keep coming back to. Which job in your day would you hand to a text message first — the booking, the reminder, or the follow-up?`,
   },
+  {
+    slug: 'ai-gift-wins-the-meeting-daymaker',
+    title: "Your Cold Emails Get Ignored — an AI That Sends the Perfect Gift Gets You the Meeting",
+    excerpt:
+      "Cold email reply rates keep falling — Daymaker, #4 on Product Hunt on 22 November 2026, sends a personal gift instead: its agent researches the prospect, picks a gift that matches a real interest, and you approve it before anything is sent.",
+    tags: ['AI Agents', 'Sales', 'Cold Outreach'],
+    content: `Your cold email was ignored again. You wrote a careful subject line, personalised the first sentence, and sent it to a prospect who was, on paper, a perfect fit. It joined the forty other cold emails in their inbox that morning — most of them written by AI, all of them sounding roughly the same. The reply rate for cold outreach has been falling year after year, and the inboxes it lands in have never been fuller. A cleverer subject line is not the fix. The fix is to stop competing in the inbox at all.
+
+That is the bet behind Daymaker, which launched on Product Hunt on 22 November 2026 and finished #4 of the day. Instead of another email, it sends a gift. Its agent researches your prospect — their interests, their tastes, what they actually care about — recommends a personalised gift, repackages it in your branding, and sends it to them. There is also a done-for-you service that runs the campaign and guarantees the meetings. The idea is simple and old-fashioned at the same time: a personal gift is hard to ignore in a way an email never will be.
+
+Gifting was supposed to fix cold outreach years ago, and it mostly did not — because the gifts were generic. Champagne, company merch, AirPods: the same catalogue, the same gifts, again and again. Prospects learned to recognise them, and a gift that could have gone to anyone stopped feeling personal. Daymaker's maker, William, learned this the loud way: his earlier 'coldcaking' stunt — sending cakes to prospects — caught on so fast that one customer spent $90,000 on cakes alone and still booked 200+ meetings. Daymaker says companies including Salesforce, Rippling and PostHog spent over $100,000 on cakes in the last fourteen days. Those are the maker's numbers, not an independent audit — but the direction is hard to argue with: the channel works when the gift is personal, and it stops working the moment it becomes a catalogue.
+
+The honest maths matters here, because a gift costs real money. Daymaker's maker says each research run costs them about $10, before the gift itself. So this is not a tool for blasting a thousand prospects. It is for the twenty accounts that would change your quarter. Say the gift and delivery come to £30 each: twenty prospects cost £600. One meeting that turns into one deal covers that many times over — and the meeting is the part cold email keeps failing to produce. Compare it with the alternative the maker names: Facebook ad costs rose 16% last year, and cold email reply rates keep sliding. The question is not whether a gift costs more than an email. It is whether an email that nobody opens costs you the deal.
+
+Here is what that looks like from your side of the desk:
+
+:::demo giftpilot:::
+
+The demo above shows the flow for a seller reaching out to one prospect: the agent researches Daniel Reeves, a VP of Sales, and finds three real interests — specialty espresso, road cycling, vinyl records. It recommends the espresso tasting set at £28, drafts the message, and waits. Nothing is sent until the owner approves it. Daniel replies the same afternoon, and the meeting is booked for Tuesday at 10:00. The gift did not close the deal. It did the one thing the email could not: it got the reply.
+
+So how does a small business build this? Start with a short list, not a big one: the twenty prospects who would change your quarter. Write down what you know about each one — their role, their company, one real interest you can verify from LinkedIn or their website. That list is your prompt template. Build it with vibe-coding tools — v0, Lovable, Bolt or Replit — connect it to a gift catalogue with budget rules through APIs, and deploy it on Vercel or Netlify. Keep the approval gate from the start: the agent drafts the gift choice and the message, and you approve both before anything is sent or spent.
+
+Before you switch it on, check four things. One: the gift matches a real interest you verified, not a guess. Two: your branding is on the package, not the gift company's. Three: the message sounds like you wrote it, not like a template. Four: nothing is sent or spent without your approval. If all four are true, your outreach stops sounding like everyone else's — because it stops being an email.
+
+The inbox is full, and it is only getting fuller. The sellers who win the meeting will not be the ones with the cleverest subject line. They will be the ones who showed up with something personal, in the prospect's hands, before the call was ever booked. Which prospect on your list would you send a gift to first?`,
+  },
 ];

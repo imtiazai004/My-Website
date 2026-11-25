@@ -212,6 +212,9 @@ export const DEMO_APPS: DemoApp[] = [
   { slug: 'textpilot', name: 'TextPilot', industry: 'Retail & shops', post: 'ai-agents-live-in-text-messages',
     problem: 'Customers text instead of opening your app — and the message sits unanswered after hours.',
     description: 'A WhatsApp/SMS agent that answers stock questions, confirms bookings, sends reminders and chases no-shows — all inside the customer’s own chat thread, with the owner approving every send.' },
+  { slug: 'giftpilot', name: 'GiftPilot', industry: 'Sales & admin', post: 'ai-gift-wins-the-meeting-daymaker',
+    problem: 'Cold emails get ignored — and generic gifts get forgotten just as fast.',
+    description: 'An AI gift-finder that researches the prospect, picks a personal gift inside your budget, drafts the note, and sends it in your branding — with your approval before anything is spent.' },
 ];
 
 /** Display order on /demos — our core customers first. */
