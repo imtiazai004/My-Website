@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopSense — Ask Your Shop Anything</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Nunito',system-ui,sans-serif}
+body{background:#f0fdf4;min-height:100vh;padding:26px}body.embed{background:transparent!important;padding:0!important;min-height:0!important}body.embed .phone{box-shadow:none!important;border-radius:0!important;padding-top:46px!important}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;align-items:center;margin-bottom:14px}
+.top h1{font-size:24px;font-weight:900;color:#15803d}.top h1 span{color:#b45309}
+.alert{background:linear-gradient(135deg,#15803d,#16a34a);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(21,128,61,.3)}
+.alert .big{font-size:26px;font-weight:900}.alert .txt{font-size:13px;font-weight:700;line-height:1.35}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 8px rgba(21,128,61,.08);border-top:3px solid #15803d}
+.stat .sv{font-size:20px;font-weight:900;color:#15803d}.stat .sl{font-size:10.5px;color:#15803d;font-weight:700}
+.tabs{display:flex;background:#fff;border-radius:14px;padding:4px;margin-bottom:12px;box-shadow:0 2px 8px rgba(21,128,61,.08)}
+.tab{flex:1;text-align:center;padding:10px 4px;font-size:12px;font-weight:800;color:#15803d;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.on{background:#15803d;color:#fff}
+.panel{background:#fff;border-radius:14px;padding:16px 14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(21,128,61,.08)}
+.panel b{font-size:15px;color:#15803d;display:block}
+.panel .q{font-size:12.5px;color:#475569;font-weight:600;margin:4px 0 8px;line-height:1.5}
+.panel .src{font-size:11px;color:#94a3b8;font-weight:700;margin-top:2px}
+.chip{display:inline-block;font-size:11px;font-weight:800;padding:5px 10px;border-radius:12px;background:#dcfce7;color:#166534;margin:3px 4px 3px 0;cursor:pointer}
+.chip:hover{background:#bbf7d0}
+.qbox{width:100%;border:2px solid #bbf7d0;border-radius:12px;padding:11px 12px;font-size:13.5px;font-weight:700;color:#1e293b;font-family:'Nunito',system-ui,sans-serif;outline:none;margin-top:8px}
+.qbox:focus{border-color:#15803d}
+.ans{background:#f0fdf4;border-left:3px solid #15803d;border-radius:8px;padding:10px 12px;font-size:12.5px;color:#166534;font-weight:600;margin-top:10px;line-height:1.55}
+.ans b{color:#15803d;display:inline;font-size:12.5px}
+.card{background:#fff;border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(21,128,61,.08)}
+.card b{font-size:14px;color:#15803d;display:block}
+.card .q{font-size:12.5px;color:#475569;font-weight:600;margin:3px 0 8px;line-height:1.5}
+.card .draft{background:#f0fdf4;border-left:3px solid #15803d;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#166534;font-weight:600;margin-bottom:9px;line-height:1.5}
+.card .act{font-size:12px;color:#b45309;font-weight:800;margin-bottom:9px}
+.card .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.kv{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;color:#334155;padding:4px 0;border-bottom:1px dashed #e2e8f0}
+.kv:last-child{border-bottom:none}
+.kv span:last-child{color:#15803d;font-weight:900}
+.flag{font-size:10px;font-weight:900;padding:4px 10px;border-radius:12px;white-space:nowrap}
+.flag.wait{background:#fef3c7;color:#92400e}.flag.ok{background:#dcfce7;color:#15803d}.flag.run{background:#e0e7ff;color:#15803d}
+.abtn{border:none;font-size:11.5px;font-weight:800;padding:8px 13px;border-radius:10px;cursor:pointer}
+.abtn.run{background:#15803d;color:#fff}.abtn.ok{background:#dcfce7;color:#15803d}.abtn.no{background:#fee2e2;color:#b91c1c}
+.next{width:100%;border:none;background:#15803d;color:#fff;font-size:13.5px;font-weight:900;padding:13px;border-radius:14px;cursor:pointer;box-shadow:0 4px 14px rgba(21,128,61,.35)}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:#15803d;color:#fff;padding:12px 22px;border-radius:30px;font-size:13px;font-weight:800;opacity:0;transition:all .3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{text-align:center;font-size:11px;color:#15803d;font-weight:700;margin-top:14px}
+</style>
+</head>
+<body>
+<script>try{if(new URLSearchParams(location.search).get("embed")==="phone")document.body.classList.add("embed")}catch(e){}</script>
+<div class="wrap">
+  <div class="top"><h1>🛍️ Shop<span>Sense</span></h1></div>
+  <div class="alert"><div class="big">💬</div><div class="txt">Five dashboards, one tired owner. Ask your shop a question instead — and let the agent draft the ad, but never spend without your yes.</div></div>
+  <div class="stats">
+    <div class="stat"><div class="sv" id="stS">£4,280</div><div class="sl">Sales this week</div></div>
+    <div class="stat"><div class="sv" id="stR">£186</div><div class="sl">Refunds this week</div></div>
+    <div class="stat"><div class="sv" id="stL">3</div><div class="sl">Items low in stock</div></div>
+    <div class="stat"><div class="sv" id="stC">0</div><div class="sl">Campaigns live</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab on" id="askTab" onclick="setTab('ask')">💬 Ask</div>
+    <div class="tab" id="campTab" onclick="setTab('camp')">📣 Campaign</div>
+    <div class="tab" id="apprTab" onclick="setTab('appr')">✅ Approve</div>
+  </div>
+  <div id="panel"></div>
+  <div id="gate"></div>
+  <button class="next" id="nextBtn" onclick="nextStep()">Next step → Draft the campaign</button>
+  <div class="foot">ShopSense — ask your shop anything. Willow &amp; Thread · Manchester · Emily Carter.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let TAB='ask';
+let DRAFTED=false;
+let LIVE=false;
+let LASTQ='';
+const ORDER=['ask','camp','appr'];
+const LABEL={ask:'Draft the campaign',camp:'Review & approve',appr:'Ask another question'};
+const ANSWERS=[
+ {k:['worst','slowest','losing','bottom'],t:'Worst seller this week',a:'<b>Lavender room spray — 2 sold, £24 revenue, 14 still in stock.</b> It has sat in the bottom three for three weeks running. Bundle it with the soy candle or cut the price before you reorder.'},
+ {k:['refund','return'],t:'What refunds cost you',a:'<b>£186 this week — 4.3% of sales.</b> Biggest: damaged ceramic vase, £96 (2 returns). Then the wrong-shade throw, £54, and a late-delivery candle, £36. The vase supplier\u2019s packaging is the repeat cause.'},
+ {k:['low','stock','reorder','running out'],t:'What is running low',a:'<b>3 items under 5 units.</b> Fig &amp; Cassis candle: 4 left, sells about 7 a week. Linen throw in sage: 3 left. Small ceramic vase: 2 left — and 2 of those came back damaged. Reorder the candle first.'},
+ {k:['best','top','selling'],t:'Best seller this week',a:'<b>Hand-poured soy candle — Fig &amp; Cassis: 46 sold, £828 revenue.</b> That is about a third of the week\u2019s sales, and it is the item running lowest in stock. It is also the obvious hero for the weekend campaign.'}
+];
+function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._x);e._x=setTimeout(()=>e.classList.remove('show'),2800)}
+function setTab(t){TAB=t;['ask','camp','appr'].forEach(x=>document.getElementById(x+'Tab').classList.toggle('on',x===t));document.getElementById('nextBtn').textContent='Next step → '+LABEL[t];render()}
+function nextStep(){const i=ORDER.indexOf(TAB);setTab(ORDER[(i+1)%ORDER.length])}
+function askQ(q){
+ const box=document.getElementById('qbox');
+ const text=(q!==undefined?q:(box?box.value:''))||'';
+ if(!text.trim()){toast('Type a question, or tap one below');return}
+ LASTQ=text.trim();
+ const low=LASTQ.toLowerCase();
+ const hit=ANSWERS.find(a=>a.k.some(k=>low.includes(k)));
+ const ans=document.getElementById('ans');
+ if(ans){
+  ans.style.display='block';
+  ans.innerHTML=hit
+   ? '<b>'+hit.t+'.</b> '+hit.a
+   : '<b>From your sales, stock and refund data:</b> I can answer about the worst seller, refunds, best sellers, or what is running low. Try one of those — the answers come with the numbers attached.';
+ }
+ render_gate();
+}
+function draftCampaign(){
+ const goal=(document.getElementById('goalbox')||{}).value||'Bring more weekend shoppers in for the candle range';
+ DRAFTED=true;
+ render();
+ toast('📣 Campaign drafted — review it in the Approve tab before anything is spent');
+}
+function approveCampaign(){
+ if(LIVE||!DRAFTED)return;
+ LIVE=true;
+ document.getElementById('stC').textContent='1';
+ render();
+ toast('✅ Campaign approved and live — £10/day, starts Saturday 09:00');
+}
+function render_gate(){
+ const gate=document.getElementById('gate');
+ if(!gate)return;
+ if(TAB==='ask'){
+  gate.innerHTML=`<div class="card"><b>💬 What just happened</b><div class="q">One question, one answer from the shop's own data — no dashboard opened, no spreadsheet checked. The numbers come with the answer, so you can trust it or check it.</div><div class="row"><span class="flag ok">✅ ANSWERED FROM REAL DATA</span><span class="flag run">📊 SALES · STOCK · REFUNDS</span></div></div>`;
+ }else if(TAB==='camp'){
+  gate.innerHTML = DRAFTED
+  ? `<div class="card"><b>📣 Draft ready — waiting for you</b><div class="q">Keywords, headline, audience and budget are set. Nothing is published and nothing is spent until you approve it in the next tab.</div><div class="row"><span class="flag wait">⏸️ DRAFT — NOT PUBLISHED</span><span class="flag run">💰 £70 TOTAL BUDGET</span></div></div>`
+  : `<div class="card"><b>📣 No draft yet</b><div class="q">Type your goal in one sentence and tap “Draft campaign”. The agent does the keyword research, the creative, the audience and the setup — you only review and approve.</div><div class="row"><span class="flag wait">⏸️ WAITING FOR YOUR GOAL</span></div></div>`;
+ }else{
+  if(!DRAFTED){
+   gate.innerHTML=`<div class="card"><b>⏸️ Nothing to approve yet</b><div class="q">No campaign has been drafted. Go back to the Campaign tab and draft one first — the approval step only appears when there is something to approve.</div><div class="row"><span class="flag wait">⏸️ NO DRAFT YET</span></div></div>`;
+  }else if(!LIVE){
+   gate.innerHTML=`<div class="card"><b>🛡️ Approval gate — nothing spends itself</b><div class="q">The agent drafted the campaign, but NOTHING has been published or spent yet. Review the budget and the audience, then decide.</div><div class="draft">“Hand-Poured Soy Candles — Made in Manchester.” Small-batch soy candles, poured in Manchester. This weekend: 10% off the candle range in store. Budget £10/day for 7 days — £70 total.</div><div class="row"><button class="abtn ok" onclick="approveCampaign()">✅ Approve &amp; publish</button><button class="abtn no" onclick="toast('✏️ Change the goal or the budget first')">Change goal / budget</button></div></div>`;
+  }else{
+   gate.innerHTML=`<div class="card"><b>✅ Campaign live — Saturday 09:00</b><div class="q">Approved by Emily Carter. £10/day for 7 days, audience within 8 miles of the shop. The agent reports sales against the spend, so you can see whether the weekend paid for itself.</div><div class="row"><span class="flag ok">✅ LIVE — £10/DAY</span><span class="flag run">📍 WITHIN 8 MILES</span></div></div>`;
+  }
+ }
+}
+function render(){
+ const panel=document.getElementById('panel');
+ if(TAB==='ask'){
+  panel.innerHTML=`<div class="panel"><b>💬 Ask your shop anything</b><div class="q">Answers come from this week's sales, stock and refund data for Willow &amp; Thread — not a guess, not a template.</div><div><span class="chip" onclick="askQ('Which product sold worst this week?')">Which product sold worst this week?</span><span class="chip" onclick="askQ('How much did refunds cost me?')">How much did refunds cost me?</span><span class="chip" onclick="askQ('What is running low?')">What is running low?</span></div><input class="qbox" id="qbox" type="text" placeholder="Type your question…" value="${LASTQ.replace(/"/g,'&quot;')}"><div class="ans" id="ans" style="display:none"></div><div style="margin-top:10px"><button class="abtn run" onclick="askQ()">Ask ShopSense →</button></div><div class="src">Data: sales, stock and refunds, week of 24 Nov · Willow &amp; Thread, Manchester</div></div>`;
+ }else if(TAB==='camp'){
+  panel.innerHTML=`<div class="panel"><b>📣 Campaign builder — one sentence in</b><div class="q">Describe the goal in everyday words. The agent handles keyword research, the creative, the audience and the setup.</div><input class="qbox" id="goalbox" type="text" value="Bring more weekend shoppers in for the candle range"><div style="margin-top:10px"><button class="abtn run" onclick="draftCampaign()">Draft campaign →</button></div>`
+  +(DRAFTED?`<div style="margin-top:12px"><div class="kv"><span>Keywords</span><span>4 researched</span></div><div class="kv"><span>Headline</span><span>Hand-Poured Soy Candles</span></div><div class="kv"><span>Audience</span><span>Within 8 miles</span></div><div class="kv"><span>Budget</span><span>£10/day · £70 total</span></div></div><div class="src">Keywords: scented candles Manchester · soy candles near me · candle gifts Manchester · hand poured candles UK</div>`:`<div class="src">Built on the same data as the Ask tab — the agent already knows the hero product is the Fig &amp; Cassis candle.</div>`)
+  +`</div>`;
+ }else{
+  panel.innerHTML=`<div class="panel"><b>✅ Approve — the human stays in charge</b><div class="q">Every campaign, every pound of spend, waits for one tap. The agent drafts; Emily decides.</div><div class="kv"><span>Campaign</span><span>${DRAFTED?'Weekend candle push':'Not drafted yet'}</span></div><div class="kv"><span>Budget</span><span>${DRAFTED?'£70 total':'—'}</span></div><div class="kv"><span>Status</span><span>${LIVE?'LIVE — Sat 09:00':(DRAFTED?'Awaiting approval':'No draft')}</span></div></div>`;
+ }
+ render_gate();
+}
+render();
+</script>
+</body>
+</html>

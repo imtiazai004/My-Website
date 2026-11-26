@@ -215,6 +215,9 @@ export const DEMO_APPS: DemoApp[] = [
   { slug: 'giftpilot', name: 'GiftPilot', industry: 'Sales & admin', post: 'ai-gift-wins-the-meeting-daymaker',
     problem: 'Cold emails get ignored — and generic gifts get forgotten just as fast.',
     description: 'An AI gift-finder that researches the prospect, picks a personal gift inside your budget, drafts the note, and sends it in your branding — with your approval before anything is spent.' },
+  { slug: 'shopsense', name: 'ShopSense', industry: 'Retail & shops', post: 'ask-your-shop-anything-ai-agent',
+    problem: 'The shop’s numbers live in five dashboards — and the evening is gone before the real question gets asked.',
+    description: 'Ask your shop a question in plain words and get an answer from your own sales, stock and refund data — then let the agent draft your Google ad campaign and wait for your approval before anything is spent.' },
 ];
 
 /** Display order on /demos — our core customers first. */

@@ -1055,4 +1055,30 @@ Before you switch it on, check four things. One: the gift matches a real interes
 
 The inbox is full, and it is only getting fuller. The sellers who win the meeting will not be the ones with the cleverest subject line. They will be the ones who showed up with something personal, in the prospect's hands, before the call was ever booked. Which prospect on your list would you send a gift to first?`,
   },
+  {
+    slug: 'ask-your-shop-anything-ai-agent',
+    title: "Stop Opening Dashboards — Just Ask Your Shop: the AI Agent That Knows Your Sales, Stock and Refunds",
+    excerpt:
+      "Pine Labs launched Guide and Marketer Agent on 25 November 2026: ask your shop a question in plain words and get an answer from your own sales, stock and refund data — and an AI that drafts your Google ad campaign and waits for your approval before spending a penny.",
+    tags: ['AI Agents', 'Small Business', 'Retail'],
+    content: `Every evening, the same ritual. The shop is closed, and the owner opens the laptop to find out how the day went. Sales in one dashboard. Refunds in another. The card machine's settlement somewhere else. Stock in a spreadsheet last updated on Tuesday. By the time the numbers are gathered, the evening is gone — and the one question that actually mattered, which product is quietly losing money, never got asked. That is the gap an ask your business AI agent is built to close: not another dashboard to open, but a question you can type in plain words and get an answer to.
+
+Pine Labs, the Indian fintech behind the Pine Labs One merchant app, put that idea in front of close to a million merchants on 25 November 2026. It launched two AI agents, Guide and Marketer Agent, under a platform it calls Agentic Org. Guide answers questions about the merchant's own business in plain language — sales by store, transactions, settlements, refunds and payments across UPI, cards and wallets. Marketer Agent turns a goal described in everyday words into a Google ad campaign: keywords, creative, audience, setup. Nothing is spent until the merchant approves it. Those are Pine Labs' claims — for a shop with no marketing team and no analyst.
+
+The first agent replaces the dashboard crawl. A shopkeeper who clicked through five reports to learn refunds ate the week's margin can now ask directly and get the answer with the numbers attached. The second agent replaces the marketing hire the shop never had. A decent campaign's cost was never just the ad budget — it was the person who knows keywords, copy and results. For a single shop, that person is usually the owner, after closing. Marketer Agent is built on Google Gemini, and Pine Labs says it can link an ad click to a sale at the counter, using privacy-preserving methods. That claim has not been independently tested — treat it as the company's promise, not a proven result.
+
+The approval gate is the part that matters most, and it is the part most agent demos quietly skip. An agent that can see settlements and refunds is touching sensitive commercial data, and one that can spend money on ads is touching the owner's wallet. Pine Labs built a permission layer called Grantex that controls what each agent can see and do, and keeps a human in the loop where money moves. The campaign is drafted, reviewed and approved — only then published. That is the difference between an agent you trust and one you switch off after the first surprise bill.
+
+Here is what that looks like from your side of the counter:
+
+:::demo shopsense:::
+
+The demo above shows the flow for a home and gift boutique: the owner asks which product sold worst this week and how much refunds cost, and gets answers from the shop's own sales, stock and refund data. Then she types one sentence — bring more weekend shoppers in for the candle range — and the agent drafts the Google campaign: keywords, headline, audience, budget. Nothing is published until she taps approve. The campaign only goes live on her word.
+
+So how does a small business build this? Start with the data you already have: the sales list, the stock list, the refund log. That is the agent's memory — without it, the answers are guesses. Write down the ten questions you ask every week — worst seller, refund cost, stock running low. That list is your prompt template. Build it with vibe-coding tools — v0, Lovable, Bolt or Replit — connect it to your sales and stock data through APIs, and deploy it on Vercel or Netlify. Add the campaign side second: one sentence in, a draft out, and an approval step nothing can skip.
+
+Before you switch it on, check four things. One: the agent answers from your real sales and stock data, not a sample. Two: every answer shows its numbers, so you can check it. Three: the campaign draft shows the budget and the audience before you approve it. Four: nothing is spent or published without your approval — ever. If all four are true, the evening ritual changes: one question typed, one answer back, and the laptop closes early.
+
+Pine Labs is rolling this out to merchants across India, and an Agent App Store is planned by 15 December. The pattern will not stay in India — every payments company has the same data and the same shopkeepers asking the same questions. The dashboard had a thirty-year run. The question is whether the next thirty belong to the shopkeeper who types a sentence and gets an answer. What is the one question about your shop you would ask first?`,
+  },
 ];
